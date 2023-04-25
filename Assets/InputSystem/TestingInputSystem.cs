@@ -14,6 +14,7 @@ public class TestingInputSystem : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
 
+        //////// 여기부터!!  영상 16:00 부터 보면 됨.  아래 줄 제거 후 진행해도 무방해보임
         playerInput.onActionTriggered += PlayerInput_onActionTriggered;
     }
 
@@ -24,6 +25,7 @@ public class TestingInputSystem : MonoBehaviour
 
 
     public void Jump(InputAction.CallbackContext context) {
+        Debug.Log(context);
         if (context.performed)
         {
             Debug.Log("Jump! " + context.phase);
