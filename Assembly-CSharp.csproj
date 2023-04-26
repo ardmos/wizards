@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\InputSystem\TestingInputSystem.cs" />
+    <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
