@@ -15,7 +15,7 @@ D:/UnityProjects/Wizards
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-4213
+1868
 Successfully changed project path to: D:/UnityProjects/Wizards
 D:/UnityProjects/Wizards
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,11 +47,11 @@ D:/UnityProjects/Wizards
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [18248] Host "[IP] 192.168.0.12 [Port] 0 [Flags] 2 [Guid] 2674579598 [EditorId] 2674579598 [Version] 1048832 [Id] WindowsEditor(7,summerconst-PC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [15164] Host "[IP] 192.168.0.12 [Port] 0 [Flags] 2 [Guid] 1949929576 [EditorId] 1949929576 [Version] 1048832 [Id] WindowsEditor(7,summerconst-PC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [18248] Host "[IP] 192.168.0.12 [Port] 0 [Flags] 2 [Guid] 2674579598 [EditorId] 2674579598 [Version] 1048832 [Id] WindowsEditor(7,summerconst-PC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [15164] Host "[IP] 192.168.0.12 [Port] 0 [Flags] 2 [Guid] 1949929576 [EditorId] 1949929576 [Version] 1048832 [Id] WindowsEditor(7,summerconst-PC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 74.90 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 145.33 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.20f1 (577897200b8b)
 [Subsystems] Discovering subsystems at path D:/UnityEditor/2021.3.20f1/Editor/Data/Resources/UnitySubsystems
@@ -67,75 +67,75 @@ Initialize mono
 Mono path[0] = 'D:/UnityEditor/2021.3.20f1/Editor/Data/Managed'
 Mono path[1] = 'D:/UnityEditor/2021.3.20f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/UnityEditor/2021.3.20f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56188
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56012
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/UnityEditor/2021.3.20f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001546 seconds.
+Registered in 0.114717 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 82.45 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 87.79 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.492 seconds
+- Completed reload, in  3.648 seconds
 Domain Reload Profiling:
-	ReloadAssembly (492ms)
-		BeginReloadAssembly (64ms)
+	ReloadAssembly (3649ms)
+		BeginReloadAssembly (3120ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (353ms)
-			LoadAssemblies (64ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (92ms)
+			CreateAndSetChildDomain (2ms)
+		EndReloadAssembly (351ms)
+			LoadAssemblies (3117ms)
+			RebuildTransferFunctionScriptingTraits (1ms)
+			SetupTypeCache (71ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (20ms)
-			SetupLoadedEditorAssemblies (203ms)
+			RebuildScriptCaches (21ms)
+			SetupLoadedEditorAssemblies (221ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (83ms)
-				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (83ms)
-				ProcessInitializeOnLoadMethodAttributes (31ms)
+				RefreshPlugins (88ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (93ms)
+				ProcessInitializeOnLoadMethodAttributes (33ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.002610 seconds.
+Registered in 0.021679 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image D:\UnityProjects\Wizards\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\UnityProjects\Wizards\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 84.84 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 88.52 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.976 seconds
+- Completed reload, in  1.130 seconds
 Domain Reload Profiling:
-	ReloadAssembly (977ms)
-		BeginReloadAssembly (101ms)
+	ReloadAssembly (1131ms)
+		BeginReloadAssembly (85ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (16ms)
-		EndReloadAssembly (806ms)
-			LoadAssemblies (94ms)
+		EndReloadAssembly (966ms)
+			LoadAssemblies (215ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
 			SetupTypeCache (218ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (42ms)
-			SetupLoadedEditorAssemblies (442ms)
+			RebuildScriptCaches (45ms)
+			SetupLoadedEditorAssemblies (467ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (2ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (85ms)
-				BeforeProcessingInitializeOnLoad (79ms)
-				ProcessInitializeOnLoadAttributes (220ms)
-				ProcessInitializeOnLoadMethodAttributes (54ms)
+				RefreshPlugins (89ms)
+				BeforeProcessingInitializeOnLoad (85ms)
+				ProcessInitializeOnLoadAttributes (234ms)
+				ProcessInitializeOnLoadMethodAttributes (56ms)
 				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
@@ -143,13 +143,13 @@ Domain Reload Profiling:
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 1.49 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 1.57 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5180 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 37 unused Assets / (0.8 MB). Loaded Objects now: 5633.
-Memory consumption went from 207.4 MB to 206.6 MB.
-Total: 6.331900 ms (FindLiveObjects: 0.753300 ms CreateObjectMapping: 0.435400 ms MarkObjects: 4.406800 ms  DeleteObjects: 0.732000 ms)
+Unloading 5181 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 37 unused Assets / (0.8 MB). Loaded Objects now: 5637.
+Memory consumption went from 209.5 MB to 208.8 MB.
+Total: 3.545800 ms (FindLiveObjects: 0.408000 ms CreateObjectMapping: 0.198300 ms MarkObjects: 2.608700 ms  DeleteObjects: 0.329900 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -163,73 +163,575 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 94132.136892 seconds.
-  path: Assets/Settings
-  artifactKey: Guid(59393b46176827d45b15552cb0f00ed2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings using Guid(59393b46176827d45b15552cb0f00ed2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1813a7839756914e43a33bd29d2b4452') in 0.023447 seconds 
+  Time since last request: 170747.461423 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP
+  artifactKey: Guid(916ac46125c6bd449beedd736c06ad44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP using Guid(916ac46125c6bd449beedd736c06ad44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2810e67ff2844d6fac826a3e3c4f3db6') in 0.016863 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 9.106868 seconds.
-  path: Assets/UniversalRenderPipelineGlobalSettings.asset
-  artifactKey: Guid(d5c63ba7a8fcffc4e90ce6dec4747dc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UniversalRenderPipelineGlobalSettings.asset using Guid(d5c63ba7a8fcffc4e90ce6dec4747dc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f195a135607d21eb985e7a257e0de22e') in 0.036101 seconds 
+  Time since last request: 0.835193 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP.zip
+  artifactKey: Guid(ab8e87a824ce0594b86a80033657ca28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP.zip using Guid(ab8e87a824ce0594b86a80033657ca28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2f02b3d86657d851fe20b793d5365c3') in 0.022105 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 875.724726 seconds.
-  path: Assets/Settings/Ultra Universal Render Pipeline Asset_Renderer.asset
-  artifactKey: Guid(927c6f1498d618842a8a7c1e38f98a32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/Ultra Universal Render Pipeline Asset_Renderer.asset using Guid(927c6f1498d618842a8a7c1e38f98a32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf9032e7590854b8468474897048e216') in 0.023599 seconds 
+  Time since last request: 20.232580 seconds.
+  path: Assets/RPGTinyHeroWavePBR/Material
+  artifactKey: Guid(ae5f1d2c5fae36640a4fb67668052369) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/Material using Guid(ae5f1d2c5fae36640a4fb67668052369) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb6ee3ea99027beede3f96d734701001') in 0.006977 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 111.868939 seconds.
-  path: Assets/Settings/Ultra Universal Render Pipeline Asset_Renderer.asset
-  artifactKey: Guid(927c6f1498d618842a8a7c1e38f98a32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/Ultra Universal Render Pipeline Asset_Renderer.asset using Guid(927c6f1498d618842a8a7c1e38f98a32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1265023bb3d9bf0ea526c1c9d7eca910') in 0.003425 seconds 
+  Time since last request: 11.172284 seconds.
+  path: Assets/RPGTinyHeroWavePBR/Prefab
+  artifactKey: Guid(349a7771185191b418b97051fee521cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/Prefab using Guid(349a7771185191b418b97051fee521cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9cbe4da3c3031c7c25d4aa23d6db8870') in 0.008573 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 25.497613 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/HDRP.zip
+  artifactKey: Guid(9e13a54e231877749b7cd43e408c0253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/HDRP.zip using Guid(9e13a54e231877749b7cd43e408c0253) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ddedddce881a31aeaff10edb8a1fd8f3') in 0.007430 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 20.652952 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP
+  artifactKey: Guid(c78539d8872fe9c4ebfd231b77a84073) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP using Guid(c78539d8872fe9c4ebfd231b77a84073) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f92b8e69cec67e6de4a3cbb959340bd') in 0.006959 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.575181 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture
+  artifactKey: Guid(4cade32073d41174c94f7aebbc1f825f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture using Guid(4cade32073d41174c94f7aebbc1f825f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd97e58fa9cecd6615585142e8d9bdf30') in 0.007415 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.536308 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/DefaultPBR
+  artifactKey: Guid(7344787f191c4ab48813804940d9d5b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/DefaultPBR using Guid(7344787f191c4ab48813804940d9d5b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51cb690daacb8cdddcd0cdf07f96e318') in 0.006790 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.384257 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/MaskTint
+  artifactKey: Guid(5e0d6870867723146b7d6d253956ab1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/MaskTint using Guid(5e0d6870867723146b7d6d253956ab1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c545f1c2ac385298edac74e41a29af6') in 0.007668 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.384657 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Scene
+  artifactKey: Guid(66e76cfa9347ea1439c4cce80a7b9096) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Scene using Guid(66e76cfa9347ea1439c4cce80a7b9096) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd772082efeb4c86c3efc3d33b52a54b1') in 0.009200 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.142512 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Material/DefaultPBR.mat
+  artifactKey: Guid(f323cced30244554986ee5e9f5dd8b67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Material/DefaultPBR.mat using Guid(f323cced30244554986ee5e9f5dd8b67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '67188618d60122eeba3db2f3268ba488') in 0.918020 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000065 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Material/Stage.mat
+  artifactKey: Guid(76de7fe0d4609694dac330bb3ef77a6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Material/Stage.mat using Guid(76de7fe0d4609694dac330bb3ef77a6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19e19c57bf4468c2076551b76965a155') in 0.704656 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.049925 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/MaskTint/AlbedoMaskTint.png
+  artifactKey: Guid(9751e858421c8be43bed7b812dbd4aac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/MaskTint/AlbedoMaskTint.png using Guid(9751e858421c8be43bed7b812dbd4aac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d94bf674124380b4857aa4516ebad41') in 0.064677 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/MaskTint/Mask01.png
+  artifactKey: Guid(c537304dae934574c83263b8935bf6fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/MaskTint/Mask01.png using Guid(c537304dae934574c83263b8935bf6fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d5dd9b56f56cfce9adecb57329f731b') in 0.016824 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/MaskTint/Mask03.png
+  artifactKey: Guid(acd1491b46b794a4a840e9e1d5c78d57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Texture/MaskTint/Mask03.png using Guid(acd1491b46b794a4a840e9e1d5c78d57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ec8672a5358b418eaf248a974f6b040') in 0.015234 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.185444 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts
+  artifactKey: Guid(c7add5069f33d7247a74520157a5a842) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts using Guid(c7add5069f33d7247a74520157a5a842) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30615b7053f29ca676e2be38c5bf0616') in 0.007169 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.340921 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/MaskTintCharacters
+  artifactKey: Guid(417bf12672420674f90cfe118df05435) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/MaskTintCharacters using Guid(417bf12672420674f90cfe118df05435) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3448aa0040bbe94e2237b6d0c59ab135') in 0.007403 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.450734 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons
+  artifactKey: Guid(7cca6b04f933c13419f7c759618b93c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons using Guid(7cca6b04f933c13419f7c759618b93c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '35acf1973692be2597d5b53f0bab5c67') in 0.006343 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.350965 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters
+  artifactKey: Guid(d033d65cf66add242b51f1725d69be2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters using Guid(d033d65cf66add242b51f1725d69be2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7ad02bcc5c7970f7553b2c77daf2919') in 0.006344 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.405233 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/Arrows.prefab
+  artifactKey: Guid(7591ff249d4d6f84c9f356a99eca71e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/Arrows.prefab using Guid(7591ff249d4d6f84c9f356a99eca71e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0765d783ebd127764e61c32bcddcb6f8') in 0.109499 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS08_Sword.prefab
+  artifactKey: Guid(9f5e6a295b85b2c46880c90207c150f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS08_Sword.prefab using Guid(9f5e6a295b85b2c46880c90207c150f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93d08219f583032aff145795b9cb37b3') in 0.017825 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000138 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS09_Sword.prefab
+  artifactKey: Guid(97a81ef93f40fd44d97c853fb7565bee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS09_Sword.prefab using Guid(97a81ef93f40fd44d97c853fb7565bee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e76c6e60e75b9e589ce89fdf233b6c3') in 0.019405 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS07_Sword.prefab
+  artifactKey: Guid(443ccd8f0fd734b4987d0269cd1e0d89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS07_Sword.prefab using Guid(443ccd8f0fd734b4987d0269cd1e0d89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abffc442c2d78a3b6d0ad4ddfff4af57') in 0.019727 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS05_Sword.prefab
+  artifactKey: Guid(2fa60857586233043ab8a3235b6166d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS05_Sword.prefab using Guid(2fa60857586233043ab8a3235b6166d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e5550b5070d4a821aaf3c5e422a090a') in 0.019985 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000065 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS15_Sword.prefab
+  artifactKey: Guid(33f81648c9485844fb45d2e15951d38c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS15_Sword.prefab using Guid(33f81648c9485844fb45d2e15951d38c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '382d09e703774953832fc53ef7edab52') in 0.017293 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS11_Hammer.prefab
+  artifactKey: Guid(2e01e3e0f8c4ef74784af78e323fc0e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS11_Hammer.prefab using Guid(2e01e3e0f8c4ef74784af78e323fc0e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b81c04083874dd52b721d52267b7f63') in 0.018550 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000061 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/Shield02.prefab
+  artifactKey: Guid(f27ad0bae5252f649abbfbeffc9585f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/Shield02.prefab using Guid(f27ad0bae5252f649abbfbeffc9585f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b79ab38e2da58d3dcbd9f477836932c6') in 0.022779 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000068 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/Shield03.prefab
+  artifactKey: Guid(e46f7b99ad2a1294bbf48a790b57fbbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/Shield03.prefab using Guid(e46f7b99ad2a1294bbf48a790b57fbbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce53a330c6ce7c53f55115a2bae7fdb4') in 0.018747 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000102 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS01_Stick.prefab
+  artifactKey: Guid(d74d166bac1266b45b0fec2f2c95fe9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS01_Stick.prefab using Guid(d74d166bac1266b45b0fec2f2c95fe9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b02d7e6105bcde7eae67432e2a6a6fb') in 0.019388 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS14_Hammer.prefab
+  artifactKey: Guid(5c46bff3855bdcc40b8264ba30b041df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS14_Hammer.prefab using Guid(5c46bff3855bdcc40b8264ba30b041df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6589eaa7a21069c87546992074ceb471') in 0.018330 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000150 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS13_Axe.prefab
+  artifactKey: Guid(c4ac131e534416c4aafd651dc39c2945) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS13_Axe.prefab using Guid(c4ac131e534416c4aafd651dc39c2945) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b41ff96515672fe66d0983442de288e') in 0.019471 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS04_Sword.prefab
+  artifactKey: Guid(bf390cd197216324cb82145dfad20c52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS04_Sword.prefab using Guid(bf390cd197216324cb82145dfad20c52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '690f7e9fd54f57dab10ee33ce690cb8a') in 0.022709 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000053 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS16_Sword.prefab
+  artifactKey: Guid(ae7cbf81781c2ca4b802f49ac688d50d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS16_Sword.prefab using Guid(ae7cbf81781c2ca4b802f49ac688d50d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cafb84d0d9fb1bceb3d53710517e4abd') in 0.015707 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000070 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS02_Niddle.prefab
+  artifactKey: Guid(f9ec344f25d9c0c4d93a8d5a176fa122) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS02_Niddle.prefab using Guid(f9ec344f25d9c0c4d93a8d5a176fa122) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03d6591d5aad9a7cca943f3b9383f512') in 0.018730 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/Shield01.prefab
+  artifactKey: Guid(de7626e0a015a774cb24dc99db7f6d22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/Shield01.prefab using Guid(de7626e0a015a774cb24dc99db7f6d22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46cb3809170b43c03513a88554320c31') in 0.016928 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS10_Axe.prefab
+  artifactKey: Guid(a991ddcbe92e20a48bed746ece9abafc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS10_Axe.prefab using Guid(a991ddcbe92e20a48bed746ece9abafc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fca4d1757a091c0b46191bb581b5009') in 0.018536 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000076 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS03_Sword.prefab
+  artifactKey: Guid(949ce6572c25a5446b035cac76c74aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS03_Sword.prefab using Guid(949ce6572c25a5446b035cac76c74aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '272082e743dfd6042061f4acd524c844') in 0.020148 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000061 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS06_Sword.prefab
+  artifactKey: Guid(e65c75b997a6a664297587e210878bea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS06_Sword.prefab using Guid(e65c75b997a6a664297587e210878bea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '839fd41ed3c9e590f68d5fa2889b82f5') in 0.020222 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS12_Sword.prefab
+  artifactKey: Guid(0837e0393543c044884ee117532f6ada) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/Weapons/OHS12_Sword.prefab using Guid(0837e0393543c044884ee117532f6ada) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '153c5fbf4e534e7c027b9f4f2ac09bd2') in 0.017169 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.424644 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Scene/URPsettings
+  artifactKey: Guid(6000d4f1e2d9c3c42bd9a41fbe23e622) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Scene/URPsettings using Guid(6000d4f1e2d9c3c42bd9a41fbe23e622) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a09de0850e2d17c79c49be22a530dcde') in 0.006210 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.355632 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Scene/MainScene.unity
+  artifactKey: Guid(732defcb56c220a478eeb579c600da34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Scene/MainScene.unity using Guid(732defcb56c220a478eeb579c600da34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b612a7cda81f9940fba7f4f219aae53e') in 0.006718 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.935689 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Scene/Extra Scenes
+  artifactKey: Guid(35bdfa34fae20da4b8e5e54734dee85c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Scene/Extra Scenes using Guid(35bdfa34fae20da4b8e5e54734dee85c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '076c3b507b97f6a6e2816e4a0584406f') in 0.006632 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 35.267355 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleScene.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '690f45b9478f4b514f63f2b4bdb1477a') in 0.009115 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.521098 seconds.
+  path: Assets/Scenes/SampleScene
+  artifactKey: Guid(23193fc7bcfb5b849a8bc78721e087f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleScene using Guid(23193fc7bcfb5b849a8bc78721e087f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f151dff623688f6ac6a7f66bbeb95348') in 0.008539 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.954755 seconds.
+  path: Assets/Scenes/SampleScene/Global Volume Profile.asset
+  artifactKey: Guid(40d505439bb32744c98b9b2689d56fcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleScene/Global Volume Profile.asset using Guid(40d505439bb32744c98b9b2689d56fcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63747d4095edc373a4d9e1216b80934f') in 0.008518 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 34.218063 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/MaskTintCharacters/MaskTint01.prefab
+  artifactKey: Guid(57afc98a9486fd94db1965e854a296e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/MaskTintCharacters/MaskTint01.prefab using Guid(57afc98a9486fd94db1965e854a296e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b877131655197edb1d294d25c856b7d7') in 0.918171 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.312577 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC01_Heart.prefab
+  artifactKey: Guid(74d321e03ba93e8448d847bbe1d47809) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC01_Heart.prefab using Guid(74d321e03ba93e8448d847bbe1d47809) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81bdac7c8cc608d8ef0885739ae4cf29') in 0.015742 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC03_NightVision.prefab
+  artifactKey: Guid(c060d37057ab8f14e8fbce1547c3ce5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC03_NightVision.prefab using Guid(c060d37057ab8f14e8fbce1547c3ce5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6f19e1a594623517cb316e2f3f7e8c9') in 0.018451 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC04_ShortEars.prefab
+  artifactKey: Guid(460c107a6258b1646ac7a43949177a2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC04_ShortEars.prefab using Guid(460c107a6258b1646ac7a43949177a2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b76560fae7505d03148a874a1524b76c') in 0.015034 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC06_Crown01.prefab
+  artifactKey: Guid(d251628a40465a64facfdb63bb987888) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC06_Crown01.prefab using Guid(d251628a40465a64facfdb63bb987888) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ac5bd72c05f6e7c410e4d4ca3771638') in 0.016987 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC03_BlackGlass.prefab
+  artifactKey: Guid(c91e15b789a11df4a920d157cf0e138c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC03_BlackGlass.prefab using Guid(c91e15b789a11df4a920d157cf0e138c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc308ea44ca17a5772c42a443fa9935f') in 0.015581 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC04_AngelEars.prefab
+  artifactKey: Guid(8f4a87986f41bba4687a9f020ed07325) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC04_AngelEars.prefab using Guid(8f4a87986f41bba4687a9f020ed07325) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '619315a2ff8f0cd84cc7b6909d9bd853') in 0.015696 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC04_BunnyEars.prefab
+  artifactKey: Guid(fdb55c7f7fd68314e86be760e0e4ed44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC04_BunnyEars.prefab using Guid(fdb55c7f7fd68314e86be760e0e4ed44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f422ea2aac9eb5ab26b039892a9ab2df') in 0.016822 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC05_Horn01.prefab
+  artifactKey: Guid(7e8af9c86094f4544a985682c7f3508c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC05_Horn01.prefab using Guid(7e8af9c86094f4544a985682c7f3508c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f012719d9ff465a54133d84575c78ae') in 0.016201 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000074 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC03_NerdGlass.prefab
+  artifactKey: Guid(c36fdd77d2d0a0544b415041d8f686fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC03_NerdGlass.prefab using Guid(c36fdd77d2d0a0544b415041d8f686fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63fa0015f40a75cf0216d3ded979f2ad') in 0.012586 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.150302 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC07_PiratePatch.prefab
+  artifactKey: Guid(ea3483e1b629bd94989f7e622948f984) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC07_PiratePatch.prefab using Guid(ea3483e1b629bd94989f7e622948f984) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a225be61f0561d46e2782354bc6dbc8') in 0.020539 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC08_NinjaMask03.prefab
+  artifactKey: Guid(8f0fc8501cd6afc498cc3db0b66350b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/HeadParts/AC08_NinjaMask03.prefab using Guid(8f0fc8501cd6afc498cc3db0b66350b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9194b83b7b6a8228812898a8a17da08') in 0.015915 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.729642 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC05.prefab
+  artifactKey: Guid(643bdda2d7596c941807e9d7671abee1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC05.prefab using Guid(643bdda2d7596c941807e9d7671abee1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cd8a316514cd49d89f51e5e45c4130a') in 0.096853 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC18.prefab
+  artifactKey: Guid(e9e6dc64c04529e43a402135e8a51faa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC18.prefab using Guid(e9e6dc64c04529e43a402135e8a51faa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '311c3f543f178e5e8986f31959c475c1') in 0.092937 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000083 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC21.prefab
+  artifactKey: Guid(86ebe045344c04b45b80dec820d85bed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC21.prefab using Guid(86ebe045344c04b45b80dec820d85bed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9fea58e4f9029077b2ecf58fee9b45a9') in 0.096112 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC11.prefab
+  artifactKey: Guid(ff9d1c6a188ff3644bc59bacb9537ff4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC11.prefab using Guid(ff9d1c6a188ff3644bc59bacb9537ff4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f8f8f5e5c6b2728df79666b8b3bbcea') in 0.078655 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC09.prefab
+  artifactKey: Guid(b9fa4e873c3ac494db24b7e292b0ab10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC09.prefab using Guid(b9fa4e873c3ac494db24b7e292b0ab10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56398238c6afdaf324de1a57625d1208') in 0.100820 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC12.prefab
+  artifactKey: Guid(a7cb98eb096d7d649925415cc8648e2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC12.prefab using Guid(a7cb98eb096d7d649925415cc8648e2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '282e289b3258b211a7022bc131d936de') in 0.089745 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000061 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC15.prefab
+  artifactKey: Guid(0b33bf0809790354a814c2c4b1704449) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC15.prefab using Guid(0b33bf0809790354a814c2c4b1704449) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1616fab0b6794e81b3f2bb2078ed70bc') in 0.078246 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC16.prefab
+  artifactKey: Guid(cb00758158fa6c44a9935b6c0084f2c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC16.prefab using Guid(cb00758158fa6c44a9935b6c0084f2c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d2095327999545142bd01d77edf5823') in 0.072857 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000058 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC14.prefab
+  artifactKey: Guid(c56a12731e8250747a296b61a25e07ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC14.prefab using Guid(c56a12731e8250747a296b61a25e07ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ee1972c39b39a1a1b704b3eb5e6fac7') in 0.082093 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 24.179377 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC01.prefab
+  artifactKey: Guid(b419e164ab53516438da636332342da9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC01.prefab using Guid(b419e164ab53516438da636332342da9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd753de019a7d8000e3c717f15ff33957') in 0.095712 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC04.prefab
+  artifactKey: Guid(435bb8e3cb367524788cbb43c18e476c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC04.prefab using Guid(435bb8e3cb367524788cbb43c18e476c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d186360e1cfaa12c6a6fede62b00fd2') in 0.098538 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 78.484487 seconds.
+  path: Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC22.prefab
+  artifactKey: Guid(8d89ada5f8847c44389ce35d4ea4612d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPGTinyHeroWavePBR/HDRP_URP/URP/Prefab/ModularCharacters/MC22.prefab using Guid(8d89ada5f8847c44389ce35d4ea4612d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '28a4c99d02e1bf4b1e7080234308fe96') in 0.103836 seconds 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.002529 seconds.
+Registered in 0.002582 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image D:\UnityProjects\Wizards\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\UnityProjects\Wizards\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.88 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.03 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.966 seconds
+- Completed reload, in  1.160 seconds
 Domain Reload Profiling:
-	ReloadAssembly (967ms)
-		BeginReloadAssembly (121ms)
+	ReloadAssembly (1160ms)
+		BeginReloadAssembly (153ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (3ms)
+			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (41ms)
-		EndReloadAssembly (781ms)
-			LoadAssemblies (73ms)
+			CreateAndSetChildDomain (46ms)
+		EndReloadAssembly (925ms)
+			LoadAssemblies (112ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (237ms)
+			SetupTypeCache (279ms)
 			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (39ms)
-			SetupLoadedEditorAssemblies (389ms)
+			RebuildScriptCaches (54ms)
+			SetupLoadedEditorAssemblies (399ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (4ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (63ms)
+				ProcessInitializeOnLoadAttributes (259ms)
+				ProcessInitializeOnLoadMethodAttributes (68ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (24ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.00 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5065 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 28 unused Assets / (0.7 MB). Loaded Objects now: 5736.
+Memory consumption went from 226.2 MB to 225.5 MB.
+Total: 5.980900 ms (FindLiveObjects: 0.587200 ms CreateObjectMapping: 0.483300 ms MarkObjects: 4.433300 ms  DeleteObjects: 0.475800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004160 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\UnityProjects\Wizards\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\UnityProjects\Wizards\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.73 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.000 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1001ms)
+		BeginReloadAssembly (121ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (818ms)
+			LoadAssemblies (84ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (232ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (40ms)
+			SetupLoadedEditorAssemblies (388ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
 				BeforeProcessingInitializeOnLoad (60ms)
-				ProcessInitializeOnLoadAttributes (252ms)
+				ProcessInitializeOnLoadAttributes (250ms)
 				ProcessInitializeOnLoadMethodAttributes (70ms)
 				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (9ms)
+			AwakeInstancesAfterBackupRestoration (19ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.96 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 2.50 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5057 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 28 unused Assets / (0.8 MB). Loaded Objects now: 5639.
-Memory consumption went from 199.0 MB to 198.2 MB.
-Total: 3.412300 ms (FindLiveObjects: 0.386500 ms CreateObjectMapping: 0.203400 ms MarkObjects: 2.490200 ms  DeleteObjects: 0.331300 ms)
+Unloading 5065 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 28 unused Assets / (0.8 MB). Loaded Objects now: 5739.
+Memory consumption went from 226.2 MB to 225.4 MB.
+Total: 3.414900 ms (FindLiveObjects: 0.381100 ms CreateObjectMapping: 0.172600 ms MarkObjects: 2.529200 ms  DeleteObjects: 0.330800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003659 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\UnityProjects\Wizards\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\UnityProjects\Wizards\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.06 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.992 seconds
+Domain Reload Profiling:
+	ReloadAssembly (993ms)
+		BeginReloadAssembly (125ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (802ms)
+			LoadAssemblies (88ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (248ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (36ms)
+			SetupLoadedEditorAssemblies (379ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (55ms)
+				ProcessInitializeOnLoadAttributes (245ms)
+				ProcessInitializeOnLoadMethodAttributes (70ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (19ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5065 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 28 unused Assets / (0.8 MB). Loaded Objects now: 5742.
+Memory consumption went from 226.2 MB to 225.4 MB.
+Total: 5.070900 ms (FindLiveObjects: 0.554400 ms CreateObjectMapping: 0.446600 ms MarkObjects: 3.579800 ms  DeleteObjects: 0.488100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
