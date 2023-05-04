@@ -59,6 +59,7 @@
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\InputSystem\TestingInputSystem.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\RPGTinyHeroWavePBR\HowToTestHDRP_URP.txt" />

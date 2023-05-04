@@ -6145,7 +6145,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: e0b6295c3b25b7d499aca4a450a9f484, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -7857,6 +7857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2763914743854016808}
   - component: {fileID: 2436971511861807025}
+  - component: {fileID: 3247294876761617299}
   m_Layer: 0
   m_Name: PlayerVisual
   m_TagString: Untagged
@@ -7864,6 +7865,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3247294876761617299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247294876761617298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b891d0fd50f5e4ab73d7dc548a58ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &3251452130587359358
 MeshFilter:
   m_ObjectHideFlags: 0
