@@ -21,4 +21,10 @@ public class GameInput : MonoBehaviour
 
         return inputVector;
     }
+
+    public float GetIsAttack1()
+    {
+        float isAttack = playerInputActions.Player.Attack1.ReadValue<float>();
+        return isAttack;
+    }
 }

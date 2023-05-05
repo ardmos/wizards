@@ -7,11 +7,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
     private bool isWalking;
+    private bool isAttack1;
 
 
     // Update is called once per frame
     void Update()
     {
+        Attack1();
         Move();
     }
 
@@ -33,8 +35,18 @@ public class Player : MonoBehaviour
         transform.forward = slerpResult;
     }
 
+    private void Attack1()
+    {           
+        isAttack1 = gameInput.GetIsAttack1() == 1;
+        Debug.Log("isAttack1 = " + isAttack1);
+    }
+
     public bool IsWalking()
     {
         return isWalking;
+    }
+    public bool IsAttack1()
+    {
+        return isAttack1;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     private const string IS_WALKING = "IsWalking";
+    private const string IS_ATTACK1 = "IsAttack1";
 
     [SerializeField] private Player player;
     private Animator animator;
@@ -17,6 +18,7 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.IsWalking());
+        animator.SetBool(IS_ATTACK1, player.IsAttack1());
     }
 
 
