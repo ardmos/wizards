@@ -45,6 +45,7 @@ public class SpawnProjectiles : MonoBehaviour
             // 테스트용. 무조건 Attack1 파이어볼.   커맨드패턴 사용하게끔 수정할 때, 추후 플레이어가 줍는 스킬들로 동적으로 스킬 벨트가 세팅될 수 있게끔 신경써서 수정하기. 
             vfxProjectileToSpawn = vfxProjectilePrefabs[0]; // 테스트용 Attack1이 있는 0번 인덱스.
             // 연사율(쿨다운) 체크 연사율 체크 로직도 수정 검토하기. CodeMonkey 참고. 
+            // ProjectileMoveScript도 새로 생성하기
             if (Time.time >= timeToFire)
             {
                 //Debug.Log("발사 !!! Time.time:" + Time.time + ", timeToFire:" + timeToFire);
