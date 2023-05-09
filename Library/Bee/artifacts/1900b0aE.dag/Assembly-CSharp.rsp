@@ -378,9 +378,11 @@
 "Assets/GabrielAguiarProductions/Unique_ToonProjectiles_Volume_1/Scripts/UniqueProjectiles/SpawnProjectilesScript.cs"
 "Assets/InputSystem/PlayerInputActions.cs"
 "Assets/InputSystem/TestingInputSystem.cs"
+"Assets/Scripts/CameraShake.cs"
 "Assets/Scripts/GameInput.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/PlayerAnimator.cs"
+"Assets/Scripts/SpawnProjectiles.cs"
 -langversion:9.0
 
 /deterministic
