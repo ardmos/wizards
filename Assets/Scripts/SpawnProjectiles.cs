@@ -16,15 +16,15 @@ public class SpawnProjectiles : MonoBehaviour
     //private const string FIRE_BALL_1 = "FireBall1";
 
     [SerializeField] private Player player;
-    public GameObject muzzle;
-    public GameObject mainCamera;
-    public bool cameraShake;
-    public float timeToFire;
+    [SerializeField] private GameObject muzzle;
+    //public GameObject mainCamera;
+    //public bool cameraShake;
+    [SerializeField] private float timeToFire;
 
     // 스킬들. 각 발사체 VFX들 프리팹 리스트 저장 
-    public List<GameObject> vfxProjectilePrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> vfxProjectilePrefabs = new List<GameObject>();
     // 발사하기로 선택된 프리팹
-    private GameObject vfxProjectileToSpawn;
+    [SerializeField] private GameObject vfxProjectileToSpawn;
 
     private void Update()
     {
@@ -51,7 +51,7 @@ public class SpawnProjectiles : MonoBehaviour
                 //Debug.Log("발사 !!! Time.time:" + Time.time + ", timeToFire:" + timeToFire);
                 timeToFire = Time.time + 1f / vfxProjectileToSpawn.GetComponent<ProjectileMoveScript>().fireRate;
                 SpawnVFXProjectile(vfxProjectileToSpawn);  
-                ShakeMainCamera();
+                //ShakeMainCamera();  카메라 흔들기 시네머신 이용해서 구현해야함 
             }
             //else Debug.Log("쿨다운 입니다 ... Time.time:"+ Time.time +", timeToFire:" + timeToFire);
         }
@@ -69,16 +69,13 @@ public class SpawnProjectiles : MonoBehaviour
         }   
     }
 
-    private void ShakeMainCamera()
+/*    private void ShakeMainCamera()
     {
         var cameraShakeScript = mainCamera.GetComponent<CameraShake>();
         if (cameraShake && cameraShakeScript != null)
         {
             cameraShakeScript.ShakeCamera();
             cameraShake = !cameraShake;
-        }
-            
-
-        
-    }
+        }              
+    }*/
 }
