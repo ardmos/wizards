@@ -924,6 +924,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="IngameDebugConsole.Editor.csproj">
+      <Project>{0822653F-8344-E92C-D91D-F180CC00FB96}</Project>
+      <Name>IngameDebugConsole.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
+      <Project>{9BBFB8B1-55DE-CC05-A70E-5F051FB16868}</Project>
+      <Name>IngameDebugConsole.Runtime</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

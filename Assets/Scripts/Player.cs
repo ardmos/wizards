@@ -39,7 +39,7 @@ public class Player : NetworkBehaviour
     private void Attack1()
     {           
         isAttack1 = gameInput.GetIsAttack1() == 1;
-        Debug.Log("isAttack1 = " + isAttack1);
+        //Debug.Log("isAttack1 = " + isAttack1);
     }
 
     public bool IsWalking()
