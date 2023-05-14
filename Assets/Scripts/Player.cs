@@ -13,7 +13,10 @@ public class Player : NetworkBehaviour
 
     private void Start()
     {
-
+        // 시네머신 카메라가 따라오도록 변경 
+        CinemachineVirtualCamera cinemachineVirtualCamera = GameObject.Find("Virtual Camera (1)").GetComponent<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera.Follow = transform;
+        cinemachineVirtualCamera.LookAt = transform;
     }
 
     // Update is called once per frame
