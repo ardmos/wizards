@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+/// <summary>
+/// 삭제 가능 
+/// </summary>
+
 public class PlayerNetwork : NetworkBehaviour
 {
     // NetworkVariable 로 간단하게 클라이언트간 변수 공유가 가능하다. 권한설정도 가능
