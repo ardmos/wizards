@@ -404,6 +404,7 @@
 "Assets/InputSystem/PlayerInputActions.cs"
 "Assets/InputSystem/TestingInputSystem.cs"
 "Assets/Scripts/CameraShake.cs"
+"Assets/Scripts/ClientNetworkTransform.cs"
 "Assets/Scripts/GameInput.cs"
 "Assets/Scripts/NetworkManagerUI.cs"
 "Assets/Scripts/Player.cs"
