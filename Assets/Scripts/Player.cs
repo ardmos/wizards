@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Cinemachine;
 
 public class Player : NetworkBehaviour
 {
@@ -10,12 +11,18 @@ public class Player : NetworkBehaviour
     private bool isWalking;
     private bool isAttack1;
 
+    private void Start()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
+
         Attack1();
-        Move();
+        Move();     
     }
 
     private void Move()
@@ -26,7 +33,29 @@ public class Player : NetworkBehaviour
         transform.position += moveDir * moveSpeed * Time.deltaTime;
         isWalking = moveDir != Vector3.zero;
 
-        Rotate(moveDir);
+        // 진행방향 바라볼 때
+        //Rotate(moveDir);
+        // 마우스 커서 방향 바라볼 때
+        /*Vector3 mouseWorldCoordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseDir = mouseWorldCoordinates - transform.position;
+        Rotate(mouseDir);*/
+
+        RaycastHit hit;
+        //float maxDistance = 100f;
+        Vector3 mousePos = Input.mousePosition;
+        Ray mouseRay = Camera.main.ScreenPointToRay(mousePos);
+        Vector3 mouseDir = Vector3.zero;
+        if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit)) {
+            mouseDir = hit.point - transform.position;
+            Debug.Log("mouseRay 충돌! 충돌 위치: " + hit.point);
+        }
+        else
+        {
+            Vector3 pos = mouseRay.GetPoint(100);
+            Debug.Log("mouseRay.GetPoint : " + pos);
+            mouseDir = pos - transform.position;
+        }
+        Rotate(mouseDir);
     }
 
     private void Rotate(Vector3 mMoveDir)

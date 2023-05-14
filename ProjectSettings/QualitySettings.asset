@@ -78,20 +78,4 @@ QualitySettings:
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 11400000, guid: ca623a0a44a1e2d4189d7536865288b5, type: 2}
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality:
-    Android: 0
-    GameCoreScarlett: 1
-    GameCoreXboxOne: 1
-    Lumin: 1
-    Nintendo 3DS: 1
-    Nintendo Switch: 1
-    PS4: 1
-    PS5: 1
-    Server: 1
-    Stadia: 1
-    Standalone: 1
-    WebGL: 0
-    Windows Store Apps: 1
-    XboxOne: 1
-    iPhone: 0
-    tvOS: 0
+  m_PerPlatformDefaultQuality: {}
