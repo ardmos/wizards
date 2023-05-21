@@ -2664,7 +2664,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932501098101691884}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36d1d7cf6b47b1f4489cc5ab2fc60982, type: 3}
   m_Name: 
@@ -2714,16 +2714,16 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 1
+  SyncRotAngleX: 0
   SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
-  InLocalSpace: 0
+  InLocalSpace: 1
   Interpolate: 1
 --- !u!54 &4842463508567140202
 Rigidbody:
@@ -10459,7 +10459,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4859955840248925076}
-  m_LocalRotation: {x: -0, y: 4e-45, z: -4e-45, w: 1}
+  m_LocalRotation: {x: -0, y: 6e-45, z: -6e-45, w: 1}
   m_LocalPosition: {x: -1.4e-43, y: 0, z: -28.07295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
