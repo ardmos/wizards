@@ -8,16 +8,14 @@ public class Player : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private GameObject virtualCameraObj;
     private bool isWalking;
     private bool isAttack1;
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
-        // 시네머신 카메라가 따라오도록 변경 // 카메라명 수정 필요. 아래 코드 수정할건 없는지 추후 확인 요망
-        // 플레이어가 여럿인 경우, 각 플레이어에게 카메라가 하나씩 따라다닐 필요가 있음. 
-/*        CinemachineVirtualCamera cinemachineVirtualCamera = GameObject.Find("Virtual Camera (1)").GetComponent<CinemachineVirtualCamera>();
-        cinemachineVirtualCamera.Follow = transform;
-        cinemachineVirtualCamera.LookAt = transform;*/
+        // 카메라가 소유자만 따라다니도록  
+        virtualCameraObj.SetActive(IsOwner);
     }
 
     // Update is called once per frame

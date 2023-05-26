@@ -403,7 +403,6 @@
 "Assets/GabrielAguiarProductions/Unique_ToonProjectiles_Volume_1/Scripts/UniqueProjectiles/SpawnProjectilesScript.cs"
 "Assets/InputSystem/PlayerInputActions.cs"
 "Assets/InputSystem/TestingInputSystem.cs"
-"Assets/Scripts/CameraShake.cs"
 "Assets/Scripts/ClientNetworkTransform.cs"
 "Assets/Scripts/FloorGenerator.cs"
 "Assets/Scripts/GameInput.cs"
