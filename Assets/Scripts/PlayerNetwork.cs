@@ -19,6 +19,7 @@ public class PlayerNetwork : NetworkBehaviour
         }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
+    // 아래 OnNetworkSpawn에서 등록된 randomNumber.OnValueChanged에서 사용할 밸류들 초기화.
     public struct MyCustomData : INetworkSerializable
     {
         public int _int;
@@ -35,8 +36,10 @@ public class PlayerNetwork : NetworkBehaviour
         }
     }
 
+    // 네트워크 오브젝트에서는 Awake나 Start 사용해선 안됨.  대신 OnNetworkSpawn 사용
     public override void OnNetworkSpawn()
     {
+        // 생성해둔 NetworkVariable의 값이 변할 때 호출되는 Delegate 
         randomNumber.OnValueChanged += (MyCustomData previousValue, MyCustomData newValue) =>
         {
             Debug.Log(OwnerClientId + "; randomNumber: " + newValue._int + "; " + newValue._bool + "; " + newValue.message);
