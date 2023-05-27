@@ -64,8 +64,12 @@ public class SpawnProjectiles : MonoBehaviour
             GameObject projectilePrefab;
             // 포구에 발사체 위치시키기
             projectilePrefab = Instantiate(skillPrefObj, muzzle.transform.position, Quaternion.identity);
+            // 아래 회전, 발사는 각 마법의 Move스크립트에서 처리. 여기서는 머즐에 생성만 해줌.
             // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기. 직진이나 유도 등 이동은 발사체가 알아서 함.
             projectilePrefab.transform.localRotation = player.transform.localRotation;
+            // 소환시에 Impulse 
+            float speed = 35f;
+            projectilePrefab.GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Impulse);
         }   
     }
 

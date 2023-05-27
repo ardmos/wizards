@@ -76,15 +76,20 @@ public class ProjectileMoveScript : MonoBehaviour {
 				Destroy (muzzleVFX, psChild.main.duration);
 			}
 		}
+
+        // 소환시에 Impulse 테스트
+        //rb.AddForce(Vector3.forward * speed, ForceMode.Impulse);
 	}
 
 	void FixedUpdate () {
+        // 직사마법 기준. 추후 유도탄은 이 부분 수정해주면 됨.  지금은 SpawnProjectiles에서 해주고 있음
         if (target != null)
             rotateToMouse.RotateToMouse (gameObject, target.transform.position);
         if (rotate)
             transform.Rotate(0, 0, rotateAmount, Space.Self);
-        if (speed != 0 && rb != null)
-			rb.position += (transform.forward + offset) * (speed * Time.deltaTime);   
+        // 에너지로 날아가는게 아니었네.  물리로 날아가도록 변경하자. 소환시에 Impulse  
+        //if (speed != 0 && rb != null)
+            //rb.position += (transform.forward + offset) * (speed * Time.deltaTime);
     }
 
 	void OnCollisionEnter (Collision co) {
@@ -92,6 +97,11 @@ public class ProjectileMoveScript : MonoBehaviour {
         {
             if (co.gameObject.tag != "Bullet" && !collided)
             {
+
+                // 폭발력 추가 ????? 이게ㅐ 왜 안됨????
+                //rb.AddExplosionForce(500f, transform.position, 100f);
+                Debug.Log("폭발!");
+
                 collided = true;
 
                 if (trails.Count > 0)
@@ -130,6 +140,8 @@ public class ProjectileMoveScript : MonoBehaviour {
                 }
 
                 StartCoroutine(DestroyParticle(0f));
+
+
             }
         }
         else

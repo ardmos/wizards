@@ -23,12 +23,17 @@ public class FloorGenerator : MonoBehaviour
     // 오브젝트 Y 높이
     private float transformYValue = -0.5f;
 
+    // 테스트용 벽 기둥
+    [SerializeField] private GameObject walls, pillars, targets;
+
     // Start is called before the first frame update
     void Start()
     {
+        // 벽, 기둥 생성
+        walls.SetActive(true);
+        pillars.SetActive(true);
+        targets.SetActive(true);
 
-
-        
 
         // 생성 가로(mapSizeX) 세로(mapSizeZ)
         for (int laneZ = mapSizeZ-1; laneZ >= 0; laneZ--)

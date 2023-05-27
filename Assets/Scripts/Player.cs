@@ -14,7 +14,7 @@ public class Player : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        // 카메라가 소유자만 따라다니도록  
+        // 카메라가 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
     }
 
