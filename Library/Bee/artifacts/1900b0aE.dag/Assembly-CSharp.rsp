@@ -406,6 +406,7 @@
 "Assets/Scripts/ClientNetworkTransform.cs"
 "Assets/Scripts/FloorGenerator.cs"
 "Assets/Scripts/GameInput.cs"
+"Assets/Scripts/LevelDesigner.cs"
 "Assets/Scripts/NetworkManagerUI.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/PlayerAnimator.cs"

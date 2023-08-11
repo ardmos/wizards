@@ -8,7 +8,7 @@ using UnityEngine;
 /// 원점(현 스크립트가 붙어있는 오브젝트) 를 전체 맵 사이즈의 좌상단으로 설정.
 /// 한 칸 간의 간격 : 5m (한 타일이 10x10이기 때문)
 /// </summary>
-
+ 
 public class FloorGenerator : MonoBehaviour
 {
     // 바닥으로 쓸 프리팹 
