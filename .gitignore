@@ -70,20 +70,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-Library/ArtifactDB
-Library/Bee/backend_profiler0.traceevents
-Library/Bee/fullprofile.json
-Library/Bee/tundra.digestcache
-Library/Bee/TundraBuildState.state.map
-Library/BurstCache/JIT/BurstCacheManifest.cm
-Library/LastSceneManagerSetup.txt
-Library/SceneVisibilityState.asset
-Library/Search/transactions.db
-Library/ShaderCache.db
-Library/ShaderCache/EditorEncounteredVariants
-Library/SourceAssetDB
-Library/StateCache/MainStageHierarchy/ff/ffcc8d678d72740a0742f6c3b4a49298.json
-Library/StateCache/SceneView/73/73c1121f36c8d7623a499408dc67bfbb.json
-Logs/shadercompiler-UnityShaderCompiler.exe0.log
-UserSettings/EditorUserSettings.asset
-UserSettings/Layouts/default-2021.dwlt
