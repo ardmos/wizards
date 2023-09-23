@@ -6,6 +6,8 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 /// <summary>
 /// Unity 인증시스템을 관리하는 스크립트 입니다.
 /// !!현재 기능
@@ -14,6 +16,8 @@ using UnityEngine.SceneManagement;
 
 public class UnityAuthenticationManager : MonoBehaviour
 {
+    public string Token;
+    public string Error;
 
     private async void Awake()
     {
@@ -24,13 +28,46 @@ public class UnityAuthenticationManager : MonoBehaviour
 
             SetupEvents();
 
-            await SignInCachedUserAsync();
+            //await SignInCachedUserAsync();   테스트중에는 주석처리. 자동로그인 안함
+
+            //Initialize PlayGamesPlatform
+            PlayGamesPlatform.Activate();
+            //LoginGooglePlayGames(); 버튼 클릭시 실행
         }
         catch(Exception e)
         {
             Debug.LogException(e);
         }
         
+    }
+
+    /// <summary>
+    /// 구글플레이게임즈 로그인
+    /// </summary>
+    public void LoginGooglePlayGames()
+    {
+        PlayGamesPlatform.Instance.Authenticate((success) =>
+        {
+            if (success == SignInStatus.Success)
+            {
+                Debug.Log("Login with Google Play games successful.");
+
+                PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+                {
+                    Debug.Log("Authorization code: " + code);
+                    Token = code;
+                    // This token serves as an example to be used for SignInWithGooglePlayGames
+                });
+
+                // 로비 씬으로 이동
+                MoveToTheLobbyScene();
+            }
+            else
+            {
+                Error = "Failed to retrieve Google play games authorization code";
+                Debug.Log("Login Unsuccessful");
+            }
+        });
     }
 
     /// <summary>
