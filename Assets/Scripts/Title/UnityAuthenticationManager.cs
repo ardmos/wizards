@@ -23,6 +23,8 @@ public class UnityAuthenticationManager : MonoBehaviour
             Debug.Log(UnityServices.State);
 
             SetupEvents();
+
+            await SignInCachedUserAsync();
         }
         catch(Exception e)
         {
@@ -92,11 +94,51 @@ public class UnityAuthenticationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 로그인 캐쉬 확인 후 처리
+    /// </summary>
+    async Task SignInCachedUserAsync()
+    {
+        // Check if a cached player already exists by checking if the session token exists
+        if (!AuthenticationService.Instance.SessionTokenExists)
+        {
+            // if not, then do nothing
+            return;
+        }
+
+        // Sign in Anonymously
+        // This call will sign in the cached player.
+        try
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            Debug.Log("Sign in anonymously succeeded!");
+
+            // Shows how to get the playerID
+            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
+
+            // 로비 씬으로 이동
+            MoveToTheLobbyScene();
+        }
+        catch (AuthenticationException ex)
+        {
+            // Compare error code to AuthenticationErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        }
+        catch (RequestFailedException ex)
+        {
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        }
+    }
+
     public async void OnBtnSignInAnonymousClicked()
     {
         await SignInAnonymouslyAsync();
     }
 
+    // 이건 로드씬 매니저 따로 만들어서 처리하도록 수정하기
     private void MoveToTheLobbyScene()
     {
         SceneManager.LoadScene("LobbyScene");
