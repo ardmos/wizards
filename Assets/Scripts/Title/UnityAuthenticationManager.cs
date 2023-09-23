@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 /// <summary>
 /// Unity 인증시스템을 관리하는 스크립트 입니다.
 /// !!현재 기능
@@ -74,6 +75,8 @@ public class UnityAuthenticationManager : MonoBehaviour
             // Shows how to get the playerID
             Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
 
+            // 로비 씬으로 이동
+            MoveToTheLobbyScene();
         }
         catch (AuthenticationException ex)
         {
@@ -92,5 +95,10 @@ public class UnityAuthenticationManager : MonoBehaviour
     public async void OnBtnSignInAnonymousClicked()
     {
         await SignInAnonymouslyAsync();
+    }
+
+    private void MoveToTheLobbyScene()
+    {
+        SceneManager.LoadScene("LobbyScene");
     }
 }
