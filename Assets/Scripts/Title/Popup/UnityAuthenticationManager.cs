@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 /// <summary>
-/// Unity 인증시스템을 관리하는 스크립트 입니다.
+/// Unity 인증시스템을 관리하는 스크립트 입니다. 타이틀씬에서의 인증과정을 관리합니다
 /// !!현재 기능
 ///     1. 익명(Anonymous)로그인 인증 처리
 /// </summary>
@@ -28,11 +27,10 @@ public class UnityAuthenticationManager : MonoBehaviour
 
             SetupEvents();
 
-            //await SignInCachedUserAsync();   테스트중에는 주석처리. 자동로그인 안함
+            //await SignInCachedUserAsync();  // 테스트중에는 주석처리. 자동로그인 안함
 
             //Initialize PlayGamesPlatform
             PlayGamesPlatform.Activate();
-            //LoginGooglePlayGames(); 버튼 클릭시 실행
         }
         catch(Exception e)
         {
@@ -60,7 +58,7 @@ public class UnityAuthenticationManager : MonoBehaviour
                 });
 
                 // 로비 씬으로 이동
-                MoveToTheLobbyScene();
+                LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
             }
             else
             {
@@ -115,7 +113,7 @@ public class UnityAuthenticationManager : MonoBehaviour
             Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
 
             // 로비 씬으로 이동
-            MoveToTheLobbyScene();
+            LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         }
         catch (AuthenticationException ex)
         {
@@ -154,7 +152,7 @@ public class UnityAuthenticationManager : MonoBehaviour
             Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
 
             // 로비 씬으로 이동
-            MoveToTheLobbyScene();
+            LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         }
         catch (AuthenticationException ex)
         {
@@ -173,11 +171,5 @@ public class UnityAuthenticationManager : MonoBehaviour
     public async void OnBtnSignInAnonymousClicked()
     {
         await SignInAnonymouslyAsync();
-    }
-
-    // 이건 로드씬 매니저 따로 만들어서 처리하도록 수정하기
-    private void MoveToTheLobbyScene()
-    {
-        SceneManager.LoadScene("LobbyScene");
     }
 }
