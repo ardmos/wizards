@@ -14,14 +14,19 @@ public class StoreTriggerAreaCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
+
         IStoreCustomer storeCustomer = other.GetComponent<IStoreCustomer>();
-        if(storeCustomer != null)
+        Debug.Log("IN"+ storeCustomer + ", who: " + other.name);
+        if (storeCustomer != null)
         {
             uiMagicStore.Show(storeCustomer);
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("OUT");
+
         IStoreCustomer storeCustomer = other.GetComponent<IStoreCustomer>();
         if (storeCustomer != null)
         {

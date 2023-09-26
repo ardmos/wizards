@@ -11,7 +11,9 @@ public class UI_MagicStore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // 기본 비활성화 상태.
+        // 비활성화 이전에 상점 품목 데이터는 로드가 끝나야함
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class UI_MagicStore : MonoBehaviour
     /// </summary>
     public void Show(IStoreCustomer storeCustomer)
     {
+        Debug.Log("ON");
         gameObject.SetActive(true);
     }
     /// <summary>
@@ -31,6 +34,7 @@ public class UI_MagicStore : MonoBehaviour
     /// </summary>
     public void Hide()
     {
+        Debug.Log("OFF");
         gameObject.SetActive(false);
     }
 }

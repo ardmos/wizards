@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using Cinemachine;
 
-public class Player : NetworkBehaviour
+public class Player : NetworkBehaviour, IStoreCustomer
 {
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
@@ -87,5 +87,13 @@ public class Player : NetworkBehaviour
     public bool IsAttack1()
     {
         return isAttack1;
+    }
+
+    /// <summary>
+    /// 상점에서 아이템 구매시 동작하는 메서드
+    /// </summary>
+    public void BoughtItem()
+    {
+        // 아이템 구매시 행동할 내용 
     }
 }
