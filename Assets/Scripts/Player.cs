@@ -79,16 +79,14 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         switch (wand)
         {
-            case 1: m_Wand = gameAssets.m_Body_1; break;
-            case 2: m_Wand = gameAssets.m_Body_2; break;
-            case 3: m_Wand = gameAssets.m_Body_3; break;
-            case 4: m_Wand = gameAssets.m_Body_4; break;
-            case 5: m_Wand = gameAssets.m_Body_5; break;
-            case 6: m_Wand = gameAssets.m_Body_6; break;
-            case 7: m_Wand = gameAssets.m_Body_7; break;
-            case 8: m_Wand = gameAssets.m_Body_8; break;
-            case 9: m_Wand = gameAssets.m_Body_9; break;
-
+            case 1: m_Wand = gameAssets.m_Wand_1; break;
+            case 2: m_Wand = gameAssets.m_Wand_2; break;
+            case 3: m_Wand = gameAssets.m_Wand_3; break;
+            case 4: m_Wand = gameAssets.m_Wand_4; break;
+            case 5: m_Wand = gameAssets.m_Wand_5; break;
+            case 6: m_Wand = gameAssets.m_Wand_6; break;
+            case 7: m_Wand = gameAssets.m_Wand_7; break;
+            
             default:
                 Debug.LogError("Wand Equipment Error. wand:" + wand);
                 break;
@@ -247,6 +245,36 @@ public class Player : NetworkBehaviour, IStoreCustomer
     public void EquipWand_1()
     {
         wand = 1;
+        UpdateEquipments();
+    }
+    public void EquipWand_2()
+    {
+        wand = 2;
+        UpdateEquipments();
+    }
+    public void EquipWand_3()
+    {
+        wand = 3;
+        UpdateEquipments();
+    }
+    public void EquipWand_4()
+    {
+        wand = 4;
+        UpdateEquipments();
+    }
+    public void EquipWand_5()
+    {
+        wand = 5;
+        UpdateEquipments();
+    }
+    public void EquipWand_6()
+    {
+        wand = 6;
+        UpdateEquipments();
+    }
+    public void EquipWand_7()
+    {
+        wand = 7;
         UpdateEquipments();
     }
 
