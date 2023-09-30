@@ -6,25 +6,48 @@ using Cinemachine;
 
 public class Player : NetworkBehaviour, IStoreCustomer
 {
+
+    #region Private
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private GameObject virtualCameraObj;
+    [SerializeField] private Mesh m_Body;
+    [SerializeField] private Mesh m_Hat;
+    [SerializeField] private Mesh m_BackPack;
+    [SerializeField] private Mesh m_Wand;
+
+    private GameAssets gameAssets;
+
     private bool isWalking;
     private bool isAttack1;
+    private int body;
+    private int hat;
+    private int backPack;
+    private int wand;
 
-    public override void OnNetworkSpawn()
+    private void UpdateEquipments()
     {
-        // 카메라가 소유자만 따라다니도록 함 
-        virtualCameraObj.SetActive(IsOwner);
+        UpdateEquipments(body, hat, backPack, wand);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!IsOwner) return;
+    private void UpdateEquipments(int body, int hat, int backPack, int wand) {
 
-        Attack1();
-        Move();     
+        switch (body)
+        {
+            case 1: m_Body = gameAssets.m_Body_1; break;
+            case 2: m_Body = gameAssets.m_Body_2; break;
+            case 3: m_Body = gameAssets.m_Body_3; break;
+            case 4: m_Body = gameAssets.m_Body_4; break;
+            case 5: m_Body = gameAssets.m_Body_5; break;
+            case 6: m_Body = gameAssets.m_Body_6; break;
+            case 7: m_Body = gameAssets.m_Body_7; break;
+            case 8: m_Body = gameAssets.m_Body_8; break;
+            case 9: m_Body = gameAssets.m_Body_9; break;
+           
+            default:
+                Debug.LogError("Body Armor Equipment Error. body:"+body);
+                break;
+        }
     }
 
     private void Move()
@@ -46,7 +69,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     private void Rotate(Vector3 mMoveDir)
     {
         float rotateSpeed = 10f;
-        Vector3 slerpResult = Vector3.Slerp(transform.forward, mMoveDir, Time.deltaTime * rotateSpeed);       
+        Vector3 slerpResult = Vector3.Slerp(transform.forward, mMoveDir, Time.deltaTime * rotateSpeed);
         transform.forward = slerpResult;
     }
 
@@ -75,9 +98,31 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
 
     private void Attack1()
-    {           
+    {
         isAttack1 = gameInput.GetIsAttack1() == 1;
         //Debug.Log("isAttack1 = " + isAttack1);
+    }
+    #endregion Private
+
+
+    public override void OnNetworkSpawn()
+    {
+        // 카메라가 소유자만 따라다니도록 함 
+        virtualCameraObj.SetActive(IsOwner);
+    }
+
+    void Start()
+    {
+        gameAssets = GameAssets.instantiate;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!IsOwner) return;
+
+        Attack1();
+        Move();     
     }
 
     public bool IsWalking()
@@ -89,11 +134,49 @@ public class Player : NetworkBehaviour, IStoreCustomer
         return isAttack1;
     }
 
-    /// <summary>
-    /// 상점에서 아이템 구매시 동작하는 메서드
-    /// </summary>
-    public void BoughtItem()
+    public void EquipArmor_1()
     {
-        // 아이템 구매시 행동할 내용 
+        body = 1;
+        UpdateEquipments();
+    }
+    public void EquipHat_1()
+    {
+        hat = 1;
+        UpdateEquipments();
+    }
+    public void EquipBackPack_1()
+    {
+        backPack = 1;
+        UpdateEquipments();
+    }
+    public void EquipWand_1()
+    {
+        wand = 1;
+        UpdateEquipments();
+    }
+
+
+    /// <summary>
+    /// 아이템 구매 메서드
+    /// </summary>
+    public void BoughtItem(Item.ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case Item.ItemType.Armor_1:
+
+                break;
+            case Item.ItemType.Hat_1:
+                break;
+            case Item.ItemType.BackPack_1:
+                break;
+            case Item.ItemType.Wand_1:
+                break;
+            case Item.ItemType.Scroll_1:
+                break;
+            default:
+                break;
+        }
+
     }
 }
