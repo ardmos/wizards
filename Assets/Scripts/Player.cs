@@ -48,6 +48,23 @@ public class Player : NetworkBehaviour, IStoreCustomer
                 Debug.LogError("Body Armor Equipment Error. body:"+body);
                 break;
         }
+
+        switch (hat)
+        {
+            case 1: m_Hat = gameAssets.m_Body_1; break;
+            case 2: m_Hat = gameAssets.m_Body_2; break;
+            case 3: m_Hat = gameAssets.m_Body_3; break;
+            case 4: m_Hat = gameAssets.m_Body_4; break;
+            case 5: m_Hat = gameAssets.m_Body_5; break;
+            case 6: m_Hat = gameAssets.m_Body_6; break;
+            case 7: m_Hat = gameAssets.m_Body_7; break;
+            case 8: m_Hat = gameAssets.m_Body_8; break;
+            case 9: m_Hat = gameAssets.m_Body_9; break;
+
+            default:
+                Debug.LogError("Hat Equipment Error. hat:" + hat);
+                break;
+        }
     }
 
     private void Move()
@@ -142,6 +159,46 @@ public class Player : NetworkBehaviour, IStoreCustomer
     public void EquipHat_1()
     {
         hat = 1;
+        UpdateEquipments();
+    }
+    public void EquipHat_2()
+    {
+        hat = 2;
+        UpdateEquipments();
+    }
+    public void EquipHat_3()
+    {
+        hat = 3;
+        UpdateEquipments();
+    }
+    public void EquipHat_4()
+    {
+        hat = 4;
+        UpdateEquipments();
+    }
+    public void EquipHat_5()
+    {
+        hat = 5;
+        UpdateEquipments();
+    }
+    public void EquipHat_6()
+    {
+        hat = 6;
+        UpdateEquipments();
+    }
+    public void EquipHat_7()
+    {
+        hat = 7;
+        UpdateEquipments();
+    }
+    public void EquipHat_8()
+    {
+        hat = 8;
+        UpdateEquipments();
+    }
+    public void EquipHat_9()
+    {
+        hat = 9;
         UpdateEquipments();
     }
     public void EquipBackPack_1()
