@@ -65,6 +65,17 @@ public class Player : NetworkBehaviour, IStoreCustomer
                 Debug.LogError("Hat Equipment Error. hat:" + hat);
                 break;
         }
+
+        switch (backPack)
+        {
+            case 1: m_BackPack = gameAssets.m_Body_1; break;
+            case 2: m_BackPack = gameAssets.m_Body_2; break;
+            case 3: m_BackPack = gameAssets.m_Body_3; break;
+
+            default:
+                Debug.LogError("BackPack Equipment Error. backPack:" + backPack);
+                break;
+        }
     }
 
     private void Move()
@@ -204,6 +215,16 @@ public class Player : NetworkBehaviour, IStoreCustomer
     public void EquipBackPack_1()
     {
         backPack = 1;
+        UpdateEquipments();
+    }
+    public void EquipBackPack_2()
+    {
+        backPack = 2;
+        UpdateEquipments();
+    }
+    public void EquipBackPack_3()
+    {
+        backPack = 3;
         UpdateEquipments();
     }
     public void EquipWand_1()
