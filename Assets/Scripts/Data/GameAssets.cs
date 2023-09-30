@@ -34,6 +34,7 @@ public class GameAssets : MonoBehaviour
     public Mesh m_Body_17;
     public Mesh m_Body_18;
     public Mesh m_Body_19;
+    public Mesh m_Body_20;
     public Mesh m_BackPack_1;
     public Mesh m_BackPack_2;
     public Mesh m_BackPack_3;
