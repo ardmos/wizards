@@ -68,12 +68,29 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         switch (backPack)
         {
-            case 1: m_BackPack = gameAssets.m_Body_1; break;
-            case 2: m_BackPack = gameAssets.m_Body_2; break;
-            case 3: m_BackPack = gameAssets.m_Body_3; break;
+            case 1: m_BackPack = gameAssets.m_BackPack_1; break;
+            case 2: m_BackPack = gameAssets.m_BackPack_2; break;
+            case 3: m_BackPack = gameAssets.m_BackPack_3; break;
 
             default:
                 Debug.LogError("BackPack Equipment Error. backPack:" + backPack);
+                break;
+        }
+
+        switch (wand)
+        {
+            case 1: m_Wand = gameAssets.m_Body_1; break;
+            case 2: m_Wand = gameAssets.m_Body_2; break;
+            case 3: m_Wand = gameAssets.m_Body_3; break;
+            case 4: m_Wand = gameAssets.m_Body_4; break;
+            case 5: m_Wand = gameAssets.m_Body_5; break;
+            case 6: m_Wand = gameAssets.m_Body_6; break;
+            case 7: m_Wand = gameAssets.m_Body_7; break;
+            case 8: m_Wand = gameAssets.m_Body_8; break;
+            case 9: m_Wand = gameAssets.m_Body_9; break;
+
+            default:
+                Debug.LogError("Wand Equipment Error. wand:" + wand);
                 break;
         }
     }
