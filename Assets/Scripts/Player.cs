@@ -192,6 +192,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         return isAttack1;
     }
 
+    #region 아이템 장착
     public void EquipArmor_1()
     {
         body = 1;
@@ -412,14 +413,65 @@ public class Player : NetworkBehaviour, IStoreCustomer
         wand = 7;
         UpdateEquipments();
     }
-
+    #endregion 아이템 장착 
 
     /// <summary>
     /// 아이템 구매 메서드
     /// </summary>
     public void BoughtItem(Item.ItemType itemType)
     {
-       
+        Debug.Log("Bought item: " + itemType);
+        switch (itemType)
+        {
+            case Item.ItemType.Armor_1: EquipArmor_1(); break;
+            case Item.ItemType.Armor_2: EquipArmor_2(); break;
+            case Item.ItemType.Armor_3: EquipArmor_3(); break;
+            case Item.ItemType.Armor_4: EquipArmor_4(); break;
+            case Item.ItemType.Armor_5: EquipArmor_5(); break;
+            case Item.ItemType.Armor_6: EquipArmor_6(); break;
+            case Item.ItemType.Armor_7: EquipArmor_7(); break;
+            case Item.ItemType.Armor_8: EquipArmor_8(); break;
+            case Item.ItemType.Armor_9: EquipArmor_9(); break;
+            case Item.ItemType.Armor_10: EquipArmor_10(); break;
+            case Item.ItemType.Armor_11: EquipArmor_11(); break;
+            case Item.ItemType.Armor_12: EquipArmor_12(); break;
+            case Item.ItemType.Armor_13: EquipArmor_13(); break;
+            case Item.ItemType.Armor_14: EquipArmor_14(); break;
+            case Item.ItemType.Armor_15: EquipArmor_15(); break;
+            case Item.ItemType.Armor_16: EquipArmor_16(); break;
+            case Item.ItemType.Armor_17: EquipArmor_17(); break;
+            case Item.ItemType.Armor_18: EquipArmor_18(); break;
+            case Item.ItemType.Armor_19: EquipArmor_19(); break;
+            case Item.ItemType.Armor_20: EquipArmor_20(); break;
+            case Item.ItemType.Hat_1: EquipHat_1(); break;
+            case Item.ItemType.Hat_2: EquipHat_2(); break;
+            case Item.ItemType.Hat_3: EquipHat_3(); break;
+            case Item.ItemType.Hat_4: EquipHat_4(); break;
+            case Item.ItemType.Hat_5: EquipHat_5(); break;
+            case Item.ItemType.Hat_6: EquipHat_6(); break;
+            case Item.ItemType.Hat_7: EquipHat_7(); break;
+            case Item.ItemType.Hat_8: EquipHat_8(); break;
+            case Item.ItemType.Hat_9: EquipHat_9(); break;
+            case Item.ItemType.Hat_10: EquipHat_10(); break;
+            case Item.ItemType.Hat_11: EquipHat_11(); break;
+            case Item.ItemType.Hat_12: EquipHat_12(); break;
+            case Item.ItemType.Hat_13: EquipHat_13(); break;
+            case Item.ItemType.Hat_14: EquipHat_14(); break;
+            case Item.ItemType.BackPack_1: EquipBackPack_1(); break;
+            case Item.ItemType.BackPack_2: EquipBackPack_2(); break;
+            case Item.ItemType.BackPack_3: EquipBackPack_3(); break;
+            case Item.ItemType.Wand_1: EquipWand_1(); break;
+            case Item.ItemType.Wand_2: EquipWand_2(); break;
+            case Item.ItemType.Wand_3: EquipWand_3(); break;
+            case Item.ItemType.Wand_4: EquipWand_4(); break;
+            case Item.ItemType.Wand_5: EquipWand_5(); break;
+            case Item.ItemType.Wand_6: EquipWand_6(); break;
+            case Item.ItemType.Wand_7: EquipWand_7(); break;
+            case Item.ItemType.Scroll_1:
+                break;
+            default:
+                break;
+        }
 
     }
 }
