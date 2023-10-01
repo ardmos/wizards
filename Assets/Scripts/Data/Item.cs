@@ -53,7 +53,8 @@ public class Item
         Wand_5,
         Wand_6,
         Wand_7,
-        Scroll_1
+        Scroll_1,
+        Max
     }
 
     public static int GetCost(ItemType itemType)

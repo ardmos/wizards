@@ -100,7 +100,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 
                 // 폭발력 추가 ????? 이게ㅐ 왜 안됨????
                 //rb.AddExplosionForce(500f, transform.position, 100f);
-                Debug.Log("폭발!");
+                //Debug.Log("폭발!");
 
                 collided = true;
 

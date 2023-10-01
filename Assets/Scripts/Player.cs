@@ -34,6 +34,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         switch (body)
         {
+            case 0: break;
             case 1: m_Body = gameAssets.m_Body_1; break;
             case 2: m_Body = gameAssets.m_Body_2; break;
             case 3: m_Body = gameAssets.m_Body_3; break;
@@ -61,6 +62,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         switch (hat)
         {
+            case 0: break;
             case 1: m_Hat = gameAssets.m_Hat_1; break;  
             case 2: m_Hat = gameAssets.m_Hat_2; break;
             case 3: m_Hat = gameAssets.m_Hat_3; break;
@@ -83,6 +85,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         switch (backPack)
         {
+            case 0: break;
             case 1: m_BackPack = gameAssets.m_BackPack_1; break;
             case 2: m_BackPack = gameAssets.m_BackPack_2; break;
             case 3: m_BackPack = gameAssets.m_BackPack_3; break;
@@ -94,6 +97,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         switch (wand)
         {
+            case 0: break;  // 여기 버그잡는것까지 했음
             case 1: m_Wand = gameAssets.m_Wand_1; break;
             case 2: m_Wand = gameAssets.m_Wand_2; break;
             case 3: m_Wand = gameAssets.m_Wand_3; break;
