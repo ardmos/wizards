@@ -17,11 +17,15 @@ public class UI_MagicStore : MonoBehaviour
 
     private IStoreCustomer storeCustomer;
 
+    private void Awake()
+    {
+        // 상점 품목들 로드
+        LoadContents();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        // 기본 비활성화 상태.
-        // 비활성화 이전에 상점 품목 데이터는 로드가 끝나야함
+        // 상점 UI 비활성화
         gameObject.SetActive(false);
     }
 
@@ -36,9 +40,9 @@ public class UI_MagicStore : MonoBehaviour
     /// 1. 프리팹 사용 아이템 생성
     /// 2. 생성되는 각각의 아이템에 각 ItemType과 현 스크립트 주소를 넣어줌 (각 아이템 클릭시 활용할 수 있도록)
     /// </summary>
-    public void CreateItembutton()
+    public void LoadContents()
     {
-        for (int i = ((int)Item.ItemType.Wand_1); i < ((int)Item.ItemType.Max); i++)
+        for (int i = ((int)Item.ItemType.Scroll_1); i < ((int)Item.ItemType.Max); i++)
         {
             Item.ItemType itemType = (Item.ItemType)i;
             Transform storeItemTransform = Instantiate(storeItemTemplatePref);
@@ -58,7 +62,6 @@ public class UI_MagicStore : MonoBehaviour
         this.storeCustomer = storeCustomer;
         Debug.Log("ON");
         gameObject.SetActive(true);
-        CreateItembutton();
     }
     /// <summary>
     /// 상점을 비활성화 시키는 메서드

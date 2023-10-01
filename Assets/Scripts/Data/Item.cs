@@ -54,6 +54,8 @@ public class Item
         Wand_6,
         Wand_7,
         Scroll_1,
+        Scroll_2,
+        Scroll_3,
         Max
     }
 
@@ -110,6 +112,8 @@ public class Item
             case ItemType.Wand_7:
                 return 60;
             case ItemType.Scroll_1:
+            case ItemType.Scroll_2:
+            case ItemType.Scroll_3:
                 return 30;
             default:
                 { Debug.LogError("GetCost error"); return 0; }

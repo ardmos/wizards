@@ -97,7 +97,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         switch (wand)
         {
-            case 0: break;  // 여기 버그잡는것까지 했음
+            case 0: break;  
             case 1: m_Wand = gameAssets.m_Wand_1; break;
             case 2: m_Wand = gameAssets.m_Wand_2; break;
             case 3: m_Wand = gameAssets.m_Wand_3; break;
