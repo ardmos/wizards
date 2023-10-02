@@ -201,17 +201,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""47d4ccaa-015a-488a-ab24-d5888b5de3e1"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Attack1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0cdd5087-361f-4ea4-a659-afd79ac6a148"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
