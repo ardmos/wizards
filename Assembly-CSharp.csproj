@@ -75,11 +75,11 @@
     <Compile Include="Assets\Scripts\Game\Store\UI_MagicStoreItemTemplate.cs" />
     <Compile Include="Assets\Scripts\Data\SpellData.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
-    <Compile Include="Assets\Scripts\Data\ShootingSpell.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
+    <Compile Include="Assets\Scripts\Game\Spell.cs" />
     <Compile Include="Assets\Scripts\Game\Store\UI_MagicStore.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
