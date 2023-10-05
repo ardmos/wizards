@@ -51,7 +51,7 @@ public abstract class Spell : MonoBehaviour
     /// </summary>
     public virtual SpellData CollisionHandling(SpellData playerSpellData, SpellData opponentsSpellData)
     {
-        switch ()  // <---------------------------------------- 속성계산 식에 따라 처리하는 부분 만들 차례. 여기부터! switch 쓸지는 생각필요!
+        switch ()  // <---------------------------------------- 속성계산 식에 따라 처리하는 부분 만들 차례. 여기부터! switch 쓸지는 생각필요! 좋은 패턴이 어떤게 있을까!
         {
             default:
                 break;
