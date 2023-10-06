@@ -51,12 +51,22 @@ public abstract class Spell : MonoBehaviour
     /// </summary>
     public virtual SpellData CollisionHandling(SpellData playerSpellData, SpellData opponentsSpellData)
     {
-        switch (playerSpellData)  // <---------------------------------------- 속성계산 식에 따라 처리하는 부분 만들 차례. 여기부터! switch 쓸지는 생각필요! 좋은 패턴이 어떤게 있을까!
+        // <---------------------------------------- 속성계산 식에 따라 처리하는 부분 만들 차례. 여기부터! switch 쓸지는 생각필요! 좋은 패턴이 어떤게 있을까!
+        switch (playerSpellData.spellType)
         {
+            case SpellData.SpellType.Fire:
+                break;
+            case SpellData.SpellType.Water:
+                break;
+            case SpellData.SpellType.Ice:
+                break;
+            case SpellData.SpellType.Lightning:
+                break;
+            case SpellData.SpellType.Arcane:
+                break;
             default:
                 break;
         }
-
 
 
         return playerSpellData;
