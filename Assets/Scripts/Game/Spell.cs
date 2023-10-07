@@ -45,44 +45,4 @@ public abstract class Spell : MonoBehaviour
             spellData.castAble = false;
         }
     }
-
-    /// <summary>
-    /// 충돌 처리. 여기서 각 속성에 따른 결과값을 반환한다.   <--- 여기서 하면 계산이 중복되는데? GameManager에서 실행?
-    /// </summary>
-    public virtual SpellData CollisionHandling(SpellData playerSpellData, SpellData opponentsSpellData)
-    {
-        // 1. 레벨 계산
-        CalcCollisionSpellLevel(playerSpellData.level, opponentsSpellData.level);
-        // 2. 양쪽 마법 삭제
-
-        // 3. 한쪽 레벨이 남았을 경우 그 위치에 마법 생성
-
-        switch (playerSpellData.spellType)
-        {
-            case SpellData.SpellType.Fire:
-                // 불 none
-                // 물 
-                break;
-            case SpellData.SpellType.Water:
-                break;
-            case SpellData.SpellType.Ice:
-                break;
-            case SpellData.SpellType.Lightning:
-                break;
-            case SpellData.SpellType.Arcane:
-                break;
-            default:
-                break;
-        }
-
-
-        return playerSpellData;
-    }
-
-    private int CalcCollisionSpellLevel(int playerSpellLevel, int opponentsSpellLevel)
-    {
-        int result = playerSpellLevel - opponentsSpellLevel;
-
-        return result;
-    }
 }
