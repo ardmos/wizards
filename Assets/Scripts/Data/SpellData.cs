@@ -41,5 +41,7 @@ public class SpellData : MonoBehaviour
         spellName = "";
         castAble = true;
         spellObjectPref = null;
+        // 기본 타입
+        spellType = SpellType.Fire;
     }
 }
