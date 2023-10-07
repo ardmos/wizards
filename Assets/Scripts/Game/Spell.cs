@@ -47,14 +47,21 @@ public abstract class Spell : MonoBehaviour
     }
 
     /// <summary>
-    /// 충돌 처리. 여기서 각 속성에 따른 결과값을 반환한다.
+    /// 충돌 처리. 여기서 각 속성에 따른 결과값을 반환한다.   <--- 여기서 하면 계산이 중복되는데? GameManager에서 실행?
     /// </summary>
     public virtual SpellData CollisionHandling(SpellData playerSpellData, SpellData opponentsSpellData)
     {
-        // <---------------------------------------- 속성계산 식에 따라 처리하는 부분 만들 차례. 여기부터! switch 쓸지는 생각필요! 좋은 패턴이 어떤게 있을까!
+        // 1. 레벨 계산
+        CalcCollisionSpellLevel(playerSpellData.level, opponentsSpellData.level);
+        // 2. 양쪽 마법 삭제
+
+        // 3. 한쪽 레벨이 남았을 경우 그 위치에 마법 생성
+
         switch (playerSpellData.spellType)
         {
             case SpellData.SpellType.Fire:
+                // 불 none
+                // 물 
                 break;
             case SpellData.SpellType.Water:
                 break;
@@ -70,5 +77,12 @@ public abstract class Spell : MonoBehaviour
 
 
         return playerSpellData;
+    }
+
+    private int CalcCollisionSpellLevel(int playerSpellLevel, int opponentsSpellLevel)
+    {
+        int result = playerSpellLevel - opponentsSpellLevel;
+
+        return result;
     }
 }
