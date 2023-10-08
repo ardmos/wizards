@@ -9,10 +9,10 @@ using static FireSpell;
 /// </summary>
 public abstract class Spell : MonoBehaviour
 {
-    public struct CollisionCalcResult
+    public struct SpellLvlType
     {
-        Spell.SpellType spellType;
-        int level;
+        public Spell.SpellType spellType;
+        public int level;
     }
 
     public enum SpellType
@@ -38,5 +38,5 @@ public abstract class Spell : MonoBehaviour
     public GameObject spellObjectPref;
 
     // 속성별 충돌 계산. 여기선 Lvl와 Type만 반환하고 나머지 속성값은 각 마법스펠에서 입력해 사용한다. (보통은 기존의 본인들 스탯을 그대로 사용하게됨)
-    public abstract CollisionCalcResult CollisionHandling(Spell thisSpell, Spell opponentsSpell);
+    public abstract SpellLvlType CollisionHandling(SpellLvlType thisSpell, SpellLvlType opponentsSpell);
 }
