@@ -31,7 +31,6 @@ public abstract class Spell : MonoBehaviour
         public float restTime;
         public float lifeTime;
         public float moveSpeed;
-        public int damage;
         public int price;
         public int level;
         public string spellName;
