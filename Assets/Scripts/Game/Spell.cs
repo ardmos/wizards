@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static FireSpell;
 
 /// <summary>
 /// 마법의 공통적인 기능들을 관리하는 클래스
 /// </summary>
-public class Spell : MonoBehaviour
+public abstract class Spell : MonoBehaviour
 {
+    public struct CollisionCalcResult
+    {
+        Spell.SpellType spellType;
+        int level;
+    }
+
     public enum SpellType
     {
         Fire,
@@ -29,4 +36,7 @@ public class Spell : MonoBehaviour
     public bool castAble;
 
     public GameObject spellObjectPref;
+
+    // 속성별 충돌 계산. 여기선 Lvl와 Type만 반환하고 나머지 속성값은 각 마법스펠에서 입력해 사용한다. (보통은 기존의 본인들 스탯을 그대로 사용하게됨)
+    public abstract CollisionCalcResult CollisionHandling(Spell thisSpell, Spell opponentsSpell);
 }
