@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarController.cs" />
     <Compile Include="Assets\Scripts\Game\Store\UI_MagicStoreItemTemplate.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
+    <Compile Include="Assets\Scripts\Game\FireBall.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
