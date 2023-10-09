@@ -9,10 +9,14 @@ using UnityEngine;
 /// 1. 상세 능력치 설정
 /// 2. 게임 월드에서의 Spell Object의 이동 처리
 /// 3. CollisionEnter 충돌 처리
+/// 4. 마법 시전
 /// </summary>
 public class FireBallLv1 : FireSpell
 {
-    SpellInfo spellInfo;
+    [SerializeField]
+    private SpellInfo spellInfo;
+
+    public GameObject muzzlePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -43,5 +47,19 @@ public class FireBallLv1 : FireSpell
             spellName = "FireBall Lv.1",
             castAble = true
         };
+    }
+
+    /// <summary>
+    /// 4. 마법 시전
+    /// </summary>
+    public override void CastSpell(Transform muzzle)
+    {
+        base.CastSpell(muzzle);
+        MuzzleVFX(muzzlePrefab, muzzle);
+    }
+
+    public override void MuzzleVFX(GameObject muzzlePrefab, Transform muzzle)
+    {
+        base.MuzzleVFX(muzzlePrefab, muzzle);
     }
 }
