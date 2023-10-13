@@ -16,7 +16,7 @@ public class SpellController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentSpell.CastSpell(muzzle);
+        
     }
 
     // Update is called once per frame
@@ -24,4 +24,7 @@ public class SpellController : MonoBehaviour
     {
         
     }
+
+    // 발사방법 Player.cs와 SpawnProjectiles.cs에서 확인해서 구현하기. 
+    // Spell.cs와 현 스크립트. strategy pattern 
 }

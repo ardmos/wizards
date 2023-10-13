@@ -40,6 +40,11 @@ public abstract class Spell : MonoBehaviour
 
     public virtual void CastSpell(Transform muzzle)
     {
+        // Spell이 갖는 성질 <--- 이건 나중에. 일단 바로 발사되도록 만들어보자.
+        // 1. 발사 대기
+        // 2. 성장 
+        // 3. 발사
+
 
     }
 
