@@ -44,3 +44,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cccfcea7d901a4983bc821d5b7c7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Body_1: {fileID: 0}
+  m_Body_2: {fileID: 0}
+  m_Body_3: {fileID: 0}
+  m_Body_4: {fileID: 0}
+  m_Body_5: {fileID: 0}
+  m_Body_6: {fileID: 0}
+  m_Body_7: {fileID: 0}
+  m_Body_8: {fileID: 0}
+  m_Body_9: {fileID: 0}
+  m_Body_10: {fileID: 0}
+  m_Body_11: {fileID: 0}
+  m_Body_12: {fileID: 0}
+  m_Body_13: {fileID: 0}
+  m_Body_14: {fileID: 0}
+  m_Body_15: {fileID: 0}
+  m_Body_16: {fileID: 0}
+  m_Body_17: {fileID: 0}
+  m_Body_18: {fileID: 0}
+  m_Body_19: {fileID: 0}
+  m_Body_20: {fileID: 0}
+  m_BackPack_1: {fileID: 0}
+  m_BackPack_2: {fileID: 0}
+  m_BackPack_3: {fileID: 0}
+  m_Wand_1: {fileID: 0}
+  m_Wand_2: {fileID: 0}
+  m_Wand_3: {fileID: 0}
+  m_Wand_4: {fileID: 0}
+  m_Wand_5: {fileID: 0}
+  m_Wand_6: {fileID: 0}
+  m_Wand_7: {fileID: 0}
+  m_Hat_1: {fileID: 0}
+  m_Hat_2: {fileID: 0}
+  m_Hat_3: {fileID: 0}
+  m_Hat_4: {fileID: 0}
+  m_Hat_5: {fileID: 0}
+  m_Hat_6: {fileID: 0}
+  m_Hat_7: {fileID: 0}
+  m_Hat_8: {fileID: 0}
+  m_Hat_9: {fileID: 0}
+  m_Hat_10: {fileID: 0}
+  m_Hat_11: {fileID: 0}
+  m_Hat_12: {fileID: 0}
+  m_Hat_13: {fileID: 0}
+  m_Hat_14: {fileID: 0}
+  m_Scroll_1: {fileID: 0}
+  m_Scroll_2: {fileID: 0}
+  m_Scroll_3: {fileID: 0}
+  m_Scroll_4: {fileID: 0}
+  m_Scroll_5: {fileID: 0}
+  fireBall_1: {fileID: 1881642356963322, guid: 77d75e6d0d8ad3747be6ebe8b26bf0f8, type: 3}
+  waterBall_1: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
+  iceBall_1: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}

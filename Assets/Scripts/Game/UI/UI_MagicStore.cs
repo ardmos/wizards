@@ -10,10 +10,9 @@ using UnityEngine;
 /// </summary>
 public class UI_MagicStore : MonoBehaviour
 {
-    [SerializeField]
-    private Transform container;
-    [SerializeField]
-    private Transform storeItemTemplatePref;
+    [SerializeField] private Transform container;
+    [SerializeField] private Transform storeItemTemplatePref;
+    [SerializeField] private UI_SelectSpellSlot selectSpellSlotPopup;
 
     private IStoreCustomer storeCustomer;
 
@@ -42,7 +41,7 @@ public class UI_MagicStore : MonoBehaviour
     /// </summary>
     public void LoadContents()
     {
-        for (int i = ((int)Item.ItemType.Scroll_1); i < ((int)Item.ItemType.Max); i++)
+        for (int i = ((int)Item.ItemType.FireBall_1); i < ((int)Item.ItemType.Max); i++)
         {
             Item.ItemType itemType = (Item.ItemType)i;
             Transform storeItemTransform = Instantiate(storeItemTemplatePref);
@@ -50,7 +49,7 @@ public class UI_MagicStore : MonoBehaviour
             UI_MagicStoreItemTemplate ui_MagicStoreItem = storeItemTransform.GetComponent<UI_MagicStoreItemTemplate>();
             ui_MagicStoreItem.InitItemInfo(itemType.ToString(), Item.GetCost(itemType).ToString());
             ui_MagicStoreItem.itemType = itemType;
-            ui_MagicStoreItem.magicStore = this;
+            ui_MagicStoreItem.selectSpellSlotPopup = selectSpellSlotPopup;
         }
     }
 
@@ -59,21 +58,20 @@ public class UI_MagicStore : MonoBehaviour
     /// </summary>
     public void Show(IStoreCustomer storeCustomer)
     {
-        this.storeCustomer = storeCustomer;
-        Debug.Log("ON");
         gameObject.SetActive(true);
+        this.storeCustomer = storeCustomer;
     }
     /// <summary>
     /// 상점을 비활성화 시키는 메서드
     /// </summary>
     public void Hide()
     {
-        Debug.Log("OFF");
         gameObject.SetActive(false);
     }
 
-    public void TryBuyItem(Item.ItemType itemType)
+    public void TryBuyItem(Item.ItemType itemType, int slotNum)
     {
-        storeCustomer.BoughtItem(itemType);
+        storeCustomer.BoughtSpellScroll(itemType, slotNum);
+        selectSpellSlotPopup.Hide();
     }
 }

@@ -53,9 +53,9 @@ public class Item
         Wand_5,
         Wand_6,
         Wand_7,
-        Scroll_1,
-        Scroll_2,
-        Scroll_3,
+        FireBall_1,
+        WaterBall_1,
+        IceBall_1,
         Max
     }
 
@@ -111,9 +111,9 @@ public class Item
             case ItemType.Wand_6:
             case ItemType.Wand_7:
                 return 60;
-            case ItemType.Scroll_1:
-            case ItemType.Scroll_2:
-            case ItemType.Scroll_3:
+            case ItemType.FireBall_1:
+            case ItemType.WaterBall_1:
+            case ItemType.IceBall_1:
                 return 30;
             default:
                 { Debug.LogError("GetCost error"); return 0; }
@@ -168,7 +168,9 @@ public class Item
             case ItemType.Wand_5: return GameAssets.instantiate.m_Wand_5;
             case ItemType.Wand_6: return GameAssets.instantiate.m_Wand_6;
             case ItemType.Wand_7: return GameAssets.instantiate.m_Wand_7;
-            case ItemType.Scroll_1: return GameAssets.instantiate.m_Scroll_1;
+            case ItemType.FireBall_1: return GameAssets.instantiate.m_Scroll_1;
+            case ItemType.WaterBall_1: return GameAssets.instantiate.m_Scroll_1;
+            case ItemType.IceBall_1: return GameAssets.instantiate.m_Scroll_1;
             default: { Debug.LogError("GetMesh error"); return null; }
         }
     }

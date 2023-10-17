@@ -7,6 +7,6 @@ using UnityEngine;
 
 public interface IStoreCustomer
 {
-    // Item 클래스, GameAssets 클래스 만들어둘 필요가 있음. 
+    void BoughtSpellScroll(Item.ItemType itemType, int slotNum);
     void BoughtItem(Item.ItemType itemType);
 }

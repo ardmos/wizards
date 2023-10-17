@@ -11,7 +11,7 @@ using UnityEngine;
 public class UI_MagicStoreItemTemplate : MonoBehaviour
 {
     public Item.ItemType itemType;
-    public UI_MagicStore magicStore;
+    public UI_SelectSpellSlot selectSpellSlotPopup;
     public TextMeshProUGUI txtName, txtPrice;
 
     public void InitItemInfo(string itemName, string itemPrice)
@@ -22,6 +22,6 @@ public class UI_MagicStoreItemTemplate : MonoBehaviour
 
     public void BtnItemOnClick()
     {
-        magicStore.TryBuyItem(itemType);
+        selectSpellSlotPopup.Show(itemType);
     }
 }

@@ -131,18 +131,17 @@ public class SpellController : MonoBehaviour
         return currentSpell3Prefab.GetComponent<Spell>().spellInfo.spellName;
     }
 
+    public void SetCurrentSpell(GameObject spellObjectPrefab, int slotNumber)
+    {
+        switch (slotNumber)
+        {
+            case 1 : currentSpell1Prefab = spellObjectPrefab; break;
+            case 2 : currentSpell2Prefab = spellObjectPrefab; break;
+            case 3 : currentSpell3Prefab = spellObjectPrefab; break;
+            default:
+                break;
+        }
 
-    // #Test Code 10/16 : Switch current spell
-    public void SetCurrentSpell1(GameObject spellObject)
-    {
-        currentSpell1Prefab = spellObject;
-    }
-    public void SetCurrentSpell2(GameObject spellObject)
-    {
-        currentSpell2Prefab = spellObject;
-    }
-    public void SetCurrentSpell3(GameObject spellObject)
-    {
-        currentSpell3Prefab = spellObject;
+
     }
 }

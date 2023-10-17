@@ -2596,6 +2596,7 @@ MonoBehaviour:
   moveSpeed: 7
   gameInput: {fileID: -3331297196142442222}
   virtualCameraObj: {fileID: 4859955840248925076}
+  spellController: {fileID: 6631467521865965885}
   m_Body: {fileID: 0}
   m_Hat: {fileID: 0}
   m_BackPack: {fileID: 0}

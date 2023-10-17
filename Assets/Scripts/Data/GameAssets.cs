@@ -65,4 +65,10 @@ public class GameAssets : MonoBehaviour
     public Mesh m_Scroll_4;
     public Mesh m_Scroll_5;
     #endregion Mesh
+
+    #region Prefab
+    public GameObject fireBall_1;
+    public GameObject waterBall_1;
+    public GameObject iceBall_1;
+    #endregion
 }

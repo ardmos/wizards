@@ -11,6 +11,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private GameObject virtualCameraObj;
+    [SerializeField] private SpellController spellController;
     [SerializeField] private Mesh m_Body;
     [SerializeField] private Mesh m_Hat;
     [SerializeField] private Mesh m_BackPack;
@@ -435,6 +436,25 @@ public class Player : NetworkBehaviour, IStoreCustomer
     /// <summary>
     /// 아이템 구매 메서드
     /// </summary>
+    public void BoughtSpellScroll(Item.ItemType itemType, int slotNumber)
+    {
+        Debug.Log("Bought spell: " + itemType + ", slotNum : " + slotNumber);
+        switch (itemType)
+        {
+            case Item.ItemType.FireBall_1:
+                spellController.SetCurrentSpell(gameAssets.fireBall_1, slotNumber);
+                break;
+            case Item.ItemType.WaterBall_1:
+                spellController.SetCurrentSpell(gameAssets.waterBall_1, slotNumber);
+                break;
+            case Item.ItemType.IceBall_1:
+                spellController.SetCurrentSpell(gameAssets.iceBall_1, slotNumber);
+                break;
+            default:
+                break;
+        }
+
+    }
     public void BoughtItem(Item.ItemType itemType)
     {
         Debug.Log("Bought item: " + itemType);
@@ -484,8 +504,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
             case Item.ItemType.Wand_5: EquipWand_5(); break;
             case Item.ItemType.Wand_6: EquipWand_6(); break;
             case Item.ItemType.Wand_7: EquipWand_7(); break;
-            case Item.ItemType.Scroll_1:
-                break;
             default:
                 break;
         }
