@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Spell;
 using static UnityEngine.ParticleSystem;
 /// <summary>
 /// 
@@ -47,6 +48,27 @@ public class IceBallLv1 : IceSpell
         if (!collided)
         {
             collided = true;
+
+            SpellLvlType thisSpell = new SpellLvlType { level = spellInfo.level, spellType = spellInfo.spellType };
+            SpellInfo opponentsSpellInfo = collision.gameObject.GetComponent<Spell>().spellInfo;
+            SpellLvlType opponentsSpell = new SpellLvlType { level = opponentsSpellInfo.level, spellType = opponentsSpellInfo.spellType };
+
+            SpellLvlType result = CollisionHandling(thisSpell, opponentsSpell);
+            if (result.level > 0) {
+                switch (result.spellType)
+                {
+                    case SpellType.Water:
+                        CastSpell(GameAssets.instantiate.waterBall_1);
+                        break;
+                    case SpellType.Ice:
+                        CastSpell(GameAssets.instantiate.)
+                        break;
+                    default:
+                        break;
+                }
+
+
+            }
 
             if (trails.Count > 0)
             {
@@ -115,9 +137,9 @@ public class IceBallLv1 : IceSpell
     /// <summary>
     /// 4. 마법 시전
     /// </summary>
-    public override void CastSpell(GameObject spellPrefab, Transform muzzle)
+    public override void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
     {
-        base.CastSpell(spellPrefab, muzzle);
+        base.CastSpell(spellLvlType, muzzle);
         MuzzleVFX(muzzlePrefab, muzzle);
     }
 

@@ -59,7 +59,7 @@ public class SpellController : MonoBehaviour
 
         if (player.IsAttack1())
         {
-            currentSpell1Prefab.GetComponent<Spell>().CastSpell(currentSpell1Prefab, muzzle);
+            currentSpell1Prefab.GetComponent<Spell>().CastSpell(new Spell.SpellLvlType { level = currentSpell1Prefab.GetComponent<Spell>().spellInfo.level, spellType = currentSpell1Prefab.GetComponent<Spell>().spellInfo.spellType}, muzzle);  ;
             currentSpell1Prefab.GetComponent<Spell>().spellInfo.castAble = false;
         }
     }
@@ -80,7 +80,7 @@ public class SpellController : MonoBehaviour
 
         if (player.IsAttack2())
         {
-            currentSpell2Prefab.GetComponent<Spell>().CastSpell(currentSpell2Prefab, muzzle);
+            currentSpell2Prefab.GetComponent<Spell>().CastSpell(new Spell.SpellLvlType { level = currentSpell2Prefab.GetComponent<Spell>().spellInfo.level, spellType = currentSpell2Prefab.GetComponent<Spell>().spellInfo.spellType }, muzzle);
             currentSpell2Prefab.GetComponent<Spell>().spellInfo.castAble = false;
         }
     }
@@ -101,7 +101,7 @@ public class SpellController : MonoBehaviour
 
         if (player.IsAttack3())
         {
-            currentSpell3Prefab.GetComponent<Spell>().CastSpell(currentSpell3Prefab, muzzle);
+            currentSpell3Prefab.GetComponent<Spell>().CastSpell(new Spell.SpellLvlType { level = currentSpell3Prefab.GetComponent<Spell>().spellInfo.level, spellType = currentSpell3Prefab.GetComponent<Spell>().spellInfo.spellType }, muzzle);
             currentSpell3Prefab.GetComponent<Spell>().spellInfo.castAble = false;
         }
     }

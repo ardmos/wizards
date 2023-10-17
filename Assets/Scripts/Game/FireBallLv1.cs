@@ -115,9 +115,9 @@ public class FireBallLv1 : FireSpell
     /// <summary>
     /// 4. 마법 시전
     /// </summary>
-    public override void CastSpell(GameObject spellPrefab, Transform muzzle)
+    public override void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
     {
-        base.CastSpell(spellPrefab, muzzle);
+        base.CastSpell(spellLvlType, muzzle);
         MuzzleVFX(muzzlePrefab, muzzle);
     }
 
