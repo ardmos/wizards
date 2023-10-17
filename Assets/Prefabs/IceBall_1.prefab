@@ -4812,7 +4812,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 471fd056a7163294b9459fc0c7c272c3, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9675,7 +9674,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 471fd056a7163294b9459fc0c7c272c3, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14538,7 +14536,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 471fd056a7163294b9459fc0c7c272c3, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19401,7 +19398,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ffd93b0c159b9234daa329ec89d537bb, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19579,5 +19575,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91593162f6fc43d46be2e4b1218c3662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzlePrefab: {fileID: 0}
-  hitPrefab: {fileID: 0}
+  muzzlePrefab: {fileID: 1779451694322954, guid: 773a246c7cccdf74a923b1b08e411977, type: 3}
+  hitPrefab: {fileID: 1423167456353516, guid: 5c9f2e637478e2b4d94b0245306b5e84, type: 3}
+  trails:
+  - {fileID: 1713662898640638}
+  - {fileID: 1802059017955996}
+  - {fileID: 1948296609094292}
+  - {fileID: 1225959865209112}
