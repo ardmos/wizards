@@ -8,9 +8,8 @@ using static UnityEngine.ParticleSystem;
 /// 
 /// !!! 현재 기능
 /// 1. 상세 능력치 설정
-/// 2. 게임 월드에서의 Spell Object의 이동 처리
-/// 3. CollisionEnter 충돌 처리
-/// 4. 마법 시전
+/// 2. CollisionEnter 충돌 처리
+/// 3. 마법 시전
 /// </summary>
 public class FireBallLv1 : FireSpell
 {
@@ -18,7 +17,8 @@ public class FireBallLv1 : FireSpell
     public GameObject hitPrefab;
     public List<GameObject> trails;
 
-    private bool collided;
+    private bool collided, isSpellCollided;
+    private SpellLvlType collisionHandlingResult;
 
     /// <summary>
     /// 1. 상세 능력치 설정
@@ -39,13 +39,24 @@ public class FireBallLv1 : FireSpell
     }
 
     /// <summary>
-    /// 3. CollisionEnter 충돌 처리
+    /// 2. CollisionEnter 충돌 처리
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if (!collided)
         {
+            if (collision.gameObject.tag == "Spell")
+            {
+                isSpellCollided = true;
+                SpellLvlType thisSpell = new SpellLvlType { level = spellInfo.level, spellType = spellInfo.spellType };
+                SpellInfo opponentsSpellInfo = collision.gameObject.GetComponent<Spell>().spellInfo;
+                SpellLvlType opponentsSpell = new SpellLvlType { level = opponentsSpellInfo.level, spellType = opponentsSpellInfo.spellType };
+
+                collisionHandlingResult = CollisionHandling(thisSpell, opponentsSpell);
+            }
+            else { isSpellCollided = false; }
+
             collided = true;
 
             if (trails.Count > 0)
@@ -110,10 +121,19 @@ public class FireBallLv1 : FireSpell
 
         yield return new WaitForSeconds(waitTime);
         Destroy(gameObject);
+
+        if (isSpellCollided)
+        {
+            Debug.Log("collisionHandlingResult.level : " + collisionHandlingResult.level);
+            if (collisionHandlingResult.level > 0)
+            {
+                CastSpell(collisionHandlingResult, gameObject.transform);
+            }
+        }
     }
 
     /// <summary>
-    /// 4. 마법 시전
+    /// 3. 마법 시전
     /// </summary>
     public override void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
     {

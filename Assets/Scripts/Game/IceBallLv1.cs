@@ -9,9 +9,8 @@ using static UnityEngine.ParticleSystem;
 /// 
 /// !!! 현재 기능
 /// 1. 상세 능력치 설정
-/// 2. 게임 월드에서의 Spell Object의 이동 처리
-/// 3. CollisionEnter 충돌 처리
-/// 4. 마법 시전
+/// 2. CollisionEnter 충돌 처리
+/// 3. 마법 시전
 /// </summary>
 public class IceBallLv1 : IceSpell
 {
@@ -41,7 +40,7 @@ public class IceBallLv1 : IceSpell
     }
 
     /// <summary>
-    /// 3. CollisionEnter 충돌 처리
+    /// 2. CollisionEnter 충돌 처리
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
@@ -135,7 +134,7 @@ public class IceBallLv1 : IceSpell
     }
 
     /// <summary>
-    /// 4. 마법 시전
+    /// 3. 마법 시전
     /// </summary>
     public override void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
     {
