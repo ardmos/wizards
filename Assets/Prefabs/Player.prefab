@@ -2549,11 +2549,11 @@ GameObject:
   - component: {fileID: 3569301515384591240}
   - component: {fileID: -2944897953648591521}
   - component: {fileID: -3331297196142442222}
-  - component: {fileID: -8138196769906066676}
   - component: {fileID: 1148712213122628549}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 1723316301763572947}
   - component: {fileID: 7039472144025679976}
+  - component: {fileID: 6631467521865965885}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2596,6 +2596,10 @@ MonoBehaviour:
   moveSpeed: 7
   gameInput: {fileID: -3331297196142442222}
   virtualCameraObj: {fileID: 4859955840248925076}
+  m_Body: {fileID: 0}
+  m_Hat: {fileID: 0}
+  m_BackPack: {fileID: 0}
+  m_Wand: {fileID: 0}
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2640,24 +2644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2ae86f6bc5a384ca03f87bf25f11f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8138196769906066676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932501098101691884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 835485256c132ff4dadd35d0f9f36e0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 932501098101691876}
-  muzzle: {fileID: 932501096560631535}
-  timeToFire: 0
-  vfxProjectilePrefabs:
-  - {fileID: 1439816204641800, guid: 3d873118a8346a74bb1ea9ec62d17fd7, type: 3}
-  vfxProjectileToSpawn: {fileID: 0}
 --- !u!114 &1148712213122628549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2750,6 +2736,24 @@ CapsuleCollider:
   m_Height: 1.55
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &6631467521865965885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d9a03a873a9884086712713b853b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpell1Prefab: {fileID: 1439816204641800, guid: 272fdfeedd78f764f9a5c1d00cfc9441, type: 3}
+  player: {fileID: 932501098101691876}
+  muzzle: {fileID: 932501096560631534}
+  restTimeCurrentSpell_1: 0
+  restTimeCurrentSpell_2: 0
+  restTimeCurrentSpell_3: 0
 --- !u!1 &989151211542393136
 GameObject:
   m_ObjectHideFlags: 0

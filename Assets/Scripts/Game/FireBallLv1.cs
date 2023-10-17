@@ -13,22 +13,8 @@ using UnityEngine;
 /// </summary>
 public class FireBallLv1 : FireSpell
 {
-    [SerializeField]
-    private SpellInfo spellInfo;
-
     public GameObject muzzlePrefab;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        InitSpellInfoDetail();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameObject hitPrefab;
 
     /// <summary>
     /// 1. 상세 능력치 설정
@@ -39,7 +25,8 @@ public class FireBallLv1 : FireSpell
         {
             spellType = SpellType.Fire,
             coolTime = 5.0f,
-            restTime = 0.0f,
+            // #Test Code 10/16 : 
+            //restTime = 0.0f,
             lifeTime = 10.0f,
             moveSpeed = 10.0f,
             price = 30,
@@ -52,9 +39,9 @@ public class FireBallLv1 : FireSpell
     /// <summary>
     /// 4. 마법 시전
     /// </summary>
-    public override void CastSpell(Transform muzzle)
+    public override void CastSpell(GameObject spellPrefab, Transform muzzle)
     {
-        base.CastSpell(muzzle);
+        base.CastSpell(spellPrefab, muzzle);
         MuzzleVFX(muzzlePrefab, muzzle);
     }
 

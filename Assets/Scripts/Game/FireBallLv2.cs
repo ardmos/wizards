@@ -13,20 +13,6 @@ using static Spell;
 /// </summary>
 public class FireBallLv2 : FireSpell
 {
-    SpellInfo spellInfo;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        InitSpellInfoDetail();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// 1. 상세 능력치 설정
     /// </summary>
@@ -36,7 +22,8 @@ public class FireBallLv2 : FireSpell
         {
             spellType = SpellType.Fire,
             coolTime = 5.0f,
-            restTime = 0.0f,
+            // #Test Code 10/16 : 
+            //restTime = 0.0f,
             lifeTime = 10.0f,
             moveSpeed = 10.0f,
             price = 40,
