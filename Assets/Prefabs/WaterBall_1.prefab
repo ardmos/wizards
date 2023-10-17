@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4797478012653496}
   - component: {fileID: 54873829185623922}
   - component: {fileID: 135482376466425384}
-  - component: {fileID: -6353461479094368792}
   - component: {fileID: -6982064251807329147}
   m_Layer: 0
   m_Name: WaterBall_1
@@ -85,29 +84,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0.4}
---- !u!114 &-6353461479094368792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117804056975720}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ba759cd568c0e47a7018ab70867a0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotate: 0
-  rotateAmount: 45
-  bounce: 0
-  bounceForce: 10
-  speed: 30
-  accuracy: 100
-  fireRate: 3
-  muzzlePrefab: {fileID: 1956366456712032, guid: 59338a206c93bcb429042110c8a897b0, type: 3}
-  hitPrefab: {fileID: 1607111504653374, guid: 3f08a73d9f840254fa5c91759a51a583, type: 3}
-  trails:
-  - {fileID: 1938363951039914, guid: 118a754c0d3d1b842bce8ff4892b0ef9, type: 3}
 --- !u!114 &-6982064251807329147
 MonoBehaviour:
   m_ObjectHideFlags: 0

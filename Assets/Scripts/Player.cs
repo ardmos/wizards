@@ -175,12 +175,12 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // 카메라가 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
         gameAssets = GameAssets.instantiate;
-        Debug.Log("Player Spawn");
+
+        if(IsOwner) GameObject.FindObjectOfType<GameManager>().ownerPlayerObject = gameObject;
     }
 
     void Start()
     {
-        Debug.Log("Player Start");
     }
 
     // Update is called once per frame

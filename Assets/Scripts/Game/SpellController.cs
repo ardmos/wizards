@@ -106,7 +106,43 @@ public class SpellController : MonoBehaviour
         }
     }
 
+    public string GetCurrentSpell1Name()
+    {
+        if (currentSpell1Prefab == null)
+        {
+            return "";
+        }
+        return currentSpell1Prefab.GetComponent<Spell>().spellInfo.spellName;
+    }
+    public string GetCurrentSpell2Name()
+    {
+        if (currentSpell2Prefab == null)
+        {
+            return "";
+        }
+        return currentSpell2Prefab.GetComponent<Spell>().spellInfo.spellName;
+    }
+    public string GetCurrentSpell3Name()
+    {
+        if (currentSpell3Prefab == null)
+        {
+            return "";
+        }
+        return currentSpell3Prefab.GetComponent<Spell>().spellInfo.spellName;
+    }
+
+
     // #Test Code 10/16 : Switch current spell
-
-
+    public void SetCurrentSpell1(GameObject spellObject)
+    {
+        currentSpell1Prefab = spellObject;
+    }
+    public void SetCurrentSpell2(GameObject spellObject)
+    {
+        currentSpell2Prefab = spellObject;
+    }
+    public void SetCurrentSpell3(GameObject spellObject)
+    {
+        currentSpell3Prefab = spellObject;
+    }
 }
