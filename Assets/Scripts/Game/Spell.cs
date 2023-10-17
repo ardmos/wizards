@@ -44,24 +44,16 @@ public abstract class Spell : MonoBehaviour
 
     public virtual void CastSpell(GameObject spellPrefab, Transform muzzle)
     {
-        // Spell이 갖는 성질 <--- 이건 나중에. 일단 바로 발사되도록 만들어보자.
-        // 1. 발사 대기
-        // 2. 성장 
-        // 3. 발사
-
-        // #Test Code 10/14 : Generate Spell Object By Prefab
+        // 포구에 발사체 위치시키기
         GameObject spellObject = Instantiate(spellPrefab, muzzle.position, Quaternion.identity);
+        // 아래 회전, 발사는 각 마법의 Move스크립트에서 처리. 여기서는 머즐에 생성만 해줌.
+        // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기. 직진이나 유도 등 이동은 발사체가 알아서 함.
         spellObject.transform.forward = muzzle.forward;
-        //spellObject.transform.localRotation = muzzle.transform.localRotation;
-        // ???????? Impulse 
+        // 소환시에 Impulse 
         float speed = 35f;
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * speed, ForceMode.Impulse);
-
-        // #Test Code 10/15 : Adding Cool-Time System
-        //spellInfo.castAble = false;
     }
 
-    // 수정 요망 : 머즐 위치 재설정 필요 ( 발사체와 충돌 피하게끔 )
     public virtual void MuzzleVFX(GameObject muzzlePrefab, Transform muzzle)
     {
         if (muzzlePrefab != null)

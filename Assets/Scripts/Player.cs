@@ -20,6 +20,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     private bool isWalking;
     private bool isAttack1;
+    private bool isAttack2;
+    private bool isAttack3;
     private int body;
     private int hat;
     private int backPack;
@@ -159,10 +161,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
         return mouseDir;
     }
 
-    private void Attack1()
+    private void UpdateAttackInput()
     {
         isAttack1 = gameInput.GetIsAttack1() == 1;
-        //Debug.Log("isAttack1 = " + isAttack1);
+        isAttack2 = gameInput.GetIsAttack2() == 1;
+        isAttack3 = gameInput.GetIsAttack3() == 1;
     }
     #endregion Private
 
@@ -185,7 +188,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     {
         if (!IsOwner) return;
 
-        Attack1();
+        UpdateAttackInput();
         Move();     
     }
 
@@ -196,6 +199,14 @@ public class Player : NetworkBehaviour, IStoreCustomer
     public bool IsAttack1()
     {
         return isAttack1;
+    }
+    public bool IsAttack2()
+    {
+        return isAttack2;
+    }
+    public bool IsAttack3()
+    {
+        return isAttack3;
     }
 
     #region æ∆¿Ã≈€ ¿Â¬¯

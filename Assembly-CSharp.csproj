@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingSceneManager.cs" />
     <Compile Include="Assets\Scripts\Game\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv2.cs" />
+    <Compile Include="Assets\Scripts\Game\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\FloorGenerator.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
@@ -75,10 +76,13 @@
     <Compile Include="Assets\Scripts\Game\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\Game\FireSpell.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
+    <Compile Include="Assets\Scripts\Game\IceSpell.cs" />
+    <Compile Include="Assets\Scripts\Game\WaterSpell.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarController.cs" />
     <Compile Include="Assets\Scripts\Game\Store\UI_MagicStoreItemTemplate.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
+    <Compile Include="Assets\Scripts\Game\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />

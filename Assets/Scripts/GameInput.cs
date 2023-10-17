@@ -27,4 +27,14 @@ public class GameInput : MonoBehaviour
         float isAttack = playerInputActions.Player.Attack1.ReadValue<float>();
         return isAttack;
     }
+    public float GetIsAttack2()
+    {
+        float isAttack = playerInputActions.Player.Attack2.ReadValue<float>();
+        return isAttack;
+    }
+    public float GetIsAttack3()
+    {
+        float isAttack = playerInputActions.Player.Attack3.ReadValue<float>();
+        return isAttack;
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 
-/// 1레벨 파이어볼 스크립트입니다.
+/// 1레벨 워터볼 스크립트입니다.
 /// 
 /// !!! 현재 기능
 /// 1. 상세 능력치 설정
@@ -11,7 +11,7 @@ using UnityEngine;
 /// 3. CollisionEnter 충돌 처리
 /// 4. 마법 시전
 /// </summary>
-public class FireBallLv1 : FireSpell
+public class WaterBallLv1 : WaterSpell
 {
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
@@ -23,13 +23,13 @@ public class FireBallLv1 : FireSpell
     {
         spellInfo = new SpellInfo()
         {
-            spellType = SpellType.Fire,
+            spellType = SpellType.Water,
             coolTime = 5.0f,
             lifeTime = 10.0f,
             moveSpeed = 10.0f,
             price = 30,
             level = 1,
-            spellName = "FireBall Lv.1",
+            spellName = "WaterBall Lv.1",
             castAble = true
         };
     }

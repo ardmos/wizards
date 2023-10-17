@@ -11,7 +11,7 @@ using UnityEngine;
 /// 3. CollisionEnter 面倒 贸府
 /// 4. 付过 矫傈
 /// </summary>
-public class FireBallLv1 : FireSpell
+public class IceBallLv1 : IceSpell
 {
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
@@ -23,13 +23,13 @@ public class FireBallLv1 : FireSpell
     {
         spellInfo = new SpellInfo()
         {
-            spellType = SpellType.Fire,
+            spellType = SpellType.Ice,
             coolTime = 5.0f,
             lifeTime = 10.0f,
             moveSpeed = 10.0f,
             price = 30,
             level = 1,
-            spellName = "FireBall Lv.1",
+            spellName = "IceBall Lv.1",
             castAble = true
         };
     }

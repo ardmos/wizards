@@ -2447,7 +2447,7 @@ Transform:
   m_GameObject: {fileID: 932501096560631535}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24, y: 0.7, z: 0.98}
+  m_LocalPosition: {x: 0.24, y: 1.45, z: 1.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2748,7 +2748,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d9a03a873a9884086712713b853b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell1Prefab: {fileID: 1439816204641800, guid: 272fdfeedd78f764f9a5c1d00cfc9441, type: 3}
+  currentSpell1Prefab: {fileID: 1881642356963322, guid: 77d75e6d0d8ad3747be6ebe8b26bf0f8, type: 3}
+  currentSpell2Prefab: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
+  currentSpell3Prefab: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
   player: {fileID: 932501098101691876}
   muzzle: {fileID: 932501096560631534}
   restTimeCurrentSpell_1: 0
@@ -10459,7 +10461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4859955840248925076}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 4e-45, z: -4e-45, w: 1}
+  m_LocalRotation: {x: -0, y: 6e-45, z: -6e-45, w: 1}
   m_LocalPosition: {x: -1.4e-43, y: 0, z: -28.07295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
