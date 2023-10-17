@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\Game\Store\StoreTriggerAreaCollider.cs" />
+    <Compile Include="Assets\Scripts\Loading\LoadingImageController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
