@@ -19,7 +19,8 @@ public class IceBallLv1 : IceSpell
     public GameObject hitPrefab;
     public List<GameObject> trails;
 
-    private bool collided;
+    private bool collided, isSpellCollided;
+    private SpellLvlType collisionHandlingResult;
 
     /// <summary>
     /// 1. 상세 능력치 설정
@@ -47,28 +48,18 @@ public class IceBallLv1 : IceSpell
     {
         if (!collided)
         {
-            collided = true;
+            if (collision.gameObject.tag == "Spell")
+            {
+                isSpellCollided = true;
+                SpellLvlType thisSpell = new SpellLvlType { level = spellInfo.level, spellType = spellInfo.spellType };
+                SpellInfo opponentsSpellInfo = collision.gameObject.GetComponent<Spell>().spellInfo;
+                SpellLvlType opponentsSpell = new SpellLvlType { level = opponentsSpellInfo.level, spellType = opponentsSpellInfo.spellType };
 
-            SpellLvlType thisSpell = new SpellLvlType { level = spellInfo.level, spellType = spellInfo.spellType };
-            SpellInfo opponentsSpellInfo = collision.gameObject.GetComponent<Spell>().spellInfo;
-            SpellLvlType opponentsSpell = new SpellLvlType { level = opponentsSpellInfo.level, spellType = opponentsSpellInfo.spellType };
-
-            SpellLvlType result = CollisionHandling(thisSpell, opponentsSpell);
-            if (result.level > 0) {
-                switch (result.spellType)
-                {
-                    case SpellType.Water:
-                        CastSpell(GameAssets.instantiate.waterBall_1);
-                        break;
-                    case SpellType.Ice:
-                        CastSpell(GameAssets.instantiate.)
-                        break;
-                    default:
-                        break;
-                }
-
-
+                collisionHandlingResult = CollisionHandling(thisSpell, opponentsSpell);
             }
+            else { isSpellCollided = false; }
+
+            collided = true;
 
             if (trails.Count > 0)
             {
@@ -132,6 +123,15 @@ public class IceBallLv1 : IceSpell
 
         yield return new WaitForSeconds(waitTime);
         Destroy(gameObject);
+
+        if (isSpellCollided)
+        {
+            Debug.Log("collisionHandlingResult.level : " + collisionHandlingResult.level);
+            if (collisionHandlingResult.level > 0)
+            {
+                CastSpell(collisionHandlingResult, gameObject.transform);
+            }
+        }
     }
 
     /// <summary>

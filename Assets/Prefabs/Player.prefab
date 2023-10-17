@@ -2750,8 +2750,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpell1Prefab: {fileID: 1881642356963322, guid: 77d75e6d0d8ad3747be6ebe8b26bf0f8, type: 3}
-  currentSpell2Prefab: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
-  currentSpell3Prefab: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
+  currentSpell2Prefab: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
+  currentSpell3Prefab: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
   player: {fileID: 932501098101691876}
   muzzle: {fileID: 932501096560631534}
   restTimeCurrentSpell_1: 0

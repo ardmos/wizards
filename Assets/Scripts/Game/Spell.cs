@@ -68,10 +68,10 @@ public abstract class Spell : MonoBehaviour
                         resultObject = gameAssets.fireBall_1;
                         break;
                     case SpellType.Water:
-                        resultObject = gameAssets.iceBall_1;
+                        resultObject = gameAssets.waterBall_1;
                         break;
                     case SpellType.Ice:
-                        resultObject = gameAssets.waterBall_1;
+                        resultObject = gameAssets.iceBall_1;
                         break;
                     case SpellType.Lightning:
                         break;
