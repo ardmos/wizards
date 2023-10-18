@@ -39,17 +39,15 @@ public abstract class Spell : MonoBehaviour
 
     public abstract void InitSpellInfoDetail();
 
-    // 속성별 충돌 계산. 여기선 Lvl와 Type만 반환하고 나머지 속성값은 각 마법스펠에서 입력해 사용한다. (보통은 기존의 본인들 스탯을 그대로 사용하게됨)
     public abstract SpellLvlType CollisionHandling(SpellLvlType thisSpell, SpellLvlType opponentsSpell);
 
     public virtual void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
     {
         // 포구에 발사체 위치시키기
         GameObject spellObject = Instantiate(GetSpellObject(spellLvlType), muzzle.position, Quaternion.identity);
-        // 아래 회전, 발사는 각 마법의 Move스크립트에서 처리. 여기서는 머즐에 생성만 해줌.
-        // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기. 직진이나 유도 등 이동은 발사체가 알아서 함.
+        // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = muzzle.forward;
-        // 소환시에 Impulse 
+        // 소환시에 Impulse로 발사 처리
         float speed = 35f;
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * speed, ForceMode.Impulse);
     }

@@ -3,31 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 플레이어 캐릭터 오브젝트에 붙이는 스크립트
-/// !!! 현재 기능
-/// 1. 마법 보유 현황 관리
-/// 2. 스킬 발동 
+/// 현재 기능
+///   1. 마법 보유 현황 관리
+///   2. 스킬 발동 
 /// </summary>
 public class SpellController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject currentSpell1Prefab;
-    [SerializeField]
-    private GameObject currentSpell2Prefab;
-    [SerializeField]
-    private GameObject currentSpell3Prefab;
-    [SerializeField]
-    private Player player;
-    [SerializeField]
-    private Transform muzzle;
-    [SerializeField]
-    private float restTimeCurrentSpell_1 = 0f;
-    [SerializeField]
-    private float restTimeCurrentSpell_2 = 0f;
-    [SerializeField]
-    private float restTimeCurrentSpell_3 = 0f;
+    [SerializeField] private GameObject currentSpell1Prefab, currentSpell2Prefab, currentSpell3Prefab;
+    [SerializeField] private Player player;
+    [SerializeField] private Transform muzzle;
+    [SerializeField] private float restTimeCurrentSpell_1 = 0f;
+    [SerializeField] private float restTimeCurrentSpell_2 = 0f;
+    [SerializeField] private float restTimeCurrentSpell_3 = 0f;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         currentSpell1Prefab.GetComponent<Spell>().InitSpellInfoDetail();
@@ -35,7 +23,6 @@ public class SpellController : MonoBehaviour
         currentSpell3Prefab.GetComponent<Spell>().InitSpellInfoDetail();
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckCastSpellSlot1();
@@ -108,26 +95,17 @@ public class SpellController : MonoBehaviour
 
     public string GetCurrentSpell1Name()
     {
-        if (currentSpell1Prefab == null)
-        {
-            return "";
-        }
+        if (currentSpell1Prefab == null) return "";
         return currentSpell1Prefab.GetComponent<Spell>().spellInfo.spellName;
     }
     public string GetCurrentSpell2Name()
     {
-        if (currentSpell2Prefab == null)
-        {
-            return "";
-        }
+        if (currentSpell2Prefab == null) return "";
         return currentSpell2Prefab.GetComponent<Spell>().spellInfo.spellName;
     }
     public string GetCurrentSpell3Name()
     {
-        if (currentSpell3Prefab == null)
-        {
-            return "";
-        }
+        if (currentSpell3Prefab == null) return "";
         return currentSpell3Prefab.GetComponent<Spell>().spellInfo.spellName;
     }
 
@@ -141,7 +119,5 @@ public class SpellController : MonoBehaviour
             default:
                 break;
         }
-
-
     }
 }

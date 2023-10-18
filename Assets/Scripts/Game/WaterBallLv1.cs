@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 /// <summary>
-/// 
 /// 1레벨 워터볼 스크립트입니다.
-/// 
-/// !!! 현재 기능
-/// 1. 상세 능력치 설정
-/// 2. CollisionEnter 충돌 처리
-/// 3. 마법 시전
+/// 현재 기능
+///   1. 상세 능력치 설정
+///   2. CollisionEnter 충돌 처리
+///   3. 마법 시전
 /// </summary>
 public class WaterBallLv1 : WaterSpell
 {
