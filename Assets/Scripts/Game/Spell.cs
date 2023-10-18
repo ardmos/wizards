@@ -38,10 +38,13 @@ public abstract class Spell : MonoBehaviour
 
     public SpellInfo spellInfo;
 
+    // 마법 상세값 설정
     public abstract void InitSpellInfoDetail();
 
+    // 마법 충돌시 속성 계산
     public abstract SpellLvlType CollisionHandling(SpellLvlType thisSpell, SpellLvlType opponentsSpell);
 
+    // 마법 발사
     public virtual void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
     {
         // 포구에 발사체 위치시키기
@@ -52,7 +55,7 @@ public abstract class Spell : MonoBehaviour
         float speed = 35f;
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * speed, ForceMode.Impulse);
     }
-
+    // 마법 발사시 VFX
     public virtual void MuzzleVFX(GameObject muzzlePrefab, Transform muzzle)
     {
         if (muzzlePrefab != null)
@@ -70,6 +73,7 @@ public abstract class Spell : MonoBehaviour
         }
     }
 
+    // 마법 프리팹 반환
     private GameObject GetSpellObject(SpellLvlType spellLvlType)
     {
         GameObject resultObject = null;

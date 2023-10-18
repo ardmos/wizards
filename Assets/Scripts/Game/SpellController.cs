@@ -30,6 +30,7 @@ public class SpellController : MonoBehaviour
         CheckCastSpellSlot3();
     }
 
+    #region 현재 설정된 마법 시전
     public void CheckCastSpellSlot1()
     {
         if (currentSpell1Prefab == null) return;
@@ -50,7 +51,6 @@ public class SpellController : MonoBehaviour
             currentSpell1Prefab.GetComponent<Spell>().spellInfo.castAble = false;
         }
     }
-
     public void CheckCastSpellSlot2()
     {
         if (currentSpell2Prefab == null) return;
@@ -71,7 +71,6 @@ public class SpellController : MonoBehaviour
             currentSpell2Prefab.GetComponent<Spell>().spellInfo.castAble = false;
         }
     }
-
     public void CheckCastSpellSlot3()
     {
         if (currentSpell3Prefab == null) return;
@@ -92,7 +91,9 @@ public class SpellController : MonoBehaviour
             currentSpell3Prefab.GetComponent<Spell>().spellInfo.castAble = false;
         }
     }
+    #endregion
 
+    #region 현재 마법 이름 얻기
     public string GetCurrentSpell1Name()
     {
         if (currentSpell1Prefab == null) return "";
@@ -108,7 +109,9 @@ public class SpellController : MonoBehaviour
         if (currentSpell3Prefab == null) return "";
         return currentSpell3Prefab.GetComponent<Spell>().spellInfo.spellName;
     }
+    #endregion
 
+    // 현재 마법 변경
     public void SetCurrentSpell(GameObject spellObjectPrefab, int slotNumber)
     {
         switch (slotNumber)
