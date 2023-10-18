@@ -8,12 +8,6 @@ using UnityEngine.EventSystems;
 /// </summary>
 public abstract class Spell : MonoBehaviour
 {
-    public struct SpellLvlType
-    {
-        public Spell.SpellType spellType;
-        public int level;
-    }
-
     public enum SpellType
     {
         Fire,
@@ -22,6 +16,13 @@ public abstract class Spell : MonoBehaviour
         Lightning,
         Arcane
     }
+
+    public struct SpellLvlType
+    {
+        public Spell.SpellType spellType;
+        public int level;
+    }
+
     public class SpellInfo
     {
         public SpellType spellType;
@@ -50,6 +51,23 @@ public abstract class Spell : MonoBehaviour
         // 소환시에 Impulse로 발사 처리
         float speed = 35f;
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * speed, ForceMode.Impulse);
+    }
+
+    public virtual void MuzzleVFX(GameObject muzzlePrefab, Transform muzzle)
+    {
+        if (muzzlePrefab != null)
+        {
+            GameObject muzzleVFX = Instantiate(muzzlePrefab, muzzle.position, Quaternion.identity);
+            muzzleVFX.transform.forward = gameObject.transform.forward;
+            var ps = muzzleVFX.GetComponent<ParticleSystem>();
+            if (ps != null)
+                Destroy(muzzleVFX, ps.main.duration);
+            else
+            {
+                var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+                Destroy(muzzleVFX, psChild.main.duration);
+            }
+        }
     }
 
     private GameObject GetSpellObject(SpellLvlType spellLvlType)
@@ -118,22 +136,5 @@ public abstract class Spell : MonoBehaviour
         }
 
         return resultObject;
-    }
-
-    public virtual void MuzzleVFX(GameObject muzzlePrefab, Transform muzzle)
-    {
-        if (muzzlePrefab != null)
-        {
-            GameObject muzzleVFX = Instantiate(muzzlePrefab, muzzle.position, Quaternion.identity);
-            muzzleVFX.transform.forward = gameObject.transform.forward;
-            var ps = muzzleVFX.GetComponent<ParticleSystem>();
-            if (ps != null)
-                Destroy(muzzleVFX, ps.main.duration);
-            else
-            {
-                var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-                Destroy(muzzleVFX, psChild.main.duration);
-            }
-        }
     }
 }
