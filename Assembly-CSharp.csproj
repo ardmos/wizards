@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarController.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\Game\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\UnityAuthenticationManager.cs" />
