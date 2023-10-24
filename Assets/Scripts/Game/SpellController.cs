@@ -116,9 +116,18 @@ public class SpellController : MonoBehaviour
     {
         switch (slotNumber)
         {
-            case 1 : currentSpell1Prefab = spellObjectPrefab; break;
-            case 2 : currentSpell2Prefab = spellObjectPrefab; break;
-            case 3 : currentSpell3Prefab = spellObjectPrefab; break;
+            case 1 : 
+                currentSpell1Prefab = spellObjectPrefab; 
+                currentSpell1Prefab.GetComponent<Spell>().InitSpellInfoDetail(); 
+                break;
+            case 2 : 
+                currentSpell2Prefab = spellObjectPrefab;
+                currentSpell2Prefab.GetComponent<Spell>().InitSpellInfoDetail();
+                break;
+            case 3 : 
+                currentSpell3Prefab = spellObjectPrefab;
+                currentSpell3Prefab.GetComponent<Spell>().InitSpellInfoDetail();
+                break;
             default:
                 break;
         }

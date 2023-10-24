@@ -25,6 +25,7 @@ public class FireBallLv1 : FireSpell
     /// </summary>
     public override void InitSpellInfoDetail()
     {
+        Debug.Log("InitSpellInfoDetail() FireBall Lv1");
         spellInfo = new SpellInfo()
         {
             spellType = SpellType.Fire,
@@ -36,6 +37,16 @@ public class FireBallLv1 : FireSpell
             spellName = "FireBall Lv.1",
             castAble = true
         };
+
+        if (spellInfo == null)
+        {
+            Debug.Log("Spell Info is null");
+        }
+        else
+        {
+            Debug.Log("Spell Info is not null");
+            Debug.Log($"spell Type : {spellInfo.spellType}, level : {spellInfo.level}");
+        }
     }
 
     /// <summary>
@@ -54,6 +65,21 @@ public class FireBallLv1 : FireSpell
                 SpellLvlType opponentsSpell = new SpellLvlType { level = opponentsSpellInfo.level, spellType = opponentsSpellInfo.spellType };
 
                 collisionHandlingResult = CollisionHandling(thisSpell, opponentsSpell);
+            }
+            else if (collision.gameObject.tag == "Player")
+            {
+                isSpellCollided = false;
+
+                if (spellInfo == null)
+                {
+                    Debug.Log("Spell Info is null");
+                }
+                Debug.Log($"Hit!! spell level: {spellInfo.level}");
+
+                Player player = collision.gameObject.GetComponent<Player>();
+                if (player != null) {
+                    player.GetHit(spellInfo.level);
+                }
             }
             else { isSpellCollided = false; }
 

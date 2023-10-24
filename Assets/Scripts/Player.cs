@@ -8,14 +8,16 @@ public class Player : NetworkBehaviour, IStoreCustomer
 {
 
     #region Private
-    [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private GameObject virtualCameraObj;
     [SerializeField] private SpellController spellController;
+    [SerializeField] private UI_HPBar hPBar;
     [SerializeField] private Mesh m_Body;
     [SerializeField] private Mesh m_Hat;
     [SerializeField] private Mesh m_BackPack;
     [SerializeField] private Mesh m_Wand;
+    [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private int hp = 5;
 
     private GameAssets gameAssets;
 
@@ -27,6 +29,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     private int hat;
     private int backPack;
     private int wand;
+    
 
     private void UpdateEquipments()
     {
@@ -153,7 +156,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         else
         {
             Vector3 pos = mouseRay.GetPoint(maxDistance);
-            Debug.Log("커서가 맵 밖으로 벗어났습니다  mouseRay.GetPoint : " + pos);
+            //Debug.Log("커서가 맵 밖으로 벗어났습니다  mouseRay.GetPoint : " + pos);
             mouseDir = pos - transform.position;
         }
 
@@ -168,6 +171,19 @@ public class Player : NetworkBehaviour, IStoreCustomer
         isAttack2 = gameInput.GetIsAttack2() == 1;
         isAttack3 = gameInput.GetIsAttack3() == 1;
     }
+
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!IsOwner) return;
+
+        UpdateAttackInput();
+        Move();
+    }
     #endregion Private
 
 
@@ -180,18 +196,15 @@ public class Player : NetworkBehaviour, IStoreCustomer
         if(IsOwner) GameObject.FindObjectOfType<GameManager>().ownerPlayerObject = gameObject;
     }
 
-    void Start()
+    public void GetHit(int damage)
     {
+        // HP 감소
+        hp--;
+        // HP 바 감소
+        hPBar.SetHP(hp);
+        // 밀려나는건 물리엔진?
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!IsOwner) return;
-
-        UpdateAttackInput();
-        Move();     
-    }
 
     public bool IsWalking()
     {
