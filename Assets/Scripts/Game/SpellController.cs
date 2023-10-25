@@ -111,6 +111,24 @@ public class SpellController : MonoBehaviour
     }
     #endregion
 
+    #region 현재 마법 restTime/coolTime 얻기
+    public float GetCurrentSpell1CoolTimeRatio()
+    {
+        float coolTimeRatio = restTimeCurrentSpell_1 / currentSpell1Prefab.GetComponent<Spell>().spellInfo.coolTime;
+        return coolTimeRatio;
+    }
+    public float GetCurrentSpell2CoolTimeRatio()
+    {
+        float coolTimeRatio = restTimeCurrentSpell_2 / currentSpell2Prefab.GetComponent<Spell>().spellInfo.coolTime;
+        return coolTimeRatio;
+    }
+    public float GetCurrentSpell3CoolTimeRatio()
+    {
+        float coolTimeRatio = restTimeCurrentSpell_3 / currentSpell3Prefab.GetComponent<Spell>().spellInfo.coolTime;
+        return coolTimeRatio;
+    }
+    #endregion
+
     // 현재 마법 변경
     public void SetCurrentSpell(GameObject spellObjectPrefab, int slotNumber)
     {
