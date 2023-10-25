@@ -189,6 +189,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     public override void OnNetworkSpawn()
     {
+        hPBar.SetHP(hp);
+
         // 카메라가 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
         gameAssets = GameAssets.instantiate;

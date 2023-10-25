@@ -15,7 +15,7 @@ public class UI_HPBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetHP(float value)
