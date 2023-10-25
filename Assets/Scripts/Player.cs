@@ -141,6 +141,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         transform.forward = slerpResult;
     }
 
+    // 마우스 커서 방향 바라볼 때 사용했던 메소드. 추후 삭제 가능
     private Vector3 GetMouseDir()
     {
         RaycastHit hit;
