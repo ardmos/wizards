@@ -26,7 +26,7 @@ public class WaterBallLv1 : WaterSpell
         spellInfo = new SpellInfo()
         {
             spellType = SpellType.Water,
-            coolTime = 5.0f,
+            coolTime = 2.0f,
             lifeTime = 10.0f,
             moveSpeed = 10.0f,
             price = 30,

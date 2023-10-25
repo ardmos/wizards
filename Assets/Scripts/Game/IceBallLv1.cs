@@ -29,7 +29,7 @@ public class IceBallLv1 : IceSpell
         spellInfo = new SpellInfo()
         {
             spellType = SpellType.Ice,
-            coolTime = 5.0f,
+            coolTime = 2.0f,
             lifeTime = 10.0f,
             moveSpeed = 10.0f,
             price = 30,

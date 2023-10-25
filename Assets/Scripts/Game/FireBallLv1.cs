@@ -29,7 +29,7 @@ public class FireBallLv1 : FireSpell
         spellInfo = new SpellInfo()
         {
             spellType = SpellType.Fire,
-            coolTime = 5.0f,
+            coolTime = 2.0f,
             lifeTime = 10.0f,
             moveSpeed = 10.0f,
             price = 30,
