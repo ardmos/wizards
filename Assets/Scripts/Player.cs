@@ -127,11 +127,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
         isWalking = moveDir != Vector3.zero;
 
         // 진행방향 바라볼 때
-        //Rotate(moveDir);
+        Rotate(moveDir);
 
         // 마우스 커서 방향 바라볼 때
-        Vector3 mouseDir = GetMouseDir();
-        Rotate(mouseDir);
+        //Vector3 mouseDir = GetMouseDir();
+        //Rotate(mouseDir);
     }
 
     private void Rotate(Vector3 mMoveDir)

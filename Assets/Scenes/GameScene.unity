@@ -2676,7 +2676,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 40
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2702,8 +2702,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.37919003, y: -0.000000022516241, z: 0.00000000922702, w: 0.92531884}
-  m_LocalPosition: {x: 11.889023, y: 20.900002, z: -24.536156}
+  m_LocalRotation: {x: 0.3791901, y: 0.000000015921385, z: -0.000000006524487, w: 0.92531884}
+  m_LocalPosition: {x: 0, y: 19.7, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3628,7 +3628,7 @@ GameObject:
   - component: {fileID: 1184569043}
   - component: {fileID: 1184569042}
   m_Layer: 0
-  m_Name: Virtual Camera
+  m_Name: "Virtual Camera (1\uBC88\uACFC \uC2DC\uC810\uC774 \uB2E4\uB984)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6020,12 +6020,12 @@ GameObject:
   - component: {fileID: 1896243803}
   - component: {fileID: 1896243804}
   m_Layer: 0
-  m_Name: Virtual Camera (1)
+  m_Name: "Virtual Camera (1\uBC88)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1896243801
 MonoBehaviour:
   m_ObjectHideFlags: 0
