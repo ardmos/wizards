@@ -18,6 +18,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [SerializeField] private Mesh m_Wand;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private int hp = 5;
+    [SerializeField] private int score = 0;
 
     private GameAssets gameAssets;
 
@@ -208,6 +209,10 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // 밀려나는건 물리엔진?
     }
 
+    public int GetScore()
+    {
+        return score;
+    }
 
     public bool IsWalking()
     {
