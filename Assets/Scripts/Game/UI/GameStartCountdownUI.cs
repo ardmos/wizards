@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameStartCountdownUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private TextMeshProUGUI txtCountdown;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class GameStartCountdownUI : MonoBehaviour
 
     private void Update()
     {
-        countdownText.text = Math.Ceiling(GameManager.Instance.GetCountdownToStartTimer()).ToString();
+        txtCountdown.text = Math.Ceiling(GameManager.Instance.GetCountdownToStartTimer()).ToString();
     }
 
     private void GameManager_OnStateChanged(object sender, EventArgs e)
