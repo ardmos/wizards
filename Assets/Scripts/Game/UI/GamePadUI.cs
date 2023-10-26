@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 1. 조작 버튼에 현재 스킬 이름 띄워주기
 /// </summary>
-public class UI_GamePad : MonoBehaviour
+public class GamePadUI : MonoBehaviour
 {
     public TextMeshProUGUI txtButtonWest, txtButtonNorth, txtButtonEast;
     public Image imgCooltimeWest, imgCooltimeNorth, imgCooltimeEast;

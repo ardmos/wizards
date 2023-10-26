@@ -8,10 +8,10 @@ using UnityEngine;
 ///     1. 아이템 이름, 가격 표시
 ///     2. 클릭시 구매 시도 소식을 MagicStore에게 알림
 /// </summary>
-public class UI_MagicStoreItemTemplate : MonoBehaviour
+public class MagicStoreItemTemplateUI : MonoBehaviour
 {
     public Item.ItemType itemType;
-    public UI_SelectSpellSlot selectSpellSlotPopup;
+    public SelectSpellSlotUI selectSpellSlotPopup;
     public TextMeshProUGUI txtName, txtPrice;
 
     public void InitItemInfo(string itemName, string itemPrice)

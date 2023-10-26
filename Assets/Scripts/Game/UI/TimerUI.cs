@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UI_Timer : MonoBehaviour
+public class TimerUI : MonoBehaviour
 {
     [SerializeField] private bool isTimerOn = false;
     [SerializeField] private TextMeshProUGUI txtTimer;

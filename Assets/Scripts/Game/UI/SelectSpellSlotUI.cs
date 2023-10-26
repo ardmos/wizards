@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_SelectSpellSlot : MonoBehaviour
+public class SelectSpellSlotUI : MonoBehaviour
 {
     private Item.ItemType itemType;
 
-    public UI_MagicStore magicStore;
+    public MagicStoreUI magicStore;
 
     // Start is called before the first frame update
     void Start()

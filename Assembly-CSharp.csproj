@@ -58,32 +58,34 @@
     <Analyzer Include="D:\UnityEditor\2022.3.10f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Game\UI\UI_SelectSpellSlot.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\SelectSpellSlotUI.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Title\BtnStartAuthController.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\InputSystem\TestingInputSystem.cs" />
     <Compile Include="Assets\Scripts\PlayerNetwork.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingSceneManager.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\UI_GamePad.cs" />
     <Compile Include="Assets\Scripts\Game\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Game\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\FloorGenerator.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\UI_HPBar.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\UI_Timer.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\ClientNetworkTransform.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\HPBarUI.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\Game\FireSpell.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
     <Compile Include="Assets\Scripts\Game\IceSpell.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\GameStartCountdownUI.cs" />
     <Compile Include="Assets\Scripts\Game\WaterSpell.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
-    <Compile Include="Assets\Scripts\Loading\LoadingProgressBarController.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\MagicStoreUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\GamePadUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\TimerUI.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\Billboard.cs" />
@@ -93,12 +95,11 @@
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\Game\Spell.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\UI_MagicStore.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\UI_GameStartCountdown.cs" />
+    <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
+    <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\UI_MagicStoreItemTemplate.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\PopupSelectAuthMethodController.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\Game\Store\StoreTriggerAreaCollider.cs" />
-    <Compile Include="Assets\Scripts\Loading\LoadingImageController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

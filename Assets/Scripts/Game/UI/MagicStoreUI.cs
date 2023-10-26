@@ -8,11 +8,11 @@ using UnityEngine;
 ///     2. 컨텐츠 아이템 생성 (템플릿 활용)
 ///     3. 아이템 구매
 /// </summary>
-public class UI_MagicStore : MonoBehaviour
+public class MagicStoreUI : MonoBehaviour
 {
     [SerializeField] private Transform container;
     [SerializeField] private Transform storeItemTemplatePref;
-    [SerializeField] private UI_SelectSpellSlot selectSpellSlotPopup;
+    [SerializeField] private SelectSpellSlotUI selectSpellSlotPopup;
 
     private IStoreCustomer storeCustomer;
 
@@ -46,7 +46,7 @@ public class UI_MagicStore : MonoBehaviour
             Item.ItemType itemType = (Item.ItemType)i;
             Transform storeItemTransform = Instantiate(storeItemTemplatePref);
             storeItemTransform.SetParent(container);
-            UI_MagicStoreItemTemplate ui_MagicStoreItem = storeItemTransform.GetComponent<UI_MagicStoreItemTemplate>();
+            MagicStoreItemTemplateUI ui_MagicStoreItem = storeItemTransform.GetComponent<MagicStoreItemTemplateUI>();
             ui_MagicStoreItem.InitItemInfo(itemType.ToString(), Item.GetCost(itemType).ToString());
             ui_MagicStoreItem.itemType = itemType;
             ui_MagicStoreItem.selectSpellSlotPopup = selectSpellSlotPopup;

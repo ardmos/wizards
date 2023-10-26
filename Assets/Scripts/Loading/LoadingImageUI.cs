@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadingImageController : MonoBehaviour
+public class LoadingImageUI : MonoBehaviour
 {
     public Image image;
 

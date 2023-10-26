@@ -11,7 +11,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [SerializeField] private GameInput gameInput;
     [SerializeField] private GameObject virtualCameraObj;
     [SerializeField] private SpellController spellController;
-    [SerializeField] private UI_HPBar hPBar;
+    [SerializeField] private HPBarUI hPBar;
     [SerializeField] private Mesh m_Body;
     [SerializeField] private Mesh m_Hat;
     [SerializeField] private Mesh m_BackPack;
