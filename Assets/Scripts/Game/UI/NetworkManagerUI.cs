@@ -34,10 +34,12 @@ public class NetworkManagerUI : NetworkBehaviour
 
     private void Update()
     {
-        playersCountText.text = "Players: " + playersNum.Value.ToString();
+        //playersCountText.text = "Players: " + playersNum.Value.ToString();
 
-        if (!IsServer) return;
+        // GameManager에서 카운트 하기로 함.
+        //if (!IsServer) return;
 
-        playersNum.Value = NetworkManager.Singleton.ConnectedClients.Count;  
+        //playersNum.Value = NetworkManager.Singleton.ConnectedClients.Count;
+        //playersCountText.text = "Players: " + playersNum.Value.ToString();
     }
 }
