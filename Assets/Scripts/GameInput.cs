@@ -15,7 +15,7 @@ public class GameInput : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Clear Statics의 일부. 인풋 액션이 추가되면 여기서 전부 -= 해줘야 한다. 
+        // 재접속 구현의 일부 인풋 액션이 추가되면 여기서 전부 -= 해줘야 한다. 
         playerInputActions.Dispose();
     }
 
