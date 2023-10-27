@@ -22,7 +22,7 @@ public class TimerUI : MonoBehaviour
     {
         if (isTimerOn)
         {
-            totalPassedTime += Time.deltaTime;
+            totalPassedTime = GameManager.Instance.GetGamePlayingTimer();
             h = ((int)totalPassedTime / 3600);
             m = ((int)totalPassedTime / 60 % 60);
             s = ((int)totalPassedTime % 60);

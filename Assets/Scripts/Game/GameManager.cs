@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
     private State state;
     private float watingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
-    private float gamePlayingTimer = 5f;
+    private float gamePlayingTimer = 0;
+    private float gamePlayingTimerMax = 300f;
 
     [SerializeField] private int currentAlivePlayerCount; 
 
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
                     // Test Code. 실제로는 Observer Pattern으로 생성해야 함.  테스트목적으로 여기서 호출해주는것. 그것도 이건 호스트임
                     NetworkManager.Singleton.StartHost();
                     state = State.GamePlaying;
+                    gamePlayingTimer = gamePlayingTimerMax;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
                 }
                 break;
@@ -114,5 +116,10 @@ public class GameManager : MonoBehaviour
         return currentAlivePlayerCount;
     }
 
-   
+    public float GetGamePlayingTimer()
+    {
+        if(gamePlayingTimer == 0f) return 0f;
+
+        return gamePlayingTimerMax - gamePlayingTimer;
+    }
 }
