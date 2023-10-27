@@ -13,6 +13,12 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Enable();
     }
 
+    private void OnDestroy()
+    {
+        // Clear Statics의 일부. 인풋 액션이 추가되면 여기서 전부 -= 해줘야 한다. 
+        playerInputActions.Dispose();
+    }
+
     public Vector2 GetMovementVectorNormalized()
     {
         Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
