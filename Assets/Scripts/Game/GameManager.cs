@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     }
 
     private State state;
-    private float watingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
     private float gamePlayingTimer = 0;
     private float gamePlayingTimerMax = 300f;
@@ -44,7 +43,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // WatingToStart 타이머 구현 부분 삭제했음. 타이머 대신, 플레이어들 레디 여부로 시작하려고 함. 
+        // 레디 GameState 일치시키기 참고해서 구현하면 됨. 여기부터 시작. 
+        // 이후로 쭉쭉 싱크 맞추기 ㄱㄱ 하면 됨 . 지금은 SetlectHostClientForTest.cs 까지 완성함. 현재 각 버튼 누르면 캐릭터 생성까지만 됨.
+        // 캐릭터 생성에서 게임 스테이트 관리까지 연결 안됨.
+        //GameInput.Insatan
     }
 
     // Update is called once per frame
@@ -58,12 +61,6 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case State.WatingToStart:
-                watingToStartTimer -= Time.deltaTime;
-                if (watingToStartTimer < 0f)
-                {
-                    state = State.CountdownToStart;
-                    OnStateChanged?.Invoke(this, EventArgs.Empty);
-                }
                 break;
             case State.CountdownToStart:
                 countdownToStartTimer -= Time.deltaTime;
