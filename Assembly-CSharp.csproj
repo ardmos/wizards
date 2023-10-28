@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\UI\SelectSpellSlotUI.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
+    <Compile Include="Assets\Scripts\Game\ForTest\SelectHostClientForTest.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Title\BtnStartAuthController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />

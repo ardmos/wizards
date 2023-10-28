@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
                 if (countdownToStartTimer < 0f)
                 {
                     // Test Code. 실제로는 Observer Pattern으로 생성해야 함.  테스트목적으로 여기서 호출해주는것. 그것도 이건 호스트임
-                    NetworkManager.Singleton.StartHost();
+                    // NetworkManager.Singleton.StartHost();
                     state = State.GamePlaying;
                     gamePlayingTimer = gamePlayingTimerMax;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);

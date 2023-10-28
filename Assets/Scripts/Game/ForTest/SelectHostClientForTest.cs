@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-/// <summary>
-/// 네트워크가 필요한 UI들 여기서 관리 
-/// </summary>
-public class NetworkManagerUI : NetworkBehaviour
+
+// 테스트용 스크립트. NetworkManagerUI.cs의 기능을 잠시 따라하고 있다. NetworkManagerUI.cs 스크립트는 잠시 안쓰고 두는 중.
+public class SelectHostClientForTest : NetworkBehaviour
 {
     [SerializeField] private Button hostBtn;
     [SerializeField] private Button clientBtn;
@@ -18,10 +16,17 @@ public class NetworkManagerUI : NetworkBehaviour
         hostBtn.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();
+            Hide();
         });
         clientBtn.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartClient();
+            Hide();
         });
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }
