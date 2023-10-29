@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     }
 
     private State state;
+    private bool isLocalPlayerReady;
     private float countdownToStartTimer = 3f;
     private float gamePlayingTimer = 0;
     private float gamePlayingTimerMax = 300f;
@@ -66,8 +68,6 @@ public class GameManager : MonoBehaviour
                 countdownToStartTimer -= Time.deltaTime;
                 if (countdownToStartTimer < 0f)
                 {
-                    // Test Code. 실제로는 Observer Pattern으로 생성해야 함.  테스트목적으로 여기서 호출해주는것. 그것도 이건 호스트임
-                    // NetworkManager.Singleton.StartHost();
                     state = State.GamePlaying;
                     gamePlayingTimer = gamePlayingTimerMax;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
@@ -87,6 +87,18 @@ public class GameManager : MonoBehaviour
                 break;
         }
         Debug.Log(state);
+    }
+
+    // test code
+    public void StartReady()
+    {
+        state = State.WatingToStart;
+        OnStateChanged?.Invoke(this, EventArgs.Empty); 
+    }
+
+    public bool IsWatingToStart()
+    {
+        return state == State.WatingToStart;
     }
 
     public bool IsGamePlaying()

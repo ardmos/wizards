@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Game\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Title\BtnStartAuthController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\GameReadyUI.cs" />
     <Compile Include="Assets\InputSystem\TestingInputSystem.cs" />
     <Compile Include="Assets\Scripts\PlayerNetwork.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />

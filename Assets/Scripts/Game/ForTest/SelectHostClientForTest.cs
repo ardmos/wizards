@@ -7,18 +7,19 @@ using UnityEngine.UI;
 // 테스트용 스크립트. NetworkManagerUI.cs의 기능을 잠시 따라하고 있다. NetworkManagerUI.cs 스크립트는 잠시 안쓰고 두는 중.
 public class SelectHostClientForTest : NetworkBehaviour
 {
-    [SerializeField] private Button hostBtn;
-    [SerializeField] private Button clientBtn;
+    [SerializeField] private Button btnHost;
+    [SerializeField] private Button btnClient;
 
     private void Awake()
     {
         // 델리게이트. 
-        hostBtn.onClick.AddListener(() =>
+        btnHost.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();
+            GameManager.Instance.StartReady();
             Hide();
         });
-        clientBtn.onClick.AddListener(() =>
+        btnClient.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartClient();
             Hide();

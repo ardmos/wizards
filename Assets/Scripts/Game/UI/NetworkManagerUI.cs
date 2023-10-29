@@ -9,17 +9,17 @@ using UnityEngine.UI;
 /// </summary>
 public class NetworkManagerUI : NetworkBehaviour
 {
-    [SerializeField] private Button hostBtn;
-    [SerializeField] private Button clientBtn;
+    [SerializeField] private Button btnHost;
+    [SerializeField] private Button btnClient;
 
     private void Awake()
     {
         // µ¨¸®°ÔÀÌÆ®. 
-        hostBtn.onClick.AddListener(() =>
+        btnHost.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();
         });
-        clientBtn.onClick.AddListener(() =>
+        btnClient.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartClient();
         });
