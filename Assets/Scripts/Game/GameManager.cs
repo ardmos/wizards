@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -12,7 +10,7 @@ using UnityEngine;
 /// ownerPlayerObject
 /// </summary>
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance { get; private set; }
 
@@ -26,11 +24,12 @@ public class GameManager : MonoBehaviour
         GameOver,
     }
 
-    private State state;
+    private NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart); // 생성과 동시에 Default값 설정. 
     private bool isLocalPlayerReady;
-    private float countdownToStartTimer = 3f;
-    private float gamePlayingTimer = 0;
-    private float gamePlayingTimerMax = 300f;
+    private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
+    private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
+    private float gamePlayingTimerMax = 10f;
+    private Dictionary<ulong, bool> playerReadyDictionary;
 
     [SerializeField] private int currentAlivePlayerCount; 
 
@@ -39,17 +38,23 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        state = State.WatingToStart;
+        playerReadyDictionary = new Dictionary<ulong, bool>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // WatingToStart 타이머 구현 부분 삭제했음. 타이머 대신, 플레이어들 레디 여부로 시작하려고 함. 
-        // 레디 GameState 일치시키기 참고해서 구현하면 됨. 여기부터 시작. 
-        // 이후로 쭉쭉 싱크 맞추기 ㄱㄱ 하면 됨 . 지금은 SetlectHostClientForTest.cs 까지 완성함. 현재 각 버튼 누르면 캐릭터 생성까지만 됨.
-        // 캐릭터 생성에서 게임 스테이트 관리까지 연결 안됨.
-        //GameInput.Insatan
+
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        state.OnValueChanged += State_OnValueChanged;
+    }
+
+    private void State_OnValueChanged(State previousValue, State newValue)
+    {
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     // Update is called once per frame
@@ -60,25 +65,25 @@ public class GameManager : MonoBehaviour
 
     private void RunStateMachine()
     {
-        switch (state)
+        if(!IsServer) { return; }
+
+        switch (state.Value)
         {
             case State.WatingToStart:
                 break;
             case State.CountdownToStart:
-                countdownToStartTimer -= Time.deltaTime;
-                if (countdownToStartTimer < 0f)
+                countdownToStartTimer.Value -= Time.deltaTime;
+                if (countdownToStartTimer.Value < 0f)
                 {
-                    state = State.GamePlaying;
-                    gamePlayingTimer = gamePlayingTimerMax;
-                    OnStateChanged?.Invoke(this, EventArgs.Empty);
+                    state.Value = State.GamePlaying;
+                    gamePlayingTimer.Value = gamePlayingTimerMax;
                 }
                 break;
             case State.GamePlaying:
-                gamePlayingTimer -= Time.deltaTime;
-                if (gamePlayingTimer < 0f)
+                gamePlayingTimer.Value -= Time.deltaTime;
+                if (gamePlayingTimer.Value < 0f)
                 {
-                    state = State.GameOver;
-                    OnStateChanged?.Invoke(this, EventArgs.Empty);
+                    state.Value = State.GameOver;
                 }
                 break;
             case State.GameOver:
@@ -89,35 +94,65 @@ public class GameManager : MonoBehaviour
         Debug.Log(state);
     }
 
-    // test code
-    public void StartReady()
+    [ServerRpc(RequireOwnership = false)]
+    private void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
     {
-        state = State.WatingToStart;
-        OnStateChanged?.Invoke(this, EventArgs.Empty); 
+        playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
+
+        bool allClientsReady = true;
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            if(!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
+            {
+                // 이 clientId 플레이어는 레디 안한 플레이어입니다
+                allClientsReady = false;
+                break;
+            }
+        }
+
+        // 모든 플레이어가 레디 했을 경우. 카운트다운 시작
+        if (allClientsReady)
+        {
+            state.Value = State.CountdownToStart;
+        }
+    }
+
+    public void LocalPlayerReady()
+    {
+        if (state.Value == State.WatingToStart)
+        {
+            isLocalPlayerReady = true;
+            SetPlayerReadyServerRpc();
+        }
+    }
+
+    public bool IsLocalPlayerReady()
+    {
+        return isLocalPlayerReady;
     }
 
     public bool IsWatingToStart()
     {
-        return state == State.WatingToStart;
+        return state.Value == State.WatingToStart;
     }
 
     public bool IsGamePlaying()
     {
-        return state == State.GamePlaying;
+        return state.Value == State.GamePlaying;
     }
 
     public bool IsCountdownToStartActive()
     {
-        return state == State.CountdownToStart;
+        return state.Value == State.CountdownToStart;
     }
     public bool IsGameOver()
     {
-        return state == State.GameOver;
+        return state.Value == State.GameOver;
     }
 
     public float GetCountdownToStartTimer()
     {
-        return countdownToStartTimer;
+        return countdownToStartTimer.Value;
     }
 
     public int GetCurrentAlivePlayerCount()
@@ -127,8 +162,8 @@ public class GameManager : MonoBehaviour
 
     public float GetGamePlayingTimer()
     {
-        if(gamePlayingTimer == 0f) return 0f;
+        if(gamePlayingTimer.Value == 0f) return 0f;
 
-        return gamePlayingTimerMax - gamePlayingTimer;
+        return gamePlayingTimerMax - gamePlayingTimer.Value;
     }
 }

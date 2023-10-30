@@ -15,8 +15,7 @@ public class SelectHostClientForTest : NetworkBehaviour
         // µ¨¸®°ÔÀÌÆ®. 
         btnHost.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.StartHost();
-            GameManager.Instance.StartReady();
+            NetworkManager.Singleton.StartHost();           
             Hide();
         });
         btnClient.onClick.AddListener(() =>
