@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\PlayerNetwork.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingSceneManager.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\HostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Game\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Game\IceBallLv1.cs" />

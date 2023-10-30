@@ -13,8 +13,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField] private Button btnClient;
 
     private void Awake()
-    {
-        // µ¨¸®°ÔÀÌÆ®. 
+    {        
         btnHost.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();

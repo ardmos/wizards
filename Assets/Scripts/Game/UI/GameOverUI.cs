@@ -4,16 +4,26 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtRankNumber;
     [SerializeField] private TextMeshProUGUI txtScoreCount;
+    [SerializeField] private Button btnPlayAgain;
+
 
     void Start()
     {
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
         Hide();
+
+        btnPlayAgain.onClick.AddListener(()=>
+        {
+            NetworkManager.Singleton.Shutdown();
+            // 로비로 이동. 
+            LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
+        });
     }
 
     private void Update()
