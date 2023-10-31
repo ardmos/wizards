@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 

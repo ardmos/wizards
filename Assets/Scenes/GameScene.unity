@@ -2021,7 +2021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtRankNumber: {fileID: 669295891}
   txtScoreCount: {fileID: 1392332379}
-  btnPlayAgain: {fileID: 0}
+  btnPlayAgain: {fileID: 1625540442}
 --- !u!1 &532961429
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+#if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+#endif
 /// <summary>
 /// Unity 인증시스템을 관리하는 스크립트 입니다. 타이틀씬에서의 인증과정을 관리합니다
 /// !!현재 기능
@@ -20,7 +22,7 @@ public class UnityAuthenticationManager : MonoBehaviour
 
     private async void Awake()
     {
-        #if UNITY_ANDROID
+
         try
         {
             await UnityServices.InitializeAsync();
@@ -29,15 +31,16 @@ public class UnityAuthenticationManager : MonoBehaviour
             SetupEvents();
 
             //await SignInCachedUserAsync();  // 테스트중에는 주석처리. 자동로그인 안함
-
+#if UNITY_ANDROID
             //Initialize PlayGamesPlatform
             PlayGamesPlatform.Activate();
+#endif
+
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.LogException(e);
         }
-        #endif
     }
 
     /// <summary>
@@ -45,7 +48,7 @@ public class UnityAuthenticationManager : MonoBehaviour
     /// </summary>
     public void LoginGooglePlayGames()
     {
-        #if UNITY_ANDROID
+#if UNITY_ANDROID
         PlayGamesPlatform.Instance.Authenticate((success) =>
         {
             if (success == SignInStatus.Success)
@@ -68,7 +71,7 @@ public class UnityAuthenticationManager : MonoBehaviour
                 Debug.Log("Login Unsuccessful");
             }
         });
-        #endif
+#endif
     }
 
     /// <summary>
