@@ -12,15 +12,14 @@ public class SelectHostClientForTest : NetworkBehaviour
 
     private void Awake()
     {
-        // µ¨¸®°ÔÀÌÆ®. 
         btnHost.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.StartHost();           
+            GameMultiplayer.Instance.StartHost();           
             Hide();
         });
         btnClient.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.StartClient();
+            GameMultiplayer.Instance.StartClient();
             Hide();
         });
     }

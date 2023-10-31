@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /// <summary>
@@ -18,6 +19,7 @@ public static class LoadingSceneManager
         TitleScene,
         LoadingScene,
         LobbyScene,
+        GameRoomScene,
         GameScene,
         StoreScene,
         OptionScene
@@ -44,6 +46,15 @@ public static class LoadingSceneManager
     }
 
     /// <summary>
+    /// Lobby씬에서 사용. 게임 호스트가 클라이언트들과 함께 씬 이동을 하려면 이걸 사용해야함. 단, 이걸 사용하면 로딩화면은 안뜬다. 추후 구현 필요
+    /// </summary>
+    /// <param name="targetScene"></param>
+    public static void LoadNetwork(Scene targetScene)
+    {
+        NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
+    }
+
+    /// <summary>
     /// 씬의 비동기 로딩 상태 확인을 위한 코루틴
     /// </summary>
     /// <param name="targetScene"></param>
@@ -51,7 +62,6 @@ public static class LoadingSceneManager
     private static IEnumerator LoadSceneAsync(Scene targetScene)
     {
         yield return null;
-
         loadingAsyncOperation = SceneManager.LoadSceneAsync(targetScene.ToString());
 
         while (!loadingAsyncOperation.isDone)
