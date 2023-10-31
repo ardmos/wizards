@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\Game\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\UnityAuthenticationManager.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\CharacterSelectUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\Game\Spell.cs" />
