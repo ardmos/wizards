@@ -19,8 +19,7 @@ public class HostHasDisconnectedUI : MonoBehaviour
             NetworkManager.Singleton.Shutdown();
             // 로비로 이동.
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
-        });            
-        
+        });                    
     }
 
     private void NetworkManager_OnClientDisconnectCallback(ulong clientId)

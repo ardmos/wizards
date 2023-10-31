@@ -1460,7 +1460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &328211912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2021,6 +2021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtRankNumber: {fileID: 669295891}
   txtScoreCount: {fileID: 1392332379}
+  btnPlayAgain: {fileID: 0}
 --- !u!1 &532961429
 GameObject:
   m_ObjectHideFlags: 0
@@ -6615,7 +6616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1595075180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6934,7 +6935,7 @@ GameObject:
   - component: {fileID: 1625540441}
   - component: {fileID: 1625540440}
   m_Layer: 5
-  m_Name: btn_PlayAgain (1)
+  m_Name: btn_PlayAgain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

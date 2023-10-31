@@ -1037,6 +1037,9 @@
     <Reference Include="Unity.Services.Authentication">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Authentication.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Services.Matchmaker">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Matchmaker.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
