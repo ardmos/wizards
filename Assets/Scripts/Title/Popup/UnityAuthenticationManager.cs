@@ -20,6 +20,7 @@ public class UnityAuthenticationManager : MonoBehaviour
 
     private async void Awake()
     {
+        #if UNITY_ANDROID
         try
         {
             await UnityServices.InitializeAsync();
@@ -36,7 +37,7 @@ public class UnityAuthenticationManager : MonoBehaviour
         {
             Debug.LogException(e);
         }
-        
+        #endif
     }
 
     /// <summary>
@@ -44,6 +45,7 @@ public class UnityAuthenticationManager : MonoBehaviour
     /// </summary>
     public void LoginGooglePlayGames()
     {
+        #if UNITY_ANDROID
         PlayGamesPlatform.Instance.Authenticate((success) =>
         {
             if (success == SignInStatus.Success)
@@ -66,6 +68,7 @@ public class UnityAuthenticationManager : MonoBehaviour
                 Debug.Log("Login Unsuccessful");
             }
         });
+        #endif
     }
 
     /// <summary>
