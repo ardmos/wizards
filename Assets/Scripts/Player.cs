@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Cinemachine;
+using UnityEditor.PackageManager;
 
 public class Player : NetworkBehaviour, IStoreCustomer
 {
-
-    #region Private
     [SerializeField] private GameInput gameInput;
     [SerializeField] private GameObject virtualCameraObj;
     [SerializeField] private SpellController spellController;
@@ -30,8 +28,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
     private int hat;
     private int backPack;
     private int wand;
-    
 
+
+    #region Private 아이템 장착
     private void UpdateEquipments()
     {
         UpdateEquipments(body, hat, backPack, wand);
@@ -118,13 +117,41 @@ public class Player : NetworkBehaviour, IStoreCustomer
                 break;
         }
     }
+    #endregion
 
-    private void Move()
+    #region Private 캐릭터 조작
+    // Server Auth 방식의 이동 처리 (현 오브젝트에 Network Transform이 필요)
+    private void HandleMovementServerAuth()
+    {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        HandleMovementServerRPC(inputVector);
+    }
+    [ServerRpc(RequireOwnership =false)]
+    private void HandleMovementServerRPC(Vector2 inputVector)
+    {
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        float moveDistance = moveSpeed * Time.deltaTime;
+        transform.position += moveDir * moveDistance;
+        isWalking = moveDir != Vector3.zero;
+
+        // 진행방향 바라볼 때
+        Rotate(moveDir);
+
+        // 마우스 커서 방향 바라볼 때
+        //Vector3 mouseDir = GetMouseDir();
+        //Rotate(mouseDir);
+    }
+
+    // Client Auth 방식의 이동 처리 (현 오브젝트에 Client Network Transform이 필요)
+    private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-        transform.position += moveDir * moveSpeed * Time.deltaTime;
+
+        float moveDistance = moveSpeed * Time.deltaTime;
+        transform.position += moveDir * moveDistance;
         isWalking = moveDir != Vector3.zero;
 
         // 진행방향 바라볼 때
@@ -137,7 +164,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     private void Rotate(Vector3 mMoveDir)
     {
-        float rotateSpeed = 10f;
+        float rotateSpeed = 20f;
         Vector3 slerpResult = Vector3.Slerp(transform.forward, mMoveDir, Time.deltaTime * rotateSpeed);
         transform.forward = slerpResult;
     }
@@ -173,21 +200,19 @@ public class Player : NetworkBehaviour, IStoreCustomer
         isAttack2 = gameInput.GetIsAttack2() == 1;
         isAttack3 = gameInput.GetIsAttack3() == 1;
     }
-
-    void Start()
-    {
-    }
+    #endregion
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!IsOwner) return;
 
         UpdateAttackInput();
-        Move();
+        // Server Auth 방식의 이동 처리
+        HandleMovementServerAuth();
+        // Client Auth 방식의 이동 처리
+        //HandleMovement(); 
     }
-    #endregion Private
-
 
     public override void OnNetworkSpawn()
     {
@@ -206,7 +231,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
         hp--;
         // HP 바 감소
         hPBar.SetHP(hp);
-        // 밀려나는건 물리엔진?
     }
 
     public int GetScore()
@@ -454,6 +478,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
     #endregion 아이템 장착 
 
+    #region 아이템 구매
     /// <summary>
     /// 아이템 구매 메서드
     /// </summary>
@@ -530,4 +555,5 @@ public class Player : NetworkBehaviour, IStoreCustomer
         }
 
     }
+    #endregion
 }
