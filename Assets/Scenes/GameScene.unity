@@ -9331,6 +9331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57635e1f62beba84c8a19bb95771a506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 932501098101691874, guid: cbb9aef0a6bbdb94399ab6a09a83d476, type: 3}
   currentAlivePlayerCount: 0
 --- !u!4 &2141758591
 Transform:
