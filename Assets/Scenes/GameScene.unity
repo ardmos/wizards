@@ -1354,12 +1354,12 @@ GameObject:
   - component: {fileID: 328211913}
   - component: {fileID: 328211914}
   m_Layer: 5
-  m_Name: ==SelectHostClientForTest==
+  m_Name: ==SelectHostClientForTest== No longer in use
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &328211912
 RectTransform:
   m_ObjectHideFlags: 0

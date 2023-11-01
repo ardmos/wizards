@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\FloorGenerator.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\CharacterSelectReady.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\ClientNetworkTransform.cs" />
     <Compile Include="Assets\Scripts\Game\UI\HPBarUI.cs" />
