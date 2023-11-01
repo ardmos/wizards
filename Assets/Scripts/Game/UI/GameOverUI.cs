@@ -57,6 +57,6 @@ public class GameOverUI : MonoBehaviour
     private void InitGameOverUIData()
     {
         txtRankNumber.text = (GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();        
-        txtScoreCount.text = GameManager.Instance.ownerPlayerObject.GetComponent<Player>().GetScore().ToString();
+        txtScoreCount.text = Player.LocalInstance.GetScore().ToString();
     }
 }

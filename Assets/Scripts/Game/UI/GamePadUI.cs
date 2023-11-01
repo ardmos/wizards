@@ -27,33 +27,33 @@ public class GamePadUI : MonoBehaviour
 
     private void UpdateButtonText()
     {
-        if (gameManager.ownerPlayerObject == null)
+        if (Player.LocalInstance == null)
         {
             return;
         }
 
-        txtButtonWest.text = gameManager.ownerPlayerObject.GetComponent<SpellController>().GetCurrentSpell1Name();
-        txtButtonNorth.text = gameManager.ownerPlayerObject.GetComponent<SpellController>().GetCurrentSpell2Name();
-        txtButtonEast.text = gameManager.ownerPlayerObject.GetComponent<SpellController>().GetCurrentSpell3Name();    
+        txtButtonWest.text = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell1Name();
+        txtButtonNorth.text = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell2Name();
+        txtButtonEast.text = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell3Name();    
     }
 
     private void CoolTimePresenter()
     {
-        if (gameManager.ownerPlayerObject == null)
+        if (Player.LocalInstance == null)
         {
             return;
         }
 
-        float spell1CoolTimeRatio = gameManager.ownerPlayerObject.GetComponent<SpellController>().GetCurrentSpell1CoolTimeRatio();
+        float spell1CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell1CoolTimeRatio();
         if (spell1CoolTimeRatio > 0) {
             imgCooltimeWest.fillAmount = 1 - spell1CoolTimeRatio;
         }
-        float spell2CoolTimeRatio = gameManager.ownerPlayerObject.GetComponent<SpellController>().GetCurrentSpell2CoolTimeRatio();
+        float spell2CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell2CoolTimeRatio();
         if (spell2CoolTimeRatio > 0)
         {
             imgCooltimeNorth.fillAmount = 1 - spell2CoolTimeRatio;
         }
-        float spell3CoolTimeRatio = gameManager.ownerPlayerObject.GetComponent<SpellController>().GetCurrentSpell3CoolTimeRatio();
+        float spell3CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell3CoolTimeRatio();
         if (spell3CoolTimeRatio > 0)
         {
             imgCooltimeEast.fillAmount = 1 - spell3CoolTimeRatio;

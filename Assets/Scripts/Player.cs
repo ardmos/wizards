@@ -5,6 +5,8 @@ using Cinemachine;
 
 public class Player : NetworkBehaviour, IStoreCustomer
 {
+    public static Player LocalInstance { get; private set; }
+
     [SerializeField] private GameInput gameInput;
     [SerializeField] private GameObject virtualCameraObj;
     [SerializeField] private SpellController spellController;
@@ -16,6 +18,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private int hp = 5;
     [SerializeField] private int score = 0;
+    [SerializeField] private List<Vector3> spawnPositionList;
 
     private GameAssets gameAssets;
 
@@ -42,13 +45,13 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     public override void OnNetworkSpawn()
     {
+        if (IsOwner) LocalInstance = this;
+
         hPBar.SetHP(hp);
 
         // 카메라가 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
         gameAssets = GameAssets.instantiate;
-
-        if(IsOwner) GameObject.FindObjectOfType<GameManager>().ownerPlayerObject = gameObject;
     }
 
     public void GetHit(int damage)

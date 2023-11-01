@@ -33,9 +33,7 @@ public class GameManager : NetworkBehaviour
     private float gamePlayingTimerMax = 10f;
     private Dictionary<ulong, bool> playerReadyDictionary;
 
-    [SerializeField] private int currentAlivePlayerCount; 
-
-    public GameObject ownerPlayerObject { get; set; }
+    [SerializeField] private int currentAlivePlayerCount;     
 
     void Awake()
     {
