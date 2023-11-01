@@ -47,11 +47,15 @@ public class Player : NetworkBehaviour, IStoreCustomer
     {
         if (IsOwner) LocalInstance = this;
 
+        // HP 초기화
         hPBar.SetHP(hp);
 
-        // 카메라가 소유자만 따라다니도록 함 
+        // 카메라 위치 초기화. 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
         gameAssets = GameAssets.instantiate;
+
+        // 스폰 위치 초기화
+        transform.position = spawnPositionList[(int)OwnerClientId];
     }
 
     public void GetHit(int damage)

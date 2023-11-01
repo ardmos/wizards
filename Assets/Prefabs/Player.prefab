@@ -2605,6 +2605,11 @@ MonoBehaviour:
   moveSpeed: 7
   hp: 5
   score: 0
+  spawnPositionList:
+  - {x: 0, y: 0, z: 10}
+  - {x: 10, y: 0, z: 0}
+  - {x: -10, y: 0, z: 0}
+  - {x: 0, y: 0, z: -10}
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
