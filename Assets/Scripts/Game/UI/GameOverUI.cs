@@ -28,10 +28,7 @@ public class GameOverUI : MonoBehaviour
 
     private void Update()
     {
-        txtRankNumber.text = (GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();
-        // and call minus current Player count method!!!
 
-        txtScoreCount.text = GameManager.Instance.ownerPlayerObject.GetComponent<Player>().GetScore().ToString();
     }
 
     private void GameManager_OnStateChanged(object sender, EventArgs e)
@@ -39,6 +36,7 @@ public class GameOverUI : MonoBehaviour
         if (GameManager.Instance.IsGameOver())
         {
             Show();
+            InitGameOverUIData();
         }
         else
         {
@@ -54,5 +52,11 @@ public class GameOverUI : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    private void InitGameOverUIData()
+    {
+        txtRankNumber.text = (GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();        
+        txtScoreCount.text = GameManager.Instance.ownerPlayerObject.GetComponent<Player>().GetScore().ToString();
     }
 }

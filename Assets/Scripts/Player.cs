@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Cinemachine;
-using UnityEditor.PackageManager;
 
 public class Player : NetworkBehaviour, IStoreCustomer
 {
