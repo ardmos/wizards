@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -6,6 +7,8 @@ using UnityEngine;
 public class CharacterSelectReady : NetworkBehaviour
 {
     public static CharacterSelectReady Instance { get; private set; }
+
+    public event EventHandler OnReadyChanged;
 
     private Dictionary<ulong, bool> playerReadyDictionary;
 
@@ -23,6 +26,9 @@ public class CharacterSelectReady : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
     {
+        // Client쪽에도 레디한 ClientId 브로드캐스트 해줌. 각자 화면에서 레디 표시 띄워줘야하기 때문
+        SetPlayerReadyClientRpc(serverRpcParams.Receive.SenderClientId);
+        // 이 과정은 서버쪽에서만 저장하고 처리하는 거라 윗줄이 필요함.
         playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
 
         bool allClientsReady = true;
@@ -41,5 +47,18 @@ public class CharacterSelectReady : NetworkBehaviour
         {
             LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameScene);
         }
+    }
+
+    [ClientRpc]
+    private void SetPlayerReadyClientRpc(ulong clientId)
+    {
+        playerReadyDictionary[clientId] = true;
+
+        OnReadyChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public bool IsPlayerReady(ulong clientId)
+    {
+        return playerReadyDictionary.ContainsKey(clientId) && playerReadyDictionary[clientId];
     }
 }

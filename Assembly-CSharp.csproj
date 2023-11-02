@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Title\Popup\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\GameRoom\CharacterSelectUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\CharacterSelectPlayer.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\Game\Spell.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneUI.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyBottomUI.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\PopupSelectAuthMethodUI.cs" />

@@ -14,6 +14,8 @@ public class HostHasDisconnectedUI : MonoBehaviour
         btnPlayAgain.onClick.AddListener(() => 
         {
             NetworkManager.Singleton.Shutdown();
+            // 로비로 이동 전에 NetworkManager, GameMultiplayManager 중복되지 않도록 깔끔하게 정리.
+            CleanUp();
             // 로비로 이동.
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });                    
@@ -36,5 +38,16 @@ public class HostHasDisconnectedUI : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+    private void CleanUp()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
+        if (GameMultiplayer.Instance != null)
+        {
+            Destroy(GameMultiplayer.Instance.gameObject);
+        }
     }
 }

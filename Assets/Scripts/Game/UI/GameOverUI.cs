@@ -21,6 +21,8 @@ public class GameOverUI : MonoBehaviour
         btnPlayAgain.onClick.AddListener(()=>
         {
             NetworkManager.Singleton.Shutdown();
+            // 로비로 이동 전에 NetworkManager, GameMultiplayManager 중복되지 않도록 깔끔하게 정리.
+            CleanUp();
             // 로비로 이동. 
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
@@ -58,5 +60,17 @@ public class GameOverUI : MonoBehaviour
     {
         txtRankNumber.text = (GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();        
         txtScoreCount.text = Player.LocalInstance.GetScore().ToString();
+    }
+
+    private void CleanUp()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
+        if (GameMultiplayer.Instance != null)
+        {
+            Destroy(GameMultiplayer.Instance.gameObject);
+        }
     }
 }
