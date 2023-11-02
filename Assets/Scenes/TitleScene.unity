@@ -310,19 +310,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 106172793}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 896313050}
-        m_TargetAssemblyTypeName: PopupSelectAuthMethodController, Assembly-CSharp
-        m_MethodName: OnBtnCloseClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &106172793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,19 +431,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 127994376}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1035905392}
-        m_TargetAssemblyTypeName: UnityAuthenticationManager, Assembly-CSharp
-        m_MethodName: OnBtnSignInAnonymousClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &127994376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +609,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314517094}
   m_CullTransparentMesh: 1
+--- !u!1 &359977846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 359977847}
+  - component: {fileID: 359977848}
+  m_Layer: 0
+  m_Name: ==TitleSceneUI==
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &359977847
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359977846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1340718267}
+  m_Father: {fileID: 1886036799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -390}
+  m_SizeDelta: {x: 500, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &359977848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359977846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad55ee83b9c29e847b8f0c0c822017a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupSelectAuthMethod: {fileID: 896313048}
+  btnStartAuth: {fileID: 1340718268}
 --- !u!1 &443187605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1055,7 @@ GameObject:
   - component: {fileID: 896313049}
   - component: {fileID: 896313050}
   m_Layer: 0
-  m_Name: Popup_SelectAuthMethod
+  m_Name: ==Popup_SelectAuthMethodUI==
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1067,6 +1094,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8399a5f2d929df548bc57d21f4231855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnSignInAnonymous: {fileID: 127994375}
+  btnSignInGooglePlayerGames: {fileID: 1715686233}
+  btnClose: {fileID: 106172792}
 --- !u!1 &1035905391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1177,50 @@ Transform:
   - {fileID: 258506498}
   - {fileID: 630245315}
   - {fileID: 2084226088}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1221313321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1221313323}
+  - component: {fileID: 1221313322}
+  m_Layer: 0
+  m_Name: TitleSceneCleanUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1221313322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221313321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072717039ae1cd04c855428d36cd2c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1221313323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221313321}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1661.6636, y: 637.0996, z: -6.7416954}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1233737037
@@ -1263,7 +1337,6 @@ GameObject:
   - component: {fileID: 1340718270}
   - component: {fileID: 1340718269}
   - component: {fileID: 1340718268}
-  - component: {fileID: 1340718271}
   m_Layer: 0
   m_Name: Btn_StartAuth
   m_TagString: Untagged
@@ -1278,17 +1351,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340718266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 714994058}
-  m_Father: {fileID: 1886036799}
+  m_Father: {fileID: 359977847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1340718268
@@ -1334,19 +1407,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1340718269}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1340718271}
-        m_TargetAssemblyTypeName: BtnStartAuthController, Assembly-CSharp
-        m_MethodName: OnBtnStartAuthClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1340718269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,19 +1446,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340718266}
   m_CullTransparentMesh: 1
---- !u!114 &1340718271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340718266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad55ee83b9c29e847b8f0c0c822017a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupSelectAuthMethod: {fileID: 896313048}
 --- !u!1 &1349329231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,81 +1583,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &1400335362
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1400335363}
-  - component: {fileID: 1400335365}
-  - component: {fileID: 1400335364}
-  m_Layer: 0
-  m_Name: Image_Title
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1400335363
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400335362}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1886036799}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1400335364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400335362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e1efc6ca6725362498f3fc6990d7e43b, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1400335365
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400335362}
-  m_CullTransparentMesh: 1
 --- !u!1 &1558640138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,19 +1733,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1715686234}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1035905392}
-        m_TargetAssemblyTypeName: UnityAuthenticationManager, Assembly-CSharp
-        m_MethodName: LoginGooglePlayGames
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1715686234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1910,8 +1871,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1400335363}
-  - {fileID: 1340718267}
+  - {fileID: 359977847}
   - {fileID: 896313049}
   m_Father: {fileID: 1700420542}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4347,14 +4307,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1939ee5f5b093fc4b961116c9ab28207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
   gameInput: {fileID: 5892074840662268075}
   virtualCameraObj: {fileID: 0}
   spellController: {fileID: 0}
+  hPBar: {fileID: 0}
   m_Body: {fileID: 0}
   m_Hat: {fileID: 0}
   m_BackPack: {fileID: 0}
   m_Wand: {fileID: 0}
+  moveSpeed: 7
+  hp: 5
+  score: 0
+  spawnPositionList: []
 --- !u!4 &950640578411548882
 Transform:
   m_ObjectHideFlags: 0
@@ -24039,3 +24003,4 @@ SceneRoots:
   - {fileID: 1789567686}
   - {fileID: 786614915}
   - {fileID: 1035905393}
+  - {fileID: 1221313323}

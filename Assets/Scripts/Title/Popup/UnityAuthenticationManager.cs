@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+
 #if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -17,11 +18,14 @@ using GooglePlayGames.BasicApi;
 
 public class UnityAuthenticationManager : MonoBehaviour
 {
+    public static UnityAuthenticationManager Instance { get; private set; }
+
     public string Token;
     public string Error;
 
     private async void Awake()
     {
+        Instance = this;
 
         try
         {
@@ -46,7 +50,7 @@ public class UnityAuthenticationManager : MonoBehaviour
     /// <summary>
     /// 구글플레이게임즈 로그인
     /// </summary>
-    public void LoginGooglePlayGames()
+    private void LoginGooglePlayGames()
     {
 #if UNITY_ANDROID
         PlayGamesPlatform.Instance.Authenticate((success) =>
@@ -138,7 +142,7 @@ public class UnityAuthenticationManager : MonoBehaviour
     /// <summary>
     /// 로그인 캐쉬 확인 후 처리
     /// </summary>
-    async Task SignInCachedUserAsync()
+    private async Task SignInCachedUserAsync()
     {
         // Check if a cached player already exists by checking if the session token exists
         if (!AuthenticationService.Instance.SessionTokenExists)
@@ -173,9 +177,13 @@ public class UnityAuthenticationManager : MonoBehaviour
             Debug.LogException(ex);
         }
     }
-
     public async void OnBtnSignInAnonymousClicked()
     {
         await SignInAnonymouslyAsync();
+    }
+
+    public void OnBtnSignInGooglePlayGamesClicked()
+    {
+        LoginGooglePlayGames();
     }
 }
