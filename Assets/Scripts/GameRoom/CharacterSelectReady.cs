@@ -49,6 +49,7 @@ public class CharacterSelectReady : NetworkBehaviour
         }
     }
 
+    // Client쪽 화면 레디 표시
     [ClientRpc]
     private void SetPlayerReadyClientRpc(ulong clientId)
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,13 +38,6 @@ public class GameMultiplayer : NetworkBehaviour
         OnPlayerDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void StartHost()
-    {
-        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
-        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
-        NetworkManager.Singleton.StartHost();
-    }
-
     private void NetworkManager_OnClientConnectedCallback(ulong clientId)
     {
         playerDataNetworkList.Add(new PlayerData
@@ -72,17 +66,39 @@ public class GameMultiplayer : NetworkBehaviour
         response.Approved = true;
     }
 
+    private void NetworkManager_Client_OnClientDisconnectCallback(ulong obj)
+    {
+        OnFailedToJoinGame.Invoke(this, EventArgs.Empty);
+    }
+
+    public void StartHost()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
+        NetworkManager.Singleton.StartHost();
+    }
+
+    // GameRoom에서 Client가 나갔을 때 플레이어를 없애주는 부분.
+    private void NetworkManager_Server_OnClientDisconnectCallback(ulong clientId)
+    {
+        for (int i = 0; i<playerDataNetworkList.Count; i++)
+        {
+            PlayerData playerData = playerDataNetworkList[i];
+            if (playerData.clientId == clientId)
+            {
+                // 해당 플레이어 Disconnected
+                playerDataNetworkList.RemoveAt(i);
+            }
+        }
+    }
+
     public void StartClient()
     {
         OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
 
-        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartClient();
-    }
-
-    private void NetworkManager_OnClientDisconnectCallback(ulong obj)
-    {
-        OnFailedToJoinGame.Invoke(this, EventArgs.Empty);
     }
 
     // CharacterSelectPlayer에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
