@@ -12,13 +12,9 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtScoreCount;
     [SerializeField] private Button btnPlayAgain;
 
-
-    void Start()
+    private void Awake()
     {
-        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
-        Hide();
-
-        btnPlayAgain.onClick.AddListener(()=>
+        btnPlayAgain.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.Shutdown();
             // 로비로 이동 전에 NetworkManager, GameMultiplayManager 중복되지 않도록 깔끔하게 정리.
@@ -28,9 +24,10 @@ public class GameOverUI : MonoBehaviour
         });
     }
 
-    private void Update()
+    void Start()
     {
-
+        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+        Hide();
     }
 
     private void GameManager_OnStateChanged(object sender, EventArgs e)

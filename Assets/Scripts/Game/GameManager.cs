@@ -105,7 +105,7 @@ public class GameManager : NetworkBehaviour
             default:
                 break;
         }
-        Debug.Log(state);
+        //Debug.Log(state);
     }
 
     [ServerRpc(RequireOwnership = false)]

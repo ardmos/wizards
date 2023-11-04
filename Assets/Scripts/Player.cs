@@ -55,7 +55,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         gameAssets = GameAssets.instantiate;
 
         // 스폰 위치 초기화
-        transform.position = spawnPositionList[(int)OwnerClientId];
+        transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
     }
 
     public void GetHit(int damage)

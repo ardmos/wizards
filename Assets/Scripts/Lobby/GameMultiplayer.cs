@@ -68,15 +68,7 @@ public class GameMultiplayer : NetworkBehaviour
 
     private void NetworkManager_Client_OnClientDisconnectCallback(ulong obj)
     {
-        OnFailedToJoinGame.Invoke(this, EventArgs.Empty);
-    }
-
-    public void StartHost()
-    {
-        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
-        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
-        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
-        NetworkManager.Singleton.StartHost();
+        OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
     }
 
     // GameRoom에서 Client가 나갔을 때 플레이어를 없애주는 부분.
@@ -91,6 +83,13 @@ public class GameMultiplayer : NetworkBehaviour
                 playerDataNetworkList.RemoveAt(i);
             }
         }
+    }
+    public void StartHost()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
+        NetworkManager.Singleton.StartHost();
     }
 
     public void StartClient()
@@ -107,9 +106,43 @@ public class GameMultiplayer : NetworkBehaviour
         return playerIndex < playerDataNetworkList.Count;
     }
 
-    // 플레이어 Index를 단서로 ClientId 포함 여러 플레이어 데이터를 찾는 메소드
+    // 플레이어 client를 단서로 player Index를 찾는 메소드
+    public int GetPlayerDataIndexFromClientId(ulong clientId)
+    {
+        for (int i = 0; i < playerDataNetworkList.Count; i++)
+        {
+            if (playerDataNetworkList[i].clientId == clientId)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    // 플레이어 client를 단서로 PlayerData(ClientId 포함 여러 플레이어 데이터)를 찾는 메소드
+    public PlayerData GetPlayerDataFromClientId(ulong clientId)
+    {
+        foreach (PlayerData playerData in playerDataNetworkList)
+        {
+            if (playerData.clientId == clientId)
+            {
+                return playerData;
+            }
+        }
+        return default;
+    }
+
+    // 플레이어 Index를 단서로 PlayerData(ClientId 포함 여러 플레이어 데이터)를 찾는 메소드
     public PlayerData GetPlayerDataFromPlayerIndex(int playerIndex)
     {
         return playerDataNetworkList[playerIndex];
+    }
+
+    // 플레이어 kick
+    public void KickPlayer(ulong clientId)
+    {
+        NetworkManager.Singleton.DisconnectClient(clientId);
+        // 위 DisconnectClient 했을 때 아래 내용이 자동으로 호출이 안돼서 직접 호출해줌.
+        NetworkManager_Server_OnClientDisconnectCallback(clientId);
     }
 }
