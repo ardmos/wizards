@@ -10,7 +10,12 @@ using UnityEngine.UI;
 public class LoadingProgressBarUI : MonoBehaviour
 {
     public Image imgFill;
-    
+
+    private void Awake()
+    {
+        imgFill.fillAmount = 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
