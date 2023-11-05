@@ -81,7 +81,7 @@ public static class LoadingSceneManager
             return loadingAsyncOperation.progress;
         } else
         {
-            return 1f;
+            return 0f;
         }
     }
 
