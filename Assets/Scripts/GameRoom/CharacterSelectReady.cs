@@ -3,19 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+#if UNITY_SERVER || UNITY_EDITOR
+using Unity.Services.Multiplay;
+#endif  
+
 
 public class CharacterSelectReady : NetworkBehaviour
 {
     public static CharacterSelectReady Instance { get; private set; }
+    public static event EventHandler OnInstanceCreated;
 
     public event EventHandler OnReadyChanged;
+    public event EventHandler OnGameStarting;
 
     private Dictionary<ulong, bool> playerReadyDictionary;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
         playerReadyDictionary = new Dictionary<ulong, bool>();
+        OnReadyChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private async void Start()
+    {
+#if DEDICATED_SERVER
+        Debug.Log("DEDICATED_SERVER CHARACTER SELECT READY");
+
+        // 서버를 플레이어 수용 대기중 상태로 만듦
+        Debug.Log("ReadyServerForPlayersAsync");
+        await MultiplayService.Instance.ReadyServerForPlayersAsync();
+
+        // 이거 해줘야 에러 안남
+        Camera.main.enabled = false;
+#endif
     }
 
     public void SetPlayerReady()
@@ -45,6 +66,8 @@ public class CharacterSelectReady : NetworkBehaviour
         // 모든 플레이어가 레디 했을 경우. 게임 씬으로 이동
         if (allClientsReady)
         {
+            // Game 시작을 알림
+            OnGameStarting?.Invoke(this, EventArgs.Empty);
             LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameScene);
         }
     }

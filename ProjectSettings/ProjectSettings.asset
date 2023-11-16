@@ -157,7 +157,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.SunriseGamesStudio.Wizards
-    Standalone: com.Sunrise-Games-Studio.Wizards
+    Standalone: com.SunriseGamesStudio.Wizards
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -826,7 +826,9 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Server: DEDICATED_SERVER
+    Standalone: DEDICATED_SERVER_NO;UNITY_ANDROID_NO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

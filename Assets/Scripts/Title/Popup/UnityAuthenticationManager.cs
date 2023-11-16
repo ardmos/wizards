@@ -29,16 +29,27 @@ public class UnityAuthenticationManager : MonoBehaviour
 
         try
         {
-            await UnityServices.InitializeAsync();
+#if UNITY_ANDROID
+            //Initialize PlayGamesPlatform
+            PlayGamesPlatform.Activate();
+#endif
+
+            if (UnityServices.State == ServicesInitializationState.Initialized)
+            {
+                return;
+            }
+            // 한 컴퓨터에서 여러 화면 띄워놓고 테스트 하기 위한 코드           
+            InitializationOptions initializationOptions = new InitializationOptions();
+#if !DEDICATED_SERVER
+            initializationOptions.SetProfile(UnityEngine.Random.Range(0, 10000).ToString());
+#endif
+            await UnityServices.InitializeAsync(initializationOptions);
             Debug.Log(UnityServices.State);
 
             SetupEvents();
 
             //await SignInCachedUserAsync();  // 테스트중에는 주석처리. 자동로그인 안함
-#if UNITY_ANDROID
-            //Initialize PlayGamesPlatform
-            PlayGamesPlatform.Activate();
-#endif
+
 
         }
         catch (Exception e)

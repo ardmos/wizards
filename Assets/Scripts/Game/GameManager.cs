@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+#if UNITY_SERVER || UNITY_EDITOR
+using Unity.Services.Multiplay;
+#endif
+
 
 /// <summary>
 /// Singleton
@@ -42,9 +46,15 @@ public class GameManager : NetworkBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
+#if DEDICATED_SERVER
+        // 서버의 플레이어 수용 상태 를 비수용 상태로 변경
+        await MultiplayService.Instance.UnreadyServerAsync();
 
+        // 여기서도 이거 해줘야 에러 안남
+        Camera.main.enabled = false;
+#endif
     }
 
     public override void OnNetworkSpawn()

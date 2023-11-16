@@ -92,6 +92,15 @@ public class GameMultiplayer : NetworkBehaviour
         NetworkManager.Singleton.StartHost();
     }
 
+    // UGS Dedicated Server 
+    public void StartServer()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
+        NetworkManager.Singleton.StartServer();
+    }
+
     public void StartClient()
     {
         OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
@@ -145,4 +154,40 @@ public class GameMultiplayer : NetworkBehaviour
         // 위 DisconnectClient 했을 때 아래 내용이 자동으로 호출이 안돼서 직접 호출해줌.
         NetworkManager_Server_OnClientDisconnectCallback(clientId);
     }
+
+    public bool HasAvailablePlayerSlots()
+    {
+        return NetworkManager.Singleton.ConnectedClientsIds.Count < MAX_PLAYER_AMOUNT;
+    }
+
+    public NetworkList<PlayerData> GetPlayerDataNetworkList()
+    {
+        return playerDataNetworkList;
+    }
+
+    // 플레이어 이름 띄워주는 부분 () 서버일 경우 NetworkManager_OnclientConnectedCallback에서 호출해주고 클라이언트일 경우StartClient에서 호출해줘야함
+    // 최초 이름 등록하는부분은 ???? 
+    /*[ServerRpc(RequireOwnership = false)]
+    private void SetPlayerNameServerRpc(string playerName, ServerRpcParams serverRpcParams = default)
+    {
+        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
+
+        PlayerData playerData = playerDataNetworkList[playerDataIndex];
+
+        playerData.playerName = playerName;
+
+        playerDataNetworkList[playerDataIndex] = playerData;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetPlayerIdServerRpc(string playerId, ServerRpcParams serverRpcParams = default)
+    {
+        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
+
+        PlayerData playerData = playerDataNetworkList[playerDataIndex];
+
+        playerData.playerId = playerId;
+
+        playerDataNetworkList[playerDataIndex] = playerData;
+    }*/
 }
