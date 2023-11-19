@@ -112,12 +112,12 @@ public class MatchmakerUI : MonoBehaviour
             {
                 case MultiplayAssignment.StatusOptions.Timeout:
                     createTicketResponse = null;
-                    Debug.Log("Multiplay Timeout!");
+                    Debug.Log("Multiplay Ticket Timeout!");
                     lookingForGameTransform.gameObject.SetActive(false);
                     break;
                 case MultiplayAssignment.StatusOptions.Failed:
                     createTicketResponse = null;
-                    Debug.Log("Failed to create Multiplay server!");
+                    Debug.Log("Failed to create Multiplay server! Error: " + multiplayAssignment.Message);
                     lookingForGameTransform.gameObject.SetActive(false);
                     break;
                 case MultiplayAssignment.StatusOptions.InProgress:
@@ -133,7 +133,7 @@ public class MatchmakerUI : MonoBehaviour
                     GameMultiplayer.Instance.StartClient();
                     break;
                 default:
-                    break;
+                    throw new InvalidOperationException();
             }
         }
     }

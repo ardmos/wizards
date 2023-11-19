@@ -24,7 +24,7 @@ public class LobbyManager : MonoBehaviour
     private const ushort defaultMaxPlayers = 4;
     private const string defaultServerName = "MyServerName";
     private const string defaultGameType = "MyGameType";
-    private const string defaultBuildId = "MyBuildId";
+    private const string defaultBuildId = "59462"; // <<<<<<<  여기부터!!!!   MyBuildId 에서 지금 Id로 바꿨는데, 이렇게 하는거 아닌 것 같다.  samyam 영상 참고해서 다시 처음부터 확인해보기 
     private const string defaultMap = "MyMap";
 
     private float autoAllocateTimer = 9999999f;
@@ -68,22 +68,6 @@ public class LobbyManager : MonoBehaviour
 #endif
     }
 
-    private async void GameMultiplayer_OnPlayerDataNetworkListChanged(object sender, EventArgs e)
-    {
-#if DEDICATED_SERVER
-        HandleUpdateBackfillTickets();
-
-        if (GameMultiplayer.Instance.HasAvailablePlayerSlots())
-        {
-            await MultiplayService.Instance.ReadyServerForPlayersAsync();
-        }
-        else
-        {
-            await MultiplayService.Instance.UnreadyServerAsync();
-        }
-#endif
-    }
-
     private void Update()
     {
 #if DEDICATED_SERVER
@@ -114,6 +98,21 @@ public class LobbyManager : MonoBehaviour
                 acceptBackfillTicketsTimer = acceptBackfillTicketsTimerMax;
                 HandleBackfillTickets();
             }
+        }
+#endif
+    }
+    private async void GameMultiplayer_OnPlayerDataNetworkListChanged(object sender, EventArgs e)
+    {
+#if DEDICATED_SERVER
+        HandleUpdateBackfillTickets();
+
+        if (GameMultiplayer.Instance.HasAvailablePlayerSlots())
+        {
+            await MultiplayService.Instance.ReadyServerForPlayersAsync();
+        }
+        else
+        {
+            await MultiplayService.Instance.UnreadyServerAsync();
         }
 #endif
     }
