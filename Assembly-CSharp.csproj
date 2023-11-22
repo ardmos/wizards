@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GamePadUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\TimerUI.cs" />
+    <Compile Include="Assets\Scripts\Title\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Assets\Scripts\Title\Popup\PopupSelectAuthMethodUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyManager.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
+    <Compile Include="Assets\Scripts\Title\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
     <Compile Include="Assets\Scripts\Game\Store\StoreTriggerAreaCollider.cs" />
   </ItemGroup>
