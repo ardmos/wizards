@@ -59,9 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\UI\SelectSpellSlotUI.cs" />
-    <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Game\ForTest\SelectHostClientForTest.cs" />
-    <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneCleanUp.cs" />
@@ -71,9 +71,9 @@
     <Compile Include="Assets\Scripts\PlayerNetwork.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingSceneManager.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\HostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Game\SpellController.cs" />
-    <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Game\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\Lobby\ConnectingUI.cs" />
@@ -86,21 +86,22 @@
     <Compile Include="Assets\Scripts\Game\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\Lobby\ConnectionResponseMessageUI.cs" />
     <Compile Include="Assets\Scripts\Game\FireSpell.cs" />
-    <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
-    <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\Game\IceSpell.cs" />
-    <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameStartCountdownUI.cs" />
     <Compile Include="Assets\Scripts\Game\WaterSpell.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameOverUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GamePadUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\TimerUI.cs" />
     <Compile Include="Assets\Scripts\Title\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
-    <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\Game\UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\Game\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
@@ -110,7 +111,6 @@
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\GameRoom\CharacterSelectPlayer.cs" />
     <Compile Include="Assets\Scripts\Game\Spell.cs" />
-    <Compile Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
@@ -135,7 +135,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\Download Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Shaders\Legacy\AdditiveMobile_Scroll01.shader" />
+    <None Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Shaders\Legacy\AdditiveMobile_Scroll01.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

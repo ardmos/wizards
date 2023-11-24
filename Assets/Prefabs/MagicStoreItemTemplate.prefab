@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
-  magicStore: {fileID: 0}
+  selectSpellSlotPopup: {fileID: 0}
   txtName: {fileID: 1134329311628699732}
   txtPrice: {fileID: 3676668689444855460}
 --- !u!1 &3149821696421612347
