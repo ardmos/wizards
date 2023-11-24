@@ -22,10 +22,10 @@ public class LobbyManager : MonoBehaviour
 
 #if DEDICATED_SERVER
     private const ushort defaultMaxPlayers = 4;
-    private const string defaultServerName = "MyServerName";
-    private const string defaultGameType = "MyGameType";
-    private const string defaultBuildId = "59462"; // <<<<<<<  여기부터!!!!   MyBuildId 에서 지금 Id로 바꿨는데, 이렇게 하는거 아닌 것 같다.  samyam 영상 참고해서 다시 처음부터 확인해보기 
-    private const string defaultMap = "MyMap";
+    private const string defaultServerName = "n/a";
+    private const string defaultGameType = "n/a";
+    private const string defaultBuildId = "0"; // <<<<<<<  여기부터!!!!   MyBuildId 에서 지금 Id로 바꿨는데, 이렇게 하는거 아닌 것 같다.  samyam 영상 참고해서 다시 처음부터 확인해보기 
+    private const string defaultMap = "n/a";
 
     private float autoAllocateTimer = 9999999f;
     private bool alreadyAutoAllocated;
@@ -130,8 +130,25 @@ public class LobbyManager : MonoBehaviour
         multiplayEventCallbacks.SubscriptionStateChanged += MultiplayEventCallbacks_SubscriptionStateChanged;
         IServerEvents serverEvents = await MultiplayService.Instance.SubscribeToServerEventsAsync(multiplayEventCallbacks);
 
-        // Start server query handler
-        serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(defaultMaxPlayers, defaultServerName, defaultGameType, defaultBuildId, defaultMap);
+        try
+        {
+            // Start server query handler
+            serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(defaultMaxPlayers, defaultServerName, defaultGameType, defaultBuildId, defaultMap);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"Something went wrong trying to set up the SQP Service:\n{ex}");
+        }
+
+
+        try
+        {
+
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"Something went wrong trying to set up the Allocation & Backfill Services:\n{ex}");
+        }
 
         // serverConfig를 통해 이미 Allocated됐는지 확인하는 부분
         var serverConfig = MultiplayService.Instance.ServerConfig;

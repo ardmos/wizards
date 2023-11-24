@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Services.Core;
+using Unity.Services.Multiplay;
 using UnityEngine;
 
 public class ServerStartUp : MonoBehaviour
@@ -10,8 +13,10 @@ public class ServerStartUp : MonoBehaviour
     // Default port 7777
     private ushort serverPort = 7777;
 
+    private IMultiplayService multiplayService;
+
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
         bool server = false;
         var args = System.Environment.GetCommandLineArgs();
@@ -29,6 +34,7 @@ public class ServerStartUp : MonoBehaviour
         if (server)
         {
             StartServer();
+            await StartServerServices();
         }
     }
 
@@ -39,4 +45,19 @@ public class ServerStartUp : MonoBehaviour
         NetworkManager.Singleton.StartServer();
     }
 
+    async Task StartServerServices()
+    {
+        await UnityServices.InitializeAsync();
+        try
+        {
+            multiplayService = MultiplayService.Instance;
+            // get sqp query handler
+            //await multiplayService.StartServerQueryHandlerAsync()
+        }
+        catch (System.Exception ex)
+        {
+
+            throw;
+        }
+    }
 }
