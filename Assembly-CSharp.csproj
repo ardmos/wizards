@@ -118,10 +118,12 @@
     <Compile Include="Assets\Scripts\Lobby\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneUI.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
+    <Compile Include="Assets\Downloaded Assets\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyBottomUI.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\PopupSelectAuthMethodUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyManager.cs" />
+    <Compile Include="Assets\Downloaded Assets\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
     <Compile Include="Assets\Scripts\Title\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
