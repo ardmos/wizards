@@ -9,16 +9,27 @@ using UnityEngine.UI;
 /// </summary>
 public class LoadingProgressBarUI : MonoBehaviour
 {
-    public Image imgFill;
+    [SerializeField] private Slider progressBar;
+    [SerializeField] private TextMeshProUGUI txtValue;
+    [SerializeField] private int progressValue;
 
     private void Awake()
     {
-        imgFill.fillAmount = 0;
+        progressBar.value  = 0f;
+        UpdateTxtValue();
     }
 
     // Update is called once per frame
     void Update()
     {
-        imgFill.fillAmount = LoadingSceneManager.GetLoadingProgress();
+        Debug.Log("Loading Progess : " + LoadingSceneManager.GetLoadingProgress());
+        progressBar.value = LoadingSceneManager.GetLoadingProgress() * 100f;
+        UpdateTxtValue();
+    }
+
+    private void UpdateTxtValue()
+    {
+        progressValue = (int)progressBar.value;
+        txtValue.text = $"Loading... {progressValue}%";
     }
 }
