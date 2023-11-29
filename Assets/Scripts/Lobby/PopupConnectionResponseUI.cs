@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConnectionResponseMessageUI : MonoBehaviour
+public class PopupConnectionResponseUI : MonoBehaviour
 {
     [SerializeField] private GameObject objectIconError;
     [SerializeField] private GameObject objectIconInfo;

@@ -84,7 +84,7 @@
     <Compile Include="Assets\Scripts\ClientNetworkTransform.cs" />
     <Compile Include="Assets\Scripts\Game\UI\HPBarUI.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv1.cs" />
-    <Compile Include="Assets\Scripts\Lobby\ConnectionResponseMessageUI.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupSettings\PopupSettingsUI.cs" />
     <Compile Include="Assets\Scripts\Game\FireSpell.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
     <Compile Include="Assets\Scripts\Game\IceSpell.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\Game\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\UnityAuthenticationManager.cs" />
+    <Compile Include="Assets\Scripts\Lobby\LobbyUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneDedicatedServer.cs" />
     <Compile Include="Assets\Scripts\GameRoom\CharacterSelectUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
@@ -121,8 +122,10 @@
     <Compile Include="Assets\Downloaded Assets\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyBottomUI.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupConnectionResponseUI.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\PopupSelectAuthMethodUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyManager.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupSettings\SoundGroupUI.cs" />
     <Compile Include="Assets\Downloaded Assets\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
     <Compile Include="Assets\Scripts\Title\ServerStartUp.cs" />
