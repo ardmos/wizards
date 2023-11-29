@@ -23,7 +23,7 @@ public class LoadingProgressBarUI : MonoBehaviour
     void Update()
     {
         Debug.Log("Loading Progess : " + LoadingSceneManager.GetLoadingProgress());
-        progressBar.value = LoadingSceneManager.GetLoadingProgress() * 100f;
+        //progressBar.value = LoadingSceneManager.GetLoadingProgress() * 100f;
         UpdateTxtValue();
     }
 

@@ -915,7 +915,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 75
+  m_Value: 15.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1047,7 +1047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &4999212837265457726
 CanvasRenderer:
   m_ObjectHideFlags: 0
