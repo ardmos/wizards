@@ -12,13 +12,13 @@ using UnityEngine.UI;
 public class PopupSelectAuthMethodUI : MonoBehaviour
 {
     [SerializeField] private Button btnSignInAnonymous;
-    [SerializeField] private Button btnSignInGooglePlayerGames;
+    [SerializeField] private Button btnSignInGooglePlayGames;
     [SerializeField] private Button btnClose;
 
     private void Start()
     {
         btnSignInAnonymous.onClick.AddListener(UnityAuthenticationManager.Instance.OnBtnSignInAnonymousClicked);
-        btnSignInGooglePlayerGames.onClick.AddListener(UnityAuthenticationManager.Instance.OnBtnSignInGooglePlayGamesClicked);
+        btnSignInGooglePlayGames.onClick.AddListener(UnityAuthenticationManager.Instance.OnBtnSignInGooglePlayGamesClicked);
         btnClose.onClick.AddListener(OnBtnCloseClicked);
     }
 
