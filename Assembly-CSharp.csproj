@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingSceneManager.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupSettings\PushAlarmGroupUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\HostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Game\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv2.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets\Scripts\Game\WaterSpell.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameOverUI.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupSettings\SwitchUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GamePadUI.cs" />
