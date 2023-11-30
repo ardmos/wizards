@@ -1,10 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-/// <summary>
-/// SoundManager와 연계 
-/// 볼륨없으면 아이콘 이미지 교체 
-/// </summary>
-public class SoundGroupUI : MonoBehaviour
+
+public class MusicGroupUI : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private Image handle;
@@ -19,7 +16,7 @@ public class SoundGroupUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,14 +27,15 @@ public class SoundGroupUI : MonoBehaviour
 
     private void UpdateIconImage()
     {
-        if (slider.value != 0) { 
+        if (slider.value != 0)
+        {
             icon.sprite = iconSoundOn;
             icon.color = colorOn;
-            handle.sprite = handleSoundOn;          
-            return; 
+            handle.sprite = handleSoundOn;
+            return;
         }
         icon.sprite = iconSoundOff;
         icon.color = colorOff;
-        handle.sprite = handleSoundOff;        
+        handle.sprite = handleSoundOff;
     }
 }

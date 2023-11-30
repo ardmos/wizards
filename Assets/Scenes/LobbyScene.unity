@@ -31701,6 +31701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5030370262777783120}
+  - component: {fileID: 5030370262777783124}
   m_Layer: 0
   m_Name: Music_Group
   m_TagString: Untagged
@@ -31708,6 +31709,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5030370262777783124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5030370262777783123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df6d7b6a63074354fbe677775b98bea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 5030370263507905219}
+  handle: {fileID: 5030370262580971968}
+  slider: {fileID: 5030370263210899119}
+  iconSoundOn: {fileID: 21300000, guid: ac3598f525aa740ad8c75bb20530a163, type: 3}
+  iconSoundOff: {fileID: 21300000, guid: 412af80c943b648d3997c61801cbe9e6, type: 3}
+  handleSoundOn: {fileID: 21300000, guid: a50a60a47334a47cf96082ce490e8caa, type: 3}
+  handleSoundOff: {fileID: 21300000, guid: a295c177167cc418a8475e5a2363f2c3, type: 3}
+  colorOn: {r: 0.40392157, g: 0.47058824, b: 0.6117647, a: 1}
+  colorOff: {r: 0.78039217, g: 0.80784315, b: 0.8862745, a: 1}
 --- !u!114 &5030370262784963240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32220,7 +32242,7 @@ GameObject:
   - component: {fileID: 5030370262923281688}
   - component: {fileID: 5030370262923281689}
   m_Layer: 0
-  m_Name: Slider_On
+  m_Name: Slider_SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33362,7 +33384,7 @@ GameObject:
   - component: {fileID: 5030370263210899118}
   - component: {fileID: 5030370263210899119}
   m_Layer: 0
-  m_Name: Slider_Off
+  m_Name: Slider_Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34251,7 +34273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3bf6fa12a88944c73b546c03aec3934e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a0238af227554c2eb9f6c4d5646a153, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -34567,6 +34589,8 @@ MonoBehaviour:
   iconSoundOff: {fileID: 21300000, guid: 3a547b28ba2934e729b159862416218a, type: 3}
   handleSoundOn: {fileID: 21300000, guid: a50a60a47334a47cf96082ce490e8caa, type: 3}
   handleSoundOff: {fileID: 21300000, guid: a295c177167cc418a8475e5a2363f2c3, type: 3}
+  colorOn: {r: 0.40392157, g: 0.47058824, b: 0.6117647, a: 1}
+  colorOff: {r: 0.78039217, g: 0.80784315, b: 0.8862745, a: 1}
 --- !u!1 &5030370263832937117
 GameObject:
   m_ObjectHideFlags: 0

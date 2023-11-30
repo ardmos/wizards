@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Title\TitleSceneCleanUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\MatchmakerUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameReadyUI.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\InputSystem\TestingInputSystem.cs" />
     <Compile Include="Assets\Scripts\PlayerNetwork.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
