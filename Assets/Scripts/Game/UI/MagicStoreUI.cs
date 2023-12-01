@@ -41,7 +41,7 @@ public class MagicStoreUI : MonoBehaviour
     /// </summary>
     public void LoadContents()
     {
-        for (int i = ((int)Item.ItemType.FireBall_1); i < ((int)Item.ItemType.Max); i++)
+        for (int i = ((int)Item.ItemType.SpellStart+1); i < ((int)Item.ItemType.SpellEnd); i++)
         {
             Item.ItemType itemType = (Item.ItemType)i;
             Transform storeItemTransform = Instantiate(storeItemTemplatePref);
@@ -69,6 +69,11 @@ public class MagicStoreUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 아이템을 구매하는 메서드
+    /// </summary>
+    /// <param name="itemType"></param>
+    /// <param name="slotNum"></param>
     public void TryBuyItem(Item.ItemType itemType, int slotNum)
     {
         storeCustomer.BoughtSpellScroll(itemType, slotNum);

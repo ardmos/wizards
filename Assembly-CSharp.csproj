@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Game\UI\HostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Game\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv2.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupShop\ItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Game\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\Lobby\ConnectingUI.cs" />
     <Compile Include="Assets\Scripts\FloorGenerator.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupShop\DailyGroupUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneUI.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />

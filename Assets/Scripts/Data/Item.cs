@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 /// <summary>
 /// 게임에서 사용되는 아이템의 상세 정보를 갖고있는 스크립트 
@@ -9,6 +6,11 @@ public class Item
 {
     public enum ItemType
     {
+        None,
+        ShopItemStart,
+        RemoveAds,
+        ShopItemEnd,
+        ArmorStart,
         Armor_1,
         Armor_2,
         Armor_3,
@@ -29,6 +31,8 @@ public class Item
         Armor_18,
         Armor_19,
         Armor_20,
+        ArmorEnd,
+        HatStart,
         Hat_1,
         Hat_2,
         Hat_3,
@@ -43,9 +47,13 @@ public class Item
         Hat_12,
         Hat_13,
         Hat_14,
+        HatEnd,
+        BackPackStart,
         BackPack_1,
         BackPack_2,
         BackPack_3,
+        BackPackEnd,
+        WandStart,
         Wand_1,
         Wand_2,
         Wand_3,
@@ -53,16 +61,22 @@ public class Item
         Wand_5,
         Wand_6,
         Wand_7,
+        WandEnd,
+        SpellStart,
         FireBall_1,
         WaterBall_1,
         IceBall_1,
+        SpellEnd,
         Max
     }
 
-    public static int GetCost(ItemType itemType)
+    public static float GetCost(ItemType itemType)
     {
         switch (itemType)
         {
+            case ItemType.None: return 0;
+            case ItemType.RemoveAds: 
+                return 3.99f;
             case ItemType.Armor_1:
             case ItemType.Armor_2:
             case ItemType.Armor_3:
@@ -83,7 +97,7 @@ public class Item
             case ItemType.Armor_18:
             case ItemType.Armor_19:
             case ItemType.Armor_20:
-                return 100;
+                return 100f;
             case ItemType.Hat_1:
             case ItemType.Hat_2:
             case ItemType.Hat_3:
@@ -98,11 +112,11 @@ public class Item
             case ItemType.Hat_12:
             case ItemType.Hat_13:
             case ItemType.Hat_14:
-                return 50;
+                return 50f;
             case ItemType.BackPack_1:
             case ItemType.BackPack_2:
             case ItemType.BackPack_3:
-                return 80;
+                return 80f;
             case ItemType.Wand_1:
             case ItemType.Wand_2:
             case ItemType.Wand_3:
@@ -110,13 +124,14 @@ public class Item
             case ItemType.Wand_5:
             case ItemType.Wand_6:
             case ItemType.Wand_7:
-                return 60;
+                return 60f;
             case ItemType.FireBall_1:
             case ItemType.WaterBall_1:
             case ItemType.IceBall_1:
-                return 30;
+                return 30f;
             default:
-                { Debug.LogError("GetCost error"); return 0; }
+                Debug.LogError("GetCost error"); 
+                return 0; 
         }
     }
 
@@ -174,4 +189,28 @@ public class Item
             default: { Debug.LogError("GetMesh error"); return null; }
         }
     }
+
+    public static Sprite GetSprite(ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.RemoveAds:
+                return GameAssets.instantiate.s_RemoveAds;
+
+            default:
+                Debug.Log("No Image");
+                return null;               
+        }
+    }
+
+    public static string GetName(ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.RemoveAds:
+                return "Remove Ads";
+            default:
+                return "";
+        }
+    } 
 }

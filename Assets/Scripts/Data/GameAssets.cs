@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 게임에 필요한 애셋들(Mesh 등등...)을 갖고있는 스크립트
+/// 필요할때마다 접근해서 꺼내 쓰면 된다.
 /// </summary>
 public class GameAssets : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class GameAssets : MonoBehaviour
             return _instantiate;
         }
     }
+
+    #region Sprites
+    public Sprite s_RemoveAds;
+    #endregion
 
     #region Mesh
     public Mesh m_Body_1;
