@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\UI\SelectSpellSlotUI.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupShop\PopupShopUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Game\ForTest\SelectHostClientForTest.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
@@ -77,7 +78,6 @@
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\HostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Game\SpellController.cs" />
-    <Compile Include="Assets\Scripts\Shop\ShopUI.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Game\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\Lobby\ConnectingUI.cs" />

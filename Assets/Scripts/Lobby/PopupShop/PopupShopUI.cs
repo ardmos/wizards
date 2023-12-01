@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupSettingsUI : MonoBehaviour
+public class PopupShopUI : MonoBehaviour
 {
-    [SerializeField] private Button btnClose;
+    [SerializeField] private Button btnBack;
+    [SerializeField] private Button btnHome;
 
     // Start is called before the first frame update
     void Start()
     {
-        InitPopupSettings();
+        btnBack.onClick.AddListener(Hide);
+        btnHome.onClick.AddListener(Hide);
 
-        btnClose.onClick.AddListener(Hide);
+        //Hide();
     }
 
     // Update is called once per frame
@@ -21,17 +23,12 @@ public class PopupSettingsUI : MonoBehaviour
         
     }
 
-    private void InitPopupSettings()
-    {
-        // Sound Manager 추가 이후 구현
-    }
-
     public void Show()
     {
-        gameObject.SetActive(true);    
+        gameObject.SetActive(true);
     }
 
-    private void Hide()
+    private void Hide() 
     {
         gameObject.SetActive(false);
     }

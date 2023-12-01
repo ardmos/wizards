@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// 1. 스위치 이미지 변경
-/// 2. 스위치 상태 업데이트
+/// 2. 스위치 상태 업데이트 <- 미구현
 /// </summary>
 public class SwitchUI : MonoBehaviour
 {    
