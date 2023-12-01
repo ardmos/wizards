@@ -21,8 +21,6 @@ public static class LoadingSceneManager
         LobbyScene,
         GameRoomScene,
         GameScene,
-        StoreScene,
-        OptionScene
     }
 
     private static Action onLoaderCallback;

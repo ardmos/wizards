@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\HostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Game\SpellController.cs" />
+    <Compile Include="Assets\Scripts\Shop\ShopUI.cs" />
     <Compile Include="Assets\Scripts\Game\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Game\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\Lobby\ConnectingUI.cs" />
