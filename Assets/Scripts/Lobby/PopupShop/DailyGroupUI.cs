@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 아이템들 생성
 /// 현재 아이템 리스트
-/// 1. Remove Ads
+/// 1. Remove Ads(실제 구매 기능은 광고기능 추가 후 추가)
 /// </summary>
 public class DailyGroupUI : MonoBehaviour
 {
