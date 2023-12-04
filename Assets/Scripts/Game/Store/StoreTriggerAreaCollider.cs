@@ -10,7 +10,7 @@ using UnityEngine;
 /// </summary>
 public class StoreTriggerAreaCollider : MonoBehaviour
 {
-    [SerializeField] private MagicStoreUI uiMagicStore;
+    [SerializeField] private PopupMagicStoreUI uiMagicStore;
 
     private void OnTriggerEnter(Collider other)
     {

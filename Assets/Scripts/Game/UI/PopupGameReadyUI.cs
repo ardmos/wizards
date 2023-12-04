@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameReadyUI : MonoBehaviour
+public class PopupGameReadyUI : MonoBehaviour
 {
     [SerializeField] private Button btnReady;
     [SerializeField] private TextMeshProUGUI txtGameReady;

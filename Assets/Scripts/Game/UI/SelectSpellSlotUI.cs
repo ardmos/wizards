@@ -6,7 +6,7 @@ public class SelectSpellSlotUI : MonoBehaviour
 {
     private Item.ItemType itemType;
 
-    public MagicStoreUI magicStore;
+    public PopupMagicStoreUI magicStore;
 
     // Start is called before the first frame update
     void Start()

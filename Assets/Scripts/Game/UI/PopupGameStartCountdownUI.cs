@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GameStartCountdownUI : MonoBehaviour
+public class PopupGameStartCountdownUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtCountdown;
 

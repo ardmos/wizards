@@ -8,7 +8,7 @@ using UnityEngine;
 ///     2. 컨텐츠 아이템 생성 (템플릿 활용)
 ///     3. 아이템 구매
 /// </summary>
-public class MagicStoreUI : MonoBehaviour
+public class PopupMagicStoreUI : MonoBehaviour
 {
     [SerializeField] private Transform container;
     [SerializeField] private Transform storeItemTemplatePref;

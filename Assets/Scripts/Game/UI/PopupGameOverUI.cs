@@ -1,9 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HostHasDisconnectedUI : MonoBehaviour
+public class PopupGameOverUI : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI txtRankNumber;
+    [SerializeField] private TextMeshProUGUI txtScoreCount;
     [SerializeField] private Button btnPlayAgain;
 
     private void Awake()
@@ -13,30 +19,27 @@ public class HostHasDisconnectedUI : MonoBehaviour
             NetworkManager.Singleton.Shutdown();
             // 로비로 이동 전에 NetworkManager, GameMultiplayManager 중복되지 않도록 깔끔하게 정리.
             CleanUp();
-            // 로비로 이동.
+            // 로비로 이동. 
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
     }
 
-    private void Start()
+    void Start()
     {
-        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
-        Hide();              
+        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+        Hide();
     }
 
-    private void OnDestroy()
+    private void GameManager_OnStateChanged(object sender, EventArgs e)
     {
-        // 강퇴당했을 시 NetworkManager와 현 스크립트의 오브젝트는 라이프사이클이 다르기 때문에 손수 이벤트 구독을 해제해준다
-        NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnectCallback;
-    }
-
-    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
-    {
-        Debug.Log($"누군가 나갔습니다. clientId : {clientId}");
-        if (clientId == NetworkManager.ServerClientId)
+        if (GameManager.Instance.IsGameOver())
         {
-            // Server is shutting down
             Show();
+            InitGameOverUIData();
+        }
+        else
+        {
+            Hide();
         }
     }
 
@@ -49,6 +52,13 @@ public class HostHasDisconnectedUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    private void InitGameOverUIData()
+    {
+        txtRankNumber.text = (GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();        
+        txtScoreCount.text = Player.LocalInstance.GetScore().ToString();
+    }
+
     private void CleanUp()
     {
         if (NetworkManager.Singleton != null)
