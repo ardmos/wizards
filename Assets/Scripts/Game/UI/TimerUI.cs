@@ -23,10 +23,10 @@ public class TimerUI : MonoBehaviour
         if (isTimerOn)
         {
             totalPassedTime = GameManager.Instance.GetGamePlayingTimer();
-            h = ((int)totalPassedTime / 3600);
+            //h = ((int)totalPassedTime / 3600);
             m = ((int)totalPassedTime / 60 % 60);
             s = ((int)totalPassedTime % 60);
-            txtTimer.text = $"{h, 2:D2}:{m, 2:D2}:{s, 02:D2}";
+            txtTimer.text = $"{m, 2:D2} : {s, 02:D2}";
         }
     }
 

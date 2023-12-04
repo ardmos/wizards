@@ -17624,7 +17624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8915471279292534532}
   m_Layer: 0
-  m_Name: =Timer=
+  m_Name: =Top UI=
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18984,7 +18984,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022887998, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 170.0076}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6301277442076414189
@@ -20448,6 +20448,7 @@ GameObject:
   - component: {fileID: 6317268124660750969}
   - component: {fileID: 7139624035269635180}
   - component: {fileID: 1176614082675003841}
+  - component: {fileID: 8457353546395403035}
   m_Layer: 0
   m_Name: PlayerCount
   m_TagString: Untagged
@@ -20455,6 +20456,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8457353546395403035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457353546395403034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd589f088f96c0478c2936e1535cbae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtAlivePlayerCount: {fileID: 109639947374977130}
 --- !u!224 &8519257929799825597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20562,6 +20576,7 @@ GameObject:
   - component: {fileID: 8624331744585675006}
   - component: {fileID: 3401072089883154879}
   - component: {fileID: 5617960112634776147}
+  - component: {fileID: 8646956649956757125}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
@@ -20569,6 +20584,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8646956649956757125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8646956649956757124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2066514b3e83341847c72e4e314dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTimerOn: 0
+  txtTimer: {fileID: 1931416869394693623}
 --- !u!114 &8680610235854209243
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class GameManager : NetworkBehaviour
     public static GameManager Instance { get; private set; }
 
     public event EventHandler OnStateChanged;
+    public event EventHandler OnAlivePlayerCountChanged;
 
     private enum State
     {
@@ -137,8 +138,15 @@ public class GameManager : NetworkBehaviour
         // 모든 플레이어가 레디 했을 경우. 카운트다운 시작
         if (allClientsReady)
         {
+            // 플레이어 카운트 집계 업데이트
+            UpdateCurrentAlivePlayerCount();
             state.Value = State.CountdownToStart;
         }
+    }
+
+    public void UpdateCurrentAlivePlayerCount()
+    {
+        OnAlivePlayerCountChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void LocalPlayerReady()
