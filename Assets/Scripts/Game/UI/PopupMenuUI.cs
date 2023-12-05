@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +17,9 @@ public class PopupMenuUI : MonoBehaviour
         btnClose.onClick.AddListener(Hide);
         btnRestart.onClick.AddListener(() =>
         {
-            // 이동 전에 UGS Multiplay 플레이 종료 처리 이곳에 추가하면 됨
-
+            // 이동 전에 UGS Multiplay 플레이 종료 처리
+            NetworkManager.Singleton.Shutdown();
+            CleanUp();
             // 로비씬으로 이동
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
@@ -31,5 +33,17 @@ public class PopupMenuUI : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    private void CleanUp()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
+        if (GameMultiplayer.Instance != null)
+        {
+            Destroy(GameMultiplayer.Instance.gameObject);
+        }
     }
 }
