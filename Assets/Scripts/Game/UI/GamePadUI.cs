@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// 1. 조작 버튼에 현재 스킬 이름 띄워주기
+/// 1. 조작 버튼에 현재 스킬 이미지 띄워주기
 /// </summary>
 public class GamePadUI : MonoBehaviour
 {

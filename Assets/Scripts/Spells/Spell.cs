@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// 마법의 공통적인 기능들을 관리하는 클래스
@@ -34,6 +32,7 @@ public abstract class Spell : MonoBehaviour
         public int level;
         public string spellName;
         public bool castAble;
+        public Sprite IconImage;
     }
 
     public SpellInfo spellInfo;
@@ -74,7 +73,7 @@ public abstract class Spell : MonoBehaviour
         }
     }
 
-    // 마법 프리팹 반환
+    // 마법 프리팹 검색 및 반환
     private GameObject GetSpellObject(SpellLvlType spellLvlType)
     {
         GameObject resultObject = null;
