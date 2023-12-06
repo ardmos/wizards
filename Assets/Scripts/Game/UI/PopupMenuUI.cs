@@ -18,7 +18,7 @@ public class PopupMenuUI : MonoBehaviour
         btnRestart.onClick.AddListener(() =>
         {
             // 이동 전에 UGS Multiplay 플레이 종료 처리
-            NetworkManager.Singleton.Shutdown();
+            if (NetworkManager.Singleton != null) NetworkManager.Singleton.Shutdown();
             CleanUp();
             // 로비씬으로 이동
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
