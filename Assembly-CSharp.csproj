@@ -1127,21 +1127,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="IngameDebugConsole.Editor.csproj">
+      <Project>{0822653F-8344-E92C-D91D-F180CC00FB96}</Project>
+      <Name>IngameDebugConsole.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Google.Play.Games.csproj">
       <Project>{C2C88881-030D-60CE-C6A0-8054BC730F91}</Project>
       <Name>Google.Play.Games</Name>
-    </ProjectReference>
-    <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
-      <Project>{9BBFB8B1-55DE-CC05-A70E-5F051FB16868}</Project>
-      <Name>IngameDebugConsole.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Google.Play.Games.Editor.csproj">
       <Project>{8B3CE402-E5C9-4F6C-A8B7-61E7F7CC8B68}</Project>
       <Name>Google.Play.Games.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="IngameDebugConsole.Editor.csproj">
-      <Project>{0822653F-8344-E92C-D91D-F180CC00FB96}</Project>
-      <Name>IngameDebugConsole.Editor</Name>
+    <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
+      <Project>{9BBFB8B1-55DE-CC05-A70E-5F051FB16868}</Project>
+      <Name>IngameDebugConsole.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
