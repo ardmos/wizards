@@ -136,6 +136,7 @@
     <Compile Include="Assets\Scripts\Title\Popup\PopupSelectAuthMethodUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\SoundGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\Downloaded Assets\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />

@@ -32,7 +32,7 @@ public abstract class Spell : MonoBehaviour
         public int level;
         public string spellName;
         public bool castAble;
-        public Sprite IconImage;
+        public Sprite iconImage;
     }
 
     public SpellInfo spellInfo;

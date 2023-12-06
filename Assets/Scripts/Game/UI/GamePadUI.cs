@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
 /// 1. 조작 버튼에 현재 스킬 이미지 띄워주기
+/// 2. 쿨타임 시각효과로 보여주기
 /// </summary>
 public class GamePadUI : MonoBehaviour
 {
-    public TextMeshProUGUI txtButtonWest, txtButtonNorth, txtButtonEast;
-    public Image imgCooltimeWest, imgCooltimeNorth, imgCooltimeEast;
+    public Image imgBtnSkill1, imgBtnSkill2, imgBtnSkill3;//, imgBtnSkillDefence;
+    public Image imgCooltimeSkill1, imgCooltimeSkill2, imgCooltimeSkill3;//, imgCooltimeSkillDefence;
     public GameManager gameManager;
 
     // Start is called before the first frame update
@@ -32,9 +33,10 @@ public class GamePadUI : MonoBehaviour
             return;
         }
 
-        txtButtonWest.text = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell1Name();
-        txtButtonNorth.text = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell2Name();
-        txtButtonEast.text = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell3Name();    
+        imgBtnSkill1.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(1);
+        imgBtnSkill2.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(2);
+        imgBtnSkill3.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(3);
+        //imgBtnSkillDefence.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(4);
     }
 
     private void CoolTimePresenter()
@@ -44,19 +46,19 @@ public class GamePadUI : MonoBehaviour
             return;
         }
 
-        float spell1CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell1CoolTimeRatio();
+        float spell1CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(1);
         if (spell1CoolTimeRatio > 0) {
-            imgCooltimeWest.fillAmount = 1 - spell1CoolTimeRatio;
+            imgCooltimeSkill1.fillAmount = 1 - spell1CoolTimeRatio;
         }
-        float spell2CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell2CoolTimeRatio();
+        float spell2CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(2);
         if (spell2CoolTimeRatio > 0)
         {
-            imgCooltimeNorth.fillAmount = 1 - spell2CoolTimeRatio;
+            imgCooltimeSkill2.fillAmount = 1 - spell2CoolTimeRatio;
         }
-        float spell3CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpell3CoolTimeRatio();
+        float spell3CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(3);
         if (spell3CoolTimeRatio > 0)
         {
-            imgCooltimeEast.fillAmount = 1 - spell3CoolTimeRatio;
+            imgCooltimeSkill3.fillAmount = 1 - spell3CoolTimeRatio;
         }
     }
 }

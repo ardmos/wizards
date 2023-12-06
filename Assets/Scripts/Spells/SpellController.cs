@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class SpellController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] currentSpellPrefabArray;//, currentSpell2Prefab, currentSpell3Prefab;
+    [SerializeField] private GameObject[] currentSpellPrefabArray;
     [SerializeField] private List<Spell.SpellInfo> currentSpellInfoList;
     [SerializeField] private Player player;
     [SerializeField] private Transform muzzle;
@@ -28,9 +28,6 @@ public class SpellController : MonoBehaviour
                 currentSpellInfoList.Add(spell.GetComponent<Spell>().spellInfo);
             }
         }
-        /*currentSpell1Prefab.GetComponent<Spell>().InitSpellInfoDetail();
-        currentSpell2Prefab.GetComponent<Spell>().InitSpellInfoDetail();
-        currentSpell3Prefab.GetComponent<Spell>().InitSpellInfoDetail();*/
     }
 
     void Update()
@@ -96,7 +93,7 @@ public class SpellController : MonoBehaviour
     public Sprite GetCurrentSpellIcon(int spellNumber)
     {
         if (currentSpellInfoList[spellNumber - 1] == null) return null;
-        return currentSpellInfoList[spellNumber - 1].IconImage;
+        return currentSpellInfoList[spellNumber - 1].iconImage;
     }
     #endregion
 

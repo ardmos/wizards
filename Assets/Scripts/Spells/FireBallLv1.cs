@@ -13,12 +13,13 @@ using static UnityEngine.ParticleSystem;
 /// </summary>
 public class FireBallLv1 : FireSpell
 {
-    public GameObject muzzlePrefab;
-    public GameObject hitPrefab;
-    public List<GameObject> trails;
+    [SerializeField] private Sprite iconImage;
+    [SerializeField] private GameObject muzzlePrefab;
+    [SerializeField] private GameObject hitPrefab;
+    [SerializeField] private List<GameObject> trails;
 
-    private bool collided, isSpellCollided;
-    private SpellLvlType collisionHandlingResult;
+    [SerializeField] private bool collided, isSpellCollided;
+    [SerializeField] private SpellLvlType collisionHandlingResult;
 
     /// <summary>
     /// 1. 상세 능력치 설정
@@ -35,7 +36,8 @@ public class FireBallLv1 : FireSpell
             price = 30,
             level = 1,
             spellName = "FireBall Lv.1",
-            castAble = true
+            castAble = true,
+            iconImage = iconImage
         };
 
         if (spellInfo == null)

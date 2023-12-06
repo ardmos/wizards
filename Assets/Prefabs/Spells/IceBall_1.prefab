@@ -19575,6 +19575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91593162f6fc43d46be2e4b1218c3662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconImage: {fileID: 21300000, guid: c4e246c987a2745d9a604b6edc5567e2, type: 3}
   muzzlePrefab: {fileID: 1779451694322954, guid: 773a246c7cccdf74a923b1b08e411977, type: 3}
   hitPrefab: {fileID: 1423167456353516, guid: 5c9f2e637478e2b4d94b0245306b5e84, type: 3}
   trails:
@@ -19582,3 +19583,5 @@ MonoBehaviour:
   - {fileID: 1802059017955996}
   - {fileID: 1948296609094292}
   - {fileID: 1225959865209112}
+  collided: 0
+  isSpellCollided: 0
