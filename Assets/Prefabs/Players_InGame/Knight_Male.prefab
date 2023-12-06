@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 4363808372757004467}
   - component: {fileID: 1975861779361592441}
   m_Layer: 0
-  m_Name: OHS02_Niddle
+  m_Name: Wand_Steel Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 4411280255926103896}
   - component: {fileID: 1935689450713226130}
   m_Layer: 0
-  m_Name: OHS14_Hammer
+  m_Name: Hammer_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 4088241534595646884}
   - component: {fileID: 2258745746524385646}
   m_Layer: 0
-  m_Name: Shield09
+  m_Name: HeaterShield_Purple Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1782,7 +1782,7 @@ GameObject:
   - component: {fileID: 4953954242892506175}
   - component: {fileID: 4760708005668052124}
   m_Layer: 0
-  m_Name: Body04
+  m_Name: Body04_T-Shirt Purple Gold Sleeves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1993,7 +1993,7 @@ GameObject:
   - component: {fileID: 595155153406599866}
   - component: {fileID: 8533769914028606541}
   m_Layer: 0
-  m_Name: Body13
+  m_Name: Body13_HeavyArmor Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2555,7 +2555,7 @@ GameObject:
   - component: {fileID: 5033900459084263869}
   - component: {fileID: 1026839346395833499}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Knight_Male
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2716,9 +2716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d9a03a873a9884086712713b853b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell1Prefab: {fileID: 1881642356963322, guid: 77d75e6d0d8ad3747be6ebe8b26bf0f8, type: 3}
-  currentSpell2Prefab: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
-  currentSpell3Prefab: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
+  currentSpellPrefabArray: []
   player: {fileID: 932501098101691876}
   muzzle: {fileID: 932501096560631534}
   restTimeCurrentSpell_1: 0
@@ -2861,7 +2859,7 @@ GameObject:
   - component: {fileID: 3557316973132971798}
   - component: {fileID: 1637858605734431708}
   m_Layer: 0
-  m_Name: OHS16_Sword
+  m_Name: Sword_Blue Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3094,7 +3092,7 @@ GameObject:
   - component: {fileID: 2401379776334333984}
   - component: {fileID: 7559012295797528253}
   m_Layer: 0
-  m_Name: Body18
+  m_Name: Body18_HeavyArmor Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3338,7 +3336,7 @@ GameObject:
   - component: {fileID: 3222088112470759948}
   - component: {fileID: 816241529902657222}
   m_Layer: 0
-  m_Name: OHS09_Sword
+  m_Name: Sword_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4180,7 +4178,7 @@ GameObject:
   - component: {fileID: 2876747785891306791}
   - component: {fileID: 2451461910931949}
   m_Layer: 0
-  m_Name: OHS11_Hammer
+  m_Name: Hammer_Green Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4571,7 +4569,7 @@ GameObject:
   - component: {fileID: 6997728006205407578}
   - component: {fileID: 6438257910879166414}
   m_Layer: 0
-  m_Name: Body03
+  m_Name: Body03_T-Shirt Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4700,7 +4698,7 @@ GameObject:
   - component: {fileID: 2445334419712740439}
   - component: {fileID: 435553917918738589}
   m_Layer: 0
-  m_Name: Shield12
+  m_Name: HeaterShield_Blue Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4908,7 +4906,7 @@ GameObject:
   - component: {fileID: 4284289331348480999}
   - component: {fileID: 1939455316726292569}
   m_Layer: 0
-  m_Name: Body15
+  m_Name: Body15_HeavyArmor Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5203,7 +5201,7 @@ GameObject:
   - component: {fileID: 2069703973480703260}
   - component: {fileID: 4277829782635860438}
   m_Layer: 0
-  m_Name: Shield07
+  m_Name: SquareShield_Red Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5652,7 +5650,7 @@ GameObject:
   - component: {fileID: 4400242925959374113}
   - component: {fileID: 2058891734310713753}
   m_Layer: 0
-  m_Name: Body14
+  m_Name: Body14_Armor Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6155,7 +6153,7 @@ GameObject:
   - component: {fileID: 1820134930620872250}
   - component: {fileID: 4514467589077795568}
   m_Layer: 0
-  m_Name: Shield08
+  m_Name: HeaterShield_Gold Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6238,7 +6236,7 @@ GameObject:
   - component: {fileID: 1927225054167218068}
   - component: {fileID: 4420872029869065054}
   m_Layer: 0
-  m_Name: OHS01_Stick
+  m_Name: Stick_Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6404,7 +6402,7 @@ GameObject:
   - component: {fileID: 1903208630299153660}
   - component: {fileID: 4435334676493672502}
   m_Layer: 0
-  m_Name: OHS13_Axe
+  m_Name: Axe_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6768,12 +6766,12 @@ GameObject:
   - component: {fileID: 3446124203419393334}
   - component: {fileID: 6490021071172911353}
   m_Layer: 0
-  m_Name: Body09
+  m_Name: Body09_Robe Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3446124203419393334
 Transform:
   m_ObjectHideFlags: 0
@@ -7426,7 +7424,7 @@ GameObject:
   - component: {fileID: 7527146163715856007}
   - component: {fileID: 3899424250954850973}
   m_Layer: 0
-  m_Name: Cloak02
+  m_Name: Cloak02_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7637,7 +7635,7 @@ GameObject:
   - component: {fileID: 6591910300977875069}
   - component: {fileID: 8286660977443864355}
   m_Layer: 0
-  m_Name: Body01
+  m_Name: Body01_SwimSuit Male
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7849,7 +7847,7 @@ GameObject:
   - component: {fileID: 879897972523857987}
   - component: {fileID: 3157852106963946633}
   m_Layer: 0
-  m_Name: Shield11
+  m_Name: HeaterShield_Green Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8046,7 +8044,7 @@ GameObject:
   - component: {fileID: 1140687386141851860}
   - component: {fileID: 2895953561526596638}
   m_Layer: 0
-  m_Name: OHS12_Sword
+  m_Name: Blade_Purple Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8128,7 +8126,7 @@ GameObject:
   - component: {fileID: 3244047221174301719}
   - component: {fileID: 1789401516176182938}
   m_Layer: 0
-  m_Name: Bow05
+  m_Name: Bow05_Green Metal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8420,7 +8418,7 @@ GameObject:
   - component: {fileID: 3248668424977287323}
   - component: {fileID: 4476566458900745351}
   m_Layer: 0
-  m_Name: Bow03
+  m_Name: Bow03_Green Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8514,7 +8512,7 @@ GameObject:
   - component: {fileID: 688558794139910665}
   - component: {fileID: 3344687823725704899}
   m_Layer: 0
-  m_Name: BackPack01
+  m_Name: BackPack01_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9167,7 +9165,7 @@ GameObject:
   - component: {fileID: 799305695599983734}
   - component: {fileID: 3239006235013286076}
   m_Layer: 0
-  m_Name: OHS06_Sword
+  m_Name: Sword_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9676,7 +9674,7 @@ GameObject:
   - component: {fileID: 8640926496036825892}
   - component: {fileID: 4869197822466959830}
   m_Layer: 0
-  m_Name: Body10
+  m_Name: Body10_Robe Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10086,7 +10084,7 @@ GameObject:
   - component: {fileID: 269711616023930447}
   - component: {fileID: 2619619441796174469}
   m_Layer: 0
-  m_Name: Shield03
+  m_Name: SquareShield_Wood lv2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10335,7 +10333,7 @@ GameObject:
   - component: {fileID: 8948915347738706024}
   - component: {fileID: 6616940490850907298}
   m_Layer: 0
-  m_Name: BackPack02
+  m_Name: BackPack02_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10546,7 +10544,7 @@ Transform:
   m_GameObject: {fileID: 4852693569813904920}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0.047796454, w: 0.9988571}
-  m_LocalPosition: {x: -0.07777202, y: 3.0531133e-18, z: 8.634429e-18}
+  m_LocalPosition: {x: -0.069, y: 0.087, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10569,7 +10567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5193644103417795837
 Transform:
   m_ObjectHideFlags: 0
@@ -10637,8 +10635,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4859955840248925076}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.37919018, y: -0, z: -0, w: 0.9253188}
-  m_LocalPosition: {x: 0, y: 19.700012, z: -20}
+  m_LocalRotation: {x: 0.37919003, y: -0.000000022516241, z: 0.00000000922702, w: 0.92531884}
+  m_LocalPosition: {x: 0, y: 19.7, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10811,7 +10809,7 @@ GameObject:
   - component: {fileID: 6134555237320302607}
   - component: {fileID: 6572161386170601297}
   m_Layer: 0
-  m_Name: Cloak01
+  m_Name: Cloak01_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11271,7 +11269,7 @@ GameObject:
   - component: {fileID: 1999944891645346401}
   - component: {fileID: 3245895429602896377}
   m_Layer: 0
-  m_Name: Body07
+  m_Name: Body07_HeavyArmor Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11629,7 +11627,7 @@ GameObject:
   - component: {fileID: 217538814767300288}
   - component: {fileID: 8508384598401113675}
   m_Layer: 0
-  m_Name: Body02
+  m_Name: Body02_SwimSuit Female
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12031,7 +12029,7 @@ GameObject:
   - component: {fileID: 8104483869740778650}
   - component: {fileID: 6312954219185352784}
   m_Layer: 0
-  m_Name: Shield10
+  m_Name: HeaterShield_Blue Steel Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12113,7 +12111,7 @@ GameObject:
   - component: {fileID: 1225799192294489387}
   - component: {fileID: 6129322184150860027}
   m_Layer: 0
-  m_Name: Bow02
+  m_Name: Bow02_Blue Heavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12490,12 +12488,12 @@ GameObject:
   - component: {fileID: 7130087629771677071}
   - component: {fileID: 2034335902941521556}
   m_Layer: 0
-  m_Name: Body06
+  m_Name: Body06_LightArmor Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7130087629771677071
 Transform:
   m_ObjectHideFlags: 0
@@ -12868,7 +12866,7 @@ GameObject:
   - component: {fileID: 7987677016564583121}
   - component: {fileID: 5277403634235260443}
   m_Layer: 0
-  m_Name: OHS08_Sword
+  m_Name: Blade_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13781,7 +13779,7 @@ GameObject:
   - component: {fileID: 7595140620524281448}
   - component: {fileID: 5657554048986753698}
   m_Layer: 0
-  m_Name: OHS05_Sword
+  m_Name: Sword_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15122,7 +15120,7 @@ GameObject:
   - component: {fileID: 1207879480884474059}
   - component: {fileID: 2404424155340519100}
   m_Layer: 0
-  m_Name: Cloak03
+  m_Name: Cloak03_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15728,7 +15726,7 @@ GameObject:
   - component: {fileID: 5634527867919305107}
   - component: {fileID: 9198693276682285898}
   m_Layer: 0
-  m_Name: Body12
+  m_Name: Body12_Robe Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15857,7 +15855,7 @@ GameObject:
   - component: {fileID: 7174481501729108628}
   - component: {fileID: 4932593467910800990}
   m_Layer: 0
-  m_Name: Shield05
+  m_Name: RoundShield_Brown Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16007,7 +16005,7 @@ GameObject:
   - component: {fileID: 6700615898151493959}
   - component: {fileID: 8870307727528121741}
   m_Layer: 0
-  m_Name: OHS04_Sword
+  m_Name: Sword_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16338,7 +16336,7 @@ GameObject:
   - component: {fileID: 5572377688617566315}
   - component: {fileID: 8857864797147266875}
   m_Layer: 0
-  m_Name: Body20
+  m_Name: Body20_Armor Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16882,7 +16880,7 @@ GameObject:
   - component: {fileID: 6528604586931298931}
   - component: {fileID: 9042863021568186041}
   m_Layer: 0
-  m_Name: Shield02
+  m_Name: RoundShield_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17654,7 +17652,7 @@ GameObject:
   - component: {fileID: 7301546428041096111}
   - component: {fileID: 5906866619415380422}
   m_Layer: 0
-  m_Name: Body11
+  m_Name: Body11_Robe Orange with Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17815,12 +17813,12 @@ GameObject:
   - component: {fileID: 5819070975262984237}
   - component: {fileID: 8585419384305417447}
   m_Layer: 0
-  m_Name: BackPack03
+  m_Name: BackPack03_Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7453076599640491912
 Transform:
   m_ObjectHideFlags: 0
@@ -17897,7 +17895,7 @@ GameObject:
   - component: {fileID: 6361708080443261434}
   - component: {fileID: 267929594371433855}
   m_Layer: 0
-  m_Name: Body08
+  m_Name: Body08_Armor Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18109,7 +18107,7 @@ GameObject:
   - component: {fileID: 5940547479472809100}
   - component: {fileID: 8472932521657585734}
   m_Layer: 0
-  m_Name: OHS15_Sword
+  m_Name: Sword_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18274,7 +18272,7 @@ GameObject:
   - component: {fileID: 9479175305758128}
   - component: {fileID: 4945565323207207437}
   m_Layer: 0
-  m_Name: Body16
+  m_Name: Body16_HeavyArmor Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18403,7 +18401,7 @@ GameObject:
   - component: {fileID: 6007236751093606696}
   - component: {fileID: 8410765559054720482}
   m_Layer: 0
-  m_Name: OHS03_Sword
+  m_Name: Sword_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18620,7 +18618,7 @@ GameObject:
   - component: {fileID: 5505649231373590039}
   - component: {fileID: 7747046262385158877}
   m_Layer: 0
-  m_Name: OHS07_Sword
+  m_Name: Sword_Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18791,7 +18789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8825959788960873164
 Transform:
   m_ObjectHideFlags: 0
@@ -19980,7 +19978,7 @@ GameObject:
   - component: {fileID: 5398783612174656588}
   - component: {fileID: 7856708077591859334}
   m_Layer: 0
-  m_Name: Shield06
+  m_Name: SquareShield_Wood lv3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20063,7 +20061,7 @@ GameObject:
   - component: {fileID: 5379292931690936657}
   - component: {fileID: 7873384111231323547}
   m_Layer: 0
-  m_Name: Shield01
+  m_Name: Shield01_Wood lv1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20145,7 +20143,7 @@ GameObject:
   - component: {fileID: 6332727326820830384}
   - component: {fileID: 8743779675903466905}
   m_Layer: 0
-  m_Name: Body19
+  m_Name: Body19_HeavyArmor Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20724,7 +20722,7 @@ GameObject:
   - component: {fileID: 5038956947313553472}
   - component: {fileID: 7064194999093331082}
   m_Layer: 0
-  m_Name: OHS10_Axe
+  m_Name: Axe_Blue Double Edged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21120,7 +21118,7 @@ GameObject:
   - component: {fileID: 5052197103384801428}
   - component: {fileID: 7059943505716757598}
   m_Layer: 0
-  m_Name: Shield04
+  m_Name: RoundShield_Green Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21285,7 +21283,7 @@ GameObject:
   - component: {fileID: 2307771181136931096}
   - component: {fileID: 5795241027149949496}
   m_Layer: 0
-  m_Name: Body05
+  m_Name: Body05_T-Shirt Yellow Gold Sleeves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21496,7 +21494,7 @@ GameObject:
   - component: {fileID: 5801339653218602532}
   - component: {fileID: 3084941192779852622}
   m_Layer: 0
-  m_Name: Bow04
+  m_Name: Bow04_Brown Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21838,12 +21836,12 @@ GameObject:
   - component: {fileID: 23373829149518626}
   - component: {fileID: 1046305861300374841}
   m_Layer: 0
-  m_Name: Bow01
+  m_Name: Bow01_Purple Magic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &23373829149518626
 Transform:
   m_ObjectHideFlags: 0
@@ -22097,7 +22095,7 @@ GameObject:
   - component: {fileID: 7541386581860650261}
   - component: {fileID: 5741220342459673286}
   m_Layer: 0
-  m_Name: Body17
+  m_Name: Body17_Armor Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
