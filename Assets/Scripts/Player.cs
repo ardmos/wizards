@@ -60,6 +60,14 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     public void GetHit(int damage)
     {
+        if(hp >= damage)
+        {
+            // 사망 처리 
+            hp = 0;
+            hPBar.SetHP(hp);
+            return;
+        }
+
         // HP 감소
         hp--;
         // HP 바 감소
