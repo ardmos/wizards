@@ -8,6 +8,7 @@ public abstract class Spell : MonoBehaviour
 {
     public enum SpellType
     {
+        Normal,
         Fire,
         Water,
         Ice,

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows.Speech;
 /// <summary>
 /// 플레이어 캐릭터 오브젝트에 붙이는 스크립트
 /// 현재 기능
@@ -9,13 +10,11 @@ using UnityEngine;
 /// </summary>
 public class SpellController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] currentSpellPrefabArray;
+    [SerializeField] private GameObject[] currentSpellPrefabArray = new GameObject[3];
     [SerializeField] private List<Spell.SpellInfo> currentSpellInfoList;
     [SerializeField] private Player player;
     [SerializeField] private Transform muzzle;
-    [SerializeField] private float restTimeCurrentSpell_1 = 0f;
-    [SerializeField] private float restTimeCurrentSpell_2 = 0f;
-    [SerializeField] private float restTimeCurrentSpell_3 = 0f;
+    [SerializeField] private float[] restTimeCurrentSpellArray = new float[3];
 
     void Start()
     {
@@ -32,40 +31,41 @@ public class SpellController : MonoBehaviour
 
     void Update()
     {
-        CheckCastSpell(1);
-        CheckCastSpell(2);
-        CheckCastSpell(3);
+        for (int i = 0; i < currentSpellPrefabArray.Length; i++) {
+            CheckCastSpell(i);
+        }
     }
 
 
 
     #region 현재 설정된 마법 시전
-    private void CheckCastSpell(int spellNumber)
+    private void CheckCastSpell(int spellIndex)
     {
-        if (currentSpellPrefabArray[spellNumber - 1] == null) return;
+        Debug.Log($"spellNumber : {spellIndex}, currentSpellPrefabArray.Length : {currentSpellPrefabArray.Length}");
+        if (currentSpellPrefabArray[spellIndex] == null) return;
         // 쿨타임 관리
-        if (currentSpellInfoList[spellNumber - 1].castAble == false)
+        if (currentSpellInfoList[spellIndex].castAble == false)
         {
-            restTimeCurrentSpell_1 += Time.deltaTime;
-            if (restTimeCurrentSpell_1 >= currentSpellInfoList[spellNumber - 1].coolTime)
+            restTimeCurrentSpellArray[spellIndex] += Time.deltaTime;
+            if (restTimeCurrentSpellArray[spellIndex] >= currentSpellInfoList[spellIndex].coolTime)
             {
-                currentSpellInfoList[spellNumber - 1].castAble = true;
-                restTimeCurrentSpell_1 = 0f;
+                currentSpellInfoList[spellIndex].castAble = true;
+                restTimeCurrentSpellArray[spellIndex] = 0f;
             }
             return;
         }
 
         // 스킬 발동 키 입력 관리
         bool isPlayerInput = false;
-        switch (spellNumber)
+        switch (spellIndex)
         {
-            case 1:
+            case 0:
                 isPlayerInput = player.IsAttack1();
                 break;
-            case 2:
+            case 1:
                 isPlayerInput = player.IsAttack2();
                 break;
-            case 3:
+            case 2:
                 isPlayerInput = player.IsAttack3();
                 break;
             default:
@@ -75,8 +75,8 @@ public class SpellController : MonoBehaviour
 
         if (isPlayerInput)
         {
-            currentSpellPrefabArray[spellNumber - 1].GetComponent<Spell>().CastSpell(new Spell.SpellLvlType { level = currentSpellInfoList[spellNumber - 1].level, spellType = currentSpellInfoList[spellNumber - 1].spellType }, muzzle);
-            currentSpellInfoList[spellNumber - 1].castAble = false;
+            currentSpellPrefabArray[spellIndex].GetComponent<Spell>().CastSpell(new Spell.SpellLvlType { level = currentSpellInfoList[spellIndex].level, spellType = currentSpellInfoList[spellIndex].spellType }, muzzle);
+            currentSpellInfoList[spellIndex].castAble = false;
         }
     }
     #endregion
@@ -101,7 +101,7 @@ public class SpellController : MonoBehaviour
     public float GetCurrentSpellCoolTimeRatio(int spellNumber)
     {
         if (currentSpellInfoList[spellNumber - 1] == null) return 0f;
-        float coolTimeRatio = restTimeCurrentSpell_1 / currentSpellInfoList[spellNumber - 1].coolTime;
+        float coolTimeRatio = restTimeCurrentSpellArray[spellNumber-1] / currentSpellInfoList[spellNumber - 1].coolTime;
         return coolTimeRatio;
     }
     #endregion

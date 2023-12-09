@@ -58,6 +58,23 @@ public class IceBallLv1 : IceSpell
 
                 collisionHandlingResult = CollisionHandling(thisSpell, opponentsSpell);
             }
+            else if (collision.gameObject.tag == "Player")
+            {
+                isSpellCollided = false;
+
+                if (spellInfo == null)
+                {
+                    Debug.Log("Spell Info is null");
+                }
+                Debug.Log($"Hit!! spell level: {spellInfo.level}");
+
+                Player player = collision.gameObject.GetComponent<Player>();
+                if (player != null)
+                {
+                    player.GetHit(spellInfo.level);
+                }
+                else Debug.LogError("Player is null!");
+            }
             else { isSpellCollided = false; }
 
             collided = true;
@@ -96,7 +113,7 @@ public class IceBallLv1 : IceSpell
                     Destroy(hitVFX, ps.main.duration);
             }
 
-            StartCoroutine(DestroyParticle(0f));
+            StartCoroutine(DestroyParticle(1f));
         }
     }
     public IEnumerator DestroyParticle(float waitTime)

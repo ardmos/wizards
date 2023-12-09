@@ -1,50 +1,53 @@
 using System.Collections.Generic;
-using UnityEngine;
 using Unity.Netcode;
-using Cinemachine;
-
+using UnityEngine;
+/// <summary>
+/// 1. 공통적인 플레이어 정보 관리
+/// </summary>
 public class Player : NetworkBehaviour, IStoreCustomer
 {
     public static Player LocalInstance { get; private set; }
 
-    [SerializeField] private GameInput gameInput;
-    [SerializeField] private GameObject virtualCameraObj;
-    [SerializeField] private SpellController spellController;
-    [SerializeField] private HPBarUI hPBar;
-    [SerializeField] private Mesh m_Body;
-    [SerializeField] private Mesh m_Hat;
-    [SerializeField] private Mesh m_BackPack;
-    [SerializeField] private Mesh m_Wand;
-    [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private int hp = 5;
-    [SerializeField] private int score = 0;
-    [SerializeField] private List<Vector3> spawnPositionList;
+    [SerializeField] protected GameInput gameInput;
+    [SerializeField] protected GameObject virtualCameraObj;
+    [SerializeField] protected SpellController spellController;
+    [SerializeField] protected HPBarUI hPBar;
+    [SerializeField] protected Mesh m_Body;
+    [SerializeField] protected Mesh m_Hat;
+    [SerializeField] protected Mesh m_BackPack;
+    [SerializeField] protected Mesh m_Wand;
+    [SerializeField] protected float moveSpeed = 7f;
+    [SerializeField] protected int hp = 5;
+    [SerializeField] protected int score = 0;
+    [SerializeField] protected List<Vector3> spawnPositionList;
 
-    private GameAssets gameAssets;
+    protected GameAssets gameAssets;
 
-    private bool isWalking;
-    private bool isAttack1;
-    private bool isAttack2;
-    private bool isAttack3;
-    private int body;
-    private int hat;
-    private int backPack;
-    private int wand;
+    protected bool isWalking;
+    protected bool isAttack1;
+    protected bool isAttack2;
+    protected bool isAttack3;
+    protected int body;
+    protected int hat;
+    protected int backPack;
+    protected int wand;
 
     // Update is called once per frame
     private void Update()
     {
-        if (!IsOwner) return;
+        // 자식 오브젝트로 이동
+        // if (!IsOwner) return;
 
-        UpdateAttackInput();
+        // UpdateAttackInput();
         // Server Auth 방식의 이동 처리
-        HandleMovementServerAuth();
+        // HandleMovementServerAuth();
         // Client Auth 방식의 이동 처리
         //HandleMovement(); 
     }
 
     public override void OnNetworkSpawn()
-    {
+    { 
+        Debug.Log("OnNetworkSpan");
         if (IsOwner) LocalInstance = this;
 
         // HP 초기화
@@ -58,6 +61,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
     }
 
+    #region Public 플레이어 정보 확인
     public void GetHit(int damage)
     {
         if(hp >= damage)
@@ -95,6 +99,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     {
         return isAttack3;
     }
+    #endregion
 
     #region Public 아이템 구매
     /// <summary>
@@ -486,9 +491,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
     #endregion
 
-    #region Private 캐릭터 조작
+    #region Private&Protect 캐릭터 조작
     // Server Auth 방식의 이동 처리 (현 오브젝트에 Network Transform이 필요)
-    private void HandleMovementServerAuth()
+    protected void HandleMovementServerAuth()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         HandleMovementServerRPC(inputVector);
@@ -496,6 +501,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [ServerRpc(RequireOwnership = false)]
     private void HandleMovementServerRPC(Vector2 inputVector)
     {
+        Debug.Log($"HandleMovementServerRPC inputVector : {inputVector}");
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         float moveDistance = moveSpeed * Time.deltaTime;
@@ -529,7 +535,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         //Rotate(mouseDir);
     }
 
-    private void Rotate(Vector3 mMoveDir)
+    protected void Rotate(Vector3 mMoveDir)
     {
         float rotateSpeed = 20f;
         Vector3 slerpResult = Vector3.Slerp(transform.forward, mMoveDir, Time.deltaTime * rotateSpeed);
@@ -561,7 +567,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         return mouseDir;
     }
 
-    private void UpdateAttackInput()
+    protected void UpdateAttackInput()
     {
         isAttack1 = gameInput.GetIsAttack1() == 1;
         isAttack2 = gameInput.GetIsAttack2() == 1;

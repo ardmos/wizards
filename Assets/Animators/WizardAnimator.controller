@@ -110,7 +110,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerAnimator
+  m_Name: WizardAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: IsWalking
@@ -296,7 +296,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: f9551df6b2799a54aa79faeac8d146e2, type: 3}
+  m_Motion: {fileID: 1827226128182048838, guid: 1b9e4da06db26e145b966d0abdc8b7a5, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

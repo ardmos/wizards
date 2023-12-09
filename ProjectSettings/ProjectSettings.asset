@@ -828,7 +828,7 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Server: DEDICATED_SERVER
-    Standalone: DEDICATED_SERVER;UNITY_ANDROID_NO
+    Standalone: DEDICATED_SERVER_NO;UNITY_ANDROID_NO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
