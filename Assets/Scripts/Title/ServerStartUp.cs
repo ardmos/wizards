@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+/*using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Core;
-using Unity.Services.Multiplay;
+using Unity.Services.Multiplay;*/
 using UnityEngine;
 
 public class ServerStartUp : MonoBehaviour
 {
-    private const string internalServerIp = "0.0.0.0";
+    /*private const string internalServerIp = "0.0.0.0";
     // Default port 7777
     private ushort serverPort = 7777;
 
@@ -59,5 +57,5 @@ public class ServerStartUp : MonoBehaviour
 
             throw;
         }
-    }
+    }*/
 }

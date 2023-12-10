@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows.Speech;
 /// <summary>
 /// 플레이어 캐릭터 오브젝트에 붙이는 스크립트
 /// 현재 기능

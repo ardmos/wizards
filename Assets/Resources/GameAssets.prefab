@@ -101,3 +101,5 @@ MonoBehaviour:
   knight_Male_ForLobby: {fileID: 8406262372636307266, guid: 03b77d822d230814799c565ef95a07aa, type: 3}
   wizard_Male: {fileID: 932501098101691884, guid: 470d188c01e7349468602788c6bbf2de, type: 3}
   knight_Male: {fileID: 932501098101691884, guid: ffad87a8b5984754eb42effbdf5887df, type: 3}
+  music_Title: {fileID: 8300000, guid: 0e47ef963992f4e4fa646be25baf7256, type: 3}
+  music_Lobby: {fileID: 8300000, guid: 7474e1a01656bd347baabd0911edd59b, type: 3}

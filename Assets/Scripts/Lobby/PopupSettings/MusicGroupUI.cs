@@ -16,7 +16,12 @@ public class MusicGroupUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        slider.onValueChanged.AddListener(delegate { ChangeMusicValue(); });      
+    }
 
+    private void OnEnable()
+    {
+        slider.value = GameObject.FindObjectOfType<SoundManager>().audioSourceMusic.volume;
     }
 
     // Update is called once per frame
@@ -37,5 +42,10 @@ public class MusicGroupUI : MonoBehaviour
         icon.sprite = iconSoundOff;
         icon.color = colorOff;
         handle.sprite = handleSoundOff;
+    }
+
+    private void ChangeMusicValue()
+    {
+        GameObject.FindObjectOfType<SoundManager>().audioSourceMusic.volume = slider.value;
     }
 }

@@ -82,4 +82,13 @@ public class GameAssets : MonoBehaviour
     public GameObject wizard_Male;
     public GameObject knight_Male;
     #endregion
+
+    #region Music
+    public AudioClip music_Title;
+    public AudioClip music_Lobby;
+    #endregion
+
+    #region SFX
+
+    #endregion
 }
