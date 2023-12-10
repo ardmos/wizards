@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7846979903572380361}
   - component: {fileID: 9174879400292790070}
   - component: {fileID: 7723497821998605879}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadArmor05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7738856599059313186}
   - component: {fileID: 3228995945111468886}
   - component: {fileID: 369918721097341625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackPack03_Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7929131428648463654}
   - component: {fileID: 5924441182396547719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body16_HeavyArmor Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 1684966807105461882}
   - component: {fileID: 5853930603129245180}
   - component: {fileID: 4434198263446097302}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair06_Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5260036842502666859}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 4206049083511845866}
   - component: {fileID: 2037731869103002022}
   - component: {fileID: 6947360333411192686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC02_Leaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 894756525189869984}
   - component: {fileID: 5789287760965793721}
   - component: {fileID: 8382133956973697015}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield11_Purple Steel Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8105861991276109225}
   - component: {fileID: 8771041940859375133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body12_Robe Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 8032685757331586814}
   - component: {fileID: 2307206693976969287}
   - component: {fileID: 4077902353278514743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TH02_Sword_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 550690704018396151}
   - component: {fileID: 2127057322302820285}
   - component: {fileID: 6112156174696440622}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC11_Mustache06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3120470493473507635}
   - component: {fileID: 673781821472249201}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body13_HeavyArmor Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1006,7 +1006,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2519540611253768958}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1039,7 +1039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 827031254592699142}
   - component: {fileID: 8243582324798452304}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body06_LightArmor Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1168,7 +1168,7 @@ GameObject:
   - component: {fileID: 825326597818827205}
   - component: {fileID: 2202920498760902838}
   - component: {fileID: 1116557666102023435}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC11_Mustache02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1250,7 +1250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5740604791255916927}
   - component: {fileID: 625798882241607020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body02_SwimSuit Female
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1379,7 @@ GameObject:
   - component: {fileID: 3593389089452144943}
   - component: {fileID: 2481143183694544428}
   - component: {fileID: 3972689570935788951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC01_Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1462,7 @@ GameObject:
   - component: {fileID: 593958034212052295}
   - component: {fileID: 11624582559646541}
   - component: {fileID: 8334862149571429152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head04_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1543,7 +1543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6952638629991141977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1577,7 +1577,7 @@ GameObject:
   - component: {fileID: 701065143188329345}
   - component: {fileID: 8845617942886485495}
   - component: {fileID: 8362099302063835673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stick01_Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1660,7 +1660,7 @@ GameObject:
   - component: {fileID: 1703492433872700638}
   - component: {fileID: 706767535003753630}
   - component: {fileID: 2419679438423353337}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword04_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1741,7 +1741,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5167119471487712102}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clavicle_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1776,7 +1776,7 @@ GameObject:
   - component: {fileID: 6921772937250085304}
   - component: {fileID: 1635137498718244489}
   - component: {fileID: 5948276038929821626}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword04_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1858,7 +1858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6743219056233085521}
   - component: {fileID: 7462344534140888860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body04_T-Shirt Purple Gold Sleeves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1987,7 +1987,7 @@ GameObject:
   - component: {fileID: 6825996633298706088}
   - component: {fileID: 6008418497915762781}
   - component: {fileID: 4497862080613050752}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword03_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2068,7 +2068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6391712805699361281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: calf_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2102,7 +2102,7 @@ GameObject:
   - component: {fileID: 1726490872357611710}
   - component: {fileID: 8016534805508577514}
   - component: {fileID: 1871589831651959568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword07_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2185,7 +2185,7 @@ GameObject:
   - component: {fileID: 160525577037221513}
   - component: {fileID: 1698515242597572100}
   - component: {fileID: 6962017721944218599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC08_NinjaMask07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2268,7 +2268,7 @@ GameObject:
   - component: {fileID: 3898032096830213626}
   - component: {fileID: 8737082797508162644}
   - component: {fileID: 1472707645780380068}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC11_Mustache04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2351,7 +2351,7 @@ GameObject:
   - component: {fileID: 592635631669902454}
   - component: {fileID: 3957598045974091426}
   - component: {fileID: 2116020407334292808}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword01_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2434,7 +2434,7 @@ GameObject:
   - component: {fileID: 704316411520564918}
   - component: {fileID: 530229023841897758}
   - component: {fileID: 6858018542635698778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat14_Black Knight with Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2517,7 +2517,7 @@ GameObject:
   - component: {fileID: 725900741097959624}
   - component: {fileID: 3742473028631431262}
   - component: {fileID: 60276283836240983}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head04_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2599,7 +2599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7206155986502997940}
   - component: {fileID: 8446807597884351077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cloak02_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2726,7 +2726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 719817333885429249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: weapon_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2796,7 +2796,7 @@ GameObject:
   - component: {fileID: 7833273283548020056}
   - component: {fileID: 2643096769522800135}
   - component: {fileID: 5842617079133996800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2877,7 +2877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 74127827030062153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2913,7 +2913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8299229208440429198}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2946,7 +2946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456058890139343392}
   - component: {fileID: 8013641922894532128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body08_Armor Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3075,7 +3075,7 @@ GameObject:
   - component: {fileID: 5659891949686734345}
   - component: {fileID: 5702602536539874702}
   - component: {fileID: 352460087111589367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword06_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3157,7 +3157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 998498714966452583}
   - component: {fileID: 6169951622428118842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body18_HeavyArmor Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3284,7 +3284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4565372966419325183}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bow_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3317,7 +3317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3670373738823392533}
   - component: {fileID: 8519944106912143032}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body11_Robe Orange with Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3445,7 +3445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5851928198623712622}
   - component: {fileID: 2649224542505130275}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body03_T-Shirt Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3574,7 +3574,7 @@ GameObject:
   - component: {fileID: 3576424795004590964}
   - component: {fileID: 4033572108374408885}
   - component: {fileID: 1624948562538032581}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC04_AngelEars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3657,7 +3657,7 @@ GameObject:
   - component: {fileID: 6782254572681171689}
   - component: {fileID: 5114959070598091495}
   - component: {fileID: 1069530880932482754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head03_Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3740,7 +3740,7 @@ GameObject:
   - component: {fileID: 3464994430816873437}
   - component: {fileID: 301633549475243383}
   - component: {fileID: 8739330490472308528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3823,7 +3823,7 @@ GameObject:
   - component: {fileID: 8330863088886994777}
   - component: {fileID: 3971537519358304291}
   - component: {fileID: 8621488140279452538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eyebrow02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3906,7 +3906,7 @@ GameObject:
   - component: {fileID: 3289972939582883816}
   - component: {fileID: 756522617631019875}
   - component: {fileID: 8003706210804279657}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3989,7 +3989,7 @@ GameObject:
   - component: {fileID: 4891515634828078746}
   - component: {fileID: 7085873815405790055}
   - component: {fileID: 1769241708298203328}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield05_Blue Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4072,7 +4072,7 @@ GameObject:
   - component: {fileID: 4422884983742976639}
   - component: {fileID: 2601687691125574695}
   - component: {fileID: 157025678674497301}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TH06_Sword_Green with Black Skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4155,7 +4155,7 @@ GameObject:
   - component: {fileID: 3792007297533250193}
   - component: {fileID: 5774951896287968973}
   - component: {fileID: 6788619339292303367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC05_Horn02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4238,7 +4238,7 @@ GameObject:
   - component: {fileID: 8291681937775868808}
   - component: {fileID: 5932397639491975994}
   - component: {fileID: 3198574233754704686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC08_NinjaMask05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4321,7 +4321,7 @@ GameObject:
   - component: {fileID: 8494446608005096305}
   - component: {fileID: 8089485061481265981}
   - component: {fileID: 6259739673275678800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC06_Crown03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4404,7 +4404,7 @@ GameObject:
   - component: {fileID: 1778603286326908539}
   - component: {fileID: 41784611418418757}
   - component: {fileID: 1629929049690185523}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair12_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4487,7 +4487,7 @@ GameObject:
   - component: {fileID: 3483335818283251014}
   - component: {fileID: 1185335037582567134}
   - component: {fileID: 3776399063954306558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SquareShield02_Wood lv3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4570,7 +4570,7 @@ GameObject:
   - component: {fileID: 7357749217466438681}
   - component: {fileID: 5073529884094032524}
   - component: {fileID: 4300277610352501443}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair13_White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4653,7 +4653,7 @@ GameObject:
   - component: {fileID: 404420360196857251}
   - component: {fileID: 8712241543274127038}
   - component: {fileID: 6048122301424051691}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wand01_Green Magic Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4736,7 +4736,7 @@ GameObject:
   - component: {fileID: 8923564362524132688}
   - component: {fileID: 1082261583406148852}
   - component: {fileID: 6743650780746379456}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spear05_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4819,7 +4819,7 @@ GameObject:
   - component: {fileID: 5519640665440522021}
   - component: {fileID: 1241449636887951108}
   - component: {fileID: 304347433329852133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC11_Mustache03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 2465231827834564768}
   - component: {fileID: 2622323654966069914}
   - component: {fileID: 7270889333036292767}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4985,7 +4985,7 @@ GameObject:
   - component: {fileID: 663810388026040249}
   - component: {fileID: 7863268095718303500}
   - component: {fileID: 5322765724597772780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5066,7 +5066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3202106079854237553}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: calf_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5100,7 +5100,7 @@ GameObject:
   - component: {fileID: 7134324277724536439}
   - component: {fileID: 1846424631034762643}
   - component: {fileID: 4583064799209485381}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5183,7 +5183,7 @@ GameObject:
   - component: {fileID: 1416169214699540497}
   - component: {fileID: 5426418865224849862}
   - component: {fileID: 777679847019533539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC03_NerdGlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5266,7 +5266,7 @@ GameObject:
   - component: {fileID: 7743463634695998728}
   - component: {fileID: 4152085687009036079}
   - component: {fileID: 6520709868874165465}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eyebrow01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5349,7 +5349,7 @@ GameObject:
   - component: {fileID: 2629349482074492717}
   - component: {fileID: 2256526574284696007}
   - component: {fileID: 8673697958195172183}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RoundShield03_Brown Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5432,7 +5432,7 @@ GameObject:
   - component: {fileID: 6809440768710804315}
   - component: {fileID: 7913718483617811033}
   - component: {fileID: 2114323533052335655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat11_Blue Soldier Style
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5513,7 +5513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1507322531469132250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5547,7 +5547,7 @@ GameObject:
   - component: {fileID: 2199548173703032525}
   - component: {fileID: 8436649558582044036}
   - component: {fileID: 3313626570669491579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TH05_Blade_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5630,7 +5630,7 @@ GameObject:
   - component: {fileID: 601533700485518063}
   - component: {fileID: 7052475524269548379}
   - component: {fileID: 7727421772948241483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword07_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5711,7 +5711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2434310511496722269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5856,7 +5856,7 @@ GameObject:
   - component: {fileID: 311947817886144899}
   - component: {fileID: 4243173220445571369}
   - component: {fileID: 3134172409489937950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RoundShield05_Red Steel Pheonix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5939,7 +5939,7 @@ GameObject:
   - component: {fileID: 8027652425908889477}
   - component: {fileID: 8245789529563902425}
   - component: {fileID: 5361364875195630644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat06_Green Archer Style
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6021,7 +6021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9105948230163546951}
   - component: {fileID: 6119309935422881667}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow02_Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6106,7 +6106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4908460411647111761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: foot_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6140,7 +6140,7 @@ GameObject:
   - component: {fileID: 2843193294555615105}
   - component: {fileID: 2995054006755443472}
   - component: {fileID: 2618622978148014645}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wand07_Gold Skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6222,7 +6222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4499847416297031688}
   - component: {fileID: 9195342968307614751}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bow04_Brown Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6314,7 +6314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8300213732212016610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: lowerarm_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6346,7 +6346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8477336755829791652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ball_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6377,7 +6377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6925776416237240462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: arrowBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6409,7 +6409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4560596614465370213}
   - component: {fileID: 2784738968377553070}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body01_SwimSuit Male
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6538,7 +6538,7 @@ GameObject:
   - component: {fileID: 2297439821293387731}
   - component: {fileID: 215129532168407665}
   - component: {fileID: 9177819266320513056}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RoundShield01_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6621,7 +6621,7 @@ GameObject:
   - component: {fileID: 3368581038552077054}
   - component: {fileID: 2544863916029218461}
   - component: {fileID: 5087015687100996447}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TH07_Sword_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6704,7 +6704,7 @@ GameObject:
   - component: {fileID: 3024824420862002158}
   - component: {fileID: 5627390290881917205}
   - component: {fileID: 9210107837382847264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6787,7 +6787,7 @@ GameObject:
   - component: {fileID: 8504129534862979314}
   - component: {fileID: 5781351707530391691}
   - component: {fileID: 1388004650064290202}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield04_Green Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6868,7 +6868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7356727906300965829}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_03_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6901,7 +6901,7 @@ GameObject:
   - component: {fileID: 1744237169145661238}
   - component: {fileID: 2258180756484277914}
   - component: {fileID: 4208392857771547404}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade01_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6983,7 +6983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3086717679726892966}
   - component: {fileID: 7145384085309384951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow01_Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7069,7 +7069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3102546723873761830}
   - component: {fileID: 9118657287285271443}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bow01_Purple Magic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7163,7 +7163,7 @@ GameObject:
   - component: {fileID: 3786701643663423103}
   - component: {fileID: 3034086198862895317}
   - component: {fileID: 5330844541688639571}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair02_Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7246,7 +7246,7 @@ GameObject:
   - component: {fileID: 4474567722828288141}
   - component: {fileID: 8556457944937632472}
   - component: {fileID: 5705649802236474515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe01_Blue Double Edged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7329,7 +7329,7 @@ GameObject:
   - component: {fileID: 4933460280095179072}
   - component: {fileID: 1887921152889202830}
   - component: {fileID: 5493773088024022466}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackPack01_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7412,7 +7412,7 @@ GameObject:
   - component: {fileID: 4658632555535037906}
   - component: {fileID: 5042513477061892554}
   - component: {fileID: 718874238256874055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword03_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7494,7 +7494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4807685428891666779}
   - component: {fileID: 6883373883064265666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bow02_Blue Heavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7588,7 +7588,7 @@ GameObject:
   - component: {fileID: 327541479626863381}
   - component: {fileID: 203380459944403406}
   - component: {fileID: 4370301526242916175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TH03_Sword_Orange Axe Style
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7669,7 +7669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4318959382761498938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowJoint07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7701,7 +7701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9140842770424959731}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thigh_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7735,7 +7735,7 @@ GameObject:
   - component: {fileID: 9054550624926027899}
   - component: {fileID: 7775997098134292113}
   - component: {fileID: 6060047298781154329}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackPack02_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7818,7 +7818,7 @@ GameObject:
   - component: {fileID: 6159051030522362663}
   - component: {fileID: 8449629668883888200}
   - component: {fileID: 7982680103591932799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC10_Mustache06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7901,7 +7901,7 @@ GameObject:
   - component: {fileID: 4473307128829260379}
   - component: {fileID: 6902991490228996048}
   - component: {fileID: 6027138290133092242}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair03_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7984,7 +7984,7 @@ GameObject:
   - component: {fileID: 884560674694857958}
   - component: {fileID: 6940094353830555224}
   - component: {fileID: 6017991559584533842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC08_NinjaMask03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8067,7 +8067,7 @@ GameObject:
   - component: {fileID: 4392694382648657010}
   - component: {fileID: 5594503589080386579}
   - component: {fileID: 201559941771137677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shield01_Wood lv1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8148,7 +8148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3567365885208364428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowJoint06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8180,7 +8180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1101201519722628488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: foot_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8212,7 +8212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1453476347222995982}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CloakBone03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8245,7 +8245,7 @@ GameObject:
   - component: {fileID: 5081256716329923003}
   - component: {fileID: 4606208579167452543}
   - component: {fileID: 3333024487384662022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe01_Blue Double Edged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8326,7 +8326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7521046460243881556}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: upperarm_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8360,7 +8360,7 @@ GameObject:
   - component: {fileID: 8937099235337695651}
   - component: {fileID: 1569580899949609295}
   - component: {fileID: 8670113812890497747}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stick01_Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8443,7 +8443,7 @@ GameObject:
   - component: {fileID: 3832741466686420254}
   - component: {fileID: 6180711836880890568}
   - component: {fileID: 632367749595456285}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat02_Black Steel Viking Style Hiding Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8526,7 +8526,7 @@ GameObject:
   - component: {fileID: 7029072496097366908}
   - component: {fileID: 574204685466331093}
   - component: {fileID: 170004387056638162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair10_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8607,7 +8607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7829464282492265439}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowJoint08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8640,7 +8640,7 @@ GameObject:
   - component: {fileID: 4005601458460665264}
   - component: {fileID: 2115670406539043825}
   - component: {fileID: 184021307163384739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC08_NinjaMask04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8723,7 +8723,7 @@ GameObject:
   - component: {fileID: 6299307586462342365}
   - component: {fileID: 2634577166831858553}
   - component: {fileID: 588006412256658779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword08_Blue Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8805,7 +8805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8937467354106037836}
   - component: {fileID: 2667360847964008403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bow03_Green Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8898,7 +8898,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5564558845633185603}
   - component: {fileID: 6274223365280859485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body10_Robe Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9027,7 +9027,7 @@ GameObject:
   - component: {fileID: 3009696508410639512}
   - component: {fileID: 3911085421221048274}
   - component: {fileID: 1145950844289249576}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9110,7 +9110,7 @@ GameObject:
   - component: {fileID: 2302655575208255535}
   - component: {fileID: 6441791418524109102}
   - component: {fileID: 8677425591250727587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield09_RedBlack Steel Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9193,7 +9193,7 @@ GameObject:
   - component: {fileID: 7376401718510269526}
   - component: {fileID: 3746629432505487689}
   - component: {fileID: 6537241732148702653}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9276,7 +9276,7 @@ GameObject:
   - component: {fileID: 797024767544781165}
   - component: {fileID: 3274337298328908484}
   - component: {fileID: 4792626386816051186}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC05_Horn04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9359,7 +9359,7 @@ GameObject:
   - component: {fileID: 4500806798200507696}
   - component: {fileID: 833861124183081527}
   - component: {fileID: 5518960052073681474}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC03_BlackGlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9440,7 +9440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6229808909960543632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: upperarm_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9474,7 +9474,7 @@ GameObject:
   - component: {fileID: 1502869152795020616}
   - component: {fileID: 7907245209876008184}
   - component: {fileID: 8077311077698313191}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Niddle01_Steel Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9555,7 +9555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3894194090808706476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9591,7 +9591,7 @@ GameObject:
   - component: {fileID: 1632770121080626576}
   - component: {fileID: 9004706777613492117}
   - component: {fileID: 2509073330819776625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC08_NinjaMask01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9674,7 +9674,7 @@ GameObject:
   - component: {fileID: 7119510726983378795}
   - component: {fileID: 7831906078589975992}
   - component: {fileID: 6843867513061060533}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head04_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9757,7 +9757,7 @@ GameObject:
   - component: {fileID: 7103736142118060306}
   - component: {fileID: 1049180542341659528}
   - component: {fileID: 3859294609799801394}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wand03_Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9840,7 +9840,7 @@ GameObject:
   - component: {fileID: 4235097130234967290}
   - component: {fileID: 6262962146826649737}
   - component: {fileID: 6461902008773488584}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword01_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9922,7 +9922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1900198234242064797}
   - component: {fileID: 2950081267855621068}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cloak03_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10050,7 +10050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6957346776234842237}
   - component: {fileID: 369728483989550649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow05_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10137,7 +10137,7 @@ GameObject:
   - component: {fileID: 1337590363982910798}
   - component: {fileID: 264237436178098371}
   - component: {fileID: 4997222872448928761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword02_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10220,7 +10220,7 @@ GameObject:
   - component: {fileID: 7716081163137110387}
   - component: {fileID: 6416574423623881062}
   - component: {fileID: 6418771490556414385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat05_Green Clothes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10303,7 +10303,7 @@ GameObject:
   - component: {fileID: 5095061682872743601}
   - component: {fileID: 1045990082782502703}
   - component: {fileID: 6219579378319193848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadArmor02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10384,7 +10384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6539397936589323673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: shoulderPadJoint_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10415,7 +10415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4468230160082225339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10449,7 +10449,7 @@ GameObject:
   - component: {fileID: 3181410837785226529}
   - component: {fileID: 2073448383406070853}
   - component: {fileID: 2889906766840176611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade02_Purple Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10530,7 +10530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3311163660380888901}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackpackBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10566,7 +10566,7 @@ GameObject:
   - component: {fileID: 8582452637996512399}
   - component: {fileID: 2235592377804395496}
   - component: {fileID: 7339071955018337847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC05_Horn03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10647,7 +10647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3967200480647677019}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clavicle_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10682,7 +10682,7 @@ GameObject:
   - component: {fileID: 7716367977880309317}
   - component: {fileID: 4103011002926473562}
   - component: {fileID: 7016790281465658522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10765,7 +10765,7 @@ GameObject:
   - component: {fileID: 2801736980809489009}
   - component: {fileID: 3942105149359334562}
   - component: {fileID: 7972407972495248248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield03_Blue Steel Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10848,7 +10848,7 @@ GameObject:
   - component: {fileID: 5630543954032709784}
   - component: {fileID: 8560118199655768033}
   - component: {fileID: 9081934340796206947}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SquareShield01_Wood lv2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10931,7 +10931,7 @@ GameObject:
   - component: {fileID: 7469193226494262837}
   - component: {fileID: 3649439168772743759}
   - component: {fileID: 8996674527813997161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head03_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11013,7 +11013,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6179373271392425374}
   - component: {fileID: 2554452264593904631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11071,7 +11071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5244594828285474191}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CloakBone02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11105,7 +11105,7 @@ GameObject:
   - component: {fileID: 5004342872840286528}
   - component: {fileID: 4578210628088209715}
   - component: {fileID: 20121593690075138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield07_Purple Steel Magic Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11188,7 +11188,7 @@ GameObject:
   - component: {fileID: 9174972960432911916}
   - component: {fileID: 605871830692832529}
   - component: {fileID: 1170311329598380105}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC10_Mustache01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11271,7 +11271,7 @@ GameObject:
   - component: {fileID: 6540576046019442375}
   - component: {fileID: 221905799905972049}
   - component: {fileID: 4944052815233206093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC06_Crown02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11354,7 +11354,7 @@ GameObject:
   - component: {fileID: 1273675680253309390}
   - component: {fileID: 7143563276939694479}
   - component: {fileID: 4168907833192147554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword08_Blue Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11437,7 +11437,7 @@ GameObject:
   - component: {fileID: 182755764373359346}
   - component: {fileID: 7912702481610636112}
   - component: {fileID: 2142065226068314918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC06_Crown01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11520,7 +11520,7 @@ GameObject:
   - component: {fileID: 8859768267842529346}
   - component: {fileID: 6391693746332299697}
   - component: {fileID: 2618139781627111090}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat07_Black Steel Viking Style Open Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11603,7 +11603,7 @@ GameObject:
   - component: {fileID: 7185648707239629939}
   - component: {fileID: 421302000159917918}
   - component: {fileID: 8774606370007419271}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat01_Purple Archer Style
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11686,7 +11686,7 @@ GameObject:
   - component: {fileID: 6196899927992274554}
   - component: {fileID: 3174238863405433851}
   - component: {fileID: 444777822177233395}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head05_Santa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11769,7 +11769,7 @@ GameObject:
   - component: {fileID: 6384709175722373884}
   - component: {fileID: 7207164814051634904}
   - component: {fileID: 1440982343924967775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair04_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11851,7 +11851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9126739237151925643}
   - component: {fileID: 1717341312935742923}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body19_HeavyArmor Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11979,7 +11979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6745488068849521272}
   - component: {fileID: 7123197538140364709}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bow05_Green Metal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12073,7 +12073,7 @@ GameObject:
   - component: {fileID: 26518962346141854}
   - component: {fileID: 6935917111696385565}
   - component: {fileID: 265270849742669405}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadArmor03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12156,7 +12156,7 @@ GameObject:
   - component: {fileID: 8048592258481881617}
   - component: {fileID: 2451225589867239662}
   - component: {fileID: 3021150218874294840}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head04_Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12239,7 +12239,7 @@ GameObject:
   - component: {fileID: 787623017858504262}
   - component: {fileID: 4412159072162627734}
   - component: {fileID: 6289187245394350194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'TH01_Sword_Purple Square '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12322,7 +12322,7 @@ GameObject:
   - component: {fileID: 4810252131335918027}
   - component: {fileID: 2969971502910064318}
   - component: {fileID: 7954042453896803062}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TH04_Sword_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12405,7 +12405,7 @@ GameObject:
   - component: {fileID: 1718275222792221274}
   - component: {fileID: 7450374660294922433}
   - component: {fileID: 5560239111720463262}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat13_Blue Water Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12488,7 +12488,7 @@ GameObject:
   - component: {fileID: 8530310833240779126}
   - component: {fileID: 6294290182775752910}
   - component: {fileID: 6993657792770724859}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SquareShield03_Red Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12569,7 +12569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1690129936046898318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowJoint04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12603,7 +12603,7 @@ GameObject:
   - component: {fileID: 5125293210006668443}
   - component: {fileID: 2418080943104901764}
   - component: {fileID: 2419256980712942162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hammer02_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12686,7 +12686,7 @@ GameObject:
   - component: {fileID: 4385198767837682861}
   - component: {fileID: 3695884462744792800}
   - component: {fileID: 3651544572007350781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hammer01_Green Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12769,7 +12769,7 @@ GameObject:
   - component: {fileID: 4525812604791121825}
   - component: {fileID: 1353087653081919382}
   - component: {fileID: 7402214353063392165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12852,7 +12852,7 @@ GameObject:
   - component: {fileID: 8635117162504627867}
   - component: {fileID: 3624535738249170440}
   - component: {fileID: 2726832191900294705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12933,7 +12933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5271026030328322043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12965,7 +12965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1944617481753521752}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hand_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13001,7 +13001,7 @@ GameObject:
   - component: {fileID: 8399245479489778728}
   - component: {fileID: 4520542989070023513}
   - component: {fileID: 4280915485067400386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Niddle01_Steel Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13084,7 +13084,7 @@ GameObject:
   - component: {fileID: 8809387224666225503}
   - component: {fileID: 4057922580854296726}
   - component: {fileID: 1635358756475102549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat03_Blue Party Style
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13167,7 +13167,7 @@ GameObject:
   - component: {fileID: 1011597732046951988}
   - component: {fileID: 7176666748489988835}
   - component: {fileID: 1622700034458261383}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head04_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13250,7 +13250,7 @@ GameObject:
   - component: {fileID: 9099680536730398769}
   - component: {fileID: 8304713674730920820}
   - component: {fileID: 405608545155785263}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat08_Red Wizard Style
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13333,7 +13333,7 @@ GameObject:
   - component: {fileID: 4622119755589438190}
   - component: {fileID: 8187546326897210659}
   - component: {fileID: 6054497814440623099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spear01_Training
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13416,7 +13416,7 @@ GameObject:
   - component: {fileID: 1512354632605901449}
   - component: {fileID: 8261383349047309118}
   - component: {fileID: 5940574839150127610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC07_PiratePatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13497,7 +13497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7119281150028440623}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_03_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13528,7 +13528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3734145437320791691}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13562,7 +13562,7 @@ GameObject:
   - component: {fileID: 1954061459642917548}
   - component: {fileID: 194195563339832026}
   - component: {fileID: 7738134186878858889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC08_NinjaMask08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13645,7 +13645,7 @@ GameObject:
   - component: {fileID: 3666081672189746034}
   - component: {fileID: 1083149627301246306}
   - component: {fileID: 6015637384542579778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat09_Pink Cute Style
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13728,7 +13728,7 @@ GameObject:
   - component: {fileID: 883254210282668566}
   - component: {fileID: 8074856619302622575}
   - component: {fileID: 1649598523493595429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spear02_Basic Steel tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13811,7 +13811,7 @@ GameObject:
   - component: {fileID: 2005791784129182994}
   - component: {fileID: 9037853489571866133}
   - component: {fileID: 1297456888223683413}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC10_Mustache03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13892,7 +13892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570986850746056057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hand_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13928,7 +13928,7 @@ GameObject:
   - component: {fileID: 3543924852585577084}
   - component: {fileID: 2729576094233216040}
   - component: {fileID: 3001540029430766291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC08_NinjaMask02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14009,7 +14009,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2336847870492540303}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14042,7 +14042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6151759763003062297}
   - component: {fileID: 5861802841358801778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14120,7 +14120,7 @@ GameObject:
   - component: {fileID: 4786037606679875422}
   - component: {fileID: 8011097060165593086}
   - component: {fileID: 9039891063948046217}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14201,7 +14201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1376829815315590760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowJoint01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14236,7 +14236,7 @@ GameObject:
   - component: {fileID: 7851442857655449923}
   - component: {fileID: 6831338901472255683}
   - component: {fileID: 3554630527791606889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword06_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14317,7 +14317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8461428228924088482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_03_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14349,7 +14349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6922218736786085103}
   - component: {fileID: 2185114028955021019}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body09_Robe Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14476,7 +14476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4114615574227769081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: neck_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14510,7 +14510,7 @@ GameObject:
   - component: {fileID: 660097630901817644}
   - component: {fileID: 6386104755287345889}
   - component: {fileID: 6748267204628013165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword05_Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14593,7 +14593,7 @@ GameObject:
   - component: {fileID: 6304369237445705500}
   - component: {fileID: 6009823684708324724}
   - component: {fileID: 8859009147043951804}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade01_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14676,7 +14676,7 @@ GameObject:
   - component: {fileID: 3648335151157039777}
   - component: {fileID: 5966489930470678806}
   - component: {fileID: 7229866516949315387}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14759,7 +14759,7 @@ GameObject:
   - component: {fileID: 5972642399366299066}
   - component: {fileID: 8832064790772226316}
   - component: {fileID: 5596611572498013040}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head02_Female
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14842,7 +14842,7 @@ GameObject:
   - component: {fileID: 7204536629811796648}
   - component: {fileID: 2458103881987330910}
   - component: {fileID: 4370550365711708352}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadArmor04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14925,7 +14925,7 @@ GameObject:
   - component: {fileID: 1551977300939188739}
   - component: {fileID: 9003594112454406055}
   - component: {fileID: 4516055862774584837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair01_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15008,7 +15008,7 @@ GameObject:
   - component: {fileID: 4275397289890599590}
   - component: {fileID: 7398358847971843481}
   - component: {fileID: 2262974441213218795}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadArmor01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15089,7 +15089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4981617103357857237}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: shoulderPadJoint_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15122,7 +15122,7 @@ GameObject:
   - component: {fileID: 7633479619559025104}
   - component: {fileID: 2862127576755684482}
   - component: {fileID: 9164690229993554537}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head04_Grey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15205,7 +15205,7 @@ GameObject:
   - component: {fileID: 6155167586379520874}
   - component: {fileID: 8690540457687533378}
   - component: {fileID: 9196557304621712817}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield10_Green Steel Gold Turtle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15288,7 +15288,7 @@ GameObject:
   - component: {fileID: 8772048530273183192}
   - component: {fileID: 1227569368736530112}
   - component: {fileID: 6740776642792335272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC10_Mustache05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15371,7 +15371,7 @@ GameObject:
   - component: {fileID: 8658280393889206171}
   - component: {fileID: 927478914215570311}
   - component: {fileID: 2975116429951941636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15452,7 +15452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4097468753047148271}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ball_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15485,7 +15485,7 @@ GameObject:
   - component: {fileID: 8865342236802971826}
   - component: {fileID: 7841539210230419849}
   - component: {fileID: 3857821114802862134}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat04_Brown Leather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15566,7 +15566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6970365407916975798}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15600,7 +15600,7 @@ GameObject:
   - component: {fileID: 3442022383541975194}
   - component: {fileID: 7047076909188119883}
   - component: {fileID: 3378958150683260775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15683,7 +15683,7 @@ GameObject:
   - component: {fileID: 4295247589339736095}
   - component: {fileID: 2769359156209734659}
   - component: {fileID: 4387134325429489343}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC05_Horn01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15766,7 +15766,7 @@ GameObject:
   - component: {fileID: 606265583449528504}
   - component: {fileID: 3678883353767033773}
   - component: {fileID: 7554117967084409854}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield02_Steel Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15849,7 +15849,7 @@ GameObject:
   - component: {fileID: 5280270980695212841}
   - component: {fileID: 8422350361827346484}
   - component: {fileID: 2413248313374058115}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head03_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15930,7 +15930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7057934320955596222}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15964,7 +15964,7 @@ GameObject:
   - component: {fileID: 8296559029959463120}
   - component: {fileID: 293016478747184195}
   - component: {fileID: 3469482060962187465}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair08_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16047,7 +16047,7 @@ GameObject:
   - component: {fileID: 3870175017453271972}
   - component: {fileID: 8801654186180114443}
   - component: {fileID: 8847817603306520157}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16130,7 +16130,7 @@ GameObject:
   - component: {fileID: 8537110361220639781}
   - component: {fileID: 18891875895288999}
   - component: {fileID: 2802579509556456970}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair05_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16213,7 +16213,7 @@ GameObject:
   - component: {fileID: 2492157769768821330}
   - component: {fileID: 2951049906587279866}
   - component: {fileID: 4174824232758923160}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat12_Green Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16295,7 +16295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7164273632416349228}
   - component: {fileID: 3433319021884905500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow04_Gold with Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16382,7 +16382,7 @@ GameObject:
   - component: {fileID: 852174509845068798}
   - component: {fileID: 1433511601800672812}
   - component: {fileID: 8772846977481017306}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC09_Ribbon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16465,7 +16465,7 @@ GameObject:
   - component: {fileID: 1673360279448105011}
   - component: {fileID: 6292404766530347558}
   - component: {fileID: 4336488569482191870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair11_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16548,7 +16548,7 @@ GameObject:
   - component: {fileID: 4470172307293535733}
   - component: {fileID: 182534455373513928}
   - component: {fileID: 5530469480704088968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wand06_Green with Green Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16631,7 +16631,7 @@ GameObject:
   - component: {fileID: 6629453561314391519}
   - component: {fileID: 564092286238592061}
   - component: {fileID: 5617675331158671583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC04_AnthenaEars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16712,7 +16712,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7592762325106508547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowJoint03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16745,7 +16745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8116492741405819532}
   - component: {fileID: 6118276407349037941}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body17_Armor Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16873,7 +16873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6006532750919654399}
   - component: {fileID: 3208131309038984571}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body07_HeavyArmor Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17002,7 +17002,7 @@ GameObject:
   - component: {fileID: 2742264562467248322}
   - component: {fileID: 4669385335325365318}
   - component: {fileID: 4827721900071044456}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hammer02_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17085,7 +17085,7 @@ GameObject:
   - component: {fileID: 8676456331204093218}
   - component: {fileID: 6386387277269440869}
   - component: {fileID: 6653983193147964968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe02_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17168,7 +17168,7 @@ GameObject:
   - component: {fileID: 4286158970108163337}
   - component: {fileID: 6844235161041778266}
   - component: {fileID: 4417792261801399034}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head01_Male
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17251,7 +17251,7 @@ GameObject:
   - component: {fileID: 3138984805073461483}
   - component: {fileID: 3392002256706112349}
   - component: {fileID: 6972073954548050777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hammer01_Green Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17334,7 +17334,7 @@ GameObject:
   - component: {fileID: 3596424723693467817}
   - component: {fileID: 5569623950051523499}
   - component: {fileID: 5390127280025523955}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC03_HeavyMetalGlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17417,7 +17417,7 @@ GameObject:
   - component: {fileID: 5609187232723510498}
   - component: {fileID: 1297086985537253113}
   - component: {fileID: 4913076731122417170}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair09_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17498,7 +17498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1061189406179280471}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_03_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17530,7 +17530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3523812241785858147}
   - component: {fileID: 4466952669191529541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17590,7 +17590,7 @@ GameObject:
   - component: {fileID: 6680175465044035095}
   - component: {fileID: 400192033387838912}
   - component: {fileID: 4812685235859323785}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield06_Red Steel Red Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17673,7 +17673,7 @@ GameObject:
   - component: {fileID: 1584710981484613332}
   - component: {fileID: 4312125037515222211}
   - component: {fileID: 7314845344842601695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword05_Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17756,7 +17756,7 @@ GameObject:
   - component: {fileID: 1657789243285781670}
   - component: {fileID: 903398277051644768}
   - component: {fileID: 5220554076550480353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spear04_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17839,7 +17839,7 @@ GameObject:
   - component: {fileID: 8065498889189712734}
   - component: {fileID: 8900079244826899513}
   - component: {fileID: 4074977352399933715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield08_Orange Steel Lion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17922,7 +17922,7 @@ GameObject:
   - component: {fileID: 6892247079024811258}
   - component: {fileID: 8640725281483798345}
   - component: {fileID: 192893227646214013}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC03_NightVision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18005,7 +18005,7 @@ GameObject:
   - component: {fileID: 2083603304200582032}
   - component: {fileID: 7293918317055577782}
   - component: {fileID: 5468574067496207867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sword02_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18086,7 +18086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1395561913828609990}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18120,7 +18120,7 @@ GameObject:
   - component: {fileID: 5461404725556764437}
   - component: {fileID: 186111297294381746}
   - component: {fileID: 4488135959033509067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC08_NinjaMask06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18203,7 +18203,7 @@ GameObject:
   - component: {fileID: 8798573449086215543}
   - component: {fileID: 4917906149593278145}
   - component: {fileID: 2808310318288973088}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wizard_Male
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -18287,7 +18287,7 @@ GameObject:
   - component: {fileID: 7855879034141614384}
   - component: {fileID: 1903848179056483400}
   - component: {fileID: 3650287509431628002}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18370,7 +18370,7 @@ GameObject:
   - component: {fileID: 896898058826522736}
   - component: {fileID: 9076260883255092823}
   - component: {fileID: 8411691753194749906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe02_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18453,7 +18453,7 @@ GameObject:
   - component: {fileID: 4195957933975228252}
   - component: {fileID: 2317900016950578936}
   - component: {fileID: 4441529469296163522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC10_Mustache02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18536,7 +18536,7 @@ GameObject:
   - component: {fileID: 3716774710220590502}
   - component: {fileID: 9052738357960952308}
   - component: {fileID: 2361502645425713191}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18619,7 +18619,7 @@ GameObject:
   - component: {fileID: 7377774489402565375}
   - component: {fileID: 868146947588317974}
   - component: {fileID: 7583079108868756743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RoundShield04_Green Steel Mask Rider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18702,7 +18702,7 @@ GameObject:
   - component: {fileID: 9102080808938284185}
   - component: {fileID: 2787344839741566290}
   - component: {fileID: 7621695596260973582}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wand02_Brown Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18783,7 +18783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 343028657325660541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: lowerarm_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18817,7 +18817,7 @@ GameObject:
   - component: {fileID: 3366751225393645308}
   - component: {fileID: 3166501219469504115}
   - component: {fileID: 7628657782200602868}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC11_Mustache05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18898,7 +18898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6259686943623330433}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowJoint02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18930,7 +18930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4653206542512112818}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: weapon_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18999,7 +18999,7 @@ GameObject:
   - component: {fileID: 4314184163578688928}
   - component: {fileID: 6675845509928954315}
   - component: {fileID: 4742884322907399558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19080,7 +19080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4689999328859945752}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CloakBone01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19114,7 +19114,7 @@ GameObject:
   - component: {fileID: 2420574584938245548}
   - component: {fileID: 2652202059088418905}
   - component: {fileID: 1860701881355742299}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head03_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19196,7 +19196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3555659942302615151}
   - component: {fileID: 7168431882021519841}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow03_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19283,7 +19283,7 @@ GameObject:
   - component: {fileID: 2317727963778657660}
   - component: {fileID: 7904387347679143618}
   - component: {fileID: 2922920745770281805}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spear03_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19364,7 +19364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3122468638240199942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowJoint05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19397,7 +19397,7 @@ GameObject:
   - component: {fileID: 430523469405073489}
   - component: {fileID: 4878872335310835337}
   - component: {fileID: 7721424906022416134}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hat10_Black with Crown BombKing Style
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19479,7 +19479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1185456323183046763}
   - component: {fileID: 1110417990840149869}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body05_T-Shirt Yellow Gold Sleeves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19607,7 +19607,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5969485186451639184}
   - component: {fileID: 8297812730989191648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body14_Armor Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19736,7 +19736,7 @@ GameObject:
   - component: {fileID: 5646544462824225786}
   - component: {fileID: 894106811416229112}
   - component: {fileID: 5709491946346974042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC11_Mustache01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19819,7 +19819,7 @@ GameObject:
   - component: {fileID: 37476146200005880}
   - component: {fileID: 7425898781685275195}
   - component: {fileID: 2726085250142184153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wand05_Purple with Pink Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19901,7 +19901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3588982989068599268}
   - component: {fileID: 2899252328455778265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body20_Armor Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20030,7 +20030,7 @@ GameObject:
   - component: {fileID: 947124924385934410}
   - component: {fileID: 1815127412806041697}
   - component: {fileID: 9045202369706353463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade02_Purple Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20111,7 +20111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2393527599962799826}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thigh_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20145,7 +20145,7 @@ GameObject:
   - component: {fileID: 8489632236103871739}
   - component: {fileID: 6555661933295448773}
   - component: {fileID: 9030099934431964590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wand04_Blue Crystal with Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20228,7 +20228,7 @@ GameObject:
   - component: {fileID: 7960866084026096057}
   - component: {fileID: 1443423677772335030}
   - component: {fileID: 5561825061875270432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeaterShield01_Gold Steel Royal Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20310,7 +20310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 650943725441663297}
   - component: {fileID: 6818228425439057241}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cloak01_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20439,7 +20439,7 @@ GameObject:
   - component: {fileID: 149525009864567919}
   - component: {fileID: 8750441634379540880}
   - component: {fileID: 7436142977216795902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20522,7 +20522,7 @@ GameObject:
   - component: {fileID: 118835863998571148}
   - component: {fileID: 5350506583201252848}
   - component: {fileID: 1480333411702559034}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20605,7 +20605,7 @@ GameObject:
   - component: {fileID: 3686928629603397205}
   - component: {fileID: 3259169988292551529}
   - component: {fileID: 4708424691384297974}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head03_Grey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20688,7 +20688,7 @@ GameObject:
   - component: {fileID: 4820279121560282646}
   - component: {fileID: 1135409450136289209}
   - component: {fileID: 9215289349188957354}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RoundShield02_Green Steel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20771,7 +20771,7 @@ GameObject:
   - component: {fileID: 1105664621201443697}
   - component: {fileID: 2662189520847729001}
   - component: {fileID: 7318957271409578332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20854,7 +20854,7 @@ GameObject:
   - component: {fileID: 6625183277987616930}
   - component: {fileID: 7312963985031866373}
   - component: {fileID: 8621459941823432765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC04_BunnyEars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20937,7 +20937,7 @@ GameObject:
   - component: {fileID: 7486298870865458505}
   - component: {fileID: 7005830226730524796}
   - component: {fileID: 5096034255483082756}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC04_ShortEars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21019,7 +21019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5527051843691244553}
   - component: {fileID: 3932097107410077590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body15_HeavyArmor Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21148,7 +21148,7 @@ GameObject:
   - component: {fileID: 4928740497949128061}
   - component: {fileID: 612771873265894790}
   - component: {fileID: 6770769532894474458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head03_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21231,7 +21231,7 @@ GameObject:
   - component: {fileID: 8830861425525170130}
   - component: {fileID: 2456414005104565885}
   - component: {fileID: 8447362346369204278}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AC10_Mustache04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21314,7 +21314,7 @@ GameObject:
   - component: {fileID: 5081394350826061574}
   - component: {fileID: 8944584431413308872}
   - component: {fileID: 211415865611880200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair07_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21397,7 +21397,7 @@ GameObject:
   - component: {fileID: 5255024367437506161}
   - component: {fileID: 6536167975599738031}
   - component: {fileID: 7919349404258454640}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
