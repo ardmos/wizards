@@ -67,6 +67,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameReadyUI.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupModUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneCleanUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\MatchmakerUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\MusicGroupUI.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupEquipmentUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\Game\UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameOverUI.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Assets\Scripts\GameRoom\CharacterSelectUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupClanUI.cs" />
     <Compile Include="Assets\Scripts\GameRoom\CharacterSelectPlayer.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
