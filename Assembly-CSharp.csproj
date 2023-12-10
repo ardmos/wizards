@@ -111,6 +111,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupEquipmentUI.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupInboxUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\Game\UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameOverUI.cs" />
