@@ -2545,7 +2545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 932501098101691874}
-  - component: {fileID: 5577225032273852061}
+  - component: {fileID: -2686748507231774534}
   - component: {fileID: 6631467521865965885}
   - component: {fileID: 3569301515384591240}
   - component: {fileID: -2944897953648591521}
@@ -2582,7 +2582,7 @@ Transform:
   - {fileID: 8909977629314831837}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5577225032273852061
+--- !u!114 &-2686748507231774534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2591,7 +2591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de669b7434fd13146b2422a01d6de14b, type: 3}
+  m_Script: {fileID: 11500000, guid: 20a0b2ec62b4a5747b4059f0f3fd4bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameInput: {fileID: -3331297196142442222}
@@ -2623,7 +2623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpellPrefabArray: []
-  player: {fileID: 5577225032273852061}
+  player: {fileID: 0}
   muzzle: {fileID: 932501096560631534}
   restTimeCurrentSpellArray: []
 --- !u!114 &3569301515384591240
@@ -5380,7 +5380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b891d0fd50f5e4ab73d7dc548a58ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5577225032273852061}
+  player: {fileID: 0}
 --- !u!1 &2456494494696557206
 GameObject:
   m_ObjectHideFlags: 0
@@ -17185,7 +17185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7862390793633361810
 Transform:
   m_ObjectHideFlags: 0
@@ -17582,7 +17582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7168110085541836639
 Transform:
   m_ObjectHideFlags: 0

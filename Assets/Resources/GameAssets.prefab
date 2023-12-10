@@ -97,3 +97,7 @@ MonoBehaviour:
   fireBall_1: {fileID: 1881642356963322, guid: 77d75e6d0d8ad3747be6ebe8b26bf0f8, type: 3}
   waterBall_1: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
   iceBall_1: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
+  wizard_Male_ForLobby: {fileID: 7822752010955555959, guid: ed053f82f0a9cad41a1156a5d6c24080, type: 3}
+  knight_Male_ForLobby: {fileID: 8406262372636307266, guid: 03b77d822d230814799c565ef95a07aa, type: 3}
+  wizard_Male: {fileID: 932501098101691884, guid: 470d188c01e7349468602788c6bbf2de, type: 3}
+  knight_Male: {fileID: 932501098101691884, guid: ffad87a8b5984754eb42effbdf5887df, type: 3}

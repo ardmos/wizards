@@ -75,5 +75,11 @@ public class GameAssets : MonoBehaviour
     public GameObject fireBall_1;
     public GameObject waterBall_1;
     public GameObject iceBall_1;
+
+    // 캐릭터 프리팹\
+    public GameObject wizard_Male_ForLobby;
+    public GameObject knight_Male_ForLobby;
+    public GameObject wizard_Male;
+    public GameObject knight_Male;
     #endregion
 }

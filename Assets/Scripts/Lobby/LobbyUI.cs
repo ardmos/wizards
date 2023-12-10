@@ -25,13 +25,9 @@ public class LobbyUI : MonoBehaviour
 
     [SerializeField] private PopupInboxUI popupInbox;
 
-    // 임시로 현 스크립트에서 상태 저장
-    private enum MyClass
-    {
-        Wizard,
-        Knight
-    }
-    [SerializeField] private MyClass myClass;
+    [SerializeField] private GameObject characterPos;
+    [SerializeField] private GameObject character;
+
     [SerializeField] private Sprite iconWizard, iconKnight;
 
     // Start is called before the first frame update
@@ -39,7 +35,7 @@ public class LobbyUI : MonoBehaviour
     {
         btnUserInfo.onClick.AddListener(() => { popupUserInfoUI.Show(); });
         btnSettings.onClick.AddListener(() => { popupSettingsUI.Show(); });
-        btnClassChange.onClick.AddListener(ChangeClass);
+        btnClassChange.onClick.AddListener(ChangeCurrentClass);
         btnShop.onClick.AddListener(() => { popupShop.Show(); });
         btnEquipment.onClick.AddListener(() => { popupEquipment.Show(); });
         btnClan.onClick.AddListener(() => { popupClan.Show(); });
@@ -48,7 +44,8 @@ public class LobbyUI : MonoBehaviour
         btnInbox.onClick.AddListener(() => { popupInbox.Show(); });
 
         // 임시로 현 스크립트에서 상태 저장
-        myClass = MyClass.Wizard;
+        PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Wizard);
+        UpdateCurrentClass();
     }
 
     // Update is called once per frame
@@ -57,20 +54,44 @@ public class LobbyUI : MonoBehaviour
         
     }
 
-    private void ChangeClass()
+    private void ChangeCurrentClass()
     {
-        switch (myClass)
+        switch (PlayerProfileData.Instance.GetCurrentSelectedClass())
         {
-            case MyClass.Wizard:
-                myClass = MyClass.Knight;
-                btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
-                break; 
-            case MyClass.Knight:
-                myClass = MyClass.Wizard;
-                btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
-                break; 
+            case CharacterClasses.Class.Wizard:
+                PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Knight);
+                break;
+            case CharacterClasses.Class.Knight:
+                PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Wizard);
+                break;
             default:
+                Debug.LogError("UpdateCurrentClass() Class Error");
                 break;
         }
+
+        UpdateCurrentClass();
+    }
+
+    private void UpdateCurrentClass()
+    {
+        if (character != null) { Destroy(character); }        
+
+        switch (PlayerProfileData.Instance.GetCurrentSelectedClass())
+        {
+            case CharacterClasses.Class.Wizard:
+                btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
+                character = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedClassObjectForLobby());
+                break; 
+            case CharacterClasses.Class.Knight:
+                btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
+                character = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedClassObjectForLobby());
+                break; 
+            default:
+                Debug.LogError("UpdateCurrentClass() Class Error");
+                break;
+        }
+        character.transform.SetParent(characterPos.transform);
+        character.transform.localPosition = Vector3.zero;
+        character.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
     }
 }

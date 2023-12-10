@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\Game\UI\PopupGameOverUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupMenuUI.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
+    <Compile Include="Assets\Scripts\Test\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneDedicatedServer.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Title\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\Spells\SwordAttackLv1.cs" />
+    <Compile Include="Assets\Scripts\Test\PlayerProfileData.cs" />
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
     <Compile Include="Assets\Scripts\Game\Store\StoreTriggerAreaCollider.cs" />
   </ItemGroup>
