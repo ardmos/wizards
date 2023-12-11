@@ -87,7 +87,9 @@ public class LobbyManager : MonoBehaviour
             }
             // Doc에서 매 업데이트마다 호출해주라고 했음
             serverQueryHandler.UpdateServerCheck();
+            Debug.Log("serverQueryHandler.UpdateServerCheck()");
         }
+        else Debug.Log("serverQueryHandler is null");
 
         // UGS doc에서 back fill도 마찬가지로 매 초 티켓 승인을 받으라고 했음. 게임 서버가 아직 실행중임을 매치메이커 서비스에게 증명하는데 필요하다고 함. 이걸 안하면 백필 할당이 안됨. 새로운 플레이어 못들어옴
         if (backfillTicketId != null)

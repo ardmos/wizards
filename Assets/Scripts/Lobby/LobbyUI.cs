@@ -15,6 +15,7 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private Button btnMod;
 
     [SerializeField] private Button btnInbox;
+    [SerializeField] private Button btnNews;
 
     [SerializeField] private PopupUserInfoUI popupUserInfoUI;
     [SerializeField] private PopupSettingsUI popupSettingsUI;
@@ -24,6 +25,7 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private PopupModUI popupMod;
 
     [SerializeField] private PopupInboxUI popupInbox;
+    [SerializeField] private PopupInboxUI popupNews;
 
     [SerializeField] private GameObject characterPos;
     [SerializeField] private GameObject character;
@@ -42,6 +44,7 @@ public class LobbyUI : MonoBehaviour
         btnMod.onClick.AddListener(() => { popupMod.Show(); });
 
         btnInbox.onClick.AddListener(() => { popupInbox.Show(); });
+        btnNews.onClick.AddListener(() => { popupNews.Show(); });
 
         // 임시로 현 스크립트에서 상태 저장
         PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Wizard);
