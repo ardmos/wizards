@@ -68,6 +68,7 @@ public class GameMultiplayer : NetworkBehaviour
 
     private void NetworkManager_Client_OnClientDisconnectCallback(ulong obj)
     {
+        Debug.Log($"OnClientDisconnectCallback : {obj}");
         OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
     }
 
