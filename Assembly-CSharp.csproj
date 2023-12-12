@@ -130,6 +130,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupClanUI.cs" />
     <Compile Include="Assets\Scripts\GameRoom\CharacterSelectPlayer.cs" />
+    <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
@@ -1146,6 +1147,10 @@
     <ProjectReference Include="Google.Play.Games.csproj">
       <Project>{C2C88881-030D-60CE-C6A0-8054BC730F91}</Project>
       <Name>Google.Play.Games</Name>
+    </ProjectReference>
+    <ProjectReference Include="ParrelSync.csproj">
+      <Project>{1D9DC370-218D-A565-2A33-96DCB44A9A78}</Project>
+      <Name>ParrelSync</Name>
     </ProjectReference>
     <ProjectReference Include="Google.Play.Games.Editor.csproj">
       <Project>{8B3CE402-E5C9-4F6C-A8B7-61E7F7CC8B68}</Project>
