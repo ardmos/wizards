@@ -504,7 +504,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
         Debug.Log($"HandleMovementServerRPC inputVector : {inputVector}");
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-        float moveDistance = moveSpeed * Time.deltaTime;
+        // 서버권한방식의 네트워크에서 이동처리 할 때 서버의 DeltaTime이 클라이언트의 델타타임과는 다른 경우가 생김. 따라서 아래처럼 수정해야함
+        //float moveDistance = moveSpeed * Time.deltaTime;
+        float moveDistance = moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
         transform.position += moveDir * moveDistance;
         isWalking = moveDir != Vector3.zero;
 

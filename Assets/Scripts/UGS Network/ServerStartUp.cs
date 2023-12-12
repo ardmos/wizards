@@ -11,6 +11,8 @@ using UnityEngine;
 
 public class ServerStartUp : MonoBehaviour
 {
+    public static event System.Action ClientInstance;
+
     private const string InternalServerIp = "0.0.0.0";
     private string externalServerIP = "0.0.0.0";
     // Default port 7777
@@ -57,6 +59,10 @@ public class ServerStartUp : MonoBehaviour
         {
             StartServer();
             await StartServerServices();
+        }
+        else
+        {
+            ClientInstance?.Invoke();
         }
     }
 
