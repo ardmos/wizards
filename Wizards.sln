@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngameDebugConsole.Runtime", "IngameDebugConsole.Runtime.csproj", "{9BBFB8B1-55DE-CC05-A70E-5F051FB16868}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Play.Games", "Google.Play.Games.csproj", "{C2C88881-030D-60CE-C6A0-8054BC730F91}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParrelSync", "ParrelSync.csproj", "{1D9DC370-218D-A565-2A33-96DCB44A9A78}"
 EndProject
@@ -19,6 +19,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9BBFB8B1-55DE-CC05-A70E-5F051FB16868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9BBFB8B1-55DE-CC05-A70E-5F051FB16868}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BBFB8B1-55DE-CC05-A70E-5F051FB16868}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,10 +31,6 @@ Global
 		{C2C88881-030D-60CE-C6A0-8054BC730F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C88881-030D-60CE-C6A0-8054BC730F91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2C88881-030D-60CE-C6A0-8054BC730F91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1D9DC370-218D-A565-2A33-96DCB44A9A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D9DC370-218D-A565-2A33-96DCB44A9A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D9DC370-218D-A565-2A33-96DCB44A9A78}.Release|Any CPU.ActiveCfg = Release|Any CPU

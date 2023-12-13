@@ -1,81 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
-using UnityEngine;
-using Unity.Services.Matchmaker;
-using Unity.Services.Matchmaker.Models;
-using StatusOptions = Unity.Services.Matchmaker.Models.MultiplayAssignment.StatusOptions;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-#if UNITY_EDITOR
-using ParrelSync;
-#endif
+using Unity.Services.Authentication;
+using Unity.Services.Matchmaker;
+using Unity.Services.Matchmaker.Models;
+using UnityEngine;
+using StatusOptions = Unity.Services.Matchmaker.Models.MultiplayAssignment.StatusOptions;
 
+/// <summary>
+/// 1. 타이틀씬에서는 딱 Anonymously SignIn 기능 직전까지만. 해단 기능은 UnityAuthenticationManager에서.
+/// 2. 로비씬에서는 매치메이킹 관리.
+/// </summary>
 public class MatchmakerClient : MonoBehaviour
 {
     private string ticketId;
 
-    private void OnEnable()
-    {
-        ServerStartUp.ClientInstance += SignIn;
-    }
-
-    private void OnDisable()
-    {
-        ServerStartUp.ClientInstance -= SignIn;
-    }
-
-    private async void SignIn()
-    {
-        #region 테스트용!
-        await ClientSignIn("WizardsandKnightsPlayer");
-        #endregion
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
-
-    private async Task ClientSignIn(string serviceProfileName = null)
-    {
-        #region 컴퓨터에서 테스트를 위한 처리. 한 컴퓨터에서 여러개의 클라이언트를 띄워주기 위한 준비 
-        if(serviceProfileName != null)
-        {
-            #if UNITY_EDITOR
-            serviceProfileName = $"{serviceProfileName}{GetCloneNumberSuffix()}";
-            #endif
-            var initOptions = new InitializationOptions();
-            initOptions.SetProfile(serviceProfileName);
-            await UnityServices.InitializeAsync(initOptions);
-        }
-        #endregion
-        else
-        {
-            //Initialize Unity Services <-- 이건 원래 여기서 하는 일.
-            await UnityServices.InitializeAsync();
-        }
-
-        Debug.Log($"Signed In Anonymously as {serviceProfileName}({PlayerID()})");
-    }
-
-    private string PlayerID()
+    private string GetPlayerID()
     {
         return AuthenticationService.Instance.PlayerId;
     }
 
-    #if UNITY_EDITOR
-    private string GetCloneNumberSuffix()
-    {
-        string projectPath = ClonesManager.GetCurrentProjectPath();
-        int lastUnderscore = projectPath.LastIndexOf('_');  
-        string projectCloneSuffix = projectPath.Substring(lastUnderscore+1);
-        if(projectCloneSuffix.Length != 1)
-        {
-            projectCloneSuffix = "";
-        }
-        return projectCloneSuffix;
-    }
-    #endif
-
+    // 매치메이킹 시작 메서드. (매치메이킹 버튼 UI가 클릭됐을 때 호출된다.)
     public void StartClient()
     {
         CreateATicket();
@@ -89,7 +36,7 @@ public class MatchmakerClient : MonoBehaviour
         var players = new List<Unity.Services.Matchmaker.Models.Player>
         {
             new Unity.Services.Matchmaker.Models.Player(
-                PlayerID(),
+                GetPlayerID(),
                 new MatchmakingPlayerData
                 {
                     Skill = 100,

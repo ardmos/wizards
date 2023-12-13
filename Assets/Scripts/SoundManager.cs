@@ -26,8 +26,7 @@ public class SoundManager : MonoBehaviour
         string sceneName = next.name;
         PlayMusic(sceneName);
 
-        Debug.Log($"Current Scene : {current.name}, {next.name}");
-
+        //Debug.Log($"Current Scene : {current.name}, {next.name}");
     }
 
     private void PlayMusic(string sceneName)
