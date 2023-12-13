@@ -21,6 +21,7 @@ public class CharacterSelectReady : NetworkBehaviour
     private void Awake()
     {
         Instance = this;
+        OnInstanceCreated?.Invoke(this, EventArgs.Empty);
         playerReadyDictionary = new Dictionary<ulong, bool>();
         OnReadyChanged?.Invoke(this, EventArgs.Empty);
     }

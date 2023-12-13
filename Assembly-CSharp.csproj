@@ -106,6 +106,7 @@
     <Compile Include="Assets\GPGSIds.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\SwitchUI.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupLookingForGameUI.cs" />
     <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GamePadUI.cs" />

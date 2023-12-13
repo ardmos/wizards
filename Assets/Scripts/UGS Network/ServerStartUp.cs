@@ -79,7 +79,8 @@ public class ServerStartUp : MonoBehaviour
     private void StartServer()
     {
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(InternalServerIp, serverPort);
-        NetworkManager.Singleton.StartServer();
+        GameMultiplayer.Instance.StartServer();
+        //NetworkManager.Singleton.StartServer();
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }
 
@@ -247,7 +248,9 @@ public class ServerStartUp : MonoBehaviour
     {
         if (!backfilling && NetworkManager.Singleton.ConnectedClients.Count > 0 && NeedsPlayers())
         {
+            #pragma warning disable 4014
             BeginBackfilling(matchmakingPayload);
+            #pragma warning restore 4014
         }
     }
 
