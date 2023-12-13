@@ -15,11 +15,12 @@ public class TitleSceneUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 새로운 UGS 네트워크방식 테스트하는중. 스타트버튼의 기능을 서버에 접속하는데 쓸거라서 잠시 주석처리
-        //btnStartAuth.onClick.AddListener(OnBtnStartAuthClick);
+        btnStartAuth.onClick.AddListener(OnBtnStartAuthClick);
     }
 
     public void OnBtnStartAuthClick() {
+        //Debug.Log("OnBtnStartAuthClick");
+        // 새로운 UGS 네트워크방식 테스트하는중. 스타트버튼의 기능을 서버에 접속하는데 쓸거라서 잠시 주석처리
         popupSelectAuthMethod.transform.localScale = Vector3.one;
     }
 }

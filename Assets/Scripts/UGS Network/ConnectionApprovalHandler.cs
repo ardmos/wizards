@@ -12,7 +12,7 @@ public class ConnectionApprovalHandler : MonoBehaviour
 {
     public static int MaxPlayers = 10;
 
-    private void Awake()
+    private void Start()
     {
         NetworkManager.Singleton.ConnectionApprovalCallback = ApprovalCheck;    
     }

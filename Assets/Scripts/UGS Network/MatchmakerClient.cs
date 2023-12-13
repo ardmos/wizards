@@ -128,6 +128,7 @@ public class MatchmakerClient : MonoBehaviour
                     Debug.LogError($"Faild to get ticket status. Error: {multiplayAssignment.Message}");
                     break;
                 case StatusOptions.InProgress:
+                    Debug.Log("Still searching...");
                     break;
                 case StatusOptions.Found:
                     gotAssignment = true;

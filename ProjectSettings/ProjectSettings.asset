@@ -829,7 +829,8 @@ PlayerSettings:
   scriptingDefineSymbols:
     Server: DEDICATED_SERVER
     Standalone: DEDICATED_SERVER_NO;UNITY_ANDROID_NO
-  additionalCompilerArguments: {}
+  additionalCompilerArguments:
+    Standalone: []
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

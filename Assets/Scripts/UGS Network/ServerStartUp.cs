@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using Unity.Burst.Intrinsics;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Core;
@@ -39,6 +40,15 @@ public class ServerStartUp : MonoBehaviour
     {
         bool server = false;
         var args = System.Environment.GetCommandLineArgs();
+        // µð¹ö±ë¿ë
+        string commandLineArgs = "";
+        foreach (var arg in args)
+        {
+            commandLineArgs += arg;          
+        }
+        Debug.Log($"CommandLineArgs: {commandLineArgs}");
+
+
         for (int i = 0; i < args.Length; i++)
         {
             if (args[i] == "-dedicatedServer")
