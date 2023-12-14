@@ -39,17 +39,17 @@ public class LobbyManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; 
+/*        instance = this; 
 
         DontDestroyOnLoad(gameObject);
 
-        InitializeUGSDedicatedServer();
+        InitializeUGSDedicatedServer();*/
     }
 
     private void Start()
     {
-        GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
-        CharacterSelectReady.OnInstanceCreated += CharacterSelectReady_OnInstanceCreated;
+/*        GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
+        CharacterSelectReady.OnInstanceCreated += CharacterSelectReady_OnInstanceCreated;*/
     }
 
     private void CharacterSelectReady_OnInstanceCreated(object sender, EventArgs e)

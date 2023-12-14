@@ -57,8 +57,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
         virtualCameraObj.SetActive(IsOwner);
         gameAssets = GameAssets.instantiate;
 
+        Debug.Log($"spawnPositionList.Count: {spawnPositionList.Count}, OwnerClientId: {OwnerClientId}, GameMultiplayer.Instance.GetPlayerDataIndexFromClientId: {GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)}");
+
         // 스폰 위치 초기화
-        transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
+        //transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
+        transform.position = spawnPositionList[0];
     }
 
     #region Public 플레이어 정보 확인
@@ -501,7 +504,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [ServerRpc(RequireOwnership = false)]
     private void HandleMovementServerRPC(Vector2 inputVector)
     {
-        Debug.Log($"HandleMovementServerRPC inputVector : {inputVector}");
+        //Debug.Log($"HandleMovementServerRPC inputVector : {inputVector}");
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         // 서버권한방식의 네트워크에서 이동처리 할 때 서버의 DeltaTime이 클라이언트의 델타타임과는 다른 경우가 생김. 따라서 아래처럼 수정해야함

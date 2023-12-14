@@ -13,6 +13,7 @@ using UnityEngine;
 public class ServerStartUp : MonoBehaviour
 {
     public static event System.Action ClientInstance;
+    public static ServerStartUp Instance = null;
 
     private const string InternalServerIp = "0.0.0.0";
     private string externalServerIP = "0.0.0.0";
@@ -38,6 +39,13 @@ public class ServerStartUp : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+        
         bool server = false;
         var args = System.Environment.GetCommandLineArgs();
         // 디버깅용
@@ -104,6 +112,9 @@ public class ServerStartUp : MonoBehaviour
             if (matchmakingPayload != null)
             {
                 Debug.Log($"Got payload: {matchmakingPayload}");
+                //MaxPlayer 10에서3으로 변경하고 Pool 룰 최대 플레이어 카운트 9에서 2로 변경했음. 테스트를 위해!
+                // 1. GameRoomScene으로 이동
+                LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);                
                 await StartBackfill(matchmakingPayload);
             }
             else
@@ -229,6 +240,9 @@ public class ServerStartUp : MonoBehaviour
                 await MatchmakerService.Instance.DeleteBackfillTicketAsync(localBackfillTicket.Id);
                 localBackfillTicket.Id = null;
                 backfilling = false;
+
+                // 모든 인원이 모였다! 화면 이동!
+                LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
                 return;
             }
 
@@ -241,6 +255,7 @@ public class ServerStartUp : MonoBehaviour
 
     private bool NeedsPlayers()
     {
+        Debug.Log($"ConnectedClients.Count: {NetworkManager.Singleton.ConnectedClients.Count}, MaxPlayer: {ConnectionApprovalHandler.MaxPlayers}");
         return NetworkManager.Singleton.ConnectedClients.Count < ConnectionApprovalHandler.MaxPlayers;
     }
 

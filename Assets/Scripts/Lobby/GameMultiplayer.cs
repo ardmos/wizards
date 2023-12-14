@@ -46,7 +46,7 @@ public class GameMultiplayer : NetworkBehaviour
         });
     }
 
-    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+/*    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
     {
         // GameRoom æ¿¿Œ¡ˆ »Æ¿Œ
         if (SceneManager.GetActiveScene().name != LoadingSceneManager.Scene.GameRoomScene.ToString()) { 
@@ -64,7 +64,7 @@ public class GameMultiplayer : NetworkBehaviour
         }
 
         response.Approved = true;
-    }
+    }*/
 
     private void NetworkManager_Client_OnClientDisconnectCallback(ulong obj)
     {
@@ -87,7 +87,7 @@ public class GameMultiplayer : NetworkBehaviour
     }
     public void StartHost()
     {
-        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+        //NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
         NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartHost();
@@ -96,7 +96,7 @@ public class GameMultiplayer : NetworkBehaviour
     // UGS Dedicated Server 
     public void StartServer()
     {
-        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+        //NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
         NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartServer();

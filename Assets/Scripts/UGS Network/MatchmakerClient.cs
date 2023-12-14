@@ -89,7 +89,7 @@ public class MatchmakerClient : MonoBehaviour
                     popupLookingForGame.Hide();
                     break;
                 case StatusOptions.InProgress:
-                    Debug.Log("Still searching...");
+                    Debug.Log("Searching...");
                     break;
                 case StatusOptions.Found:
                     gotAssignment = true;

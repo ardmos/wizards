@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
 
         UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
+        //Debug.Log($"Current Scene : {sceneName}");
         PlayMusic(sceneName);
     }
 

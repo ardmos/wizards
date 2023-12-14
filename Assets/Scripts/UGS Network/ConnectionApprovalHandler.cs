@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 /// <summary>
 /// Approval progress for new connectiong clients.
 /// Currently we are just making sure the amount of players does not exceed the MaxPlayers count.
@@ -10,7 +11,7 @@ using UnityEngine;
 /// </summary>
 public class ConnectionApprovalHandler : MonoBehaviour
 {
-    public static int MaxPlayers = 10;
+    public static int MaxPlayers = 3;
 
     private void Start()
     {
@@ -19,15 +20,26 @@ public class ConnectionApprovalHandler : MonoBehaviour
 
     private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
     {
+
         response.Approved = true;
         response.CreatePlayerObject = true;
         response.PlayerPrefabHash = null;
-        if(NetworkManager.Singleton.ConnectedClients.Count >= MaxPlayers ) 
+/*        if (SceneManager.GetActiveScene().name != LoadingSceneManager.Scene.GameRoomScene.ToString())
+        {
+            response.Approved = false;
+            response.Reason = "Game has already started";
+        }*/
+        if (NetworkManager.Singleton.ConnectedClients.Count >= MaxPlayers ) 
         {
             response.Approved = false;
             response.Reason = "Server is Full";
         }
 
         response.Pending = false;
+
+        if(!response.Approved)
+            Debug.Log($"{nameof(ApprovalCheck)} Reason: {response.Reason}");
+        else
+            Debug.Log($"{nameof(ApprovalCheck)} Approved: true");
     }
 }

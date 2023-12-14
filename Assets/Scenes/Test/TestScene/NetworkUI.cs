@@ -1,7 +1,9 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// 테스트용 스크립트.
+/// </summary>
 public class NetworkUI : MonoBehaviour
 {
     [SerializeField] private Button btnServer;

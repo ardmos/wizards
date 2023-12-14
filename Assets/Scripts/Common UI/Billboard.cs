@@ -6,8 +6,8 @@ using UnityEngine;
 /// </summary>
 public class Billboard : MonoBehaviour
 {
+#if !DEDICATED_SERVER
     private Transform mCamera;
-
     private void Start()
     {
         mCamera = Camera.main.transform;
@@ -15,6 +15,8 @@ public class Billboard : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.LookAt(transform.position + mCamera.forward);
+        if(mCamera != null)
+            transform.LookAt(transform.position + mCamera.forward);
     }
+#endif
 }
