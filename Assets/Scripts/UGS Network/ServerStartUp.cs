@@ -255,7 +255,7 @@ public class ServerStartUp : MonoBehaviour
 
     private bool NeedsPlayers()
     {
-        Debug.Log($"ConnectedClients.Count: {NetworkManager.Singleton.ConnectedClients.Count}, MaxPlayer: {ConnectionApprovalHandler.MaxPlayers}");
+        //Debug.Log($"ConnectedClients.Count: {NetworkManager.Singleton.ConnectedClients.Count}, MaxPlayer: {ConnectionApprovalHandler.MaxPlayers}");
         return NetworkManager.Singleton.ConnectedClients.Count < ConnectionApprovalHandler.MaxPlayers;
     }
 
