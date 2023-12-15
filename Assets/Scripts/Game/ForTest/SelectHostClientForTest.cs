@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +12,8 @@ public class SelectHostClientForTest : NetworkBehaviour
     {
         btnHost.onClick.AddListener(() =>
         {
-            GameMultiplayer.Instance.StartHost();           
+            // ÀÌÁ¦ Host ¾È¾¸
+            //GameMultiplayer.Instance.StartHost();           
             Hide();
         });
         btnClient.onClick.AddListener(() =>

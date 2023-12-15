@@ -15,13 +15,14 @@ public class NetworkUI : MonoBehaviour
         btnServer.onClick.AddListener(() => 
         {
             NetworkManager.Singleton.StartServer();
+            LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
         });
         btnHost.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();
             //GameMultiplayer.Instance.StartHost();
             //LoadingSceneManager.Load(LoadingSceneManager.Scene.GameRoomScene);
-            LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
+            //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
         });
 
         btnClient.onClick.AddListener(() =>

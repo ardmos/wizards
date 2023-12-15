@@ -26,7 +26,9 @@ public class UnityAuthenticationManager : MonoBehaviour
     public string Token;
     public string Error;
 
-    private async void Awake()
+    // 내부 await SignInCachedUserAsync(); 사용할 때 async도 다시 사용
+    //private async void Awake()
+    private void Awake()
     {
         Instance = this;
 

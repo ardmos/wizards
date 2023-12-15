@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -9,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class GameRoomCharacterPrefab : MonoBehaviour
 {
-    [SerializeField] GameObject playerObject;
+    [SerializeField] private GameObject playerObject;
     /// <summary>
     /// Player가 선택한 캐릭터의 비주얼을 가져와 보여줍니다.
     /// 총 과정 
@@ -17,13 +15,16 @@ public class GameRoomCharacterPrefab : MonoBehaviour
     /// 2. 서버가 열리면 GameMultiplayer의 NetworkList인 playerDataList에 저장.
     /// 3. 필요할 때 playerIndex나 clientID로 꺼내서 사용.
     /// </summary>
-    public void UpdateCharacter3DVisual(int playerIndex)
-    {
-        if(playerObject != null) Destroy(playerObject);
-        
-        Debug.Log($"LoadCharacter3DVisual");
+    public void ShowCharacter3DVisual(int playerIndex)
+    {        
+        //Debug.Log($"LoadCharacter3DVisual playerIndex:{playerIndex}, playerObject:{playerObject}");
         playerObject = Instantiate(GameMultiplayer.Instance.GetPlayerClassPrefabByPlayerIndex_NotForGameSceneObject(playerIndex));
         playerObject.transform.SetParent(transform, false);
         playerObject.transform.localPosition = Vector3.zero;
+    }
+
+    public void HideCharacter3DVisual() {
+        Destroy(playerObject);
+        playerObject = null;
     }
 }

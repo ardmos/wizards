@@ -32,7 +32,7 @@ public class PopupHostHasDisconnectedUI : MonoBehaviour
 
     private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
     {
-        Debug.Log($"누군가 나갔습니다. clientId : {clientId}");
+        //Debug.Log($"누군가 나갔습니다. clientId : {clientId}");
         if (clientId == NetworkManager.ServerClientId)
         {
             // Server is shutting down

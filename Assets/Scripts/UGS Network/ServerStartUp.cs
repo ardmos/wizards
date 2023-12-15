@@ -12,7 +12,7 @@ using UnityEngine;
 
 public class ServerStartUp : MonoBehaviour
 {
-    public static event System.Action ClientInstance;
+    //public static event System.Action ClientInstance;
     public static ServerStartUp Instance = null;
 
     private const string InternalServerIp = "0.0.0.0";
@@ -80,7 +80,7 @@ public class ServerStartUp : MonoBehaviour
         }
         else
         {
-            ClientInstance?.Invoke();
+            //ClientInstance?.Invoke();
         }
     }
 

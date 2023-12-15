@@ -1,19 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Spawn network objects
+/// NetworkList 관리
 /// </summary>
 
 public class GameMultiplayer : NetworkBehaviour
 {
-    private const int MAX_PLAYER_AMOUNT = 4;
+    // ConnectionApprovalHandler에서 함
+    // private const int MAX_PLAYER_AMOUNT = 4;
 
     // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트
     private NetworkList<PlayerData> playerDataNetworkList;
@@ -82,7 +79,12 @@ public class GameMultiplayer : NetworkBehaviour
             PlayerData playerData = playerDataNetworkList[i];
             if (playerData.clientId == clientId)
             {
-                // 해당 플레이어 Disconnected
+                Debug.Log($"Disconnected Player clientID: {clientId},");
+                Debug.Log($"playerDataNetworkList Index: {i},");
+                Debug.Log($"playerDataNetworkList.Count: {playerDataNetworkList.Count},");
+                Debug.Log($"playerDataNetworkList[index]: {playerDataNetworkList[i]}");
+
+                // 플레이어 Disconnected. 해당 인덱스 데이터 삭제
                 playerDataNetworkList.RemoveAt(i);
             }
         }
@@ -152,17 +154,10 @@ public class GameMultiplayer : NetworkBehaviour
         return playerDataNetworkList[playerIndex];
     }
 
-    // 플레이어 kick
-    public void KickPlayer(ulong clientId)
-    {
-        NetworkManager.Singleton.DisconnectClient(clientId);
-        // 위 DisconnectClient 했을 때 아래 내용이 자동으로 호출이 안돼서 직접 호출해줌.
-        NetworkManager_Server_OnClientDisconnectCallback(clientId);
-    }
-
     public bool HasAvailablePlayerSlots()
     {
-        return NetworkManager.Singleton.ConnectedClientsIds.Count < MAX_PLAYER_AMOUNT;
+        //return NetworkManager.Singleton.ConnectedClientsIds.Count < MAX_PLAYER_AMOUNT;
+        return NetworkManager.Singleton.ConnectedClientsIds.Count < ConnectionApprovalHandler.MaxPlayers;
     }
 
     public NetworkList<PlayerData> GetPlayerDataNetworkList()
