@@ -11,6 +11,7 @@ public class CharacterSelectPlayer : MonoBehaviour
     [SerializeField] private int playerIndex;
     [SerializeField] private GameObject readyGameObject;
     [SerializeField] private Button btnKick;
+    public GameRoomCharacterPrefab gameRoomCharacterPrefab;
 
     private void Awake()
     {
@@ -25,10 +26,8 @@ public class CharacterSelectPlayer : MonoBehaviour
         GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
         CharacterSelectReady.Instance.OnReadyChanged += CharacterSelectReady_OnReadyChanged;
 
-        Debug.Log($"playerIndex : {playerIndex}");
-        // 서버 캐릭터에게만 Kick 버튼을 보여줍니다. 서버 본인 캐릭터는 제외
-        if (playerIndex != 0) btnKick.gameObject.SetActive(NetworkManager.Singleton.IsServer);
-        else btnKick.gameObject.SetActive(false);
+        // 방장(Player Index 0) 캐릭터에게만 Kick 버튼을 보여줍니다. 방장 본인 캐릭터는 제외
+        btnKick.gameObject.SetActive(playerIndex!=0);
 
         UpdatePlayer();
     }
@@ -51,6 +50,7 @@ public class CharacterSelectPlayer : MonoBehaviour
     // 화면에 캐릭터 표시 여부 결정
     private void UpdatePlayer()
     {
+        Debug.Log(nameof(UpdatePlayer) + $"IsPlayer{playerIndex} Connected: {GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex)}");
         if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
         {
             Show();
@@ -68,6 +68,7 @@ public class CharacterSelectPlayer : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
+        gameRoomCharacterPrefab.UpdateCharacter3DVisual();
     }
 
     private void Hide()

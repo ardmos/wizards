@@ -83,11 +83,11 @@ public class LobbyUI : MonoBehaviour
         {
             case CharacterClasses.Class.Wizard:
                 btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
-                character = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedClassObjectForLobby());
+                character = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedCharacterPrefab_NotInGame());
                 break; 
             case CharacterClasses.Class.Knight:
                 btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
-                character = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedClassObjectForLobby());
+                character = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedCharacterPrefab_NotInGame());
                 break; 
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");

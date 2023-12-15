@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\Game\UI\PopupGameOverUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupMenuUI.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\GameRoomCharacterPrefab.cs" />
     <Compile Include="Assets\Scripts\Test\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneDedicatedServer.cs" />
