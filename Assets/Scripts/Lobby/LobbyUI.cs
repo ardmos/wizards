@@ -37,7 +37,7 @@ public class LobbyUI : MonoBehaviour
     {
         btnUserInfo.onClick.AddListener(() => { popupUserInfoUI.Show(); });
         btnSettings.onClick.AddListener(() => { popupSettingsUI.Show(); });
-        btnClassChange.onClick.AddListener(ChangeCurrentClass);
+        btnClassChange.onClick.AddListener(ChangePlayerClass);
         btnShop.onClick.AddListener(() => { popupShop.Show(); });
         btnEquipment.onClick.AddListener(() => { popupEquipment.Show(); });
         btnClan.onClick.AddListener(() => { popupClan.Show(); });
@@ -46,9 +46,10 @@ public class LobbyUI : MonoBehaviour
         btnInbox.onClick.AddListener(() => { popupInbox.Show(); });
         btnNews.onClick.AddListener(() => { popupNews.Show(); });
 
-        // 임시로 현 스크립트에서 상태 저장
+        // 임시로 현 스크립트(클라이언트)에서 player class 저장. 잘 가지고 있다가 Server가 Allocate 되면 GameMultiplyer의 서버RPC를 통해 서버에 넘겨준다. 
+        // 이후에 UGS 클라우드 서버가 구축되면, 그곳에서 관리할것이다.
         PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Wizard);
-        UpdateCurrentClass();
+        UpdatePlayerClass();
     }
 
     // Update is called once per frame
@@ -57,7 +58,7 @@ public class LobbyUI : MonoBehaviour
         
     }
 
-    private void ChangeCurrentClass()
+    private void ChangePlayerClass()
     {
         switch (PlayerProfileData.Instance.GetCurrentSelectedClass())
         {
@@ -72,10 +73,10 @@ public class LobbyUI : MonoBehaviour
                 break;
         }
 
-        UpdateCurrentClass();
+        UpdatePlayerClass();      
     }
 
-    private void UpdateCurrentClass()
+    private void UpdatePlayerClass()
     {
         if (character != null) { Destroy(character); }        
 
@@ -95,6 +96,6 @@ public class LobbyUI : MonoBehaviour
         }
         character.transform.SetParent(characterPos.transform);
         character.transform.localPosition = Vector3.zero;
-        character.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        character.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);        
     }
 }

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 /// <summary>
+/// 삭제 가능. GameMultiplayer에서 현 스크립트의 모든 기능을 가져감.
 /// PlayerProfileData 
-/// (테스트용. 현재는 UGS Multiplay 서버를 사용함. 추후 UGS Cloud서버에 계정 정보를 저장, 이용 계정과 연동하여관리하여야할 데이터임)
+/// (테스트용. 현재는 UGS Multiplay 서버를 사용함. 추후 UGS Cloud서버에 계정 정보를 저장<<---이 부분 구현할 차례. Ready정보 브로드캐스팅 하는 것 참고, 이용 계정과 연동하여관리하여야할 데이터임)
 /// 1. 현재 선택된 캐릭터 정보 저장(클래스, 아이템 장착&보유 상태 등)
 /// 2. 원래는 복장상태 저장도 해야함.
 /// </summary>
@@ -19,6 +20,7 @@ public class PlayerProfileData : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            Debug.Log("PlayerProfileData");
         }
         else
         {

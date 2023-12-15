@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 /// <summary>
 /// GameRoom씬에서 사용되는 Player 캐릭터 프리팹의 스크립트로
@@ -11,13 +12,17 @@ public class GameRoomCharacterPrefab : MonoBehaviour
     [SerializeField] GameObject playerObject;
     /// <summary>
     /// Player가 선택한 캐릭터의 비주얼을 가져와 보여줍니다.
+    /// 총 과정 
+    /// 1. 로비씬에서 PlayerProfileData에 선택중인 클래스를 저장
+    /// 2. 서버가 열리면 GameMultiplayer의 NetworkList인 playerDataList에 저장.
+    /// 3. 필요할 때 playerIndex나 clientID로 꺼내서 사용.
     /// </summary>
-    public void UpdateCharacter3DVisual()
+    public void UpdateCharacter3DVisual(int playerIndex)
     {
         if(playerObject != null) Destroy(playerObject);
-
+        
         Debug.Log($"LoadCharacter3DVisual");
-        playerObject = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedCharacterPrefab_NotInGame());
+        playerObject = Instantiate(GameMultiplayer.Instance.GetPlayerClassPrefabByPlayerIndex_NotForGameSceneObject(playerIndex));
         playerObject.transform.SetParent(transform, false);
         playerObject.transform.localPosition = Vector3.zero;
     }

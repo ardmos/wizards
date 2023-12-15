@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// GameRoom Scene에 캐릭터의 표시 여부를 조절하는 스크립트
+/// GameRoom Scene에서 현 캐릭터오브젝트의 표시 여부를 조절하는 스크립트
 /// </summary>
 public class CharacterSelectPlayer : MonoBehaviour
 {
@@ -47,7 +47,7 @@ public class CharacterSelectPlayer : MonoBehaviour
         UpdatePlayer();
     }
 
-    // 화면에 캐릭터 표시 여부 결정
+    // 화면에 캐릭터 표시 여부 결정. 내부 기능이 좀 반복되는면이 있어보인다. Ready와 오브젝트 Show를 분리할 수 있어보임. 
     private void UpdatePlayer()
     {
         Debug.Log(nameof(UpdatePlayer) + $"IsPlayer{playerIndex} Connected: {GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex)}");
@@ -68,7 +68,7 @@ public class CharacterSelectPlayer : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
-        gameRoomCharacterPrefab.UpdateCharacter3DVisual();
+        gameRoomCharacterPrefab.UpdateCharacter3DVisual(playerIndex);
     }
 
     private void Hide()
