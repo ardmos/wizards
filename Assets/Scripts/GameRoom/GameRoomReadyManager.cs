@@ -7,9 +7,9 @@ using Unity.Services.Multiplay;
 #endif  
 
 
-public class CharacterSelectReady : NetworkBehaviour
+public class GameRoomReadyManager : NetworkBehaviour
 {
-    public static CharacterSelectReady Instance { get; private set; }
+    public static GameRoomReadyManager Instance { get; private set; }
     public static event EventHandler OnInstanceCreated;
 
     public event EventHandler OnReadyChanged;

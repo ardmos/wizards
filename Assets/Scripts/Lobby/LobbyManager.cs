@@ -54,7 +54,7 @@ public class LobbyManager : MonoBehaviour
 
     private void CharacterSelectReady_OnInstanceCreated(object sender, EventArgs e)
     {
-        CharacterSelectReady.Instance.OnGameStarting += CharacterSelectReady_OnGameStarting;
+        GameRoomReadyManager.Instance.OnGameStarting += CharacterSelectReady_OnGameStarting;
     }
 
     private async void CharacterSelectReady_OnGameStarting(object sender, EventArgs e)

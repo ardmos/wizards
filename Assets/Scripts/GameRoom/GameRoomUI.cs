@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterSelectUI : MonoBehaviour
+public class GameRoomUI : MonoBehaviour
 {
     [SerializeField] private Button btnReady;
     [SerializeField] private Button btnBack;
@@ -13,7 +13,7 @@ public class CharacterSelectUI : MonoBehaviour
     {
         btnReady.onClick.AddListener(()=>
         {
-            CharacterSelectReady.Instance.SetPlayerReady();
+            GameRoomReadyManager.Instance.SetPlayerReady();
         });
 
         btnBack.onClick.AddListener(() =>

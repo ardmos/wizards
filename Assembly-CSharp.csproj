@@ -93,8 +93,8 @@
     <Compile Include="Assets\Scripts\Spells\IceSpell.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\GameRoomReadyManager.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameUI.cs" />
-    <Compile Include="Assets\Scripts\GameRoom\CharacterSelectReady.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Knight.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PlayerCountUI.cs" />
     <Compile Include="Assets\Scripts\ClientNetworkTransform.cs" />
@@ -128,12 +128,10 @@
     <Compile Include="Assets\Scripts\Lobby\LobbyUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneDedicatedServer.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />
-    <Compile Include="Assets\Scripts\GameRoom\CharacterSelectUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupClanUI.cs" />
     <Compile Include="Assets\Scripts\Test\LogCurrentScene.cs" />
-    <Compile Include="Assets\Scripts\GameRoom\CharacterSelectPlayer.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
@@ -155,6 +153,7 @@
     <Compile Include="Assets\Scripts\Game\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\IfServer.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\GameRoomPlayerCharacter.cs" />
     <Compile Include="Assets\Scripts\Common UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
@@ -162,6 +161,7 @@
     <Compile Include="Assets\Scripts\Test\PlayerProfileData.cs" />
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
     <Compile Include="Assets\Scripts\Game\Store\StoreTriggerAreaCollider.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\GameRoomUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

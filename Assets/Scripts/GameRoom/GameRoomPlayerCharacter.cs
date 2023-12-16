@@ -3,7 +3,7 @@ using UnityEngine.UI;
 /// <summary>
 /// GameRoom Scene에서 현 캐릭터오브젝트의 표시 여부를 조절하는 스크립트
 /// </summary>
-public class CharacterSelectPlayer : MonoBehaviour
+public class GameRoomPlayerCharacter : MonoBehaviour
 {
     [SerializeField] private int playerIndex;
     [SerializeField] private GameObject readyGameObject;    
@@ -19,7 +19,7 @@ public class CharacterSelectPlayer : MonoBehaviour
     private void Start()
     {
         GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
-        CharacterSelectReady.Instance.OnReadyChanged += CharacterSelectReady_OnReadyChanged;
+        GameRoomReadyManager.Instance.OnReadyChanged += CharacterSelectReady_OnReadyChanged;
 
         UpdatePlayer();
     }
@@ -58,7 +58,7 @@ public class CharacterSelectPlayer : MonoBehaviour
     {
         // 화면에 레디상태 표시 여부 결정
         PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-        readyGameObject.SetActive(CharacterSelectReady.Instance.IsPlayerReady(playerData.clientId));
+        readyGameObject.SetActive(GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId));
     }
 
     private void Show()
