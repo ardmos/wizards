@@ -2065,7 +2065,7 @@ GameObject:
   - component: {fileID: 1883614390}
   - component: {fileID: 1883614392}
   m_Layer: 0
-  m_Name: CharacterSelectReady
+  m_Name: GameRoomReadyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2824,7 +2824,7 @@ GameObject:
   - component: {fileID: 5209790676403974677}
   - component: {fileID: 8766088877514029384}
   m_Layer: 0
-  m_Name: GameRoomCharacter3Prefab
+  m_Name: GameRoomPlayerCharacter3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2841,7 +2841,7 @@ GameObject:
   - component: {fileID: 5209790675935641774}
   - component: {fileID: 8766088877581782003}
   m_Layer: 0
-  m_Name: GameRoomCharacter1Prefab
+  m_Name: GameRoomPlayerCharacter1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2858,7 +2858,7 @@ GameObject:
   - component: {fileID: 5209790675953643729}
   - component: {fileID: 8766088877599456140}
   m_Layer: 0
-  m_Name: GameRoomCharacter2Prefab
+  m_Name: GameRoomPlayerCharacter2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2875,7 +2875,7 @@ GameObject:
   - component: {fileID: 5209790674488921806}
   - component: {fileID: 8766088878282278291}
   m_Layer: 0
-  m_Name: GameRoomCharacter0Prefab
+  m_Name: GameRoomPlayerCharacter0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

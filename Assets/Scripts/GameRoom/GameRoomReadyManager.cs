@@ -5,15 +5,16 @@ using UnityEngine;
 #if UNITY_SERVER || UNITY_EDITOR
 using Unity.Services.Multiplay;
 #endif  
-
-
+/// <summary>
+/// GameRoom의 레디 상태 관리
+/// </summary>
 public class GameRoomReadyManager : NetworkBehaviour
 {
     public static GameRoomReadyManager Instance { get; private set; }
-    public static event EventHandler OnInstanceCreated;
+    public static event EventHandler OnInstanceCreated; // 게임룸 입장시 더 이상의 중간 진입을 막고싶을 때 사용함. Backfill 차단.
 
     public event EventHandler OnReadyChanged;
-    public event EventHandler OnGameStarting;
+    public event EventHandler OnGameStarting; // 게임룸 입장시 더 이상의 중간 진입을 막고싶을 때 사용함. Backfill 차단.
 
     private Dictionary<ulong, bool> playerReadyDictionary;
 
@@ -28,14 +29,14 @@ public class GameRoomReadyManager : NetworkBehaviour
     private async void Start()
     {
 #if DEDICATED_SERVER
-        Debug.Log("DEDICATED_SERVER CHARACTER SELECT READY");
+        Debug.Log("DEDICATED_SERVER GAME ROOM READY MANAGER");
 
-        // 서버를 플레이어 수용 대기중 상태로 만듦
-        Debug.Log("ReadyServerForPlayersAsync");
-        await MultiplayService.Instance.ReadyServerForPlayersAsync();
+        // 서버를 플레이어 수용 대기중 상태로 만듦. Backfill을 위한 것. 지금은 ServerStartup에서 다 관리. 플레이어 재접속 문제 관련 참고가 필요할경우를 대비해서 주석으로 남겨둠.
+        //Debug.Log("ReadyServerForPlayersAsync");
+        //await MultiplayService.Instance.ReadyServerForPlayersAsync();
 
         // 이거 해줘야 에러 안남
-        Camera.main.enabled = false;
+        //Camera.main.enabled = false;
 #endif
     }
 

@@ -152,6 +152,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\SoundGroupUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\GameRoomCharacterManager.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\IfServer.cs" />
     <Compile Include="Assets\Scripts\GameRoom\GameRoomPlayerCharacter.cs" />
     <Compile Include="Assets\Scripts\Common UI\Billboard.cs" />

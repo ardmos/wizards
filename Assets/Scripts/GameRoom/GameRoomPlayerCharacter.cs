@@ -18,24 +18,24 @@ public class GameRoomPlayerCharacter : MonoBehaviour
 
     private void Start()
     {
-        GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
-        GameRoomReadyManager.Instance.OnReadyChanged += CharacterSelectReady_OnReadyChanged;
+        GameRoomCharacterManager.instance.OnPlayerCharacterUpdated += GameRoomCharacterManager_OnPlayerCharacterUpdated;
+        GameRoomReadyManager.Instance.OnReadyChanged += GameRoomReadyManager_OnReadyChanged;
 
         UpdatePlayer();
     }
 
-    private void CharacterSelectReady_OnReadyChanged(object sender, System.EventArgs e)
+    private void GameRoomReadyManager_OnReadyChanged(object sender, System.EventArgs e)
     {
-        //UpdatePlayer();
         UpdatePlayerReadyUI();
     }
 
     private void OnDestroy()
     {
-        GameMultiplayer.Instance.OnPlayerDataNetworkListChanged -= GameMultiplayer_OnPlayerDataNetworkListChanged;
+        GameRoomCharacterManager.instance.OnPlayerCharacterUpdated -= GameRoomCharacterManager_OnPlayerCharacterUpdated;
+        GameRoomReadyManager.Instance.OnReadyChanged -= GameRoomReadyManager_OnReadyChanged;
     }
 
-    private void GameMultiplayer_OnPlayerDataNetworkListChanged(object sender, System.EventArgs e)
+    private void GameRoomCharacterManager_OnPlayerCharacterUpdated(object sender, System.EventArgs e)
     {
         UpdatePlayer();
     }

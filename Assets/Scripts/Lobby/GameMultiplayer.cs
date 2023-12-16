@@ -28,8 +28,15 @@ public class GameMultiplayer : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
 
         playerDataNetworkList = new NetworkList<PlayerData>();
-        // CharacterSelectPlayer 에서 지켜보는 EventHandler
+        // GameRoomReadyManager 에서 지켜보는 EventHandler
         playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
+        // GameRoomCharacterManager에서 지켜보는 Eventhandler
+        GameRoomCharacterManager.OnInstanceCreated += GameRoomCharacterManager_OnInstanceCreated;
+    }
+
+    private void GameRoomCharacterManager_OnInstanceCreated(object sender, EventArgs e)
+    {
+        GameRoomCharacterManager.instance.SetPlayerCharacter();
     }
 
     private void PlayerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent)
@@ -189,6 +196,8 @@ public class GameMultiplayer : NetworkBehaviour
     /// PlayerIndex로 현재 플레이어가 선택중인 Class의 프리팹 오브젝트를 얻을 수 있습니다.
     /// 
     /// 원래는 여기서 복장상태 반영해서 반환해줘야함. 지금은 클래스만 반영해서 반환해줌
+    /// 
+    /// <<< 근데 이거 여기 맞나???? 클래스 분리 고려해볼 필요 있다.   
     /// </summary>
     /// <returns></returns>
     public GameObject GetPlayerClassPrefabByPlayerIndex_NotForGameSceneObject(int playerIndex)
