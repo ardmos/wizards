@@ -31,13 +31,13 @@ public class GameMultiplayer : NetworkBehaviour
         // GameRoomReadyManager 俊辑 瘤难焊绰 EventHandler
         playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
         // GameRoomCharacterManager俊辑 瘤难焊绰 Eventhandler
-        GameRoomCharacterManager.OnInstanceCreated += GameRoomCharacterManager_OnInstanceCreated;
+        //GameRoomCharacterManager.OnInstanceCreated += GameRoomCharacterManager_OnInstanceCreated;
     }
 
-    private void GameRoomCharacterManager_OnInstanceCreated(object sender, EventArgs e)
-    {
-        GameRoomCharacterManager.instance.SetPlayerCharacter();
-    }
+    //private void GameRoomCharacterManager_OnInstanceCreated(object sender, EventArgs e)
+    //{
+    //    GameRoomCharacterManager.instance.SetPlayerCharacter();
+    //}
 
     private void PlayerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent)
     {
@@ -50,6 +50,7 @@ public class GameMultiplayer : NetworkBehaviour
         {
             clientId = clientId,
         });
+        GameRoomCharacterManager.instance.UpdatePlayerCharacter();
     }
 
 /*    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
@@ -93,6 +94,9 @@ public class GameMultiplayer : NetworkBehaviour
 
                 // 敲饭捞绢 Disconnected. 秦寸 牢郸胶 单捞磐 昏力
                 playerDataNetworkList.RemoveAt(i);
+
+                // 한 번 더 GameRoom 캐릭터 Visual 업데이트. 
+                GameRoomCharacterManager.instance.UpdatePlayerCharacter();
             }
         }
     }

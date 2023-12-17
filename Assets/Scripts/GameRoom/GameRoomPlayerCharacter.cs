@@ -49,9 +49,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
             Show();
         }
         else
-            Hide();
-
- 
+            Hide(); 
     }
 
     private void UpdatePlayerReadyUI()
@@ -64,13 +62,13 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
-        gameRoomCharacterPrefab.ShowCharacter3DVisual(playerIndex);
+        ShowCharacter3DVisual(playerIndex);
     }
 
     private void Hide()
     {
         gameObject.SetActive(false);
-        gameRoomCharacterPrefab.HideCharacter3DVisual();
+        HideCharacter3DVisual();
     }
 
     // 캐릭터 보여주기
