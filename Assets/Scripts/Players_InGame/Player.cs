@@ -35,7 +35,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     // Update is called once per frame
     private void Update()
     {
-        // 자식 오브젝트로 이동
+        /// 아래 내용들 모두 자식 오브젝트로 이동
         // if (!IsOwner) return;
 
         // UpdateAttackInput();
@@ -43,6 +43,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // HandleMovementServerAuth();
         // Client Auth 방식의 이동 처리
         //HandleMovement(); 
+        /// 여기까지! 
     }
 
     public override void OnNetworkSpawn()
@@ -522,8 +523,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
 
     // Client Auth 방식의 이동 처리 (현 오브젝트에 Client Network Transform이 필요)
-    private void HandleMovement()
-    {
+    protected void HandleMovement()
+    {        
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
@@ -540,7 +541,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         //Rotate(mouseDir);
     }
 
-    protected void Rotate(Vector3 mMoveDir)
+    private void Rotate(Vector3 mMoveDir)
     {
         float rotateSpeed = 20f;
         Vector3 slerpResult = Vector3.Slerp(transform.forward, mMoveDir, Time.deltaTime * rotateSpeed);

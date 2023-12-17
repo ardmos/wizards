@@ -41,16 +41,16 @@ public class GameMultiplayer : NetworkBehaviour
 
     private void PlayerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent)
     {
+        Debug.Log($"PlayerDataNetworkList_OnListChanged changed index: {changeEvent.Index}");
         OnPlayerDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private void NetworkManager_OnClientConnectedCallback(ulong clientId)
+    private void Server_OnClientConnectedCallback(ulong clientId)
     {
         playerDataNetworkList.Add(new PlayerData
         {
             clientId = clientId,
         });
-        GameRoomCharacterManager.instance.UpdatePlayerCharacter();
     }
 
 /*    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
@@ -73,14 +73,14 @@ public class GameMultiplayer : NetworkBehaviour
         response.Approved = true;
     }*/
 
-    private void NetworkManager_Client_OnClientDisconnectCallback(ulong obj)
+    private void Client_OnClientDisconnectCallback(ulong obj)
     {
         Debug.Log($"OnClientDisconnectCallback : {obj}");
         OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
     }
 
     // GameRoom俊辑 Client啊 唱艾阑 锭 敲饭捞绢甫 绝局林绰 何盒.
-    private void NetworkManager_Server_OnClientDisconnectCallback(ulong clientId)
+    private void Server_OnClientDisconnectCallback(ulong clientId)
     {
         for (int i = 0; i<playerDataNetworkList.Count; i++)
         {
@@ -93,10 +93,7 @@ public class GameMultiplayer : NetworkBehaviour
                 Debug.Log($"playerDataNetworkList[index]: {playerDataNetworkList[i]}");
 
                 // 敲饭捞绢 Disconnected. 秦寸 牢郸胶 单捞磐 昏力
-                playerDataNetworkList.RemoveAt(i);
-
-                // 한 번 더 GameRoom 캐릭터 Visual 업데이트. 
-                GameRoomCharacterManager.instance.UpdatePlayerCharacter();
+                playerDataNetworkList.RemoveAt(i);               
             }
         }
     }
@@ -105,8 +102,8 @@ public class GameMultiplayer : NetworkBehaviour
     public void StartServer()
     {
         //NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
-        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
-        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback += Server_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartServer();
     }
 
@@ -114,7 +111,7 @@ public class GameMultiplayer : NetworkBehaviour
     {
         OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
         NetworkManager.Singleton.OnClientConnectedCallback += Client_OnClientConnectedCallback;
-        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Client_OnClientDisconnectCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartClient();
     }
     /// <summary>
@@ -130,6 +127,7 @@ public class GameMultiplayer : NetworkBehaviour
     // CharacterSelectPlayer俊辑 秦寸 牢郸胶狼 敲饭捞绢啊 立加 登菌唱 犬牢且 锭 荤侩
     public bool IsPlayerIndexConnected(int playerIndex)
     {
+        //Debug.Log($"IsPlayerIndexConnected playerIndex: {playerIndex}, playerDataNetworkList.Count: {playerDataNetworkList.Count}");
         return playerIndex < playerDataNetworkList.Count;
     }
 
@@ -193,7 +191,7 @@ public class GameMultiplayer : NetworkBehaviour
         int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
         PlayerData playerData = playerDataNetworkList[playerDataIndex];
         playerData.playerClass = playerClass;
-        playerDataNetworkList[playerDataIndex] = playerData;
+        playerDataNetworkList[playerDataIndex] = playerData;      
     }
 
     /// <summary>

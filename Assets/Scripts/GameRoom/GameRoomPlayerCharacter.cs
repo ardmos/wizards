@@ -1,6 +1,9 @@
+using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
+/// /// GameRoom의 캐릭터 상태 관리
 /// GameRoom Scene에서 현 캐릭터오브젝트의 표시 여부를 조절하는 스크립트
 /// </summary>
 public class GameRoomPlayerCharacter : MonoBehaviour
@@ -16,11 +19,16 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     // 캐릭터 보여주기
     [SerializeField] private GameObject playerObject;
 
-    private void Start()
-    {
-        GameRoomCharacterManager.instance.OnPlayerCharacterUpdated += GameRoomCharacterManager_OnPlayerCharacterUpdated;
+    private void Awake()
+    {       
         GameRoomReadyManager.Instance.OnReadyChanged += GameRoomReadyManager_OnReadyChanged;
 
+        GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += Instance_OnPlayerDataNetworkListChanged;
+    }
+
+    private void Instance_OnPlayerDataNetworkListChanged(object sender, System.EventArgs e)
+    {
+        Debug.Log($"Instance_OnPlayerDataNetworkListChanged playerIndex: {playerIndex}, playerDataNetworkList.Count: {GameMultiplayer.Instance.GetPlayerDataNetworkList().Count}");
         UpdatePlayer();
     }
 
@@ -30,20 +38,20 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     }
 
     private void OnDestroy()
-    {
-        GameRoomCharacterManager.instance.OnPlayerCharacterUpdated -= GameRoomCharacterManager_OnPlayerCharacterUpdated;
+    {       
         GameRoomReadyManager.Instance.OnReadyChanged -= GameRoomReadyManager_OnReadyChanged;
     }
 
     private void GameRoomCharacterManager_OnPlayerCharacterUpdated(object sender, System.EventArgs e)
     {
-        UpdatePlayer();
+        //UpdatePlayer();
+        //Debug.Log($"GameRoomCharacterManager_OnPlayerCharacterUpdated sender: {sender}");
     }
 
     // 화면에 캐릭터 표시 여부 결정. 내부 기능이 좀 반복되는면이 있어보인다. Ready와 오브젝트 Show를 분리할 수 있어보임. 
     private void UpdatePlayer()
     {
-        Debug.Log(nameof(UpdatePlayer) + $"IsPlayer{playerIndex} Connected?: {GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex)}");
+        //Debug.Log(nameof(UpdatePlayer) + $"IsPlayer{playerIndex} Connected?: {GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex)}");
         if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
         {
             Show();
@@ -68,7 +76,6 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
-        HideCharacter3DVisual();
     }
 
     // 캐릭터 보여주기
@@ -83,13 +90,8 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     {
         //Debug.Log($"LoadCharacter3DVisual playerIndex:{playerIndex}, playerObject:{playerObject}");
         playerObject = Instantiate(GameMultiplayer.Instance.GetPlayerClassPrefabByPlayerIndex_NotForGameSceneObject(playerIndex));
+        Debug.Log($"playerObject: {playerObject.name}");
         playerObject.transform.SetParent(transform, false);
         playerObject.transform.localPosition = Vector3.zero;
-    }
-
-    public void HideCharacter3DVisual()
-    {
-        Destroy(playerObject);
-        playerObject = null;
     }
 }

@@ -83,6 +83,7 @@ public class SpellController : MonoBehaviour
     #region 현재 마법 이름 얻기
     public string GetCurrentSpellName(int spellNumber)
     {
+        // null 예외처리 필요함
         if (currentSpellInfoList[spellNumber - 1] == null) return "";
         return currentSpellInfoList[spellNumber - 1].spellName;
     }

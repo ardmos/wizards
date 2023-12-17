@@ -90,7 +90,7 @@ public class WaterBallLv1 : WaterSpell
                 }
             }
 
-            GetComponent<Rigidbody>().isKinematic = true;
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
             ContactPoint contact = collision.contacts[0];
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
