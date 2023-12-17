@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+/// <summary>
+/// 테스트용 인풋시스템
+/// </summary>
 public class TestingInputSystem : MonoBehaviour
 {
     private Rigidbody playerRigidbody;

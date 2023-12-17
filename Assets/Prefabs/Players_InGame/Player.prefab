@@ -2719,9 +2719,7 @@ MonoBehaviour:
   currentSpellPrefabArray: []
   player: {fileID: 932501098101691876}
   muzzle: {fileID: 932501096560631534}
-  restTimeCurrentSpell_1: 0
-  restTimeCurrentSpell_2: 0
-  restTimeCurrentSpell_3: 0
+  restTimeCurrentSpellArray: []
 --- !u!114 &5033900459084263869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18522,7 +18520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593e5f8c20457c248913ecf53e34834d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpFill: {fileID: 5446678117487382934}
+  slider: {fileID: 0}
+  imgFill: {fileID: 0}
+  hpColors: []
 --- !u!1 &8102100778939647797
 GameObject:
   m_ObjectHideFlags: 0

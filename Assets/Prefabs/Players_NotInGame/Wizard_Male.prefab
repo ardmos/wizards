@@ -18203,6 +18203,7 @@ GameObject:
   - component: {fileID: 8798573449086215543}
   - component: {fileID: 4917906149593278145}
   - component: {fileID: 2808310318288973088}
+  - component: {fileID: 1748078243192159317}
   m_Layer: 6
   m_Name: Wizard_Male
   m_TagString: Player
@@ -18276,6 +18277,18 @@ CapsuleCollider:
   m_Height: 1.55
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &1748078243192159317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822752010955555959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f798e783da77e7d4292b36cf3a53dbe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7827638752707065953
 GameObject:
   m_ObjectHideFlags: 0
