@@ -1,8 +1,4 @@
-using Unity.Netcode;
-using Unity.Services.Matchmaker.Models;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.UI;
 /// <summary>
 /// /// GameRoom의 캐릭터 상태 관리
 /// GameRoom Scene에서 현 캐릭터오브젝트의 표시 여부를 조절하는 스크립트
