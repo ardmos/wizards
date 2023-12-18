@@ -48,7 +48,7 @@ public class LobbyUI : MonoBehaviour
 
         // 임시로 현 스크립트(클라이언트)에서 player class 저장. 잘 가지고 있다가 Server가 Allocate 되면 GameMultiplyer의 서버RPC를 통해 서버에 넘겨준다. 
         // 이후에 UGS 클라우드 서버가 구축되면, 그곳에서 관리할것이다.
-        PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Wizard);
+        //PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Wizard);
         UpdatePlayerClass();
     }
 

@@ -82,16 +82,34 @@ public class GameManager : NetworkBehaviour
     {
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            // plyaerPrefab?? ???? ClientId?? ???? ?????????? ???????? ??????????????.            
-            //Transform playerTransform = Instantiate(playerPrefab);
-            GameObject player = Instantiate(GameMultiplayer.Instance.GetPlayerClassPrefabByPlayerIndex_ForGameSceneObject(
-                GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(clientId)));
+            // Player Character Client 历厘 规侥
+            GameObject player = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).playerClass));
+            // Player Character Server 历厘 规侥
+            //GameObject player = Instantiate(GameMultiplayer.Instance.GetCurrentGamePlayerPrefabServerRPC());
             if (player != null)
                 player.transform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             else
                 Debug.Log($"SceneManager_OnLoadEventCompleted : player prefab load failed. prefab is null");
         }
     }
+
+    private GameObject GetCurrentPlayerCharacterPrefab(CharacterClasses.Class playerClass)
+    {
+        GameObject playerPrefab = null;
+        switch (playerClass)
+        {
+            case CharacterClasses.Class.Wizard:
+                playerPrefab = GameAssets.instantiate.wizard_Male;
+                break;
+            case CharacterClasses.Class.Knight:
+                playerPrefab = GameAssets.instantiate.knight_Male;
+                break;
+            default:
+                break;
+        }
+        return playerPrefab;
+    }
+
 
     private void State_OnValueChanged(State previousValue, State newValue)
     {

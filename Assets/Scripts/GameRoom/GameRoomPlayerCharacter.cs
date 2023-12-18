@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,38 +21,32 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     [SerializeField] private GameObject playerObject;
 
     private void Awake()
-    {       
-        GameRoomReadyManager.Instance.OnReadyChanged += GameRoomReadyManager_OnReadyChanged;
-
-        GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += Instance_OnPlayerDataNetworkListChanged;
+    {
+        GameRoomReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyChanged;
+        GameMultiplayer.Instance.OnServerPlayerListChanged += OnServerPlayerListChanged;
     }
 
-    private void Instance_OnPlayerDataNetworkListChanged(object sender, System.EventArgs e)
+    private void OnServerPlayerListChanged(object sender, System.EventArgs e)
     {
-        Debug.Log($"Instance_OnPlayerDataNetworkListChanged playerIndex: {playerIndex}, playerDataNetworkList.Count: {GameMultiplayer.Instance.GetPlayerDataNetworkList().Count}");
+        Debug.Log($"OnServerPlayerListChanged playerIndex: {playerIndex}, playerDataNetworkList.Count: {GameMultiplayer.Instance.GetPlayerDataNetworkList().Count}");
         UpdatePlayer();
     }
 
-    private void GameRoomReadyManager_OnReadyChanged(object sender, System.EventArgs e)
+    private void OnReadyChanged(object sender, System.EventArgs e)
     {
         UpdatePlayerReadyUI();
     }
 
     private void OnDestroy()
-    {       
-        GameRoomReadyManager.Instance.OnReadyChanged -= GameRoomReadyManager_OnReadyChanged;
-    }
-
-    private void GameRoomCharacterManager_OnPlayerCharacterUpdated(object sender, System.EventArgs e)
     {
-        //UpdatePlayer();
-        //Debug.Log($"GameRoomCharacterManager_OnPlayerCharacterUpdated sender: {sender}");
+        GameRoomReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyChanged;
+        GameMultiplayer.Instance.OnServerPlayerListChanged -= OnServerPlayerListChanged;
     }
 
     // 화면에 캐릭터 표시 여부 결정. 내부 기능이 좀 반복되는면이 있어보인다. Ready와 오브젝트 Show를 분리할 수 있어보임. 
     private void UpdatePlayer()
     {
-        //Debug.Log(nameof(UpdatePlayer) + $"IsPlayer{playerIndex} Connected?: {GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex)}");
+        Debug.Log(nameof(UpdatePlayer) + $"IsPlayer{playerIndex} Connected?: {GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex)}");
         if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
         {
             Show();
@@ -76,6 +71,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+        Destroy(playerObject);
     }
 
     // 캐릭터 보여주기
@@ -88,10 +84,28 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     /// </summary>
     public void ShowCharacter3DVisual(int playerIndex)
     {
-        //Debug.Log($"LoadCharacter3DVisual playerIndex:{playerIndex}, playerObject:{playerObject}");
-        playerObject = Instantiate(GameMultiplayer.Instance.GetPlayerClassPrefabByPlayerIndex_NotForGameSceneObject(playerIndex));
+        Debug.Log($"ShowCharacter3DVisual playerIndex:{playerIndex}, class:{GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass}");
+        
+        playerObject = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass));
         Debug.Log($"playerObject: {playerObject.name}");
         playerObject.transform.SetParent(transform, false);
         playerObject.transform.localPosition = Vector3.zero;
+    }
+
+    private GameObject GetCurrentPlayerCharacterPrefab(CharacterClasses.Class playerClass)
+    {
+        GameObject playerPrefab = null;
+        switch (playerClass)
+        {
+            case CharacterClasses.Class.Wizard:
+                playerPrefab = GameAssets.instantiate.wizard_Male_ForLobby;
+                break;
+            case CharacterClasses.Class.Knight:
+                playerPrefab = GameAssets.instantiate.knight_Male_ForLobby;
+                break;
+            default:
+                break;
+        }
+        return playerPrefab;
     }
 }

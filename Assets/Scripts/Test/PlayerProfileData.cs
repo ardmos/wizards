@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerProfileData : MonoBehaviour
 {
+#if !DEDICATED_SERVER
     public static PlayerProfileData Instance { get; private set; }
 
     [SerializeField] private CharacterClasses.Class currentSelectedClass;
@@ -19,6 +20,7 @@ public class PlayerProfileData : MonoBehaviour
         {
             Instance = this;
             Debug.Log("PlayerProfileData");
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,10 +28,15 @@ public class PlayerProfileData : MonoBehaviour
         }
     }
 
-    public CharacterClasses.Class GetCurrentSelectedClass() { return currentSelectedClass; } 
-    
+    public CharacterClasses.Class GetCurrentSelectedClass() 
+    {
+        return currentSelectedClass; 
+    }
+
+    // Lobby Scene 전용. Client 내부 저장용
     public void SetCurrentSelectedClass(CharacterClasses.Class @class) { currentSelectedClass = @class; }
 
+    // Lobby Scene 전용. Client 내부 저장용
     public GameObject GetCurrentSelectedCharacterPrefab_NotInGame()
     {
         //Debug.Log($"GetCurrentSelectedCharacterPrefab_NotInGame currentSelectedClass: {currentSelectedClass}");
@@ -49,6 +56,8 @@ public class PlayerProfileData : MonoBehaviour
         //Debug.Log($"GetCurrentSelectedCharacterPrefab_NotInGame resultObject: {resultObejct?.name}");
         return resultObejct;
     }
+
+    // Lobby Scene 전용. Client 내부 저장용
     public GameObject GetCurrentSelectedCharacterPrefab_InGame()
     {
         // 원래는 여기서 복장상태 반영해서 반환해줘야함. 지금은 클래스만 반영해서 반환해줌
@@ -67,4 +76,5 @@ public class PlayerProfileData : MonoBehaviour
 
         return resultObejct;
     }
+#endif
 }

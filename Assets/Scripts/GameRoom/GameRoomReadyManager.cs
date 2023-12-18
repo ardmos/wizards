@@ -13,7 +13,7 @@ public class GameRoomReadyManager : NetworkBehaviour
     public static GameRoomReadyManager Instance { get; private set; }
     public static event EventHandler OnInstanceCreated; // 게임룸 입장시 더 이상의 중간 진입을 막고싶을 때 사용함. Backfill 차단.
 
-    public event EventHandler OnReadyChanged;
+    public event EventHandler OnClintPlayerReadyDictionaryChanged;
     public event EventHandler OnGameStarting; // 게임룸 입장시 더 이상의 중간 진입을 막고싶을 때 사용함. Backfill 차단.
 
     private Dictionary<ulong, bool> playerReadyDictionary;
@@ -23,7 +23,7 @@ public class GameRoomReadyManager : NetworkBehaviour
         Instance = this;
         OnInstanceCreated?.Invoke(this, EventArgs.Empty);
         playerReadyDictionary = new Dictionary<ulong, bool>();
-        OnReadyChanged?.Invoke(this, EventArgs.Empty);
+        OnClintPlayerReadyDictionaryChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private async void Start()
@@ -79,7 +79,7 @@ public class GameRoomReadyManager : NetworkBehaviour
     {
         playerReadyDictionary[clientId] = true;
 
-        OnReadyChanged?.Invoke(this, EventArgs.Empty);
+        OnClintPlayerReadyDictionaryChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public bool IsPlayerReady(ulong clientId)

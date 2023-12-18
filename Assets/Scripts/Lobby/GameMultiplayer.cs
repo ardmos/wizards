@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 /// <summary>
@@ -19,64 +22,34 @@ public class GameMultiplayer : NetworkBehaviour
 
     public event EventHandler OnTryingToJoinGame;
     public event EventHandler OnFailedToJoinGame;
-    public event EventHandler OnPlayerDataNetworkListChanged;
+    public event EventHandler OnServerPlayerListChanged;
 
     private void Awake()
     {
         Instance = this;
-
         DontDestroyOnLoad(gameObject);
-
         playerDataNetworkList = new NetworkList<PlayerData>();
-        // GameRoomReadyManager 에서 지켜보는 EventHandler
-        playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
-        // GameRoomCharacterManager에서 지켜보는 Eventhandler
-        //GameRoomCharacterManager.OnInstanceCreated += GameRoomCharacterManager_OnInstanceCreated;
     }
 
-    //private void GameRoomCharacterManager_OnInstanceCreated(object sender, EventArgs e)
-    //{
-    //    GameRoomCharacterManager.instance.SetPlayerCharacter();
-    //}
-
-    private void PlayerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent)
+    public override void OnNetworkSpawn()
     {
-        Debug.Log($"PlayerDataNetworkList_OnListChanged changed index: {changeEvent.Index}");
-        OnPlayerDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
+        base.OnNetworkSpawn();
+        playerDataNetworkList.OnListChanged += OnServerListChanged;
     }
 
-    private void Server_OnClientConnectedCallback(ulong clientId)
+    private void OnServerListChanged(NetworkListEvent<PlayerData> changeEvent)
     {
-        playerDataNetworkList.Add(new PlayerData
-        {
-            clientId = clientId,
-        });
+        Debug.Log($"OnServerListChanged changed index: ");
+        OnServerPlayerListChanged?.Invoke(this, EventArgs.Empty);
     }
 
-/*    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    // UGS Dedicated Server 
+    public void StartServer()
     {
-        // GameRoom 씬인지 확인
-        if (SceneManager.GetActiveScene().name != LoadingSceneManager.Scene.GameRoomScene.ToString()) { 
-            response.Approved = false;
-            response.Reason = "Game has already started";
-            return;
-        }
-
-        // Maximum Player 확인
-        if (NetworkManager.Singleton.ConnectedClientsIds.Count >= MAX_PLAYER_AMOUNT)
-        {
-            response.Approved = false;
-            response.Reason = "Game is full";
-            return;
-        }
-
-        response.Approved = true;
-    }*/
-
-    private void Client_OnClientDisconnectCallback(ulong obj)
-    {
-        Debug.Log($"OnClientDisconnectCallback : {obj}");
-        OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
+        //NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+        //NetworkManager.Singleton.OnClientConnectedCallback += Server_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += Server_OnClientDisconnectCallback;
+        NetworkManager.Singleton.StartServer();
     }
 
     // GameRoom에서 Client가 나갔을 때 플레이어를 없애주는 부분.
@@ -87,24 +60,10 @@ public class GameMultiplayer : NetworkBehaviour
             PlayerData playerData = playerDataNetworkList[i];
             if (playerData.clientId == clientId)
             {
-                Debug.Log($"Disconnected Player clientID: {clientId},");
-                Debug.Log($"playerDataNetworkList Index: {i},");
-                Debug.Log($"playerDataNetworkList.Count: {playerDataNetworkList.Count},");
-                Debug.Log($"playerDataNetworkList[index]: {playerDataNetworkList[i]}");
-
                 // 플레이어 Disconnected. 해당 인덱스 데이터 삭제
-                playerDataNetworkList.RemoveAt(i);               
+                playerDataNetworkList.RemoveAt(i);
             }
         }
-    }
-
-    // UGS Dedicated Server 
-    public void StartServer()
-    {
-        //NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
-        NetworkManager.Singleton.OnClientConnectedCallback += Server_OnClientConnectedCallback;
-        NetworkManager.Singleton.OnClientDisconnectCallback += Server_OnClientDisconnectCallback;
-        NetworkManager.Singleton.StartServer();
     }
 
     public void StartClient()
@@ -121,10 +80,41 @@ public class GameMultiplayer : NetworkBehaviour
     private void Client_OnClientConnectedCallback(ulong clientId)
     {
         // 서버RPC를 통해 서버에 저장
-        ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
+        Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerProfileData.Instance.GetCurrentSelectedClass()}");
+        ChangePlayerClass(clientId, PlayerProfileData.Instance.GetCurrentSelectedClass());
+    }
+    private void Client_OnClientDisconnectCallback(ulong obj)
+    {
+        Debug.Log($"OnClientDisconnectCallback : {obj}");
+        OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
     }
 
-    // CharacterSelectPlayer에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
+    /// <summary>
+    /// 클래스 변경을 서버에게 보고할 수 있습니다.
+    /// 보고 시점은 Server가 Allocate 된 이후! 
+    /// 즉 GameRoom에 들어가면서 입니다.
+    /// </summary>
+    /// <param name="playerClass"></param>    
+    private void ChangePlayerClass(ulong clientId, CharacterClasses.Class playerClass)
+    {
+        Debug.Log($"ChangePlayerClass. clientId: {clientId}, class: {playerClass}");
+        ChangePlayerClassServerRPC(clientId, playerClass);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ChangePlayerClassServerRPC(ulong clientId, CharacterClasses.Class playerClass, ServerRpcParams serverRpcParams = default)
+    {
+        // 새로운 유저
+        playerDataNetworkList.Add(new PlayerData
+        {
+            clientId = clientId,
+            playerClass = playerClass,
+        });
+        Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
+            $"player{clientId} Class: {playerClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
+    }
+
+    // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
     public bool IsPlayerIndexConnected(int playerIndex)
     {
         //Debug.Log($"IsPlayerIndexConnected playerIndex: {playerIndex}, playerDataNetworkList.Count: {playerDataNetworkList.Count}");
@@ -174,70 +164,25 @@ public class GameMultiplayer : NetworkBehaviour
         return playerDataNetworkList;
     }
 
-    /// <summary>
-    /// 클래스 변경을 서버에게 보고할 수 있습니다.
-    /// 보고 시점은 Server가 Allocate 된 이후! 
-    /// 즉 GameRoom에 들어가면서 입니다.
-    /// </summary>
-    /// <param name="playerClass"></param>    
-    public void ChangePlayerClass(CharacterClasses.Class playerClass)
-    {
-        ChangePlayerClassServerRPC(playerClass);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void ChangePlayerClassServerRPC(CharacterClasses.Class playerClass, ServerRpcParams serverRpcParams = default)
-    {
-        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
-        PlayerData playerData = playerDataNetworkList[playerDataIndex];
-        playerData.playerClass = playerClass;
-        playerDataNetworkList[playerDataIndex] = playerData;      
-    }
-
-    /// <summary>
-    /// PlayerIndex로 현재 플레이어가 선택중인 Class의 프리팹 오브젝트를 얻을 수 있습니다.
-    /// 
-    /// 원래는 여기서 복장상태 반영해서 반환해줘야함. 지금은 클래스만 반영해서 반환해줌
-    /// 
-    /// <<< 근데 이거 여기 맞나???? 클래스 분리 고려해볼 필요 있다.   
-    /// </summary>
-    /// <returns></returns>
-    public GameObject GetPlayerClassPrefabByPlayerIndex_NotForGameSceneObject(int playerIndex)
-    {       
-        GameObject resultObejct = null;
-        switch (GetPlayerDataFromPlayerIndex(playerIndex).playerClass)
+    /*    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {
-            case CharacterClasses.Class.Wizard:
-                resultObejct = GameAssets.instantiate.wizard_Male_ForLobby;
-                break;
-            case CharacterClasses.Class.Knight:
-                resultObejct = GameAssets.instantiate.knight_Male_ForLobby;
-                break;
-            default:
-                break;
-        }     
-        return resultObejct;
-    }
-    public GameObject GetPlayerClassPrefabByPlayerIndex_ForGameSceneObject(int playerIndex)
-    {
-        GameObject resultObejct = null;
-        switch (GetPlayerDataFromPlayerIndex(playerIndex).playerClass)
-        {
-            case CharacterClasses.Class.Wizard:
-                resultObejct = GameAssets.instantiate.wizard_Male;
-                break;
-            case CharacterClasses.Class.Knight:
-                resultObejct = GameAssets.instantiate.knight_Male;
-                break;
-            default:
-                break;
-        }
+            // GameRoom 씬인지 확인
+            if (SceneManager.GetActiveScene().name != LoadingSceneManager.Scene.GameRoomScene.ToString()) { 
+                response.Approved = false;
+                response.Reason = "Game has already started";
+                return;
+            }
 
-        return resultObejct;
-    }
+            // Maximum Player 확인
+            if (NetworkManager.Singleton.ConnectedClientsIds.Count >= MAX_PLAYER_AMOUNT)
+            {
+                response.Approved = false;
+                response.Reason = "Game is full";
+                return;
+            }
 
-
-    //
+            response.Approved = true;
+        }*/
 
     // 플레이어 이름 띄워주는 부분 () 서버일 경우 NetworkManager_OnclientConnectedCallback에서 호출해주고 클라이언트일 경우StartClient에서 호출해줘야함
     // 최초 이름 등록하는부분은 ???? 
