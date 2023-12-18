@@ -66,8 +66,9 @@ public class GameRoomPlayerCharacter : MonoBehaviour
 
     private void Hide()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);       
         Destroy(playerObject);
+        playerObject = null;
     }
 
     // 캐릭터 보여주기
@@ -80,8 +81,12 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     /// </summary>
     public void ShowCharacter3DVisual(int playerIndex)
     {
+        if (playerObject != null)
+        {
+            Debug.Log($"player{playerIndex}'s visual character is already exist.");
+            return;
+        }
         Debug.Log($"ShowCharacter3DVisual playerIndex:{playerIndex}, class:{GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass}");
-        
         playerObject = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass));
         Debug.Log($"playerObject: {playerObject.name}");
         playerObject.transform.SetParent(transform, false);
