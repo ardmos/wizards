@@ -1,7 +1,8 @@
 using UnityEngine;
 /// <summary>
 /// /// GameRoom의 캐릭터 상태 관리
-/// GameRoom Scene에서 현 캐릭터오브젝트의 표시 여부를 조절하는 스크립트
+/// 1. player index에 맞춰 Player Visual Prefab을 업데이트 해줍니다.
+/// 2. 캐릭터 머리 위에 'READY' UI를 업데이트 해줍니다.
 /// </summary>
 public class GameRoomPlayerCharacter : MonoBehaviour
 {
@@ -22,10 +23,15 @@ public class GameRoomPlayerCharacter : MonoBehaviour
         GameMultiplayer.Instance.OnServerPlayerListChanged += OnServerPlayerListChanged;
     }
 
+    private void Start()
+    {
+        readyGameObject.SetActive(false);
+    }
+
     private void OnServerPlayerListChanged(object sender, System.EventArgs e)
     {
-        Debug.Log($"OnServerPlayerListChanged playerIndex: {playerIndex}, playerDataNetworkList.Count: {GameMultiplayer.Instance.GetPlayerDataNetworkList().Count}");
-        UpdatePlayer();
+        //Debug.Log($"OnServerPlayerListChanged playerIndex: {playerIndex}, playerDataNetworkList.Count: {GameMultiplayer.Instance.GetPlayerDataNetworkList().Count}");
+        UpdatePlayerCharacter();
     }
 
     private void OnReadyChanged(object sender, System.EventArgs e)
@@ -39,38 +45,30 @@ public class GameRoomPlayerCharacter : MonoBehaviour
         GameMultiplayer.Instance.OnServerPlayerListChanged -= OnServerPlayerListChanged;
     }
 
-    // 화면에 캐릭터 표시 여부 결정. 내부 기능이 좀 반복되는면이 있어보인다. Ready와 오브젝트 Show를 분리할 수 있어보임. 
-    private void UpdatePlayer()
-    {
-        Debug.Log(nameof(UpdatePlayer) + $"IsPlayer{playerIndex} Connected?: {GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex)}");
+    /// <summary>
+    /// Player Visual Prefab 업데이트
+    /// </summary>
+    private void UpdatePlayerCharacter()
+    {      
         if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
         {
-            Show();
+            Debug.Log(nameof(UpdatePlayerCharacter) + $"Player{playerIndex} Connected");
+            ShowPlayerCharacter();
         }
         else
-            Hide(); 
+            HidePlayerCharacter(); 
     }
-
-    private void UpdatePlayerReadyUI()
-    {
-        // 화면에 레디상태 표시 여부 결정
-        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-        readyGameObject.SetActive(GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId));
-    }
-
-    private void Show()
+    private void ShowPlayerCharacter()
     {
         gameObject.SetActive(true);
         ShowCharacter3DVisual(playerIndex);
     }
-
-    private void Hide()
+    private void HidePlayerCharacter()
     {
         gameObject.SetActive(false);       
         Destroy(playerObject);
         playerObject = null;
     }
-
     // 캐릭터 보여주기
     /// <summary>
     /// Player가 선택한 캐릭터의 비주얼을 가져와 보여줍니다.
@@ -83,12 +81,12 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     {
         if (playerObject != null)
         {
-            Debug.Log($"player{playerIndex}'s visual character is already exist.");
+            //Debug.Log($"player{playerIndex}'s visual character is already exist.");
             return;
         }
-        Debug.Log($"ShowCharacter3DVisual playerIndex:{playerIndex}, class:{GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass}");
+        //Debug.Log($"ShowCharacter3DVisual playerIndex:{playerIndex}, class:{GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass}");
         playerObject = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass));
-        Debug.Log($"playerObject: {playerObject.name}");
+        //Debug.Log($"playerObject: {playerObject.name}");
         playerObject.transform.SetParent(transform, false);
         playerObject.transform.localPosition = Vector3.zero;
     }
@@ -108,5 +106,15 @@ public class GameRoomPlayerCharacter : MonoBehaviour
                 break;
         }
         return playerPrefab;
+    }
+
+    /// <summary>
+    /// Ready UI 업데이트 
+    /// </summary>
+    private void UpdatePlayerReadyUI()
+    {
+        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
+        readyGameObject.SetActive(GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId));
+        Debug.Log($"UpdatePlayerReadyUI playerIndex: {playerIndex} is Ready? {GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId)}");
     }
 }

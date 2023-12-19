@@ -40,7 +40,7 @@ public class GameRoomReadyManager : NetworkBehaviour
 #endif
     }
 
-    public void SetPlayerReady()
+    public void SetPlayerReadyClientUI()
     {
         SetPlayerReadyServerRpc();
     }
