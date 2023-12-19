@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
-/// Spawn network objects
+/// UGS Start Server, Start Client
 /// NetworkList 관리
 /// </summary>
 
@@ -147,6 +147,10 @@ public class GameMultiplayer : NetworkBehaviour
     // 플레이어 Index를 단서로 PlayerData(ClientId 포함 여러 플레이어 데이터)를 찾는 메소드
     public PlayerData GetPlayerDataFromPlayerIndex(int playerIndex)
     {
+        if (playerIndex >= playerDataNetworkList.Count)
+        {
+            Debug.Log($"playerIndex is wrong. playerIndex:{playerIndex}, listCount: {playerDataNetworkList.Count}");       
+        }
         return playerDataNetworkList[playerIndex];
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,33 +10,33 @@ using UnityEngine.UI;
 /// </summary>
 public class GamePadUI : MonoBehaviour
 {
+    public Image[] imgBtnSkillArray = new Image[3];
     public Image imgBtnSkill1, imgBtnSkill2, imgBtnSkill3;//, imgBtnSkillDefence;
     public Image imgCooltimeSkill1, imgCooltimeSkill2, imgCooltimeSkill3;//, imgCooltimeSkillDefence;
     public GameManager gameManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
-    {
-        UpdateButtonText();
+    {     
         CoolTimePresenter();
     }
 
-    private void UpdateButtonText()
+    public void UpdateSpellUI(int spellNumber)
+    {
+        UpdateButtonText(spellNumber);
+    }
+
+    private void UpdateButtonText(int spellNumber)
     {
         if (Player.LocalInstance == null)
         {
             return;
         }
 
-        imgBtnSkill1.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(1);
+        imgBtnSkillArray[spellNumber-1].sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(spellNumber);
+        /*imgBtnSkill1.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(1);
         imgBtnSkill2.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(2);
-        imgBtnSkill3.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(3);
+        imgBtnSkill3.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(3);*/
         //imgBtnSkillDefence.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(4);
     }
 
@@ -47,7 +48,8 @@ public class GamePadUI : MonoBehaviour
         }
 
         float spell1CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(1);
-        if (spell1CoolTimeRatio > 0) {
+        if (spell1CoolTimeRatio > 0)
+        {
             imgCooltimeSkill1.fillAmount = 1 - spell1CoolTimeRatio;
         }
         float spell2CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(2);

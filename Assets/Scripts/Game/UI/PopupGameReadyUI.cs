@@ -7,18 +7,25 @@ public class PopupGameReadyUI : MonoBehaviour
     [SerializeField] private Button btnReady;
     [SerializeField] private TextMeshProUGUI txtGameReady;
 
-    private void Start()
+    private void Awake()
     {
-        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
-        Show();
+        GameManager.Instance.OnStateChanged += OnGameStateChanged;
         btnReady.onClick.AddListener(() =>
         {
             LocalPlayerReady();
         });
     }
-
-    private void GameManager_OnStateChanged(object sender, System.EventArgs e)
+    private void Start()
     {
+        txtGameReady.text = "Please Ready";
+    }
+
+    private void OnGameStateChanged(object sender, System.EventArgs e)
+    {
+        if (GameManager.Instance.IsWatingToStart())
+        {
+            Show();
+        }
         if (GameManager.Instance.IsCountdownToStartActive())
         {
             Hide();
@@ -39,11 +46,7 @@ public class PopupGameReadyUI : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
-        btnReady.gameObject.SetActive(true);
-        txtGameReady.gameObject.SetActive(true);
-        txtGameReady.text = "Please Ready";
     }
-
     private void Hide()
     {
         gameObject.SetActive(false);

@@ -10,15 +10,11 @@ public class PopupMenuUI : MonoBehaviour
     [SerializeField] private Button btnRestart;
     // 게임 포기. 관전하기 ( 관전시스템 추후 구축 )
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         btnClose.onClick.AddListener(Hide);
         btnRestart.onClick.AddListener(() =>
         {
-            // 이동 전에 UGS Multiplay 플레이 종료 처리
-            if (NetworkManager.Singleton != null) NetworkManager.Singleton.Shutdown();
             CleanUp();
             // 로비씬으로 이동
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
@@ -39,11 +35,12 @@ public class PopupMenuUI : MonoBehaviour
     {
         if (NetworkManager.Singleton != null)
         {
+            NetworkManager.Singleton.Shutdown();
             Destroy(NetworkManager.Singleton.gameObject);
         }
         if (GameMultiplayer.Instance != null)
         {
-            Destroy(GameMultiplayer.Instance.gameObject);
+            Destroy(GameMultiplayer.Instance.gameObject);           
         }
     }
 }

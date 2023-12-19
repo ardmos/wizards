@@ -2621,7 +2621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d9a03a873a9884086712713b853b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpellPrefabArray: []
+  currentSpellPrefabArray:
+  - {fileID: 0}
   player: {fileID: 5577225032273852061}
   muzzle: {fileID: 932501096560631534}
   restTimeCurrentSpellArray: []

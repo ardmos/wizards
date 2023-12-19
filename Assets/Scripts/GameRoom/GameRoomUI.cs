@@ -18,20 +18,16 @@ public class GameRoomUI : MonoBehaviour
 
         btnBack.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.Shutdown();
+            CleanUp();
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
-    }
-
-    private void OnDestroy()
-    {
-        CleanUp();
     }
 
     private void CleanUp()
     {
         if (NetworkManager.Singleton != null)
         {
+            NetworkManager.Singleton.Shutdown();
             Destroy(NetworkManager.Singleton.gameObject);
         }
         if (GameMultiplayer.Instance != null)

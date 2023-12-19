@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5209790675118492347}
   - component: {fileID: 8766088878359445990}
-  - component: {fileID: 2822774892014577211}
   m_Layer: 0
   m_Name: GameRoomCharacterPrefab
   m_TagString: Untagged
@@ -48,20 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 0
   readyGameObject: {fileID: 2674458065029515651}
-  btnKick: {fileID: 691346636544635463}
-  gameRoomCharacterPrefab: {fileID: 2822774892014577211}
---- !u!114 &2822774892014577211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2281895816831562862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9050c3242e08647498c9f6221c714f91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   playerObject: {fileID: 0}
 --- !u!1 &2674458065029515651
 GameObject:

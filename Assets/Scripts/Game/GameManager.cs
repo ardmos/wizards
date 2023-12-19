@@ -37,7 +37,7 @@ public class GameManager : NetworkBehaviour
     // Test??. playerPrefab?? ?????? ???????? ???????? ?????????? ?????????? ??????.
     //[SerializeField] private Transform playerPrefab;
 
-    private NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart); // 생성과 동시에 Default값 설정. 
+    private NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart); 
     private bool isLocalPlayerReady;
     private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
@@ -68,7 +68,7 @@ public class GameManager : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         state.OnValueChanged += State_OnValueChanged;
-
+        state = new NetworkVariable<State>(State.WatingToStart); // 생성과 동시에 Default값 설정. 
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
@@ -76,16 +76,19 @@ public class GameManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// ???? ?????? Player Character ????
+    /// Game Scene 로드 완료시 실행됩니다.
+    /// 1. Player Character 로드
     /// </summary>
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             // Player Character Client 저장 방식
-            GameObject player = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).playerClass));
+            //GameObject player = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).playerClass));
             // Player Character Server 저장 방식
-            //GameObject player = Instantiate(GameMultiplayer.Instance.GetCurrentGamePlayerPrefabServerRPC());
+            CharacterClasses.Class playerClass = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).playerClass;
+            GameObject playerPrefab = GetCurrentPlayerCharacterPrefab(playerClass);
+            GameObject player = Instantiate(playerPrefab);
             if (player != null)
                 player.transform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             else
@@ -113,15 +116,13 @@ public class GameManager : NetworkBehaviour
 
     private void State_OnValueChanged(State previousValue, State newValue)
     {
-        //???? ?????? ???????
         OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // SceneManager_OnLoadEventCompleted ?????? ?????? ??????????, ?? Update???? ???????????  EventHandler ???? ???????? ???? ????. 
-
+        // Update 대신에 State 바뀔때마다 호출되는 Eventhandler 사용하면 될것같은데! 추후 검토
         RunStateMachine();
     }
 

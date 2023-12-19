@@ -73,7 +73,6 @@
     <Compile Include="Assets\Scripts\Lobby\PopupModUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneCleanUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\MatchmakerUI.cs" />
-    <Compile Include="Assets\Scripts\GameRoom\GameRoomCharacter.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\InputSystem\TestingInputSystem.cs" />

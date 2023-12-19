@@ -10,19 +10,14 @@ public class PopupHostHasDisconnectedUI : MonoBehaviour
     {
         btnPlayAgain.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.Shutdown();           
+            CleanUp();
             // 로비로 이동.
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
     }
 
-    private void Start()
-    {
-        Hide();              
-    }
-
-    private void OnDestroy()
+    private void OnDisable()
     {        
         //NetworkManager.Singleton.OnClientDisconnectCallback
         NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnectCallback;
@@ -46,5 +41,18 @@ public class PopupHostHasDisconnectedUI : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    private void CleanUp()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.Shutdown();
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
+        if (GameMultiplayer.Instance != null)
+        {
+            Destroy(GameMultiplayer.Instance.gameObject);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -9,6 +10,7 @@ using UnityEngine;
 /// </summary>
 public class SpellController : MonoBehaviour
 {
+    public event EventHandler OnSpellChanged;
     [SerializeField] private GameObject[] currentSpellPrefabArray = new GameObject[3];
     [SerializeField] private List<Spell.SpellInfo> currentSpellInfoList;
     [SerializeField] private Player player;
@@ -112,6 +114,7 @@ public class SpellController : MonoBehaviour
         currentSpellPrefabArray[spellNumber - 1] = spellObjectPrefab;
         currentSpellPrefabArray[spellNumber - 1].GetComponent<Spell>().InitSpellInfoDetail();
         currentSpellInfoList[spellNumber - 1] = currentSpellPrefabArray[spellNumber - 1].GetComponent<Spell>().spellInfo;
+        //OnSpellChanged?.Invoke(this, spellNumber); ////////////////////////////////////////  <----- GamePadUI 의 업데이트 스킬아이콘을 어쩌면 좋을꼬!!!! 여기부터!
     }
     #endregion
 }

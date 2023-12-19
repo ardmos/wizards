@@ -61,7 +61,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     private void ShowPlayerCharacter()
     {
         gameObject.SetActive(true);
-        ShowCharacter3DVisual(playerIndex);
+        ShowCharacter3DVisual();
     }
     private void HidePlayerCharacter()
     {
@@ -77,7 +77,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     /// 2. 서버가 열리면 GameMultiplayer의 NetworkList인 playerDataList에 저장.
     /// 3. 필요할 때 playerIndex나 clientID로 꺼내서 사용.
     /// </summary>
-    public void ShowCharacter3DVisual(int playerIndex)
+    public void ShowCharacter3DVisual()
     {
         if (playerObject != null)
         {
@@ -113,8 +113,14 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     /// </summary>
     private void UpdatePlayerReadyUI()
     {
-        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-        readyGameObject.SetActive(GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId));
-        Debug.Log($"UpdatePlayerReadyUI playerIndex: {playerIndex} is Ready? {GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId)}");
+        if(GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
+        {
+            PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
+            readyGameObject.SetActive(GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId));
+        }
+        else
+        {
+            readyGameObject.SetActive(false);
+        }
     }
 }

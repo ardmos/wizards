@@ -8,11 +8,9 @@ public class PopupGameStartCountdownUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtCountdown;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
-        Hide();
     }
 
     private void Update()

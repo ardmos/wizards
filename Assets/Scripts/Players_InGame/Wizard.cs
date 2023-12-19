@@ -10,6 +10,7 @@ public class Wizard : Player
     void Start()
     {
         InitStat();
+        GetComponent<Rigidbody>().isKinematic = false;
     }
 
     // Update is called once per frame
