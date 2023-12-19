@@ -26,7 +26,6 @@ public class PopupHostHasDisconnectedUI : MonoBehaviour
     {        
         //NetworkManager.Singleton.OnClientDisconnectCallback
         NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnectCallback;
-        CleanUp();
     }
 
     private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
@@ -47,16 +46,5 @@ public class PopupHostHasDisconnectedUI : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
-    }
-    private void CleanUp()
-    {
-        if (NetworkManager.Singleton != null)
-        {
-            Destroy(NetworkManager.Singleton.gameObject);
-        }
-        if (GameMultiplayer.Instance != null)
-        {
-            Destroy(GameMultiplayer.Instance.gameObject);
-        }
     }
 }

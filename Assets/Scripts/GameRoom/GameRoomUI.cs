@@ -13,16 +13,19 @@ public class GameRoomUI : MonoBehaviour
     {
         btnReady.onClick.AddListener(()=>
         {
-            GameRoomReadyManager.Instance.SetPlayerReady();
+            GameRoomReadyManager.Instance.SetPlayerReadyClientUI();
         });
 
         btnBack.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.Shutdown();
-            CleanUp();
-
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
+    }
+
+    private void OnDestroy()
+    {
+        CleanUp();
     }
 
     private void CleanUp()
