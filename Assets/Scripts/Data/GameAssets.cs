@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,6 +73,12 @@ public class GameAssets : MonoBehaviour
     #endregion Mesh
 
     #region Prefab
+    // Á÷¾÷º° ½ºÆç ÇÁ¸®ÆÕ
+    public GameObject[] spellListWizard;
+    public GameObject[] spellListKnight;
+
+
+    // Å×½ºÆ®¿ë ÇÁ¸®ÆÕ
     public GameObject fireBall_1;
     public GameObject waterBall_1;
     public GameObject iceBall_1;
@@ -91,4 +98,13 @@ public class GameAssets : MonoBehaviour
     #region SFX
 
     #endregion
+
+    public GameObject GetWizardSpellPrefab(CharacterClasses.Class playerClass, SpellNames.Wizard spellName)
+    {
+        return spellListWizard[(int)spellName];
+    }
+    public GameObject GetKnightSpellPrefab(CharacterClasses.Class playerClass, SpellNames.Knight spellName)
+    {
+        return spellListKnight[(int)spellName];
+    }
 }

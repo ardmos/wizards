@@ -2609,6 +2609,8 @@ MonoBehaviour:
   - {x: 5, y: 1, z: 0}
   - {x: -5, y: 1, z: 0}
   - {x: 0, y: 1, z: -5}
+  ownedSpellList: 
+  ownedSpellPrefabList: []
 --- !u!114 &6631467521865965885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2623,9 +2625,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpellPrefabArray:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   player: {fileID: 5577225032273852061}
   muzzle: {fileID: 932501096560631534}
-  restTimeCurrentSpellArray: []
+  restTimeCurrentSpellArray:
+  - 0
+  - 0
+  - 0
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9249,7 +9256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 7.68, z: -7.69}
+  m_FollowOffset: {x: 0, y: 9.2, z: -11.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

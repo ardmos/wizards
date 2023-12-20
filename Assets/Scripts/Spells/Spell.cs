@@ -47,7 +47,10 @@ public abstract class Spell : MonoBehaviour
     public virtual void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
     {
         // 포구에 발사체 위치시키기
-        GameObject spellObject = Instantiate(GetSpellObject(spellLvlType), muzzle.position, Quaternion.identity);
+        //GameObject spellObject = Instantiate(GetSpellObject(spellLvlType), muzzle.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(gameObject, muzzle.position, Quaternion.identity);
+        //GameObject spellObject = gameObject;
+        //spellObject.transform.position = muzzle.position;
         spellObject.GetComponent<Spell>().InitSpellInfoDetail();
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = muzzle.forward;
@@ -96,6 +99,9 @@ public abstract class Spell : MonoBehaviour
                     case SpellType.Lightning:
                         break;
                     case SpellType.Arcane:
+                        break;
+                    case SpellType.Normal: 
+                        //resultObject
                         break;
                     default:
                         break;

@@ -46,13 +46,10 @@ public class Player : NetworkBehaviour, IStoreCustomer
         /// 여기까지! 
     }
 
-    public override void OnNetworkSpawn()
+    public void InitializePlayer()
     { 
         Debug.Log("OnNetworkSpan");
         if (IsOwner) LocalInstance = this;
-
-        // HP 초기화
-        hPBar.SetHP(hp);
 
         // 카메라 위치 초기화. 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
@@ -115,13 +112,14 @@ public class Player : NetworkBehaviour, IStoreCustomer
         switch (itemType)
         {
             case Item.ItemType.FireBall_1:
-                spellController.SetCurrentSpell(gameAssets.fireBall_1, slotNumber);
+                // CurrentSpell 바꾸는건 현재 착용 장비에 따라 달라지고, 아이템 구매(획득)시에는 해당 스킬 레벨이 올라간다
+                //spellController.SetCurrentSpell(gameAssets.fireBall_1, slotNumber);
                 break;
             case Item.ItemType.WaterBall_1:
-                spellController.SetCurrentSpell(gameAssets.waterBall_1, slotNumber);
+                //spellController.SetCurrentSpell(gameAssets.waterBall_1, slotNumber);
                 break;
             case Item.ItemType.IceBall_1:
-                spellController.SetCurrentSpell(gameAssets.iceBall_1, slotNumber);
+                //spellController.SetCurrentSpell(gameAssets.iceBall_1, slotNumber);
                 break;
             default:
                 break;

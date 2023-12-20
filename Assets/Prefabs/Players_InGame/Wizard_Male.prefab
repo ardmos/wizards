@@ -2621,10 +2621,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d9a03a873a9884086712713b853b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpellPrefabArray: []
+  currentSpellPrefabArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   player: {fileID: 0}
   muzzle: {fileID: 932501096560631534}
-  restTimeCurrentSpellArray: []
+  restTimeCurrentSpellArray:
+  - 0
+  - 0
+  - 0
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9248,7 +9254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 7.68, z: -7.69}
+  m_FollowOffset: {x: 0, y: 9.2, z: -11.3}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

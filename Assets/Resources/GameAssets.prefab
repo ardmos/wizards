@@ -94,6 +94,12 @@ MonoBehaviour:
   m_Scroll_3: {fileID: 0}
   m_Scroll_4: {fileID: 0}
   m_Scroll_5: {fileID: 0}
+  spellListWizard:
+  - {fileID: 1881642356963322, guid: 77d75e6d0d8ad3747be6ebe8b26bf0f8, type: 3}
+  - {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
+  - {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
+  spellListKnight:
+  - {fileID: 1881642356963322, guid: a7143fbcc32420c4697ee48a013db27a, type: 3}
   fireBall_1: {fileID: 1881642356963322, guid: 77d75e6d0d8ad3747be6ebe8b26bf0f8, type: 3}
   waterBall_1: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
   iceBall_1: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}

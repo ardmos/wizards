@@ -10,36 +10,37 @@ using UnityEngine.UI;
 /// </summary>
 public class GamePadUI : MonoBehaviour
 {
-    public Image[] imgBtnSkillArray = new Image[3];
-    public Image imgBtnSkill1, imgBtnSkill2, imgBtnSkill3;//, imgBtnSkillDefence;
+    public Image[] attackSkillIcons;
+    // Defence or Dodge skill array[1] 하나도 추가할 예정.
+    //public Image imgBtnSkill1, imgBtnSkill2, imgBtnSkill3;//, imgBtnSkillDefence;
     public Image imgCooltimeSkill1, imgCooltimeSkill2, imgCooltimeSkill3;//, imgCooltimeSkillDefence;
     public GameManager gameManager;
 
     // Update is called once per frame
     void Update()
-    {     
+    {
         CoolTimePresenter();
     }
 
-    public void UpdateSpellUI(int spellNumber)
+    // spellNumber 0부터 시작 
+    public void UpdateSpellUI(Sprite spellIcon, int spellNumber)
     {
-        UpdateButtonText(spellNumber);
+        UpdateButtonImage(spellIcon, spellNumber);
     }
-
-    private void UpdateButtonText(int spellNumber)
+    // spellNumber 0부터 시작 
+    private void UpdateButtonImage(Sprite spellIcon, int spellNumber)
     {
+        Debug.Log($"{nameof(UpdateButtonImage)} Player.LocalInstance:{Player.LocalInstance}, spellIcon:{spellIcon.name}, spellNumber:{spellNumber}");
         if (Player.LocalInstance == null)
         {
             return;
         }
 
-        imgBtnSkillArray[spellNumber-1].sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(spellNumber);
-        /*imgBtnSkill1.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(1);
-        imgBtnSkill2.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(2);
-        imgBtnSkill3.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(3);*/
+        attackSkillIcons[spellNumber].sprite = spellIcon;
         //imgBtnSkillDefence.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(4);
     }
 
+    // spellNumber 0부터 시작
     private void CoolTimePresenter()
     {
         if (Player.LocalInstance == null)
@@ -47,17 +48,17 @@ public class GamePadUI : MonoBehaviour
             return;
         }
 
-        float spell1CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(1);
+        float spell1CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(0);
         if (spell1CoolTimeRatio > 0)
         {
             imgCooltimeSkill1.fillAmount = 1 - spell1CoolTimeRatio;
         }
-        float spell2CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(2);
+        float spell2CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(1);
         if (spell2CoolTimeRatio > 0)
         {
             imgCooltimeSkill2.fillAmount = 1 - spell2CoolTimeRatio;
         }
-        float spell3CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(3);
+        float spell3CoolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(2);
         if (spell3CoolTimeRatio > 0)
         {
             imgCooltimeSkill3.fillAmount = 1 - spell3CoolTimeRatio;

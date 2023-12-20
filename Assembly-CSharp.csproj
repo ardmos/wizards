@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingSceneManager.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\PushAlarmGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Data\SpellNames.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Player.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupEquipmentUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupInboxUI.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupClanUI.cs" />
     <Compile Include="Assets\Scripts\Test\LogCurrentScene.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
+    <Compile Include="Assets\Scripts\Spells\SlashLv1.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
@@ -158,7 +161,6 @@
     <Compile Include="Assets\Scripts\Common UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
-    <Compile Include="Assets\Scripts\Spells\SwordAttackLv1.cs" />
     <Compile Include="Assets\Scripts\Test\PlayerProfileData.cs" />
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
     <Compile Include="Assets\Scripts\Game\Store\StoreTriggerAreaCollider.cs" />

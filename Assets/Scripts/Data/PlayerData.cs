@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -12,7 +13,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
 
     public bool Equals(PlayerData other)
     {
-        return 
+        return
             clientId == other.clientId &&
             playerName == other.playerName &&
             playerId == other.playerId &&
