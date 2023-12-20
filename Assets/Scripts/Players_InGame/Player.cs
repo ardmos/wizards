@@ -47,8 +47,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
 
     public void InitializePlayer()
-    { 
-        Debug.Log("OnNetworkSpan");
+    {      
         if (IsOwner) LocalInstance = this;
 
         // 카메라 위치 초기화. 소유자만 따라다니도록 함 
@@ -539,10 +538,13 @@ public class Player : NetworkBehaviour, IStoreCustomer
         //Rotate(mouseDir);
     }
 
-    private void Rotate(Vector3 mMoveDir)
+    private void Rotate(Vector3 moveDir)
     {
+        // 가만 있을 때 회전방향 바뀌지 않도록 예외처리
+        if(moveDir == Vector3.zero) return;
+
         float rotateSpeed = 20f;
-        Vector3 slerpResult = Vector3.Slerp(transform.forward, mMoveDir, Time.deltaTime * rotateSpeed);
+        Vector3 slerpResult = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
         transform.forward = slerpResult;
     }
 
