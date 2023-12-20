@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupInboxUI.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\NetworkUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
+    <Compile Include="Assets\Scripts\UGS Network\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameOverUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupMenuUI.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />

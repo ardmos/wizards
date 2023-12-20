@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 /// <summary>
 /// 1. Knight ½ºÅÈ °ü¸®
@@ -32,7 +30,7 @@ public class Knight : Player
     private void InitStat()
     {
         hp = 7;
-        moveSpeed = 7f;
+        moveSpeed = 4f;
     }
 
 

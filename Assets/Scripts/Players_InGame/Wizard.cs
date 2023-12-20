@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary> 
@@ -31,7 +30,7 @@ public class Wizard : Player
     private void InitStat()
     {
         hp = 5;
-        moveSpeed = 7f;
+        moveSpeed = 4f;
     }
 
 

@@ -87,6 +87,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     {
         return isWalking;
     }
+
     public bool IsAttack1()
     {
         return isAttack1;
@@ -511,6 +512,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
         transform.position += moveDir * moveDistance;
         isWalking = moveDir != Vector3.zero;
 
+        // Animation State 브로드캐스팅
+        UpdateAnimationStateClientRPC(isWalking);
+
         // 진행방향 바라볼 때
         Rotate(moveDir);
 
@@ -518,6 +522,13 @@ public class Player : NetworkBehaviour, IStoreCustomer
         //Vector3 mouseDir = GetMouseDir();
         //Rotate(mouseDir);
     }
+
+    [ClientRpc]
+    private void UpdateAnimationStateClientRPC(bool isWalking)
+    {
+        this.isWalking = isWalking;
+    }
+
 
     // Client Auth 방식의 이동 처리 (현 오브젝트에 Client Network Transform이 필요)
     protected void HandleMovement()
