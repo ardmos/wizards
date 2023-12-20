@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 /// <summary>
 /// 플레이어 캐릭터 오브젝트에 붙이는 스크립트
 /// 현재 기능
-///   1. 마법 보유 현황 관리
-///   2. 스킬 발동 
+///   1. 현재 캐릭터 마법 보유 현황 관리
+///   2. 캐릭터 보유 마법 발동 
 ///   3. 현재 보유 마법에 대한 정보를 공유
 /// </summary>
 public class SpellController : MonoBehaviour
@@ -13,7 +14,6 @@ public class SpellController : MonoBehaviour
     [SerializeField] private GameObject[] currentSpellPrefabArray = new GameObject[3];
     [SerializeField] private Spell.SpellInfo[] currentSpellInfoList = new Spell.SpellInfo[3];
     [SerializeField] private Player player;
-    [SerializeField] private Transform muzzle;
     [SerializeField] private float[] restTimeCurrentSpellArray = new float[3];
 
     #region 현재 설정된 마법 시전
@@ -53,7 +53,7 @@ public class SpellController : MonoBehaviour
 
         if (isPlayerInput)
         {
-            currentSpellPrefabArray[spellIndex].GetComponent<Spell>().CastSpell(new Spell.SpellLvlType { level = currentSpellInfoList[spellIndex].level, spellType = currentSpellInfoList[spellIndex].spellType }, muzzle);
+            currentSpellPrefabArray[spellIndex].GetComponent<Spell>().CastSpell(new SpellLvlType { level = currentSpellInfoList[spellIndex].level, spellType = currentSpellInfoList[spellIndex].spellType }, player.GetComponent<NetworkObject>());
             currentSpellInfoList[spellIndex].castAble = false;
         }
     }

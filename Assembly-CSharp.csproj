@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\ItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Data\SpellType.cs" />
     <Compile Include="Assets\Scripts\Lobby\ConnectingUI.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\FloorGenerator.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupNewsUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
+    <Compile Include="Assets\Scripts\Game\SpellManager.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\SwitchUI.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Assets\Scripts\Game\UI\TimerUI.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
+    <Compile Include="Assets\Scripts\Players_InGame\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
@@ -137,7 +140,6 @@
     <Compile Include="Assets\Scripts\Test\LogCurrentScene.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Spells\SlashLv1.cs" />
-    <Compile Include="Assets\Scripts\Spells\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Test\PlayerProfileData.cs" />
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
+    <Compile Include="Assets\Scripts\Game\Player\SpellController.cs" />
     <Compile Include="Assets\Scripts\Game\Store\StoreTriggerAreaCollider.cs" />
     <Compile Include="Assets\Scripts\GameRoom\GameRoomUI.cs" />
   </ItemGroup>

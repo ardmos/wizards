@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using static Spell;
 using static UnityEngine.ParticleSystem;
@@ -15,8 +16,8 @@ using static UnityEngine.ParticleSystem;
 public class IceBallLv1 : IceSpell
 {
     [SerializeField] private Sprite iconImage;
-    [SerializeField] private GameObject muzzlePrefab;
-    [SerializeField] private GameObject hitPrefab;
+    [SerializeField] private GameObject muzzleVFXPrefab;
+    [SerializeField] private GameObject hitVFXPrefab;
     [SerializeField] private List<GameObject> trails;
 
     [SerializeField] private bool collided, isSpellCollided;
@@ -99,9 +100,9 @@ public class IceBallLv1 : IceSpell
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
             Vector3 pos = contact.point;
 
-            if (hitPrefab != null)
+            if (hitVFXPrefab != null)
             {
-                var hitVFX = Instantiate(hitPrefab, pos, rot) as GameObject;
+                var hitVFX = Instantiate(hitVFXPrefab, pos, rot) as GameObject;
 
                 var ps = hitVFX.GetComponent<ParticleSystem>();
                 if (ps == null)
@@ -147,7 +148,7 @@ public class IceBallLv1 : IceSpell
             Debug.Log("collisionHandlingResult.level : " + collisionHandlingResult.level);
             if (collisionHandlingResult.level > 0)
             {
-                CastSpell(collisionHandlingResult, gameObject.transform);
+                CastSpell(collisionHandlingResult, gameObject.GetComponent<NetworkObject>());
             }
         }
     }
@@ -155,14 +156,14 @@ public class IceBallLv1 : IceSpell
     /// <summary>
     /// 3. 마법 시전
     /// </summary>
-    public override void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
+    public override void CastSpell(SpellLvlType spellLvlType, NetworkObject player)
     {
-        base.CastSpell(spellLvlType, muzzle);
-        MuzzleVFX(muzzlePrefab, muzzle);
+        base.CastSpell(spellLvlType, player);
+        MuzzleVFX(muzzleVFXPrefab, player);
     }
 
-    public override void MuzzleVFX(GameObject muzzlePrefab, Transform muzzle)
+    public override void MuzzleVFX(GameObject muzzlePrefab, NetworkObject player)
     {
-        base.MuzzleVFX(muzzlePrefab, muzzle);
+        base.MuzzleVFX(muzzlePrefab, player);
     }
 }

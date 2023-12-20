@@ -32,20 +32,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
     protected int backPack;
     protected int wand;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        /// 아래 내용들 모두 자식 오브젝트로 이동
-        // if (!IsOwner) return;
-
-        // UpdateAttackInput();
-        // Server Auth 방식의 이동 처리
-        // HandleMovementServerAuth();
-        // Client Auth 방식의 이동 처리
-        //HandleMovement(); 
-        /// 여기까지! 
-    }
-
     public void InitializePlayer()
     {      
         if (IsOwner) LocalInstance = this;
@@ -503,7 +489,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [ServerRpc(RequireOwnership = false)]
     private void HandleMovementServerRPC(Vector2 inputVector)
     {
-        //Debug.Log($"HandleMovementServerRPC inputVector : {inputVector}");
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         // 서버권한방식의 네트워크에서 이동처리 할 때 서버의 DeltaTime이 클라이언트의 델타타임과는 다른 경우가 생김. 따라서 아래처럼 수정해야함
@@ -530,7 +515,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
 
 
-    // Client Auth 방식의 이동 처리 (현 오브젝트에 Client Network Transform이 필요)
+    //사용 안함. 삭제 가능 Client Auth 방식의 이동 처리 (현 오브젝트에 Client Network Transform이 필요)
     protected void HandleMovement()
     {        
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();

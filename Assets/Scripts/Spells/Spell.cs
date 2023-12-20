@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
@@ -5,22 +6,6 @@ using UnityEngine;
 /// </summary>
 public abstract class Spell : MonoBehaviour
 {
-    public enum SpellType
-    {
-        Normal,
-        Fire,
-        Water,
-        Ice,
-        Lightning,
-        Arcane
-    }
-
-    public struct SpellLvlType
-    {
-        public Spell.SpellType spellType;
-        public int level;
-    }
-
     public class SpellInfo
     {
         public SpellType spellType;
@@ -44,26 +29,16 @@ public abstract class Spell : MonoBehaviour
     public abstract SpellLvlType CollisionHandling(SpellLvlType thisSpell, SpellLvlType opponentsSpell);
 
     // 마법 발사
-    public virtual void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
+    public virtual void CastSpell(SpellLvlType spellLvlType, NetworkObject muzzle)
     {
-        // 포구에 발사체 위치시키기
-        //GameObject spellObject = Instantiate(GetSpellObject(spellLvlType), muzzle.position, Quaternion.identity);
-        GameObject spellObject = Instantiate(gameObject, muzzle.position, Quaternion.identity);
-        //GameObject spellObject = gameObject;
-        //spellObject.transform.position = muzzle.position;
-        spellObject.GetComponent<Spell>().InitSpellInfoDetail();
-        // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
-        spellObject.transform.forward = muzzle.forward;
-        // 소환시에 Impulse로 발사 처리
-        float speed = 35f;
-        spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * speed, ForceMode.Impulse);
+        SpellManager.instance.SpawnSpellObject(spellLvlType, muzzle);
     }
-    // 마법 발사시 VFX
-    public virtual void MuzzleVFX(GameObject muzzlePrefab, Transform muzzle)
+    // 마법 발사시 VFX. 지금은 상대방건 안보임. 상대방것도 보이게 하려면 발사체처럼 Server에서 NetworkObject로 Spawn 해줘야함.
+    public virtual void MuzzleVFX(GameObject muzzlePrefab, NetworkObject muzzle)
     {
         if (muzzlePrefab != null)
         {
-            GameObject muzzleVFX = Instantiate(muzzlePrefab, muzzle.position, Quaternion.identity);
+            GameObject muzzleVFX = Instantiate(muzzlePrefab, muzzle.GetComponent<Transform>().position, Quaternion.identity);
             muzzleVFX.transform.forward = gameObject.transform.forward;
             var ps = muzzleVFX.GetComponent<ParticleSystem>();
             if (ps != null)
@@ -74,77 +49,5 @@ public abstract class Spell : MonoBehaviour
                 Destroy(muzzleVFX, psChild.main.duration);
             }
         }
-    }
-
-    // 마법 프리팹 검색 및 반환
-    private GameObject GetSpellObject(SpellLvlType spellLvlType)
-    {
-        GameObject resultObject = null;
-        GameAssets gameAssets = GameAssets.instantiate;
-
-        switch (spellLvlType.level)
-        {
-            case 1:
-                switch (spellLvlType.spellType)
-                {
-                    case SpellType.Fire:
-                        resultObject = gameAssets.fireBall_1;
-                        break;
-                    case SpellType.Water:
-                        resultObject = gameAssets.waterBall_1;
-                        break;
-                    case SpellType.Ice:
-                        resultObject = gameAssets.iceBall_1;
-                        break;
-                    case SpellType.Lightning:
-                        break;
-                    case SpellType.Arcane:
-                        break;
-                    case SpellType.Normal: 
-                        //resultObject
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 2:
-                switch (spellLvlType.spellType)
-                {
-                    case SpellType.Fire:
-                        break;
-                    case SpellType.Water:
-                        break;
-                    case SpellType.Ice:
-                        break;
-                    case SpellType.Lightning:
-                        break;
-                    case SpellType.Arcane:
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 3:
-                switch (spellLvlType.spellType)
-                {
-                    case SpellType.Fire:
-                        break;
-                    case SpellType.Water:
-                        break;
-                    case SpellType.Ice:
-                        break;
-                    case SpellType.Lightning:
-                        break;
-                    case SpellType.Arcane:
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                break;
-        }
-
-        return resultObject;
     }
 }

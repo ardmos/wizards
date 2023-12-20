@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 /// <summary>
 /// 1레벨 한손검 베기 스킬 스크립트입니다.  
@@ -8,7 +9,7 @@ using UnityEngine;
 public class SlashLv1 : Spell
 {
     [SerializeField] private Sprite iconImage;
-    [SerializeField] private GameObject hitPrefab;
+    [SerializeField] private GameObject hitVFXPrefab;
 
     [SerializeField] private bool collided, isSpellCollided;
     [SerializeField] private SpellLvlType collisionHandlingResult;
@@ -115,9 +116,9 @@ public class SlashLv1 : Spell
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
             Vector3 pos = contact.point;
 
-            if (hitPrefab != null)
+            if (hitVFXPrefab != null)
             {
-                var hitVFX = Instantiate(hitPrefab, pos, rot) as GameObject;
+                var hitVFX = Instantiate(hitVFXPrefab, pos, rot) as GameObject;
 
                 var ps = hitVFX.GetComponent<ParticleSystem>();
                 if (ps == null)
@@ -163,7 +164,7 @@ public class SlashLv1 : Spell
             Debug.Log("collisionHandlingResult.level : " + collisionHandlingResult.level);
             if (collisionHandlingResult.level > 0)
             {
-                CastSpell(collisionHandlingResult, gameObject.transform);
+                CastSpell(collisionHandlingResult, gameObject.GetComponent<NetworkObject>());
             }
         }
     }
@@ -172,8 +173,8 @@ public class SlashLv1 : Spell
     /// <summary>
     /// 3. 마법 시전
     /// </summary>
-    public override void CastSpell(SpellLvlType spellLvlType, Transform muzzle)
+    public override void CastSpell(SpellLvlType spellLvlType, NetworkObject player)
     {
-        base.CastSpell(spellLvlType, muzzle);
+        base.CastSpell(spellLvlType, player);
     }
 }
