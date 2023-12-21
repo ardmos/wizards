@@ -181,6 +181,33 @@ public class GameManager : NetworkBehaviour
         OnAlivePlayerCountChanged?.Invoke(this, EventArgs.Empty);
     }
 
+
+
+
+
+
+    // 스킬 대미지 처리
+    // clientID와 HP 연계해서 처리. 
+    // 충돌 녀석이 플레이어일 경우 실행. 
+    // ClientID로 리스트 검색 후 HP 수정시키고 업데이트된 내용 브로드캐스팅.
+    // 수신측은 ClientID의 플레이어 HP 업데이트. 
+    public void PlayerHit()
+    {
+        PlayerHitServerRPC();
+    }
+    [ServerRpc]
+    private void PlayerHitServerRPC(ServerRpcParams serverRpcParams = default)
+    {
+        //GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerHP;
+    }
+    
+
+
+
+
+
+
+
     public void LocalPlayerReady()
     {
         if (state.Value == State.WatingToStart)

@@ -17,7 +17,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [SerializeField] protected Mesh m_BackPack;
     [SerializeField] protected Mesh m_Wand;
     [SerializeField] protected float moveSpeed;
-    [SerializeField] protected int hp;
+    [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
     [SerializeField] protected List<Vector3> spawnPositionList;
 
@@ -45,6 +45,13 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // 스폰 위치 초기화
         //transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
         transform.position = spawnPositionList[0];
+    }
+
+    [ClientRpc]
+    public void SetHPClientRPC(sbyte hp)
+    {
+        Debug.Log($"SetHPClientPRC HP Set! hp:{hp}");
+        hPBar.SetHP(hp);
     }
 
     #region Public 플레이어 정보 확인
@@ -486,7 +493,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         HandleMovementServerRPC(inputVector);
     }
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void HandleMovementServerRPC(Vector2 inputVector)
     {
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);

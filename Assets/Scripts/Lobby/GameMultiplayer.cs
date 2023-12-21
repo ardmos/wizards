@@ -106,9 +106,31 @@ public class GameMultiplayer : NetworkBehaviour
         {
             clientId = serverRpcParams.Receive.SenderClientId,
             playerClass = playerClass,
+            // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
         });
         Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
             $"player{serverRpcParams.Receive.SenderClientId} Class: {playerClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
+    }
+
+    public void SetPlayerHP(sbyte playerHP)
+    {
+        SetPlayerHPServerRPC(playerHP);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void SetPlayerHPServerRPC(sbyte playerHP, ServerRpcParams serverRpcParams = default)
+    {
+        var clientId = serverRpcParams.Receive.SenderClientId;
+        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
+        {
+            // 요청한 플레이어 HP수치 변경
+            PlayerData playerData = GetPlayerDataFromClientId(clientId);
+            playerData.playerHP = playerHP;
+            // 요청한 클라이언트 플레이어 오브젝트의 HP바 업데이트
+            NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
+            networkClient.PlayerObject.GetComponent<Player>().SetHPClientRPC(playerHP);
+            // 변경사항 저장
+            playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = playerData;
+        }
     }
 
     // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
@@ -153,17 +175,19 @@ public class GameMultiplayer : NetworkBehaviour
         }
         return playerDataNetworkList[playerIndex];
     }
-
-    public bool HasAvailablePlayerSlots()
-    {
-        //return NetworkManager.Singleton.ConnectedClientsIds.Count < MAX_PLAYER_AMOUNT;
-        return NetworkManager.Singleton.ConnectedClientsIds.Count < ConnectionApprovalHandler.MaxPlayers;
-    }
-
+    
     public NetworkList<PlayerData> GetPlayerDataNetworkList()
     {
         return playerDataNetworkList;
     }
+
+
+    // 사용 안하는 메서드. ServerStartUp에서 처리중이다.
+/*    public bool HasAvailablePlayerSlots()
+    {
+        //return NetworkManager.Singleton.ConnectedClientsIds.Count < MAX_PLAYER_AMOUNT;
+        return NetworkManager.Singleton.ConnectedClientsIds.Count < ConnectionApprovalHandler.MaxPlayers;
+    }*/
 
     /*    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {
