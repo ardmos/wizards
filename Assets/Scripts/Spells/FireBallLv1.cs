@@ -27,7 +27,7 @@ public class FireBallLv1 : FireSpell
     /// </summary>
     public override void InitSpellInfoDetail()
     {
-        Debug.Log("InitSpellInfoDetail() FireBall Lv1");
+        //Debug.Log("InitSpellInfoDetail() FireBall Lv1");
         spellInfo = new SpellInfo()
         {
             spellType = SpellType.Fire,
@@ -40,16 +40,6 @@ public class FireBallLv1 : FireSpell
             castAble = true,
             iconImage = iconImage
         };
-
-        if (spellInfo == null)
-        {
-            Debug.Log("Spell Info is null");
-        }
-        else
-        {
-            Debug.Log("Spell Info is not null");
-            Debug.Log($"spell Type : {spellInfo.spellType}, level : {spellInfo.level}");
-        }
     }
 
     /// <summary>
@@ -69,6 +59,9 @@ public class FireBallLv1 : FireSpell
 
                 collisionHandlingResult = CollisionHandling(thisSpell, opponentsSpell);
             }
+            // 충돌한게 플레이어일 경우! 
+            // 1. player에게 GetHit() 시킴
+            // 2. player가 GameMultiplayer(ServerRPC)에게 보고, player(ClientRPC)업데이트.
             else if (collision.gameObject.tag == "Player")
             {
                 isSpellCollided = false;
@@ -82,7 +75,8 @@ public class FireBallLv1 : FireSpell
                 Player player = collision.gameObject.GetComponent<Player>();
                 if (player != null)
                 {
-                    player.GetHit(spellInfo.level);
+                    player.GetHit((sbyte)spellInfo.level); 
+
                 }
                 else Debug.LogError("Player is null!");
             }

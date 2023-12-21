@@ -25,13 +25,7 @@ public class PopupMagicStoreUI : MonoBehaviour
     void Start()
     {
         // 상점 UI 비활성화
-        gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Hide();
     }
 
     /// <summary>

@@ -21,6 +21,11 @@ public class PopupMenuUI : MonoBehaviour
         });
     }
 
+    private void Start()
+    {
+        Hide();
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);

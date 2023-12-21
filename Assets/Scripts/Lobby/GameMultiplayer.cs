@@ -1,5 +1,6 @@
 using System;
 using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 
 /// <summary>
@@ -36,7 +37,7 @@ public class GameMultiplayer : NetworkBehaviour
 
     private void OnServerListChanged(NetworkListEvent<PlayerData> changeEvent)
     {
-        Debug.Log($"OnServerListChanged changed index: ");
+        //Debug.Log($"OnServerListChanged changed index: ");
         OnServerPlayerListChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -132,6 +133,54 @@ public class GameMultiplayer : NetworkBehaviour
             playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = playerData;
         }
     }
+
+    // 스킬 대미지 처리
+    // clientID와 HP 연계해서 처리. 
+    // 충돌 녀석이 플레이어일 경우 실행. 
+    // ClientID로 리스트 검색 후 HP 수정시키고 업데이트된 내용 브로드캐스팅.
+    // 수신측은 ClientID의 플레이어 HP 업데이트. 
+    public void PlayerHit(sbyte damage)
+    {
+        PlayerHitServerRPC(damage);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void PlayerHitServerRPC(sbyte damage, ServerRpcParams serverRpcParams = default)
+    {
+        var clientId = serverRpcParams.Receive.SenderClientId;
+        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
+        {
+            // 요청한 플레이어 HP수치 변경
+            PlayerData playerData = GetPlayerDataFromClientId(clientId);
+            sbyte playerHP = playerData.playerHP;
+
+            NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
+
+            // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
+            if (playerHP <= damage)
+            {
+                // HP 0
+                playerHP = 0;
+                // 요청한 클라이언트 플레이어 오브젝트의 HP바 업데이트
+                networkClient.PlayerObject.GetComponent<Player>().SetHPClientRPC(playerHP);
+                return;
+            }
+            // HP 감소
+            playerHP -= damage;
+            // 요청한 클라이언트 플레이어 오브젝트의 HP바 업데이트
+            networkClient.PlayerObject.GetComponent<Player>().SetHPClientRPC(playerHP);
+            // 변경된 HP값 서버에 저장
+            playerData.playerHP = playerHP;
+            playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = playerData;          
+        }
+
+
+
+    }
+
+
+
+
+
 
     // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
     public bool IsPlayerIndexConnected(int playerIndex)

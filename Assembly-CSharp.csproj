@@ -158,6 +158,7 @@
     <Compile Include="Assets\Scripts\Lobby\LobbyManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\SoundGroupUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\JoystickDirectionUI.cs" />
+    <Compile Include="Assets\Scripts\Data\KillLogData.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\IfServer.cs" />
     <Compile Include="Assets\Scripts\GameRoom\GameRoomPlayerCharacter.cs" />

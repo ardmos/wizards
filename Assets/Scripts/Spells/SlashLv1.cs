@@ -102,7 +102,7 @@ public class SlashLv1 : Spell
                 Player player = collision.gameObject.GetComponent<Player>();
                 if (player != null)
                 {
-                    player.GetHit(spellInfo.level);
+                    player.GetHit((sbyte)spellInfo.level);
                 }
                 else Debug.LogError("Player is null!");
             }

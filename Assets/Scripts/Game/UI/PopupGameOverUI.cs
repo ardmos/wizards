@@ -12,7 +12,7 @@ public class PopupGameOverUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtScoreCount;
     [SerializeField] private Button btnPlayAgain;
 
-    private void Awake()
+    private void Start()
     {
         btnPlayAgain.onClick.AddListener(() =>
         {
@@ -20,15 +20,17 @@ public class PopupGameOverUI : MonoBehaviour
             // 로비로 이동. 
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
-        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+
+        GameManager.Instance.OnStateChanged += OnGameManagerStateChanged;
+        //Debug.Log("PopupGameOverUI Start");
+        Hide();
     }
 
-    private void GameManager_OnStateChanged(object sender, EventArgs e)
+    private void OnGameManagerStateChanged(object sender, EventArgs e)
     {
         if (GameManager.Instance.IsGameOver())
         {
-            Show();
-            InitGameOverUIData();
+            Show();            
         }
         else
         {
@@ -39,6 +41,7 @@ public class PopupGameOverUI : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
+        InitGameOverUIData();
     }
 
     private void Hide()
@@ -48,7 +51,7 @@ public class PopupGameOverUI : MonoBehaviour
 
     private void InitGameOverUIData()
     {
-        txtRankNumber.text = (GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();        
-        txtScoreCount.text = Player.LocalInstance.GetScore().ToString();
+        txtRankNumber.text = "0"; //(GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();
+        txtScoreCount.text = "0"; //Player.LocalInstance.GetScore().ToString();
     }
 }

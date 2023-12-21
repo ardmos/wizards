@@ -57,7 +57,6 @@ public class Wizard : Player
             {
                 spellController.SetCurrentSpell(ownedSpellPrefabList[i], i);
             }
-
         }
     }
 }

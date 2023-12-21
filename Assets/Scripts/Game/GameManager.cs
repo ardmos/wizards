@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using static Spell;
 #if UNITY_SERVER || UNITY_EDITOR
 using Unity.Services.Multiplay;
 #endif
 
 
 /// <summary>
+/// GameScene 게임 흐름 관리
 /// Singleton
 /// EventSystem(Observer Pattern)
 /// Game State Machine
@@ -36,14 +36,17 @@ public class GameManager : NetworkBehaviour
     private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
     private float gamePlayingTimerMax = 10f;
-    private Dictionary<ulong, bool> playerReadyDictionary;
+    private Dictionary<ulong, bool> playerReadyList;
+
+    public NetworkList<ulong> playerGameOverListServer;
 
     [SerializeField] private int currentAlivePlayerCount;     
 
     void Awake()
     {
         Instance = this;
-        playerReadyDictionary = new Dictionary<ulong, bool>();
+        playerReadyList = new Dictionary<ulong, bool>();
+        playerGameOverListServer = new NetworkList<ulong>();
     }
 
     // Start is called before the first frame update
@@ -151,15 +154,16 @@ public class GameManager : NetworkBehaviour
         //Debug.Log(state);
     }
 
+    // 레디상태 서버에 보고
     [ServerRpc(RequireOwnership = false)]
     private void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
     {
-        playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
+        playerReadyList[serverRpcParams.Receive.SenderClientId] = true;
 
         bool allClientsReady = true;
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            if(!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
+            if(!playerReadyList.ContainsKey(clientId) || !playerReadyList[clientId])
             {
                 // 이 clientId 플레이어는 레디 안한 플레이어입니다
                 allClientsReady = false;
@@ -181,39 +185,41 @@ public class GameManager : NetworkBehaviour
         OnAlivePlayerCountChanged?.Invoke(this, EventArgs.Empty);
     }
 
-
-
-
-
-
-    // 스킬 대미지 처리
-    // clientID와 HP 연계해서 처리. 
-    // 충돌 녀석이 플레이어일 경우 실행. 
-    // ClientID로 리스트 검색 후 HP 수정시키고 업데이트된 내용 브로드캐스팅.
-    // 수신측은 ClientID의 플레이어 HP 업데이트. 
-    public void PlayerHit()
-    {
-        PlayerHitServerRPC();
-    }
-    [ServerRpc]
-    private void PlayerHitServerRPC(ServerRpcParams serverRpcParams = default)
-    {
-        //GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerHP;
-    }
-    
-
-
-
-
-
-
-
     public void LocalPlayerReady()
     {
         if (state.Value == State.WatingToStart)
         {
             isLocalPlayerReady = true;
             SetPlayerReadyServerRpc();
+        }
+    }
+
+    // Client 게임오버시
+    // 1. 서버에게 보고.  서버는 딕셔너리에 ClientID 게임오버 true로 기록.
+    // 2. 클라이언트쪽 딕셔너리 리스트에도 해당 내용 공유.
+    // 3. 해당 클라이언트 GameOverUIPopup은 클라이언트쪽 딕셔너리 리스트 OnValueChanged 이벤트핸들러를 통해 활성화됨.
+    // 4. 서버측 게임오버 False인 인원 1명일 경우 승리.
+    // (이렇게 하면 관전기능 추가 가능. 아직 미구현. 여기서 추가하면 됨.)
+    public void UpdatePlayerGameOver()
+    {
+        UpdatePlayerGameOverListServerRPC();
+    } 
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdatePlayerGameOverListServerRPC(ServerRpcParams serverRpcParams = default)
+    {
+        Debug.Log("UpdatePlayerGameOverListServerRPC");
+        var clientId = serverRpcParams.Receive.SenderClientId;
+        // GameOver 플레이어 리스트 업데이트  (아직 게임오버시킨사람 닉네임 공유는 미구현)
+        playerGameOverListServer.Add(clientId);
+
+        // 게임오버된 플레이어 화면에 게임오버UI 띄우기
+
+        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
+        {
+            // 게임오버됐다는 플레이어 오브젝트 찾기
+            NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
+            // player에게 게임오버 팝업 띄우라고 시킴
+            networkClient.PlayerObject.GetComponent<Player>().PopupGameOverUI();
         }
     }
 

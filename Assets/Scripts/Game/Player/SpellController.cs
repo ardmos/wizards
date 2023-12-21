@@ -71,7 +71,7 @@ public class SpellController : MonoBehaviour
     #region 현재 마법 변경
     public void SetCurrentSpell(GameObject spellObjectPrefab, int spellIndex)
     {
-        Debug.Log($"SetCurrentSpell spellIndex:{spellIndex}, currentSpellPrefabArray.Length: {currentSpellPrefabArray.Length}");
+        //Debug.Log($"SetCurrentSpell spellIndex:{spellIndex}, currentSpellPrefabArray.Length: {currentSpellPrefabArray.Length}");
         currentSpellPrefabArray[spellIndex] = spellObjectPrefab;
         currentSpellPrefabArray[spellIndex].GetComponent<Spell>().InitSpellInfoDetail();
         currentSpellInfoList[spellIndex] = currentSpellPrefabArray[spellIndex].GetComponent<Spell>().spellInfo;

@@ -17,6 +17,11 @@ public class PopupHostHasDisconnectedUI : MonoBehaviour
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
     }
 
+    private void Start()
+    {
+        Hide();
+    }
+
     private void OnDisable()
     {        
         //NetworkManager.Singleton.OnClientDisconnectCallback

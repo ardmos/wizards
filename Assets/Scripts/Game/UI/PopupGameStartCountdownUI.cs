@@ -8,9 +8,10 @@ public class PopupGameStartCountdownUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtCountdown;
 
-    private void Awake()
+    private void Start()
     {
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+        Hide();
     }
 
     private void Update()

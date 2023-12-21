@@ -30,7 +30,7 @@ public class GamePadUI : MonoBehaviour
     // spellNumber 0부터 시작 
     private void UpdateButtonImage(Sprite spellIcon, int spellNumber)
     {
-        Debug.Log($"{nameof(UpdateButtonImage)} Player.LocalInstance:{Player.LocalInstance}, spellIcon:{spellIcon.name}, spellNumber:{spellNumber}");
+        //Debug.Log($"{nameof(UpdateButtonImage)} Player.LocalInstance:{Player.LocalInstance}, spellIcon:{spellIcon.name}, spellNumber:{spellNumber}");
         if (Player.LocalInstance == null)
         {
             return;

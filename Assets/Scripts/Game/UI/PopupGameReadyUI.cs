@@ -8,8 +8,7 @@ public class PopupGameReadyUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtGameReady;
 
     private void Awake()
-    {
-        GameManager.Instance.OnStateChanged += OnGameStateChanged;
+    {    
         btnReady.onClick.AddListener(() =>
         {
             LocalPlayerReady();
@@ -17,6 +16,7 @@ public class PopupGameReadyUI : MonoBehaviour
     }
     private void Start()
     {
+        GameManager.Instance.OnStateChanged += OnGameStateChanged;
         txtGameReady.text = "Please Ready";
     }
 

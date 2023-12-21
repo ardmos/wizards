@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -45,6 +46,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // 스폰 위치 초기화
         //transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
         transform.position = spawnPositionList[0];
+
+        // 테스트용
+        GameManager.Instance.UpdatePlayerGameOver();
     }
 
     [ClientRpc]
@@ -52,25 +56,28 @@ public class Player : NetworkBehaviour, IStoreCustomer
     {
         Debug.Log($"SetHPClientPRC HP Set! hp:{hp}");
         hPBar.SetHP(hp);
+
+        // 게임오버 처리
+        if (hp <= 0)
+        {
+            GameManager.Instance.UpdatePlayerGameOver();
+            // 쓰러지는 애니메이션 실행
+
+        }
+    }
+    public void PopupGameOverUI()
+    {
+        Debug.Log("Player PopupGameOverUI");
+        //GameUI.Instance.popupGameOverUI.Show();
+        // 일단은 팝업 없음. 테스트중. 
+    }
+
+    public void GetHit(sbyte damage)
+    {
+        GameMultiplayer.Instance.PlayerHit(damage);
     }
 
     #region Public 플레이어 정보 확인
-    public void GetHit(int damage)
-    {
-        if(hp >= damage)
-        {
-            // 사망 처리 
-            hp = 0;
-            hPBar.SetHP(hp);
-            return;
-        }
-
-        // HP 감소
-        hp--;
-        // HP 바 감소
-        hPBar.SetHP(hp);
-    }
-
     public int GetScore()
     {
         return score;
