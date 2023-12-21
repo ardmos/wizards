@@ -78,7 +78,7 @@ public class GameMultiplayer : NetworkBehaviour
     {
         // 서버RPC를 통해 서버에 저장
         Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerProfileData.Instance.GetCurrentSelectedClass()}");
-        ChangePlayerClass(clientId, PlayerProfileData.Instance.GetCurrentSelectedClass());
+        ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
     }
     private void Client_OnClientDisconnectCallback(ulong obj)
     {
@@ -92,23 +92,23 @@ public class GameMultiplayer : NetworkBehaviour
     /// 즉 GameRoom에 들어가면서 입니다.
     /// </summary>
     /// <param name="playerClass"></param>    
-    private void ChangePlayerClass(ulong clientId, CharacterClasses.Class playerClass)
+    private void ChangePlayerClass(CharacterClasses.Class playerClass)
     {
-        Debug.Log($"ChangePlayerClass. clientId: {clientId}, class: {playerClass}");
-        ChangePlayerClassServerRPC(clientId, playerClass);
+        //Debug.Log($"ChangePlayerClass. clientId: {clientId}, class: {playerClass}");
+        ChangePlayerClassServerRPC(playerClass);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ChangePlayerClassServerRPC(ulong clientId, CharacterClasses.Class playerClass, ServerRpcParams serverRpcParams = default)
+    private void ChangePlayerClassServerRPC(CharacterClasses.Class playerClass, ServerRpcParams serverRpcParams = default)
     {
         // 새로운 유저
         playerDataNetworkList.Add(new PlayerData
         {
-            clientId = clientId,
+            clientId = serverRpcParams.Receive.SenderClientId,
             playerClass = playerClass,
         });
         Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
-            $"player{clientId} Class: {playerClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
+            $"player{serverRpcParams.Receive.SenderClientId} Class: {playerClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
     }
 
     // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
