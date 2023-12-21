@@ -26,8 +26,10 @@ public class PopupGameReadyUI : MonoBehaviour
         {
             Show();
         }
+        Debug.Log($"PopupGameReadyUI OnGameStateChanged state.IsWaitingToStart: {GameManager.Instance.IsWatingToStart()}, state.isCountdown: {GameManager.Instance.IsCountdownToStartActive()}");
         if (GameManager.Instance.IsCountdownToStartActive())
         {
+            
             Hide();
         }
     }

@@ -23,7 +23,7 @@ public class GameManager : NetworkBehaviour
     public event EventHandler OnStateChanged;
     public event EventHandler OnAlivePlayerCountChanged;
 
-    private enum State
+    public enum State
     {
         WatingToStart,
         CountdownToStart,
@@ -31,7 +31,7 @@ public class GameManager : NetworkBehaviour
         GameOver,
     }
 
-    private NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart); 
+    public NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart); 
     private bool isLocalPlayerReady;
     private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
@@ -114,6 +114,7 @@ public class GameManager : NetworkBehaviour
     private void State_OnValueChanged(State previousValue, State newValue)
     {
         OnStateChanged?.Invoke(this, EventArgs.Empty);
+        Debug.Log($"OnStateChanged!!!!!");////// 이거 되는지 테스트하면됨
     }
 
     // Update is called once per frame
@@ -174,21 +175,27 @@ public class GameManager : NetworkBehaviour
         // 모든 플레이어가 레디 했을 경우. 카운트다운 시작
         if (allClientsReady)
         {
-            // 플레이어 카운트 집계 업데이트
-            UpdateCurrentAlivePlayerCount();
+            // 플레이어 카운트 집계 업데이트(이 순간 접속중인 인원.)
+            UpdateCurrentAlivePlayerCount(NetworkManager.ConnectedClients.Count);
             state.Value = State.CountdownToStart;
         }
+
+        Debug.Log($"SetPlayerReadyServerRpc game state:{state.Value}, allClientsReady: {allClientsReady}");
     }
 
-    public void UpdateCurrentAlivePlayerCount()
+    public void UpdateCurrentAlivePlayerCount(int playerCount)
     {
+        // 게임중인 플레이어 숫자(게임오버 안당하고)
+        currentAlivePlayerCount = playerCount;
         OnAlivePlayerCountChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    // 게임 시작시 보이는 Ready UI 버튼을 클릭했을 때 동작하는 메서드 입니다.
     public void LocalPlayerReady()
     {
         if (state.Value == State.WatingToStart)
         {
+            Debug.Log($"LocalPlayerReady game state:{state.Value}");
             isLocalPlayerReady = true;
             SetPlayerReadyServerRpc();
         }

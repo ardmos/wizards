@@ -21,6 +21,7 @@ public class PopupGameStartCountdownUI : MonoBehaviour
 
     private void GameManager_OnStateChanged(object sender, EventArgs e)
     {
+        Debug.Log($"GameManager_OnStateChanged is count down to start active? {GameManager.Instance.IsCountdownToStartActive()}");
         if (GameManager.Instance.IsCountdownToStartActive())
         {
             Show();
