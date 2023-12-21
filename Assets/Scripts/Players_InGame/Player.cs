@@ -16,8 +16,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [SerializeField] protected Mesh m_Hat;
     [SerializeField] protected Mesh m_BackPack;
     [SerializeField] protected Mesh m_Wand;
-    [SerializeField] protected float moveSpeed = 7f;
-    [SerializeField] protected int hp = 5;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected int hp;
     [SerializeField] protected int score = 0;
     [SerializeField] protected List<Vector3> spawnPositionList;
 

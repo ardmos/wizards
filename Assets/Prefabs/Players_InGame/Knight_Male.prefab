@@ -2601,7 +2601,7 @@ MonoBehaviour:
   m_Hat: {fileID: 0}
   m_BackPack: {fileID: 0}
   m_Wand: {fileID: 0}
-  moveSpeed: 7
+  moveSpeed: 4
   hp: 7
   score: 0
   spawnPositionList:
@@ -2628,7 +2628,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   player: {fileID: 5577225032273852061}
-  muzzle: {fileID: 3569301515384591240}
   restTimeCurrentSpellArray:
   - 0
   - 0

@@ -27,19 +27,12 @@ public class Wizard : Player
         }
     }
 
-    private void InitStat()
-    {
-        hp = 5;
-        moveSpeed = 4f;
-    }
-
 
     public override void OnNetworkSpawn()
     {
         InitializePlayer();
         if (IsOwner)
         {
-            InitStat();
             GetComponent<Rigidbody>().isKinematic = false;
             // HP √ ±‚»≠
             hPBar.SetHP(hp);
