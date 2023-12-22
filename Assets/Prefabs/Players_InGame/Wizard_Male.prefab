@@ -2614,7 +2614,7 @@ MonoBehaviour:
   m_Hat: {fileID: 0}
   m_BackPack: {fileID: 0}
   m_Wand: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: 1.5
   hp: 5
   score: 0
   spawnPositionList:
