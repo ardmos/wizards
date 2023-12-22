@@ -13,7 +13,7 @@ public class NotifyMessageTemplateUI : MonoBehaviour
     void Start()
     {
         //Debug.Log($"NotifyMessageTemplateUI");
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 5f);
     }
 
     public void UpdatePlayerName(string playerName)

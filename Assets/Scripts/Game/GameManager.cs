@@ -33,8 +33,9 @@ public class GameManager : NetworkBehaviour
     }
 
     [SerializeField] private NetworkList<ulong> playerGameOverList;
-    [SerializeField] private NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart); 
-    [SerializeField] private NetworkVariable<int> currentAlivePlayerCount;
+    [SerializeField] private NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart);
+    [SerializeField] private NetworkVariable<int> startedPlayerCount = new NetworkVariable<int>(0);
+    [SerializeField] private NetworkVariable<int> currentAlivePlayerCount = new NetworkVariable<int>(0);
     [SerializeField] private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     [SerializeField] private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
 
@@ -188,7 +189,8 @@ public class GameManager : NetworkBehaviour
         if (allClientsReady)
         {
             // 플레이어 카운트 집계 업데이트(이 순간 접속중인 인원.)
-            UpdateCurrentAlivePlayerCount(NetworkManager.ConnectedClients.Count);
+            startedPlayerCount.Value = NetworkManager.ConnectedClients.Count;
+            UpdateCurrentAlivePlayerCount();
             //Debug.Log($"allClientsReady state.Value:{state.Value}");
             state.Value = State.CountdownToStart;
             //Debug.Log($"allClientsReady state.Value:{state.Value}");
@@ -197,11 +199,11 @@ public class GameManager : NetworkBehaviour
         //Debug.Log($"SetPlayerReadyServerRpc game state:{state.Value}, allClientsReady: {allClientsReady}");
     }
 
-    public void UpdateCurrentAlivePlayerCount(int playerCount)
+    public void UpdateCurrentAlivePlayerCount()
     {
         // 게임중인 플레이어 숫자(게임오버 안당하고)
-        currentAlivePlayerCount.Value = playerCount;        
-        Debug.Log($"All Player is Ready. playerCount:{playerCount}");
+        currentAlivePlayerCount.Value = startedPlayerCount.Value - playerGameOverList.Count;        
+        Debug.Log($"UpdateCurrentAlivePlayerCount playerCount:{currentAlivePlayerCount.Value}");
     }
 
     // 게임 시작시 보이는 Ready UI 버튼을 클릭했을 때 동작하는 메서드 입니다.
@@ -224,7 +226,7 @@ public class GameManager : NetworkBehaviour
     public void UpdatePlayerGameOver()
     {
         UpdatePlayerGameOverListServerRPC();
-    } 
+    }
     [ServerRpc(RequireOwnership = false)]
     private void UpdatePlayerGameOverListServerRPC(ServerRpcParams serverRpcParams = default)
     {
@@ -233,15 +235,20 @@ public class GameManager : NetworkBehaviour
 
         if (NetworkManager.ConnectedClients.ContainsKey(clientId) && !playerGameOverList.Contains(clientId))
         {
-            // GameOver 플레이어 리스트 업데이트  (게임오버시킨사람 닉네임 공유는 아직 미구현)
-            playerGameOverList.Add(clientId);
+            AddGameOverPlayer(clientId);
             // 게임오버됐다는 플레이어 오브젝트 찾기
             NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-            // player에게 게임오버 팝업 띄우라고 시킴
+            // 모든 player에게 게임오버 팝업 띄우라고 시킴
             networkClient.PlayerObject.GetComponent<Player>().PopupGameOverUI();
-            // AlivePlayersCount 값 수정
-            UpdateCurrentAlivePlayerCount(currentAlivePlayerCount.Value-1);
+
         }
+    }
+
+    public void AddGameOverPlayer(ulong clientId) {
+        // GameOver 플레이어 리스트 업데이트  (게임오버시킨사람 닉네임 공유는 아직 미구현)
+        playerGameOverList.Add(clientId);
+        // 상단 UI를 위한 AlivePlayersCount 값 업데이트
+        UpdateCurrentAlivePlayerCount();
     }
 
     public bool IsLocalPlayerReady()

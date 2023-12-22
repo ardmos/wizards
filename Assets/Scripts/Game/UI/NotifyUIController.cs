@@ -15,7 +15,8 @@ public class NotifyUIController : MonoBehaviour
 
     // 게임오버가 발생했을 때, 가장 최근에 게임오버된 플레이어를 띄워줍니다. 지금은 ClientID를 띄워줍니다. playerName기능이 구현되면 playerName으로 변경할것입니다.
     private void OnPlayerGameOverListChanged(object sender, System.EventArgs e)
-    {       
+    {
+        //Debug.Log($"Player {GameManager.Instance.GetLastGameOverPlayer().ToString()} 가 게임오버됐습니다! 알림 올라갑니다!");
         GameObject messageObject = Instantiate(notifyMessageTemplatePrefab);
         messageObject.GetComponent<NotifyMessageTemplateUI>().UpdatePlayerName(GameManager.Instance.GetLastGameOverPlayer().ToString());
         messageObject.transform.SetParent(notifyMessageGroup.transform, false);        

@@ -53,6 +53,7 @@ public class GameMultiplayer : NetworkBehaviour
     // GameRoom에서 Client가 나갔을 때 플레이어를 없애주는 부분.
     private void Server_OnClientDisconnectCallback(ulong clientId)
     {
+
         for (int i = 0; i<playerDataNetworkList.Count; i++)
         {
             PlayerData playerData = playerDataNetworkList[i];
@@ -60,6 +61,8 @@ public class GameMultiplayer : NetworkBehaviour
             {
                 // 플레이어 Disconnected. 해당 인덱스 데이터 삭제
                 playerDataNetworkList.RemoveAt(i);
+                // Game중이라면 GameManager에서 죽은걸로 처리. 어차피 재접속 안되게끔 구현할거니까 재접속시 처리는 안해도 된다.
+                GameManager.Instance.AddGameOverPlayer(clientId);
             }
         }
     }

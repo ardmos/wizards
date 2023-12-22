@@ -21,6 +21,7 @@ public class PopupGameOverUI : MonoBehaviour
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
 
+        // 게임 로직 바꾸면서 바뀌어야할 부분. GameOver는 State따라서 되는게 아니라, HP에 따라서 각자 띄워지는것.
         GameManager.Instance.OnStateChanged += OnGameManagerStateChanged;
         //Debug.Log("PopupGameOverUI Start");
         Hide();
