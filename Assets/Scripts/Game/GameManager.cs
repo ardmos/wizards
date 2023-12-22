@@ -64,10 +64,8 @@ public class GameManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log($"GameManager OnNetworkSpawn state.Value:{state.Value}");
         state.OnValueChanged += State_OnValueChanged;
         state.Value = State.WatingToStart; // 생성과 동시에 Default값 설정. 
-        Debug.Log($"GameManager OnNetworkSpawn state.Value:{state.Value}");
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
@@ -116,7 +114,6 @@ public class GameManager : NetworkBehaviour
     private void State_OnValueChanged(State previousValue, State newValue)
     {
         OnStateChanged?.Invoke(this, EventArgs.Empty);
-        Debug.Log($"OnStateChanged!!!!! previousValue:{previousValue}, newValue:{newValue}");
     }
 
     // Update is called once per frame
@@ -220,17 +217,17 @@ public class GameManager : NetworkBehaviour
     {
         Debug.Log("UpdatePlayerGameOverListServerRPC");
         var clientId = serverRpcParams.Receive.SenderClientId;
-        // GameOver 플레이어 리스트 업데이트  (아직 게임오버시킨사람 닉네임 공유는 미구현)
-        playerGameOverListServer.Add(clientId);
-
-        // 게임오버된 플레이어 화면에 게임오버UI 띄우기
 
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {
+            Debug.Log($"playerGameOverList.Count:{playerGameOverListServer.Count}");
+            // GameOver 플레이어 리스트 업데이트  (아직 게임오버시킨사람 닉네임 공유는 미구현)
+            playerGameOverListServer.Add(clientId);
             // 게임오버됐다는 플레이어 오브젝트 찾기
             NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
             // player에게 게임오버 팝업 띄우라고 시킴
             networkClient.PlayerObject.GetComponent<Player>().PopupGameOverUI();
+            Debug.Log($"playerGameOverList.Count:{playerGameOverListServer.Count}");
         }
     }
 

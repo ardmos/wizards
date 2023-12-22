@@ -48,7 +48,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         transform.position = spawnPositionList[0];
 
         // 테스트용
-        //GameManager.Instance.UpdatePlayerGameOver();
+        GameManager.Instance.UpdatePlayerGameOver();
     }
 
     [ClientRpc]
