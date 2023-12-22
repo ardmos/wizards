@@ -64,8 +64,10 @@ public class GameManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        Debug.Log($"GameManager OnNetworkSpawn state.Value:{state.Value}");
         state.OnValueChanged += State_OnValueChanged;
-        state = new NetworkVariable<State>(State.WatingToStart); // 생성과 동시에 Default값 설정. 
+        state.Value = State.WatingToStart; // 생성과 동시에 Default값 설정. 
+        Debug.Log($"GameManager OnNetworkSpawn state.Value:{state.Value}");
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
@@ -114,7 +116,7 @@ public class GameManager : NetworkBehaviour
     private void State_OnValueChanged(State previousValue, State newValue)
     {
         OnStateChanged?.Invoke(this, EventArgs.Empty);
-        Debug.Log($"OnStateChanged!!!!!");////// 이거 되는지 테스트하면됨
+        Debug.Log($"OnStateChanged!!!!! previousValue:{previousValue}, newValue:{newValue}");
     }
 
     // Update is called once per frame
@@ -177,7 +179,9 @@ public class GameManager : NetworkBehaviour
         {
             // 플레이어 카운트 집계 업데이트(이 순간 접속중인 인원.)
             UpdateCurrentAlivePlayerCount(NetworkManager.ConnectedClients.Count);
+            Debug.Log($"allClientsReady state.Value:{state.Value}");
             state.Value = State.CountdownToStart;
+            Debug.Log($"allClientsReady state.Value:{state.Value}");
         }
 
         Debug.Log($"SetPlayerReadyServerRpc game state:{state.Value}, allClientsReady: {allClientsReady}");
