@@ -20,7 +20,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     private void Awake()
     {
         GameRoomReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyChanged;
-        GameMultiplayer.Instance.OnServerPlayerListChanged += OnServerPlayerListChanged;
+        GameMultiplayer.Instance.OnPlayerListOnServerChanged += OnServerPlayerListChanged;
     }
 
     private void Start()
@@ -42,7 +42,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     private void OnDestroy()
     {
         GameRoomReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyChanged;
-        GameMultiplayer.Instance.OnServerPlayerListChanged -= OnServerPlayerListChanged;
+        GameMultiplayer.Instance.OnPlayerListOnServerChanged -= OnServerPlayerListChanged;
     }
 
     /// <summary>

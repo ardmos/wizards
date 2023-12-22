@@ -10,13 +10,14 @@ public class NotifyUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.playerGameOverListServer.OnListChanged += OnPlayerGameOverListChanged;
+        GameManager.Instance.OnGameOverListChanged += OnPlayerGameOverListChanged;
     }
 
-    private void OnPlayerGameOverListChanged(Unity.Netcode.NetworkListEvent<ulong> changeEvent)
+    // 게임오버가 발생했을 때, 가장 최근에 게임오버된 플레이어를 띄워줍니다. 지금은 ClientID를 띄워줍니다. playerName기능이 구현되면 playerName으로 변경할것입니다.
+    private void OnPlayerGameOverListChanged(object sender, System.EventArgs e)
     {       
         GameObject messageObject = Instantiate(notifyMessageTemplatePrefab);
-        messageObject.GetComponent<NotifyMessageTemplateUI>().UpdatePlayerName(changeEvent.Value.ToString());
-        messageObject.transform.SetParent(notifyMessageGroup.transform, false);
+        messageObject.GetComponent<NotifyMessageTemplateUI>().UpdatePlayerName(GameManager.Instance.GetLastGameOverPlayer().ToString());
+        messageObject.transform.SetParent(notifyMessageGroup.transform, false);        
     }
 }

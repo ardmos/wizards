@@ -20,7 +20,7 @@ public class GameMultiplayer : NetworkBehaviour
 
     public event EventHandler OnTryingToJoinGame;
     public event EventHandler OnFailedToJoinGame;
-    public event EventHandler OnServerPlayerListChanged;
+    public event EventHandler OnPlayerListOnServerChanged;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class GameMultiplayer : NetworkBehaviour
     private void OnServerListChanged(NetworkListEvent<PlayerData> changeEvent)
     {
         //Debug.Log($"OnServerListChanged changed index: ");
-        OnServerPlayerListChanged?.Invoke(this, EventArgs.Empty);
+        OnPlayerListOnServerChanged?.Invoke(this, EventArgs.Empty);
     }
 
     // UGS Dedicated Server 

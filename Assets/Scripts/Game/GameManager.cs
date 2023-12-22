@@ -22,6 +22,7 @@ public class GameManager : NetworkBehaviour
 
     public event EventHandler OnStateChanged;
     public event EventHandler OnAlivePlayerCountChanged;
+    public event EventHandler OnGameOverListChanged;
 
     public enum State
     {
@@ -31,22 +32,22 @@ public class GameManager : NetworkBehaviour
         GameOver,
     }
 
-    public NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart); 
-    private bool isLocalPlayerReady;
-    private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
-    private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
-    private float gamePlayingTimerMax = 10f;
-    private Dictionary<ulong, bool> playerReadyList;
+    [SerializeField] private NetworkList<ulong> playerGameOverList;
+    [SerializeField] private NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart); 
+    [SerializeField] private NetworkVariable<int> currentAlivePlayerCount;
+    [SerializeField] private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
+    [SerializeField] private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
 
-    public NetworkList<ulong> playerGameOverListServer;
-
-    [SerializeField] private NetworkVariable<int> currentAlivePlayerCount;     
+    [SerializeField] private float gamePlayingTimerMax = 10f;
+    [SerializeField] private Dictionary<ulong, bool> playerReadyList;
+    [SerializeField] private bool isLocalPlayerReady;
+ 
 
     void Awake()
     {
         Instance = this;
         playerReadyList = new Dictionary<ulong, bool>();
-        playerGameOverListServer = new NetworkList<ulong>();
+        playerGameOverList = new NetworkList<ulong>();
     }
 
     // Start is called before the first frame update
@@ -71,6 +72,12 @@ public class GameManager : NetworkBehaviour
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
         }
         currentAlivePlayerCount.OnValueChanged += currentAlivePlayerCount_OnValueChanged;
+        playerGameOverList.OnListChanged += PlayerGameOverList_OnListChanged;
+    }
+
+    private void PlayerGameOverList_OnListChanged(NetworkListEvent<ulong> changeEvent)
+    {
+        OnGameOverListChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -224,16 +231,16 @@ public class GameManager : NetworkBehaviour
         //Debug.Log("UpdatePlayerGameOverListServerRPC");
         var clientId = serverRpcParams.Receive.SenderClientId;
 
-        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
+        if (NetworkManager.ConnectedClients.ContainsKey(clientId) && !playerGameOverList.Contains(clientId))
         {
-            //Debug.Log($"playerGameOverList.Count:{playerGameOverListServer.Count}");
-            // GameOver 플레이어 리스트 업데이트  (아직 게임오버시킨사람 닉네임 공유는 미구현)
-            playerGameOverListServer.Add(clientId);
+            // GameOver 플레이어 리스트 업데이트  (게임오버시킨사람 닉네임 공유는 아직 미구현)
+            playerGameOverList.Add(clientId);
             // 게임오버됐다는 플레이어 오브젝트 찾기
             NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
             // player에게 게임오버 팝업 띄우라고 시킴
             networkClient.PlayerObject.GetComponent<Player>().PopupGameOverUI();
-            //Debug.Log($"playerGameOverList.Count:{playerGameOverListServer.Count}");
+            // AlivePlayersCount 값 수정
+            UpdateCurrentAlivePlayerCount(currentAlivePlayerCount.Value-1);
         }
     }
 
@@ -276,5 +283,10 @@ public class GameManager : NetworkBehaviour
         if(gamePlayingTimer.Value == 0f) return 0f;
 
         return gamePlayingTimerMax - gamePlayingTimer.Value;
+    }
+
+    public ulong GetLastGameOverPlayer()
+    {
+        return playerGameOverList[playerGameOverList.Count - 1];
     }
 }
