@@ -9,10 +9,12 @@ public class PlayerCountUI : MonoBehaviour
     void Start()
     {
         GameManager.Instance.OnAlivePlayerCountChanged += GameManager_OnAlivePlayerCountChanged;
+        Debug.Log("PlayerCountUI Start()");
     }
 
     private void GameManager_OnAlivePlayerCountChanged(object sender, System.EventArgs e)
     {
+        Debug.Log($"PlayerCountUI! player count: {GameManager.Instance.GetCurrentAlivePlayerCount()}");
         txtAlivePlayerCount.text = GameManager.Instance.GetCurrentAlivePlayerCount().ToString();
     }
 }
