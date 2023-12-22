@@ -54,7 +54,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [ClientRpc]
     public void SetHPClientRPC(sbyte hp)
     {
-        Debug.Log($"SetHPClientPRC HP Set! hp:{hp}");
+        Debug.Log($"Player.SetHPClientPRC() HP Set! hp:{hp}");
         hPBar.SetHP(hp);
 
         // 게임오버 처리
@@ -70,11 +70,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
         Debug.Log("Player PopupGameOverUI");
         //GameUI.Instance.popupGameOverUI.Show();
         // 일단은 팝업 없음. 테스트중. 
-    }
-
-    public void GetHit(sbyte damage)
-    {
-        GameMultiplayer.Instance.PlayerHit(damage);
     }
 
     #region Public 플레이어 정보 확인

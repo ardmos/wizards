@@ -35,7 +35,6 @@ public class Wizard : Player
         {
             GetComponent<Rigidbody>().isKinematic = false;
             // HP 초기화
-            //hPBar.SetHP(hp);
             GameMultiplayer.Instance.SetPlayerHP(hp);
 
             // GameMultiplayer.PlayerNetworkDataList.ownedSpellList 에다가 장착 장비 기준으로 스펠 업데이트를 해줬다는 전제 하에 진행되는 로직. 현재는 아래에서 배열 초기화를 해준다. 나중에는 장착 아이템이 해줘야 함.

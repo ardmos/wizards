@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -8,12 +6,6 @@ using UnityEngine;
 /// </summary>
 public class SlashLv1 : Spell
 {
-    [SerializeField] private Sprite iconImage;
-    [SerializeField] private GameObject hitVFXPrefab;
-
-    [SerializeField] private bool collided, isSpellCollided;
-    [SerializeField] private SpellLvlType collisionHandlingResult;
-
     private void Start()
     {
         // 근접공격이니까 수명 짧게
@@ -50,7 +42,7 @@ public class SlashLv1 : Spell
         }
     }
 
-    // 속성별 충돌 결과를 계산해주는 메소드
+    // 속성별 충돌 결과를 계산해주는 메소드 <--- Slash 계열 스크립트를 따로 만들어서 빼야할지도 모르겠다. 다른 fire,water,ice 처럼
     public override SpellLvlType CollisionHandling(SpellLvlType thisSpell, SpellLvlType opponentsSpell)
     {
         SpellLvlType result = new SpellLvlType();
@@ -78,97 +70,9 @@ public class SlashLv1 : Spell
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collided)
-        {
-            if (collision.gameObject.tag == "Spell")
-            {
-                isSpellCollided = true;
-                SpellLvlType thisSpell = new SpellLvlType { level = spellInfo.level, spellType = spellInfo.spellType };
-                SpellInfo opponentsSpellInfo = collision.gameObject.GetComponent<Spell>().spellInfo;
-                SpellLvlType opponentsSpell = new SpellLvlType { level = opponentsSpellInfo.level, spellType = opponentsSpellInfo.spellType };
-
-                collisionHandlingResult = CollisionHandling(thisSpell, opponentsSpell);
-            }
-            else if (collision.gameObject.tag == "Player")
-            {
-                isSpellCollided = false;
-
-                if (spellInfo == null)
-                {
-                    Debug.Log("Spell Info is null");
-                }
-                Debug.Log($"Hit!! spell level: {spellInfo.level}");
-
-                Player player = collision.gameObject.GetComponent<Player>();
-                if (player != null)
-                {
-                    player.GetHit((sbyte)spellInfo.level);
-                }
-                else Debug.LogError("Player is null!");
-            }
-            else { isSpellCollided = false; }
-
-            collided = true;
-
-            GetComponent<Rigidbody>().isKinematic = true;
-
-            ContactPoint contact = collision.contacts[0];
-            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-            Vector3 pos = contact.point;
-
-            if (hitVFXPrefab != null)
-            {
-                var hitVFX = Instantiate(hitVFXPrefab, pos, rot) as GameObject;
-
-                var ps = hitVFX.GetComponent<ParticleSystem>();
-                if (ps == null)
-                {
-                    var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-                    Destroy(hitVFX, psChild.main.duration);
-                }
-                else
-                    Destroy(hitVFX, ps.main.duration);
-            }
-
-            StartCoroutine(DestroyParticle(0f));
-        }
+        SpellHit(collision);
+        
     }
-    public IEnumerator DestroyParticle(float waitTime)
-    {
-
-        if (transform.childCount > 0 && waitTime != 0)
-        {
-            List<Transform> tList = new List<Transform>();
-
-            foreach (Transform t in transform.GetChild(0).transform)
-            {
-                tList.Add(t);
-            }
-
-            while (transform.GetChild(0).localScale.x > 0)
-            {
-                yield return new WaitForSeconds(0.01f);
-                transform.GetChild(0).localScale -= new Vector3(0.1f, 0.1f, 0.1f);
-                for (int i = 0; i < tList.Count; i++)
-                {
-                    tList[i].localScale -= new Vector3(0.1f, 0.1f, 0.1f);
-                }
-            }
-        }
-
-        yield return new WaitForSeconds(waitTime);
-        Destroy(gameObject);
-
-        if (isSpellCollided)
-        {
-            Debug.Log("collisionHandlingResult.level : " + collisionHandlingResult.level);
-            if (collisionHandlingResult.level > 0)
-            {
-                CastSpell(collisionHandlingResult, gameObject.GetComponent<NetworkObject>());
-            }
-        }
-    }
-
 
     /// <summary>
     /// 3. 마법 시전

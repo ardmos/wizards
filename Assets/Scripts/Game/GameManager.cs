@@ -39,7 +39,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     [SerializeField] private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
 
-    [SerializeField] private float gamePlayingTimerMax = 10f;
+    [SerializeField] private float gamePlayingTimerMax = 100f;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
     [SerializeField] private bool isLocalPlayerReady;
  
@@ -236,11 +236,9 @@ public class GameManager : NetworkBehaviour
         if (NetworkManager.ConnectedClients.ContainsKey(clientId) && !playerGameOverList.Contains(clientId))
         {
             AddGameOverPlayer(clientId);
-            // 게임오버됐다는 플레이어 오브젝트 찾기
+            // 게임오버됐다는 플레이어 오브젝트 찾아 게임오버 팝업 띄우라고 시킴
             NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-            // 모든 player에게 게임오버 팝업 띄우라고 시킴
             networkClient.PlayerObject.GetComponent<Player>().PopupGameOverUI();
-
         }
     }
 
