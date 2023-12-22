@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 게임오버 메세지(킬로그) UI 컨트롤러 입니다.
@@ -16,10 +14,9 @@ public class NotifyUIController : MonoBehaviour
     }
 
     private void OnPlayerGameOverListChanged(Unity.Netcode.NetworkListEvent<ulong> changeEvent)
-    {
-        Debug.Log($"NotifyUIController OnPlayerGameOverListChanged"); //<<<<<< OnListChaged가 호출이 안되는건지 확인하려함. 
+    {       
         GameObject messageObject = Instantiate(notifyMessageTemplatePrefab);
-        messageObject.GetComponent<NotifyMessageTemplateUI>().UpdatePlayerName($"Player{changeEvent.Value} is game over");
+        messageObject.GetComponent<NotifyMessageTemplateUI>().UpdatePlayerName(changeEvent.Value.ToString());
         messageObject.transform.SetParent(notifyMessageGroup.transform, false);
     }
 }
