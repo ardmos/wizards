@@ -9,7 +9,6 @@ using UnityEngine;
 /// </summary>
 public class PlayerProfileData : MonoBehaviour
 {
-#if !DEDICATED_SERVER
     public static PlayerProfileData Instance { get; private set; }
 
     [SerializeField] private CharacterClasses.Class currentSelectedClass;
@@ -76,5 +75,4 @@ public class PlayerProfileData : MonoBehaviour
 
         return resultObejct;
     }
-#endif
 }

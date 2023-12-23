@@ -39,7 +39,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     [SerializeField] private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
 
-    [SerializeField] private float gamePlayingTimerMax = 100f;
+    [SerializeField] private float gamePlayingTimerMax = 1000f;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
     [SerializeField] private bool isLocalPlayerReady;
  

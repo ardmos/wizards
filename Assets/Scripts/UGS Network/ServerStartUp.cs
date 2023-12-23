@@ -1,7 +1,7 @@
+#if UNITY_SERVER || UNITY_EDITOR
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
-using Unity.Burst.Intrinsics;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Core;
@@ -276,3 +276,4 @@ public class ServerStartUp : MonoBehaviour
         serverEvents?.UnsubscribeAsync();
     }
 }
+#endif

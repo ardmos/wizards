@@ -16,7 +16,7 @@ public class PopupGameOverUI : MonoBehaviour
     {
         btnPlayAgain.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.Shutdown();
+            CleanUp();
             // 로비로 이동. 
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
@@ -54,5 +54,18 @@ public class PopupGameOverUI : MonoBehaviour
     {
         txtRankNumber.text = "0"; //(GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();
         txtScoreCount.text = "0"; //Player.LocalInstance.GetScore().ToString();
+    }
+
+    private void CleanUp()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.Shutdown();
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
+        if (GameMultiplayer.Instance != null)
+        {
+            Destroy(GameMultiplayer.Instance.gameObject);
+        }
     }
 }

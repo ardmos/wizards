@@ -1,4 +1,6 @@
-using System;
+// ServerStartUp에서 서버세팅중. 이젠 안쓰는 스크립트. 참고용
+
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -39,17 +41,17 @@ public class LobbyManager : MonoBehaviour
 
     private void Awake()
     {
-/*        instance = this; 
+*//*        instance = this; 
 
         DontDestroyOnLoad(gameObject);
 
-        InitializeUGSDedicatedServer();*/
+        InitializeUGSDedicatedServer();*//*
     }
 
     private void Start()
     {
-/*        GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
-        CharacterSelectReady.OnInstanceCreated += CharacterSelectReady_OnInstanceCreated;*/
+*//*        GameMultiplayer.Instance.OnPlayerDataNetworkListChanged += GameMultiplayer_OnPlayerDataNetworkListChanged;
+        CharacterSelectReady.OnInstanceCreated += CharacterSelectReady_OnInstanceCreated;*//*
     }
 
     private void CharacterSelectReady_OnInstanceCreated(object sender, EventArgs e)
@@ -281,3 +283,4 @@ public class LobbyManager : MonoBehaviour
 #endif
 
 }
+*/
