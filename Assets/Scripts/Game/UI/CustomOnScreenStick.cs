@@ -113,7 +113,7 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
             m_PointerMoveAction.Enable();
         }
 
-        m_StartPos = ((RectTransform)transform).anchoredPosition;
+        m_StartPos = handleObject.anchoredPosition;
 
         if (m_Behaviour != Behaviour.ExactPositionWithDynamicOrigin) return;
         m_PointerDownPos = m_StartPos;
@@ -123,12 +123,11 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
         var image = dynamicOrigin.GetComponent<Image>();
         image.color = new Color(1, 1, 1, 0);
         var rectTransform = (RectTransform)dynamicOrigin.transform;
-        rectTransform.sizeDelta = new Vector2(m_DynamicOriginRange * 2, m_DynamicOriginRange * 2);
+        rectTransform.anchorMin = new Vector2(0, 0);
+        rectTransform.anchorMax = new Vector2(0.5f, 1f);
+        rectTransform.sizeDelta = new Vector2(0, 0);
         rectTransform.localScale = new Vector3(1, 1, 0);
         rectTransform.anchoredPosition3D = Vector3.zero;
-
-        //image.sprite = SpriteUtilities.CreateCircleSprite(16, new Color32(255, 255, 255, 255));
-        //image.alphaHitTestMinimumThreshold = 0.5f;
     }
 
     private void BeginInteraction(Vector2 pointerPosition, Camera uiCamera)
@@ -151,9 +150,17 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
                 break;
             case Behaviour.ExactPositionWithDynamicOrigin:
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, pointerPosition, uiCamera, out var pointerDown);
-                m_PointerDownPos = ((RectTransform)transform).anchoredPosition = pointerDown;
-
-                // 부모 배경이미지 오브젝트도 터치가 시작된 현 위치로 옮겨줍니다
+                //m_PointerDownPos = ((RectTransform)transform).anchoredPosition = pointerDown;
+                m_PointerDownPos = pointerDown;
+                //Debug.Log($"pointerDown: {pointerDown}");
+                // joystickOffObject를 꺼줍니다
+                joystickOffObject.gameObject.SetActive(false);
+                // 핸들, 배경 오브젝트는 켜줍니다.
+                handleObject.gameObject.SetActive(true);
+                backGroundObject.gameObject.SetActive(true);   
+                // 핸들 오브젝트도 터치가 시작된 위치로 옮겨줍니다
+                handleObject.anchoredPosition = pointerDown;
+                // 배경이미지 오브젝트도 터치가 시작된 위치로 옮겨줍니다
                 backGroundObject.anchoredPosition = pointerDown;
 
                 break;
@@ -175,18 +182,18 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
         {
             case Behaviour.RelativePositionWithStaticOrigin:
                 delta = Vector2.ClampMagnitude(delta, movementRange);
-                ((RectTransform)transform).anchoredPosition = (Vector2)m_StartPos + delta;
+                handleObject.anchoredPosition = (Vector2)m_StartPos + delta;
                 break;
 
             case Behaviour.ExactPositionWithStaticOrigin:
                 delta = position - (Vector2)m_StartPos;
                 delta = Vector2.ClampMagnitude(delta, movementRange);
-                ((RectTransform)transform).anchoredPosition = (Vector2)m_StartPos + delta;
+                handleObject.anchoredPosition = (Vector2)m_StartPos + delta;
                 break;
 
             case Behaviour.ExactPositionWithDynamicOrigin:
                 delta = Vector2.ClampMagnitude(delta, movementRange);
-                ((RectTransform)transform).anchoredPosition = m_PointerDownPos + delta;
+                handleObject.anchoredPosition = m_PointerDownPos + delta;
                 break;
         }
 
@@ -196,8 +203,15 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
 
     private void EndInteraction()
     {
-        ((RectTransform)transform).anchoredPosition = m_PointerDownPos = m_StartPos;
-        // 부모 배경이미지 오브젝트도 위치를 초기화 시켜줍니다.
+        m_PointerDownPos = m_StartPos;
+        // joystickOffObject를 켜줍니다
+        joystickOffObject.gameObject.SetActive(true);
+        // 핸들, 배경 오브젝트는 꺼줍니다.
+        handleObject.gameObject.SetActive(false);
+        backGroundObject.gameObject.SetActive(false);
+        // 핸들 오브젝트도 위치를 초기화 시켜줍니다.
+        handleObject.anchoredPosition = m_StartPos;
+        // 배경이미지 오브젝트도 위치를 초기화 시켜줍니다.
         backGroundObject.anchoredPosition = m_StartPos;
         SendValueToControl(Vector2.zero);
     }
@@ -258,54 +272,18 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
         return canvas?.worldCamera ?? Camera.main;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.matrix = ((RectTransform)transform.parent).localToWorldMatrix;
-
-        var startPos = ((RectTransform)transform).anchoredPosition;
-        if (Application.isPlaying)
-            startPos = m_StartPos;
-
-        Gizmos.color = new Color32(84, 173, 219, 255);
-
-        var center = startPos;
-        if (Application.isPlaying && m_Behaviour == Behaviour.ExactPositionWithDynamicOrigin)
-            center = m_PointerDownPos;
-
-        DrawGizmoCircle(center, m_MovementRange);
-
-        if (m_Behaviour != Behaviour.ExactPositionWithDynamicOrigin) return;
-
-        Gizmos.color = new Color32(158, 84, 219, 255);
-        DrawGizmoCircle(startPos, m_DynamicOriginRange);
-    }
-
-    private void DrawGizmoCircle(Vector2 center, float radius)
-    {
-        for (var i = 0; i < 32; i++)
-        {
-            var radians = i / 32f * Mathf.PI * 2;
-            var nextRadian = (i + 1) / 32f * Mathf.PI * 2;
-            Gizmos.DrawLine(
-                new Vector3(center.x + Mathf.Cos(radians) * radius, center.y + Mathf.Sin(radians) * radius, 0),
-                new Vector3(center.x + Mathf.Cos(nextRadian) * radius, center.y + Mathf.Sin(nextRadian) * radius, 0));
-        }
-    }
-
-    private void UpdateDynamicOriginClickableArea()
-    {
-        var dynamicOriginTransform = transform.Find(kDynamicOriginClickable);
-        if (dynamicOriginTransform)
-        {
-            var rectTransform = (RectTransform)dynamicOriginTransform;
-            rectTransform.sizeDelta = new Vector2(m_DynamicOriginRange * 2, m_DynamicOriginRange * 2);
-        }
-    }
-
     /// <summary>
     /// 다이나믹터치시 함께 이동할 배경 이미지
     /// </summary>
     public RectTransform backGroundObject;
+    /// <summary>
+    /// 다이나믹터치시 함께 이동할 핸들 이미지
+    /// </summary>
+    public RectTransform handleObject;
+    /// <summary>
+    /// 다이나믹터치 사용시 조작하지 않는 상태일 때 보여줄 조이스틱 배경&핸들 이미지
+    /// </summary>
+    public RectTransform joystickOffObject;
 
     /// <summary>
     /// The distance from the onscreen control's center of origin, around which the control can move.
@@ -314,29 +292,6 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
     {
         get => m_MovementRange;
         set => m_MovementRange = value;
-    }
-
-    /// <summary>
-    /// Defines the circular region where the onscreen control may have it's origin placed.
-    /// </summary>
-    /// <remarks>
-    /// This only applies if <see cref="behaviour"/> is set to <see cref="Behaviour.ExactPositionWithDynamicOrigin"/>.
-    /// When the first press is within this region, then the control will appear at that position and have it's origin of motion placed there.
-    /// Otherwise, if pressed outside of this region the control will ignore it.
-    /// This property defines the radius of the circular region. The center point being defined by the component position in the scene.
-    /// </remarks>
-    public float dynamicOriginRange
-    {
-        get => m_DynamicOriginRange;
-        set
-        {
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (m_DynamicOriginRange != value)
-            {
-                m_DynamicOriginRange = value;
-                UpdateDynamicOriginClickableArea();
-            }
-        }
     }
 
     /// <summary>

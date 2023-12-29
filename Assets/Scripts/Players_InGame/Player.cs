@@ -570,7 +570,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // 가만 있을 때 회전방향 바뀌지 않도록 예외처리
         if (moveDir == Vector3.zero)
         {
-            Debug.Log($"moveDir: {moveDir}");
+            //Debug.Log($"moveDir: {moveDir}");
             transform.forward = transform.forward;
             return;
         }

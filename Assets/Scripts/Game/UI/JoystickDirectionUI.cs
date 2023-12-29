@@ -28,36 +28,36 @@ public class JoystickDirectionUI : MonoBehaviour
             go.SetActive(false);
         }
 
-        Vector2 handlePos = gameObjectHandle.transform.localPosition;
+        Vector2 handleDir = gameObjectHandle.transform.localPosition - transform.localPosition;
 
         // 핸들 우상, Focus_1
-        if (handlePos.x > focushHighlightResponsiveness && handlePos.y > focushHighlightResponsiveness) gameObjectFocus[0].SetActive(true);
+        if (handleDir.x > focushHighlightResponsiveness && handleDir.y > focushHighlightResponsiveness) gameObjectFocus[0].SetActive(true);
         // 핸들 우하, Focus_2
-        else if (handlePos.x > focushHighlightResponsiveness && handlePos.y < -focushHighlightResponsiveness) gameObjectFocus[1].SetActive(true);
+        else if (handleDir.x > focushHighlightResponsiveness && handleDir.y < -focushHighlightResponsiveness) gameObjectFocus[1].SetActive(true);
         // 핸들 좌하, Focus_3
-        else if (handlePos.x < -focushHighlightResponsiveness && handlePos.y < -focushHighlightResponsiveness) gameObjectFocus[2].SetActive(true);
+        else if (handleDir.x < -focushHighlightResponsiveness && handleDir.y < -focushHighlightResponsiveness) gameObjectFocus[2].SetActive(true);
         // 핸들 좌상, Focus_4
-        else if (handlePos.x < -focushHighlightResponsiveness && handlePos.y > focushHighlightResponsiveness) gameObjectFocus[3].SetActive(true);
+        else if (handleDir.x < -focushHighlightResponsiveness && handleDir.y > focushHighlightResponsiveness) gameObjectFocus[3].SetActive(true);
         // 핸들 상, Focus_1 Focus_4
-        else if (handlePos.y > focushHighlightResponsiveness)
+        else if (handleDir.y > focushHighlightResponsiveness)
         {
             gameObjectFocus[0].SetActive(true);
             gameObjectFocus[3].SetActive(true);
         }
         // 핸들 우, Focus_1 Focus_2
-        else if (handlePos.x > focushHighlightResponsiveness)
+        else if (handleDir.x > focushHighlightResponsiveness)
         {
             gameObjectFocus[0].SetActive(true);
             gameObjectFocus[1].SetActive(true);
         }
         // 핸들 하, Focus_2 Focus_3
-        else if (handlePos.y < -focushHighlightResponsiveness)
+        else if (handleDir.y < -focushHighlightResponsiveness)
         {
             gameObjectFocus[1].SetActive(true);
             gameObjectFocus[2].SetActive(true);
         }
         // 핸들 좌, Focus_3 Focus_4
-        else if (handlePos.x < -focushHighlightResponsiveness)
+        else if (handleDir.x < -focushHighlightResponsiveness)
         {
             gameObjectFocus[2].SetActive(true);
             gameObjectFocus[3].SetActive(true);
