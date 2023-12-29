@@ -79,11 +79,6 @@ public class GameAssets : MonoBehaviour
     // ½ºÆç ÇÁ¸®ÆÕ
     public GameObject[] spellPrefabList;
 
-    // Å×½ºÆ®¿ë ÇÁ¸®ÆÕ
-    public GameObject fireBall_1;
-    public GameObject waterBall_1;
-    public GameObject iceBall_1;
-
     // Ä³¸¯ÅÍ ÇÁ¸®ÆÕ\
     public GameObject wizard_Male_ForLobby;
     public GameObject knight_Male_ForLobby;

@@ -46,74 +46,7 @@ public class SpellManager : NetworkBehaviour
     // 마법 프리팹 검색 및 반환
     private GameObject GetSpellObject(SpellInfo spellInfo)
     {
-        GameObject resultObject = null;
-        GameAssets gameAssets = GameAssets.instantiate;
-
-        switch (spellInfo.level)
-        {
-            case 1:
-                switch (spellInfo.spellType)
-                {
-                    case SpellType.Fire:
-                        resultObject = gameAssets.fireBall_1;
-                        break;
-                    case SpellType.Water:
-                        resultObject = gameAssets.waterBall_1;
-                        break;
-                    case SpellType.Ice:
-                        resultObject = gameAssets.iceBall_1;
-                        break;
-                    case SpellType.Lightning:
-                        break;
-                    case SpellType.Arcane:
-                        break;
-                    case SpellType.Normal:
-                        // 테스트용.  마법별 Type으로 검색하는것 대신 마법종류or이름으로 검색해야함.
-                        resultObject = gameAssets.fireBall_1;
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 2:
-                switch (spellInfo.spellType)
-                {
-                    case SpellType.Fire:
-                        break;
-                    case SpellType.Water:
-                        break;
-                    case SpellType.Ice:
-                        break;
-                    case SpellType.Lightning:
-                        break;
-                    case SpellType.Arcane:
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 3:
-                switch (spellInfo.spellType)
-                {
-                    case SpellType.Fire:
-                        break;
-                    case SpellType.Water:
-                        break;
-                    case SpellType.Ice:
-                        break;
-                    case SpellType.Lightning:
-                        break;
-                    case SpellType.Arcane:
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                break;
-        }
-
-        return resultObject;
+        return GameAssets.instantiate.GetSpellPrefab(spellInfo.spellName);
     }
 
 }
