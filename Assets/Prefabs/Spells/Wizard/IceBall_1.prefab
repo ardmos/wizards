@@ -19578,9 +19578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91593162f6fc43d46be2e4b1218c3662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 21300000, guid: c4e246c987a2745d9a604b6edc5567e2, type: 3}
-  muzzleVFXPrefab: {fileID: 0}
-  hitVFXPrefab: {fileID: 0}
+  muzzleVFXPrefab: {fileID: 1779451694322954, guid: e5df23447230e144bae8664dbe57ce5a, type: 3}
+  hitVFXPrefab: {fileID: 1423167456353516, guid: 0f5b05149b3cc7347b9bdcfd0a0bfa7a, type: 3}
   trails:
   - {fileID: 1713662898640638}
   - {fileID: 1802059017955996}

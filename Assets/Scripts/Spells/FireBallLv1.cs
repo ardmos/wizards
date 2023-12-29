@@ -47,11 +47,5 @@ public class FireBallLv1 : FireSpell
     public override void CastSpell(SpellInfo spellInfo, NetworkObject player)
     {
         base.CastSpell(spellInfo, player);
-        MuzzleVFX(muzzleVFXPrefab, player);
-    }
-
-    public override void MuzzleVFX(GameObject muzzlePrefab, NetworkObject player)
-    {
-        base.MuzzleVFX(muzzlePrefab, player);
     }
 }

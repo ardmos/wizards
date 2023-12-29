@@ -1,12 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 
 /// <summary>
 /// 마법의 공통적인 기능들을 관리하는 클래스
 /// </summary>
-public abstract class Spell : MonoBehaviour
+public abstract class Spell : NetworkBehaviour
 {
     public SpellInfo spellInfo;
 
@@ -24,29 +24,20 @@ public abstract class Spell : MonoBehaviour
     public abstract SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell);
 
     // 마법 발사
-    public virtual void CastSpell(SpellInfo spellInfo, NetworkObject muzzle)
+    public virtual void CastSpell(SpellInfo spellInfo, NetworkObject player)
     {
         // 여기 할차례
-        SpellManager.instance.SpawnSpellObject(spellInfo, muzzle);
-    }
-    // 마법 발사시 VFX. 지금은 상대방건 안보임. 상대방것도 보이게 하려면 발사체처럼 Server에서 NetworkObject로 Spawn 해줘야함.
-    public virtual void MuzzleVFX(GameObject muzzlePrefab, NetworkObject muzzle)
-    {
-        if (muzzlePrefab != null)
-        {
-            GameObject muzzleVFX = Instantiate(muzzlePrefab, muzzle.GetComponent<Transform>().position, Quaternion.identity);
-            muzzleVFX.transform.forward = gameObject.transform.forward;
-            var ps = muzzleVFX.GetComponent<ParticleSystem>();
-            if (ps != null)
-                Destroy(muzzleVFX, ps.main.duration);
-            else
-            {
-                var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-                Destroy(muzzleVFX, psChild.main.duration);
-            }
-        }
+        SpellManager.instance.SpawnSpellObject(spellInfo, player);
     }
 
+    public GameObject GetMuzzleVFXPrefab()
+    {
+        return muzzleVFXPrefab;
+    }
+    public GameObject GetHitVFXPrefab()
+    {
+        return hitVFXPrefab;
+    }
     /// <summary>
     /// 2. CollisionEnter 충돌 처리 (서버 권한 방식)
     /// </summary>
@@ -60,6 +51,7 @@ public abstract class Spell : MonoBehaviour
             if (collision.gameObject.tag == "Spell")
             {
                 isSpellCollided = true;
+                Debug.Log($"Spell Hit!");
                 SpellInfo thisSpell = spellInfo;
                 SpellInfo opponentsSpell = collision.gameObject.GetComponent<Spell>().spellInfo;
 
@@ -71,23 +63,27 @@ public abstract class Spell : MonoBehaviour
             else if (collision.gameObject.tag == "Player")
             {
                 isSpellCollided = false;
+                Debug.Log($"Player Hit!");
 
                 if (spellInfo == null)
                 {
                     Debug.Log("Spell Info is null");
                 }
-                Debug.Log($"Hit!! spell level: {spellInfo.level}");
+                //Debug.Log($"Hit!! spell level: {spellInfo.level}");
 
                 Player player = collision.gameObject.GetComponent<Player>();
                 if (player != null)
                 {
                     sbyte damage = (sbyte)spellInfo.level;
-                    Debug.Log("Spell.GotHit()");
+                    //Debug.Log("Spell.GotHit()");
                     GameMultiplayer.Instance.PlayerGotHit(damage, player.GetComponent<NetworkObject>().OwnerClientId);
                 }
                 else Debug.LogError("Player is null!");
             }
-            else { isSpellCollided = false; }
+            else { 
+                isSpellCollided = false;
+                Debug.Log($"Object Hit!");
+            }
             collided = true;
 
             if (trails.Count > 0)
@@ -95,11 +91,11 @@ public abstract class Spell : MonoBehaviour
                 for (int i = 0; i < trails.Count; i++)
                 {
                     trails[i].transform.parent = null;
-                    var ps = trails[i].GetComponent<ParticleSystem>();
-                    if (ps != null)
+                    ParticleSystem particleSystem = trails[i].GetComponent<ParticleSystem>();
+                    if (particleSystem != null)
                     {
-                        ps.Stop();
-                        Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+                        particleSystem.Stop();
+                        Destroy(particleSystem.gameObject, particleSystem.main.duration + particleSystem.main.startLifetime.constantMax);
                     }
                 }
             }
@@ -112,22 +108,34 @@ public abstract class Spell : MonoBehaviour
 
             if (hitVFXPrefab != null)
             {
+                Debug.Log($"hitVFXPrefab is Not null");
                 var hitVFX = Instantiate(hitVFXPrefab, pos, rot) as GameObject;
 
-                var ps = hitVFX.GetComponent<ParticleSystem>();
-                if (ps == null)
+                var particleSystem = hitVFX.GetComponent<ParticleSystem>();
+                if (particleSystem == null)
                 {
-                    var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-                    Destroy(hitVFX, psChild.main.duration);
+                    particleSystem = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
                 }
-                else
-                    Destroy(hitVFX, ps.main.duration);
+                Destroy(hitVFX, particleSystem.main.duration);
             }
+            else Debug.Log($"hitVFXPrefab is null");
 
-            StartCoroutine(DestroyParticle(1f));
+            Debug.Log($"Collided Obejct name: {collision.gameObject.name}");
+            //StartCoroutine(DestroyParticle(1f));
+            Destroy(gameObject, 0.2f);
+
+            if (isSpellCollided)
+            {
+                Debug.Log("collisionHandlingResult.level : " + collisionHandlingResult.level);
+                if (collisionHandlingResult.level > 0)
+                {
+                    CastSpell(collisionHandlingResult, gameObject.GetComponent<NetworkObject>());
+                }
+            }
         }
     }
-    protected IEnumerator DestroyParticle(float waitTime)
+    // 아래 효과 안씀
+    /*protected IEnumerator DestroyParticle(float waitTime)
     {
 
         if (transform.childCount > 0 && waitTime != 0)
@@ -161,5 +169,5 @@ public abstract class Spell : MonoBehaviour
                 CastSpell(collisionHandlingResult, gameObject.GetComponent<NetworkObject>());
             }
         }
-    }
+    }*/
 }

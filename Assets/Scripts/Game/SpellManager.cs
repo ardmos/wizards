@@ -41,6 +41,31 @@ public class SpellManager : NetworkBehaviour
         // 소환시에 Impulse로 발사 처리
         float speed = 35f;
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * speed, ForceMode.Impulse);
+
+        // 포구 VFX
+        MuzzleVFX(spellObject.GetComponent<Spell>().GetMuzzleVFXPrefab(), muzzlePos);
+    }
+
+    // 포구 VFX 
+    public virtual void MuzzleVFX(GameObject muzzleVFXPrefab, Vector3 muzzlePos)
+    {
+        if (muzzleVFXPrefab == null)
+        {
+            Debug.Log($"MuzzleVFX muzzleVFXPrefab is null");
+            return;
+        }
+
+        GameObject muzzleVFX = Instantiate(muzzleVFXPrefab, muzzlePos, Quaternion.identity);
+        muzzleVFX.GetComponent<NetworkObject>().Spawn();
+        muzzleVFX.transform.forward = gameObject.transform.forward;
+        var particleSystem = muzzleVFX.GetComponent<ParticleSystem>();
+
+        if (particleSystem == null)
+        {
+            particleSystem = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+        }
+
+        Destroy(muzzleVFX, particleSystem.main.duration);
     }
 
     // 마법 프리팹 검색 및 반환
@@ -48,5 +73,4 @@ public class SpellManager : NetworkBehaviour
     {
         return GameAssets.instantiate.GetSpellPrefab(spellInfo.spellName);
     }
-
 }
