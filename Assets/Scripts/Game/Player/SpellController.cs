@@ -12,7 +12,7 @@ using UnityEngine;
 public class SpellController : MonoBehaviour
 {
     [SerializeField] private GameObject[] currentSpellPrefabArray = new GameObject[3];
-    [SerializeField] private Spell.SpellInfo[] currentSpellInfoList = new Spell.SpellInfo[3];
+    [SerializeField] private SpellInfo[] currentSpellInfoList = new SpellInfo[3];
     [SerializeField] private Player player;
     [SerializeField] private float[] restTimeCurrentSpellArray = new float[3];
 
@@ -53,7 +53,10 @@ public class SpellController : MonoBehaviour
 
         if (isPlayerInput)
         {
-            currentSpellPrefabArray[spellIndex].GetComponent<Spell>().CastSpell(new SpellLvlType { level = currentSpellInfoList[spellIndex].level, spellType = currentSpellInfoList[spellIndex].spellType }, player.GetComponent<NetworkObject>());
+            currentSpellPrefabArray[spellIndex].GetComponent<Spell>()
+                .CastSpell(
+                currentSpellInfoList[spellIndex], 
+                player.GetComponent<NetworkObject>());
             currentSpellInfoList[spellIndex].castAble = false;
         }
     }
@@ -75,7 +78,8 @@ public class SpellController : MonoBehaviour
         currentSpellPrefabArray[spellIndex] = spellObjectPrefab;
         currentSpellPrefabArray[spellIndex].GetComponent<Spell>().InitSpellInfoDetail();
         currentSpellInfoList[spellIndex] = currentSpellPrefabArray[spellIndex].GetComponent<Spell>().spellInfo;
-        FindObjectOfType<GamePadUI>().UpdateSpellUI(currentSpellInfoList[spellIndex].iconImage, spellIndex);
+        Sprite spellIconImage = GameAssets.instantiate.GetSpellIconImage(currentSpellInfoList[spellIndex].spellName);
+        FindObjectOfType<GamePadUI>().UpdateSpellUI(spellIconImage, spellIndex);
     }
     #endregion
 }

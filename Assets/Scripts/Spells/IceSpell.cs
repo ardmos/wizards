@@ -9,9 +9,9 @@ using UnityEngine;
 public abstract class IceSpell : Spell
 {
     // 1. 속성별 충돌 계산
-    public override SpellLvlType CollisionHandling(SpellLvlType thisSpell, SpellLvlType opponentsSpell)
+    public override SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell)
     {
-        SpellLvlType result = new SpellLvlType();
+        SpellInfo result = new SpellInfo();
 
         // Lvl 비교
         int resultLevel = thisSpell.level - opponentsSpell.level;

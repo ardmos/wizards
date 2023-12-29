@@ -27,9 +27,8 @@ public class FireBallLv1 : FireSpell
             moveSpeed = 10.0f,
             price = 30,
             level = 1,
-            spellName = "FireBall Lv.1",
+            spellName = SpellName.FireBallLv1,
             castAble = true,
-            iconImage = iconImage
         };
     }
 
@@ -45,9 +44,9 @@ public class FireBallLv1 : FireSpell
     /// <summary>
     /// 3. 마법 시전
     /// </summary>
-    public override void CastSpell(SpellLvlType spellLvlType, NetworkObject player)
+    public override void CastSpell(SpellInfo spellInfo, NetworkObject player)
     {
-        base.CastSpell(spellLvlType, player);
+        base.CastSpell(spellInfo, player);
         MuzzleVFX(muzzleVFXPrefab, player);
     }
 

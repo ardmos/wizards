@@ -8,40 +8,26 @@ using UnityEngine;
 /// </summary>
 public abstract class Spell : MonoBehaviour
 {
-    public class SpellInfo
-    {
-        public SpellType spellType;
-
-        public float coolTime;
-        public float lifeTime;
-        public float moveSpeed;
-        public int price;
-        public int level;
-        public string spellName;
-        public bool castAble;
-        public Sprite iconImage;
-    }
-
     public SpellInfo spellInfo;
 
-    [SerializeField] protected Sprite iconImage;
     [SerializeField] protected GameObject muzzleVFXPrefab;
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
 
     [SerializeField] protected bool collided, isSpellCollided;
-    [SerializeField] protected SpellLvlType collisionHandlingResult;
+    [SerializeField] protected SpellInfo collisionHandlingResult;
 
     // 마법 상세값 설정
     public abstract void InitSpellInfoDetail();
 
     // 마법 충돌시 속성 계산
-    public abstract SpellLvlType CollisionHandling(SpellLvlType thisSpell, SpellLvlType opponentsSpell);
+    public abstract SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell);
 
     // 마법 발사
-    public virtual void CastSpell(SpellLvlType spellLvlType, NetworkObject muzzle)
+    public virtual void CastSpell(SpellInfo spellInfo, NetworkObject muzzle)
     {
-        SpellManager.instance.SpawnSpellObject(spellLvlType, muzzle);
+        // 여기 할차례
+        SpellManager.instance.SpawnSpellObject(spellInfo, muzzle);
     }
     // 마법 발사시 VFX. 지금은 상대방건 안보임. 상대방것도 보이게 하려면 발사체처럼 Server에서 NetworkObject로 Spawn 해줘야함.
     public virtual void MuzzleVFX(GameObject muzzlePrefab, NetworkObject muzzle)
@@ -69,12 +55,13 @@ public abstract class Spell : MonoBehaviour
     {
         if (!collided)
         {
+            // 충돌한게 Spell일 경우, 스펠간 충돌 결과 처리를 따로 진행합니다
+            // 처리결과를 collisionHandlingResult 변수에 저장해뒀다가 DestroyParticle시에 castSpell 시킵니다.
             if (collision.gameObject.tag == "Spell")
             {
                 isSpellCollided = true;
-                SpellLvlType thisSpell = new SpellLvlType { level = spellInfo.level, spellType = spellInfo.spellType };
-                SpellInfo opponentsSpellInfo = collision.gameObject.GetComponent<Spell>().spellInfo;
-                SpellLvlType opponentsSpell = new SpellLvlType { level = opponentsSpellInfo.level, spellType = opponentsSpellInfo.spellType };
+                SpellInfo thisSpell = spellInfo;
+                SpellInfo opponentsSpell = collision.gameObject.GetComponent<Spell>().spellInfo;
 
                 collisionHandlingResult = CollisionHandling(thisSpell, opponentsSpell);
             }

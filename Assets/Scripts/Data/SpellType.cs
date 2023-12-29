@@ -10,7 +10,8 @@ public enum SpellType
     Arcane
 }
 
-public struct SpellLvlType : INetworkSerializable
+// Spell Info로 대체. 현재는 안쓰는 구조체. 삭제 가능
+/*public struct SpellLvlType : INetworkSerializable
 {
     public SpellType spellType;
     public int level;
@@ -20,4 +21,4 @@ public struct SpellLvlType : INetworkSerializable
         serializer.SerializeValue(ref spellType);
         serializer.SerializeValue(ref level);
     }
-}
+}*/

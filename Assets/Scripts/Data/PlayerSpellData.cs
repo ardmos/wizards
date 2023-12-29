@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public struct WizardSpell : IEquatable<WizardSpell>, INetworkSerializable
 {
-    public SpellNames.Wizard spellName;
+    public SpellName spellName;
 
     public bool Equals(WizardSpell other)
     {

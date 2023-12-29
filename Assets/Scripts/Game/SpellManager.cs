@@ -18,12 +18,12 @@ public class SpellManager : NetworkBehaviour
     /// <summary>
     /// 마법 생성해주기 ( NetworkObject는 Server에서만 생성 가능합니다 )
     /// </summary>
-    public void SpawnSpellObject(SpellLvlType spellLvlType, NetworkObjectReference player)
+    public void SpawnSpellObject(SpellInfo spellInfo, NetworkObjectReference player)
     {
-        SpawnSpellObjectServerRPC(spellLvlType, player);
+        SpawnSpellObjectServerRPC(spellInfo, player);
     }
     [ServerRpc(RequireOwnership = false)]
-    private void SpawnSpellObjectServerRPC(SpellLvlType spellLvlType, NetworkObjectReference player)
+    private void SpawnSpellObjectServerRPC(SpellInfo spellInfo, NetworkObjectReference player)
     {
         // GameObject 얻어내기 실패시 로그 출력
         if(!player.TryGet(out NetworkObject playerObject))
@@ -33,7 +33,7 @@ public class SpellManager : NetworkBehaviour
         // 포구 위치 찾기
         Vector3 muzzlePos = playerObject.GetComponentInChildren<MuzzlePos>().GetMuzzlePosition();
         // 포구에 발사체 위치시키기
-        GameObject spellObject = Instantiate(GetSpellObject(spellLvlType), muzzlePos, Quaternion.identity);
+        GameObject spellObject = Instantiate(GetSpellObject(spellInfo), muzzlePos, Quaternion.identity);
         spellObject.GetComponent<Spell>().InitSpellInfoDetail();
         spellObject.GetComponent<NetworkObject>().Spawn();
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
@@ -44,15 +44,15 @@ public class SpellManager : NetworkBehaviour
     }
 
     // 마법 프리팹 검색 및 반환
-    private GameObject GetSpellObject(SpellLvlType spellLvlType)
+    private GameObject GetSpellObject(SpellInfo spellInfo)
     {
         GameObject resultObject = null;
         GameAssets gameAssets = GameAssets.instantiate;
 
-        switch (spellLvlType.level)
+        switch (spellInfo.level)
         {
             case 1:
-                switch (spellLvlType.spellType)
+                switch (spellInfo.spellType)
                 {
                     case SpellType.Fire:
                         resultObject = gameAssets.fireBall_1;
@@ -68,14 +68,15 @@ public class SpellManager : NetworkBehaviour
                     case SpellType.Arcane:
                         break;
                     case SpellType.Normal:
-                        //resultObject
+                        // 테스트용.  마법별 Type으로 검색하는것 대신 마법종류or이름으로 검색해야함.
+                        resultObject = gameAssets.fireBall_1;
                         break;
                     default:
                         break;
                 }
                 break;
             case 2:
-                switch (spellLvlType.spellType)
+                switch (spellInfo.spellType)
                 {
                     case SpellType.Fire:
                         break;
@@ -92,7 +93,7 @@ public class SpellManager : NetworkBehaviour
                 }
                 break;
             case 3:
-                switch (spellLvlType.spellType)
+                switch (spellInfo.spellType)
                 {
                     case SpellType.Fire:
                         break;

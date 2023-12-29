@@ -26,26 +26,25 @@ public class SlashLv1 : Spell
             moveSpeed = 10.0f,
             price = 30,
             level = 1,
-            spellName = "Slash Lv1",
+            spellName = SpellName.SlashLv1,
             castAble = true,
-            iconImage = iconImage
         };
 
         if (spellInfo == null)
         {
-            Debug.Log("Spell Info is null");
+            Debug.Log("SlashLv1 Spell Info is null");
         }
         else
         {
-            Debug.Log("Spell Info is not null");
-            Debug.Log($"spell Type : {spellInfo.spellType}, level : {spellInfo.level}");
+            Debug.Log("SlashLv1 Spell Info is not null");
+            Debug.Log($"SlashLv1 spell Type : {spellInfo.spellType}, level : {spellInfo.level}");
         }
     }
 
     // 속성별 충돌 결과를 계산해주는 메소드 <--- Slash 계열 스크립트를 따로 만들어서 빼야할지도 모르겠다. 다른 fire,water,ice 처럼
-    public override SpellLvlType CollisionHandling(SpellLvlType thisSpell, SpellLvlType opponentsSpell)
+    public override SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell)
     {
-        SpellLvlType result = new SpellLvlType();
+        SpellInfo result = new SpellInfo();
 
         // Lvl 비교
         int resultLevel = thisSpell.level - opponentsSpell.level;
@@ -77,8 +76,8 @@ public class SlashLv1 : Spell
     /// <summary>
     /// 3. 마법 시전
     /// </summary>
-    public override void CastSpell(SpellLvlType spellLvlType, NetworkObject player)
+    public override void CastSpell(SpellInfo spellInfo, NetworkObject player)
     {
-        base.CastSpell(spellLvlType, player);
+        base.CastSpell(spellInfo, player);
     }
 }

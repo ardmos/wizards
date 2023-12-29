@@ -28,7 +28,7 @@ public class FireBallLv2 : FireSpell
             moveSpeed = 10.0f,
             price = 40,
             level = 2,
-            spellName = "FireBall Lv.2",
+            spellName = SpellName.FireBallLv1,
             castAble = true
         };
     }

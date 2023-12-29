@@ -21,6 +21,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
     [SerializeField] protected List<Vector3> spawnPositionList;
+    [SerializeField] protected List<GameObject> ownedSpellPrefabList;
 
     protected GameAssets gameAssets;
 
@@ -33,9 +34,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
     protected int backPack;
     protected int wand;
 
-    public void InitializePlayer()
-    {      
-        if (IsOwner) LocalInstance = this;
+    public void InitializePlayer(SpellName[] ownedSpellList)
+    {
+        if (!IsOwner) return;
+
+        LocalInstance = this;
 
         // 카메라 위치 초기화. 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
@@ -49,6 +52,28 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         // 테스트용
         //GameManager.Instance.UpdatePlayerGameOver();
+
+        // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
+        GetComponent<Rigidbody>().isKinematic = false;
+
+        // HP 초기화
+        GameMultiplayer.Instance.SetPlayerHP(hp);
+
+        // 나머지는 스킬 로드 과정
+        // GameMultiplayer.PlayerNetworkDataList.ownedSpellList 에다가 장착 장비 기준으로 스펠 업데이트를 해줬다는 전제 하에 진행되는 로직. 현재는 아래에서 배열 초기화를 해준다. 나중에는 장착 아이템이 해줘야 함.
+        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        CharacterClasses.Class playerClass = playerData.playerClass;
+        // GameAsset으로부터 Spell Prefab 로딩. playerClass와 spellName으로 필요한 프리팹만 불러온다. 
+        ownedSpellPrefabList = new List<GameObject>();
+
+        foreach (var spellName in ownedSpellList)
+        {
+            ownedSpellPrefabList.Add(GameAssets.instantiate.GetSpellPrefab(spellName));
+        }
+        for (int i = 0; i < ownedSpellPrefabList.Count; i++)
+        {
+            spellController.SetCurrentSpell(ownedSpellPrefabList[i], i);
+        }
     }
 
     [ClientRpc]
@@ -585,4 +610,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
         isAttack3 = gameInput.GetIsAttack3() == 1;
     }
     #endregion
+
+
 }

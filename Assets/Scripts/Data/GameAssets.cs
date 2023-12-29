@@ -18,6 +18,9 @@ public class GameAssets : MonoBehaviour
 
     #region Sprites
     public Sprite s_RemoveAds;
+
+    // ½ºÅ³ Icon Images
+    public Sprite[] spellIconsArray;
     #endregion
 
     #region Mesh
@@ -73,10 +76,8 @@ public class GameAssets : MonoBehaviour
     #endregion Mesh
 
     #region Prefab
-    // Á÷¾÷º° ½ºÆç ÇÁ¸®ÆÕ
-    public GameObject[] spellListWizard;
-    public GameObject[] spellListKnight;
-
+    // ½ºÆç ÇÁ¸®ÆÕ
+    public GameObject[] spellPrefabList;
 
     // Å×½ºÆ®¿ë ÇÁ¸®ÆÕ
     public GameObject fireBall_1;
@@ -99,12 +100,13 @@ public class GameAssets : MonoBehaviour
 
     #endregion
 
-    public GameObject GetWizardSpellPrefab(CharacterClasses.Class playerClass, SpellNames.Wizard spellName)
+    public GameObject GetSpellPrefab(SpellName spellName)
     {
-        return spellListWizard[(int)spellName];
+        return spellPrefabList[(int)spellName];
     }
-    public GameObject GetKnightSpellPrefab(CharacterClasses.Class playerClass, SpellNames.Knight spellName)
+
+    public Sprite GetSpellIconImage(SpellName spellName)
     {
-        return spellListKnight[(int)spellName];
+        return spellIconsArray[(int)spellName];
     }
 }

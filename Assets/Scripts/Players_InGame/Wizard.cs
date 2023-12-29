@@ -5,8 +5,8 @@ using UnityEngine;
 /// </summary>
 public class Wizard : Player
 {
-    public SpellNames.Wizard[] ownedSpellList;
-    public List<GameObject> ownedSpellPrefabList;
+    public SpellName[] ownedSpellList;
+
     // Update is called once per frame
     void Update()
     {
@@ -30,32 +30,12 @@ public class Wizard : Player
 
     public override void OnNetworkSpawn()
     {
-        InitializePlayer();
-        if (IsOwner)
-        {
-            GetComponent<Rigidbody>().isKinematic = false;
-            // HP 초기화
-            GameMultiplayer.Instance.SetPlayerHP(hp);
-
-            // GameMultiplayer.PlayerNetworkDataList.ownedSpellList 에다가 장착 장비 기준으로 스펠 업데이트를 해줬다는 전제 하에 진행되는 로직. 현재는 아래에서 배열 초기화를 해준다. 나중에는 장착 아이템이 해줘야 함.
-            PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-            ownedSpellList = new SpellNames.Wizard[]{
-                SpellNames.Wizard.FireBallLv1,
-                SpellNames.Wizard.WaterBallLv1,
-                SpellNames.Wizard.IceBallLv1
+        // 테스트 목적으로 스펠리스트 하드코딩. 로비씬에서 선택해줘야함.
+        ownedSpellList = new SpellName[]{
+                SpellName.FireBallLv1,
+                SpellName.WaterBallLv1,
+                SpellName.IceBallLv1
                 };
-            CharacterClasses.Class playerClass = playerData.playerClass;
-            // GameAsset으로부터 Spell Prefab 로딩. playerClass와 spellName으로 필요한 프리팹만 불러온다. 
-            ownedSpellPrefabList = new List<GameObject>();
-
-            foreach (var spellName in ownedSpellList)
-            {
-                ownedSpellPrefabList.Add(GameAssets.instantiate.GetWizardSpellPrefab(playerClass, spellName));
-            }
-            for (int i = 0; i < ownedSpellPrefabList.Count; i++)
-            {
-                spellController.SetCurrentSpell(ownedSpellPrefabList[i], i);
-            }
-        }
+        InitializePlayer(ownedSpellList);
     }
 }
