@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.OnScreen;
 /// <summary>
 /// 1. 조이스틱 핸들 위치에 따라 포커스 하이라이트 효과 켜주기
 /// </summary>
@@ -10,10 +11,12 @@ public class JoystickDirectionUI : MonoBehaviour
     [SerializeField] private GameObject gameObjectHandle;
     [SerializeField] private float focushHighlightResponsiveness;
 
+    //[SerializeField] private OnScreenStick handle;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //handle.OnPointerDown();
     }
 
     // Update is called once per frame

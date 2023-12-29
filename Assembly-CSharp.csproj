@@ -147,6 +147,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\CustomOnScreenStick.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\DailyGroupUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\GameMultiplayer.cs" />
