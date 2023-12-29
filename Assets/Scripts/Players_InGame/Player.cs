@@ -568,9 +568,14 @@ public class Player : NetworkBehaviour, IStoreCustomer
     private void Rotate(Vector3 moveDir)
     {
         // 가만 있을 때 회전방향 바뀌지 않도록 예외처리
-        if(moveDir == Vector3.zero) return;
+        if (moveDir == Vector3.zero)
+        {
+            Debug.Log($"moveDir: {moveDir}");
+            transform.forward = transform.forward;
+            return;
+        }
 
-        float rotateSpeed = 20f;
+        float rotateSpeed = 30f;
         Vector3 slerpResult = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
         transform.forward = slerpResult;
     }

@@ -11008,7 +11008,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.505
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -11230,7 +11230,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.5
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -11327,7 +11327,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -11632,7 +11632,7 @@ GameObject:
   - component: {fileID: 1057068785320938834}
   - component: {fileID: 1057068785320938926}
   m_Layer: 0
-  m_Name: Joystick_Skill 1
+  m_Name: Skill 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11773,7 +11773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1057068785441658198}
   m_Layer: 0
-  m_Name: Joysitck_Skill_Group_Light
+  m_Name: Skill_Group_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12084,7 +12084,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.505
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13040,7 +13040,7 @@ GameObject:
   - component: {fileID: 1057068786283933263}
   - component: {fileID: 1057068786283933262}
   m_Layer: 0
-  m_Name: Joystick_Skill Defence
+  m_Name: Skill Defence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13529,7 +13529,7 @@ GameObject:
   - component: {fileID: 1057068786546511690}
   - component: {fileID: 1057068786546511692}
   m_Layer: 0
-  m_Name: Joystick_Skill 2
+  m_Name: Skill 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13848,7 +13848,7 @@ GameObject:
   - component: {fileID: 1057068786613489263}
   - component: {fileID: 1057068786613489264}
   m_Layer: 0
-  m_Name: Joystick_Skill 3
+  m_Name: Skill 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
