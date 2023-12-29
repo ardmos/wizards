@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 
 /// <summary>
@@ -27,7 +26,7 @@ public abstract class Spell : NetworkBehaviour
     public virtual void CastSpell(SpellInfo spellInfo, NetworkObject player)
     {
         // 여기 할차례
-        SpellManager.instance.SpawnSpellObject(spellInfo, player);
+        SpellManager.Instance.SpawnSpellObject(spellInfo, player);
     }
 
     public GameObject GetMuzzleVFXPrefab()
@@ -46,6 +45,9 @@ public abstract class Spell : NetworkBehaviour
     {
         if (!collided)
         {
+            // 일단 마법 정지
+            GetComponent<Rigidbody>().isKinematic = true;
+
             // 충돌한게 Spell일 경우, 스펠간 충돌 결과 처리를 따로 진행합니다
             // 처리결과를 collisionHandlingResult 변수에 저장해뒀다가 DestroyParticle시에 castSpell 시킵니다.
             if (collision.gameObject.tag == "Spell")
@@ -76,11 +78,12 @@ public abstract class Spell : NetworkBehaviour
                 {
                     sbyte damage = (sbyte)spellInfo.level;
                     //Debug.Log("Spell.GotHit()");
-                    GameMultiplayer.Instance.PlayerGotHit(damage, player.GetComponent<NetworkObject>().OwnerClientId);
+                    SpellManager.Instance.PlayerGotHit(damage, player.GetComponent<NetworkObject>().OwnerClientId);
                 }
                 else Debug.LogError("Player is null!");
             }
-            else { 
+            else
+            {
                 isSpellCollided = false;
                 Debug.Log($"Object Hit!");
             }
@@ -100,25 +103,8 @@ public abstract class Spell : NetworkBehaviour
                 }
             }
 
-            GetComponent<Rigidbody>().isKinematic = true;
-
-            ContactPoint contact = collision.contacts[0];
-            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-            Vector3 pos = contact.point;
-
-            if (hitVFXPrefab != null)
-            {
-                Debug.Log($"hitVFXPrefab is Not null");
-                var hitVFX = Instantiate(hitVFXPrefab, pos, rot) as GameObject;
-
-                var particleSystem = hitVFX.GetComponent<ParticleSystem>();
-                if (particleSystem == null)
-                {
-                    particleSystem = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-                }
-                Destroy(hitVFX, particleSystem.main.duration);
-            }
-            else Debug.Log($"hitVFXPrefab is null");
+            // 적중 효과 VFX
+            SpellManager.Instance.HitVFX(hitVFXPrefab, collision);
 
             Debug.Log($"Collided Obejct name: {collision.gameObject.name}");
             //StartCoroutine(DestroyParticle(1f));

@@ -57,7 +57,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         GetComponent<Rigidbody>().isKinematic = false;
 
         // HP 초기화
-        GameMultiplayer.Instance.SetPlayerHP(hp);
+        PlayerHPManager.Instance.SetPlayerHP(hp);
 
         // 나머지는 스킬 로드 과정        
         // GameAsset으로부터 Spell Prefab 로딩. playerClass와 spellName으로 필요한 프리팹만 불러온다. 

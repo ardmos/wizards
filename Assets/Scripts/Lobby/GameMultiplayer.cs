@@ -116,62 +116,6 @@ public class GameMultiplayer : NetworkBehaviour
             $"player{serverRpcParams.Receive.SenderClientId} Class: {playerClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
     }
 
-    public void SetPlayerHP(sbyte playerHP)
-    {
-        SetPlayerHPServerRPC(playerHP);
-    }
-    [ServerRpc(RequireOwnership = false)]
-    private void SetPlayerHPServerRPC(sbyte playerHP, ServerRpcParams serverRpcParams = default)
-    {
-        var clientId = serverRpcParams.Receive.SenderClientId;
-        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
-        {
-            UpdatePlayerHP(clientId, playerHP);
-        }
-    }
-    private void UpdatePlayerHP(ulong clientId, sbyte playerTotalHP)
-    {
-        // 변경된 HP값 서버에 저장
-        PlayerData playerData = GetPlayerDataFromClientId(clientId);
-        playerData.playerHP = playerTotalHP;
-        playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = playerData;
-
-        // 플레이어의 HP바 업데이트
-        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<Player>().SetHPClientRPC(playerTotalHP);
-    }
-
-    // 스킬 대미지 처리
-    // clientID와 HP 연계해서 처리. 
-    // 충돌 녀석이 플레이어일 경우 실행. 
-    // ClientID로 리스트 검색 후 HP 수정시키고 업데이트된 내용 브로드캐스팅.
-    // 수신측은 ClientID의 플레이어 HP 업데이트. 
-    // 서버에서 구동되는 스크립트.
-    public void PlayerGotHit(sbyte damage, ulong clientId)
-    {             
-        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
-        {
-            // 요청한 플레이어 현재 HP값 가져오기 
-            PlayerData playerData = GetPlayerDataFromClientId(clientId);
-            sbyte playerHP = playerData.playerHP;
-
-            // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
-            if (playerHP <= damage)
-            {
-                // HP 0
-                playerHP = 0;
-            }
-            else
-            {
-                // HP 감소 계산
-                playerHP -= damage;
-            }
-
-            UpdatePlayerHP(clientId, playerHP);
-            Debug.Log($"GameMultiplayer.PlayerGotHit()  Player{clientId} got {damage} damage new HP:{playerHP}");
-        }
-    }
-
     // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
     public bool IsPlayerIndexConnected(int playerIndex)
     {
@@ -218,6 +162,11 @@ public class GameMultiplayer : NetworkBehaviour
     public NetworkList<PlayerData> GetPlayerDataNetworkList()
     {
         return playerDataNetworkList;
+    }
+
+    public void SetPlayerDataFromClientId(ulong clientId, PlayerData newPlayerData)
+    {
+        playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
     }
 
 
