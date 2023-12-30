@@ -531,12 +531,20 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // Animation State 브로드캐스팅
         UpdateAnimationStateClientRPC(isWalking);
 
-        // 진행방향 바라볼 때
-        Rotate(moveDir);
-
+        if(!isAttack1 && !isAttack2 && !isAttack3) 
+        {
+            // 공격중이 아닐 때 진행방향 바라보게 함. (공격중일때는 스킬 시전 방향 바라봐야함) 
+            Rotate(moveDir);
+        }
+        
         // 마우스 커서 방향 바라볼 때
         //Vector3 mouseDir = GetMouseDir();
         //Rotate(mouseDir);
+    }
+
+    private void SpellController_OnSpellIconClicked(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
     }
 
     [ClientRpc]
@@ -567,13 +575,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     private void Rotate(Vector3 moveDir)
     {
-        // 가만 있을 때 회전방향 바뀌지 않도록 예외처리
-        if (moveDir == Vector3.zero)
-        {
-            //Debug.Log($"moveDir: {moveDir}");
-            transform.forward = transform.forward;
-            return;
-        }
+        if (moveDir == Vector3.zero) return;
 
         float rotateSpeed = 30f;
         Vector3 slerpResult = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);

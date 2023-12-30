@@ -30,7 +30,7 @@ public class Wizard : Player
 
     public override void OnNetworkSpawn()
     {
-        // 테스트 목적으로 스펠리스트 하드코딩. 로비씬에서 선택해줘야함.
+        // 테스트 목적으로 스펠리스트 하드코딩. 로비씬에서 선택해줘야함. (스킬트리)
         ownedSpellList = new SpellName[]{
                 SpellName.FireBallLv1,
                 SpellName.WaterBallLv1,

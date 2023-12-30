@@ -25,7 +25,6 @@ public abstract class Spell : NetworkBehaviour
     // 마법 발사
     public virtual void CastSpell(SpellInfo spellInfo, NetworkObject player)
     {
-        // 여기 할차례
         SpellManager.Instance.SpawnSpellObject(spellInfo, player);
     }
 
