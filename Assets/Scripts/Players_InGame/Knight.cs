@@ -20,11 +20,11 @@ public class Knight : Player
 
         // == 공격 == 
         // 스킬발동체크방식도 지금 Update에서 좀 더 낭비 없는 방식으로 바꿀 필요가 있음.!  일단 테스트용으로 Update에서 실행. 
-        UpdateAttackInput();
-        for (int i = 0; i < ownedSpellPrefabList.Count; i++)
+        //UpdateAttackInput();
+/*        for (int i = 0; i < ownedSpellPrefabList.Count; i++)
         {
-            spellController.CheckCastSpell(i);
-        }     
+            spellController.StartCastingSpell(i);
+        }   */  // Udate에서 좀 더 낭비없도록 옵저버패턴 형식으로 수정했음. player.cs에서 실행합니다
     }
 
     public override void OnNetworkSpawn()

@@ -26,9 +26,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
     protected GameAssets gameAssets;
 
     protected bool isWalking;
-    protected bool isAttack1;
-    protected bool isAttack2;
-    protected bool isAttack3;
+    protected bool isAttack1Casting;
+    protected bool isAttack2Casting;
+    protected bool isAttack3Casting;
     protected int body;
     protected int hat;
     protected int backPack;
@@ -71,6 +71,52 @@ public class Player : NetworkBehaviour, IStoreCustomer
         {
             spellController.SetCurrentSpell(ownedSpellPrefabList[i], i);
         }
+
+        gameInput.OnAttack1Started += GameInput_OnAttack1Started;
+        gameInput.OnAttack2Started += GameInput_OnAttack2Started;
+        gameInput.OnAttack3Started += GameInput_OnAttack3Started;
+        gameInput.OnAttack1Ended += GameInput_OnAttack1Ended;
+        gameInput.OnAttack2Ended += GameInput_OnAttack2Ended;
+        gameInput.OnAttack3Ended += GameInput_OnAttack3Ended;
+    }
+
+    private void GameInput_OnAttack1Started(object sender, EventArgs e)
+    {
+        isAttack1Casting = true;
+        spellController.StartCastingSpell(0);
+    }
+
+    private void GameInput_OnAttack2Started(object sender, EventArgs e)
+    {
+        isAttack2Casting = true;
+        spellController.StartCastingSpell(1);
+    }
+
+    private void GameInput_OnAttack3Started(object sender, EventArgs e)
+    {
+        isAttack3Casting = true;
+        spellController.StartCastingSpell(2);
+    }
+
+    private void GameInput_OnAttack1Ended(object sender, EventArgs e)
+    {
+        if (!isAttack1Casting) return;
+        isAttack1Casting = false;
+        spellController.ShootCurrentCastingSpell(0);
+    }
+
+    private void GameInput_OnAttack2Ended(object sender, EventArgs e)
+    {
+        if (!isAttack2Casting) return;
+        isAttack2Casting = false;
+        spellController.ShootCurrentCastingSpell(1);
+    }
+
+    private void GameInput_OnAttack3Ended(object sender, EventArgs e)
+    {
+        if (!isAttack3Casting) return;
+        isAttack3Casting = false;
+        spellController.ShootCurrentCastingSpell(2);
     }
 
     [ClientRpc]
@@ -105,18 +151,18 @@ public class Player : NetworkBehaviour, IStoreCustomer
         return isWalking;
     }
 
-    public bool IsAttack1()
+/*    public bool IsAttack1Casting()
     {
-        return isAttack1;
+        return isAttack1Casting;
     }
-    public bool IsAttack2()
+    public bool IsAttack2Casting()
     {
-        return isAttack2;
+        return isAttack2Casting;
     }
-    public bool IsAttack3()
+    public bool IsAttack3Casting()
     {
-        return isAttack3;
-    }
+        return isAttack3Casting;
+    }*/
     #endregion
 
     #region Public 아이템 구매
@@ -531,7 +577,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // Animation State 브로드캐스팅
         UpdateAnimationStateClientRPC(isWalking);
 
-        if(!isAttack1 && !isAttack2 && !isAttack3) 
+        if(!isAttack1Casting && !isAttack2Casting && !isAttack3Casting) 
         {
             // 공격중이 아닐 때 진행방향 바라보게 함. (공격중일때는 스킬 시전 방향 바라봐야함) 
             Rotate(moveDir);
@@ -607,13 +653,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
         return mouseDir;
     }
 
-    protected void UpdateAttackInput()
+    /*protected void UpdateAttackInput()
     {
-        isAttack1 = gameInput.GetIsAttack1() == 1;
-        isAttack2 = gameInput.GetIsAttack2() == 1;
-        isAttack3 = gameInput.GetIsAttack3() == 1;
-    }
+        isAttack1Started = gameInput.GetIsAttack1() == 1;
+        isAttack2Started = gameInput.GetIsAttack2() == 1;
+        isAttack3Started = gameInput.GetIsAttack3() == 1;
+    }*/
     #endregion
-
-
 }

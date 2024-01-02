@@ -1,22 +1,76 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 플레이어 프리팹에 붙어있는 Input 관리 스크립트
+/// </summary>
 public class GameInput : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
 
+    public event EventHandler OnAttack1Started;
+    public event EventHandler OnAttack2Started;
+    public event EventHandler OnAttack3Started;
+    public event EventHandler OnAttack1Ended;
+    public event EventHandler OnAttack2Ended;
+    public event EventHandler OnAttack3Ended;
 
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+
+        playerInputActions.Player.Attack1.started += Attack1_started;
+        playerInputActions.Player.Attack1.canceled += Attack1_canceled;
+        playerInputActions.Player.Attack2.started += Attack2_started;
+        playerInputActions.Player.Attack2.canceled += Attack2_canceled;
+        playerInputActions.Player.Attack3.started += Attack3_started;
+        playerInputActions.Player.Attack3.canceled += Attack3_canceled;
     }
+
+    private void Attack1_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAttack1Started?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Attack1_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAttack1Ended?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Attack2_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAttack2Started?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Attack2_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAttack2Ended?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Attack3_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAttack3Started?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Attack3_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAttack3Ended?.Invoke(this, EventArgs.Empty);
+    }
+
 
     private void OnDestroy()
     {
+        playerInputActions.Player.Attack1.started -= Attack1_started;
+        playerInputActions.Player.Attack1.canceled -= Attack1_canceled;
+        playerInputActions.Player.Attack2.started -= Attack2_started;
+        playerInputActions.Player.Attack2.canceled -= Attack2_canceled;
+        playerInputActions.Player.Attack3.started -= Attack3_started;
+        playerInputActions.Player.Attack3.canceled -= Attack3_canceled;
         // 재접속 구현의 일부 인풋 액션이 추가되면 여기서 전부 -= 해줘야 한다. 
         playerInputActions.Dispose();
+
     }
 
     public Vector2 GetMovementVectorNormalized()
@@ -28,27 +82,10 @@ public class GameInput : MonoBehaviour
         return inputVector;
     }
 
-    public float GetIsAttack1()
+/*    public float GetIsAttack1()
     {
         float isAttack = playerInputActions.Player.Attack1.ReadValue<float>();
-
-
-        // 스킬 드래그 시스템 만들기!!  여기부터 시작하면 될듯. started 콜백을 이용해서 eventHander를 Invoke하고, 이 eventHandler를 통해 옵저버 패턴을 구현하면 되겠다.
-        // 스킬 터치 start 단계 -> 드래그 UI ON! (이 때 Player는 회전을 중지한다.)
-        // 드래그 UI 하는 일. 
-        // 1. 드래그(터치) 방향에 따라 UI회전.
-        // 회전값을 Player오브젝트에도 반영. 회전 시킨다.
-        // 스킬 터치 Performed? or Cancled? 둘 중 하나가 정상종료이면, 취소와 함께 해야함. 어쨌든 끝마녀 다시 Player는 이동방향을 바라보는 회전을 시작한다.
-        playerInputActions.Player.Attack1.started += Attack1_started;
-        Debug.Log($"isAttack.ReadValue: {isAttack}, " +
-            $"Attack1.IsPressed? {playerInputActions.Player.Attack1.IsPressed()}, " +
-            $"Attack1.IsInProgress? {playerInputActions.Player.Attack1.IsInProgress()}");
         return isAttack;
-    }
-
-    private void Attack1_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        throw new System.NotImplementedException();
     }
 
     public float GetIsAttack2()
@@ -60,5 +97,5 @@ public class GameInput : MonoBehaviour
     {
         float isAttack = playerInputActions.Player.Attack3.ReadValue<float>();
         return isAttack;
-    }
+    }*/
 }

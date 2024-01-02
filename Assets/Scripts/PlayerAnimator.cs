@@ -19,7 +19,8 @@ public class PlayerAnimator : MonoBehaviour
     {
         //Debug.Log($"is walking? {player.IsWalking()}");
         animator.SetBool(IS_WALKING, player.IsWalking());
-        animator.SetBool(IS_ATTACK1, player.IsAttack1());
+        // 애니메이션 변경이 필요합니다. 단계 구분. 1.캐스팅 2.발사
+        //animator.SetBool(IS_ATTACK1, player.IsAttack1());
     }
 
 

@@ -11,13 +11,17 @@ public class SpellManager : NetworkBehaviour
 {
     public static SpellManager Instance;
 
+    // Spell Dictionary that the player is casting.
+    private Dictionary<ulong, GameObject> playerSpellPairs = new Dictionary<ulong, GameObject>();
+    private Dictionary<ulong, Vector3> playerMuzzlePairs = new Dictionary<ulong, Vector3>();
+
     private void Awake()
     {
         Instance = this;
     }
 
     /// <summary>
-    /// 마법 생성해주기 ( NetworkObject는 Server에서만 생성 가능합니다 )
+    /// 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
     /// </summary>
     public void SpawnSpellObject(SpellInfo spellInfo, NetworkObjectReference player)
     {
@@ -33,18 +37,19 @@ public class SpellManager : NetworkBehaviour
         }
         // 포구 위치 찾기
         Vector3 muzzlePos = playerObject.GetComponentInChildren<MuzzlePos>().GetMuzzlePosition();
+        // 포구 위치 저장하기
+        playerMuzzlePairs[playerObject.OwnerClientId] = muzzlePos;
         // 포구에 발사체 위치시키기
         GameObject spellObject = Instantiate(GetSpellObject(spellInfo), muzzlePos, Quaternion.identity);
+        //spellObject.transform.SetParent(playerObject.GetComponentInChildren<MuzzlePos>().transform);
         spellObject.GetComponent<Spell>().InitSpellInfoDetail();
         spellObject.GetComponent<NetworkObject>().Spawn();
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = playerObject.transform.forward;
-        // 소환시에 Impulse로 발사 처리
-        float speed = 35f;
-        spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * speed, ForceMode.Impulse);
 
-        // 포구 VFX
-        MuzzleVFX(spellObject.GetComponent<Spell>().GetMuzzleVFXPrefab(), muzzlePos);
+        // 플레이어가 시전중인 마법 목록에 저장하기
+        if (playerSpellPairs.ContainsKey(playerObject.OwnerClientId)) playerSpellPairs[playerObject.OwnerClientId] = spellObject;
+        else playerSpellPairs.Add(playerObject.OwnerClientId, spellObject);
     }
 
     // 포구 VFX 
@@ -90,6 +95,32 @@ public class SpellManager : NetworkBehaviour
         }
         else Debug.Log($"hitVFXPrefab is null");
     }
+    /// <summary>
+    /// 마법 발사하기
+    /// </summary>
+    public void ShootSpellObject()
+    {
+        ShootSpellObjectServerRPC();
+    }
+    [ServerRpc (RequireOwnership = false)]
+    public void ShootSpellObjectServerRPC(ServerRpcParams serverRpcParams = default)
+    {
+        ulong clientId = serverRpcParams.Receive.SenderClientId;
+        GameObject spellObject = playerSpellPairs[clientId];
+        if (spellObject == null) { 
+            Debug.Log($"ShootSpellObjectServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
+            return;
+        }
+
+        // 마법 발사
+        float moveSpeed = spellObject.GetComponent<Spell>().spellInfo.moveSpeed;
+        spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
+
+        // 포구 VFX
+        Vector3 muzzlePos = playerMuzzlePairs[clientId];
+        MuzzleVFX(spellObject.GetComponent<Spell>().GetMuzzleVFXPrefab(), muzzlePos);
+    }
+
 
     // 마법 프리팹 검색 및 반환
     private GameObject GetSpellObject(SpellInfo spellInfo)

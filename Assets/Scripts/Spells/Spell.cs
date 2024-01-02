@@ -15,14 +15,14 @@ public abstract class Spell : NetworkBehaviour
 
     [SerializeField] protected bool collided, isSpellCollided;
     [SerializeField] protected SpellInfo collisionHandlingResult;
-
+    
     // 마법 상세값 설정
     public abstract void InitSpellInfoDetail();
 
     // 마법 충돌시 속성 계산
     public abstract SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell);
 
-    // 마법 발사
+    // 마법 캐스팅 시작
     public virtual void CastSpell(SpellInfo spellInfo, NetworkObject player)
     {
         SpellManager.Instance.SpawnSpellObject(spellInfo, player);

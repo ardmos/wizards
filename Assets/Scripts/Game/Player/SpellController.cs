@@ -8,6 +8,7 @@ using UnityEngine;
 ///   1. 현재 캐릭터 마법 보유 현황 관리
 ///   2. 캐릭터 보유 마법 발동 
 ///   3. 현재 보유 마법에 대한 정보를 공유
+///   4. 현재 캐스팅중인 마법 오브젝트 관리
 /// </summary>
 public class SpellController : MonoBehaviour
 {
@@ -16,8 +17,21 @@ public class SpellController : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private float[] restTimeCurrentSpellArray = new float[3];
 
-    #region 현재 설정된 마법 시전
-    public void CheckCastSpell(int spellIndex)
+    [SerializeField] private GameObject currentCastingSpellObject;
+
+    private void Update()
+    {
+        // 쿨타임 관리
+        for (ushort i = 0; i < currentSpellPrefabArray.Length; i++)
+        {
+            Cooltime(i);
+        }        
+    }
+
+    /// <summary>
+    /// 마법 쿨타임 관리
+    /// </summary>
+    private void Cooltime(ushort spellIndex)
     {
         //Debug.Log($"spellNumber : {spellIndex}, currentSpellPrefabArray.Length : {currentSpellPrefabArray.Length}");
         if (currentSpellPrefabArray[spellIndex] == null) return;
@@ -32,33 +46,53 @@ public class SpellController : MonoBehaviour
             }
             return;
         }
+    }
 
-        // 스킬 발동 키 입력 관리
-        bool isPlayerInput = false;
-        switch (spellIndex)
+    #region 현재 설정된 마법 시전
+    public void StartCastingSpell(int spellIndex)
+    {
+        /*        // 스킬 발동 키 입력 관리
+                bool isPlayerInput = false;
+                switch (spellIndex)
+                {
+                    case 0:
+                        isPlayerInput = player.IsAttack1Casting();
+                        break;
+                    case 1:
+                        isPlayerInput = player.IsAttack2Casting();
+                        break;
+                    case 2:
+                        isPlayerInput = player.IsAttack3Casting();
+                        break;
+                    default:
+                        Debug.Log("CheckCastSpell : Wrong spellNumber");
+                        break;
+                }
+
+                if (isPlayerInput)
+                {
+                    currentSpellPrefabArray[spellIndex].GetComponent<Spell>()
+                        .CastSpell(
+                        currentSpellInfoList[spellIndex], 
+                        player.GetComponent<NetworkObject>());
+                    currentSpellInfoList[spellIndex].castAble = false;
+                }*/
+        if (!currentSpellInfoList[spellIndex].castAble)
         {
-            case 0:
-                isPlayerInput = player.IsAttack1();
-                break;
-            case 1:
-                isPlayerInput = player.IsAttack2();
-                break;
-            case 2:
-                isPlayerInput = player.IsAttack3();
-                break;
-            default:
-                Debug.Log("CheckCastSpell : Wrong spellNumber");
-                break;
+            Debug.Log($"마법 {currentSpellInfoList[spellIndex].spellName}은 현재 시전불가상태입니다.");
+            return;
         }
 
-        if (isPlayerInput)
-        {
-            currentSpellPrefabArray[spellIndex].GetComponent<Spell>()
-                .CastSpell(
-                currentSpellInfoList[spellIndex], 
-                player.GetComponent<NetworkObject>());
-            currentSpellInfoList[spellIndex].castAble = false;
-        }
+        currentSpellPrefabArray[spellIndex].GetComponent<Spell>().CastSpell(currentSpellInfoList[spellIndex],player.GetComponent<NetworkObject>());
+    }
+
+    /// <summary>
+    /// 캐스팅중인 마법 발사
+    /// </summary>
+    public void ShootCurrentCastingSpell(ulong spellIndex)
+    {
+        SpellManager.Instance.ShootSpellObject() ; 
+        currentSpellInfoList[spellIndex].castAble = false;
     }
     #endregion
 
@@ -71,7 +105,7 @@ public class SpellController : MonoBehaviour
     }
     #endregion
 
-    #region 현재 마법 변경
+    #region 현재 보유 마법 변경
     public void SetCurrentSpell(GameObject spellObjectPrefab, int spellIndex)
     {
         //Debug.Log($"SetCurrentSpell spellIndex:{spellIndex}, currentSpellPrefabArray.Length: {currentSpellPrefabArray.Length}");
