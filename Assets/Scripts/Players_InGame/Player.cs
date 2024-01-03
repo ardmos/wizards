@@ -79,10 +79,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         gameInput.OnAttack2Ended += GameInput_OnAttack2Ended;
         gameInput.OnAttack3Ended += GameInput_OnAttack3Ended;
     }
-    /// 7. 스킬버튼 드래그로 플레이어 회전시켜야함. 스킬조준기능 개발
-    ///     1. 스킬버튼 started -> GamePadUI에 UI드래그 시작 명령.
-    ///     2. 플레이어 드래그중 설정. 드래그중에는 UI드래그값에 따라 플레이어 회전(GamePadUI에서 회전메소드 호출)
-    ///     3. 스킬버튼 canceled -> 스킬버튼 제자리
+
     private void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
         isBtnAttack1Clicked = true;
@@ -580,15 +577,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // Animation State 브로드캐스팅
         UpdateAnimationStateClientRPC(isWalking);
 
-        Debug.Log($"isBtnAttack1Clicked:{isBtnAttack1Clicked}, isBtnAttack2Clicked:{isBtnAttack2Clicked}, isBtnAttack3Clicked:{isBtnAttack3Clicked}");
-        // 공격중이 아닐 때
+        //Debug.Log($"isBtnAttack1Clicked:{isBtnAttack1Clicked}, isBtnAttack2Clicked:{isBtnAttack2Clicked}, isBtnAttack3Clicked:{isBtnAttack3Clicked}");
+        // 공격중이 아닐 때에만 진행방향으로 캐릭터 회전
         if (!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked)
         {
             Rotate(moveDir);
-        }
-        // 스킬 캐스팅중일 때
-        else { 
-                
         }
 
         // 마우스 커서 방향 바라볼 때
@@ -596,9 +589,18 @@ public class Player : NetworkBehaviour, IStoreCustomer
         //Rotate(mouseDir);
     }
 
-    private void SpellController_OnSpellIconClicked(object sender, EventArgs e)
+    /// <summary>
+    /// GamePad UI 스킬버튼 드래그에서 호출하여 플레이어를 회전시키는 메소드.
+    /// </summary>
+    public void RotateByDragSpellBtn(Vector3 dir)
     {
-        throw new NotImplementedException();
+        //Debug.Log($"RotateByDragSpellBtn dir:{dir}");
+        RotateByDragSpellBtnServerRPC(dir);
+    }
+    [ServerRpc (RequireOwnership = false)]
+    private void RotateByDragSpellBtnServerRPC(Vector3 dir)
+    {
+        Rotate(dir);
     }
 
     [ClientRpc]
@@ -636,7 +638,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         transform.forward = slerpResult;
     }
 
-    // 마우스 커서 방향 바라볼 때 사용했던 메소드. 추후 삭제 가능
+    // 마우스 커서 방향 바라볼 때 사용했던 메소드. 현재는 사용 안함. 추후 삭제 가능
     private Vector3 GetMouseDir()
     {
         RaycastHit hit;

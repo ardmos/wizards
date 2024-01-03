@@ -12,7 +12,7 @@ using UnityEngine.Serialization;
 /// 
 /// 할일
 /// 1. 쿨타임중 드래그반응 안하기   완료
-/// 2. 드래그중 플레이어 회전시키기
+/// 2. 드래그중 플레이어 회전시키기  완료
 /// </summary>
 public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -47,8 +47,10 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         {
             return;
         }
-
-        MoveButton(eventData.position, eventData.pressEventCamera);
+        // 버튼 이동
+        Vector2 dir = MoveButton(eventData.position, eventData.pressEventCamera);
+        // 플레이어 회전
+        Player.LocalInstance.RotateByDragSpellBtn(new Vector3(dir.x, 0f, dir.y));
     }
     /// <summary>
     /// 터치 끝
@@ -73,22 +75,24 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         SendValueToControl(1.0f);
     }
 
-    private void MoveButton(Vector2 pointerPosition, Camera uiCamera)
+    private Vector2 MoveButton(Vector2 pointerPosition, Camera uiCamera)
     {
         var canvasRect = transform.parent?.GetComponentInParent<RectTransform>();
         if (canvasRect == null)
         {
             Debug.LogError("CustomOnScreenButton needs to be attached as a child to a UI Canvas to function properly.");
-            return;
+            return Vector2.zero;
         }
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, pointerPosition, uiCamera, out var position);
-        var delta = position - m_PointerDownPos;
+        Vector2 dir = position - m_PointerDownPos;
 
-        delta = Vector2.ClampMagnitude(delta, movementRange);
+        Vector2 delta = Vector2.ClampMagnitude(dir, movementRange);
         transform.GetComponent<RectTransform>().anchoredPosition = (Vector2)m_StartPos + delta;
 
         var newPos = new Vector2(delta.x / movementRange, delta.y / movementRange);
         //SendValueToControl(newPos);
+
+        return dir;
     }
 
     private void EndInteraction()
