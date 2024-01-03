@@ -10,4 +10,9 @@ public class MuzzlePos : MonoBehaviour
     {
         return transform.position;
     }
+
+    public Vector3 GetMuzzleLocalPosition()
+    {
+        return transform.localPosition;
+    }
 }
