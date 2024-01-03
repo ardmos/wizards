@@ -6,13 +6,5 @@ using UnityEngine;
 /// </summary>
 public class MuzzlePos : MonoBehaviour
 {
-    public Vector3 GetMuzzlePosition()
-    {
-        return transform.position;
-    }
-
-    public Vector3 GetMuzzleLocalPosition()
-    {
-        return transform.localPosition;
-    }
+   
 }

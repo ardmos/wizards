@@ -13,7 +13,7 @@ public class SpellManager : NetworkBehaviour
 
     // Spell Dictionary that the player is casting.
     private Dictionary<ulong, GameObject> playerSpellPairs = new Dictionary<ulong, GameObject>();
-    private Dictionary<ulong, Vector3> playerMuzzlePairs = new Dictionary<ulong, Vector3>();
+    private Dictionary<ulong, Transform> playerMuzzlePairs = new Dictionary<ulong, Transform>();
 
     private void Awake()
     {
@@ -36,17 +36,15 @@ public class SpellManager : NetworkBehaviour
             Debug.Log("SpawnSpellObjectServerRPC Failed to Get NetworkObject from NetwrokObjectRefernce!");
         }
         // 포구 위치 찾기(Local posittion)
-        Vector3 muzzleLocalPos = playerObject.GetComponentInChildren<MuzzlePos>().GetMuzzleLocalPosition();
-        // 포구 위치 저장하기(world Position)
-        Vector3 muzzleWorldPos = playerObject.GetComponentInChildren<MuzzlePos>().GetMuzzlePosition();
-        playerMuzzlePairs[playerObject.OwnerClientId] = muzzleWorldPos;
+        Transform muzzleTransform = playerObject.GetComponentInChildren<MuzzlePos>().transform;
+        playerMuzzlePairs[playerObject.OwnerClientId] = muzzleTransform;
         // 포구에 발사체 위치시키기
-        GameObject spellObject = Instantiate(GetSpellObject(spellInfo), muzzleWorldPos, Quaternion.identity);
+        GameObject spellObject = Instantiate(GetSpellObject(spellInfo), muzzleTransform.position, Quaternion.identity);
         //GameObject spellObject = Instantiate(GetSpellObject(spellInfo));
         spellObject.GetComponent<Spell>().InitSpellInfoDetail();
         spellObject.GetComponent<NetworkObject>().Spawn();
         spellObject.transform.SetParent(playerObject.transform);
-        spellObject.transform.localPosition = muzzleLocalPos;
+        spellObject.transform.localPosition = muzzleTransform.localPosition;
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = playerObject.transform.forward;
 
@@ -58,14 +56,14 @@ public class SpellManager : NetworkBehaviour
 
         ///////////여기부터!!! 
         /// 1. 소환하는데 위치잡는게 느려서 보임
-        /// 2. muzzle vfx에서 사용할 포지션이 업데이트가 안됨
+        /// 2. muzzle vfx에서 사용할 포지션이 업데이트가 안됨 ( 5번과 교체해야함 )
         /// 3. 스킬시전중인데 조이스틱으로 방향전환이 됨
         /// 4. 발사~탄착 사이에 스킬버튼 클릭시 muzzle vfx가 여러번 발동됨.
         /// 5. 발사~탄착 사이에 플레이어가 회전하면 비행중인 스킬도 같이 회전함.
     }
 
     // 포구 VFX 
-    public void MuzzleVFX(GameObject muzzleVFXPrefab, Vector3 muzzlePos)
+    public void MuzzleVFX(GameObject muzzleVFXPrefab, Transform muzzleTransform)
     {
         if (muzzleVFXPrefab == null)
         {
@@ -73,8 +71,10 @@ public class SpellManager : NetworkBehaviour
             return;
         }
 
-        GameObject muzzleVFX = Instantiate(muzzleVFXPrefab, muzzlePos, Quaternion.identity);
+        GameObject muzzleVFX = Instantiate(muzzleVFXPrefab, muzzleTransform.position, Quaternion.identity);
         muzzleVFX.GetComponent<NetworkObject>().Spawn();
+        muzzleVFX.transform.SetParent(muzzleTransform);
+        muzzleVFX.transform.localPosition = muzzleTransform.localPosition;
         muzzleVFX.transform.forward = gameObject.transform.forward;
         var particleSystem = muzzleVFX.GetComponent<ParticleSystem>();
 
@@ -125,12 +125,12 @@ public class SpellManager : NetworkBehaviour
         }
 
         // 마법 발사
+        spellObject.transform.SetParent(this.transform);
         float moveSpeed = spellObject.GetComponent<Spell>().spellInfo.moveSpeed;
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
 
         // 포구 VFX
-        Vector3 muzzlePos = playerMuzzlePairs[clientId];
-        MuzzleVFX(spellObject.GetComponent<Spell>().GetMuzzleVFXPrefab(), muzzlePos);
+        MuzzleVFX(spellObject.GetComponent<Spell>().GetMuzzleVFXPrefab(), playerMuzzlePairs[clientId]);
     }
 
 
