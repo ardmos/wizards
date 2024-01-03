@@ -11957,6 +11957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonWest
   m_MovementRange: 50
+  spellIndex: 0
 --- !u!114 &1057068785398856500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13858,6 +13859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonNorth
   m_MovementRange: 50
+  spellIndex: 1
 --- !u!1 &1057068786550146916
 GameObject:
   m_ObjectHideFlags: 0
@@ -14173,10 +14175,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1057068786613489257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3566226ee0309604bb2a378f707c89a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonEast
+  m_MovementRange: 50
+  spellIndex: 2
 --- !u!114 &1057068786630892480
 MonoBehaviour:
   m_ObjectHideFlags: 0

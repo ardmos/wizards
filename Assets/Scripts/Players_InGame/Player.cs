@@ -67,7 +67,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
             Debug.Log($"spellName: {spellName}");
             ownedSpellPrefabList.Add(GameAssets.instantiate.GetSpellPrefab(spellName));
         }
-        for (int i = 0; i < ownedSpellPrefabList.Count; i++)
+        for (ushort i = 0; i < ownedSpellPrefabList.Count; i++)
         {
             spellController.SetCurrentSpell(ownedSpellPrefabList[i], i);
         }

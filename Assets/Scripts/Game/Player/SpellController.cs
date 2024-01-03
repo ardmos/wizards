@@ -49,7 +49,7 @@ public class SpellController : MonoBehaviour
     }
 
     #region 현재 설정된 마법 시전
-    public void StartCastingSpell(int spellIndex)
+    public void StartCastingSpell(ushort spellIndex)
     {
         /*        // 스킬 발동 키 입력 관리
                 bool isPlayerInput = false;
@@ -90,7 +90,7 @@ public class SpellController : MonoBehaviour
     /// <summary>
     /// 캐스팅중인 마법 발사
     /// </summary>
-    public void ShootCurrentCastingSpell(ulong spellIndex)
+    public void ShootCurrentCastingSpell(ushort spellIndex)
     {
         if (currentSpellInfoList[spellIndex].spellState != SpellState.Casting) return;
 
@@ -100,7 +100,7 @@ public class SpellController : MonoBehaviour
     #endregion
 
     #region 현재 마법 restTime/coolTime 얻기
-    public float GetCurrentSpellCoolTimeRatio(int spellIndex)
+    public float GetCurrentSpellCoolTimeRatio(ushort spellIndex)
     {
         if (currentSpellInfoList[spellIndex] == null) return 0f;
         float coolTimeRatio = restTimeCurrentSpellArray[spellIndex] / currentSpellInfoList[spellIndex].coolTime;
@@ -108,8 +108,18 @@ public class SpellController : MonoBehaviour
     }
     #endregion
 
+    /// <summary>
+    /// Spell state를 얻을 수 있는 메소드 입니다
+    /// </summary>
+    /// <param name="spellIndex"></param>
+    /// <returns></returns>
+    public SpellState GetSpellStateFromSpellIndex(ushort spellIndex)
+    {
+        return currentSpellInfoList[spellIndex].spellState;
+    }
+
     #region 현재 보유 마법 변경
-    public void SetCurrentSpell(GameObject spellObjectPrefab, int spellIndex)
+    public void SetCurrentSpell(GameObject spellObjectPrefab, ushort spellIndex)
     {
         //Debug.Log($"SetCurrentSpell spellIndex:{spellIndex}, currentSpellPrefabArray.Length: {currentSpellPrefabArray.Length}");
         currentSpellPrefabArray[spellIndex] = spellObjectPrefab;

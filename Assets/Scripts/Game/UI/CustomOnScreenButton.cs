@@ -9,6 +9,10 @@ using UnityEngine.Serialization;
 /// <summary>
 /// GamePad의 Skill버튼용 스크립트 입니다.
 /// 누르면 드래그되고, 드래그되는동안 플레이어에게 회전방향값을 넘겨서 플레이어를 회전시켜야 합니다.
+/// 
+/// 할일
+/// 1. 쿨타임중 드래그반응 안하기   완료
+/// 2. 드래그중 플레이어 회전시키기
 /// </summary>
 public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -37,6 +41,12 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
     {
         if (eventData == null)
             throw new System.ArgumentNullException(nameof(eventData));
+
+        // Spell State 체크. Casting이 아닌 경우는 무시
+        if (Player.LocalInstance.gameObject.GetComponent<SpellController>().GetSpellStateFromSpellIndex(spellIndex) != SpellState.Casting)
+        {
+            return;
+        }
 
         MoveButton(eventData.position, eventData.pressEventCamera);
     }
@@ -99,7 +109,6 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
     /// </remarks>
     [SerializeField] private bool m_UsePressure;
     */
-
     [InputControl(layout = "Button")]
     [SerializeField]
     private string m_ControlPath;
@@ -116,6 +125,8 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         get => m_MovementRange;
         set => m_MovementRange = value;
     }
+
+    [SerializeField] private ushort spellIndex;
 
     protected override string controlPathInternal
     {
