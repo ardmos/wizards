@@ -26,9 +26,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
     protected GameAssets gameAssets;
 
     protected bool isWalking;
-    protected bool isAttack1Casting;
-    protected bool isAttack2Casting;
-    protected bool isAttack3Casting;
+    protected bool isBtnAttack1Clicked;
+    protected bool isBtnAttack2Clicked;
+    protected bool isBtnAttack3Clicked;
     protected int body;
     protected int hat;
     protected int backPack;
@@ -82,40 +82,40 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     private void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
-        isAttack1Casting = true;
+        isBtnAttack1Clicked = true;
         spellController.StartCastingSpell(0);
     }
 
     private void GameInput_OnAttack2Started(object sender, EventArgs e)
     {
-        isAttack2Casting = true;
+        isBtnAttack2Clicked = true;
         spellController.StartCastingSpell(1);
     }
 
     private void GameInput_OnAttack3Started(object sender, EventArgs e)
     {
-        isAttack3Casting = true;
+        isBtnAttack3Clicked = true;
         spellController.StartCastingSpell(2);
     }
 
     private void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-        if (!isAttack1Casting) return;
-        isAttack1Casting = false;
+        if (!isBtnAttack1Clicked) return;
+        isBtnAttack1Clicked = false;
         spellController.ShootCurrentCastingSpell(0);
     }
 
     private void GameInput_OnAttack2Ended(object sender, EventArgs e)
     {
-        if (!isAttack2Casting) return;
-        isAttack2Casting = false;
+        if (!isBtnAttack2Clicked) return;
+        isBtnAttack2Clicked = false;
         spellController.ShootCurrentCastingSpell(1);
     }
 
     private void GameInput_OnAttack3Ended(object sender, EventArgs e)
     {
-        if (!isAttack3Casting) return;
-        isAttack3Casting = false;
+        if (!isBtnAttack3Clicked) return;
+        isBtnAttack3Clicked = false;
         spellController.ShootCurrentCastingSpell(2);
     }
 
@@ -577,7 +577,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // Animation State 브로드캐스팅
         UpdateAnimationStateClientRPC(isWalking);
 
-        if(!isAttack1Casting && !isAttack2Casting && !isAttack3Casting) 
+        if(!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked) 
         {
             // 공격중이 아닐 때 진행방향 바라보게 함. (공격중일때는 스킬 시전 방향 바라봐야함) 
             Rotate(moveDir);

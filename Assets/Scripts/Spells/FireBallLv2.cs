@@ -29,7 +29,7 @@ public class FireBallLv2 : FireSpell
             price = 40,
             level = 2,
             spellName = SpellName.FireBallLv1,
-            castAble = true
+            spellState = SpellState.Ready
         };
     }
 }

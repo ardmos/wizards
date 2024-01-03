@@ -27,7 +27,7 @@ public class SlashLv1 : Spell
             price = 30,
             level = 1,
             spellName = SpellName.SlashLv1,
-            castAble = true,
+            spellState = SpellState.Ready,
         };
 
         if (spellInfo == null)

@@ -24,7 +24,7 @@ public class WaterBallLv1 : WaterSpell
             price = 30,
             level = 1,
             spellName = SpellName.WaterBallLv1,
-            castAble = true,
+            spellState = SpellState.Ready,
         };
     }
 

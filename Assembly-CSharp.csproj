@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\Game\UI\GameUI.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Knight.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PlayerCountUI.cs" />
+    <Compile Include="Assets\Scripts\Data\SpellState.cs" />
     <Compile Include="Assets\Scripts\ClientNetworkTransform.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Wizard.cs" />
     <Compile Include="Assets\Scripts\Game\UI\HPBarUI.cs" />

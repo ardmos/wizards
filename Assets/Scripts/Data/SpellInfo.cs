@@ -11,7 +11,7 @@ public class SpellInfo : INetworkSerializable
     public int price;
     public int level;
     public SpellName spellName;
-    public bool castAble;
+    public SpellState spellState;
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
@@ -22,7 +22,7 @@ public class SpellInfo : INetworkSerializable
         serializer.SerializeValue(ref price);
         serializer.SerializeValue(ref level);
         serializer.SerializeValue(ref spellName);
-        serializer.SerializeValue(ref castAble);
+        serializer.SerializeValue(ref spellState);
 
     }
 }

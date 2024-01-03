@@ -26,7 +26,7 @@ public class IceBallLv1 : IceSpell
             price = 30,
             level = 1,
             spellName = SpellName.IceBallLv1,
-            castAble = true,
+            spellState = SpellState.Ready,
         };
     }
 

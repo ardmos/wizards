@@ -36,12 +36,12 @@ public class SpellController : MonoBehaviour
         //Debug.Log($"spellNumber : {spellIndex}, currentSpellPrefabArray.Length : {currentSpellPrefabArray.Length}");
         if (currentSpellPrefabArray[spellIndex] == null) return;
         // 쿨타임 관리
-        if (currentSpellInfoList[spellIndex].castAble == false)
+        if (currentSpellInfoList[spellIndex].spellState == SpellState.Cooltime)
         {
             restTimeCurrentSpellArray[spellIndex] += Time.deltaTime;
             if (restTimeCurrentSpellArray[spellIndex] >= currentSpellInfoList[spellIndex].coolTime)
             {
-                currentSpellInfoList[spellIndex].castAble = true;
+                currentSpellInfoList[spellIndex].spellState = SpellState.Ready;
                 restTimeCurrentSpellArray[spellIndex] = 0f;
             }
             return;
@@ -77,12 +77,13 @@ public class SpellController : MonoBehaviour
                         player.GetComponent<NetworkObject>());
                     currentSpellInfoList[spellIndex].castAble = false;
                 }*/
-        if (!currentSpellInfoList[spellIndex].castAble)
+        if (currentSpellInfoList[spellIndex].spellState == SpellState.Cooltime || currentSpellInfoList[spellIndex].spellState == SpellState.Casting)
         {
             Debug.Log($"마법 {currentSpellInfoList[spellIndex].spellName}은 현재 시전불가상태입니다.");
             return;
         }
 
+        currentSpellInfoList[spellIndex].spellState = SpellState.Casting;
         currentSpellPrefabArray[spellIndex].GetComponent<Spell>().CastSpell(currentSpellInfoList[spellIndex],player.GetComponent<NetworkObject>());
     }
 
@@ -91,8 +92,10 @@ public class SpellController : MonoBehaviour
     /// </summary>
     public void ShootCurrentCastingSpell(ulong spellIndex)
     {
+        if (currentSpellInfoList[spellIndex].spellState != SpellState.Casting) return;
+
         SpellManager.Instance.ShootSpellObject() ; 
-        currentSpellInfoList[spellIndex].castAble = false;
+        currentSpellInfoList[spellIndex].spellState = SpellState.Cooltime; 
     }
     #endregion
 
