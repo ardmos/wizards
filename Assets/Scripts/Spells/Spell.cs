@@ -92,6 +92,7 @@ public abstract class Spell : NetworkBehaviour
             {
                 for (int i = 0; i < trails.Count; i++)
                 {
+                    /// 이부분 에러. 이 에러때문에 플레이어 충돌시 오브젝트가 사라지지 않는다. 
                     trails[i].transform.parent = null;
                     ParticleSystem particleSystem = trails[i].GetComponent<ParticleSystem>();
                     if (particleSystem != null)

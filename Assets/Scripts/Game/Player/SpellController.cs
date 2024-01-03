@@ -14,7 +14,6 @@ public class SpellController : MonoBehaviour
 {
     [SerializeField] private GameObject[] currentSpellPrefabArray = new GameObject[3];
     [SerializeField] private SpellInfo[] currentSpellInfoList = new SpellInfo[3];
-    [SerializeField] private Player player;
     [SerializeField] private float[] restTimeCurrentSpellArray = new float[3];
 
     [SerializeField] private GameObject currentCastingSpellObject;
@@ -51,32 +50,6 @@ public class SpellController : MonoBehaviour
     #region 현재 설정된 마법 시전
     public void StartCastingSpell(ushort spellIndex)
     {
-        /*        // 스킬 발동 키 입력 관리
-                bool isPlayerInput = false;
-                switch (spellIndex)
-                {
-                    case 0:
-                        isPlayerInput = player.IsAttack1Casting();
-                        break;
-                    case 1:
-                        isPlayerInput = player.IsAttack2Casting();
-                        break;
-                    case 2:
-                        isPlayerInput = player.IsAttack3Casting();
-                        break;
-                    default:
-                        Debug.Log("CheckCastSpell : Wrong spellNumber");
-                        break;
-                }
-
-                if (isPlayerInput)
-                {
-                    currentSpellPrefabArray[spellIndex].GetComponent<Spell>()
-                        .CastSpell(
-                        currentSpellInfoList[spellIndex], 
-                        player.GetComponent<NetworkObject>());
-                    currentSpellInfoList[spellIndex].castAble = false;
-                }*/
         if (currentSpellInfoList[spellIndex].spellState == SpellState.Cooltime || currentSpellInfoList[spellIndex].spellState == SpellState.Casting)
         {
             Debug.Log($"마법 {currentSpellInfoList[spellIndex].spellName}은 현재 시전불가상태입니다.");
@@ -84,7 +57,7 @@ public class SpellController : MonoBehaviour
         }
 
         currentSpellInfoList[spellIndex].spellState = SpellState.Casting;
-        currentSpellPrefabArray[spellIndex].GetComponent<Spell>().CastSpell(currentSpellInfoList[spellIndex],player.GetComponent<NetworkObject>());
+        currentSpellPrefabArray[spellIndex].GetComponent<Spell>().CastSpell(currentSpellInfoList[spellIndex], GetComponent<NetworkObject>());
     }
 
     /// <summary>

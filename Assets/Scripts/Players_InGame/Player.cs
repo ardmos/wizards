@@ -34,6 +34,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
     protected int backPack;
     protected int wand;
 
+    [SerializeField] private bool isPlayerGameOver;
+
     public void InitializePlayer(SpellName[] ownedSpellList)
     {
         if (!IsOwner) return;
@@ -58,6 +60,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         // HP 초기화
         PlayerHPManager.Instance.SetPlayerHP(hp);
+        isPlayerGameOver = false;
 
         // 나머지는 스킬 로드 과정        
         // GameAsset으로부터 Spell Prefab 로딩. playerClass와 spellName으로 필요한 프리팹만 불러온다. 
@@ -82,24 +85,28 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     private void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
+        if (isPlayerGameOver) return;
         isBtnAttack1Clicked = true;
         spellController.StartCastingSpell(0);
     }
 
     private void GameInput_OnAttack2Started(object sender, EventArgs e)
     {
+        if (isPlayerGameOver) return;
         isBtnAttack2Clicked = true;
         spellController.StartCastingSpell(1);
     }
 
     private void GameInput_OnAttack3Started(object sender, EventArgs e)
     {
+        if (isPlayerGameOver) return;
         isBtnAttack3Clicked = true;
         spellController.StartCastingSpell(2);
     }
 
     private void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
+        if (isPlayerGameOver) return;
         if (!isBtnAttack1Clicked) return;
         isBtnAttack1Clicked = false;
         spellController.ShootCurrentCastingSpell(0);
@@ -107,6 +114,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     private void GameInput_OnAttack2Ended(object sender, EventArgs e)
     {
+        if (isPlayerGameOver) return;
         if (!isBtnAttack2Clicked) return;
         isBtnAttack2Clicked = false;
         spellController.ShootCurrentCastingSpell(1);
@@ -114,6 +122,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     private void GameInput_OnAttack3Ended(object sender, EventArgs e)
     {
+        if (isPlayerGameOver) return;
         if (!isBtnAttack3Clicked) return;
         isBtnAttack3Clicked = false;
         spellController.ShootCurrentCastingSpell(2);
@@ -129,6 +138,10 @@ public class Player : NetworkBehaviour, IStoreCustomer
         if (hp <= 0)
         {
             GameManager.Instance.UpdatePlayerGameOver();
+            // 조작 불가 처리
+            isPlayerGameOver = true;
+            // 이동속도 0
+            HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
             // 쓰러지는 애니메이션 실행
 
         }
@@ -151,18 +164,10 @@ public class Player : NetworkBehaviour, IStoreCustomer
         return isWalking;
     }
 
-/*    public bool IsAttack1Casting()
+    public bool IsGameOver()
     {
-        return isAttack1Casting;
+        return isPlayerGameOver;
     }
-    public bool IsAttack2Casting()
-    {
-        return isAttack2Casting;
-    }
-    public bool IsAttack3Casting()
-    {
-        return isAttack3Casting;
-    }*/
     #endregion
 
     #region Public 아이템 구매
@@ -560,6 +565,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
     // Server Auth 방식의 이동 처리 (현 오브젝트에 Network Transform이 필요)
     protected void HandleMovementServerAuth()
     {
+        if (isPlayerGameOver) return;
+
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         HandleMovementServerRPC(inputVector, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
     }
