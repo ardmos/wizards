@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.UI;
 /// <summary>
 /// 1. 조작 버튼에 현재 스킬 이미지 띄워주기
@@ -16,20 +17,23 @@ public class GamePadUI : MonoBehaviour
     public Image imgCooltimeSkill1, imgCooltimeSkill2, imgCooltimeSkill3;//, imgCooltimeSkillDefence;
     public GameManager gameManager;
 
+    public RectTransform[] spellButtons;
+
     // Update is called once per frame
     void Update()
     {
         CoolTimePresenter();
     }
 
-    // spellNumber 0부터 시작 
+    /// <summary>
+    /// 게임패드 스킬 아이콘을 업데이트 해주는 메소드
+    /// </summary>
+    /// <param name="spellIcon"></param>
+    /// <param name="spellNumber"></param>
     public void UpdateSpellUI(Sprite spellIcon, int spellNumber)
     {
-        UpdateButtonImage(spellIcon, spellNumber);
-    }
-    // spellNumber 0부터 시작 
-    private void UpdateButtonImage(Sprite spellIcon, int spellNumber)
-    {
+        //FindObjectOfType<OnScreenButton>().On
+
         //Debug.Log($"{nameof(UpdateButtonImage)} Player.LocalInstance:{Player.LocalInstance}, spellIcon:{spellIcon.name}, spellNumber:{spellNumber}");
         if (Player.LocalInstance == null)
         {
@@ -40,7 +44,9 @@ public class GamePadUI : MonoBehaviour
         //imgBtnSkillDefence.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(4);
     }
 
-    // spellNumber 0부터 시작
+    /// <summary>
+    /// 쿨타임을 시각화해주는 메소드
+    /// </summary>
     private void CoolTimePresenter()
     {
         if (Player.LocalInstance == null)

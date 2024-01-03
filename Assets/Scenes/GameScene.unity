@@ -3093,6 +3093,10 @@ MonoBehaviour:
   imgCooltimeSkill2: {fileID: 1590650239}
   imgCooltimeSkill3: {fileID: 1568351925}
   gameManager: {fileID: 2141758590}
+  spellButtons:
+  - {fileID: 1057068785320938925}
+  - {fileID: 1057068786546511685}
+  - {fileID: 1057068786613489262}
 --- !u!1 &834584234
 GameObject:
   m_ObjectHideFlags: 0
@@ -5384,6 +5388,7 @@ MonoBehaviour:
   imgCooltimeSkill2: {fileID: 0}
   imgCooltimeSkill3: {fileID: 0}
   gameManager: {fileID: 2141758590}
+  spellButtons: []
 --- !u!1 &1354713736
 GameObject:
   m_ObjectHideFlags: 0
@@ -11935,7 +11940,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 128.70007, y: -133.35004}
+  m_AnchoredPosition: {x: 154.00012, y: -133.35004}
   m_SizeDelta: {x: 289, y: 289}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1057068785320938926
@@ -11947,10 +11952,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1057068785320938924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3566226ee0309604bb2a378f707c89a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonWest
+  m_MovementRange: 50
 --- !u!114 &1057068785398856500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13847,10 +13853,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1057068786546511684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3566226ee0309604bb2a378f707c89a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonNorth
+  m_MovementRange: 50
 --- !u!1 &1057068786550146916
 GameObject:
   m_ObjectHideFlags: 0

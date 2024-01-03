@@ -137,6 +137,7 @@
     <Compile Include="Assets\Scripts\Lobby\LobbyUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneDedicatedServer.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\CustomOnScreenButton.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupClanUI.cs" />

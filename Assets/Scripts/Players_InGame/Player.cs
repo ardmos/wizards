@@ -79,7 +79,10 @@ public class Player : NetworkBehaviour, IStoreCustomer
         gameInput.OnAttack2Ended += GameInput_OnAttack2Ended;
         gameInput.OnAttack3Ended += GameInput_OnAttack3Ended;
     }
-
+    /// 7. 스킬버튼 드래그로 플레이어 회전시켜야함. 스킬조준기능 개발
+    ///     1. 스킬버튼 started -> GamePadUI에 UI드래그 시작 명령.
+    ///     2. 플레이어 드래그중 설정. 드래그중에는 UI드래그값에 따라 플레이어 회전(GamePadUI에서 회전메소드 호출)
+    ///     3. 스킬버튼 canceled -> 스킬버튼 제자리
     private void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
         isBtnAttack1Clicked = true;
@@ -578,12 +581,16 @@ public class Player : NetworkBehaviour, IStoreCustomer
         UpdateAnimationStateClientRPC(isWalking);
 
         Debug.Log($"isBtnAttack1Clicked:{isBtnAttack1Clicked}, isBtnAttack2Clicked:{isBtnAttack2Clicked}, isBtnAttack3Clicked:{isBtnAttack3Clicked}");
-        if (!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked) 
-        {       
-            // 공격중이 아닐 때 진행방향 바라보게 함. (공격중일때는 스킬 시전 방향 바라봐야함) 
+        // 공격중이 아닐 때
+        if (!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked)
+        {
             Rotate(moveDir);
         }
-        
+        // 스킬 캐스팅중일 때
+        else { 
+                
+        }
+
         // 마우스 커서 방향 바라볼 때
         //Vector3 mouseDir = GetMouseDir();
         //Rotate(mouseDir);
