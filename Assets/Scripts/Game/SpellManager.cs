@@ -38,6 +38,7 @@ public class SpellManager : NetworkBehaviour
         // 포구 위치 찾기(Local posittion)
         Transform muzzleTransform = playerObject.GetComponentInChildren<MuzzlePos>().transform;
         playerMuzzlePairs[playerObject.OwnerClientId] = muzzleTransform;
+        //Debug.Log($"SpawnSpell muzzlePos:{muzzleTransform.position}, muzzleLocalPos:{muzzleTransform.localPosition}");
         // 포구에 발사체 위치시키기
         GameObject spellObject = Instantiate(GetSpellObject(spellInfo), muzzleTransform.position, Quaternion.identity);
         //GameObject spellObject = Instantiate(GetSpellObject(spellInfo));
@@ -55,11 +56,11 @@ public class SpellManager : NetworkBehaviour
 
 
         ///////////여기부터!!! 
-        /// 1. 소환하는데 위치잡는게 느려서 보임
-        /// 2. muzzle vfx에서 사용할 포지션이 업데이트가 안됨 ( 5번과 교체해야함 )
+        /// 1. 소환하는데 위치잡는게 느려서 보임   해결
+        /// 2. muzzle vfx에서 사용할 포지션이 업데이트가 안됨   해결
         /// 3. 스킬시전중인데 조이스틱으로 방향전환이 됨
         /// 4. 발사~탄착 사이에 스킬버튼 클릭시 muzzle vfx가 여러번 발동됨.
-        /// 5. 발사~탄착 사이에 플레이어가 회전하면 비행중인 스킬도 같이 회전함.
+        /// 5. 발사~탄착 사이에 플레이어가 회전하면 비행중인 스킬도 같이 회전함.    해결
     }
 
     // 포구 VFX 
@@ -71,9 +72,10 @@ public class SpellManager : NetworkBehaviour
             return;
         }
 
+        //Debug.Log($"MuzzleVFX muzzlePos:{muzzleTransform.position}, muzzleLocalPos:{muzzleTransform.localPosition}");
         GameObject muzzleVFX = Instantiate(muzzleVFXPrefab, muzzleTransform.position, Quaternion.identity);
         muzzleVFX.GetComponent<NetworkObject>().Spawn();
-        muzzleVFX.transform.SetParent(muzzleTransform);
+        muzzleVFX.transform.SetParent(muzzleTransform.GetComponentInParent<Player>().transform);
         muzzleVFX.transform.localPosition = muzzleTransform.localPosition;
         muzzleVFX.transform.forward = gameObject.transform.forward;
         var particleSystem = muzzleVFX.GetComponent<ParticleSystem>();
