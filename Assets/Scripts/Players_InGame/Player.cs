@@ -561,10 +561,10 @@ public class Player : NetworkBehaviour, IStoreCustomer
     protected void HandleMovementServerAuth()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-        HandleMovementServerRPC(inputVector);
+        HandleMovementServerRPC(inputVector, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
     }
     [ServerRpc]
-    private void HandleMovementServerRPC(Vector2 inputVector)
+    private void HandleMovementServerRPC(Vector2 inputVector, bool isBtnAttack1Clicked, bool isBtnAttack2Clicked, bool isBtnAttack3Clicked)
     {
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -577,8 +577,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // Animation State 브로드캐스팅
         UpdateAnimationStateClientRPC(isWalking);
 
-        if(!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked) 
-        {
+        Debug.Log($"isBtnAttack1Clicked:{isBtnAttack1Clicked}, isBtnAttack2Clicked:{isBtnAttack2Clicked}, isBtnAttack3Clicked:{isBtnAttack3Clicked}");
+        if (!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked) 
+        {       
             // 공격중이 아닐 때 진행방향 바라보게 함. (공격중일때는 스킬 시전 방향 바라봐야함) 
             Rotate(moveDir);
         }
