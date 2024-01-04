@@ -7,8 +7,9 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     public ulong clientId;
     public FixedString64Bytes playerName;
     public FixedString64Bytes playerId;
-    public CharacterClasses.Class playerClass;
+    public CharacterClass playerClass;
     public sbyte playerHP;
+    public PlayerMoveAnimState playerAnimState;
 
     public bool Equals(PlayerData other)
     {
@@ -17,7 +18,8 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
             playerName == other.playerName &&
             playerId == other.playerId &&
             playerClass == other.playerClass && 
-            playerHP == other.playerHP;
+            playerHP == other.playerHP &&
+            playerAnimState == other.playerAnimState;
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -27,5 +29,6 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
         serializer.SerializeValue(ref playerId);
         serializer.SerializeValue(ref playerClass);
         serializer.SerializeValue(ref playerHP);
+        serializer.SerializeValue(ref playerAnimState);
     }
 }

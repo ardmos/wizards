@@ -21,6 +21,7 @@ public class GameMultiplayer : NetworkBehaviour
     public event EventHandler OnTryingToJoinGame;
     public event EventHandler OnFailedToJoinGame;
     public event EventHandler OnPlayerListOnServerChanged;
+    public event EventHandler OnPlayerMoveAnimStateChanged;
 
     private void Awake()
     {
@@ -96,20 +97,21 @@ public class GameMultiplayer : NetworkBehaviour
     /// 즉 GameRoom에 들어가면서 입니다.
     /// </summary>
     /// <param name="playerClass"></param>    
-    private void ChangePlayerClass(CharacterClasses.Class playerClass)
+    private void ChangePlayerClass(CharacterClass playerClass)
     {
         //Debug.Log($"ChangePlayerClass. clientId: {clientId}, class: {playerClass}");
         ChangePlayerClassServerRPC(playerClass);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ChangePlayerClassServerRPC(CharacterClasses.Class playerClass, ServerRpcParams serverRpcParams = default)
+    private void ChangePlayerClassServerRPC(CharacterClass playerClass, ServerRpcParams serverRpcParams = default)
     {
         // 새로운 유저
         playerDataNetworkList.Add(new PlayerData
         {
             clientId = serverRpcParams.Receive.SenderClientId,
             playerClass = playerClass,
+            playerAnimState = PlayerMoveAnimState.Idle
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
         });
         Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
@@ -164,18 +166,35 @@ public class GameMultiplayer : NetworkBehaviour
         return playerDataNetworkList;
     }
 
+    /// <summary>
+    /// 서버에서 호출해야하는 메소드
+    /// </summary>
     public void SetPlayerDataFromClientId(ulong clientId, PlayerData newPlayerData)
     {
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
     }
 
+    /// <summary>
+    /// 서버에서 호출해야하는 메소드
+    /// </summary>
+    /// <param name="clientId"></param>
+    /// <param name="playerAnimState"></param>
+    public void UpdatePlayerAnimStateOnServer(ulong clientId, PlayerMoveAnimState playerAnimState)
+    {
+        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+        playerData.playerAnimState = playerAnimState;
+        SetPlayerDataFromClientId(clientId, playerData);
+        // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
+        OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerAnimStateEventData(clientId, playerData.playerAnimState));
+    }
+
 
     // 사용 안하는 메서드. ServerStartUp에서 처리중이다.
-/*    public bool HasAvailablePlayerSlots()
-    {
-        //return NetworkManager.Singleton.ConnectedClientsIds.Count < MAX_PLAYER_AMOUNT;
-        return NetworkManager.Singleton.ConnectedClientsIds.Count < ConnectionApprovalHandler.MaxPlayers;
-    }*/
+    /*    public bool HasAvailablePlayerSlots()
+        {
+            //return NetworkManager.Singleton.ConnectedClientsIds.Count < MAX_PLAYER_AMOUNT;
+            return NetworkManager.Singleton.ConnectedClientsIds.Count < ConnectionApprovalHandler.MaxPlayers;
+        }*/
 
     /*    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {

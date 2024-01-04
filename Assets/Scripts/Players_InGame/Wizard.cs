@@ -35,7 +35,7 @@ public class Wizard : Player
         PlayerSpawnServerRPC();
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void PlayerSpawnServerRPC(ServerRpcParams serverRpcParams = default)
     {
         // 테스트 목적으로 스펠리스트 하드코딩. 로비씬에서 선택해줘야함. (스킬트리)

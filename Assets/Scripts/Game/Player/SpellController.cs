@@ -170,7 +170,7 @@ public class SpellController : NetworkBehaviour
         }
 
         spellInfoListOnServer[clientId][spellIndex].spellState = spellState;
-        OnSpellStateChanged?.Invoke(this, new SpellStateEventData(clientId, spellIndex));
+        OnSpellStateChanged?.Invoke(this, new SpellStateEventData(clientId, spellState));
         Debug.Log($"SpellController UpdatePlayerSpellStateServerRPC: {spellIndex}");
 
         // 요청한 클라이언트의 currentSpellInfoList 동기화

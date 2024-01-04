@@ -25,7 +25,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     protected GameAssets gameAssets;
 
-    protected bool isWalking;
+    //protected bool isWalking;
     protected bool isBtnAttack1Clicked;
     protected bool isBtnAttack2Clicked;
     protected bool isBtnAttack3Clicked;
@@ -34,7 +34,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
     protected int backPack;
     protected int wand;
 
-    [SerializeField] private bool isPlayerGameOver;
+    // 플레이어 조작 제어를 위한 변수
+    [SerializeField] private bool isPlayerGameOver;   
 
     /// <summary>
     /// 서버측 InitializePlayer
@@ -152,7 +153,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
             isPlayerGameOver = true;
             // 이동속도 0
             HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
-            // 쓰러지는 애니메이션 실행
         }
         else isPlayerGameOver = false;
     }
@@ -167,11 +167,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
     public int GetScore()
     {
         return score;
-    }
-
-    public bool IsWalking()
-    {
-        return isWalking;
     }
 
     public bool IsGameOver()
@@ -581,7 +576,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         HandleMovementServerRPC(inputVector, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
     }
     [ServerRpc]
-    private void HandleMovementServerRPC(Vector2 inputVector, bool isBtnAttack1Clicked, bool isBtnAttack2Clicked, bool isBtnAttack3Clicked)
+    private void HandleMovementServerRPC(Vector2 inputVector, bool isBtnAttack1Clicked, bool isBtnAttack2Clicked, bool isBtnAttack3Clicked, ServerRpcParams serverRpcParams = default)
     {
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -589,10 +584,15 @@ public class Player : NetworkBehaviour, IStoreCustomer
         //float moveDistance = moveSpeed * Time.deltaTime;
         float moveDistance = moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
         transform.position += moveDir * moveDistance;
-        isWalking = moveDir != Vector3.zero;
 
-        // Animation State 브로드캐스팅
-        UpdateAnimationStateClientRPC(isWalking);
+        // 서버(GameMultiplayer)에 새로운 Player Anim State 저장
+        if (moveDir != Vector3.zero) {
+            GameMultiplayer.Instance.UpdatePlayerAnimStateOnServer(serverRpcParams.Receive.SenderClientId, PlayerMoveAnimState.Walking);
+        }
+        else
+        {
+            GameMultiplayer.Instance.UpdatePlayerAnimStateOnServer(serverRpcParams.Receive.SenderClientId, PlayerMoveAnimState.Idle);
+        }
 
         //Debug.Log($"isBtnAttack1Clicked:{isBtnAttack1Clicked}, isBtnAttack2Clicked:{isBtnAttack2Clicked}, isBtnAttack3Clicked:{isBtnAttack3Clicked}");
         // 공격중이 아닐 때에만 진행방향으로 캐릭터 회전
@@ -600,10 +600,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
         {
             Rotate(moveDir);
         }
-
-        // 마우스 커서 방향 바라볼 때
-        //Vector3 mouseDir = GetMouseDir();
-        //Rotate(mouseDir);
     }
 
     /// <summary>
@@ -620,32 +616,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
         Rotate(dir);
     }
 
-    [ClientRpc]
-    private void UpdateAnimationStateClientRPC(bool isWalking)
-    {
-        this.isWalking = isWalking;
-    }
-
-
-    //사용 안함. 삭제 가능 Client Auth 방식의 이동 처리 (현 오브젝트에 Client Network Transform이 필요)
-    protected void HandleMovement()
-    {        
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-
-        float moveDistance = moveSpeed * Time.deltaTime;
-        transform.position += moveDir * moveDistance;
-        isWalking = moveDir != Vector3.zero;
-
-        // 진행방향 바라볼 때
-        Rotate(moveDir);
-
-        // 마우스 커서 방향 바라볼 때
-        //Vector3 mouseDir = GetMouseDir();
-        //Rotate(mouseDir);
-    }
-
     private void Rotate(Vector3 moveDir)
     {
         if (moveDir == Vector3.zero) return;
@@ -654,37 +624,5 @@ public class Player : NetworkBehaviour, IStoreCustomer
         Vector3 slerpResult = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
         transform.forward = slerpResult;
     }
-
-    // 마우스 커서 방향 바라볼 때 사용했던 메소드. 현재는 사용 안함. 추후 삭제 가능
-    private Vector3 GetMouseDir()
-    {
-        RaycastHit hit;
-        float maxDistance = 100f;
-        Vector3 mousePos = Input.mousePosition;
-        Ray mouseRay = Camera.main.ScreenPointToRay(mousePos);
-        Vector3 mouseDir = Vector3.zero;
-        if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit, maxDistance))
-        {
-            mouseDir = hit.point - transform.position;
-            //Debug.Log("mouseRay 충돌! 충돌 위치: " + hit.point);
-        }
-        else
-        {
-            Vector3 pos = mouseRay.GetPoint(maxDistance);
-            //Debug.Log("커서가 맵 밖으로 벗어났습니다  mouseRay.GetPoint : " + pos);
-            mouseDir = pos - transform.position;
-        }
-
-        // 높이 좌표(y) 고정. 현재 캐릭터 허리 높이(0f)로. 모든 캐릭터 키는 1f로 균일. 땅이 0.5f만큼 꺼져있음. 
-        mouseDir.y = 0f;
-        return mouseDir;
-    }
-
-    /*protected void UpdateAttackInput()
-    {
-        isAttack1Started = gameInput.GetIsAttack1() == 1;
-        isAttack2Started = gameInput.GetIsAttack2() == 1;
-        isAttack3Started = gameInput.GetIsAttack3() == 1;
-    }*/
     #endregion
 }

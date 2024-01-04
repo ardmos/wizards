@@ -11,7 +11,7 @@ public class PlayerProfileData : MonoBehaviour
 {
     public static PlayerProfileData Instance { get; private set; }
 
-    [SerializeField] private CharacterClasses.Class currentSelectedClass;
+    [SerializeField] private CharacterClass currentSelectedClass;
 
     private void Start()
     {
@@ -27,13 +27,13 @@ public class PlayerProfileData : MonoBehaviour
         }
     }
 
-    public CharacterClasses.Class GetCurrentSelectedClass() 
+    public CharacterClass GetCurrentSelectedClass() 
     {
         return currentSelectedClass; 
     }
 
     // Lobby Scene 전용. Client 내부 저장용
-    public void SetCurrentSelectedClass(CharacterClasses.Class @class) { currentSelectedClass = @class; }
+    public void SetCurrentSelectedClass(CharacterClass @class) { currentSelectedClass = @class; }
 
     // Lobby Scene 전용. Client 내부 저장용
     public GameObject GetCurrentSelectedCharacterPrefab_NotInGame()
@@ -43,10 +43,10 @@ public class PlayerProfileData : MonoBehaviour
         GameObject resultObejct = null;
         switch (currentSelectedClass)
         {
-            case CharacterClasses.Class.Wizard:
+            case CharacterClass.Wizard:
                 resultObejct = GameAssets.instantiate.wizard_Male_ForLobby;
                 break;
-            case CharacterClasses.Class.Knight:
+            case CharacterClass.Knight:
                 resultObejct = GameAssets.instantiate.knight_Male_ForLobby;
                 break;
             default:
@@ -63,10 +63,10 @@ public class PlayerProfileData : MonoBehaviour
         GameObject resultObejct = null;
         switch (currentSelectedClass)
         {
-            case CharacterClasses.Class.Wizard:
+            case CharacterClass.Wizard:
                 resultObejct = GameAssets.instantiate.wizard_Male;
                 break;
-            case CharacterClasses.Class.Knight:
+            case CharacterClass.Knight:
                 resultObejct = GameAssets.instantiate.knight_Male;
                 break;
             default:

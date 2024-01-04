@@ -84,6 +84,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\PushAlarmGroupUI.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Player.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\ItemTemplateUI.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Assets\Scripts\Game\UI\PopupGameOverUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupMenuUI.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerMoveAnimState.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneDedicatedServer.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />

@@ -3,11 +3,11 @@ using System;
 class SpellStateEventData : EventArgs
 {
     public ulong clientId;
-    public ushort spellIndex;
+    public SpellState spellState;
 
-    public SpellStateEventData(ulong clientId, ushort spellIndex)
+    public SpellStateEventData(ulong clientId, SpellState spellState)
     {
         this.clientId = clientId;
-        this.spellIndex = spellIndex;
+        this.spellState = spellState;
     }
 }

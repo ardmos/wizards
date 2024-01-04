@@ -91,15 +91,15 @@ public class GameRoomPlayerCharacter : MonoBehaviour
         playerObject.transform.localPosition = Vector3.zero;
     }
 
-    private GameObject GetCurrentPlayerCharacterPrefab(CharacterClasses.Class playerClass)
+    private GameObject GetCurrentPlayerCharacterPrefab(CharacterClass playerClass)
     {
         GameObject playerPrefab = null;
         switch (playerClass)
         {
-            case CharacterClasses.Class.Wizard:
+            case CharacterClass.Wizard:
                 playerPrefab = GameAssets.instantiate.wizard_Male_ForLobby;
                 break;
-            case CharacterClasses.Class.Knight:
+            case CharacterClass.Knight:
                 playerPrefab = GameAssets.instantiate.knight_Male_ForLobby;
                 break;
             default:

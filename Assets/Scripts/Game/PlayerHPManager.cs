@@ -34,5 +34,8 @@ public class PlayerHPManager : NetworkBehaviour
         // 각 Client 플레이어의 HP바 UI 업데이트
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
         networkClient.PlayerObject.GetComponent<Player>().SetHPClientRPC(playerTotalHP);
+        
+        // HP 총량 0인 GameOver 플레이어 AnimState 서버에 보고. 서버권한 방식.
+        GameMultiplayer.Instance.UpdatePlayerAnimStateOnServer(clientId, PlayerMoveAnimState.GameOver);
     }
 }
