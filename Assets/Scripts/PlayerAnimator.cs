@@ -19,6 +19,8 @@ public class PlayerAnimator : MonoBehaviour
 
         spellController.OnSpellStateChanged += OnSpellStateChanged;
         Debug.Log("PlayerAnimator Awake!");
+
+        // 이제 여기서 Player Walking이랑 GameOver 구독해서 애니메이션 실행해주면 됨.
     }
 
     /// <summary>
