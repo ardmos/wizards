@@ -9,6 +9,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 {
     public static Player LocalInstance { get; private set; }
 
+
     [SerializeField] protected GameInput gameInput;
     [SerializeField] protected GameObject virtualCameraObj;
     [SerializeField] protected SpellController spellController;
@@ -20,8 +21,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
-    [SerializeField] protected List<Vector3> spawnPositionList;
-    [SerializeField] protected List<GameObject> ownedSpellPrefabList;
+    [SerializeField] protected List<Vector3> spawnPositionList;    
 
     protected GameAssets gameAssets;
 
@@ -36,14 +36,15 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
     [SerializeField] private bool isPlayerGameOver;
 
-    public void InitializePlayer(SpellName[] ownedSpellList)
+    /// <summary>
+    /// 서버측 InitializePlayer
+    /// 1. 스폰위치 초기화
+    /// 2. HP 초기화 & 브로드캐스팅
+    /// 3. 특정 플레이어가 보유한 스킬 목록 저장 & 해당플레이어에게 공유
+    /// </summary>
+    /// <param name="ownedSpellList"></param>
+    public void InitializePlayerOnServer(SpellName[] ownedSpellList, ulong playerClientId)
     {
-        if (!IsOwner) return;
-
-        LocalInstance = this;
-
-        // 카메라 위치 초기화. 소유자만 따라다니도록 함 
-        virtualCameraObj.SetActive(IsOwner);
         gameAssets = GameAssets.instantiate;
 
         Debug.Log($"spawnPositionList.Count: {spawnPositionList.Count}, OwnerClientId: {OwnerClientId}, GameMultiplayer.Instance.GetPlayerDataIndexFromClientId: {GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)}");
@@ -52,29 +53,38 @@ public class Player : NetworkBehaviour, IStoreCustomer
         //transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
         transform.position = spawnPositionList[0];
 
+        // HP 초기화 & 브로드캐스팅
+        PlayerHPManager.Instance.SetPlayerHPOnServer(hp, playerClientId);
+
+        // 특정 플레이어가 보유한 스킬 목록 저장
+
+
+        // Spawn된 클라이언트측 InitializePlayer 시작 & 보유 스킬 리스트 공유
+        NetworkClient networkClient = NetworkManager.ConnectedClients[playerClientId];
+        networkClient.PlayerObject.GetComponent<Player>().InitializePlayerClientRPC(ownedSpellList);
+    }
+
+    [ClientRpc]
+    private void InitializePlayerClientRPC(SpellName[] ownedSpellNameList)
+    {
+        if (!IsOwner) return;
+
+        LocalInstance = this;
+
+        // 카메라 위치 초기화. 소유자만 따라다니도록 함 
+        virtualCameraObj.SetActive(IsOwner);
+
         // 테스트용
         //GameManager.Instance.UpdatePlayerGameOver();
 
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         GetComponent<Rigidbody>().isKinematic = false;
 
-        // HP 초기화
-        PlayerHPManager.Instance.SetPlayerHP(hp);
-        isPlayerGameOver = false;
-
-        // 나머지는 스킬 로드 과정        
-        // GameAsset으로부터 Spell Prefab 로딩. playerClass와 spellName으로 필요한 프리팹만 불러온다. 
-        Debug.Log($"ownedSpellList.Length : {ownedSpellList.Length}");
-        foreach (var spellName in ownedSpellList)
-        {
-            Debug.Log($"spellName: {spellName}");
-            ownedSpellPrefabList.Add(GameAssets.instantiate.GetSpellPrefab(spellName));
-        }
-        for (ushort i = 0; i < ownedSpellPrefabList.Count; i++)
-        {
-            spellController.SetCurrentSpell(ownedSpellPrefabList[i], i);
-        }
-
+        // 보유 스킬 로드          
+        Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
+        spellController.SetCurrentSpellOnClient(ownedSpellNameList);
+        
+        // Input Action 이벤트 구독
         gameInput.OnAttack1Started += GameInput_OnAttack1Started;
         gameInput.OnAttack2Started += GameInput_OnAttack2Started;
         gameInput.OnAttack3Started += GameInput_OnAttack3Started;
@@ -87,21 +97,21 @@ public class Player : NetworkBehaviour, IStoreCustomer
     {
         if (isPlayerGameOver) return;
         isBtnAttack1Clicked = true;
-        spellController.StartCastingSpell(0);
+        spellController.StartCastingSpellOnClient(0);
     }
 
     private void GameInput_OnAttack2Started(object sender, EventArgs e)
     {
         if (isPlayerGameOver) return;
         isBtnAttack2Clicked = true;
-        spellController.StartCastingSpell(1);
+        spellController.StartCastingSpellOnClient(1);
     }
 
     private void GameInput_OnAttack3Started(object sender, EventArgs e)
     {
         if (isPlayerGameOver) return;
         isBtnAttack3Clicked = true;
-        spellController.StartCastingSpell(2);
+        spellController.StartCastingSpellOnClient(2);
     }
 
     private void GameInput_OnAttack1Ended(object sender, EventArgs e)
@@ -109,7 +119,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         if (isPlayerGameOver) return;
         if (!isBtnAttack1Clicked) return;
         isBtnAttack1Clicked = false;
-        spellController.ShootCurrentCastingSpell(0);
+        spellController.ShootCurrentCastingSpellOnClient(0);
     }
 
     private void GameInput_OnAttack2Ended(object sender, EventArgs e)
@@ -117,7 +127,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         if (isPlayerGameOver) return;
         if (!isBtnAttack2Clicked) return;
         isBtnAttack2Clicked = false;
-        spellController.ShootCurrentCastingSpell(1);
+        spellController.ShootCurrentCastingSpellOnClient(1);
     }
 
     private void GameInput_OnAttack3Ended(object sender, EventArgs e)
@@ -125,7 +135,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         if (isPlayerGameOver) return;
         if (!isBtnAttack3Clicked) return;
         isBtnAttack3Clicked = false;
-        spellController.ShootCurrentCastingSpell(2);
+        spellController.ShootCurrentCastingSpellOnClient(2);
     }
 
     [ClientRpc]
@@ -143,8 +153,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
             // 이동속도 0
             HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
             // 쓰러지는 애니메이션 실행
-
         }
+        else isPlayerGameOver = false;
     }
     public void PopupGameOverUI()
     {

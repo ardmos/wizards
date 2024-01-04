@@ -158,7 +158,7 @@ public class SpellManager : NetworkBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="clientId"></param>
-    public void PlayerGotHit(sbyte damage, ulong clientId)
+    public void PlayerGotHitOnServer(sbyte damage, ulong clientId)
     {
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {
@@ -180,7 +180,7 @@ public class SpellManager : NetworkBehaviour
 
             // 각 Client에 변경HP 전달
             PlayerHPManager.Instance.UpdatePlayerHP(clientId, playerHP);
-            Debug.Log($"GameMultiplayer.PlayerGotHit()  Player{clientId} got {damage} damage new HP:{playerHP}");
+            Debug.Log($"GameMultiplayer.PlayerGotHitOnServer()  Player{clientId} got {damage} damage new HP:{playerHP}");
         }
     }
 }

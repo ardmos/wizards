@@ -11,14 +11,8 @@ public class PlayerHPManager : NetworkBehaviour
         Instance = this;
     }
 
-    public void SetPlayerHP(sbyte playerHP)
-    {
-        SetPlayerHPServerRPC(playerHP);
-    }
-    [ServerRpc(RequireOwnership = false)]
-    private void SetPlayerHPServerRPC(sbyte playerHP, ServerRpcParams serverRpcParams = default)
-    {
-        var clientId = serverRpcParams.Receive.SenderClientId;
+    public void SetPlayerHPOnServer(sbyte playerHP, ulong clientId)
+    {    
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {
             UpdatePlayerHP(clientId, playerHP);

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 
+[System.Serializable]
 public class SpellInfo : INetworkSerializable
 {
     public SpellType spellType;
