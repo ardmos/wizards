@@ -49,11 +49,14 @@ public class SpellController : NetworkBehaviour
         {
             restTimeCurrentSpellArrayOnClient[spellIndex] += Time.deltaTime;
             if (restTimeCurrentSpellArrayOnClient[spellIndex] >= spellInfoListOnClient[spellIndex].coolTime)
-            {
-                UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
+            {                
                 restTimeCurrentSpellArrayOnClient[spellIndex] = 0f;
+                // 여기서 서버에 Ready로 바뀐 State를 보고 하면 서버에서 다시 콜백해서 현 클라이언트 오브젝트의 State가 Ready로 바뀌긴 하는데, 그 사이에 딜레이가 있어서
+                // 여기서 한 번 클라이언트의 State를 바꿔주고 서버에 보고 해준다.
+                spellInfoListOnClient[spellIndex].spellState = SpellState.Ready;
+                UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
             }
-            return;
+            Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
         }
     }
 
