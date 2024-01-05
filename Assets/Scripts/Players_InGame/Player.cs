@@ -148,11 +148,14 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
 
     /// <summary>
-    /// 게임오버 처리 메소드
+    /// 게임 오버시 플레이어가 캐릭터 조작 불가하게 만드는 메소드.
     /// </summary>
     [ClientRpc]
     public void SetPlayerGameOverClientRPC()
     {
+        // 이 게임오버 캐릭터의 소유자가 아니면 리턴.
+        if(!IsOwner) return;
+
         isPlayerGameOver = true;
         // 이동속도 0
         HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
