@@ -12303,6 +12303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnMenu: {fileID: 1057068786630892482}
   popupMenuUI: {fileID: 1744270956165744330}
+  popupGameOverUI: {fileID: 479713624}
 --- !u!224 &1057068785643306476
 RectTransform:
   m_ObjectHideFlags: 0

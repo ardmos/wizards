@@ -21,25 +21,11 @@ public class PopupGameOverUI : MonoBehaviour
             LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
 
-        // 게임 로직 바꾸면서 바뀌어야할 부분. GameOver는 State따라서 되는게 아니라, HP에 따라서 각자 띄워지는것.
-        GameManager.Instance.OnStateChanged += OnGameManagerStateChanged;
         //Debug.Log("PopupGameOverUI Start");
         Hide();
     }
 
-    private void OnGameManagerStateChanged(object sender, EventArgs e)
-    {
-        if (GameManager.Instance.IsGameOver())
-        {
-            Show();            
-        }
-        else
-        {
-            Hide();
-        }
-    }
-
-    private void Show()
+    public void Show()
     {
         gameObject.SetActive(true);
         InitGameOverUIData();
@@ -52,8 +38,10 @@ public class PopupGameOverUI : MonoBehaviour
 
     private void InitGameOverUIData()
     {
-        txtRankNumber.text = "0"; //(GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();
-        txtScoreCount.text = "0"; //Player.LocalInstance.GetScore().ToString();
+        //txtRankNumber.text = "0"; //(GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();
+        //txtScoreCount.text = "0"; //Player.LocalInstance.GetScore().ToString();
+        txtRankNumber.text = (GameManager.Instance.GetCurrentAlivePlayerCount()).ToString();
+        txtScoreCount.text = Player.LocalInstance.GetScore().ToString();
     }
 
     private void CleanUp()

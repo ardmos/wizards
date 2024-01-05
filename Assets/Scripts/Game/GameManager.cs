@@ -29,7 +29,7 @@ public class GameManager : NetworkBehaviour
         WatingToStart,
         CountdownToStart,
         GamePlaying,
-        GameOver,
+        GameFinished,
     }
 
     [SerializeField] private NetworkList<ulong> playerGameOverList;
@@ -157,10 +157,10 @@ public class GameManager : NetworkBehaviour
                 gamePlayingTimer.Value -= Time.deltaTime;
                 if (gamePlayingTimer.Value < 0f)
                 {
-                    state.Value = State.GameOver;
+                    state.Value = State.GameFinished;
                 }
                 break;
-            case State.GameOver:
+            case State.GameFinished:
                 break;
             default:
                 break;
@@ -263,9 +263,9 @@ public class GameManager : NetworkBehaviour
     {
         return state.Value == State.CountdownToStart;
     }
-    public bool IsGameOver()
+    public bool IsGameFinished()
     {
-        return state.Value == State.GameOver;
+        return state.Value == State.GameFinished;
     }
 
     public float GetCountdownToStartTimer()

@@ -9,7 +9,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
 {
     public static Player LocalInstance { get; private set; }
 
-
     [SerializeField] protected GameInput gameInput;
     [SerializeField] protected GameObject virtualCameraObj;
     [SerializeField] protected SpellController spellController;
@@ -159,17 +158,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
         isPlayerGameOver = true;
         // 이동속도 0
         HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
-
-        PopupGameOverUIOnClient();
-    }
-    /// <summary>
-    /// 클라이언트에서 동작하는 메소드.
-    /// </summary>
-    public void PopupGameOverUIOnClient()
-    {
-        Debug.Log("Player PopupGameOverUIOnClient");
-        //GameUI.Instance.popupGameOverUI.Show();
-        // 일단은 팝업 없음. 테스트중. 
+        // 게임오버 팝업 띄워주기
+        GameUI.instance.popupGameOverUI.Show();
     }
 
     #region Public 플레이어 정보 확인

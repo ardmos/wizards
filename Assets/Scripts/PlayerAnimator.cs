@@ -7,7 +7,7 @@ public class PlayerAnimator : NetworkBehaviour
 {
     private const string IS_WALKING = "IsWalking";
     private const string IS_CASTING = "IsCasting";
-    private const string IS_GAMEOVER = "IsGameOver";
+    private const string IS_GAMEOVER = "IsGameFinished";
 
     [SerializeField] private Player player;
     [SerializeField] private SpellController spellController;

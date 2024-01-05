@@ -6,19 +6,20 @@ using UnityEngine.UI;
 /// </summary>
 public class GameUI : MonoBehaviour
 {
-    public static GameUI Instance;
+    public static GameUI instance;
 
     [SerializeField] private Button btnMenu;
-
     [SerializeField] private PopupMenuUI popupMenuUI;
+
+    public PopupGameOverUI popupGameOverUI;
 
     void Awake()
     {
-        Instance = this;
-
+        instance = this;
         btnMenu.onClick.AddListener(() =>
         {
             popupMenuUI.Show();
         });
     }
+
 }
