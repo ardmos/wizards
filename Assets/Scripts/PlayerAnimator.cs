@@ -19,7 +19,7 @@ public class PlayerAnimator : NetworkBehaviour
 
 
         spellController.OnSpellStateChanged += OnSpellStateChanged;
-        Debug.Log("PlayerAnimator Awake!");
+        //Debug.Log("PlayerAnimator Awake!");
 
         // 이제 여기서 Player Walking이랑 GameOver 구독해서 애니메이션 실행해주면 됨.
         GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged += OnPlayerMoveAnimStateChanged;
@@ -36,7 +36,7 @@ public class PlayerAnimator : NetworkBehaviour
         PlayerAnimStateEventData eventData = (PlayerAnimStateEventData)e;
         NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
         networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdatePlayerMoveAnimationOnServer(eventData.playerMoveAnimState);
-        Debug.Log($"Player{eventData.clientId} MoveAnimation OnPlayerMoveAnimStateChanged: {eventData.playerMoveAnimState}");
+        //Debug.Log($"Player{eventData.clientId} MoveAnimation OnPlayerMoveAnimStateChanged: {eventData.playerMoveAnimState}");
     }
     private void UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState playerMoveAnimState)
     {

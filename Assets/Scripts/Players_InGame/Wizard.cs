@@ -31,13 +31,20 @@ public class Wizard : Player
 
     public override void OnNetworkSpawn()
     {
-        // 서버에서 생성해준다
-        PlayerSpawnServerRPC();
+        
+        // 클라이언트 각자가 서버에 player data 초기화 요청. 서버에서 초기화해준다
+        if(IsClient&&IsOwner)
+        {
+            Debug.Log($"Player{OwnerClientId} OnNetworkSpawn!");
+            InitializePlayerServerRPC();
+        }
+            
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void PlayerSpawnServerRPC(ServerRpcParams serverRpcParams = default)
+    private void InitializePlayerServerRPC(ServerRpcParams serverRpcParams = default)
     {
+        Debug.Log($"InitializePlayerServerRPC. Player{serverRpcParams.Receive.SenderClientId} requested Initialize PlayerData.");
         // 테스트 목적으로 스펠리스트 하드코딩. 로비씬에서 선택해줘야함. (스킬트리)
         ownedSpellList = new SpellName[]{
                 SpellName.FireBallLv1,

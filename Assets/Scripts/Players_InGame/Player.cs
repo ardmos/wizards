@@ -44,42 +44,43 @@ public class Player : NetworkBehaviour, IStoreCustomer
     /// 3. 특정 플레이어가 보유한 스킬 목록 저장 & 해당플레이어에게 공유
     /// </summary>
     /// <param name="ownedSpellList"></param>
-    public void InitializePlayerOnServer(SpellName[] ownedSpellList, ulong playerClientId)
+    public void InitializePlayerOnServer(SpellName[] ownedSpellList, ulong requestedInitializeClientId)
     {
         gameAssets = GameAssets.instantiate;
 
-        Debug.Log($"spawnPositionList.Count: {spawnPositionList.Count}, OwnerClientId: {OwnerClientId}, GameMultiplayer.Instance.GetPlayerDataIndexFromClientId: {GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)}");
+        Debug.Log($"InitializePlayerOnServer. spawnPositionList.Count: {spawnPositionList.Count}, requestedInitializeClientId: {requestedInitializeClientId}, GameMultiplayer.Instance.GetPlayerDataIndexFromClientId: {GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(requestedInitializeClientId)}");
 
         // 스폰 위치 초기화
         //transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
         transform.position = spawnPositionList[0];
 
         // HP 초기화 & 브로드캐스팅
-        PlayerHPManager.Instance.SetPlayerHPOnServer(hp, playerClientId);
+        PlayerHPManager.Instance.SetPlayerHPOnServer(hp, requestedInitializeClientId);
 
         // 특정 플레이어가 보유한 스킬 목록 저장
 
 
         // Spawn된 클라이언트측 InitializePlayer 시작 & 보유 스킬 리스트 공유
-        NetworkClient networkClient = NetworkManager.ConnectedClients[playerClientId];
+        NetworkClient networkClient = NetworkManager.ConnectedClients[requestedInitializeClientId];
         networkClient.PlayerObject.GetComponent<Player>().InitializePlayerClientRPC(ownedSpellList);
     }
 
     [ClientRpc]
     private void InitializePlayerClientRPC(SpellName[] ownedSpellNameList)
     {
-        if (!IsOwner) return;
-
-        LocalInstance = this;
-
         // 카메라 위치 초기화. 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
+        // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
+        GetComponent<Rigidbody>().isKinematic = false;
+
+        if (!IsOwner) return;
+        LocalInstance = this;
+
+        Debug.Log($"InitializePlayerClientRPC. Player{OwnerClientId}! IsClient?{IsClient}, IsOwner?{IsOwner}, LocalInstance:{LocalInstance}");
+
 
         // 테스트용
         //GameManager.Instance.UpdatePlayerGameOver();
-
-        // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
-        GetComponent<Rigidbody>().isKinematic = false;
 
         // 보유 스킬 로드          
         Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
