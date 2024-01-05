@@ -42,7 +42,7 @@ public class PlayerHPManager : NetworkBehaviour
             // 게임오버 플레이어 게임오버자 명단 서버에 등록
             GameManager.Instance.UpdatePlayerGameOverListOnServer(clientId);
 
-            // GameOver 플레이어 AnimState 서버에 등록. 
+            // GameOver 플레이어 AnimState 서버에 등록. 게임오버 애니메이션 실행.
             GameMultiplayer.Instance.UpdatePlayerAnimStateOnServer(clientId, PlayerMoveAnimState.GameOver);
 
             // 해당 플레이어 조작 불가 처리
