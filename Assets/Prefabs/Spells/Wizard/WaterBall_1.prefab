@@ -99,12 +99,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508a3fc71ca1dc344a1a92e026890a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellInfo:
+    spellType: 0
+    coolTime: 0
+    lifeTime: 0
+    moveSpeed: 0
+    price: 0
+    level: 0
+    spellName: 0
+    spellState: 0
   muzzleVFXPrefab: {fileID: 1956366456712032, guid: c71d01a174b1c6747b545808a95f5a13, type: 3}
   hitVFXPrefab: {fileID: 1607111504653374, guid: 50158038de5004f4ba6c7ca1b4db4308, type: 3}
   trails:
   - {fileID: 652394117494112525}
   collided: 0
   isSpellCollided: 0
+  collisionHandlingResult:
+    spellType: 0
+    coolTime: 0
+    lifeTime: 0
+    moveSpeed: 0
+    price: 0
+    level: 0
+    spellName: 0
+    spellState: 0
 --- !u!114 &5331054849664308942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10060,7 +10078,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.47
       minScalar: 0.3
       maxCurve:
         serializedVersion: 2

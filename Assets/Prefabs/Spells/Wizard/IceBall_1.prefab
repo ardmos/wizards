@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4910,7 +4910,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9772,7 +9772,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14634,7 +14634,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -19553,7 +19553,7 @@ MonoBehaviour:
   size: 1
   speed: 1
   duration: 1
-  loop: 0
+  loop: 1
   prewarm: 0
   lights: 0
   trails: 0
@@ -19578,6 +19578,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91593162f6fc43d46be2e4b1218c3662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellInfo:
+    spellType: 0
+    coolTime: 0
+    lifeTime: 0
+    moveSpeed: 0
+    price: 0
+    level: 0
+    spellName: 0
+    spellState: 0
   muzzleVFXPrefab: {fileID: 1779451694322954, guid: e5df23447230e144bae8664dbe57ce5a, type: 3}
   hitVFXPrefab: {fileID: 1423167456353516, guid: 0f5b05149b3cc7347b9bdcfd0a0bfa7a, type: 3}
   trails:
@@ -19587,6 +19596,15 @@ MonoBehaviour:
   - {fileID: 1225959865209112}
   collided: 0
   isSpellCollided: 0
+  collisionHandlingResult:
+    spellType: 0
+    coolTime: 0
+    lifeTime: 0
+    moveSpeed: 0
+    price: 0
+    level: 0
+    spellName: 0
+    spellState: 0
 --- !u!114 &-2264537746373775043
 MonoBehaviour:
   m_ObjectHideFlags: 0
