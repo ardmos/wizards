@@ -141,25 +141,30 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
 
     [ClientRpc]
-    public void SetHPClientRPC(sbyte hp)
+    public void SetHPClientRPC(ulong clientId, sbyte hp)
     {
-        Debug.Log($"Player.SetHPClientPRC() HP Set! hp:{hp}");
+        Debug.Log($"Player{clientId}.SetHPClientPRC() HP Set! hp:{hp}");
         hPBar.SetHP(hp);
-
-        // 게임오버 처리
-        if (hp <= 0)
-        {
-            GameManager.Instance.UpdatePlayerGameOver();
-            // 조작 불가 처리
-            isPlayerGameOver = true;
-            // 이동속도 0
-            HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
-        }
-        else isPlayerGameOver = false;
     }
-    public void PopupGameOverUI()
+
+    /// <summary>
+    /// 게임오버 처리 메소드
+    /// </summary>
+    [ClientRpc]
+    public void SetPlayerGameOverClientRPC()
     {
-        Debug.Log("Player PopupGameOverUI");
+        isPlayerGameOver = true;
+        // 이동속도 0
+        HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
+
+        PopupGameOverUIOnClient();
+    }
+    /// <summary>
+    /// 클라이언트에서 동작하는 메소드.
+    /// </summary>
+    public void PopupGameOverUIOnClient()
+    {
+        Debug.Log("Player PopupGameOverUIOnClient");
         //GameUI.Instance.popupGameOverUI.Show();
         // 일단은 팝업 없음. 테스트중. 
     }
@@ -168,11 +173,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
     public int GetScore()
     {
         return score;
-    }
-
-    public bool IsGameOver()
-    {
-        return isPlayerGameOver;
     }
     #endregion
 

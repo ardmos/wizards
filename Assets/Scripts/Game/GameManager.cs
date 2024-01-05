@@ -217,28 +217,23 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    // Client 게임오버시
-    // 1. 서버에게 보고.  서버는 딕셔너리에 ClientID 게임오버 true로 기록.
-    // 2. 클라이언트쪽 딕셔너리 리스트에도 해당 내용 공유.
-    // 3. 해당 클라이언트 GameOverUIPopup은 클라이언트쪽 딕셔너리 리스트 OnValueChanged 이벤트핸들러를 통해 활성화됨.
-    // 4. 서버측 게임오버 False인 인원 1명일 경우 승리.
-    // (이렇게 하면 관전기능 추가 가능. 아직 미구현. 여기서 추가하면 됨.)
-    public void UpdatePlayerGameOver()
+    /// <summary>
+    /// 서버에서 동작하는 메소드입니다. 서버에 저장되는 게임오버자 명단을 업데이트 합니다.
+    /// // Client 게임오버시
+    /// 1. 서버에게 보고.  서버는 딕셔너리에 ClientID 게임오버 true로 기록.
+    /// 2. 클라이언트쪽 딕셔너리 리스트에도 해당 내용 공유.
+    /// 3. 해당 클라이언트 GameOverUIPopup은 클라이언트쪽 딕셔너리 리스트 OnValueChanged 이벤트핸들러를 통해 활성화됨.
+    /// 4. 서버측 게임오버 False인 인원 1명일 경우 승리.
+    /// (이렇게 하면 관전기능 추가 가능. 아직 미구현. 여기서 추가하면 됨.)
+    /// </summary>
+    /// <param name="serverRpcParams"></param>
+    public void UpdatePlayerGameOverListOnServer(ulong clientId)
     {
-        UpdatePlayerGameOverListServerRPC();
-    }
-    [ServerRpc(RequireOwnership = false)]
-    private void UpdatePlayerGameOverListServerRPC(ServerRpcParams serverRpcParams = default)
-    {
-        //Debug.Log("UpdatePlayerGameOverListServerRPC");
-        var clientId = serverRpcParams.Receive.SenderClientId;
+        Debug.Log($"UpdatePlayerGameOverListOnServer. gameOver player : player{clientId}");
 
         if (NetworkManager.ConnectedClients.ContainsKey(clientId) && !playerGameOverList.Contains(clientId))
         {
             AddGameOverPlayer(clientId);
-            // 게임오버됐다는 플레이어 오브젝트 찾아 게임오버 팝업 띄우라고 시킴
-            NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-            networkClient.PlayerObject.GetComponent<Player>().PopupGameOverUI();
         }
     }
 
