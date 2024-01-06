@@ -24,7 +24,7 @@ public class FireBallLv1 : FireSpell
             spellType = SpellType.Fire,
             coolTime = 2.0f,
             lifeTime = 10.0f,
-            //moveSpeed = 10.0f, 테스트용
+            //moveSpeed = 10.0f, //테스트용
             moveSpeed = 0.0f,
             price = 30,
             level = 1,

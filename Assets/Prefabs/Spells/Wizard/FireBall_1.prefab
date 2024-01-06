@@ -14893,13 +14893,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd6c85062127444ab9fee8c85952346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellInfo:
+    spellType: 0
+    coolTime: 0
+    lifeTime: 0
+    moveSpeed: 0
+    price: 0
+    level: 0
+    spellName: 0
+    spellState: 0
   muzzleVFXPrefab: {fileID: 1888054744919094, guid: 001c0f77b8acde24e991b6c6d6d846a9, type: 3}
   hitVFXPrefab: {fileID: 1262490536792160, guid: 96e6801b407ca0e44b6b1fc011e0f61e, type: 3}
   trails:
-  - {fileID: 1675076031019388}
   - {fileID: 1947216890740462}
   collided: 0
   isSpellCollided: 0
+  collisionHandlingResult:
+    spellType: 0
+    coolTime: 0
+    lifeTime: 0
+    moveSpeed: 0
+    price: 0
+    level: 0
+    spellName: 0
+    spellState: 0
 --- !u!114 &-2858450315985026663
 MonoBehaviour:
   m_ObjectHideFlags: 0
