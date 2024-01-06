@@ -8,7 +8,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Server에서 동작하는 게임씬 매니저
+/// Server에서 동작하는 게임 매니저.  
+/// Server Auth 방식에서의 게임 매니저는 당연히 서버에서 돌아가야한다. 
+/// 혹시 서버Auth방식 아닌 부분들 있으면 정리해야함.
+/// 
 /// GameScene 게임 흐름 관리
 /// Singleton
 /// EventSystem(Observer Pattern)
@@ -148,22 +151,34 @@ public class GameManager : NetworkBehaviour
             case GameState.GamePlaying:
                 gamePlayingTimer.Value -= Time.deltaTime;
 
+                // 최후 생존이 타임아웃보다 우선됨.
+                // 최후 생존
+                if (currentAlivePlayerCount.Value == 1)
+                {
+                    gameState.Value = GameState.GameFinished;
+                }
                 // 타임아웃.
-                if (gamePlayingTimer.Value < 0f)
+                else if (gamePlayingTimer.Value < 0f)
                 {
                     gameState.Value = GameState.GameFinished;
                 }
 
-                // 최후 생존
-
-
                 break;
             case GameState.GameFinished:
-                // 타임아웃으로 끝난 경우. 생존자들 Draw. 처리
+                // 최후 생존이 타임아웃보다 우선됨.
+                // 최후 생존
+                if (currentAlivePlayerCount.Value == 1)
+                {
+                    // 최후 생존으로 끝난 경우. 생존자 Win 처리    <<<<<<<<----------------- 여기부터!
+                    
+                }
+                // 타임아웃.
+                else if (gamePlayingTimer.Value < 0f)
+                {
+                    // 타임아웃으로 끝난 경우. 생존자들 Draw. 처리
+                    
+                }
 
-                // 최후 생존으로 끝난 경우. 생존자 Win 처리
-                
-                
                 break;
             default:
                 break;
