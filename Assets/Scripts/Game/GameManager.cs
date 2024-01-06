@@ -3,43 +3,35 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 #if UNITY_SERVER || UNITY_EDITOR
-using Unity.Services.Multiplay;
+//using Unity.Services.Multiplay;
 #endif
 
 
 /// <summary>
+/// Server에서 동작하는 게임씬 매니저
 /// GameScene 게임 흐름 관리
 /// Singleton
 /// EventSystem(Observer Pattern)
 /// Game State Machine
 /// ownerPlayerObject
-///
 /// </summary>
 
 public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public event EventHandler OnStateChanged;
+    public event EventHandler OnGameStateChanged;
     public event EventHandler OnAlivePlayerCountChanged;
     public event EventHandler OnGameOverListChanged;
 
-    public enum State
-    {
-        WatingToStart,
-        CountdownToStart,
-        GamePlaying,
-        GameFinished,
-    }
-
     [SerializeField] private NetworkList<ulong> playerGameOverList;
-    [SerializeField] private NetworkVariable<State> state = new NetworkVariable<State>(State.WatingToStart);
+    [SerializeField] private NetworkVariable<GameState> gameState = new NetworkVariable<GameState>(GameState.WatingToStart);
     [SerializeField] private NetworkVariable<int> startedPlayerCount = new NetworkVariable<int>(0);
     [SerializeField] private NetworkVariable<int> currentAlivePlayerCount = new NetworkVariable<int>(0);
     [SerializeField] private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     [SerializeField] private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
 
-    [SerializeField] private float gamePlayingTimerMax = 1000f;
+    [SerializeField] private float gamePlayingTimerMax = 10000f;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
     [SerializeField] private bool isLocalPlayerReady;
  
@@ -66,8 +58,8 @@ public class GameManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        state.OnValueChanged += State_OnValueChanged;
-        state.Value = State.WatingToStart; // 생성과 동시에 Default값 설정. 
+        gameState.OnValueChanged += State_OnValueChanged;
+        gameState.Value = GameState.WatingToStart; // 생성과 동시에 Default값 설정. 
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
@@ -120,9 +112,9 @@ public class GameManager : NetworkBehaviour
     }
 
 
-    private void State_OnValueChanged(State previousValue, State newValue)
+    private void State_OnValueChanged(GameState previousValue, GameState newValue)
     {
-        OnStateChanged?.Invoke(this, EventArgs.Empty);
+        OnGameStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void currentAlivePlayerCount_OnValueChanged(int previousValue, int newValue)
@@ -133,7 +125,7 @@ public class GameManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Update 대신에 State 바뀔때마다 호출되는 Eventhandler 사용하면 될것같은데! 추후 검토
+        // Update 대신에 State 바뀔때마다 호출되는 Eventhandler 사용하기  <--- 여기부터. 시간 계산기랑 EventListener랑 분리해서 구현하면 됨.
         RunStateMachine();
     }
 
@@ -141,26 +133,37 @@ public class GameManager : NetworkBehaviour
     {
         if(!IsServer) { return; }
 
-        switch (state.Value)
+        switch (gameState.Value)
         {
-            case State.WatingToStart:
+            case GameState.WatingToStart:
                 break;
-            case State.CountdownToStart:
+            case GameState.CountdownToStart:
                 countdownToStartTimer.Value -= Time.deltaTime;
                 if (countdownToStartTimer.Value < 0f)
                 {
-                    state.Value = State.GamePlaying;
+                    gameState.Value = GameState.GamePlaying;
                     gamePlayingTimer.Value = gamePlayingTimerMax;
                 }
                 break;
-            case State.GamePlaying:
+            case GameState.GamePlaying:
                 gamePlayingTimer.Value -= Time.deltaTime;
+
+                // 타임아웃.
                 if (gamePlayingTimer.Value < 0f)
                 {
-                    state.Value = State.GameFinished;
+                    gameState.Value = GameState.GameFinished;
                 }
+
+                // 최후 생존
+
+
                 break;
-            case State.GameFinished:
+            case GameState.GameFinished:
+                // 타임아웃으로 끝난 경우. 생존자들 Draw. 처리
+
+                // 최후 생존으로 끝난 경우. 생존자 Win 처리
+                
+                
                 break;
             default:
                 break;
@@ -192,7 +195,7 @@ public class GameManager : NetworkBehaviour
             startedPlayerCount.Value = NetworkManager.ConnectedClients.Count;
             UpdateCurrentAlivePlayerCount();
             //Debug.Log($"allClientsReady state.Value:{state.Value}");
-            state.Value = State.CountdownToStart;
+            gameState.Value = GameState.CountdownToStart;
             //Debug.Log($"allClientsReady state.Value:{state.Value}");
         }
 
@@ -206,10 +209,11 @@ public class GameManager : NetworkBehaviour
         Debug.Log($"UpdateCurrentAlivePlayerCount playerCount:{currentAlivePlayerCount.Value}");
     }
 
+    // 클라이언트에서 호출하는 메소드
     // 게임 시작시 보이는 Ready UI 버튼을 클릭했을 때 동작하는 메서드 입니다.
-    public void LocalPlayerReady()
+    public void LocalPlayerReadyOnClient()
     {
-        if (state.Value == State.WatingToStart)
+        if (gameState.Value == GameState.WatingToStart)
         {
             //Debug.Log($"LocalPlayerReady game state:{state.Value}");
             isLocalPlayerReady = true;
@@ -236,7 +240,6 @@ public class GameManager : NetworkBehaviour
             AddGameOverPlayer(clientId);
         }
     }
-
     public void AddGameOverPlayer(ulong clientId) {
         // GameOver 플레이어 리스트 업데이트  (게임오버시킨사람 닉네임 공유는 아직 미구현)
         playerGameOverList.Add(clientId);
@@ -251,21 +254,21 @@ public class GameManager : NetworkBehaviour
 
     public bool IsWatingToStart()
     {
-        return state.Value == State.WatingToStart;
+        return gameState.Value == GameState.WatingToStart;
     }
 
     public bool IsGamePlaying()
     {
-        return state.Value == State.GamePlaying;
+        return gameState.Value == GameState.GamePlaying;
     }
 
     public bool IsCountdownToStartActive()
     {
-        return state.Value == State.CountdownToStart;
+        return gameState.Value == GameState.CountdownToStart;
     }
     public bool IsGameFinished()
     {
-        return state.Value == State.GameFinished;
+        return gameState.Value == GameState.GameFinished;
     }
 
     public float GetCountdownToStartTimer()

@@ -44,7 +44,7 @@ public class MatchmakerUI : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log($"gUnityServices State : {UnityServices.State}");
+        Debug.Log($"gUnityServices GameState : {UnityServices.State}");
     }
 
     private void Update()

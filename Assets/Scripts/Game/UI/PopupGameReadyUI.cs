@@ -16,7 +16,7 @@ public class PopupGameReadyUI : MonoBehaviour
     }
     private void Start()
     {
-        GameManager.Instance.OnStateChanged += OnGameStateChanged;
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
         txtGameReady.text = "Please Ready";
     }
 
@@ -39,7 +39,7 @@ public class PopupGameReadyUI : MonoBehaviour
         // hide ready button UI
         btnReady.gameObject.SetActive(false);
         // report ready state to GameManager???? Complete this work when finish Sync Game State!
-        GameManager.Instance.LocalPlayerReady();
+        GameManager.Instance.LocalPlayerReadyOnClient();
         // show "Wating for players" text
         txtGameReady.text = "Wating for players...";
         // # If every player get ready, the Game State will change.  

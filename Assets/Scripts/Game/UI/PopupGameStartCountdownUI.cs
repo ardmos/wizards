@@ -10,7 +10,7 @@ public class PopupGameStartCountdownUI : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+        GameManager.Instance.OnGameStateChanged += GameManager_OnStateChanged;
         Hide();
     }
 
