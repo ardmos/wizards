@@ -113,7 +113,7 @@ public class GameMultiplayer : NetworkBehaviour
             playerClass = playerClass,
             playerAnimState = PlayerMoveAnimState.Idle,
             playerGameState = PlayerGameState.Playing,
-            playerName = "Default Name"
+            playerName = "Default Player Name"
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
         });
         Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
@@ -130,7 +130,7 @@ public class GameMultiplayer : NetworkBehaviour
     // 플레이어 clientID를 단서로 player Index를 찾는 메소드
     public int GetPlayerDataIndexFromClientId(ulong clientId)
     {
-        Debug.Log("GetPlayerDataIndexFromClientId");
+        //Debug.Log("GetPlayerDataIndexFromClientId");
         for (int i = 0; i < playerDataNetworkList.Count; i++)
         {
             if (playerDataNetworkList[i].clientId == clientId)
@@ -174,7 +174,7 @@ public class GameMultiplayer : NetworkBehaviour
     /// </summary>
     public void SetPlayerDataFromClientId(ulong clientId, PlayerData newPlayerData)
     {
-        Debug.Log("SetPlayerDataFromClientId");
+        //Debug.Log("SetPlayerDataFromClientId");
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
     }
 

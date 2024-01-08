@@ -37,7 +37,7 @@ public class PlayerAnimator : NetworkBehaviour
         PlayerAnimStateEventData eventData = (PlayerAnimStateEventData)e;
         NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
         networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdatePlayerMoveAnimationOnServer(eventData.playerMoveAnimState);
-        Debug.Log($"Player{eventData.clientId} MoveAnimation OnPlayerMoveAnimStateChanged: {eventData.playerMoveAnimState}");
+        //Debug.Log($"Player{eventData.clientId} MoveAnimation OnPlayerMoveAnimStateChanged: {eventData.playerMoveAnimState}");
     }
     private void UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState playerMoveAnimState)
     {
@@ -54,8 +54,6 @@ public class PlayerAnimator : NetworkBehaviour
             case PlayerMoveAnimState.GameOver:
                 animator.SetBool(IS_WALKING, false);
                 animator.SetTrigger(IS_GAMEOVER);
-                
-                Debug.Log($"animator.GetBool IS_GAMEOVER");
                 break;               
         }
     }

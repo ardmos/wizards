@@ -215,7 +215,7 @@ public class GameManager : NetworkBehaviour
     {
         // 게임중인 플레이어 숫자(게임오버 안당하고)
         currentAlivePlayerCount.Value = startedPlayerCount.Value - gameOverPlayerCount;        
-        Debug.Log($"UpdateCurrentAlivePlayerCount playerCount:{currentAlivePlayerCount.Value}");
+        //Debug.Log($"UpdateCurrentAlivePlayerCount playerCount:{currentAlivePlayerCount.Value}");
     }
 
     // 클라이언트에서 호출하는 메소드
@@ -240,7 +240,7 @@ public class GameManager : NetworkBehaviour
     /// <param name="serverRpcParams"></param>
     public void UpdatePlayerGameOverOnServer(ulong clientId)
     {
-        Debug.Log($"UpdatePlayerGameOverOnServer. gameOver player : player{clientId}");
+        //Debug.Log($"UpdatePlayerGameOverOnServer. gameOver player : player{clientId}");
 
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {          
