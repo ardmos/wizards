@@ -16,6 +16,15 @@ public class GameAssets : MonoBehaviour
         }
     }
 
+    #region Item Icons
+    public Sprite IconWizardClass;
+    public Sprite IconKnightClass;
+    public Sprite IconGold;
+    public Sprite IconBonusGold;
+    public Sprite IconExp;
+    #endregion
+
+
     #region Sprites
     public Sprite s_RemoveAds;
 

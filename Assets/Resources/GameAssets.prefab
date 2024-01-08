@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cccfcea7d901a4983bc821d5b7c7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IconWizardClass: {fileID: 21300000, guid: a01e08a846bcb44b79f7e2811e634c47, type: 3}
+  IconKnightClass: {fileID: 21300000, guid: 805a91a7fbf7f4d52a7f9f376932c065, type: 3}
+  IconGold: {fileID: 21300000, guid: 575678395c08d4dbe9f1cd800a0d55bb, type: 3}
+  IconBonusGold: {fileID: 21300000, guid: 7794a522475a643ac8cb62a283863d9f, type: 3}
+  IconExp: {fileID: 21300000, guid: 86991e39c8d864b198c0b90042adfcc5, type: 3}
   s_RemoveAds: {fileID: 21300000, guid: 152333def7fb04fefaac91d426ff1535, type: 3}
   spellIconsArray:
   - {fileID: 21300000, guid: 5692db8a476a44e039316aeecbe16bc6, type: 3}
