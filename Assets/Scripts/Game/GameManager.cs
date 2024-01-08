@@ -161,13 +161,19 @@ public class GameManager : NetworkBehaviour
                 if (currentAlivePlayerCount.Value == 1)
                 {
                     // 최후 생존으로 끝난 경우. 생존자 Win 처리    <<<<<<<<----------------- 여기부터!
-                    
+                    // 생존자 State Win 으로 변경
+
+                    // 생존자 화면에 Win 팝업 실행
+
                 }
                 // 타임아웃.
                 else if (gamePlayingTimer.Value < 0f)
                 {
                     // 타임아웃으로 끝난 경우. 생존자들 Draw. 처리
+                    // 생존자들 State Draw로 변경
                     
+                    // 생존자들 화면에 Draw 팝업 실행
+
                 }
 
                 break;

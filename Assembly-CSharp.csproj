@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingSceneManager.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\PushAlarmGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\PopupWinUI.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Player.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
