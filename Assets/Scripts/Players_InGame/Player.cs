@@ -147,7 +147,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
 
     /// <summary>
-    /// 게임 오버시 플레이어가 캐릭터 조작 불가하게 만드는 메소드.
+    /// 게임 오버시 동작시키는 메소드.
+    /// 1. 플레이어 조작 불가
+    /// 2. 게임오버 팝업 띄우기
     /// </summary>
     [ClientRpc]
     public void SetPlayerGameOverClientRPC()
@@ -155,6 +157,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // 이 게임오버 캐릭터의 소유자가 아니면 리턴.
         if(!IsOwner) return;
 
+        // 플레이어가 캐릭터 조작 불가
         isPlayerGameOver = true;
         // 이동속도 0
         HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
@@ -579,7 +582,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
         float moveDistance = moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
         transform.position += moveDir * moveDistance;
 
-        // 서버(GameMultiplayer)에 새로운 Player Anim State 저장
+        Debug.Log($"HandleMovementServerRPC playerAnimState: {GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerAnimState}");
+
+        // 서버(GameMultiplayer)에 새로운 Player Anim State 저장. (GameOver상태가 아닐 때에만!)
+        if (GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerAnimState == PlayerMoveAnimState.GameOver)
+            return;
         if (moveDir != Vector3.zero) {
             GameMultiplayer.Instance.UpdatePlayerAnimStateOnServer(serverRpcParams.Receive.SenderClientId, PlayerMoveAnimState.Walking);
         }

@@ -8349,6 +8349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1713142544}
   - component: {fileID: 1713142545}
+  - component: {fileID: 1713142546}
   m_Layer: 0
   m_Name: =Notify=
   m_TagString: Untagged
@@ -8390,6 +8391,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notifyMessageGroup: {fileID: 1057068785227432289}
   notifyMessageTemplatePrefab: {fileID: 5238298021885568913, guid: 908b1aae7453cc648ab8c267dce1e614, type: 3}
+--- !u!114 &1713142546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713142543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1134612179
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1732728132
 GameObject:
   m_ObjectHideFlags: 0
@@ -10281,7 +10302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57635e1f62beba84c8a19bb95771a506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state:
+  gameState:
     m_InternalValue: 0
   startedPlayerCount:
     m_InternalValue: 0
@@ -10291,6 +10312,7 @@ MonoBehaviour:
     m_InternalValue: 3
   gamePlayingTimer:
     m_InternalValue: 0
+  gameOverPlayerCount: 0
   gamePlayingTimerMax: 100
   isLocalPlayerReady: 0
 --- !u!4 &2141758591
@@ -12303,6 +12325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnMenu: {fileID: 1057068786630892482}
   popupMenuUI: {fileID: 1744270956165744330}
+  notifyUIController: {fileID: 1713142545}
   popupGameOverUI: {fileID: 479713624}
 --- !u!224 &1057068785643306476
 RectTransform:

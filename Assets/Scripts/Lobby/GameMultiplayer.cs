@@ -59,11 +59,11 @@ public class GameMultiplayer : NetworkBehaviour
         {
             PlayerData playerData = playerDataNetworkList[i];
             if (playerData.clientId == clientId)
-            {
-                // 플레이어 Disconnected. 해당 인덱스 데이터 삭제
-                playerDataNetworkList.RemoveAt(i);
-                // Game중이라면 GameManager에서 죽은걸로 처리. 어차피 재접속 안되게끔 구현할거니까 재접속시 처리는 안해도 된다.
-                GameManager.Instance.AddGameOverPlayer(clientId);
+            {              
+                // Game중이라면 GameManager에서 죽은걸로 처리. 어차피 재접속 안되게끔 구현할거니까 재접속시 처리는 안해도 된다. 해당 리스트 아이템을 삭제할 필요도 없다.
+                GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
+
+                Debug.Log($"Server_OnClientDisconnectCallback");
             }
         }
     }
@@ -92,7 +92,7 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     /// <summary>
-    /// 클래스 변경을 서버에게 보고할 수 있습니다.
+    /// 클래스 변경을 서버에게 보고할 수 있습니다. 메소드명 Change 대신 Update로 변경 고려하기.
     /// 보고 시점은 Server가 Allocate 된 이후! 
     /// 즉 GameRoom에 들어가면서 입니다.
     /// </summary>
@@ -111,7 +111,9 @@ public class GameMultiplayer : NetworkBehaviour
         {
             clientId = serverRpcParams.Receive.SenderClientId,
             playerClass = playerClass,
-            playerAnimState = PlayerMoveAnimState.Idle
+            playerAnimState = PlayerMoveAnimState.Idle,
+            playerGameState = PlayerGameState.Playing,
+            playerName = "Default Name"
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
         });
         Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
@@ -128,6 +130,7 @@ public class GameMultiplayer : NetworkBehaviour
     // 플레이어 clientID를 단서로 player Index를 찾는 메소드
     public int GetPlayerDataIndexFromClientId(ulong clientId)
     {
+        Debug.Log("GetPlayerDataIndexFromClientId");
         for (int i = 0; i < playerDataNetworkList.Count; i++)
         {
             if (playerDataNetworkList[i].clientId == clientId)
@@ -171,6 +174,7 @@ public class GameMultiplayer : NetworkBehaviour
     /// </summary>
     public void SetPlayerDataFromClientId(ulong clientId, PlayerData newPlayerData)
     {
+        Debug.Log("SetPlayerDataFromClientId");
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
     }
 

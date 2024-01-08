@@ -7,7 +7,7 @@ public class PlayerAnimator : NetworkBehaviour
 {
     private const string IS_WALKING = "IsWalking";
     private const string IS_CASTING = "IsCasting";
-    private const string IS_GAMEOVER = "IsGameFinished";
+    private const string IS_GAMEOVER = "IsGameOver";
 
     [SerializeField] private Player player;
     [SerializeField] private SpellController spellController;
@@ -26,6 +26,7 @@ public class PlayerAnimator : NetworkBehaviour
     }
 
     /// <summary>
+    /// 서버에서 동작하는 메소드 입니다.
     /// 게임 내 접속중인(서버에 존재하는) 플레이어들중 MoveAnimState가 변경된 플레이어가 있을 시 호출되는 리스너 입니다.
     /// MoveAnimState가 변경된 서버상의 플레이어 오브젝트에게 애니메이션을 바꾸라고 알려줍니다.(서버권한방식 애니메이션 변경)
     /// </summary>
@@ -36,7 +37,7 @@ public class PlayerAnimator : NetworkBehaviour
         PlayerAnimStateEventData eventData = (PlayerAnimStateEventData)e;
         NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
         networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdatePlayerMoveAnimationOnServer(eventData.playerMoveAnimState);
-        //Debug.Log($"Player{eventData.clientId} MoveAnimation OnPlayerMoveAnimStateChanged: {eventData.playerMoveAnimState}");
+        Debug.Log($"Player{eventData.clientId} MoveAnimation OnPlayerMoveAnimStateChanged: {eventData.playerMoveAnimState}");
     }
     private void UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState playerMoveAnimState)
     {
@@ -51,9 +52,11 @@ public class PlayerAnimator : NetworkBehaviour
                 animator.SetBool(IS_GAMEOVER, false);
                 break;
             case PlayerMoveAnimState.GameOver:
-                animator.SetBool(IS_GAMEOVER, true);
-                break;
-               
+                animator.SetBool(IS_WALKING, false);
+                animator.SetTrigger(IS_GAMEOVER);
+                
+                Debug.Log($"animator.GetBool IS_GAMEOVER");
+                break;               
         }
     }
 

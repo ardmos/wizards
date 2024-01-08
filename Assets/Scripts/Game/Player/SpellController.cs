@@ -56,7 +56,7 @@ public class SpellController : NetworkBehaviour
                 spellInfoListOnClient[spellIndex].spellState = SpellState.Ready;
                 UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
             }
-            Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
+            //Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
         }
     }
 
@@ -69,7 +69,7 @@ public class SpellController : NetworkBehaviour
     {
         if (spellInfoListOnClient[spellIndex].spellState == SpellState.Cooltime || spellInfoListOnClient[spellIndex].spellState == SpellState.Casting)
         {
-            Debug.Log($"마법 {spellInfoListOnClient[spellIndex].spellName}은 현재 시전불가상태입니다.");
+            //Debug.Log($"마법 {spellInfoListOnClient[spellIndex].spellName}은 현재 시전불가상태입니다.");
             return;
         }
 

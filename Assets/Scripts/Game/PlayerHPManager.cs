@@ -39,13 +39,13 @@ public class PlayerHPManager : NetworkBehaviour
         // 게임오버 처리. 서버권한 방식.
         if (playerTotalHP <= 0)
         {
-            // 게임오버 플레이어 게임오버자 명단 서버에 등록
-            GameManager.Instance.UpdatePlayerGameOverListOnServer(clientId);
+            // 게임오버 플레이어 사실을 서버에 기록.
+            GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
 
-            // GameOver 플레이어 AnimState 서버에 등록. 게임오버 애니메이션 실행.
+            // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행. 
             GameMultiplayer.Instance.UpdatePlayerAnimStateOnServer(clientId, PlayerMoveAnimState.GameOver);
 
-            // 해당 플레이어 조작 불가 처리
+            // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
             networkClient.PlayerObject.GetComponent<Player>().SetPlayerGameOverClientRPC();
         }
 

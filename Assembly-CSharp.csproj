@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />

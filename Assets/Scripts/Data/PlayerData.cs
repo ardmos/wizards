@@ -10,6 +10,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     public CharacterClass playerClass;
     public sbyte playerHP;
     public PlayerMoveAnimState playerAnimState;
+    public PlayerGameState playerGameState;
 
     public bool Equals(PlayerData other)
     {
@@ -19,7 +20,8 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
             playerId == other.playerId &&
             playerClass == other.playerClass && 
             playerHP == other.playerHP &&
-            playerAnimState == other.playerAnimState;
+            playerAnimState == other.playerAnimState &&
+            playerGameState == other.playerGameState;
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -30,5 +32,6 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
         serializer.SerializeValue(ref playerClass);
         serializer.SerializeValue(ref playerHP);
         serializer.SerializeValue(ref playerAnimState);
+        serializer.SerializeValue(ref playerGameState);
     }
 }

@@ -25,15 +25,14 @@ public class GameManager : NetworkBehaviour
 
     public event EventHandler OnGameStateChanged;
     public event EventHandler OnAlivePlayerCountChanged;
-    public event EventHandler OnGameOverListChanged;
 
-    [SerializeField] private NetworkList<ulong> playerGameOverList;
     [SerializeField] private NetworkVariable<GameState> gameState = new NetworkVariable<GameState>(GameState.WatingToStart);
     [SerializeField] private NetworkVariable<int> startedPlayerCount = new NetworkVariable<int>(0);
     [SerializeField] private NetworkVariable<int> currentAlivePlayerCount = new NetworkVariable<int>(0);
     [SerializeField] private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     [SerializeField] private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
 
+    [SerializeField] private ushort gameOverPlayerCount = 0;
     [SerializeField] private float gamePlayingTimerMax = 10000f;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
     [SerializeField] private bool isLocalPlayerReady;
@@ -42,8 +41,7 @@ public class GameManager : NetworkBehaviour
     void Awake()
     {
         Instance = this;
-        playerReadyList = new Dictionary<ulong, bool>();
-        playerGameOverList = new NetworkList<ulong>();
+        playerReadyList = new Dictionary<ulong, bool>();       
     }
 
     // Start is called before the first frame update
@@ -67,13 +65,7 @@ public class GameManager : NetworkBehaviour
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
         }
-        currentAlivePlayerCount.OnValueChanged += currentAlivePlayerCount_OnValueChanged;
-        playerGameOverList.OnListChanged += PlayerGameOverList_OnListChanged;
-    }
-
-    private void PlayerGameOverList_OnListChanged(NetworkListEvent<ulong> changeEvent)
-    {
-        OnGameOverListChanged?.Invoke(this, EventArgs.Empty);
+        currentAlivePlayerCount.OnValueChanged += currentAlivePlayerCount_OnValueChanged;        
     }
 
     /// <summary>
@@ -113,7 +105,6 @@ public class GameManager : NetworkBehaviour
         }
         return playerPrefab;
     }
-
 
     private void State_OnValueChanged(GameState previousValue, GameState newValue)
     {
@@ -217,10 +208,13 @@ public class GameManager : NetworkBehaviour
         //Debug.Log($"SetPlayerReadyServerRpc game state:{state.Value}, allClientsReady: {allClientsReady}");
     }
 
+    /// <summary>
+    /// 생존상태인 플레이어 숫자 카운트 업데이트
+    /// </summary>
     public void UpdateCurrentAlivePlayerCount()
     {
         // 게임중인 플레이어 숫자(게임오버 안당하고)
-        currentAlivePlayerCount.Value = startedPlayerCount.Value - playerGameOverList.Count;        
+        currentAlivePlayerCount.Value = startedPlayerCount.Value - gameOverPlayerCount;        
         Debug.Log($"UpdateCurrentAlivePlayerCount playerCount:{currentAlivePlayerCount.Value}");
     }
 
@@ -237,29 +231,37 @@ public class GameManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// 서버에서 동작하는 메소드입니다. 서버에 저장되는 게임오버자 명단을 업데이트 합니다.
+    /// 서버에서 동작하는 메소드입니다. 게임 오버 상태를 기록합니다.
     /// // Client 게임오버시
-    /// 1. 서버에게 보고.  서버는 딕셔너리에 ClientID 게임오버 true로 기록.
-    /// 2. 클라이언트쪽 딕셔너리 리스트에도 해당 내용 공유.
-    /// 3. 해당 클라이언트 GameOverUIPopup은 클라이언트쪽 딕셔너리 리스트 OnValueChanged 이벤트핸들러를 통해 활성화됨.
-    /// 4. 서버측 게임오버 False인 인원 1명일 경우 승리.
-    /// (이렇게 하면 관전기능 추가 가능. 아직 미구현. 여기서 추가하면 됨.)
+    /// 1. PlayerDataNetworkList상의 해당 ClientId의 PlayerGameState 값을 GameOver로 변경합니다.
+    /// 2. 현재 플레이중인 플레이어숫자를 보여주는 상단 UI를 위한 AlivePlayersCount 값을 업데이트 합니다.
+    /// 3. NotifyUI에 현재 게임오버 된 플레이어와 게임오버 시킨 플레이어의 닉네임을 공유해줍니다. (게임오버 시킨 플레이어의 닉네임 공유는 아직 미구현입니다.)
     /// </summary>
     /// <param name="serverRpcParams"></param>
-    public void UpdatePlayerGameOverListOnServer(ulong clientId)
+    public void UpdatePlayerGameOverOnServer(ulong clientId)
     {
-        Debug.Log($"UpdatePlayerGameOverListOnServer. gameOver player : player{clientId}");
+        Debug.Log($"UpdatePlayerGameOverOnServer. gameOver player : player{clientId}");
 
-        if (NetworkManager.ConnectedClients.ContainsKey(clientId) && !playerGameOverList.Contains(clientId))
-        {
-            AddGameOverPlayer(clientId);
+        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
+        {          
+            // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
+            PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+
+            if (playerData.playerGameState == PlayerGameState.GameOver) {
+                Debug.Log($"player{clientId}는 이미 게임오버처리된 플레이어입니다.");
+                return;
+            }
+            
+            playerData.playerGameState = PlayerGameState.GameOver;
+            GameMultiplayer.Instance.SetPlayerDataFromClientId(clientId, playerData);
+
+            // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.(게임오버시킨사람 닉네임 공유까지는 아직 미구현)
+            GameUI.instance.notifyUIController.NotifyGameOverPlayerClientRPC(playerData.playerName.ToString());
+
+            // 상단 UI를 위한 AlivePlayersCount 값 업데이트
+            gameOverPlayerCount++;
+            UpdateCurrentAlivePlayerCount();
         }
-    }
-    public void AddGameOverPlayer(ulong clientId) {
-        // GameOver 플레이어 리스트 업데이트  (게임오버시킨사람 닉네임 공유는 아직 미구현)
-        playerGameOverList.Add(clientId);
-        // 상단 UI를 위한 AlivePlayersCount 값 업데이트
-        UpdateCurrentAlivePlayerCount();
     }
 
     public bool IsLocalPlayerReady()
@@ -301,10 +303,5 @@ public class GameManager : NetworkBehaviour
         if(gamePlayingTimer.Value == 0f) return 0f;
 
         return gamePlayingTimerMax - gamePlayingTimer.Value;
-    }
-
-    public ulong GetLastGameOverPlayer()
-    {
-        return playerGameOverList[playerGameOverList.Count - 1];
     }
 }
