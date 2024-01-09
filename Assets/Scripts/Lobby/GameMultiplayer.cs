@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
-using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 
 /// <summary>
 /// UGS Start Server, Start Client
 /// NetworkList 관리
+/// 
+/// // 순수 서버 스크립트로 만들 필요가 있다. 추후 클라/서버 스크립트 분리 때 참고.
 /// </summary>
 
 public class GameMultiplayer : NetworkBehaviour
@@ -15,6 +18,8 @@ public class GameMultiplayer : NetworkBehaviour
 
     // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트
     private NetworkList<PlayerData> playerDataNetworkList;
+    // 플레이어들이 보유한 장비 현황
+    [SerializeField] private Dictionary<ulong, Dictionary<Item.ItemName, ushort>> playerItemDictionaryOnServer;    
 
     public static GameMultiplayer Instance { get; private set; }
 
@@ -28,6 +33,8 @@ public class GameMultiplayer : NetworkBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         playerDataNetworkList = new NetworkList<PlayerData>();
+
+        playerItemDictionaryOnServer = new Dictionary<ulong, Dictionary<Item.ItemName, ushort>>();
     }
 
     public override void OnNetworkSpawn()
@@ -192,6 +199,42 @@ public class GameMultiplayer : NetworkBehaviour
         OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerAnimStateEventData(clientId, playerData.playerAnimState));
     }
 
+
+
+    /// <summary>
+    /// 플레이어 보유 아이템 추가. 전부 서버에서 동작하는 메소드 입니다.
+    /// </summary>
+    [ServerRpc (RequireOwnership = false)]
+    public void AddPlayerItemServerRPC(Item.ItemName[] itemNameArray, ushort[] itemCountArray, ServerRpcParams serverRpcParams = default)
+    {
+        Dictionary<Item.ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
+        Debug.Log($"AddPlayerItemServerRPC. player{serverRpcParams.Receive.SenderClientId}'s playerItemDictionary.Count: {playerItemDictionary.Count} ");
+        foreach (var item in playerItemDictionary)
+        {
+            Debug.Log($"{item.Key}, {item.Value}");
+        }
+
+        if (playerItemDictionaryOnServer.ContainsKey(serverRpcParams.Receive.SenderClientId))
+            playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId] = playerItemDictionary;
+        else
+            playerItemDictionaryOnServer.Add(serverRpcParams.Receive.SenderClientId, playerItemDictionary);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void DeletePlayerItemServerRPC(Item.ItemName itemName, ServerRpcParams serverRpcParams = default)
+    {
+        if (!playerItemDictionaryOnServer.ContainsKey(serverRpcParams.Receive.SenderClientId)) return;
+
+        if(playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId][itemName]>0)
+            playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId][itemName]--;
+        else 
+            playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId][itemName] = 0;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void GetPlayerItemDictionaryServerRPC(ServerRpcParams serverRpcParams = default)
+    {
+        NetworkClient networkClient = NetworkManager.ConnectedClients[serverRpcParams.Receive.SenderClientId];
+        networkClient.PlayerObject.GetComponent<Player>().SetPlayerItemsDictionaryOnClient(playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId].Keys.ToArray(), playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId].Values.ToArray());      
+    }
 
     // 사용 안하는 메서드. ServerStartUp에서 처리중이다.
     /*    public bool HasAvailablePlayerSlots()

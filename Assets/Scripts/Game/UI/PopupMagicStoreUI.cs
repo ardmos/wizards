@@ -35,9 +35,9 @@ public class PopupMagicStoreUI : MonoBehaviour
     /// </summary>
     public void LoadContents()
     {
-        for (int i = ((int)Item.ItemType.SpellStart+1); i < ((int)Item.ItemType.SpellEnd); i++)
+        for (int i = ((int)Item.ItemName.SpellStart+1); i < ((int)Item.ItemName.SpellEnd); i++)
         {
-            Item.ItemType itemType = (Item.ItemType)i;
+            Item.ItemName itemType = (Item.ItemName)i;
             Transform storeItemTransform = Instantiate(storeItemTemplatePref);
             storeItemTransform.SetParent(container);
             MagicStoreItemTemplateUI ui_MagicStoreItem = storeItemTransform.GetComponent<MagicStoreItemTemplateUI>();
@@ -68,7 +68,7 @@ public class PopupMagicStoreUI : MonoBehaviour
     /// </summary>
     /// <param name="itemType"></param>
     /// <param name="slotNum"></param>
-    public void TryBuyItem(Item.ItemType itemType, int slotNum)
+    public void TryBuyItem(Item.ItemName itemType, int slotNum)
     {
         storeCustomer.BoughtSpellScroll(itemType, slotNum);
         selectSpellSlotPopup.Hide();

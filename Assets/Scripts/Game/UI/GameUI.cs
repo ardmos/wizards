@@ -14,6 +14,7 @@ public class GameUI : MonoBehaviour
 
     public NotifyUIController notifyUIController;
     public PopupGameOverUI popupGameOverUI;
+    public PopupWinUI popupWinUI;
 
     void Awake()
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -34,7 +35,10 @@ public class Player : NetworkBehaviour, IStoreCustomer
     protected int wand;
 
     // 플레이어 조작 제어를 위한 변수
-    [SerializeField] private bool isPlayerGameOver;   
+    [SerializeField] private bool isPlayerGameOver;
+
+    // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
+    [SerializeField] private Dictionary<Item.ItemName, ushort> playerItemDictionaryOnClient;
 
     /// <summary>
     /// 서버측 InitializePlayer
@@ -59,7 +63,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // 특정 플레이어가 보유한 스킬 목록 저장
 
 
-        // Spawn된 클라이언트측 InitializePlayer 시작 & 보유 스킬 리스트 공유
+        // Spawn된 클라이언트측 InitializePlayer 시작 & 보유 스킬 리스트 공유.   
+        // networkClient를 검색할 필요가 있는가???? 어차피 ClientRPC면 브로드캐스팅 되는거 아닌가?
         NetworkClient networkClient = NetworkManager.ConnectedClients[requestedInitializeClientId];
         networkClient.PlayerObject.GetComponent<Player>().InitializePlayerClientRPC(ownedSpellList);
     }
@@ -176,19 +181,19 @@ public class Player : NetworkBehaviour, IStoreCustomer
     /// <summary>
     /// 아이템 구매 메서드
     /// </summary>
-    public void BoughtSpellScroll(Item.ItemType itemType, int slotNumber)
+    public void BoughtSpellScroll(Item.ItemName itemType, int slotNumber)
     {
         Debug.Log("Bought spell: " + itemType + ", slotNum : " + slotNumber);
         switch (itemType)
         {
-            case Item.ItemType.FireBall_1:
+            case Item.ItemName.FireBall_1:
                 // CurrentSpell 바꾸는건 현재 착용 장비에 따라 달라지고, 아이템 구매(획득)시에는 해당 스킬 레벨이 올라간다
                 //spellController.SetCurrentSpell(gameAssets.fireBall_1, slotNumber);
                 break;
-            case Item.ItemType.WaterBall_1:
+            case Item.ItemName.WaterBall_1:
                 //spellController.SetCurrentSpell(gameAssets.waterBall_1, slotNumber);
                 break;
-            case Item.ItemType.IceBall_1:
+            case Item.ItemName.IceBall_1:
                 //spellController.SetCurrentSpell(gameAssets.iceBall_1, slotNumber);
                 break;
             default:
@@ -196,55 +201,55 @@ public class Player : NetworkBehaviour, IStoreCustomer
         }
 
     }
-    public void BoughtItem(Item.ItemType itemType)
+    public void BoughtItem(Item.ItemName itemType)
     {
         Debug.Log("Bought item: " + itemType);
         switch (itemType)
         {
-            case Item.ItemType.Armor_1: EquipArmor_1(); break;
-            case Item.ItemType.Armor_2: EquipArmor_2(); break;
-            case Item.ItemType.Armor_3: EquipArmor_3(); break;
-            case Item.ItemType.Armor_4: EquipArmor_4(); break;
-            case Item.ItemType.Armor_5: EquipArmor_5(); break;
-            case Item.ItemType.Armor_6: EquipArmor_6(); break;
-            case Item.ItemType.Armor_7: EquipArmor_7(); break;
-            case Item.ItemType.Armor_8: EquipArmor_8(); break;
-            case Item.ItemType.Armor_9: EquipArmor_9(); break;
-            case Item.ItemType.Armor_10: EquipArmor_10(); break;
-            case Item.ItemType.Armor_11: EquipArmor_11(); break;
-            case Item.ItemType.Armor_12: EquipArmor_12(); break;
-            case Item.ItemType.Armor_13: EquipArmor_13(); break;
-            case Item.ItemType.Armor_14: EquipArmor_14(); break;
-            case Item.ItemType.Armor_15: EquipArmor_15(); break;
-            case Item.ItemType.Armor_16: EquipArmor_16(); break;
-            case Item.ItemType.Armor_17: EquipArmor_17(); break;
-            case Item.ItemType.Armor_18: EquipArmor_18(); break;
-            case Item.ItemType.Armor_19: EquipArmor_19(); break;
-            case Item.ItemType.Armor_20: EquipArmor_20(); break;
-            case Item.ItemType.Hat_1: EquipHat_1(); break;
-            case Item.ItemType.Hat_2: EquipHat_2(); break;
-            case Item.ItemType.Hat_3: EquipHat_3(); break;
-            case Item.ItemType.Hat_4: EquipHat_4(); break;
-            case Item.ItemType.Hat_5: EquipHat_5(); break;
-            case Item.ItemType.Hat_6: EquipHat_6(); break;
-            case Item.ItemType.Hat_7: EquipHat_7(); break;
-            case Item.ItemType.Hat_8: EquipHat_8(); break;
-            case Item.ItemType.Hat_9: EquipHat_9(); break;
-            case Item.ItemType.Hat_10: EquipHat_10(); break;
-            case Item.ItemType.Hat_11: EquipHat_11(); break;
-            case Item.ItemType.Hat_12: EquipHat_12(); break;
-            case Item.ItemType.Hat_13: EquipHat_13(); break;
-            case Item.ItemType.Hat_14: EquipHat_14(); break;
-            case Item.ItemType.BackPack_1: EquipBackPack_1(); break;
-            case Item.ItemType.BackPack_2: EquipBackPack_2(); break;
-            case Item.ItemType.BackPack_3: EquipBackPack_3(); break;
-            case Item.ItemType.Wand_1: EquipWand_1(); break;
-            case Item.ItemType.Wand_2: EquipWand_2(); break;
-            case Item.ItemType.Wand_3: EquipWand_3(); break;
-            case Item.ItemType.Wand_4: EquipWand_4(); break;
-            case Item.ItemType.Wand_5: EquipWand_5(); break;
-            case Item.ItemType.Wand_6: EquipWand_6(); break;
-            case Item.ItemType.Wand_7: EquipWand_7(); break;
+            case Item.ItemName.Armor_1: EquipArmor_1(); break;
+            case Item.ItemName.Armor_2: EquipArmor_2(); break;
+            case Item.ItemName.Armor_3: EquipArmor_3(); break;
+            case Item.ItemName.Armor_4: EquipArmor_4(); break;
+            case Item.ItemName.Armor_5: EquipArmor_5(); break;
+            case Item.ItemName.Armor_6: EquipArmor_6(); break;
+            case Item.ItemName.Armor_7: EquipArmor_7(); break;
+            case Item.ItemName.Armor_8: EquipArmor_8(); break;
+            case Item.ItemName.Armor_9: EquipArmor_9(); break;
+            case Item.ItemName.Armor_10: EquipArmor_10(); break;
+            case Item.ItemName.Armor_11: EquipArmor_11(); break;
+            case Item.ItemName.Armor_12: EquipArmor_12(); break;
+            case Item.ItemName.Armor_13: EquipArmor_13(); break;
+            case Item.ItemName.Armor_14: EquipArmor_14(); break;
+            case Item.ItemName.Armor_15: EquipArmor_15(); break;
+            case Item.ItemName.Armor_16: EquipArmor_16(); break;
+            case Item.ItemName.Armor_17: EquipArmor_17(); break;
+            case Item.ItemName.Armor_18: EquipArmor_18(); break;
+            case Item.ItemName.Armor_19: EquipArmor_19(); break;
+            case Item.ItemName.Armor_20: EquipArmor_20(); break;
+            case Item.ItemName.Hat_1: EquipHat_1(); break;
+            case Item.ItemName.Hat_2: EquipHat_2(); break;
+            case Item.ItemName.Hat_3: EquipHat_3(); break;
+            case Item.ItemName.Hat_4: EquipHat_4(); break;
+            case Item.ItemName.Hat_5: EquipHat_5(); break;
+            case Item.ItemName.Hat_6: EquipHat_6(); break;
+            case Item.ItemName.Hat_7: EquipHat_7(); break;
+            case Item.ItemName.Hat_8: EquipHat_8(); break;
+            case Item.ItemName.Hat_9: EquipHat_9(); break;
+            case Item.ItemName.Hat_10: EquipHat_10(); break;
+            case Item.ItemName.Hat_11: EquipHat_11(); break;
+            case Item.ItemName.Hat_12: EquipHat_12(); break;
+            case Item.ItemName.Hat_13: EquipHat_13(); break;
+            case Item.ItemName.Hat_14: EquipHat_14(); break;
+            case Item.ItemName.BackPack_1: EquipBackPack_1(); break;
+            case Item.ItemName.BackPack_2: EquipBackPack_2(); break;
+            case Item.ItemName.BackPack_3: EquipBackPack_3(); break;
+            case Item.ItemName.Wand_1: EquipWand_1(); break;
+            case Item.ItemName.Wand_2: EquipWand_2(); break;
+            case Item.ItemName.Wand_3: EquipWand_3(); break;
+            case Item.ItemName.Wand_4: EquipWand_4(); break;
+            case Item.ItemName.Wand_5: EquipWand_5(); break;
+            case Item.ItemName.Wand_6: EquipWand_6(); break;
+            case Item.ItemName.Wand_7: EquipWand_7(); break;
             default:
                 break;
         }
@@ -627,4 +632,17 @@ public class Player : NetworkBehaviour, IStoreCustomer
         transform.forward = slerpResult;
     }
     #endregion
+
+
+    public void SetPlayerItemsDictionaryOnClient(Item.ItemName[] itemNameArray, ushort[] itemCountArray)
+    {
+        Dictionary<Item.ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
+        Debug.Log($"SetPlayerItemsDictionaryOnClient. player{OwnerClientId}'s playerItemDictionary.Count: {playerItemDictionary.Count} ");
+        foreach (var item in playerItemDictionary)
+        {
+            Debug.Log($"{item.Key}, {item.Value}");
+        }
+
+        playerItemDictionaryOnClient = playerItemDictionary;
+    }
 }

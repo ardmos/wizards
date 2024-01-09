@@ -7,6 +7,6 @@ using UnityEngine;
 
 public interface IStoreCustomer
 {
-    void BoughtSpellScroll(Item.ItemType itemType, int slotNum);
-    void BoughtItem(Item.ItemType itemType);
+    void BoughtSpellScroll(Item.ItemName itemType, int slotNum);
+    void BoughtItem(Item.ItemName itemType);
 }

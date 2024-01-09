@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.Netcode;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,11 +22,11 @@ using UnityEngine.UI;
 public class PopupWinUI : MonoBehaviour
 {
     // 테스트용 보상 아이템 리스트 목록 하드코딩. 따로 구현할 필요 있음.
-    [SerializeField] private Item.ItemType[] rewardItems = new Item.ItemType[4] {
-        Item.ItemType.Item_BonusGold,
-        Item.ItemType.Item_Exp,
-        Item.ItemType.Item_Wizard,
-        Item.ItemType.Item_Knight
+    [SerializeField] private Dictionary<Item.ItemName, ushort> rewardItems = new Dictionary<Item.ItemName, ushort>() {
+        { Item.ItemName.Item_BonusGold, 7 },
+        { Item.ItemName.Item_Exp, 25 },
+        { Item.ItemName.Item_Wizard, 2 },
+        { Item.ItemName.Item_Knight, 1 }
     };
 
     [SerializeField] private Animator animator;
@@ -47,15 +49,38 @@ public class PopupWinUI : MonoBehaviour
         imgEffect.SetActive(false);
         btnClaim.SetActive(false);
         btnClaim2x.SetActive(false);
+        Hide();
 
+        // 모든 상품 수령 & 로비씬 이동
         btnClaim.GetComponent<Button>().onClick.AddListener(() =>
         {
+            // 보상 수령. 수령 단계! 수령버튼 클릭 사실 서버에 보고.
+            // 1. 클라이언트가 현 btnClaim 클릭 & 서버측에 clientId와 itemName 전송.
+            // 2. ServerRPC 통해 전달받음. playerItemDictionary에 저장.
+            GameMultiplayer.Instance.AddPlayerItemServerRPC(rewardItems.Keys.ToArray<Item.ItemName>(), rewardItems.Values.ToArray<ushort>());
 
+            // NetworkManager 정리
+            CleanUp();
+            // 로비로 이동. 
+            LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
         });
+
+        // 클릭시 광고영상 재생 ( 미구현 )
         btnClaim2x.GetComponent<Button>().onClick.AddListener(() =>
         {
-
+            // 1. 광고 시청 실패시 원상복귀
+            // 2. 광고 시청 완료시 모든 상품 2배 수령(배틀패스 포함) & 로비씬 이동
         });
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -83,7 +108,7 @@ public class PopupWinUI : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         btnClaim.SetActive(true);
         yield return new WaitForSeconds(0.4f);
-        btnClaim2x.SetActive(true);
+        //btnClaim2x.SetActive(true); 광고 구현 후 진행
     }
 
     private IEnumerator FillSliderValue(float maxValue)
@@ -92,7 +117,7 @@ public class PopupWinUI : MonoBehaviour
         
         while (value <= maxValue)
         {
-            Debug.Log($"value : {value}");
+            //Debug.Log($"value : {value}");
             sliderBattlePath.value = value;
             sliderBattlePath.GetComponentInChildren<TextMeshProUGUI>().text = $"{value} <#9aa5d1>/ 100";
             yield return new WaitForSeconds(0.05f);
@@ -102,17 +127,17 @@ public class PopupWinUI : MonoBehaviour
 
     private IEnumerator LoadEarnedItems()
     {
-        foreach (Item.ItemType item in rewardItems)
+        foreach (KeyValuePair<Item.ItemName, ushort> item in rewardItems)
         {
             yield return new WaitForSeconds(0.5f);
 
             GameObject templateObject = null;
-            switch (item)
+            switch (item.Key)
             {
-                case Item.ItemType.Item_BonusGold:
+                case Item.ItemName.Item_BonusGold:
                     templateObject = itemTemplateBlue;
                     break;
-                case Item.ItemType.Item_Exp:
+                case Item.ItemName.Item_Exp:
                     templateObject = itemTemplateYellow;
                     break;
                 default:
@@ -121,8 +146,21 @@ public class PopupWinUI : MonoBehaviour
             }
 
             GameObject itemObject = Instantiate(templateObject);
-            itemObject.GetComponent<WinPopupItemTemplate>().InitTemplate(Item.GetIcon(item), "1", true);
+            itemObject.GetComponent<WinPopupItemTemplate>().InitTemplate(Item.GetIcon(item.Key), item.Value.ToString(), true);
             itemObject.transform.SetParent(itemGroup, false);           
+        }
+    }
+
+    private void CleanUp()
+    {
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.Shutdown();
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
+        if (GameMultiplayer.Instance != null)
+        {
+            Destroy(GameMultiplayer.Instance.gameObject);
         }
     }
 }

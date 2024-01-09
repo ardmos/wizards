@@ -12,7 +12,7 @@ public class ItemTemplateUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtName;
     [SerializeField] private Image imgIcon;
     [SerializeField] private TextMeshProUGUI txtPrice;
-    public void InitItem(Item.ItemType itemType)
+    public void InitItem(Item.ItemName itemType)
     {
         txtName.text = Item.GetName(itemType);
         imgIcon.sprite = Item.GetIcon(itemType);

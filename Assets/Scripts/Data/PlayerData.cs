@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Netcode;
 
@@ -18,7 +19,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
             clientId == other.clientId &&
             playerName == other.playerName &&
             playerId == other.playerId &&
-            playerClass == other.playerClass && 
+            playerClass == other.playerClass &&
             playerHP == other.playerHP &&
             playerAnimState == other.playerAnimState &&
             playerGameState == other.playerGameState;

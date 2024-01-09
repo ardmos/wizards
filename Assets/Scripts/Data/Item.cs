@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Item
 {
-    public enum ItemType
+    public enum ItemName
     {
         None,
         ShopItemStart,
@@ -79,64 +79,64 @@ public class Item
     }
 
 
-    public static float GetCost(ItemType itemType)
+    public static float GetCost(ItemName itemType)
     {
         switch (itemType)
         {
-            case ItemType.None: return 0;
-            case ItemType.RemoveAds: 
+            case ItemName.None: return 0;
+            case ItemName.RemoveAds: 
                 return 3.99f;
-            case ItemType.Armor_1:
-            case ItemType.Armor_2:
-            case ItemType.Armor_3:
-            case ItemType.Armor_4:
-            case ItemType.Armor_5:
-            case ItemType.Armor_6:
-            case ItemType.Armor_7:
-            case ItemType.Armor_8:
-            case ItemType.Armor_9:
-            case ItemType.Armor_10:
-            case ItemType.Armor_11:
-            case ItemType.Armor_12:
-            case ItemType.Armor_13:
-            case ItemType.Armor_14:
-            case ItemType.Armor_15:
-            case ItemType.Armor_16:
-            case ItemType.Armor_17:
-            case ItemType.Armor_18:
-            case ItemType.Armor_19:
-            case ItemType.Armor_20:
+            case ItemName.Armor_1:
+            case ItemName.Armor_2:
+            case ItemName.Armor_3:
+            case ItemName.Armor_4:
+            case ItemName.Armor_5:
+            case ItemName.Armor_6:
+            case ItemName.Armor_7:
+            case ItemName.Armor_8:
+            case ItemName.Armor_9:
+            case ItemName.Armor_10:
+            case ItemName.Armor_11:
+            case ItemName.Armor_12:
+            case ItemName.Armor_13:
+            case ItemName.Armor_14:
+            case ItemName.Armor_15:
+            case ItemName.Armor_16:
+            case ItemName.Armor_17:
+            case ItemName.Armor_18:
+            case ItemName.Armor_19:
+            case ItemName.Armor_20:
                 return 100f;
-            case ItemType.Hat_1:
-            case ItemType.Hat_2:
-            case ItemType.Hat_3:
-            case ItemType.Hat_4:
-            case ItemType.Hat_5:
-            case ItemType.Hat_6:
-            case ItemType.Hat_7:
-            case ItemType.Hat_8:
-            case ItemType.Hat_9:
-            case ItemType.Hat_10:
-            case ItemType.Hat_11:
-            case ItemType.Hat_12:
-            case ItemType.Hat_13:
-            case ItemType.Hat_14:
+            case ItemName.Hat_1:
+            case ItemName.Hat_2:
+            case ItemName.Hat_3:
+            case ItemName.Hat_4:
+            case ItemName.Hat_5:
+            case ItemName.Hat_6:
+            case ItemName.Hat_7:
+            case ItemName.Hat_8:
+            case ItemName.Hat_9:
+            case ItemName.Hat_10:
+            case ItemName.Hat_11:
+            case ItemName.Hat_12:
+            case ItemName.Hat_13:
+            case ItemName.Hat_14:
                 return 50f;
-            case ItemType.BackPack_1:
-            case ItemType.BackPack_2:
-            case ItemType.BackPack_3:
+            case ItemName.BackPack_1:
+            case ItemName.BackPack_2:
+            case ItemName.BackPack_3:
                 return 80f;
-            case ItemType.Wand_1:
-            case ItemType.Wand_2:
-            case ItemType.Wand_3:
-            case ItemType.Wand_4:
-            case ItemType.Wand_5:
-            case ItemType.Wand_6:
-            case ItemType.Wand_7:
+            case ItemName.Wand_1:
+            case ItemName.Wand_2:
+            case ItemName.Wand_3:
+            case ItemName.Wand_4:
+            case ItemName.Wand_5:
+            case ItemName.Wand_6:
+            case ItemName.Wand_7:
                 return 60f;
-            case ItemType.FireBall_1:
-            case ItemType.WaterBall_1:
-            case ItemType.IceBall_1:
+            case ItemName.FireBall_1:
+            case ItemName.WaterBall_1:
+            case ItemName.IceBall_1:
                 return 30f;
             default:
                 Debug.LogError("GetCost error"); 
@@ -144,82 +144,82 @@ public class Item
         }
     }
 
-    public static Mesh GetMesh(ItemType itemType)
+    public static Mesh GetMesh(ItemName itemType)
     {
         switch (itemType)
         {
-            case ItemType.Armor_1: return GameAssets.instantiate.m_Body_1;
-            case ItemType.Armor_2: return GameAssets.instantiate.m_Body_2;
-            case ItemType.Armor_3: return GameAssets.instantiate.m_Body_3;
-            case ItemType.Armor_4: return GameAssets.instantiate.m_Body_4;
-            case ItemType.Armor_5: return GameAssets.instantiate.m_Body_5;
-            case ItemType.Armor_6: return GameAssets.instantiate.m_Body_6;
-            case ItemType.Armor_7: return GameAssets.instantiate.m_Body_7;
-            case ItemType.Armor_8: return GameAssets.instantiate.m_Body_8;
-            case ItemType.Armor_9: return GameAssets.instantiate.m_Body_9;
-            case ItemType.Armor_10: return GameAssets.instantiate.m_Body_10;
-            case ItemType.Armor_11: return GameAssets.instantiate.m_Body_11;
-            case ItemType.Armor_12: return GameAssets.instantiate.m_Body_12;
-            case ItemType.Armor_13: return GameAssets.instantiate.m_Body_13;
-            case ItemType.Armor_14: return GameAssets.instantiate.m_Body_14;
-            case ItemType.Armor_15: return GameAssets.instantiate.m_Body_15;
-            case ItemType.Armor_16: return GameAssets.instantiate.m_Body_16;
-            case ItemType.Armor_17: return GameAssets.instantiate.m_Body_17;
-            case ItemType.Armor_18: return GameAssets.instantiate.m_Body_18;
-            case ItemType.Armor_19: return GameAssets.instantiate.m_Body_19;
-            case ItemType.Armor_20: return GameAssets.instantiate.m_Body_20;
-            case ItemType.Hat_1: return GameAssets.instantiate.m_Hat_1;
-            case ItemType.Hat_2: return GameAssets.instantiate.m_Hat_2;
-            case ItemType.Hat_3: return GameAssets.instantiate.m_Hat_3;
-            case ItemType.Hat_4: return GameAssets.instantiate.m_Hat_4;
-            case ItemType.Hat_5: return GameAssets.instantiate.m_Hat_5;
-            case ItemType.Hat_6: return GameAssets.instantiate.m_Hat_6;
-            case ItemType.Hat_7: return GameAssets.instantiate.m_Hat_7;
-            case ItemType.Hat_8: return GameAssets.instantiate.m_Hat_8;
-            case ItemType.Hat_9: return GameAssets.instantiate.m_Hat_9;
-            case ItemType.Hat_10: return GameAssets.instantiate.m_Hat_10;
-            case ItemType.Hat_11: return GameAssets.instantiate.m_Hat_11;
-            case ItemType.Hat_12: return GameAssets.instantiate.m_Hat_12;
-            case ItemType.Hat_13: return GameAssets.instantiate.m_Hat_13;
-            case ItemType.Hat_14: return GameAssets.instantiate.m_Hat_14;
-            case ItemType.BackPack_1: return GameAssets.instantiate.m_BackPack_1;
-            case ItemType.BackPack_2: return GameAssets.instantiate.m_BackPack_2;
-            case ItemType.BackPack_3: return GameAssets.instantiate.m_BackPack_3;
-            case ItemType.Wand_1: return GameAssets.instantiate.m_Wand_1;
-            case ItemType.Wand_2: return GameAssets.instantiate.m_Wand_2;
-            case ItemType.Wand_3: return GameAssets.instantiate.m_Wand_3;
-            case ItemType.Wand_4: return GameAssets.instantiate.m_Wand_4;
-            case ItemType.Wand_5: return GameAssets.instantiate.m_Wand_5;
-            case ItemType.Wand_6: return GameAssets.instantiate.m_Wand_6;
-            case ItemType.Wand_7: return GameAssets.instantiate.m_Wand_7;
-            case ItemType.FireBall_1: return GameAssets.instantiate.m_Scroll_1;
-            case ItemType.WaterBall_1: return GameAssets.instantiate.m_Scroll_1;
-            case ItemType.IceBall_1: return GameAssets.instantiate.m_Scroll_1;
+            case ItemName.Armor_1: return GameAssets.instantiate.m_Body_1;
+            case ItemName.Armor_2: return GameAssets.instantiate.m_Body_2;
+            case ItemName.Armor_3: return GameAssets.instantiate.m_Body_3;
+            case ItemName.Armor_4: return GameAssets.instantiate.m_Body_4;
+            case ItemName.Armor_5: return GameAssets.instantiate.m_Body_5;
+            case ItemName.Armor_6: return GameAssets.instantiate.m_Body_6;
+            case ItemName.Armor_7: return GameAssets.instantiate.m_Body_7;
+            case ItemName.Armor_8: return GameAssets.instantiate.m_Body_8;
+            case ItemName.Armor_9: return GameAssets.instantiate.m_Body_9;
+            case ItemName.Armor_10: return GameAssets.instantiate.m_Body_10;
+            case ItemName.Armor_11: return GameAssets.instantiate.m_Body_11;
+            case ItemName.Armor_12: return GameAssets.instantiate.m_Body_12;
+            case ItemName.Armor_13: return GameAssets.instantiate.m_Body_13;
+            case ItemName.Armor_14: return GameAssets.instantiate.m_Body_14;
+            case ItemName.Armor_15: return GameAssets.instantiate.m_Body_15;
+            case ItemName.Armor_16: return GameAssets.instantiate.m_Body_16;
+            case ItemName.Armor_17: return GameAssets.instantiate.m_Body_17;
+            case ItemName.Armor_18: return GameAssets.instantiate.m_Body_18;
+            case ItemName.Armor_19: return GameAssets.instantiate.m_Body_19;
+            case ItemName.Armor_20: return GameAssets.instantiate.m_Body_20;
+            case ItemName.Hat_1: return GameAssets.instantiate.m_Hat_1;
+            case ItemName.Hat_2: return GameAssets.instantiate.m_Hat_2;
+            case ItemName.Hat_3: return GameAssets.instantiate.m_Hat_3;
+            case ItemName.Hat_4: return GameAssets.instantiate.m_Hat_4;
+            case ItemName.Hat_5: return GameAssets.instantiate.m_Hat_5;
+            case ItemName.Hat_6: return GameAssets.instantiate.m_Hat_6;
+            case ItemName.Hat_7: return GameAssets.instantiate.m_Hat_7;
+            case ItemName.Hat_8: return GameAssets.instantiate.m_Hat_8;
+            case ItemName.Hat_9: return GameAssets.instantiate.m_Hat_9;
+            case ItemName.Hat_10: return GameAssets.instantiate.m_Hat_10;
+            case ItemName.Hat_11: return GameAssets.instantiate.m_Hat_11;
+            case ItemName.Hat_12: return GameAssets.instantiate.m_Hat_12;
+            case ItemName.Hat_13: return GameAssets.instantiate.m_Hat_13;
+            case ItemName.Hat_14: return GameAssets.instantiate.m_Hat_14;
+            case ItemName.BackPack_1: return GameAssets.instantiate.m_BackPack_1;
+            case ItemName.BackPack_2: return GameAssets.instantiate.m_BackPack_2;
+            case ItemName.BackPack_3: return GameAssets.instantiate.m_BackPack_3;
+            case ItemName.Wand_1: return GameAssets.instantiate.m_Wand_1;
+            case ItemName.Wand_2: return GameAssets.instantiate.m_Wand_2;
+            case ItemName.Wand_3: return GameAssets.instantiate.m_Wand_3;
+            case ItemName.Wand_4: return GameAssets.instantiate.m_Wand_4;
+            case ItemName.Wand_5: return GameAssets.instantiate.m_Wand_5;
+            case ItemName.Wand_6: return GameAssets.instantiate.m_Wand_6;
+            case ItemName.Wand_7: return GameAssets.instantiate.m_Wand_7;
+            case ItemName.FireBall_1: return GameAssets.instantiate.m_Scroll_1;
+            case ItemName.WaterBall_1: return GameAssets.instantiate.m_Scroll_1;
+            case ItemName.IceBall_1: return GameAssets.instantiate.m_Scroll_1;
             default: { Debug.LogError("GetMesh error"); return null; }
         }
     }
 
-    public static Sprite GetIcon(ItemType itemType)
+    public static Sprite GetIcon(ItemName itemType)
     {
         switch (itemType)
         {
-            case ItemType.RemoveAds: return GameAssets.instantiate.s_RemoveAds;
-            case ItemType.Item_Wizard: return GameAssets.instantiate.IconWizardClass;
-            case ItemType.Item_Knight: return GameAssets.instantiate.IconKnightClass;
-            case ItemType.Item_Gold: return GameAssets.instantiate.IconGold;
-            case ItemType.Item_BonusGold: return GameAssets.instantiate.IconBonusGold;
-            case ItemType.Item_Exp: return GameAssets.instantiate.IconExp;
+            case ItemName.RemoveAds: return GameAssets.instantiate.s_RemoveAds;
+            case ItemName.Item_Wizard: return GameAssets.instantiate.IconWizardClass;
+            case ItemName.Item_Knight: return GameAssets.instantiate.IconKnightClass;
+            case ItemName.Item_Gold: return GameAssets.instantiate.IconGold;
+            case ItemName.Item_BonusGold: return GameAssets.instantiate.IconBonusGold;
+            case ItemName.Item_Exp: return GameAssets.instantiate.IconExp;
             default:
                 Debug.Log("No Image");
                 return null;               
         }
     }
 
-    public static string GetName(ItemType itemType)
+    public static string GetName(ItemName itemType)
     {
         switch (itemType)
         {
-            case ItemType.RemoveAds:
+            case ItemName.RemoveAds:
                 return "Remove Ads";
             default:
                 return "";

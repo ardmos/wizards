@@ -45,7 +45,7 @@ public class PlayerHPManager : NetworkBehaviour
             // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행. 
             GameMultiplayer.Instance.UpdatePlayerAnimStateOnServer(clientId, PlayerMoveAnimState.GameOver);
 
-            // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
+            // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기. ClientRPC로 콜할 필요가 있는가?검토해보기
             networkClient.PlayerObject.GetComponent<Player>().SetPlayerGameOverClientRPC();
         }
 
