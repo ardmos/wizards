@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 게임에서 사용되는 아이템의 상세 정보를 갖고있는 스크립트 
@@ -67,8 +68,16 @@ public class Item
         WaterBall_1,
         IceBall_1,
         SpellEnd,
+        ItemStart,
+        Item_Wizard,
+        Item_Knight,
+        Item_Gold,
+        Item_BonusGold,
+        Item_Exp,
+        ItemEnd,
         Max
     }
+
 
     public static float GetCost(ItemType itemType)
     {
@@ -190,13 +199,16 @@ public class Item
         }
     }
 
-    public static Sprite GetSprite(ItemType itemType)
+    public static Sprite GetIcon(ItemType itemType)
     {
         switch (itemType)
         {
-            case ItemType.RemoveAds:
-                return GameAssets.instantiate.s_RemoveAds;
-
+            case ItemType.RemoveAds: return GameAssets.instantiate.s_RemoveAds;
+            case ItemType.Item_Wizard: return GameAssets.instantiate.IconWizardClass;
+            case ItemType.Item_Knight: return GameAssets.instantiate.IconKnightClass;
+            case ItemType.Item_Gold: return GameAssets.instantiate.IconGold;
+            case ItemType.Item_BonusGold: return GameAssets.instantiate.IconBonusGold;
+            case ItemType.Item_Exp: return GameAssets.instantiate.IconExp;
             default:
                 Debug.Log("No Image");
                 return null;               

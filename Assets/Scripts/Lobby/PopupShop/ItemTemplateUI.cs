@@ -15,7 +15,7 @@ public class ItemTemplateUI : MonoBehaviour
     public void InitItem(Item.ItemType itemType)
     {
         txtName.text = Item.GetName(itemType);
-        imgIcon.sprite = Item.GetSprite(itemType);
+        imgIcon.sprite = Item.GetIcon(itemType);
         txtPrice.text = $"USD $<size=120%><#21bf82>{Item.GetCost(itemType)}";
     }
 

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
@@ -12,51 +14,115 @@ using UnityEngine.UI;
 ///     2. 광고 시청 완료시 모든 상품 2배 수령(배틀패스 포함) & 로비씬 이동
 ///     
 /// 팝업에서 동작하는 애니메이션 목록
-/// Step1. Victory 문구 최초 중앙 등장 이후 상승
-/// Step2. Step1 이후 Detail영역 x축 scale값 상승 애니메이션
-/// Step3. Step2 이후 배틀패스 슬라이더 값 차오르는 애니메이션 & 얻은 아이템들 순서대로 또잉또잉 등장
+/// Step1. Victory 문구 최초 중앙 등장 이후 상승 & Detail영역 x축 scale값 상승 애니메이션(자동 실행)
+/// Step2. Step1 이후 배틀패스 슬라이더 값 차오르는 애니메이션 & 얻은 아이템들 순서대로 또잉또잉 등장
 /// </summary>
 public class PopupWinUI : MonoBehaviour
 {
-    private enum AnimationState {
-        Step1,
-        Step2,
-        Step3
-    }
+    // 테스트용 보상 아이템 리스트
+    [SerializeField] private Item.ItemType[] rewardItems = new Item.ItemType[4] {
+        Item.ItemType.Item_BonusGold,
+        Item.ItemType.Item_Exp,
+        Item.ItemType.Item_Wizard,
+        Item.ItemType.Item_Knight
+    };
 
-    private AnimationState animationState;
 
+    [SerializeField] private Animator animator;
     [SerializeField] private Slider sliderBattlePath;
     [SerializeField] private GameObject detailArea;
     [SerializeField] private GameObject btnClaim;
     [SerializeField] private GameObject btnClaim2x;
-    [SerializeField] private GameObject ImgEffect;
-    [SerializeField] private GameObject ItemTemplateGray;
-    [SerializeField] private GameObject ItemTemplateBlue;
-    [SerializeField] private GameObject ItemTemplateYellow;
+    [SerializeField] private GameObject imgEffect;
+   
+    // 아래 itemTemplate들 GameAssets에 저장 안해도 되는지?
+    [SerializeField] private GameObject itemTemplateGray;
+    [SerializeField] private GameObject itemTemplateBlue;
+    [SerializeField] private GameObject itemTemplateYellow;
+    [SerializeField] private Transform itemGroup;
 
     // Start is called before the first frame update
     void Start()
     {
-        animationState = AnimationState.Step1;
-        StartAnimation(animationState);
+        sliderBattlePath.gameObject.SetActive(false);
+        imgEffect.SetActive(false);
+        btnClaim.SetActive(false);
+        btnClaim2x.SetActive(false);
     }
 
-    private void StartAnimation(AnimationState animationState)
-    {
-        switch (animationState)
-        {
-            case AnimationState.Step1:
-                // Step1. Victory 문구 최초 중앙 등장 이후 상승
 
-                
-                break; 
-            case AnimationState.Step2:
-                // Step2. Detail영역 x축 scale값 상승 애니메이션
-                break;
-            case AnimationState.Step3:
-                // Step3. 배틀패스 슬라이더 값 차오르는 애니메이션 & 얻은 아이템들 순서대로 또잉또잉 등장 & 꽃가루 등장
-                break;
+    /// <summary>
+    /// Step2. 배틀패스 슬라이더 값 차오르는 애니메이션 & 얻은 아이템들 순서대로 또잉또잉 등장 & 꽃가루 등장 & 버튼 등장
+    /// </summary>
+    public void ShowResultDetails()
+    {
+        // 꽃가루 등장
+        imgEffect.SetActive(true);
+        // 배틀패스 슬라이더값 차오르는 애니메이션 & 얻은 아이템들 순서대로 보여주기 & 버튼 등장
+        StartResultDetailsAnim();
+    }
+
+    /// <summary>
+    /// 배틀패스 슬라이더 차오르는 애니메이션 실행 메소드 테스트용.(추후에 배틀패스 추가시 이곳에 구현)
+    /// </summary>
+    private void StartResultDetailsAnim()
+    {
+        sliderBattlePath.gameObject.SetActive(true);
+        // 테스트용으로 value 0% -> 10% 까지 채워주기. 배틀패스 추가 후에는 해당 값으로 채워주기  
+        StartCoroutine(FillSliderValue(10f));
+    }
+
+    private void ShowEarnedItems()
+    {
+        StartCoroutine(LoadEarnedItems());
+    }
+
+    private IEnumerator LoadEarnedItems()
+    {
+        foreach (Item.ItemType item in rewardItems)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            GameObject templateObject = null;
+            switch (item)
+            {
+                case Item.ItemType.Item_BonusGold:
+                    templateObject = itemTemplateBlue;
+                    break;
+                case Item.ItemType.Item_Exp:
+                    templateObject = itemTemplateYellow;
+                    break;
+                default:
+                    templateObject = itemTemplateGray;
+                    break;
+            }
+
+            GameObject itemObject = Instantiate(templateObject);
+            itemObject.GetComponent<WinPopupItemTemplate>().InitTemplate(Item.GetIcon(item), "1", true);
+            itemObject.transform.SetParent(itemGroup, false);
+            
         }
+        // 끝나면 버튼들 SetActive true
+        yield return new WaitForSeconds(0.4f);
+        btnClaim.SetActive(true);
+        yield return new WaitForSeconds(0.4f);
+        btnClaim2x.SetActive(true);
+    }
+
+    private IEnumerator FillSliderValue(float maxValue)
+    {
+        float value = 0f;
+        
+        while (value <= maxValue)
+        {
+            Debug.Log($"value : {value}");
+            sliderBattlePath.value = value;
+            sliderBattlePath.GetComponentInChildren<TextMeshProUGUI>().text = $"{value} <#9aa5d1>/ 100";
+            yield return new WaitForSeconds(0.05f);
+            value += 1f;
+        }
+
+        // 얻은 아이템들 순서대로 보여주기
+        ShowEarnedItems();
     }
 }

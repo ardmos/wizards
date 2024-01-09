@@ -5246,6 +5246,7 @@ GameObject:
   - component: {fileID: 1094039383}
   - component: {fileID: 1094039385}
   - component: {fileID: 1094039384}
+  - component: {fileID: 1094039386}
   m_Layer: 0
   m_Name: ImageEffect
   m_TagString: Untagged
@@ -5310,6 +5311,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094039382}
   m_CullTransparentMesh: 0
+--- !u!95 &1094039386
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094039382}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02431518741c4884bb25e368d3fa6d6a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1098222558
 GameObject:
   m_ObjectHideFlags: 0
@@ -10997,14 +11019,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8273c89c9f4f5d748a56f288a5de6886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewardItems: 41000000420000003e0000003f000000
+  animator: {fileID: 2016762744}
   sliderBattlePath: {fileID: 7519042239576358731}
   detailArea: {fileID: 7519042238476839172}
   btnClaim: {fileID: 5600589082907996707}
   btnClaim2x: {fileID: 7519042238912331183}
-  ImgEffect: {fileID: 7519042239466619314}
-  ItemTemplateGray: {fileID: 6212848932481772203, guid: 684a08edbd9f73649ad5cec65e1a0d71, type: 3}
-  ItemTemplateBlue: {fileID: 7124991232528497612, guid: d2c1eaf45b3d0d642a6cb84b1d86ecf8, type: 3}
-  ItemTemplateYellow: {fileID: 4647533815184401768, guid: 04939a13180608a4c9a0af2d7dd30385, type: 3}
+  imgEffect: {fileID: 7519042239466619314}
+  itemTemplateGray: {fileID: 6212848932481772203, guid: 684a08edbd9f73649ad5cec65e1a0d71, type: 3}
+  itemTemplateBlue: {fileID: 7124991232528497612, guid: d2c1eaf45b3d0d642a6cb84b1d86ecf8, type: 3}
+  itemTemplateYellow: {fileID: 4647533815184401768, guid: 04939a13180608a4c9a0af2d7dd30385, type: 3}
+  itemGroup: {fileID: 7519042238992185732}
 --- !u!95 &2016762744
 Animator:
   serializedVersion: 5
@@ -23125,7 +23150,7 @@ RectTransform:
   m_GameObject: {fileID: 7519042238476839172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7519042239576358732}
@@ -23636,7 +23661,7 @@ GameObject:
   - component: {fileID: 7519042239466619215}
   - component: {fileID: 7519042239466619312}
   m_Layer: 0
-  m_Name: ImageEffect
+  m_Name: ImageEffect2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

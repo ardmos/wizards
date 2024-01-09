@@ -17,10 +17,10 @@ public class WinPopupItemTemplate : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtItemCount;
     [SerializeField] private GameObject label;
 
-    public WinPopupItemTemplate(Sprite imgItemIcon, string txtItemCount, bool isLabelOn)
+    public void InitTemplate(Sprite imgItemIcon, string txtItemCount, bool isLabelOn)
     {
         this.imgItemIcon.sprite = imgItemIcon;
         this.txtItemCount.text = txtItemCount;
         if (label != null ) this.label.SetActive(isLabelOn);
-    }   // <<------- 여기까지 함!!!!!  PopupWinUI.cs 부터 하면 됩니다! 팝업 만들기! 이후 GameManager StateMachine에 적용! 
+    }   
 }
