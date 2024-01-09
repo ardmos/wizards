@@ -19,14 +19,13 @@ using UnityEngine.UI;
 /// </summary>
 public class PopupWinUI : MonoBehaviour
 {
-    // 테스트용 보상 아이템 리스트
+    // 테스트용 보상 아이템 리스트 목록 하드코딩. 따로 구현할 필요 있음.
     [SerializeField] private Item.ItemType[] rewardItems = new Item.ItemType[4] {
         Item.ItemType.Item_BonusGold,
         Item.ItemType.Item_Exp,
         Item.ItemType.Item_Wizard,
         Item.ItemType.Item_Knight
     };
-
 
     [SerializeField] private Animator animator;
     [SerializeField] private Slider sliderBattlePath;
@@ -48,33 +47,57 @@ public class PopupWinUI : MonoBehaviour
         imgEffect.SetActive(false);
         btnClaim.SetActive(false);
         btnClaim2x.SetActive(false);
-    }
 
+        btnClaim.GetComponent<Button>().onClick.AddListener(() =>
+        {
+
+        });
+        btnClaim2x.GetComponent<Button>().onClick.AddListener(() =>
+        {
+
+        });
+    }
 
     /// <summary>
     /// Step2. 배틀패스 슬라이더 값 차오르는 애니메이션 & 얻은 아이템들 순서대로 또잉또잉 등장 & 꽃가루 등장 & 버튼 등장
+    /// Step1. 애니메이션 끝부분에서 AnimationEvent로 호출해주고있는 메소드 입니다.
     /// </summary>
     public void ShowResultDetails()
     {
-        // 꽃가루 등장
-        imgEffect.SetActive(true);
-        // 배틀패스 슬라이더값 차오르는 애니메이션 & 얻은 아이템들 순서대로 보여주기 & 버튼 등장
-        StartResultDetailsAnim();
+        StartCoroutine(StartResultDetailsAnim());
     }
 
     /// <summary>
-    /// 배틀패스 슬라이더 차오르는 애니메이션 실행 메소드 테스트용.(추후에 배틀패스 추가시 이곳에 구현)
+    /// 팝업에 상세정보를 띄워주는 메소드 입니다.
     /// </summary>
-    private void StartResultDetailsAnim()
+    private IEnumerator StartResultDetailsAnim()
     {
         sliderBattlePath.gameObject.SetActive(true);
-        // 테스트용으로 value 0% -> 10% 까지 채워주기. 배틀패스 추가 후에는 해당 값으로 채워주기  
-        StartCoroutine(FillSliderValue(10f));
+        // 1. 배틀패스 슬라이더값 차오르는 애니메이션 (테스트용으로 value 0% -> 10% 까지 채워주기. 배틀패스 추가 후에는 해당 값으로 채워주기)
+        yield return StartCoroutine(FillSliderValue(10f));
+        // 2. 얻은 아이템들 순서대로 등장
+        yield return StartCoroutine(LoadEarnedItems());
+        // 3. 꽃가루 등장
+        imgEffect.SetActive(true);
+        // 4. 버튼들 등장
+        yield return new WaitForSeconds(0.4f);
+        btnClaim.SetActive(true);
+        yield return new WaitForSeconds(0.4f);
+        btnClaim2x.SetActive(true);
     }
 
-    private void ShowEarnedItems()
+    private IEnumerator FillSliderValue(float maxValue)
     {
-        StartCoroutine(LoadEarnedItems());
+        float value = 0f;
+        
+        while (value <= maxValue)
+        {
+            Debug.Log($"value : {value}");
+            sliderBattlePath.value = value;
+            sliderBattlePath.GetComponentInChildren<TextMeshProUGUI>().text = $"{value} <#9aa5d1>/ 100";
+            yield return new WaitForSeconds(0.05f);
+            value += 1f;
+        }
     }
 
     private IEnumerator LoadEarnedItems()
@@ -99,30 +122,7 @@ public class PopupWinUI : MonoBehaviour
 
             GameObject itemObject = Instantiate(templateObject);
             itemObject.GetComponent<WinPopupItemTemplate>().InitTemplate(Item.GetIcon(item), "1", true);
-            itemObject.transform.SetParent(itemGroup, false);
-            
+            itemObject.transform.SetParent(itemGroup, false);           
         }
-        // 끝나면 버튼들 SetActive true
-        yield return new WaitForSeconds(0.4f);
-        btnClaim.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
-        btnClaim2x.SetActive(true);
-    }
-
-    private IEnumerator FillSliderValue(float maxValue)
-    {
-        float value = 0f;
-        
-        while (value <= maxValue)
-        {
-            Debug.Log($"value : {value}");
-            sliderBattlePath.value = value;
-            sliderBattlePath.GetComponentInChildren<TextMeshProUGUI>().text = $"{value} <#9aa5d1>/ 100";
-            yield return new WaitForSeconds(0.05f);
-            value += 1f;
-        }
-
-        // 얻은 아이템들 순서대로 보여주기
-        ShowEarnedItems();
     }
 }
