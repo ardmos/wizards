@@ -161,10 +161,21 @@ public class GameManager : NetworkBehaviour
                 if (currentAlivePlayerCount.Value == 1)
                 {
                     // 최후 생존으로 끝난 경우. 생존자 Win 처리    <<<<<<<<----------------- 여기부터!
+                    // 생존자 PlayerData
+                    PlayerData winPlayer = new PlayerData();
+                    foreach (PlayerData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+                    {
+                        if(playerData.playerGameState == PlayerGameState.Playing)
+                        {
+                            winPlayer = playerData;
+                        }
+                    }
                     // 생존자 State Win 으로 변경
+                    winPlayer.playerGameState = PlayerGameState.Win;
 
                     // 생존자 화면에 Win 팝업 실행
-
+                    NetworkClient networkClient = NetworkManager.ConnectedClients[winPlayer.clientId];
+                    networkClient.PlayerObject.GetComponent<Player>().SetPlayerGameWinClientRPC();
                 }
                 // 타임아웃.
                 else if (gamePlayingTimer.Value < 0f)

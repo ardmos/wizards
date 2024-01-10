@@ -11019,7 +11019,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8273c89c9f4f5d748a56f288a5de6886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardItems: 41000000420000003e0000003f000000
   animator: {fileID: 2016762744}
   sliderBattlePath: {fileID: 7519042239576358731}
   detailArea: {fileID: 7519042238476839172}
@@ -13643,6 +13642,7 @@ MonoBehaviour:
   popupMenuUI: {fileID: 1744270956165744330}
   notifyUIController: {fileID: 1713142545}
   popupGameOverUI: {fileID: 479713624}
+  popupWinUI: {fileID: 2016762743}
 --- !u!224 &1057068785643306476
 RectTransform:
   m_ObjectHideFlags: 0

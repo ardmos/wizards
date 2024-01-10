@@ -159,7 +159,8 @@ public class Player : NetworkBehaviour, IStoreCustomer
     [ClientRpc]
     public void SetPlayerGameOverClientRPC()
     {
-        // 이 게임오버 캐릭터의 소유자가 아니면 리턴.
+        //Debug.Log($"I'm player {OwnerClientId}");
+        // 이 게임오버 캐릭터의 소유자가 아니면 리턴. RPC라 소유자 체크 한 번 해줘야 함. 
         if(!IsOwner) return;
 
         // 플레이어가 캐릭터 조작 불가
@@ -168,6 +169,16 @@ public class Player : NetworkBehaviour, IStoreCustomer
         HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
         // 게임오버 팝업 띄워주기
         GameUI.instance.popupGameOverUI.Show();
+    }
+
+    [ClientRpc]
+    public void SetPlayerGameWinClientRPC()
+    {
+        // 이 승리 캐릭터의 소유자가 아니면 리턴.
+        if (!IsOwner) return;
+
+        // 승리 팝업 띄워주기
+        GameUI.instance.popupWinUI.Show();
     }
 
     #region Public 플레이어 정보 확인
