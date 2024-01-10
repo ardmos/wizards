@@ -48,7 +48,6 @@ public class PopupWinUI : MonoBehaviour
         imgEffect.SetActive(false);
         btnClaim.SetActive(false);
         btnClaim2x.SetActive(false);
-        Hide();
 
         // 모든 상품 수령 & 로비씬 이동
         btnClaim.GetComponent<Button>().onClick.AddListener(() =>
@@ -70,6 +69,8 @@ public class PopupWinUI : MonoBehaviour
             // 1. 광고 시청 실패시 원상복귀
             // 2. 광고 시청 완료시 모든 상품 2배 수령(배틀패스 포함) & 로비씬 이동
         });
+
+        Hide();
     }
 
     public void Show()
@@ -88,13 +89,13 @@ public class PopupWinUI : MonoBehaviour
     /// </summary>
     public void ShowResultDetails()
     {
-        StartCoroutine(StartResultDetailsAnim());
+        StartCoroutine(ShowDetails());
     }
 
     /// <summary>
     /// 팝업에 상세정보를 띄워주는 메소드 입니다.
     /// </summary>
-    private IEnumerator StartResultDetailsAnim()
+    private IEnumerator ShowDetails()
     {
         sliderBattlePath.gameObject.SetActive(true);
         // 1. 배틀패스 슬라이더값 차오르는 애니메이션 (테스트용으로 value 0% -> 10% 까지 채워주기. 배틀패스 추가 후에는 해당 값으로 채워주기)
@@ -107,7 +108,7 @@ public class PopupWinUI : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         btnClaim.SetActive(true);
         yield return new WaitForSeconds(0.4f);
-        //btnClaim2x.SetActive(true); 광고 구현 후 진행
+        btnClaim2x.SetActive(true); //광고 구현 후 진행
     }
 
     private IEnumerator FillSliderValue(float maxValue)
