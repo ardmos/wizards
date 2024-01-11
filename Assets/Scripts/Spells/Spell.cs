@@ -121,6 +121,11 @@ public abstract class Spell : NetworkBehaviour
                 CastSpell(collisionHandlingResult, gameObject.GetComponent<NetworkObject>());
             }
         }
+
+        // 스크롤을 통한 스펠 추가 능력치. 게임씬에서 나가면 초기화되어야함. <<<--- 여기서 하는게 맞나?
+
+
+
     }
     // 아래 효과 안씀
     /*protected IEnumerator DestroyParticle(float waitTime)

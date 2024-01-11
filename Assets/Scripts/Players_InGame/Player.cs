@@ -193,6 +193,23 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
     #endregion
 
+    #region 스킬 스크롤 획득시 동작들
+    // 스크롤 획득시 동작
+    [ClientRpc]
+    public void ShowSelectSpellPopupClientRPC(Scroll scroll)
+    {
+        if (!IsOwner) return;
+
+        GameUI.instance.popupSelectSpell.Show(scroll);
+    }
+
+    // 슬롯 선택시 동작
+    public void ApplyScrollToSpell(Scroll scroll, ushort spellIndex)
+    {
+        // 전달받은 스크롤이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
+    }
+    #endregion
+
     #region Public 아이템 구매
     /// <summary>
     /// 아이템 구매 메서드
@@ -215,7 +232,6 @@ public class Player : NetworkBehaviour, IStoreCustomer
             default:
                 break;
         }
-
     }
     public void BoughtItem(Item.ItemName itemType)
     {

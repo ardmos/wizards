@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\ItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Game\Item\Scroll.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
     <Compile Include="Assets\Scripts\Lobby\ConnectingUI.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Assets\Scripts\Spells\SlashLv1.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\Popup\PopupSelectSpellUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Game\Item\ScrollGuide.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />

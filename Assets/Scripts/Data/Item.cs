@@ -75,6 +75,13 @@ public class Item
         Item_BonusGold,
         Item_Exp,
         ItemEnd,
+        ScrollStart,
+        Scroll_LevelUp,
+        Scroll_FireRateUp,
+        Scroll_FlySpeedUp,
+        Scroll_Attach,
+        Scroll_Guide,
+        ScrollEnd,
         Max
     }
 
@@ -225,4 +232,7 @@ public class Item
                 return "";
         }
     } 
+
+    // 마법스크롤 효과 얻기
+
 }

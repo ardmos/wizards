@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class ScrollLevelUp : MonoBehaviour
+/// <summary>
+/// 접촉한 플레이어 Level Up 시킬 스킬 선택창 띄워주는 아이템. 서버에서 동작합니다.
+/// </summary>
+public class ScrollLevelUp : Scroll
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        
-    }
+        if(!IsServer) return;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ulong collisionedClientId = collision.gameObject.GetComponent<NetworkObject>().OwnerClientId;
+
+        collision.gameObject.GetComponent<Player>().ShowSelectSpellPopupClientRPC(this);
+
     }
 }
