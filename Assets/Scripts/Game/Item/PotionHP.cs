@@ -19,7 +19,13 @@ public class PotionHP : NetworkBehaviour
 
         PlayerHPManager.Instance.SetPlayerHPOnServer(newPlayerHP, collisionedClientId);
 
-        // ÆÄ±«½Ã È¿°ú Ãß°¡ ÇÊ¿ä.
+        // Player Èú¸µ VFX ½ÇÇà
+        GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfxHeal, collision.transform);
+        vfxHeal.GetComponent<NetworkObject>().Spawn();
+        vfxHeal.transform.SetParent(collision.transform);
+        vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
+
+        // ÆÄ±«
         GetComponent<NetworkObject>().Despawn();
     }
 

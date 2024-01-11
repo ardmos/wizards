@@ -110,6 +110,10 @@ public class GameAssets : MonoBehaviour
     public GameObject coin1;
     public GameObject coin3;
     public GameObject coin5;
+
+    // VFX
+    public GameObject vfxHeal;
+
     #endregion
 
     #region Music

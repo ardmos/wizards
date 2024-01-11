@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\Game\UI\PlayerCountUI.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
     <Compile Include="Assets\Scripts\ClientNetworkTransform.cs" />
+    <Compile Include="Assets\Scripts\Game\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Game\UI\Popup\Win\WinPopupItemTemplate.cs" />
     <Compile Include="Assets\Scripts\Game\Item\ScrollLevelUp.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Wizard.cs" />
@@ -201,6 +202,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Shaders\Legacy\AdditiveMobile_Scroll01.shader" />
+    <None Include="Assets\Downloaded Assets\Lana Studio\Hyper Casual FX\Demo\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
