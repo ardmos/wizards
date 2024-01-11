@@ -19,18 +19,7 @@ public class FireBallLv1 : FireSpell
     public override void InitSpellInfoDetail()
     {
         //Debug.Log("InitSpellInfoDetail() FireBall Lv1");
-        spellInfo = new SpellInfo()
-        {
-            spellType = SpellType.Fire,
-            coolTime = 2.0f,
-            lifeTime = 10.0f,
-            //moveSpeed = 10.0f, //테스트용
-            moveSpeed = 0.0f,
-            price = 30,
-            level = 1,
-            spellName = SpellName.FireBallLv1,
-            spellState = SpellState.Ready,
-        };
+        spellInfo = SpellSpecifications.Instance.GetSpellSpec(SpellName.FireBallLv1);
     }
 
     /// <summary>

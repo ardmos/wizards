@@ -15,17 +15,7 @@ public class WaterBallLv1 : WaterSpell
     /// </summary>
     public override void InitSpellInfoDetail()
     {
-        spellInfo = new SpellInfo()
-        {
-            spellType = SpellType.Water,
-            coolTime = 2.0f,
-            lifeTime = 10.0f,
-            moveSpeed = 10.0f,
-            price = 30,
-            level = 1,
-            spellName = SpellName.WaterBallLv1,
-            spellState = SpellState.Ready,
-        };
+        spellInfo = SpellSpecifications.Instance.GetSpellSpec(SpellName.WaterBallLv1);
     }
 
     /// <summary>

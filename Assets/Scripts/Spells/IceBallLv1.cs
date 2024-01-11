@@ -17,17 +17,7 @@ public class IceBallLv1 : IceSpell
     /// </summary>
     public override void InitSpellInfoDetail()
     {
-        spellInfo = new SpellInfo()
-        {
-            spellType = SpellType.Ice,
-            coolTime = 2.0f,
-            lifeTime = 10.0f,
-            moveSpeed = 10.0f,
-            price = 30,
-            level = 1,
-            spellName = SpellName.IceBallLv1,
-            spellState = SpellState.Ready,
-        };
+        spellInfo = SpellSpecifications.Instance.GetSpellSpec(SpellName.IceBallLv1);
     }
 
     /// <summary>

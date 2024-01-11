@@ -18,17 +18,7 @@ public class SlashLv1 : Spell
     public override void InitSpellInfoDetail()
     {
         Debug.Log($"InitSpellInfoDetail() {nameof(SlashLv1)}");
-        spellInfo = new SpellInfo()
-        {
-            spellType = SpellType.Normal,
-            coolTime = 2.0f,
-            lifeTime = 10.0f,
-            moveSpeed = 10.0f,
-            price = 30,
-            level = 1,
-            spellName = SpellName.SlashLv1,
-            spellState = SpellState.Ready,
-        };
+        spellInfo = SpellSpecifications.Instance.GetSpellSpec(SpellName.SlashLv1);
 
         if (spellInfo == null)
         {

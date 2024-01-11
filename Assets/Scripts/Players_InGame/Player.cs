@@ -206,7 +206,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
     // 슬롯 선택시 동작
     public void ApplyScrollToSpell(Scroll scroll, ushort spellIndex)
     {
-        // 전달받은 스크롤이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
+        // 전달받은 스크롤클래스와 스펠인덱스를 사용해서 효과 적용을 진행한다.
+        // 여기부터!!!! 현재스킬목록에서 스킬정보를 가져와 여기에 넘겨줘야 한다! 현재 스킬목록에서 spellIndex를 단서로 넘길 스킬을 특정하면 된다.
+        //scroll.ApplyScroll();
     }
     #endregion
 

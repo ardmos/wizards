@@ -107,6 +107,8 @@ public class SpellController : NetworkBehaviour
     }
     #endregion
 
+    //public Spell
+
     /// <summary>
     /// Spell state를 얻을 수 있는 메소드 입니다
     /// </summary>

@@ -1,12 +1,17 @@
 using Unity.Netcode;
 
-public class Scroll : NetworkBehaviour
+[System.Serializable]
+public class Scroll : NetworkBehaviour, INetworkSerializable
 {
     public Item.ItemName itemName;
 
-    public virtual Spell ApplyScrollEffect(Spell targetSpell)
+    public virtual void ApplyScroll(SpellInfo spellInfo)
     {
+        
+    }
 
-        return targetSpell;
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref itemName);
     }
 }
