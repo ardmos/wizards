@@ -1,6 +1,7 @@
 using Unity.Netcode;
 /// <summary>
-/// 마법을 Server Auth 방식으로 시전할 수 있도록 도와주는 스크립트 입니다.
+/// Player HP를  Server Auth 방식으로 관리할수 있도록 도와주는 스크립트 입니다.
+/// 서버에서 동작합니다.
 /// </summary>
 public class PlayerHPManager : NetworkBehaviour
 {

@@ -93,6 +93,23 @@ public class GameAssets : MonoBehaviour
     public GameObject knight_Male_ForLobby;
     public GameObject wizard_Male;
     public GameObject knight_Male;
+
+    // Game씬 아이템 프리팹
+    /// <summary>
+    /// 1. 레벨업
+    /// 2. 발사속도
+    /// 3. 점착
+    /// 4. 유도(호버링 )
+    /// </summary>
+    public GameObject scrollLevelUp;
+    public GameObject scrollFireRateUp;
+    public GameObject scrollFlySpeedUp;
+    public GameObject scrollAttach;
+    public GameObject scrollGuide;
+    public GameObject potionHP;
+    public GameObject coin1;
+    public GameObject coin3;
+    public GameObject coin5;
     #endregion
 
     #region Music

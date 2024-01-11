@@ -10,6 +10,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     public FixedString64Bytes playerId;
     public CharacterClass playerClass;
     public sbyte playerHP;
+    public sbyte playerMaxHP;
     public PlayerMoveAnimState playerAnimState;
     public PlayerGameState playerGameState;
 
@@ -21,6 +22,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
             playerId == other.playerId &&
             playerClass == other.playerClass &&
             playerHP == other.playerHP &&
+            playerMaxHP == other.playerMaxHP &&
             playerAnimState == other.playerAnimState &&
             playerGameState == other.playerGameState;
     }
@@ -32,6 +34,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
         serializer.SerializeValue(ref playerId);
         serializer.SerializeValue(ref playerClass);
         serializer.SerializeValue(ref playerHP);
+        serializer.SerializeValue(ref playerMaxHP);
         serializer.SerializeValue(ref playerAnimState);
         serializer.SerializeValue(ref playerGameState);
     }

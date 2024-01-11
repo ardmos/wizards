@@ -58,6 +58,7 @@
     <Analyzer Include="D:\UnityEditor\2022.3.10f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Game\Item\Coin.cs" />
     <Compile Include="Assets\Scripts\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\Scripts\Game\UI\SelectSpellSlotUI.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
     <Compile Include="Assets\Scripts\ClientNetworkTransform.cs" />
     <Compile Include="Assets\Scripts\Game\UI\Popup\Win\WinPopupItemTemplate.cs" />
+    <Compile Include="Assets\Scripts\Game\Item\ScrollLevelUp.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Wizard.cs" />
     <Compile Include="Assets\Scripts\Game\UI\HPBarUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\PopupSettingsUI.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupLookingForGameUI.cs" />
     <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
+    <Compile Include="Assets\Scripts\Game\Item\PotionHP.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NotifyUIController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GamePadUI.cs" />
@@ -126,6 +129,7 @@
     <Compile Include="Assets\Scripts\Game\UI\NetworkManagerUI.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
+    <Compile Include="Assets\Scripts\Game\Item\ScrollFireRateUp.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimState.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyUI.cs" />
+    <Compile Include="Assets\Scripts\Game\Item\ScrollAttach.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneDedicatedServer.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\Game\UI\CustomOnScreenButton.cs" />
@@ -154,6 +159,7 @@
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
+    <Compile Include="Assets\Scripts\Game\Item\ScrollGuide.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Game\UI\CustomOnScreenStick.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
@@ -164,6 +170,7 @@
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Test\TestNetworkUIController.cs" />
+    <Compile Include="Assets\Scripts\Game\Item\ScrollFlySpeedUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyBottomUI.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupConnectionResponseUI.cs" />

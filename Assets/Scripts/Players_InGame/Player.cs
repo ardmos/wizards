@@ -58,6 +58,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
         transform.position = spawnPositionList[0];
 
         // HP 초기화 & 브로드캐스팅
+        // 최대HP 저장
+        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(requestedInitializeClientId);
+        playerData.playerMaxHP = hp;
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(requestedInitializeClientId, playerData);
+        // 현재 HP 저장 및 설정
         PlayerHPManager.Instance.SetPlayerHPOnServer(hp, requestedInitializeClientId);
 
         // 특정 플레이어가 보유한 스킬 목록 저장
