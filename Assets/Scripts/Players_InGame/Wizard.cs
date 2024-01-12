@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary> 
@@ -41,7 +40,7 @@ public class Wizard : Player
             
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void InitializePlayerServerRPC(ServerRpcParams serverRpcParams = default)
     {
         Debug.Log($"InitializePlayerServerRPC. Player{serverRpcParams.Receive.SenderClientId} requested Initialize PlayerData.");

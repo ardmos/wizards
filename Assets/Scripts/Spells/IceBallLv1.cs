@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 /// <summary>
 /// 
@@ -8,16 +6,15 @@ using UnityEngine;
 /// !!! 현재 기능
 /// 1. 상세 능력치 설정
 /// 2. CollisionEnter 충돌 처리
-/// 3. 마법 시전
 /// </summary>
 public class IceBallLv1 : IceSpell
 {
     /// <summary>
-    /// 1. 상세 능력치 설정
+    /// 1. 상세 능력치 설정(마법 사용시에 Server에서 부여해주는 능력치 입니다.)
     /// </summary>
-    public override void InitSpellInfoDetail()
-    {
-        spellInfo = SpellSpecifications.Instance.GetSpellSpec(SpellName.IceBallLv1);
+    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer) 
+    { 
+        spellInfo = spellInfoFromServer; 
     }
 
     /// <summary>
@@ -26,14 +23,6 @@ public class IceBallLv1 : IceSpell
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        SpellHit(collision);
-    }
-
-    /// <summary>
-    /// 3. 마법 시전
-    /// </summary>
-    public override void CastSpell(SpellInfo spellInfo, NetworkObject player)
-    {
-        base.CastSpell(spellInfo, player);
+        SpellManager.Instance.SpellHitOnServer(collision, this);
     }
 }

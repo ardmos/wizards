@@ -113,6 +113,7 @@ public class GameAssets : MonoBehaviour
 
     // VFX
     public GameObject vfxHeal;
+    public GameObject vfxSpellUpgrade;
 
     #endregion
 
@@ -127,11 +128,39 @@ public class GameAssets : MonoBehaviour
 
     public GameObject GetSpellPrefab(SpellName spellName)
     {
-        return spellPrefabList[(int)spellName];
+        return spellPrefabList[SearchSpellNameIndex(spellName)];
     }
 
     public Sprite GetSpellIconImage(SpellName spellName)
     {
-        return spellIconsArray[(int)spellName];
+        return spellIconsArray[SearchSpellNameIndex(spellName)];
+    }
+
+    /// <summary>
+    /// 스펠 네임을 넣으면 마법타입별Start, End 이넘을 제외한 해당 스펠의 순수한 Index값을 알려주는 메소드 입니다.
+    /// SpellName에 데이터가 변경될 경우 이 메소드도 함께 수정해주어야 합니다.
+    /// </summary>
+    /// <param name="spellName"></param>
+    /// <returns></returns>
+    private sbyte SearchSpellNameIndex(SpellName spellName)
+    {
+        sbyte adjustValue = 0;
+        if(spellName >= SpellName.SlashSpellStart)
+        {
+            adjustValue = 7;
+        }
+        else if(spellName >= SpellName.IceSpellStart)
+        {
+            adjustValue = 5;
+        }
+        else if (spellName >= SpellName.WaterSpellStart)
+        {
+            adjustValue = 3;
+        }
+        else if (spellName >= SpellName.FireSpellStart)
+        {
+            adjustValue = 1;
+        }
+        return (sbyte)(spellName - adjustValue);
     }
 }

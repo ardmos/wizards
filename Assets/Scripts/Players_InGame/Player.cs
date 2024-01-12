@@ -66,12 +66,10 @@ public class Player : NetworkBehaviour, IStoreCustomer
         PlayerHPManager.Instance.SetPlayerHPOnServer(hp, requestedInitializeClientId);
 
         // 특정 플레이어가 보유한 스킬 목록 저장
+        SpellManager.Instance.InitPlayerSpellInfoArrayOnServer(requestedInitializeClientId, ownedSpellList);
 
-
-        // Spawn된 클라이언트측 InitializePlayer 시작 & 보유 스킬 리스트 공유.   
-        // networkClient를 검색할 필요가 있는가???? 어차피 ClientRPC면 브로드캐스팅 되는거 아닌가?
-        NetworkClient networkClient = NetworkManager.ConnectedClients[requestedInitializeClientId];
-        networkClient.PlayerObject.GetComponent<Player>().InitializePlayerClientRPC(ownedSpellList);
+        // Spawn된 클라이언트측 InitializePlayer 시작
+        InitializePlayerClientRPC(ownedSpellList);
     }
 
     [ClientRpc]
@@ -87,13 +85,9 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         Debug.Log($"InitializePlayerClientRPC. Player{OwnerClientId}! IsClient?{IsClient}, IsOwner?{IsOwner}, LocalInstance:{LocalInstance}");
 
-
-        // 테스트용
-        //GameManager.Instance.UpdatePlayerGameOver();
-
-        // 보유 스킬 로드          
+        // 보유 스펠을 GamePad UI에 반영          
         Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
-        spellController.SetCurrentSpellOnClient(ownedSpellNameList);
+        FindObjectOfType<GamePadUI>().UpdateSpellUI(ownedSpellNameList);
         
         // Input Action 이벤트 구독
         gameInput.OnAttack1Started += GameInput_OnAttack1Started;
@@ -203,12 +197,17 @@ public class Player : NetworkBehaviour, IStoreCustomer
         GameUI.instance.popupSelectSpell.Show(scroll);
     }
 
-    // 슬롯 선택시 동작
-    public void ApplyScrollToSpell(Scroll scroll, ushort spellIndex)
+    // 슬롯 선택시 동작. 클라이언트에서 돌아가는 메소드 입니다.
+    public void ApplyScrollEffectToSpell(Scroll scroll, sbyte spellIndex)
     {
         // 전달받은 스크롤클래스와 스펠인덱스를 사용해서 효과 적용을 진행한다.
-        // 여기부터!!!! 현재스킬목록에서 스킬정보를 가져와 여기에 넘겨줘야 한다! 현재 스킬목록에서 spellIndex를 단서로 넘길 스킬을 특정하면 된다.
-        //scroll.ApplyScroll();
+        scroll.UpdateScrollEffectToServer(spellIndex);
+
+        // 스크롤 활용. 스킬 강화 VFX 실행
+        GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfxSpellUpgrade, transform);
+        vfxHeal.GetComponent<NetworkObject>().Spawn();
+        vfxHeal.transform.SetParent(transform);
+        vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
     }
     #endregion
 

@@ -1,24 +1,20 @@
-using Unity.Netcode;
 using UnityEngine;
 /// <summary>
 /// 1레벨 한손검 베기 스킬 스크립트입니다.  
 /// 속성 : 노말
+/// 
+/// 테스트용.
+/// 추후 Knight 직업 손볼 때 다듬을 필요 있음.
 /// </summary>
 public class SlashLv1 : Spell
 {
-    private void Start()
-    {
-        // 근접공격이니까 수명 짧게
-        Destroy(gameObject,1f);
-    }
-
     /// <summary>
-    /// 1. 상세 능력치 설정
+    /// 1. 상세 능력치 설정(마법 사용시에 Server에서 부여해주는 능력치 입니다.)
     /// </summary>
-    public override void InitSpellInfoDetail()
+    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
         Debug.Log($"InitSpellInfoDetail() {nameof(SlashLv1)}");
-        spellInfo = SpellSpecifications.Instance.GetSpellSpec(SpellName.SlashLv1);
+        spellInfo = spellInfoFromServer;
 
         if (spellInfo == null)
         {
@@ -37,7 +33,7 @@ public class SlashLv1 : Spell
         SpellInfo result = new SpellInfo();
 
         // Lvl 비교
-        int resultLevel = thisSpell.level - opponentsSpell.level;
+        sbyte resultLevel = (sbyte)(thisSpell.level - opponentsSpell.level);
         result.level = resultLevel;
         // resultLevel 값이 0보다 같거나 작으면 더 계산할 필요 없음. 
         //      0이면 비긴거니까 만들 필요 없고
@@ -49,6 +45,7 @@ public class SlashLv1 : Spell
         }
         // resultLevel값이 0보다 큰 경우는 내가 이긴 경우. 노말타입은 노말을 반환한다.
         result.spellType = SpellType.Normal;
+        result.SetSpellName(result.level, result.spellType);
         return result;
     }
 
@@ -59,15 +56,6 @@ public class SlashLv1 : Spell
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        SpellHit(collision);
-        
-    }
-
-    /// <summary>
-    /// 3. 마법 시전
-    /// </summary>
-    public override void CastSpell(SpellInfo spellInfo, NetworkObject player)
-    {
-        base.CastSpell(spellInfo, player);
+        SpellManager.Instance.SpellHitOnServer(collision, this);     
     }
 }

@@ -157,6 +157,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupClanUI.cs" />
     <Compile Include="Assets\Scripts\Test\LogCurrentScene.cs" />
     <Compile Include="Assets\Scripts\Game\PlayerHPManager.cs" />
+    <Compile Include="Assets\Scripts\Game\VFX\VfxSpellUpgrade.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Spells\SlashLv1.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />

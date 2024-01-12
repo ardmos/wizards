@@ -39,7 +39,6 @@ public class GameMultiplayer : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
         playerDataNetworkList.OnListChanged += OnServerListChanged;
     }
 

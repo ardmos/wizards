@@ -8,13 +8,15 @@ using UnityEngine;
 /// </summary>
 public abstract class FireSpell : Spell
 {
-    // 1. 속성별 충돌 계산
+    /// <summary>
+    /// 불속성 마법과 다른 마법의 충돌 계산결과를 알려주는 메소드.
+    /// </summary>
     public override SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell)
     {
-        SpellInfo result = new SpellInfo();
+        SpellInfo result = thisSpell;
 
         // Lvl 비교
-        int resultLevel = thisSpell.level - opponentsSpell.level;
+        sbyte resultLevel = (sbyte)(thisSpell.level - opponentsSpell.level);
         result.level = resultLevel;
         // resultLevel 값이 0보다 같거나 작으면 더 계산할 필요 없음. 
         //      0이면 비긴거니까 만들 필요 없고
@@ -32,13 +34,14 @@ public abstract class FireSpell : Spell
             case SpellType.Ice:
             case SpellType.Arcane:
             default:
-                result.spellType = SpellType.Fire;
+                result.spellType = SpellType.Fire;         
                 break;
             case SpellType.Lightning:
                 result.spellType = SpellType.Arcane;
                 break;
         }
 
+        result.SetSpellName(result.level, result.spellType);
         return result;
     }
 }

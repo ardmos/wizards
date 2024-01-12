@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 public class VfxHeal : NetworkBehaviour
 {
+    [SerializeField] private float lifeTime = 1.8f;
     void Start()
     {
         if (!IsServer) return;
@@ -14,7 +14,7 @@ public class VfxHeal : NetworkBehaviour
 
     private IEnumerator DespawnThis()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(lifeTime);
         GetComponent<NetworkObject>().Despawn();
     }
 }

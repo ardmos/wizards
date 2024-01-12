@@ -123,5 +123,6 @@ MonoBehaviour:
   coin3: {fileID: 5768934563241156221, guid: 724da891aa15b874ead36873024b2f2c, type: 3}
   coin5: {fileID: 5768934563241156221, guid: d0dd099fe31c0e24b92675e199eb6fa4, type: 3}
   vfxHeal: {fileID: 6331275906715107345, guid: e27164d836110ff4da364dd5d38a9118, type: 3}
+  vfxSpellUpgrade: {fileID: 8846737274113074935, guid: 95bd805e8c353104da0c42b81e07d12c, type: 3}
   music_Title: {fileID: 8300000, guid: 0e47ef963992f4e4fa646be25baf7256, type: 3}
   music_Lobby: {fileID: 8300000, guid: 7474e1a01656bd347baabd0911edd59b, type: 3}

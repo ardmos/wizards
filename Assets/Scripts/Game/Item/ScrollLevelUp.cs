@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
-/// <summary>
-/// 접촉한 플레이어 Level Up 시킬 스킬 선택창 띄워주는 아이템. 서버에서 동작합니다.
-/// </summary>
 public class ScrollLevelUp : Scroll
 {
+    public override void OnNetworkSpawn()
+    {
+        scrollName = Item.ItemName.Scroll_LevelUp;
+    }
+
+    /// <summary>
+    /// 충돌은 서버에서 처리
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if(!IsServer) return;
@@ -18,18 +21,16 @@ public class ScrollLevelUp : Scroll
         collision.gameObject.GetComponent<Player>().ShowSelectSpellPopupClientRPC(this);
     }
 
-    public override void ApplyScroll(SpellInfo spellInfo)
+    /// <summary>
+    /// 클라이언트에서 처리되는 메소드입니다.
+    /// 스펠의 레벨을 1 올려줍니다. 
+    /// 레벨을 올리고싶은 스펠의 SpellInfo를 파라미터로 넘겨주세요.
+    /// </summary>
+    /// <param name="spellInfo"></param>
+    public override void UpdateScrollEffectToServer(sbyte spellIndex)
     {
-        SpellSpecifications.Instance.SetSpellSpec(
-            spellInfo.spellType,
-            spellInfo.coolTime,
-            spellInfo.lifeTime,
-            spellInfo.moveSpeed,
-            spellInfo.price,
-            spellInfo.level+1,
-            spellInfo.spellName,    // SpellName 일단 변경 안함. 추후 변경 필요하면 여기서 수정.
-            spellInfo.spellState
-            );
+        // 레벨업된 새로운 스펠 정보를 업로드
+        SpellManager.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
     }
    
 }

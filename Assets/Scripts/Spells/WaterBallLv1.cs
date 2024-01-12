@@ -1,21 +1,19 @@
-using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 /// <summary>
 /// 1레벨 워터볼 스크립트입니다.
-/// 현재 기능
-///   1. 상세 능력치 설정
-///   2. CollisionEnter 충돌 처리
-///   3. 마법 시전
+/// 
+/// !!! 현재 기능
+/// 1. 상세 능력치 설정
+/// 2. CollisionEnter 충돌 처리
 /// </summary>
 public class WaterBallLv1 : WaterSpell
 {
     /// <summary>
-    /// 1. 상세 능력치 설정
+    /// 1. 상세 능력치 설정(마법 사용시에 Server에서 부여해주는 능력치 입니다.)
     /// </summary>
-    public override void InitSpellInfoDetail()
+    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
-        spellInfo = SpellSpecifications.Instance.GetSpellSpec(SpellName.WaterBallLv1);
+        spellInfo = spellInfoFromServer;
     }
 
     /// <summary>
@@ -24,14 +22,6 @@ public class WaterBallLv1 : WaterSpell
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        SpellHit(collision);
-    }
-
-    /// <summary>
-    /// 3. 마법 시전
-    /// </summary>
-    public override void CastSpell(SpellInfo spellInfo, NetworkObject player)
-    {
-        base.CastSpell(spellInfo, player);
+        SpellManager.Instance.SpellHitOnServer(collision, this);
     }
 }

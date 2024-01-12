@@ -28,20 +28,15 @@ public class GamePadUI : MonoBehaviour
     /// <summary>
     /// 게임패드 스킬 아이콘을 업데이트 해주는 메소드
     /// </summary>
-    /// <param name="spellIcon"></param>
-    /// <param name="spellNumber"></param>
-    public void UpdateSpellUI(Sprite spellIcon, int spellNumber)
+    public void UpdateSpellUI(SpellName[] spellNames)
     {
-        //FindObjectOfType<OnScreenButton>().On
+        if (Player.LocalInstance == null) return;
 
-        //Debug.Log($"{nameof(UpdateButtonImage)} Player.LocalInstance:{Player.LocalInstance}, spellIcon:{spellIcon.name}, spellNumber:{spellNumber}");
-        if (Player.LocalInstance == null)
+        for (ushort i = 0; i < spellNames.Length; i++)
         {
-            return;
-        }
-
-        attackSkillIcons[spellNumber].sprite = spellIcon;
-        //imgBtnSkillDefence.sprite = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellIcon(4);
+            Debug.Log($"spellName: {spellNames[i]}");
+            attackSkillIcons[i].sprite = GameAssets.instantiate.GetSpellIconImage(spellNames[i]);
+        }       
     }
 
     /// <summary>

@@ -14,7 +14,7 @@ public abstract class IceSpell : Spell
         SpellInfo result = new SpellInfo();
 
         // Lvl 비교
-        int resultLevel = thisSpell.level - opponentsSpell.level;
+        sbyte resultLevel = (sbyte)(thisSpell.level - opponentsSpell.level);
         result.level = resultLevel;
         // resultLevel 값이 0보다 같거나 작으면 더 계산할 필요 없음. 
         //      0이면 비긴거니까 만들 필요 없고
@@ -39,6 +39,7 @@ public abstract class IceSpell : Spell
                 break;
         }
 
+        result.SetSpellName(result.level, result.spellType);
         return result;
     }
 }

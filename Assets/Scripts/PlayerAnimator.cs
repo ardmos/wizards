@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-
+/// <summary>
+/// 서버상의 각 플레이어 오브젝트에서 동작하는 스크립트 입니다.
+/// 서버 권한 방식 애니메이션 컨트롤.
+/// </summary>
 public class PlayerAnimator : NetworkBehaviour
 {
     private const string IS_WALKING = "IsWalking";
@@ -10,15 +13,13 @@ public class PlayerAnimator : NetworkBehaviour
     private const string IS_GAMEOVER = "IsGameOver";
 
     [SerializeField] private Player player;
-    [SerializeField] private SpellController spellController;
     private Animator animator;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
 
-
-        spellController.OnSpellStateChanged += OnSpellStateChanged;
+        SpellManager.Instance.OnSpellStateChanged += OnSpellStateChanged;
         //Debug.Log("PlayerAnimator Awake!");
 
         // 이제 여기서 Player Walking이랑 GameOver 구독해서 애니메이션 실행해주면 됨.

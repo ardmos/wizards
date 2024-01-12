@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 /// <summary>
 /// ½ºÅ©·Ñ È¹µæ½Ã È¹µæÇÑ ½ºÅ©·ÑÀ» ¾î´À ½ºÆç¿¡ Àû¿ëÇÒÁö 
@@ -22,13 +21,13 @@ public class PopupSelectSpellUI : MonoBehaviour
     private void Start()
     {
         btnSpell1.onClick.AddListener(() => {
-            Player.LocalInstance.ApplyScrollToSpell(scroll, 0);
+            Player.LocalInstance.ApplyScrollEffectToSpell(scroll, 0);
         });
         btnSpell2.onClick.AddListener(() => {
-            Player.LocalInstance.ApplyScrollToSpell(scroll, 1);
+            Player.LocalInstance.ApplyScrollEffectToSpell(scroll, 1);
         });
         btnSpell3.onClick.AddListener(() => {
-            Player.LocalInstance.ApplyScrollToSpell(scroll, 2);
+            Player.LocalInstance.ApplyScrollEffectToSpell(scroll, 2);
         });
 
         Hide();
