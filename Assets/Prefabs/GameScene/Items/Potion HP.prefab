@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 741601533263612928}
   - component: {fileID: 741601533263612929}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 6745163742996733849}
   - component: {fileID: 8870572212964590234}
   - component: {fileID: 6044865659981219841}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Potion HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 2777925980108828161}
   - component: {fileID: 1234821242741596580}
   - component: {fileID: 3946842300950828398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Potion Bottle 01 Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 6816413130376082395}
   - component: {fileID: 7581555116974603390}
   - component: {fileID: 5680146871473932468}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Potion Bottle 01 Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 7489869163128578067}
   - component: {fileID: 5791215461297385398}
   - component: {fileID: 8627331793759083388}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Potion Bottle 01 Cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

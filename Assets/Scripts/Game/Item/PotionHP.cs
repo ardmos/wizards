@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Experimental.Playables;
 
 /// <summary>
 /// 접촉한 플레이어 HP 회복메소드 동작. 서버에서 동작해야 합니다.

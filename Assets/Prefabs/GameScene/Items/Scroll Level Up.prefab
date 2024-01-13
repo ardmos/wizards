@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3142795042611236596}
   - component: {fileID: 807581735787337557}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 1778073301184134449}
   - component: {fileID: 4249707135239605113}
   - component: {fileID: 2937492328386393093}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Scroll Level Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 3548924364912935688}
   - component: {fileID: 499781350120901805}
   - component: {fileID: 2381105905220630631}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Scroll 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
