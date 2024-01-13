@@ -227,7 +227,7 @@ public class SpellManager : NetworkBehaviour
     /// <param name="collision"></param>
     public virtual void SpellHitOnServer(Collision collision, Spell spell)
     {
-        if (spell.GetSpellInfo().isCollided)
+        if (spell.IsCollided())
         {
             Debug.Log("이미 동일한 마법 충돌을 처리중입니다.");
             return;
@@ -246,8 +246,7 @@ public class SpellManager : NetworkBehaviour
         // 충돌한게 Spell일 경우, 스펠간 충돌 결과 처리를 따로 진행합니다
         // 처리결과를 collisionHandlingResult 변수에 저장해뒀다가 DestroyParticle시에 castSpell 시킵니다.
         if (collision.gameObject.tag == "Spell")
-        {
-            spell.SetSpellIsCollided(true);
+        {       
             isSpellCollided = true;
             Debug.Log($"Spell Hit!");
             SpellInfo thisSpell = GetSpellInfo(spell.GetSpellInfo().ownerPlayerClientId, spell.GetSpellInfo().spellName);
@@ -261,7 +260,6 @@ public class SpellManager : NetworkBehaviour
         // 2. player가 GameMultiplayer(ServerRPC)에게 보고, player(ClientRPC)업데이트.
         else if (collision.gameObject.tag == "Player")
         {
-            spell.SetSpellIsCollided(true);
             isSpellCollided = false;
             Debug.Log($"Player Hit!");
 
@@ -284,10 +282,11 @@ public class SpellManager : NetworkBehaviour
         // 기타 오브젝트 충돌
         else
         {
-            spell.SetSpellIsCollided(true);
             isSpellCollided = false;
             Debug.Log($"Object Hit!");
         }
+
+        spell.SetSpellIsCollided(true);
 
         List<GameObject> trails = spell.GetTrails();
         if (trails.Count > 0)

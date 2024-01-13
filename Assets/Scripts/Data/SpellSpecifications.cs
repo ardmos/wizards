@@ -55,7 +55,6 @@ public class SpellSpecifications : MonoBehaviour
             level = level,
             spellName = spellName,
             spellState = spellState,
-            isCollided = false
         };
 
         spellDefaultSpec[(int)spellName] = spellInfo;

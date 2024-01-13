@@ -15,8 +15,6 @@ public class SpellInfo : INetworkSerializable
 
     public ulong ownerPlayerClientId;
 
-    public bool isCollided;
-
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref spellType);
@@ -28,7 +26,6 @@ public class SpellInfo : INetworkSerializable
         serializer.SerializeValue(ref spellName);
         serializer.SerializeValue(ref spellState);
         serializer.SerializeValue(ref ownerPlayerClientId);
-        serializer.SerializeValue(ref isCollided);
     }
 
     /// <summary>

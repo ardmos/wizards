@@ -12,6 +12,8 @@ public abstract class Spell : NetworkBehaviour
     [SerializeField] protected GameObject muzzleVFXPrefab;
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
+
+    [SerializeField] private bool isCollided;
     
     // 마법 상세값 설정
     public abstract void InitSpellInfoDetail(SpellInfo spellInfoFromServer);
@@ -21,7 +23,12 @@ public abstract class Spell : NetworkBehaviour
 
     public void SetSpellIsCollided(bool isCollided)
     {
-        spellInfo.isCollided = isCollided;
+        this.isCollided = isCollided;
+    }
+
+    public bool IsCollided()
+    {
+        return this.isCollided;
     }
 
     public SpellInfo GetSpellInfo()
