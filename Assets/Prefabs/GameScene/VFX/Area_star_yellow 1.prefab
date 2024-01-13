@@ -14492,7 +14492,7 @@ GameObject:
   - component: {fileID: 6532625474870085668}
   - component: {fileID: 6532625474870085667}
   m_Layer: 0
-  m_Name: Area_star_ellow 1
+  m_Name: Area_star_yellow 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
