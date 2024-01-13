@@ -2646,7 +2646,6 @@ MonoBehaviour:
     spellName: 0
     spellState: 0
     ownerPlayerClientId: 0
-    isCollided: 0
   - spellType: 0
     coolTime: 0
     lifeTime: 0
@@ -2656,7 +2655,6 @@ MonoBehaviour:
     spellName: 0
     spellState: 0
     ownerPlayerClientId: 0
-    isCollided: 0
   - spellType: 0
     coolTime: 0
     lifeTime: 0
@@ -2666,7 +2664,6 @@ MonoBehaviour:
     spellName: 0
     spellState: 0
     ownerPlayerClientId: 0
-    isCollided: 0
   restTimeCurrentSpellArrayOnClient:
   - 0
   - 0

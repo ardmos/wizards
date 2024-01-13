@@ -123,4 +123,14 @@ public class SpellController : NetworkBehaviour
         if (!IsOwner) return;
         spellInfoListOnClient = spellInfoArray.ToList<SpellInfo>();
     }
+
+    /// <summary>
+    /// 특정 client가 현재 보유중인 마법의 정보를 알려주는 메소드 입니다.  
+    /// </summary>
+    /// <param name="clientId">알고싶은 Client의 ID</param>
+    /// <returns></returns>
+    public List<SpellInfo> GetSpellInfoArray()
+    {
+        return spellInfoListOnClient;
+    }
 }

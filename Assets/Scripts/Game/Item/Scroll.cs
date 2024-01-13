@@ -19,9 +19,12 @@ public class Scroll : NetworkBehaviour, INetworkSerializable
     {
         if (!IsServer) return;
 
+        // 플레이어에게 스크롤 효과를 적용할 스펠 선택 팝업 띄워주기
         ulong collisionedClientId = collision.gameObject.GetComponent<NetworkObject>().OwnerClientId;
-
         collision.gameObject.GetComponent<Player>().ShowSelectSpellPopupClientRPC(this);
+
+        // 오브젝트 파괴
+        GetComponent<NetworkObject>().Despawn();
     }
 
     /// <summary>

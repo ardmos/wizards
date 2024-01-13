@@ -228,6 +228,16 @@ public class Item
         {
             case ItemName.RemoveAds:
                 return "Remove Ads";
+            case ItemName.Scroll_LevelUp:
+                return "LevelUp";
+            case ItemName.Scroll_FireRateUp:
+                return "FireRateUp";
+            case ItemName.Scroll_FlySpeedUp:
+                return "FlySpeedUp";
+            case ItemName.Scroll_Attach:
+                return "Attach";
+            case ItemName.Scroll_Guide:
+                return "Guide";
             default:
                 return "";
         }

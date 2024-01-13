@@ -144,20 +144,25 @@ public class SpellManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// 특정 client가 현재 보유중인 spellName 마법의 정보를 알려주는 메소드 입니다.  
+    /// 특정 client가 현재 보유중인 특정 마법의 정보를 알려주는 메소드 입니다.  
     /// </summary>
-    /// <param name="clientId"></param>
-    /// <param name="spellName"></param>
+    /// <param name="clientId">알고싶은 Client의 ID</param>
+    /// <param name="spellName">알고싶은 마법의 이름</param>
     /// <returns></returns>
     public SpellInfo GetSpellInfo(ulong clientId, SpellName spellName)
     {
+        if (!spellInfoListOnServer.ContainsKey(clientId))
+        {
+            Debug.Log($"GetSpellInfo. 스펠정보를 찾을 수 없습니다. clienId:{clientId}, spellName:{spellName}");
+            return null;
+        }
+
         foreach (SpellInfo spellInfo in spellInfoListOnServer[clientId])
         {
             if(spellInfo.spellName == spellName)
                 return spellInfo;
         }
 
-        Debug.Log($"GetSpellInfo. 스펠정보를 찾을 수 없습니다. clienId:{clientId}, spellName:{spellName}");
         return null;
     }
     #endregion

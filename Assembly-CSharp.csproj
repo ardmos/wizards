@@ -144,6 +144,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\UGS Network\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameOverUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\Popup\SelectSpell\PopupSelectSpellUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupMenuUI.cs" />
     <Compile Include="Assets\Scripts\LevelDesigner.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimState.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Assets\Scripts\Spells\SlashLv1.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\Popup\PopupSelectSpellUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Game\Item\ScrollGuide.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
@@ -178,6 +178,7 @@
     <Compile Include="Assets\Scripts\Game\Item\ScrollFlySpeedUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyBottomUI.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\Popup\SelectSpell\SpellSlot.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupConnectionResponseUI.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\PopupSelectAuthMethodUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyManager.cs" />

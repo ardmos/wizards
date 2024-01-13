@@ -187,6 +187,11 @@ public class Player : NetworkBehaviour, IStoreCustomer
     }
     #endregion
 
+    public SpellController GetSpellController()
+    {
+        return spellController;
+    }
+
     #region 스킬 스크롤 획득시 동작들
     // 스크롤 획득시 동작
     [ClientRpc]
@@ -203,6 +208,12 @@ public class Player : NetworkBehaviour, IStoreCustomer
         // 전달받은 스크롤클래스와 스펠인덱스를 사용해서 효과 적용을 진행한다.
         scroll.UpdateScrollEffectToServer(spellIndex);
 
+        ApplyScrollVFXServerRPC();
+    }
+
+    [ServerRpc]
+    private void ApplyScrollVFXServerRPC()
+    {
         // 스크롤 활용. 스킬 강화 VFX 실행
         GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfxSpellUpgrade, transform);
         vfxHeal.GetComponent<NetworkObject>().Spawn();
