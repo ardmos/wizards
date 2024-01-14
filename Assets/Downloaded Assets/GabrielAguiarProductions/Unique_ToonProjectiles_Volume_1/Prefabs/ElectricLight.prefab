@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4350779509112252}
   - component: {fileID: 108495659379018816}
-  - component: {fileID: -1695616390714751508}
+  - component: {fileID: 8013989647591608191}
   m_Layer: 0
   m_Name: ElectricLight
   m_TagString: Untagged
@@ -95,7 +95,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &-1695616390714751508
+--- !u!114 &8013989647591608191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
