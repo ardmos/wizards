@@ -5,7 +5,6 @@ using UnityEngine;
 /// 
 /// !!! 현재 기능
 /// 1. 상세 능력치 설정
-/// 2. CollisionEnter 충돌 처리
 /// </summary>
 public class FireBallLv1 : FireSpell
 {
@@ -17,16 +16,5 @@ public class FireBallLv1 : FireSpell
     {
         //Debug.Log("InitSpellInfoDetail() FireBall Lv1");
         spellInfo = spellInfoFromServer;
-    }
-
-    /// <summary>
-    /// 2. CollisionEnter 충돌 처리 (서버 권한 방식)
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
-        // 서버에서만 처리.
-        if (!IsServer) return;
-        SpellManager.Instance.SpellHitOnServer(collision, this);
     }
 }

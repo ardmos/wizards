@@ -5,7 +5,6 @@ using UnityEngine;
 /// 
 /// !!! 현재 기능
 /// 1. 상세 능력치 설정
-/// 2. CollisionEnter 충돌 처리
 /// </summary>
 public class IceBallLv1 : IceSpell
 {
@@ -15,14 +14,5 @@ public class IceBallLv1 : IceSpell
     public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer) 
     { 
         spellInfo = spellInfoFromServer; 
-    }
-
-    /// <summary>
-    /// 2. CollisionEnter 충돌 처리
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
-        SpellManager.Instance.SpellHitOnServer(collision, this);
     }
 }

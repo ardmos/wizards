@@ -4,7 +4,6 @@
 /// 
 /// !!! 현재 기능
 /// 1. 상세 능력치 설정
-/// 2. CollisionEnter 충돌 처리
 /// </summary>
 public class FireBallLv3 : FireSpell
 {

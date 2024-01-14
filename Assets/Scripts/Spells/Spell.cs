@@ -21,6 +21,17 @@ public abstract class Spell : NetworkBehaviour
     // 마법 충돌시 속성 계산
     public abstract SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell);
 
+    /// <summary>
+    /// 2. CollisionEnter 충돌 처리 (서버 권한 방식)
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 서버에서만 처리.
+        if (!IsServer) return;
+        SpellManager.Instance.SpellHitOnServer(collision, this);
+    }
+
     public void SetSpellIsCollided(bool isCollided)
     {
         this.isCollided = isCollided;
