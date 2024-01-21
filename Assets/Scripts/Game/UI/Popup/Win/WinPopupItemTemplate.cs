@@ -20,6 +20,7 @@ public class WinPopupItemTemplate : MonoBehaviour
     public void InitTemplate(Sprite imgItemIcon, string txtItemCount, bool isLabelOn)
     {
         this.imgItemIcon.sprite = imgItemIcon;
+        this.imgItemIcon.SetNativeSize();
         this.txtItemCount.text = txtItemCount;
         if (label != null ) this.label.SetActive(isLabelOn);
     }   
