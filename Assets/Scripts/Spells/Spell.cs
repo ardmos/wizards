@@ -32,6 +32,12 @@ public abstract class Spell : NetworkBehaviour
         SpellManager.Instance.SpellHitOnServer(collision, this);
     }
 
+    public virtual void Shoot(Vector3 force, ForceMode forceMode)
+    {
+        Debug.Log($"Spell class Shoot()");
+        GetComponent<Rigidbody>().AddForce(force, forceMode);
+    }
+
     public void SetSpellIsCollided(bool isCollided)
     {
         this.isCollided = isCollided;

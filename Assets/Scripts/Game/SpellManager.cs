@@ -218,7 +218,7 @@ public class SpellManager : NetworkBehaviour
         // 마법 발사
         spellObject.transform.SetParent(this.transform);
         float moveSpeed = GetSpellInfo(clientId, spellObject.GetComponent<Spell>().GetSpellInfo().spellName).moveSpeed;
-        spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
+        spellObject.GetComponent<Spell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
 
         // 포구 VFX
         MuzzleVFX(spellObject.GetComponent<Spell>().GetMuzzleVFXPrefab(), playerMuzzlePairs[clientId]);
@@ -323,6 +323,7 @@ public class SpellManager : NetworkBehaviour
             }
         }
 
+        // DestroyParticle 하는 이유 확인해보기.   <-----여기부터!!!!!
         Destroy(spell.gameObject, 0.2f);
     }
 

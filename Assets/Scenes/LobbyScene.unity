@@ -8964,8 +8964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0097f1f085c7644f687d02f709898fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnStartServer: {fileID: 1554887813}
-  btnStartClient: {fileID: 1869071756}
+  btnStartServer: {fileID: 8783605403819591681}
+  btnStartClient: {fileID: 3360385355629862649}
 --- !u!1001 &802068386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15580,7 +15580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9c351b11793084f8d8a5a5a5008b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnStartMatchmaking: {fileID: 3360385355629862649}
+  btnStartMatchmaking: {fileID: 0}
   popupLookingForGame: {fileID: 1961804599}
 --- !u!4 &1462535542
 Transform:
@@ -16460,7 +16460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1554887813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19718,7 +19718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1869071756
 MonoBehaviour:
   m_ObjectHideFlags: 0

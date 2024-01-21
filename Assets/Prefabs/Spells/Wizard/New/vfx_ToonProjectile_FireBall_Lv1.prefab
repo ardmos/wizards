@@ -4812,7 +4812,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 471fd056a7163294b9459fc0c7c272c3, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9675,7 +9674,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 471fd056a7163294b9459fc0c7c272c3, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9735,12 +9733,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4419323232476508}
-  - component: {fileID: 114053975025305074}
+  - component: {fileID: -3171949348736065036}
   - component: {fileID: 54419324461462068}
   - component: {fileID: 135237550928776104}
   - component: {fileID: 114885112938256800}
+  - component: {fileID: -8257197829832841457}
+  - component: {fileID: 3216914182031358455}
+  - component: {fileID: 4867435650595528468}
   m_Layer: 0
-  m_Name: vfx_ToonProjectile_Bomb03Red
+  m_Name: vfx_ToonProjectile_FireBall_Lv1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9765,7 +9766,7 @@ Transform:
   - {fileID: 4298948506556188}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114053975025305074
+--- !u!114 &-3171949348736065036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9774,21 +9775,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439816204641800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ba759cd568c0e47a7018ab70867a0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fd6c85062127444ab9fee8c85952346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotate: 0
-  rotateAmount: 45
-  bounce: 0
-  bounceForce: 10
-  speed: 35
-  accuracy: 95
-  fireRate: 4
-  muzzlePrefab: {fileID: 1696487207369030, guid: fe1b959f2d0c6db42bcff4ac8f20c812, type: 3}
-  hitPrefab: {fileID: 1312591640859010, guid: ecf7e409a310ee243a23cc83dfb0963f, type: 3}
+  spellInfo:
+    spellType: 0
+    coolTime: 0
+    lifeTime: 0
+    moveSpeed: 0
+    price: 0
+    level: 0
+    spellName: 0
+    spellState: 0
+    ownerPlayerClientId: 0
+  muzzleVFXPrefab: {fileID: 1696487207369030, guid: fe1b959f2d0c6db42bcff4ac8f20c812, type: 3}
+  hitVFXPrefab: {fileID: 1312591640859010, guid: ecf7e409a310ee243a23cc83dfb0963f, type: 3}
   trails:
   - {fileID: 1588689682261560}
   - {fileID: 1514313384593206}
+  isCollided: 0
 --- !u!54 &54419324461462068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9865,6 +9870,68 @@ MonoBehaviour:
   - {fileID: 1588689682261560}
   - {fileID: 1514313384593206}
   ActiveParticleSystems: 01010101
+--- !u!114 &-8257197829832841457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439816204641800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &3216914182031358455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439816204641800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &4867435650595528468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439816204641800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1514313384593206
 GameObject:
   m_ObjectHideFlags: 0
@@ -14677,7 +14744,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 471fd056a7163294b9459fc0c7c272c3, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14755,7 +14821,7 @@ Transform:
   m_GameObject: {fileID: 1588689682261560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.602}
+  m_LocalPosition: {x: 0, y: 0, z: -1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14844,8 +14910,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
-      minScalar: 0.4
+      scalar: 0.3
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -15015,7 +15081,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2.5
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -15068,7 +15134,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2.5
+      scalar: 1.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -19540,7 +19606,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5f15405560f0a5344bcafac5339a8cd4, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
