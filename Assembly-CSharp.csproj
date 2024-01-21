@@ -67,6 +67,7 @@
     <Compile Include="Assets/Downloaded Assets/GabrielAguiarProductions/Unique_ToonProjectiles_Volume_1/Scripts/ParticleSystemController/ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets/Scripts/Game/ForTest/SelectHostClientForTest.cs" />
     <Compile Include="Assets/Downloaded Assets/GabrielAguiarProductions/Unique_ToonProjectiles_Volume_1/Scripts/UniqueProjectiles/RotateToMouseScript.cs" />
+    <Compile Include="Assets/Scripts/Test/PlayerProfileDataManager.cs" />
     <Compile Include="Assets/Scenes/Test/TestScene/GoToLobbyScene.cs" />
     <Compile Include="Assets/Scripts/Game/UI/MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets/Scripts/Game/UI/PopupGameReadyUI.cs" />
@@ -76,8 +77,8 @@
     <Compile Include="Assets/Scripts/Lobby/MatchmakerUI.cs" />
     <Compile Include="Assets/Scripts/UGS Network/ConnectionApprovalHandler.cs" />
     <Compile Include="Assets/Scripts/Lobby/PopupSettings/MusicGroupUI.cs" />
+    <Compile Include="Assets/Scripts/Lobby/PopupUserInfo/PopupNameChangeUI.cs" />
     <Compile Include="Assets/InputSystem/TestingInputSystem.cs" />
-    <Compile Include="Assets/Scripts/Lobby/PopupUserInfoUI.cs" />
     <Compile Include="Assets/Scripts/Game/UI/PopupGameStartCountdownUI.cs" />
     <Compile Include="Assets/Scripts/PlayerNetwork.cs" />
     <Compile Include="Assets/Scripts/Loading/LoaderCallback.cs" />
@@ -106,8 +107,10 @@
     <Compile Include="Assets/Scripts/Data/SpellState.cs" />
     <Compile Include="Assets/Scripts/ClientNetworkTransform.cs" />
     <Compile Include="Assets/Scripts/Game/VFX/VfxHeal.cs" />
+    <Compile Include="Assets/Scripts/Lobby/PopupUserInfo/PopupUserInfoUI.cs" />
     <Compile Include="Assets/Scripts/Game/UI/Popup/Win/WinPopupItemTemplate.cs" />
     <Compile Include="Assets/Scripts/Game/Item/ScrollLevelUp.cs" />
+    <Compile Include="Assets/Scripts/Lobby/PopupUserInfo/TextFieldUI.cs" />
     <Compile Include="Assets/Scripts/Players_InGame/Wizard.cs" />
     <Compile Include="Assets/Scripts/Game/UI/HPBarUI.cs" />
     <Compile Include="Assets/Scripts/Lobby/PopupSettings/PopupSettingsUI.cs" />
@@ -192,7 +195,6 @@
     <Compile Include="Assets/Scripts/UGS Network/TargetFPS.cs" />
     <Compile Include="Assets/Scripts/Spells/FireBallLv3.cs" />
     <Compile Include="Assets/Scripts/Data/SpellName.cs" />
-    <Compile Include="Assets/Scripts/Test/PlayerProfileData.cs" />
     <Compile Include="Assets/Scripts/SpawnProjectiles.cs" />
     <Compile Include="Assets/Scripts/Game/Player/SpellController.cs" />
     <Compile Include="Assets/Scripts/Game/Store/StoreTriggerAreaCollider.cs" />

@@ -163,4 +163,45 @@ public class GameAssets : MonoBehaviour
         }
         return (sbyte)(spellName - adjustValue);
     }
+
+    // Lobby Scene 전용. Client 내부 저장용 
+    public GameObject GetCharacterPrefab_NotInGame(CharacterClass characterClass)
+    {
+        //Debug.Log($"GetCurrentSelectedCharacterPrefab_NotInGame currentSelectedClass: {currentSelectedClass}");
+        // 원래는 여기서 복장상태 반영해서 반환해줘야함. 지금은 클래스만 반영해서 반환해줌
+        GameObject resultObejct = null;
+        switch (characterClass)
+        {
+            case CharacterClass.Wizard:
+                resultObejct = wizard_Male_ForLobby;
+                break;
+            case CharacterClass.Knight:
+                resultObejct = knight_Male_ForLobby;
+                break;
+            default:
+                break;
+        }
+        //Debug.Log($"GetCurrentSelectedCharacterPrefab_NotInGame resultObject: {resultObejct?.name}");
+        return resultObejct;
+    }
+
+    // Lobby Scene 전용. Client 내부 저장용
+    public GameObject GetCharacterPrefab_InGame(CharacterClass characterClass)
+    {
+        // 원래는 여기서 복장상태 반영해서 반환해줘야함. 지금은 클래스만 반영해서 반환해줌
+        GameObject resultObejct = null;
+        switch (characterClass)
+        {
+            case CharacterClass.Wizard:
+                resultObejct = wizard_Male;
+                break;
+            case CharacterClass.Knight:
+                resultObejct = knight_Male;
+                break;
+            default:
+                break;
+        }
+
+        return resultObejct;
+    }
 }

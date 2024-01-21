@@ -88,13 +88,19 @@ public class GameMultiplayer : NetworkBehaviour
     private void Client_OnClientConnectedCallback(ulong clientId)
     {
         // 서버RPC를 통해 서버에 저장
-        Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerProfileData.Instance.GetCurrentSelectedClass()}");
-        ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
+        Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerProfileDataManager.Instance.GetCurrentSelectedClass()}");
+        //ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
+        SendPlayerProfileDataToServer(PlayerProfileDataManager.Instance.GetPlayerData());
     }
     private void Client_OnClientDisconnectCallback(ulong obj)
     {
         Debug.Log($"OnClientDisconnectCallback : {obj}");
         OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void SendPlayerProfileDataToServer(PlayerData playerData)
+    {
+        UpdatePlayerDataServerRPC(playerData);
     }
 
     /// <summary>
@@ -103,27 +109,27 @@ public class GameMultiplayer : NetworkBehaviour
     /// 즉 GameRoom에 들어가면서 입니다.
     /// </summary>
     /// <param name="playerClass"></param>    
-    private void ChangePlayerClass(CharacterClass playerClass)
+    private void ChangePlayerClassOnClient(CharacterClass playerClass)
     {
         //Debug.Log($"ChangePlayerClass. clientId: {clientId}, class: {playerClass}");
-        ChangePlayerClassServerRPC(playerClass);
+        //ChangePlayerClassServerRPC(playerClass);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ChangePlayerClassServerRPC(CharacterClass playerClass, ServerRpcParams serverRpcParams = default)
+    private void UpdatePlayerDataServerRPC(PlayerData playerData, ServerRpcParams serverRpcParams = default)
     {
         // 새로운 유저
         playerDataNetworkList.Add(new PlayerData
         {
             clientId = serverRpcParams.Receive.SenderClientId,
-            playerClass = playerClass,
+            playerClass = playerData.playerClass,
             playerAnimState = PlayerMoveAnimState.Idle,
             playerGameState = PlayerGameState.Playing,
-            playerName = "Default Player Name"
+            playerName = playerData.playerName
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
         });
         Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
-            $"player{serverRpcParams.Receive.SenderClientId} Class: {playerClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
+            $"player{serverRpcParams.Receive.SenderClientId} Name: {playerData.playerName} Class: {playerData.playerClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
     }
 
     // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용

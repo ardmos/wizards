@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LobbyUI : MonoBehaviour
 {
-    [SerializeField] private Button btnUserInfo;
+    // User Info UI
+    public Button btnUserInfo;
+    public TextMeshProUGUI txtUserName;     // [SerializeField] private ---> public
+
     [SerializeField] private Button btnSettings;
     [SerializeField] private Button btnClassChange;
     [SerializeField] private Button btnShop;
@@ -32,6 +36,8 @@ public class LobbyUI : MonoBehaviour
 
     [SerializeField] private Sprite iconWizard, iconKnight;
 
+    public PopupNameChangeUI popupNameChangeUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,23 +56,37 @@ public class LobbyUI : MonoBehaviour
         // 이후에 UGS 클라우드 서버가 구축되면, 그곳에서 관리할것이다.
         //PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Wizard);
         UpdatePlayerClass();
+        UpdateUserInfoUI();
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    //// User Info UI
+    ///
+    public void UpdateUserInfoUI()
     {
-        
+        // 1. Update User Name From PlayerProfileDataManager
+        txtUserName.text = PlayerProfileDataManager.Instance.GetPlayerName();
     }
+
+
+
+
+    /// <summary>
+    /// //////
+    /// </summary>
+
+
 
     private void ChangePlayerClass()
     {
-        switch (PlayerProfileData.Instance.GetCurrentSelectedClass())
+        switch (PlayerProfileDataManager.Instance.GetCurrentSelectedClass())
         {
             case CharacterClass.Wizard:
-                PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClass.Knight);
+                PlayerProfileDataManager.Instance.SetCurrentSelectedClass(CharacterClass.Knight);
                 break;
             case CharacterClass.Knight:
-                PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClass.Wizard);
+                PlayerProfileDataManager.Instance.SetCurrentSelectedClass(CharacterClass.Wizard);
                 break;
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");
@@ -80,15 +100,15 @@ public class LobbyUI : MonoBehaviour
     {
         if (character != null) { Destroy(character); }        
 
-        switch (PlayerProfileData.Instance.GetCurrentSelectedClass())
+        switch (PlayerProfileDataManager.Instance.GetCurrentSelectedClass())
         {
             case CharacterClass.Wizard:
                 btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
-                character = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedCharacterPrefab_NotInGame());
+                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerProfileDataManager.Instance.GetCurrentSelectedClass()));
                 break; 
             case CharacterClass.Knight:
                 btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
-                character = Instantiate(PlayerProfileData.Instance.GetCurrentSelectedCharacterPrefab_NotInGame());
+                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerProfileDataManager.Instance.GetCurrentSelectedClass()));
                 break; 
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");
