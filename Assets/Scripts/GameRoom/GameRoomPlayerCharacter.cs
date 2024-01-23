@@ -85,7 +85,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
             return;
         }
         //Debug.Log($"ShowCharacter3DVisual playerIndex:{playerIndex}, class:{GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass}");
-        playerObject = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).playerClass));
+        playerObject = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex).characterClass));
         //Debug.Log($"playerObject: {playerObject.name}");
         playerObject.transform.SetParent(transform, false);
         playerObject.transform.localPosition = Vector3.zero;

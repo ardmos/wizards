@@ -90,7 +90,7 @@ public class GameMultiplayer : NetworkBehaviour
         // 서버RPC를 통해 서버에 저장
         Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerProfileDataManager.Instance.GetCurrentSelectedClass()}");
         //ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
-        SendPlayerProfileDataToServer(PlayerProfileDataManager.Instance.GetPlayerData());
+        SavePlayerProfileDataOnServer(PlayerProfileDataManager.Instance.GetPlayerData());
     }
     private void Client_OnClientDisconnectCallback(ulong obj)
     {
@@ -98,7 +98,11 @@ public class GameMultiplayer : NetworkBehaviour
         OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
     }
 
-    private void SendPlayerProfileDataToServer(PlayerData playerData)
+    /// <summary>
+    /// 로컬에 저장되어있는 Player 정보를 생성된 서버에 저장하는 스크립트 입니다.
+    /// </summary>
+    /// <param name="playerData"></param>
+    private void SavePlayerProfileDataOnServer(PlayerData playerData)
     {
         UpdatePlayerDataServerRPC(playerData);
     }
@@ -107,6 +111,8 @@ public class GameMultiplayer : NetworkBehaviour
     /// 클래스 변경을 서버에게 보고할 수 있습니다. 메소드명 Change 대신 Update로 변경 고려하기.
     /// 보고 시점은 Server가 Allocate 된 이후! 
     /// 즉 GameRoom에 들어가면서 입니다.
+    /// 
+    /// 이 메소드를 사용하지 않는 방면으로 수정되었습니다.  삭제여부를 고려해야합니다.
     /// </summary>
     /// <param name="playerClass"></param>    
     private void ChangePlayerClassOnClient(CharacterClass playerClass)
@@ -122,14 +128,14 @@ public class GameMultiplayer : NetworkBehaviour
         playerDataNetworkList.Add(new PlayerData
         {
             clientId = serverRpcParams.Receive.SenderClientId,
-            playerClass = playerData.playerClass,
+            characterClass = playerData.characterClass,
             playerAnimState = PlayerMoveAnimState.Idle,
             playerGameState = PlayerGameState.Playing,
             playerName = playerData.playerName
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
         });
         Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
-            $"player{serverRpcParams.Receive.SenderClientId} Name: {playerData.playerName} Class: {playerData.playerClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
+            $"player{serverRpcParams.Receive.SenderClientId} Name: {playerData.playerName} Class: {playerData.characterClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
     }
 
     // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용

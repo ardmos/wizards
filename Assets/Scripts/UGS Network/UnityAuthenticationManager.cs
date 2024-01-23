@@ -99,7 +99,7 @@ public class UnityAuthenticationManager : MonoBehaviour
     /// UnityServices를 초기화하면서 발급받은 AuthenticationService PlayerId를 리턴해줍니다. 
     /// </summary>
     /// <returns>AuthenticationService.Instance.PlayerId</returns>
-    private string GetPlayerID()
+    public string GetPlayerID()
     {
         return AuthenticationService.Instance.PlayerId;
     }

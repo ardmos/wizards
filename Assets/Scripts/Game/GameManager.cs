@@ -79,7 +79,7 @@ public class GameManager : NetworkBehaviour
             // Player Character Client 历厘 规侥
             //GameObject player = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).playerClass));
             // Player Character Server 历厘 规侥
-            CharacterClass playerClass = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).playerClass;
+            CharacterClass playerClass = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).characterClass;
             GameObject playerPrefab = GetCurrentPlayerCharacterPrefab(playerClass);
             GameObject player = Instantiate(playerPrefab);
             if (player != null)

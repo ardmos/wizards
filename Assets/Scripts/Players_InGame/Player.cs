@@ -4,11 +4,13 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
-/// 1. 공통적인 플레이어 정보 관리
+/// 1. 인게임에서 사용되는 플레이어 스크립트입니다.
 /// </summary>
 public class Player : NetworkBehaviour, IStoreCustomer
 {
     public static Player LocalInstance { get; private set; }
+
+    // PlayerData변수를 만들어서 사용하는것으로 코드 정리 해야함. HP같은 변수들 따루 있을 이유가 없음.
 
     [SerializeField] protected GameInput gameInput;
     [SerializeField] protected GameObject virtualCameraObj;
