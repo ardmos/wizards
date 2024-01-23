@@ -43,9 +43,14 @@ public class PlayerProfileDataManager : MonoBehaviour
     /// </summary>
 
     // 1. Player정보 저장 <<<<<<<<-------------- 이걸 활용하는 부분부터 하면 됩니다.
-    public void SavePlayerData(PlayerData playerData)
+    private void SavePlayerData()
     {
         SaveSystem.SavePlayerData(playerData);
+    }
+    public void UpdatePlayerData(PlayerData playerData) // 이 메소드 필요 없이 아래에서 Set이름, 클래스 할 때 SavePlayerData() 호출하는방식이면 어떨까? 더 깔끔한걸로 선택하자.
+    {
+        this.playerData = playerData;
+        SavePlayerData();
     }
 
     // 2. Player정보 불러오기
@@ -90,9 +95,12 @@ public class PlayerProfileDataManager : MonoBehaviour
     }
 
     // Lobby Scene 전용. Client 내부 저장용
-    public void SetCurrentSelectedClass(CharacterClass characterClass) { playerData.characterClass = characterClass; }
+    public void SetCurrentPlayerClass(CharacterClass characterClass) 
+    { 
+        playerData.characterClass = characterClass; 
+    }
 
-    public CharacterClass GetCurrentSelectedClass() 
+    public CharacterClass GetCurrentPlayerClass() 
     {
         return playerData.characterClass; 
     }

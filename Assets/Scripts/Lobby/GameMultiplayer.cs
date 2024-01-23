@@ -88,7 +88,7 @@ public class GameMultiplayer : NetworkBehaviour
     private void Client_OnClientConnectedCallback(ulong clientId)
     {
         // 서버RPC를 통해 서버에 저장
-        Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerProfileDataManager.Instance.GetCurrentSelectedClass()}");
+        Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerProfileDataManager.Instance.GetCurrentPlayerClass()}");
         //ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
         SavePlayerProfileDataOnServer(PlayerProfileDataManager.Instance.GetPlayerData());
     }

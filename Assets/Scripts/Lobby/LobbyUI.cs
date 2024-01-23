@@ -80,13 +80,13 @@ public class LobbyUI : MonoBehaviour
 
     private void ChangePlayerClass()
     {
-        switch (PlayerProfileDataManager.Instance.GetCurrentSelectedClass())
+        switch (PlayerProfileDataManager.Instance.GetCurrentPlayerClass())
         {
             case CharacterClass.Wizard:
-                PlayerProfileDataManager.Instance.SetCurrentSelectedClass(CharacterClass.Knight);
+                PlayerProfileDataManager.Instance.SetCurrentPlayerClass(CharacterClass.Knight);
                 break;
             case CharacterClass.Knight:
-                PlayerProfileDataManager.Instance.SetCurrentSelectedClass(CharacterClass.Wizard);
+                PlayerProfileDataManager.Instance.SetCurrentPlayerClass(CharacterClass.Wizard);
                 break;
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");
@@ -100,15 +100,15 @@ public class LobbyUI : MonoBehaviour
     {
         if (character != null) { Destroy(character); }        
 
-        switch (PlayerProfileDataManager.Instance.GetCurrentSelectedClass())
+        switch (PlayerProfileDataManager.Instance.GetCurrentPlayerClass())
         {
             case CharacterClass.Wizard:
                 btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
-                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerProfileDataManager.Instance.GetCurrentSelectedClass()));
+                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerProfileDataManager.Instance.GetCurrentPlayerClass()));
                 break; 
             case CharacterClass.Knight:
                 btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
-                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerProfileDataManager.Instance.GetCurrentSelectedClass()));
+                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerProfileDataManager.Instance.GetCurrentPlayerClass()));
                 break; 
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");
