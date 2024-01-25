@@ -115,7 +115,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
     {
         if(GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
         {
-            PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
+            PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
             readyGameObject.SetActive(GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId));
         }
         else

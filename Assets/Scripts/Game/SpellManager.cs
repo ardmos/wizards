@@ -370,7 +370,7 @@ public class SpellManager : NetworkBehaviour
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {
             // 요청한 플레이어 현재 HP값 가져오기 
-            PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+            PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
             sbyte playerHP = playerData.playerHP;
 
             // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)

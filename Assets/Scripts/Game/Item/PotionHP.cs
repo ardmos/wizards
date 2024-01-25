@@ -31,7 +31,7 @@ public class PotionHP : NetworkBehaviour
     }
 
     private sbyte GetNewPlayerHP(ulong collisionedClientId) {
-        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(collisionedClientId);
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(collisionedClientId);
         sbyte newHP = (sbyte)(playerData.playerHP + healingValue);
         if(newHP > playerData.playerMaxHP) newHP = playerData.playerMaxHP;
         return newHP;

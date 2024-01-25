@@ -10,9 +10,9 @@ using UnityEngine;
 /// 
 /// Player 스크립트의 PlayerData로 합칠 필요가 있음. 
 /// </summary>
-public class PlayerProfileDataManager : MonoBehaviour
+public class PlayerDataManager : MonoBehaviour
 {
-    public static PlayerProfileDataManager Instance { get; private set; }
+    public static PlayerDataManager Instance { get; private set; }
 
     [SerializeField] private PlayerData playerData;
 
@@ -31,6 +31,14 @@ public class PlayerProfileDataManager : MonoBehaviour
         {
             // 로드할 플레이어 정보가 없었던 경우. 
             // 최초 데이터를 만들어준다.
+            playerData = new PlayerData(
+                new PlayerInGameData()
+                {
+                    playerName = "Player" 
+                }
+                ,
+                new PlayerOutGameData()
+                );
             SavePlayerData();
         }
     }
@@ -50,8 +58,15 @@ public class PlayerProfileDataManager : MonoBehaviour
     // 1. Player정보 저장 <<<<<<<<-------------- 이걸 활용하는 부분부터 하면 됩니다.
     private void SavePlayerData()
     {
-        SaveSystem.SavePlayerData(playerData);
-        Debug.Log($"플레이어 정보 세이브 성공!");
+        try
+        {
+            SaveSystem.SavePlayerData(playerData);
+            Debug.Log($"플레이어 정보 세이브 성공!");
+        }
+        catch (System.Exception)
+        {
+            throw;
+        }
     }
 
     // 현재 사용 안하는 메소드. 세이브기능 동작 확인 후 삭제하자
@@ -68,17 +83,11 @@ public class PlayerProfileDataManager : MonoBehaviour
     /// <returns></returns>
     private bool LoadPlayerData()
     {
-        PlayerDataForSave playerDataForSave = SaveSystem.LoadPlayerData();
-        if (playerDataForSave != null)
+        PlayerData playerData = SaveSystem.LoadPlayerData();
+        if (playerData != null)
         {
             Debug.Log($"플레이어 정보 로드 성공!");
-            playerData = new PlayerData()
-            {
-                playerLevel = playerDataForSave.playerLevel,
-                playerId = playerDataForSave.playerId,
-                playerName = playerDataForSave.playerName,
-                characterClass = playerDataForSave.characterClass
-            };
+            this.playerData = playerData;
             return true;
         }
         else
@@ -105,25 +114,35 @@ public class PlayerProfileDataManager : MonoBehaviour
 
     public void SetPlayerName(string newName)
     {
-        playerData.playerName = newName;
+        playerData.playerInGameData.playerName = newName;
         SavePlayerData();
     }
 
     public string GetPlayerName()
     {
-        return playerData.playerName.ToString();
+        return playerData.playerInGameData.playerName.ToString();
     }
 
     // Lobby Scene 전용. Client 내부 저장용
     public void SetCurrentPlayerClass(CharacterClass characterClass) 
     { 
-        playerData.characterClass = characterClass;
+        playerData.playerInGameData.characterClass = characterClass;
         SavePlayerData();
     }
 
     public CharacterClass GetCurrentPlayerClass() 
     {
-        return playerData.characterClass; 
+        return playerData.playerInGameData.characterClass; 
+    }
+
+    // 필요한 메소드인지 확인.
+    public PlayerInGameData GetPlayerInGameData()
+    {
+        return playerData.playerInGameData;
+    }
+    public PlayerOutGameData GetPlayerOutGameData()
+    {
+        return playerData.playerOutGameData;
     }
 
     public PlayerData GetPlayerData()

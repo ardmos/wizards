@@ -68,7 +68,6 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Game\ForTest\SelectHostClientForTest.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
-    <Compile Include="Assets\Scripts\Test\PlayerProfileDataManager.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\GoToLobbyScene.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameReadyUI.cs" />
@@ -80,6 +79,7 @@
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupUserInfo\PopupNameChangeUI.cs" />
     <Compile Include="Assets\InputSystem\TestingInputSystem.cs" />
+    <Compile Include="Assets\Scripts\Test\PlayerDataManager.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameStartCountdownUI.cs" />
     <Compile Include="Assets\Scripts\PlayerNetwork.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\Game\Item\PotionHP.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NotifyUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GamePadUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\TimerUI.cs" />
@@ -159,7 +160,6 @@
     <Compile Include="Assets\Scripts\Game\UI\CustomOnScreenButton.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
-    <Compile Include="Assets\Scripts\Data\PlayerDataForSave.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupClanUI.cs" />
     <Compile Include="Assets\Scripts\Test\LogCurrentScene.cs" />
     <Compile Include="Assets\Scripts\Game\PlayerHPManager.cs" />
@@ -175,6 +175,7 @@
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\DailyGroupUI.cs" />
     <Compile Include="Assets\Scripts\Data\SpellStateEventData.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerInGameData.cs" />
     <Compile Include="Assets\Scripts\Lobby\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneUI.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />

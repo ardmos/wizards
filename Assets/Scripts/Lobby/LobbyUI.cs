@@ -66,7 +66,7 @@ public class LobbyUI : MonoBehaviour
     public void UpdateUserInfoUI()
     {
         // 1. Update User Name From PlayerProfileDataManager
-        txtUserName.text = PlayerProfileDataManager.Instance.GetPlayerName();
+        txtUserName.text = PlayerDataManager.Instance.GetPlayerName();
     }
 
 
@@ -80,13 +80,13 @@ public class LobbyUI : MonoBehaviour
 
     private void ChangePlayerClass()
     {
-        switch (PlayerProfileDataManager.Instance.GetCurrentPlayerClass())
+        switch (PlayerDataManager.Instance.GetCurrentPlayerClass())
         {
             case CharacterClass.Wizard:
-                PlayerProfileDataManager.Instance.SetCurrentPlayerClass(CharacterClass.Knight);
+                PlayerDataManager.Instance.SetCurrentPlayerClass(CharacterClass.Knight);
                 break;
             case CharacterClass.Knight:
-                PlayerProfileDataManager.Instance.SetCurrentPlayerClass(CharacterClass.Wizard);
+                PlayerDataManager.Instance.SetCurrentPlayerClass(CharacterClass.Wizard);
                 break;
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");
@@ -100,15 +100,15 @@ public class LobbyUI : MonoBehaviour
     {
         if (character != null) { Destroy(character); }        
 
-        switch (PlayerProfileDataManager.Instance.GetCurrentPlayerClass())
+        switch (PlayerDataManager.Instance.GetCurrentPlayerClass())
         {
             case CharacterClass.Wizard:
                 btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
-                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerProfileDataManager.Instance.GetCurrentPlayerClass()));
+                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerDataManager.Instance.GetCurrentPlayerClass()));
                 break; 
             case CharacterClass.Knight:
                 btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
-                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerProfileDataManager.Instance.GetCurrentPlayerClass()));
+                character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerDataManager.Instance.GetCurrentPlayerClass()));
                 break; 
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");

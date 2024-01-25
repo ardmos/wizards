@@ -28,7 +28,7 @@ public class PlayerHPManager : NetworkBehaviour
     public void UpdatePlayerHP(ulong clientId, sbyte playerTotalHP)
     {
         // 변경된 HP값 서버에 저장
-        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
         playerData.playerHP = playerTotalHP;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(clientId, playerData);
 

@@ -17,7 +17,7 @@ public class GameMultiplayer : NetworkBehaviour
     // private const int MAX_PLAYER_AMOUNT = 4;
 
     // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트
-    private NetworkList<PlayerData> playerDataNetworkList;
+    private NetworkList<PlayerInGameData> playerDataNetworkList;
     // 플레이어들이 보유한 장비 현황
     [SerializeField] private Dictionary<ulong, Dictionary<Item.ItemName, ushort>> playerItemDictionaryOnServer;    
 
@@ -32,7 +32,7 @@ public class GameMultiplayer : NetworkBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        playerDataNetworkList = new NetworkList<PlayerData>();
+        playerDataNetworkList = new NetworkList<PlayerInGameData>();
 
         playerItemDictionaryOnServer = new Dictionary<ulong, Dictionary<Item.ItemName, ushort>>();
     }
@@ -42,7 +42,7 @@ public class GameMultiplayer : NetworkBehaviour
         playerDataNetworkList.OnListChanged += OnServerListChanged;
     }
 
-    private void OnServerListChanged(NetworkListEvent<PlayerData> changeEvent)
+    private void OnServerListChanged(NetworkListEvent<PlayerInGameData> changeEvent)
     {
         //Debug.Log($"OnServerListChanged changed index: ");
         OnPlayerListOnServerChanged?.Invoke(this, EventArgs.Empty);
@@ -63,7 +63,7 @@ public class GameMultiplayer : NetworkBehaviour
 
         for (int i = 0; i<playerDataNetworkList.Count; i++)
         {
-            PlayerData playerData = playerDataNetworkList[i];
+            PlayerInGameData playerData = playerDataNetworkList[i];
             if (playerData.clientId == clientId)
             {              
                 // Game중이라면 GameManager에서 죽은걸로 처리. 어차피 재접속 안되게끔 구현할거니까 재접속시 처리는 안해도 된다. 해당 리스트 아이템을 삭제할 필요도 없다.
@@ -88,9 +88,9 @@ public class GameMultiplayer : NetworkBehaviour
     private void Client_OnClientConnectedCallback(ulong clientId)
     {
         // 서버RPC를 통해 서버에 저장
-        Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerProfileDataManager.Instance.GetCurrentPlayerClass()}");
+        Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerDataManager.Instance.GetCurrentPlayerClass()}");
         //ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
-        SavePlayerProfileDataOnServer(PlayerProfileDataManager.Instance.GetPlayerData());
+        SavePlayerInGameDataOnServer(PlayerDataManager.Instance.GetPlayerInGameData());
     }
     private void Client_OnClientDisconnectCallback(ulong obj)
     {
@@ -102,9 +102,9 @@ public class GameMultiplayer : NetworkBehaviour
     /// 로컬에 저장되어있는 Player 정보를 생성된 서버에 저장하는 스크립트 입니다.
     /// </summary>
     /// <param name="playerData"></param>
-    private void SavePlayerProfileDataOnServer(PlayerData playerData)
+    private void SavePlayerInGameDataOnServer(PlayerInGameData playerData)
     {
-        UpdatePlayerDataServerRPC(playerData);
+        UpdatePlayerInGameDataServerRPC(playerData);
     }
 
     /// <summary>
@@ -122,10 +122,10 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void UpdatePlayerDataServerRPC(PlayerData playerData, ServerRpcParams serverRpcParams = default)
+    private void UpdatePlayerInGameDataServerRPC(PlayerInGameData playerData, ServerRpcParams serverRpcParams = default)
     {
         // 새로운 유저
-        playerDataNetworkList.Add(new PlayerData
+        playerDataNetworkList.Add(new PlayerInGameData
         {
             clientId = serverRpcParams.Receive.SenderClientId,
             characterClass = playerData.characterClass,
@@ -160,9 +160,9 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     // 플레이어 client를 단서로 PlayerData(ClientId 포함 여러 플레이어 데이터)를 찾는 메소드
-    public PlayerData GetPlayerDataFromClientId(ulong clientId)
+    public PlayerInGameData GetPlayerDataFromClientId(ulong clientId)
     {
-        foreach (PlayerData playerData in playerDataNetworkList)
+        foreach (PlayerInGameData playerData in playerDataNetworkList)
         {
             if (playerData.clientId == clientId)
             {
@@ -173,7 +173,7 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     // 플레이어 Index를 단서로 PlayerData(ClientId 포함 여러 플레이어 데이터)를 찾는 메소드
-    public PlayerData GetPlayerDataFromPlayerIndex(int playerIndex)
+    public PlayerInGameData GetPlayerDataFromPlayerIndex(int playerIndex)
     {
         if (playerIndex >= playerDataNetworkList.Count)
         {
@@ -182,7 +182,7 @@ public class GameMultiplayer : NetworkBehaviour
         return playerDataNetworkList[playerIndex];
     }
     
-    public NetworkList<PlayerData> GetPlayerDataNetworkList()
+    public NetworkList<PlayerInGameData> GetPlayerDataNetworkList()
     {
         return playerDataNetworkList;
     }
@@ -190,7 +190,7 @@ public class GameMultiplayer : NetworkBehaviour
     /// <summary>
     /// 서버에서 호출해야하는 메소드
     /// </summary>
-    public void SetPlayerDataFromClientId(ulong clientId, PlayerData newPlayerData)
+    public void SetPlayerDataFromClientId(ulong clientId, PlayerInGameData newPlayerData)
     {
         //Debug.Log("SetPlayerDataFromClientId");
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
@@ -203,7 +203,7 @@ public class GameMultiplayer : NetworkBehaviour
     /// <param name="playerAnimState"></param>
     public void UpdatePlayerAnimStateOnServer(ulong clientId, PlayerMoveAnimState playerAnimState)
     {
-        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
         playerData.playerAnimState = playerAnimState;
         SetPlayerDataFromClientId(clientId, playerData);
         // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.

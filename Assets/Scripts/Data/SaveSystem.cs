@@ -16,19 +16,19 @@ public static class SaveSystem
  
         FileStream fileStream = new FileStream(path, FileMode.Create);
 
-        PlayerDataForSave data = new PlayerDataForSave(playerData);
+        PlayerData data = playerData;
         binaryFormatter.Serialize(fileStream, data);
         fileStream.Close();
     }
 
-    public static PlayerDataForSave LoadPlayerData()
+    public static PlayerData LoadPlayerData()
     {      
         if (File.Exists(path))
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream fileStream = new FileStream (path, FileMode.Open);
 
-            PlayerDataForSave data = binaryFormatter.Deserialize(fileStream) as PlayerDataForSave;
+            PlayerData data = binaryFormatter.Deserialize(fileStream) as PlayerData;
             fileStream.Close();
             return data;
         }

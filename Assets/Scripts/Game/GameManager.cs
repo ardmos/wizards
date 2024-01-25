@@ -162,8 +162,8 @@ public class GameManager : NetworkBehaviour
                 {
                     // 최후 생존으로 끝난 경우. 생존자 Win 처리    <<<<<<<<----------------- 여기부터!
                     // 생존자 PlayerData
-                    PlayerData winPlayer = new PlayerData();
-                    foreach (PlayerData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+                    PlayerInGameData winPlayer = new PlayerInGameData();
+                    foreach (PlayerInGameData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
                     {
                         if(playerData.playerGameState == PlayerGameState.Playing)
                         {
@@ -262,7 +262,7 @@ public class GameManager : NetworkBehaviour
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {          
             // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
-            PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+            PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
 
             if (playerData.playerGameState == PlayerGameState.GameOver) {
                 Debug.Log($"player{clientId}는 이미 게임오버처리된 플레이어입니다.");

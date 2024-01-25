@@ -61,7 +61,7 @@ public class Player : NetworkBehaviour, IStoreCustomer
 
         // HP 초기화 & 브로드캐스팅
         // 최대HP 저장
-        PlayerData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(requestedInitializeClientId);
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(requestedInitializeClientId);
         playerData.playerMaxHP = hp;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(requestedInitializeClientId, playerData);
         // 현재 HP 저장 및 설정
