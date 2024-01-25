@@ -90,18 +90,23 @@ public class UnityAuthenticationManager : MonoBehaviour
             //Initialize Unity Services. 이건 원래 여기서 하는 일.
             await UnityServices.InitializeAsync();
         }
-        Debug.Log($"Unity Services Initialized as {serviceProfileName}({GetPlayerID()})");
+        Debug.Log($"Unity Services Initialized as {serviceProfileName}({GetPlayerUnityAuthSessionID()})");
 
         SetupEvents();
     }
 
     /// <summary>
-    /// UnityServices를 초기화하면서 발급받은 AuthenticationService PlayerId를 리턴해줍니다. 
+    /// UnityServices를 초기화하면서 발급받은 AuthenticationService PlayerId를 리턴해줍니다. 이 PlayerId는 세션동안만 유지됩니다.
     /// </summary>
     /// <returns>AuthenticationService.Instance.PlayerId</returns>
-    public string GetPlayerID()
+    public string GetPlayerUnityAuthSessionID()
     {
         return AuthenticationService.Instance.PlayerId;
+    }
+
+    public string GetPlayerGooglePlayGamesID() 
+    {
+        return AuthenticationService.Instance.PlayerInfo.GetGooglePlayGamesId();
     }
 
     #if UNITY_EDITOR

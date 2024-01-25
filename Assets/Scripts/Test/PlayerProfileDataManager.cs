@@ -27,7 +27,12 @@ public class PlayerProfileDataManager : MonoBehaviour
         // Lobby씬에서는 로그아웃 기능 구현. 로그아웃 state를 true로 변경, Title씬으로 이동. 자연스레 로그인 과정 시작. 
 
 
-        LoadPlayerData();
+        if (!LoadPlayerData())
+        {
+            // 로드할 플레이어 정보가 없었던 경우. 
+            // 최초 데이터를 만들어준다.
+            SavePlayerData();
+        }
     }
 
     // Player 정보를 여기서 세이브&로드 할지???  이미 세이브시스템은 추가되었고, 활용 부분을 정리하면 됩니다.
@@ -46,7 +51,10 @@ public class PlayerProfileDataManager : MonoBehaviour
     private void SavePlayerData()
     {
         SaveSystem.SavePlayerData(playerData);
+        Debug.Log($"플레이어 정보 세이브 성공!");
     }
+
+    // 현재 사용 안하는 메소드. 세이브기능 동작 확인 후 삭제하자
     public void UpdatePlayerData(PlayerData playerData) // 이 메소드 필요 없이 아래에서 Set이름, 클래스 할 때 SavePlayerData() 호출하는방식이면 어떨까? 더 깔끔한걸로 선택하자.
     {
         this.playerData = playerData;
@@ -54,11 +62,16 @@ public class PlayerProfileDataManager : MonoBehaviour
     }
 
     // 2. Player정보 불러오기
-    private void LoadPlayerData()
+    /// <summary>
+    /// 성공여부를 반환합니다.
+    /// </summary>
+    /// <returns></returns>
+    private bool LoadPlayerData()
     {
-        PlayerDataForSave playerDataForSave = SaveSystem.LoadPlayerData(UnityAuthenticationManager.Instance.GetPlayerID());
+        PlayerDataForSave playerDataForSave = SaveSystem.LoadPlayerData();
         if (playerDataForSave != null)
         {
+            Debug.Log($"플레이어 정보 로드 성공!");
             playerData = new PlayerData()
             {
                 playerLevel = playerDataForSave.playerLevel,
@@ -66,6 +79,12 @@ public class PlayerProfileDataManager : MonoBehaviour
                 playerName = playerDataForSave.playerName,
                 characterClass = playerDataForSave.characterClass
             };
+            return true;
+        }
+        else
+        {
+            Debug.Log($"로드할 플레이어 정보가 없습니다.");
+            return false;
         }
     }
 
@@ -87,6 +106,7 @@ public class PlayerProfileDataManager : MonoBehaviour
     public void SetPlayerName(string newName)
     {
         playerData.playerName = newName;
+        SavePlayerData();
     }
 
     public string GetPlayerName()
@@ -97,7 +117,8 @@ public class PlayerProfileDataManager : MonoBehaviour
     // Lobby Scene 전용. Client 내부 저장용
     public void SetCurrentPlayerClass(CharacterClass characterClass) 
     { 
-        playerData.characterClass = characterClass; 
+        playerData.characterClass = characterClass;
+        SavePlayerData();
     }
 
     public CharacterClass GetCurrentPlayerClass() 

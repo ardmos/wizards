@@ -7,12 +7,13 @@ using UnityEngine;
 /// </summary>
 public static class SaveSystem
 {
+    // wak는 Wizards and Knights의 세이브 파일 자료형. 로그인 구현이 안된 지금은 파일명을 하드코딩합니다.    
+    private static string path = Application.persistentDataPath + $"/playerSaveData.wak";
+
     public static void SavePlayerData(PlayerData playerData)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-        // wak는 Wizards and Knights의 세이브 파일 자료형
-        string path = Application.persistentDataPath + $"{playerData.playerId}.wak";
+ 
         FileStream fileStream = new FileStream(path, FileMode.Create);
 
         PlayerDataForSave data = new PlayerDataForSave(playerData);
@@ -20,10 +21,9 @@ public static class SaveSystem
         fileStream.Close();
     }
 
-    public static PlayerDataForSave LoadPlayerData(string playerId)
-    {
-        string path = Application.persistentDataPath + $"{playerId}.wak";
-        if(File.Exists(path))
+    public static PlayerDataForSave LoadPlayerData()
+    {      
+        if (File.Exists(path))
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream fileStream = new FileStream (path, FileMode.Open);
