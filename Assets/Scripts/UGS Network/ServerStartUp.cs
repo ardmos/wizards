@@ -113,8 +113,9 @@ public class ServerStartUp : MonoBehaviour
             {
                 Debug.Log($"Got payload: {matchmakingPayload}");
                 //MaxPlayer 10에서3으로 변경하고 Pool 룰 최대 플레이어 카운트 9에서 2로 변경했음. 테스트를 위해!
-                // 1. GameRoomScene으로 이동
-                LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);                
+                // 1. GameRoomScene으로 이동 <<<<< 대신, UI를 띄워주기로 했습니다. 현재 구현중. 
+                //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);     
+
                 await StartBackfill(matchmakingPayload);
             }
             else
@@ -240,6 +241,9 @@ public class ServerStartUp : MonoBehaviour
                 await MatchmakerService.Instance.DeleteBackfillTicketAsync(localBackfillTicket.Id);
                 localBackfillTicket.Id = null;
                 backfilling = false;
+
+
+                // 이곳에서 화면 이동 전에, 롤같이 UI 이펙트 추가해주면 좋을 것 같다. 
 
                 // 모든 인원이 모였다! 화면 이동!
                 LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);

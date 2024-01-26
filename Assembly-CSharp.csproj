@@ -68,6 +68,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Game\ForTest\SelectHostClientForTest.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupLookingForGame\PopupLookingForGameUI.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\GoToLobbyScene.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameReadyUI.cs" />
@@ -124,7 +125,6 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\SwitchUI.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
-    <Compile Include="Assets\Scripts\Lobby\PopupLookingForGameUI.cs" />
     <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\Game\Item\PotionHP.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
@@ -138,6 +138,7 @@
     <Compile Include="Assets\Scripts\Players_InGame\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\Game\Item\ScrollFireRateUp.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupWatingForPlayers\PopupWatingForPlayers.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />

@@ -13,7 +13,7 @@ public class TestNetworkUIController : MonoBehaviour
     {
         btnStartServer.onClick.AddListener(()=> {
             GameMultiplayer.Instance.StartServer();
-            LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
+            //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
         });
         btnStartClient.onClick.AddListener(()=> {
             GameMultiplayer.Instance.StartClient();

@@ -8,7 +8,7 @@ using UnityEngine;
 /// UGS Start Server, Start Client
 /// NetworkList 관리
 /// 
-/// // 순수 서버 스크립트로 만들 필요가 있다. 추후 클라/서버 스크립트 분리 때 참고.
+/// // 순수 서버 스크립트로 만들 필요가 있다. 추후 클라/서버 스크립트 분리 때 참고.  이 클래스 이름도 마음에 안든다.
 /// </summary>
 
 public class GameMultiplayer : NetworkBehaviour
@@ -23,8 +23,8 @@ public class GameMultiplayer : NetworkBehaviour
 
     public static GameMultiplayer Instance { get; private set; }
 
-    public event EventHandler OnTryingToJoinGame;
-    public event EventHandler OnFailedToJoinGame;
+    public event EventHandler OnSucceededToJoinMatch;
+    public event EventHandler OnFailedToJoinMatch;
     public event EventHandler OnPlayerListOnServerChanged;
     public event EventHandler OnPlayerMoveAnimStateChanged;
 
@@ -39,6 +39,7 @@ public class GameMultiplayer : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        Debug.Log("OnNetworkSpawn()");
         playerDataNetworkList.OnListChanged += OnServerListChanged;
     }
 
@@ -46,6 +47,7 @@ public class GameMultiplayer : NetworkBehaviour
     {
         //Debug.Log($"OnServerListChanged changed index: ");
         OnPlayerListOnServerChanged?.Invoke(this, EventArgs.Empty);
+        Debug.Log($"현재 참여중인 총 플레이어 수 : {GameMultiplayer.Instance.GetPlayerDataNetworkList().Count}");
     }
 
     // UGS Dedicated Server 
@@ -57,29 +59,43 @@ public class GameMultiplayer : NetworkBehaviour
         NetworkManager.Singleton.StartServer();
     }
 
-    // GameRoom에서 Client가 나갔을 때 플레이어를 없애주는 부분.
+    /// <summary>
+    /// 서버에 참여중인 플레이어가 나간 경우 처리해주는 부분.
+    /// 현재는 게임도중 나갔을 경우에대한 처리만 해주고 있습니다.
+    /// </summary>
+    /// <param name="clientId"></param>
     private void Server_OnClientDisconnectCallback(ulong clientId)
     {
-
-        for (int i = 0; i<playerDataNetworkList.Count; i++)
-        {
-            PlayerInGameData playerData = playerDataNetworkList[i];
-            if (playerData.clientId == clientId)
-            {              
-                // Game중이라면 GameManager에서 죽은걸로 처리. 어차피 재접속 안되게끔 구현할거니까 재접속시 처리는 안해도 된다. 해당 리스트 아이템을 삭제할 필요도 없다.
-                GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
-
-                Debug.Log($"Server_OnClientDisconnectCallback");
-            }
+        // 게임중인지 확인.
+        if (GameManager.Instance == null) { 
+            Debug.Log("유저가 나갔지만 게임씬이 아닙니다.");
+            if(GetPlayerDataIndexFromClientId(clientId) != -1) 
+                playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
+            return; 
         }
+
+        // Game중이라면 GameManager에서 죽은걸로 처리. 어차피 재접속 안되게끔 구현할거니까 재접속시 처리는 안해도 된다. 해당 리스트 아이템을 삭제할 필요도 없다.
+        if (GetPlayerDataIndexFromClientId(clientId) != -1)
+            GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
+        Debug.Log($"Server_OnClientDisconnectCallback");
     }
 
     public void StartClient()
     {
-        OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
+        //OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
         NetworkManager.Singleton.OnClientConnectedCallback += Client_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartClient();
+    }
+
+    public void StopClient()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback -= Client_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= Client_OnClientDisconnectCallback;
+
+        // 클라이언트측 네트워크매니저를 껐다가 다시 켤 때, OnNetworkSpawn도 호출됩니다. 그 때 아래 이벤트가 또다시 등록되기때문에 구독취소를 해주고있습니다.
+        playerDataNetworkList.OnListChanged -= OnServerListChanged;
+        NetworkManager.Singleton.Shutdown();
     }
     /// <summary>
     ///  클라이언트 측에서. 접속 성공시 할 일들
@@ -87,6 +103,8 @@ public class GameMultiplayer : NetworkBehaviour
     /// </summary>
     private void Client_OnClientConnectedCallback(ulong clientId)
     {
+        // 매칭 UI 실행을 위한 이벤트 핸들러 호출
+        OnSucceededToJoinMatch?.Invoke(this, EventArgs.Empty);
         // 서버RPC를 통해 서버에 저장
         Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerDataManager.Instance.GetCurrentPlayerClass()}");
         //ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
@@ -95,7 +113,8 @@ public class GameMultiplayer : NetworkBehaviour
     private void Client_OnClientDisconnectCallback(ulong obj)
     {
         Debug.Log($"OnClientDisconnectCallback : {obj}");
-        OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
+        // 매칭 UI 숨김을 위한 이벤트 핸들러 호출. 
+        OnFailedToJoinMatch?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>

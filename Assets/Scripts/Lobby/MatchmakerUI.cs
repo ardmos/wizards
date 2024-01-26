@@ -11,11 +11,9 @@ using Unity.Services.Core;
 using Unity.Services.Matchmaker;
 using Unity.Services.Matchmaker.Models;
 
-
-// 필요한 것
-// 1. UGS 서버 이니셜라이즈 되기 전까지 버튼 비활성화 <- TitleScene에서 서버 이니셜라이즈 이미 한걸로 해결.
-// 2. 매치메이킹 서버 설정
-// 3. 클라이언트 설정
+/// <summary>
+/// 이제는 안쓰는 스크립트. MatchmakerClient가 대신합니다.
+/// </summary>
 
 public class MatchmakerUI : MonoBehaviour
 {

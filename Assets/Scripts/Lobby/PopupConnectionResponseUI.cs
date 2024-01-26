@@ -3,6 +3,10 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ConnectionNotificationManager 로 이름을 바꾸는게 낫겠다. <<<< 바꾸기!
+/// </summary>
+
 public class PopupConnectionResponseUI : MonoBehaviour
 {
     [SerializeField] private GameObject objectIconError;
@@ -15,7 +19,7 @@ public class PopupConnectionResponseUI : MonoBehaviour
 
     private void Start()
     {
-        GameMultiplayer.Instance.OnFailedToJoinGame += GameMultiplayer_OnFailedToJoinGame;
+        GameMultiplayer.Instance.OnFailedToJoinMatch += GameMultiplayer_OnFailedToJoinGame;
 
         btnClose.onClick.AddListener(Hide);
 
@@ -64,6 +68,6 @@ public class PopupConnectionResponseUI : MonoBehaviour
     private void OnDestroy()
     {
         // GameMultiplayer와 현 스크립트의 오브젝트는 라이프사이클이 다르기 때문에 손수 이벤트 구독을 해제해준다
-        GameMultiplayer.Instance.OnFailedToJoinGame -= GameMultiplayer_OnFailedToJoinGame;
+        GameMultiplayer.Instance.OnFailedToJoinMatch -= GameMultiplayer_OnFailedToJoinGame;
     }
 }
