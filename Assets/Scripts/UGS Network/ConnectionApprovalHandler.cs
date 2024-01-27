@@ -11,11 +11,16 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ConnectionApprovalHandler : MonoBehaviour
 {
-    public static int MaxPlayers = 3;
+    public static int MaxPlayers = 4;
 
     private void Start()
     {
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;    
+    }
+
+    private void OnDestroy()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback -= ApprovalCheck;
     }
 
     private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)

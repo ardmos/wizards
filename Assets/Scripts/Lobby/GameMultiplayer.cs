@@ -47,7 +47,11 @@ public class GameMultiplayer : NetworkBehaviour
     {
         //Debug.Log($"OnServerListChanged changed index: ");
         OnPlayerListOnServerChanged?.Invoke(this, EventArgs.Empty);
-        Debug.Log($"현재 참여중인 총 플레이어 수 : {GameMultiplayer.Instance.GetPlayerDataNetworkList().Count}");
+        
+        
+        // 서버 내부 기록용 로그 입니다.
+        if(IsServer)
+            Debug.Log($"현재 참여중인 총 플레이어 수 : {GetPlayerCount()}");
     }
 
     // UGS Dedicated Server 
@@ -68,7 +72,7 @@ public class GameMultiplayer : NetworkBehaviour
     {
         // 게임중인지 확인.
         if (GameManager.Instance == null) { 
-            Debug.Log("유저가 나갔지만 게임씬이 아닙니다.");
+            //Debug.Log("유저가 나갔지만 게임씬이 아닙니다.");
             if(GetPlayerDataIndexFromClientId(clientId) != -1) 
                 playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
             return; 
@@ -157,11 +161,19 @@ public class GameMultiplayer : NetworkBehaviour
             $"player{serverRpcParams.Receive.SenderClientId} Name: {playerData.playerName} Class: {playerData.characterClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
     }
 
-    // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
+    // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용 <<< 쓸필요 없어보임. 봐서 아래 메소드로 대체 가능
     public bool IsPlayerIndexConnected(int playerIndex)
     {
         //Debug.Log($"IsPlayerIndexConnected playerIndex: {playerIndex}, playerDataNetworkList.Count: {playerDataNetworkList.Count}");
         return playerIndex < playerDataNetworkList.Count;
+    }
+
+    /// <summary>
+    /// 플레이어 접속 확인 메소드. 
+    /// </summary>
+    public bool IsPlayerConnected(ulong clientId)
+    {
+        return NetworkManager.Singleton.ConnectedClientsIds.Contains(clientId);
     }
 
     // 플레이어 clientID를 단서로 player Index를 찾는 메소드
@@ -204,6 +216,11 @@ public class GameMultiplayer : NetworkBehaviour
     public NetworkList<PlayerInGameData> GetPlayerDataNetworkList()
     {
         return playerDataNetworkList;
+    }
+
+    public byte GetPlayerCount()
+    {
+        return (byte)playerDataNetworkList.Count;
     }
 
     /// <summary>

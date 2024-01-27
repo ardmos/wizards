@@ -112,7 +112,7 @@ public class ServerStartUp : MonoBehaviour
             if (matchmakingPayload != null)
             {
                 Debug.Log($"Got payload: {matchmakingPayload}");
-                //MaxPlayer 10에서3으로 변경하고 Pool 룰 최대 플레이어 카운트 9에서 2로 변경했음. 테스트를 위해!
+                //MaxPlayer 10에서4으로 변경하고 Pool 룰 최대 플레이어 카운트 9에서 1로 변경했음. 팀은 4로 변경하고. 테스트를 위해!
                 // 1. GameRoomScene으로 이동 <<<<< 대신, UI를 띄워주기로 했습니다. 현재 구현중. 
                 //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);     
 

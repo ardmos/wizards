@@ -13,7 +13,7 @@ public class GameRoomUI : MonoBehaviour
     {
         btnReady.onClick.AddListener(()=>
         {
-            GameRoomReadyManager.Instance.SetPlayerReadyClientUI();
+            GameRoomReadyManager.Instance.SetPlayerReadyServerRpc();
         });
 
         btnBack.onClick.AddListener(() =>
