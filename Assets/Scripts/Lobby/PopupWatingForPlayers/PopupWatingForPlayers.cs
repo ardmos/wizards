@@ -28,7 +28,7 @@ public class PopupWatingForPlayers : MonoBehaviour
 
     public Button btnCancel;
     public Button btnReady;
-
+    public Image imgTimer;
     public TextMeshProUGUI txtPlayerCount;
     public Toggle[] toggleArrayPlayerJoined;
     public bool isCancellationRequested;
