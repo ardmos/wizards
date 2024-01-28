@@ -1,7 +1,9 @@
+using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameMatchReadyManager;
 
 /// <summary>
 /// 게임룸씬을 UI로 대체하기로 했습니다.
@@ -20,21 +22,19 @@ public class PopupWatingForPlayers : MonoBehaviour
     public enum MatchingState
     {
         WatingForPlayers,
-        WatingForReady,
-        CancelMatch,
+        WatingForReady
     }
 
     public MatchingState matchingState = MatchingState.WatingForPlayers;
 
     public Button btnCancel;
     public Button btnReady;
-    public Image imgTimer;
+    public Image imgReadyCountdown;
     public TextMeshProUGUI txtPlayerCount;
     public Toggle[] toggleArrayPlayerJoined;
     public bool isCancellationRequested;
+    public bool isReadyCountdownUIAnimStarted;
 
-
-    private byte playerCount;
 
 
     // Start is called before the first frame update
@@ -43,7 +43,7 @@ public class PopupWatingForPlayers : MonoBehaviour
         GameMultiplayer.Instance.OnSucceededToJoinMatch += OnSucceededToJoinMatch;
         GameMultiplayer.Instance.OnFailedToJoinMatch += OnFailedToJoinMatch;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged += OnPlayerListOnServerChanged;
-        GameRoomReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyChanged;
+        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyChanged;
 
         btnCancel.onClick.AddListener(CancelMatch);
         btnReady.onClick.AddListener(ReadyMatch);
@@ -56,47 +56,88 @@ public class PopupWatingForPlayers : MonoBehaviour
         GameMultiplayer.Instance.OnSucceededToJoinMatch -= OnSucceededToJoinMatch;
         GameMultiplayer.Instance.OnFailedToJoinMatch -= OnFailedToJoinMatch;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged -= OnPlayerListOnServerChanged;
-        GameRoomReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyChanged;
+        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyChanged;
     }
 
 
     private void RunStateMachine()
     {
         // 1. 서버에 퇴장의사 보고 완료 됐으면 퇴장 단계 진행
-        if (isCancellationRequested) matchingState = MatchingState.CancelMatch;
+        if (isCancellationRequested)
+        {
+            // 현 플레이어가 매칭 티켓에서 퇴장하려는 단계
+            // 1. 퇴장 실행
+            GameMultiplayer.Instance.StopClient();
+            Hide();
+        }
 
         switch (matchingState)
         {
             case MatchingState.WatingForPlayers:
                 // 아직 인원이 덜 모인 단계
-                // 1. 레디 버튼 비활성화
-                btnReady.gameObject.SetActive(false);
+
+                // 1. 혹시 카운트다운이 실행중이었다면 중지.
+                if (isReadyCountdownUIAnimStarted)
+                {
+                    StopAllCoroutines();
+                }
+                imgReadyCountdown.fillAmount = 0;
+                isReadyCountdownUIAnimStarted = false;
 
                 // 2. 접속중인 인원 표시
+                byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
                 Debug.Log($"(클라이언트)현재 참여중인 총 플레이어 수 : {playerCount}");
                 txtPlayerCount.text = $"Wating For Players... ({playerCount.ToString()}/4)";
 
                 // UI에 숫자 반영 
                 ActivateToggleUI(playerCount);
+
                 break;
 
             case MatchingState.WatingForReady:
                 // 인원이 모두 모여서 레디를 기다리는 단계
-                break;
 
-            case MatchingState.CancelMatch:
-                // 현 플레이어가 매칭 티켓에서 퇴장하려는 단계
-                // 1. 퇴장 실행
-                GameMultiplayer.Instance.StopClient();
-                Hide();
+                // 1. 카운트다운 UI 활성화
+                if(!isReadyCountdownUIAnimStarted)
+                    ActivateReadyCountdownUI();
                 break;
             default:
                 break;
         }
     }
 
+    private void ActivateReadyCountdownUI()
+    {
+        isReadyCountdownUIAnimStarted = true;
+        float countdownMaxTime = GameMatchReadyManager.readyCountdownMaxTime;
+
+        StartCoroutine(StartCountdownAnim(countdownMaxTime));
+    }
+
+    private IEnumerator StartCountdownAnim(float countdownMaxTime)
+    {
+        float time = 0f;
+        while (time <= countdownMaxTime) 
+        {
+            yield return new WaitForSeconds(Time.deltaTime);
+            time += Time.deltaTime;
+
+            imgReadyCountdown.fillAmount = time / countdownMaxTime;
+        }
+
+        // 이때까지 레디버튼이 안눌려서 SetActive상태이면 현 플레이어를 퇴장조치 합니다
+        if(btnReady.gameObject.activeSelf) 
+        {
+            CancelMatch();
+        }
+    }
+
     private void OnReadyChanged(object sender, System.EventArgs e)
     {
+        // 이 팝업 오브젝트가 활성화되지 않았단건 서버란 뜻. 서버에선 구치 실행해줄 필요 없는 내용입니다.
+        if (!gameObject.activeSelf) return;
+
+        Debug.Log("팝업 OnReadyChanged()");
         UpdateToggleUIState();
         RunStateMachine();
     }
@@ -116,29 +157,46 @@ public class PopupWatingForPlayers : MonoBehaviour
     /// </summary>
     private void OnSucceededToJoinMatch(object sender, System.EventArgs e)
     {
-        Show();       
+        Show();
+        //Debug.Log($"(OnSucceededToJoinMatch)현재 참여중인 총 플레이어 수 : {GameMultiplayer.Instance.GetPlayerCount()}");
     }
 
     /// <summary>
     /// 현재 참여중인 플레이어 숫자에 변동이 있을 때 호출되는 메소드 입니다.
-    /// 접속중인 플레이어 숫자에 맞춰서 UI를 업데이트해줍니다.
-    /// 플레이어 숫자만큼 접속표시를 합니다.
-    /// 플레이어 인원이 꽉 차면 레디 확인을 시작합니다.
+    /// 호출될 때 마다 RunStateMachine()을 호출해서 현 State에 맞는 UI 업데이트를 진행해줍니다.
     /// </summary>
     private void OnPlayerListOnServerChanged(object sender, System.EventArgs e)
     {
+        // 이 팝업 오브젝트가 활성화되지 않았단건 서버란 뜻. 서버에선 구치 실행해줄 필요 없는 내용입니다.
+        if (!gameObject.activeSelf) return;
+
         // 접속중인 플레이어 수
-        playerCount = GameMultiplayer.Instance.GetPlayerCount();
-        RunStateMachine();
+        byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
 
         // 게임 인원 다 모였는지 여부에 따라 처리
         if (playerCount == ConnectionApprovalHandler.MaxPlayers)
         {
+            RunStateMachine();
+            // 1. 레디 버튼 활성화
             btnReady.gameObject.SetActive(true);
             matchingState = MatchingState.WatingForReady;
         }
-        else matchingState = MatchingState.WatingForPlayers;
+        else
+        {
+            // 1. 레디 버튼 활성화
+            btnReady.gameObject.SetActive(false);
+            matchingState = MatchingState.WatingForPlayers;
+        }
+
+        Debug.Log($"현재 참여중인 총 플레이어 수 : {playerCount}, matchingState:{matchingState}");
+        RunStateMachine();
+
+        /*        Debug.Log($"Client측 PlayerList 반영 완료. 현재 참여중인 총 플레이어 수 : {GameMultiplayer.Instance.GetPlayerCount()}");
+                matchingState = GameMatchReadyManager.Instance.GetMatchingStateOnClientSide();
+
+                RunStateMachine();*/
     }
+
 
     /// <summary>
     /// 플레이어 레디버튼 클릭시 동작하는 메소드 입니다.
@@ -147,7 +205,7 @@ public class PopupWatingForPlayers : MonoBehaviour
     /// </summary>
     private void ReadyMatch()
     {
-        GameRoomReadyManager.Instance.SetPlayerReadyServerRpc();
+        GameMatchReadyManager.Instance.SetPlayerReadyServerRpc();
         btnReady.gameObject.SetActive(false);   
     }
 
@@ -177,7 +235,7 @@ public class PopupWatingForPlayers : MonoBehaviour
             if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
             {
                 PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-                toggleArrayPlayerJoined[playerIndex].isOn = GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId);
+                toggleArrayPlayerJoined[playerIndex].isOn = GameMatchReadyManager.Instance.IsPlayerReady(playerData.clientId);
             }
             else
             {
@@ -188,11 +246,12 @@ public class PopupWatingForPlayers : MonoBehaviour
 
     /// <summary>
     /// 현재 매칭중인 티켓에서 나갑니다. 
+    /// SetPlayerUnReadyServerRPC()-> OnReadyChanged() -> RunStateMachine() 순서로 실행돼서 퇴장이 완료됩니다.
     /// </summary>
     private void CancelMatch()
     {
-        GameRoomReadyManager.Instance.SetPlayerUnReadyServerRPC();
         isCancellationRequested = true;
+        GameMatchReadyManager.Instance.SetPlayerUnReadyServerRPC();
     }
 
     private void Show()
@@ -200,9 +259,12 @@ public class PopupWatingForPlayers : MonoBehaviour
         gameObject.SetActive(true);
 
         isCancellationRequested = false;
+        isReadyCountdownUIAnimStarted = false;
         matchingState = MatchingState.WatingForPlayers;
+        imgReadyCountdown.fillAmount = 0;
 
-        RunStateMachine();
+        Debug.Log("팝업 Show()");
+        //RunStateMachine();
     }
 
     private void Hide()

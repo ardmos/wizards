@@ -39,7 +39,7 @@ public class GameMultiplayer : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log("OnNetworkSpawn()");
+        //Debug.Log("OnNetworkSpawn()");
         playerDataNetworkList.OnListChanged += OnServerListChanged;
     }
 
@@ -47,11 +47,6 @@ public class GameMultiplayer : NetworkBehaviour
     {
         //Debug.Log($"OnServerListChanged changed index: ");
         OnPlayerListOnServerChanged?.Invoke(this, EventArgs.Empty);
-        
-        
-        // 서버 내부 기록용 로그 입니다.
-        if(IsServer)
-            Debug.Log($"현재 참여중인 총 플레이어 수 : {GetPlayerCount()}");
     }
 
     // UGS Dedicated Server 
@@ -72,7 +67,7 @@ public class GameMultiplayer : NetworkBehaviour
     {
         // 게임중인지 확인.
         if (GameManager.Instance == null) { 
-            //Debug.Log("유저가 나갔지만 게임씬이 아닙니다.");
+            Debug.Log("유저가 나갔지만 게임씬이 아닙니다.");
             if(GetPlayerDataIndexFromClientId(clientId) != -1) 
                 playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
             return; 
@@ -101,6 +96,7 @@ public class GameMultiplayer : NetworkBehaviour
         playerDataNetworkList.OnListChanged -= OnServerListChanged;
         NetworkManager.Singleton.Shutdown();
     }
+
     /// <summary>
     ///  클라이언트 측에서. 접속 성공시 할 일들
     ///  1. NetworkList인 PlayerDataList에 현재 선택중인 클래스 정보를 등록한다.

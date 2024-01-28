@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// 이제 사용 안함. 삭제 가능
 public class GameRoomUI : MonoBehaviour
 {
     [SerializeField] private Button btnReady;
@@ -13,7 +14,7 @@ public class GameRoomUI : MonoBehaviour
     {
         btnReady.onClick.AddListener(()=>
         {
-            GameRoomReadyManager.Instance.SetPlayerReadyServerRpc();
+            GameMatchReadyManager.Instance.SetPlayerReadyServerRpc();
         });
 
         btnBack.onClick.AddListener(() =>

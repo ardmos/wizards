@@ -101,7 +101,6 @@
     <Compile Include="Assets\Scripts\Spells\IceSpell.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
-    <Compile Include="Assets\Scripts\GameRoom\GameRoomReadyManager.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameUI.cs" />
     <Compile Include="Assets\Scripts\Data\SpellSpecifications.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Knight.cs" />
@@ -173,6 +172,7 @@
     <Compile Include="Assets\Scripts\Game\Item\ScrollGuide.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Game\UI\CustomOnScreenStick.cs" />
+    <Compile Include="Assets\Scripts\GameRoom\GameMatchReadyManager.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\DailyGroupUI.cs" />
     <Compile Include="Assets\Scripts\Data\SpellStateEventData.cs" />

@@ -1,5 +1,7 @@
 using UnityEngine;
 /// <summary>
+///     /// 이제 사용 안함. 삭제 가능
+///     
 /// /// GameRoom의 캐릭터 상태 관리
 /// 1. player index에 맞춰 Player Visual Prefab을 업데이트 해줍니다.
 /// 2. 캐릭터 머리 위에 'READY' UI를 업데이트 해줍니다.
@@ -19,7 +21,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
 
     private void Awake()
     {
-        GameRoomReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyChanged;
+        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyChanged;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged += OnServerPlayerListChanged;
     }
 
@@ -41,7 +43,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameRoomReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyChanged;
+        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyChanged;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged -= OnServerPlayerListChanged;
     }
 
@@ -116,7 +118,7 @@ public class GameRoomPlayerCharacter : MonoBehaviour
         if(GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
         {
             PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-            readyGameObject.SetActive(GameRoomReadyManager.Instance.IsPlayerReady(playerData.clientId));
+            readyGameObject.SetActive(GameMatchReadyManager.Instance.IsPlayerReady(playerData.clientId));
         }
         else
         {
