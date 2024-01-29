@@ -8,17 +8,16 @@ public class PopupShopUI : MonoBehaviour
     [SerializeField] private Button btnBack;
     [SerializeField] private Button btnHome;
 
+    [SerializeField] private DailyGroupUI dailyGroupUI;
+
     // Start is called before the first frame update
     void Start()
     {
         btnBack.onClick.AddListener(Hide);
         btnHome.onClick.AddListener(Hide);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Daily 카테고리의 아이템들 생성
+        dailyGroupUI.GenerateItems();
     }
 
     public void Show()

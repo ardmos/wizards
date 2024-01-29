@@ -47,6 +47,8 @@ public class LobbyUI : MonoBehaviour
         btnShop.onClick.AddListener(() => { popupShop.Show(); });
         btnEquipment.onClick.AddListener(() => { popupEquipment.Show(); });
         btnClan.onClick.AddListener(() => { popupClan.Show(); });
+        
+        // 잠시 테스트용으로 주석처리함
         btnMod.onClick.AddListener(() => { popupMod.Show(); });
 
         btnInbox.onClick.AddListener(() => { popupInbox.Show(); });
