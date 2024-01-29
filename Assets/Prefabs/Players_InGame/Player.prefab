@@ -2610,6 +2610,7 @@ MonoBehaviour:
   - {x: 10, y: 0, z: 0}
   - {x: -10, y: 0, z: 0}
   - {x: 0, y: 0, z: -10}
+  isPlayerGameOver: 0
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2716,10 +2717,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d9a03a873a9884086712713b853b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpellPrefabArray: []
-  player: {fileID: 932501098101691876}
-  muzzle: {fileID: 932501096560631534}
-  restTimeCurrentSpellArray: []
+  spellInfoListOnClient: []
+  restTimeCurrentSpellArrayOnClient:
+  - 0
+  - 0
+  - 0
 --- !u!114 &5033900459084263869
 MonoBehaviour:
   m_ObjectHideFlags: 0
