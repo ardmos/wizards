@@ -29,7 +29,7 @@ public class SpellInfo : INetworkSerializable
     }
 
     /// <summary>
-    /// 레벨과 스펠 타입으로 스펠 이름을 검색해 부여해주는 메소드 입니다.
+    /// 스펠의 레벨에 맞는 이름을 설정해주는 메소드 입니다.
     /// </summary>
     /// <param name="level"></param>
     /// <param name="spellType"></param>

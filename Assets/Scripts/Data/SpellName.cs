@@ -10,10 +10,10 @@ public enum SpellName
     IceBallLv1,
     IceSpellEnd,
     SlashSpellStart,
-    SlashLv1,
+    StoneSlashLv1,
     SlashSpellEnd,
     DefenceSpellStart,
-    DefenceLv1,
+    MagicShieldLv1,
     DefenceSpellEnd,
     Max
 }

@@ -1,29 +1,29 @@
 using UnityEngine;
 /// <summary>
 /// 1레벨 한손검 베기 스킬 스크립트입니다.  
-/// 속성 : 노말
+/// 속성 : Stone
 /// 
 /// 테스트용.
 /// 추후 Knight 직업 손볼 때 다듬을 필요 있음.
 /// </summary>
-public class SlashLv1 : Spell
+public class StoneSlashLv1 : AttackSpell  // 임시로 사용. Knight용 스킬 클래스를 따로 만들어줘야한다!
 {
     /// <summary>
     /// 1. 상세 능력치 설정(마법 사용시에 Server에서 부여해주는 능력치 입니다.)
     /// </summary>
     public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
-        Debug.Log($"InitSpellInfoDetail() {nameof(SlashLv1)}");
+        Debug.Log($"InitSpellInfoDetail() {nameof(StoneSlashLv1)}");
         spellInfo = spellInfoFromServer;
 
         if (spellInfo == null)
         {
-            Debug.Log("SlashLv1 Spell Info is null");
+            Debug.Log("StoneSlashLv1 AttackSpell Info is null");
         }
         else
         {
-            Debug.Log("SlashLv1 Spell Info is not null");
-            Debug.Log($"SlashLv1 spell Type : {spellInfo.spellType}, level : {spellInfo.level}");
+            Debug.Log("StoneSlashLv1 AttackSpell Info is not null");
+            Debug.Log($"StoneSlashLv1 spell Type : {spellInfo.spellType}, level : {spellInfo.level}");
         }
     }
 
@@ -44,7 +44,7 @@ public class SlashLv1 : Spell
             return result;
         }
         // resultLevel값이 0보다 큰 경우는 내가 이긴 경우. 노말타입은 노말을 반환한다.
-        result.spellType = SpellType.Normal;
+        result.spellType = SpellType.Stone;
         result.SetSpellName(result.level, result.spellType);
         return result;
     }

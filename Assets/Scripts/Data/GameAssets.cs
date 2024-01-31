@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
+/// 이 스크립트 정리 필요. 깔끔하게. 
+/// 
 /// 게임에 필요한 애셋들(Mesh 등등...)을 갖고있는 스크립트
 /// 필요할때마다 접근해서 꺼내 쓰면 된다.
 /// </summary>
@@ -27,74 +29,29 @@ public class GameAssets : MonoBehaviour
 
     #region Sprites
     public Sprite s_RemoveAds;
-
-    // 스킬 Icon Images
-    public Sprite[] spellIconsArray;
     #endregion
 
-    #region Mesh
-    public Mesh m_Body_1;
-    public Mesh m_Body_2;
-    public Mesh m_Body_3;
-    public Mesh m_Body_4;
-    public Mesh m_Body_5;
-    public Mesh m_Body_6;
-    public Mesh m_Body_7;
-    public Mesh m_Body_8;
-    public Mesh m_Body_9;
-    public Mesh m_Body_10;
-    public Mesh m_Body_11;
-    public Mesh m_Body_12;
-    public Mesh m_Body_13;
-    public Mesh m_Body_14;
-    public Mesh m_Body_15;
-    public Mesh m_Body_16;
-    public Mesh m_Body_17;
-    public Mesh m_Body_18;
-    public Mesh m_Body_19;
-    public Mesh m_Body_20;
-    public Mesh m_BackPack_1;
-    public Mesh m_BackPack_2;
-    public Mesh m_BackPack_3;
-    public Mesh m_Wand_1;
-    public Mesh m_Wand_2;
-    public Mesh m_Wand_3;
-    public Mesh m_Wand_4;
-    public Mesh m_Wand_5;
-    public Mesh m_Wand_6;
-    public Mesh m_Wand_7;
-    public Mesh m_Hat_1;
-    public Mesh m_Hat_2;
-    public Mesh m_Hat_3;
-    public Mesh m_Hat_4;
-    public Mesh m_Hat_5;
-    public Mesh m_Hat_6;
-    public Mesh m_Hat_7;
-    public Mesh m_Hat_8;
-    public Mesh m_Hat_9;
-    public Mesh m_Hat_10;
-    public Mesh m_Hat_11;
-    public Mesh m_Hat_12;
-    public Mesh m_Hat_13;
-    public Mesh m_Hat_14;
-    public Mesh m_Scroll_1;
-    public Mesh m_Scroll_2;
-    public Mesh m_Scroll_3;
-    public Mesh m_Scroll_4;
-    public Mesh m_Scroll_5;
-    #endregion Mesh
 
-    #region Prefab
-    // 스펠 프리팹
-    public GameObject[] spellPrefabList;
+    #region Spells
+    [System.Serializable]
+    public struct SpellAssets
+    {
+        public Sprite icon;
+        public GameObject prefab;
+    }
+    // 스펠 아이콘과 프리팹
+    public List<SpellAssets> spellAssetsList = new List<SpellAssets>();
+    #endregion
 
+
+    #region Prefab etc
     // 캐릭터 프리팹\
     public GameObject wizard_Male_ForLobby;
     public GameObject knight_Male_ForLobby;
     public GameObject wizard_Male;
     public GameObject knight_Male;
 
-    // Game씬 아이템 프리팹
+    // Game씬 획득 가능현 아이템들 프리팹
     /// <summary>
     /// 1. 레벨업
     /// 2. 발사속도
@@ -128,24 +85,30 @@ public class GameAssets : MonoBehaviour
 
     public GameObject GetSpellPrefab(SpellName spellName)
     {
-        return spellPrefabList[SearchSpellNameIndex(spellName)];
+        return spellAssetsList[SearchSpellNameIndex(spellName)].prefab;
     }
 
     public Sprite GetSpellIconImage(SpellName spellName)
     {
-        return spellIconsArray[SearchSpellNameIndex(spellName)];
+        return spellAssetsList[SearchSpellNameIndex(spellName)].icon;
     }
 
     /// <summary>
-    /// 스펠 네임을 넣으면 마법타입별Start, End 이넘을 제외한 해당 스펠의 순수한 Index값을 알려주는 메소드 입니다.
-    /// SpellName에 데이터가 변경될 경우 이 메소드도 함께 수정해주어야 합니다.
+    /// 스펠 네임을 넣으면 마법 카테고리의 시작과 끝을 알리는 Start&End 이넘의 개수을 제외한 해당 스펠의 순수한 Index값을 알려주는 메소드 입니다.
+    /// SpellName에 새로운 마법 Start&End 카테고리가 추가되거나, 마법 카테고리 순서가 변경될 경우 이 메소드도 함께 수정해주어야 합니다.
+    /// 마법 카테고리가 아닌, 하나 하나의 마법들이 추가되거나 순서가 변경되는건 상관없습니다.
+    /// 마법 카테고리 : ex) 물마법Lv1의 경우 FireSpellStart, FireSpellEnd, WaterSpellStart 총 세 개를 빼야하기 때문에 adjustValue가 3이 됩니다.
     /// </summary>
     /// <param name="spellName"></param>
     /// <returns></returns>
-    private sbyte SearchSpellNameIndex(SpellName spellName)
+    private byte SearchSpellNameIndex(SpellName spellName)
     {
-        sbyte adjustValue = 0;
-        if(spellName >= SpellName.SlashSpellStart)
+        byte adjustValue = 0;
+        if (spellName >= SpellName.DefenceSpellStart)
+        {
+            adjustValue = 9;
+        }
+        else if(spellName >= SpellName.SlashSpellStart)
         {
             adjustValue = 7;
         }
@@ -161,7 +124,8 @@ public class GameAssets : MonoBehaviour
         {
             adjustValue = 1;
         }
-        return (sbyte)(spellName - adjustValue);
+
+        return (byte)(spellName - adjustValue);
     }
 
     // Lobby Scene 전용. Client 내부 저장용 

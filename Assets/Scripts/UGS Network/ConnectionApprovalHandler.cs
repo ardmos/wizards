@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ConnectionApprovalHandler : MonoBehaviour
 {
-    public static int MaxPlayers = 4;
+    public static int MaxPlayers = 2;
 
     private void Start()
     {

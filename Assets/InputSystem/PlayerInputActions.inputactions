@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Defence",
+                    "type": "Button",
+                    "id": "743f1530-6bb9-45f9-b6c5-0ce808871958",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -198,7 +207,7 @@
                 {
                     "name": "",
                     "id": "0cdd5087-361f-4ea4-a659-afd79ac6a148",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -220,7 +229,7 @@
                 {
                     "name": "",
                     "id": "f1abf2de-f764-4556-be4d-6e584563fca2",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -231,11 +240,22 @@
                 {
                     "name": "",
                     "id": "272c15fb-54a1-40ad-aeae-e62db4200821",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Attack3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77ff8981-58d1-4cd9-9cab-87ad88a5d7f9",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Defence",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

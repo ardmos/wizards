@@ -19467,7 +19467,7 @@ GameObject:
   - component: {fileID: 114757712934105204}
   m_Layer: 0
   m_Name: vfx_ToonProjectile_IceBall_Lv2
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

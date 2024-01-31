@@ -6,7 +6,7 @@ using UnityEngine;
 /// !!! 현재 기능
 /// 1. 속성별 충돌 계산
 /// </summary>
-public abstract class IceSpell : Spell
+public abstract class IceSpell : AttackSpell
 {
     // 1. 속성별 충돌 계산
     public override SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell)

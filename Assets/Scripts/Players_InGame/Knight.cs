@@ -39,9 +39,9 @@ public class Knight : Player
     {
         // 테스트 목적으로 스펠리스트 하드코딩. 로비씬에서 선택해줘야함.
         ownedSpellList = new SpellName[]{
-                SpellName.SlashLv1,
-                SpellName.SlashLv1,
-                SpellName.SlashLv1
+                SpellName.StoneSlashLv1,
+                SpellName.StoneSlashLv1,
+                SpellName.StoneSlashLv1
                 };
         InitializePlayerOnServer(ownedSpellList, serverRpcParams.Receive.SenderClientId);
     }

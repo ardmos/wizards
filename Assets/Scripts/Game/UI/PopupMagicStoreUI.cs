@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
+/// 현재 사용 안하는 스크립트. 추후에 인게임 상점 추가시 사용가능성 있음.
+/// 
 /// 매직상점의 UI를 관리하는 스크립트.
 /// !!! 현재 기능
 ///     1. 상점 UI활성화/비활성화
@@ -35,7 +37,7 @@ public class PopupMagicStoreUI : MonoBehaviour
     /// </summary>
     public void LoadContents()
     {
-        for (int i = ((int)Item.ItemName.SpellStart+1); i < ((int)Item.ItemName.SpellEnd); i++)
+/*        for (int i = ((int)Item.ItemName.SpellStart+1); i < ((int)Item.ItemName.SpellEnd); i++)
         {
             Item.ItemName itemType = (Item.ItemName)i;
             Transform storeItemTransform = Instantiate(storeItemTemplatePref);
@@ -44,7 +46,7 @@ public class PopupMagicStoreUI : MonoBehaviour
             ui_MagicStoreItem.InitItemInfo(itemType.ToString(), Item.GetCost(itemType).ToString());
             ui_MagicStoreItem.itemType = itemType;
             ui_MagicStoreItem.selectSpellSlotPopup = selectSpellSlotPopup;
-        }
+        }*/
     }
 
     /// <summary>

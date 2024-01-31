@@ -55,60 +55,23 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 155e1dda5a5e148d28643cbf1592fbdd, type: 3}
   - {fileID: 21300000, guid: 37b235823006c499d915c13924b61e2e, type: 3}
   - {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
-  m_Body_1: {fileID: 0}
-  m_Body_2: {fileID: 0}
-  m_Body_3: {fileID: 0}
-  m_Body_4: {fileID: 0}
-  m_Body_5: {fileID: 0}
-  m_Body_6: {fileID: 0}
-  m_Body_7: {fileID: 0}
-  m_Body_8: {fileID: 0}
-  m_Body_9: {fileID: 0}
-  m_Body_10: {fileID: 0}
-  m_Body_11: {fileID: 0}
-  m_Body_12: {fileID: 0}
-  m_Body_13: {fileID: 0}
-  m_Body_14: {fileID: 0}
-  m_Body_15: {fileID: 0}
-  m_Body_16: {fileID: 0}
-  m_Body_17: {fileID: 0}
-  m_Body_18: {fileID: 0}
-  m_Body_19: {fileID: 0}
-  m_Body_20: {fileID: 0}
-  m_BackPack_1: {fileID: 0}
-  m_BackPack_2: {fileID: 0}
-  m_BackPack_3: {fileID: 0}
-  m_Wand_1: {fileID: 0}
-  m_Wand_2: {fileID: 0}
-  m_Wand_3: {fileID: 0}
-  m_Wand_4: {fileID: 0}
-  m_Wand_5: {fileID: 0}
-  m_Wand_6: {fileID: 0}
-  m_Wand_7: {fileID: 0}
-  m_Hat_1: {fileID: 0}
-  m_Hat_2: {fileID: 0}
-  m_Hat_3: {fileID: 0}
-  m_Hat_4: {fileID: 0}
-  m_Hat_5: {fileID: 0}
-  m_Hat_6: {fileID: 0}
-  m_Hat_7: {fileID: 0}
-  m_Hat_8: {fileID: 0}
-  m_Hat_9: {fileID: 0}
-  m_Hat_10: {fileID: 0}
-  m_Hat_11: {fileID: 0}
-  m_Hat_12: {fileID: 0}
-  m_Hat_13: {fileID: 0}
-  m_Hat_14: {fileID: 0}
-  m_Scroll_1: {fileID: 0}
-  m_Scroll_2: {fileID: 0}
-  m_Scroll_3: {fileID: 0}
-  m_Scroll_4: {fileID: 0}
-  m_Scroll_5: {fileID: 0}
+  spellAssetsList:
+  - icon: {fileID: 21300000, guid: 5692db8a476a44e039316aeecbe16bc6, type: 3}
+    prefab: {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
+  - icon: {fileID: 21300000, guid: 155e1dda5a5e148d28643cbf1592fbdd, type: 3}
+    prefab: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
+  - icon: {fileID: 21300000, guid: 37b235823006c499d915c13924b61e2e, type: 3}
+    prefab: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
+  - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
+    prefab: {fileID: 3153472991145048103, guid: 1df00a9cc0f78f74b90a97a967a85b30, type: 3}
+  - icon: {fileID: 21300000, guid: 1ad309a351498428d824d7ee62bed12d, type: 3}
+    prefab: {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}
   spellPrefabList:
   - {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
   - {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
   - {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
-  - {fileID: 1881642356963322, guid: 77d75e6d0d8ad3747be6ebe8b26bf0f8, type: 3}
+  - {fileID: 3153472991145048103, guid: 1df00a9cc0f78f74b90a97a967a85b30, type: 3}
+  - {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}
   wizard_Male_ForLobby: {fileID: 7822752010955555959, guid: ed053f82f0a9cad41a1156a5d6c24080, type: 3}
   knight_Male_ForLobby: {fileID: 8406262372636307266, guid: 03b77d822d230814799c565ef95a07aa, type: 3}
   wizard_Male: {fileID: 932501098101691884, guid: 470d188c01e7349468602788c6bbf2de, type: 3}

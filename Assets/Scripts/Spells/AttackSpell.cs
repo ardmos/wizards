@@ -3,9 +3,9 @@ using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
-/// 마법의 공통적인 기능들을 관리하는 클래스
+/// 공격 마법의 공통적인 기능들을 관리하는 클래스
 /// </summary>
-public abstract class Spell : NetworkBehaviour
+public abstract class AttackSpell : NetworkBehaviour
 {
     [SerializeField] protected SpellInfo spellInfo;
 
@@ -34,7 +34,7 @@ public abstract class Spell : NetworkBehaviour
 
     public virtual void Shoot(Vector3 force, ForceMode forceMode)
     {
-        Debug.Log($"Spell class Shoot()");
+        Debug.Log($"AttackSpell class Shoot()");
         GetComponent<Rigidbody>().AddForce(force, forceMode);
     }
 

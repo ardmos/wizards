@@ -9933,7 +9933,7 @@ GameObject:
   - component: {fileID: 869315431522718994}
   m_Layer: 0
   m_Name: FireBall_1
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14902,21 +14902,12 @@ MonoBehaviour:
     level: 0
     spellName: 0
     spellState: 0
+    ownerPlayerClientId: 0
   muzzleVFXPrefab: {fileID: 1888054744919094, guid: 001c0f77b8acde24e991b6c6d6d846a9, type: 3}
   hitVFXPrefab: {fileID: 1262490536792160, guid: 96e6801b407ca0e44b6b1fc011e0f61e, type: 3}
   trails:
   - {fileID: 1947216890740462}
-  collided: 0
-  isSpellCollided: 0
-  collisionHandlingResult:
-    spellType: 0
-    coolTime: 0
-    lifeTime: 0
-    moveSpeed: 0
-    price: 0
-    level: 0
-    spellName: 0
-    spellState: 0
+  isCollided: 0
 --- !u!114 &-2858450315985026663
 MonoBehaviour:
   m_ObjectHideFlags: 0

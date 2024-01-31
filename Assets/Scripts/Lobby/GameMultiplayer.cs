@@ -27,6 +27,7 @@ public class GameMultiplayer : NetworkBehaviour
     public event EventHandler OnFailedToJoinMatch;
     public event EventHandler OnPlayerListOnServerChanged;
     public event EventHandler OnPlayerMoveAnimStateChanged;
+    public event EventHandler OnPlayerAttackAnimStateChanged;
 
     private void Awake()
     {
@@ -148,7 +149,7 @@ public class GameMultiplayer : NetworkBehaviour
         {
             clientId = serverRpcParams.Receive.SenderClientId,
             characterClass = playerData.characterClass,
-            playerAnimState = PlayerMoveAnimState.Idle,
+            playerMoveAnimState = PlayerMoveAnimState.Idle,
             playerGameState = PlayerGameState.Playing,
             playerName = playerData.playerName
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
@@ -230,18 +231,28 @@ public class GameMultiplayer : NetworkBehaviour
 
     /// <summary>
     /// 서버에서 호출해야하는 메소드
+    /// 특정 플레이어에게 이동 및 특정 자세(비 공격적) 애니메이션을 실행시켜줄 수 있는 메소드 입니다.
     /// </summary>
-    /// <param name="clientId"></param>
-    /// <param name="playerAnimState"></param>
-    public void UpdatePlayerAnimStateOnServer(ulong clientId, PlayerMoveAnimState playerAnimState)
+    /// <param name="clientId">플레이어 캐릭터 특정</param>
+    /// <param name="playerAnimState">실행시키고싶은 애니메이션 state</param>
+    public void UpdatePlayerMoveAnimStateOnServer(ulong clientId, PlayerMoveAnimState playerMoveAnimState)
     {
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
-        playerData.playerAnimState = playerAnimState;
+        playerData.playerMoveAnimState = playerMoveAnimState;
         SetPlayerDataFromClientId(clientId, playerData);
         // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
-        OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerAnimStateEventData(clientId, playerData.playerAnimState));
+        OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerMoveAnimStateEventData(clientId, playerData.playerMoveAnimState));
     }
 
+
+    public void UpdatePlayerAttackAnimStateOnServer(ulong clientId, PlayerAttackAnimState playerAttackAnimState)
+    {
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+        playerData.playerAttackAnimState = playerAttackAnimState;
+        SetPlayerDataFromClientId(clientId, playerData);
+        // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
+        OnPlayerAttackAnimStateChanged?.Invoke(this, new PlayerAttackAnimStateEventData(clientId, playerData.playerAttackAnimState));
+    }
 
 
     /// <summary>

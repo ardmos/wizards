@@ -9742,7 +9742,7 @@ GameObject:
   - component: {fileID: 4867435650595528468}
   m_Layer: 0
   m_Name: vfx_ToonProjectile_FireBall_Lv1
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

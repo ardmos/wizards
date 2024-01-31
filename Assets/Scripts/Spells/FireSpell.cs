@@ -6,7 +6,7 @@ using UnityEngine;
 /// !!! 현재 기능
 /// 1. 속성별 충돌 계산
 /// </summary>
-public abstract class FireSpell : Spell
+public abstract class FireSpell : AttackSpell
 {
     /// <summary>
     /// 불속성 마법과 다른 마법의 충돌 계산결과를 알려주는 메소드.

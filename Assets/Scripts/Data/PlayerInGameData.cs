@@ -14,7 +14,8 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
     public CharacterClass characterClass;
     public sbyte playerHP;
     public sbyte playerMaxHP;
-    public PlayerMoveAnimState playerAnimState;
+    public PlayerMoveAnimState playerMoveAnimState;
+    public PlayerAttackAnimState playerAttackAnimState;
     public PlayerGameState playerGameState;
 
     public bool Equals(PlayerInGameData other)
@@ -25,7 +26,8 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
             characterClass == other.characterClass &&
             playerHP == other.playerHP &&
             playerMaxHP == other.playerMaxHP &&
-            playerAnimState == other.playerAnimState &&
+            playerMoveAnimState == other.playerMoveAnimState &&
+            playerAttackAnimState == other.playerAttackAnimState &&
             playerGameState == other.playerGameState;
     }
 
@@ -36,7 +38,8 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
         serializer.SerializeValue(ref characterClass);
         serializer.SerializeValue(ref playerHP);
         serializer.SerializeValue(ref playerMaxHP);
-        serializer.SerializeValue(ref playerAnimState);
+        serializer.SerializeValue(ref playerMoveAnimState);
+        serializer.SerializeValue(ref playerAttackAnimState);
         serializer.SerializeValue(ref playerGameState);
     }
 }

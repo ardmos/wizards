@@ -48,7 +48,8 @@ public class Wizard : Player
         ownedSpellList = new SpellName[]{
                 SpellName.FireBallLv1,
                 SpellName.WaterBallLv1,
-                SpellName.IceBallLv1
+                SpellName.IceBallLv1,
+                SpellName.MagicShieldLv1
                 };
         InitializePlayerOnServer(ownedSpellList, serverRpcParams.Receive.SenderClientId);
     }

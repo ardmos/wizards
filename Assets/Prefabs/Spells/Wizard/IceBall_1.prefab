@@ -19466,7 +19466,7 @@ GameObject:
   - component: {fileID: 1514405196943943496}
   m_Layer: 0
   m_Name: IceBall_1
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19587,6 +19587,7 @@ MonoBehaviour:
     level: 0
     spellName: 0
     spellState: 0
+    ownerPlayerClientId: 0
   muzzleVFXPrefab: {fileID: 1779451694322954, guid: e5df23447230e144bae8664dbe57ce5a, type: 3}
   hitVFXPrefab: {fileID: 1423167456353516, guid: 0f5b05149b3cc7347b9bdcfd0a0bfa7a, type: 3}
   trails:
@@ -19594,17 +19595,7 @@ MonoBehaviour:
   - {fileID: 1802059017955996}
   - {fileID: 1948296609094292}
   - {fileID: 1225959865209112}
-  collided: 0
-  isSpellCollided: 0
-  collisionHandlingResult:
-    spellType: 0
-    coolTime: 0
-    lifeTime: 0
-    moveSpeed: 0
-    price: 0
-    level: 0
-    spellName: 0
-    spellState: 0
+  isCollided: 0
 --- !u!114 &-2264537746373775043
 MonoBehaviour:
   m_ObjectHideFlags: 0

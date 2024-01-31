@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 /// <summary>
 /// 마법을 Server Auth 방식으로 시전할 수 있도록 도와주는 스크립트 입니다.
 /// 서버에서 동작하는 스크립트들이 모여있어야 합니다. 추후 코드 정리하면서 확인 필요.
@@ -12,16 +10,12 @@ public class SpellManager : NetworkBehaviour
 {
     public static SpellManager Instance;
 
-    public event EventHandler OnSpellStateChanged;
-
-
     // Spell Dictionary that the player is casting.
     private Dictionary<ulong, GameObject> playerCastingSpellPairs = new Dictionary<ulong, GameObject>();
     private Dictionary<ulong, Transform> playerMuzzlePairs = new Dictionary<ulong, Transform>();
 
     // 서버에 저장되는 내용
-    [SerializeField] private Dictionary<ulong, List<SpellInfo>> spellInfoListOnServer = new Dictionary<ulong, List<SpellInfo>>();
-
+    [SerializeField] private Dictionary<ulong, List<SpellInfo>> SpellInfoListOnServer = new Dictionary<ulong, List<SpellInfo>>();
 
     private void Awake()
     {      
@@ -30,37 +24,26 @@ public class SpellManager : NetworkBehaviour
     
     #region SpellInfo
     /// <summary>
-    /// Spell state를 얻을 수 있는 메소드 입니다
+    /// 변경된 SpellState를 Server에 보고합니다.
     /// </summary>
-    /// <param name="spellIndex"></param>
-    /// <returns></returns>
-    public SpellState GetSpellStateFromSpellIndexOnServer(ulong clientId, ushort spellIndex)
-    {
-        return spellInfoListOnServer[clientId][spellIndex].spellState;
-    }
-    
-    /// <summary>
-    /// 변경된 SpellState를 Server에 보고합니다. 보고받은 Server는 Server의 PlayerAnimator에게 애니메이션 변경을 지시합니다.
-    /// </summary>
-    /// <param name="spellIndex"></param>
+    /// <param name="spellIndex">업데이트하고싶은 마법의 Index</param>
+    /// <param name="spellState">마법의 상태</param>
     [ServerRpc(RequireOwnership = false)]
     public void UpdatePlayerSpellStateServerRPC(ushort spellIndex, SpellState spellState, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
-        if (!spellInfoListOnServer.ContainsKey(clientId))
+        if (!SpellInfoListOnServer.ContainsKey(clientId))
         {
             Debug.LogError($"UpdatePlayerSpellStateServerRPC. There is no SpellInfoList for this client. clientId:{clientId}");
             return;
         }
 
-        spellInfoListOnServer[clientId][spellIndex].spellState = spellState;
-        OnSpellStateChanged?.Invoke(this, new SpellStateEventData(clientId, spellState));
+        SpellInfoListOnServer[clientId][spellIndex].spellState = spellState;
         Debug.Log($"SpellController UpdatePlayerSpellStateServerRPC: {spellIndex}");
 
         // 요청한 클라이언트의 currentSpellInfoList 동기화
-
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
+        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(SpellInfoListOnServer[clientId].ToArray());
     }
 
     /// <summary>
@@ -80,13 +63,13 @@ public class SpellManager : NetworkBehaviour
             playerSpellInfoList.Add(spellInfo);
         }
 
-        if (!spellInfoListOnServer.ContainsKey(clientId))
+        if (!SpellInfoListOnServer.ContainsKey(clientId))
         {
-            spellInfoListOnServer.Add(clientId, playerSpellInfoList);
+            SpellInfoListOnServer.Add(clientId, playerSpellInfoList);
         }
         else
         {
-            spellInfoListOnServer[clientId] = playerSpellInfoList;
+            SpellInfoListOnServer[clientId] = playerSpellInfoList;
         }
 
         // 요청한 클라이언트의 currentSpellInfoList 동기화
@@ -103,13 +86,13 @@ public class SpellManager : NetworkBehaviour
     public void UpdateScrollEffectServerRPC(Item.ItemName scrollName, sbyte spellIndex, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
-        if (!SpellManager.Instance.spellInfoListOnServer.ContainsKey(clientId))
+        if (!SpellManager.Instance.SpellInfoListOnServer.ContainsKey(clientId))
         {
             Debug.LogError($"UpdateScrollEffectServerRPC. There is no SpellInfoList for this client. clientId:{clientId}");
             return;
         }
 
-        SpellInfo newSpellInfo = spellInfoListOnServer[clientId][spellIndex];
+        SpellInfo newSpellInfo = SpellInfoListOnServer[clientId][spellIndex];
 
         // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
         switch (scrollName)
@@ -136,11 +119,11 @@ public class SpellManager : NetworkBehaviour
         }
 
         // 변경내용 서버에 저장
-        spellInfoListOnServer[clientId][spellIndex] = newSpellInfo;
+        SpellInfoListOnServer[clientId][spellIndex] = newSpellInfo;
 
         // 변경내용을 요청한 클라이언트와도 동기화
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
+        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(SpellInfoListOnServer[clientId].ToArray());
     }
 
     /// <summary>
@@ -151,33 +134,64 @@ public class SpellManager : NetworkBehaviour
     /// <returns></returns>
     public SpellInfo GetSpellInfo(ulong clientId, SpellName spellName)
     {
-        if (!spellInfoListOnServer.ContainsKey(clientId))
+        if (!SpellInfoListOnServer.ContainsKey(clientId))
         {
             Debug.Log($"GetSpellInfo. 스펠정보를 찾을 수 없습니다. clienId:{clientId}, spellName:{spellName}");
             return null;
         }
 
-        foreach (SpellInfo spellInfo in spellInfoListOnServer[clientId])
+        foreach (SpellInfo spellInfo in SpellInfoListOnServer[clientId])
         {
             if(spellInfo.spellName == spellName)
+            {
+                Debug.Log($"GetSpellInfo.스펠정보를 찾았습니다.clienId:{clientId}, spellName: {spellName}");
                 return spellInfo;
+            }
+                
         }
 
         return null;
     }
     #endregion
 
-    #region Spell Cast&Fire
+    #region Defence Spell Cast
     /// <summary>
-    /// 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
+    /// 방어 마법 시전
     /// </summary>
+    /// <param name="player"></param>
     [ServerRpc(RequireOwnership = false)]
-    public void StartCastingSpellServerRPC(SpellName spellName, NetworkObjectReference player)
+    public void StartActivateDefenceSpellServerRPC(SpellName spellName, NetworkObjectReference player)
     {
         // GameObject 얻어내기 실패시 로그 출력
         if (!player.TryGet(out NetworkObject playerObject))
         {
-            Debug.Log("StartCastingSpellServerRPC Failed to Get NetworkObject from NetwrokObjectRefernce!");
+            Debug.LogError("StartActivateDefenceSpellServerRPC Failed to Get NetworkObject from NetwrokObjectRefernce!");
+            return;
+        }
+        ulong clientId = playerObject.OwnerClientId;
+
+        // 마법 시전
+        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), playerObject.transform.position, Quaternion.identity);        
+        spellObject.GetComponent<NetworkObject>().Spawn();
+        spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(clientId, spellName));
+        spellObject.transform.SetParent(playerObject.transform);
+        spellObject.transform.localPosition = Vector3.zero;
+        spellObject.GetComponent<DefenceSpell>().Activate();
+    }
+    #endregion
+
+    #region Attack Spell Cast&Fire
+    /// <summary>
+    /// 공격 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
+    /// </summary>
+    [ServerRpc(RequireOwnership = false)]
+    public void StartCastingAttackSpellServerRPC(SpellName spellName, NetworkObjectReference player)
+    {
+        // GameObject 얻어내기 실패시 로그 출력
+        if (!player.TryGet(out NetworkObject playerObject))
+        {
+            Debug.LogError("StartCastingAttackSpellServerRPC Failed to Get NetworkObject from NetwrokObjectRefernce!");
+            return;
         }
         ulong clientId = playerObject.OwnerClientId;
 
@@ -187,8 +201,8 @@ public class SpellManager : NetworkBehaviour
  
         // 포구에 발사체 위치시키기
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), muzzleTransform.position, Quaternion.identity);
-        spellObject.GetComponent<Spell>().InitSpellInfoDetail(GetSpellInfo(clientId, spellName));
         spellObject.GetComponent<NetworkObject>().Spawn();
+        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(GetSpellInfo(clientId, spellName));
         spellObject.transform.SetParent(playerObject.transform);
         spellObject.transform.localPosition = muzzleTransform.localPosition;
 
@@ -205,23 +219,23 @@ public class SpellManager : NetworkBehaviour
     /// </summary>
     /// <param name="serverRpcParams"></param>
     [ServerRpc(RequireOwnership = false)]
-    public void ShootSpellObjectServerRPC(ServerRpcParams serverRpcParams = default)
+    public void ShootCastingSpellObjectServerRPC(ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         GameObject spellObject = playerCastingSpellPairs[clientId];
         if (spellObject == null)
         {
-            Debug.Log($"ShootSpellObjectServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
+            Debug.Log($"ShootCastingSpellObjectServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
             return;
         }
 
         // 마법 발사
         spellObject.transform.SetParent(this.transform);
-        float moveSpeed = GetSpellInfo(clientId, spellObject.GetComponent<Spell>().GetSpellInfo().spellName).moveSpeed;
-        spellObject.GetComponent<Spell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
+        float moveSpeed = GetSpellInfo(clientId, spellObject.GetComponent<AttackSpell>().GetSpellInfo().spellName).moveSpeed;
+        spellObject.GetComponent<AttackSpell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
 
         // 포구 VFX
-        MuzzleVFX(spellObject.GetComponent<Spell>().GetMuzzleVFXPrefab(), playerMuzzlePairs[clientId]);
+        MuzzleVFX(spellObject.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), playerMuzzlePairs[clientId]);
     }
     #endregion
 
@@ -230,7 +244,7 @@ public class SpellManager : NetworkBehaviour
     /// 2. CollisionEnter 충돌 처리 (서버 권한 방식)
     /// </summary>
     /// <param name="collision"></param>
-    public virtual void SpellHitOnServer(Collision collision, Spell spell)
+    public virtual void SpellHitOnServer(Collision collision, AttackSpell spell)
     {
         if (spell.IsCollided())
         {
@@ -248,14 +262,16 @@ public class SpellManager : NetworkBehaviour
 
         Debug.Log($"collision.gameObject.tag: {collision.gameObject.tag}");
 
+
+
         // 충돌한게 Spell일 경우, 스펠간 충돌 결과 처리를 따로 진행합니다
         // 처리결과를 collisionHandlingResult 변수에 저장해뒀다가 DestroyParticle시에 castSpell 시킵니다.
-        if (collision.gameObject.tag == "Spell")
+        if (collision.gameObject.CompareTag("Attack"))
         {       
             isSpellCollided = true;
-            Debug.Log($"Spell Hit!");
+            Debug.Log($"AttackSpell Hit!");
             SpellInfo thisSpell = GetSpellInfo(spell.GetSpellInfo().ownerPlayerClientId, spell.GetSpellInfo().spellName);
-            SpellInfo opponentsSpell = GetSpellInfo(collision.gameObject.GetComponent<Spell>().GetSpellInfo().ownerPlayerClientId, collision.gameObject.GetComponent<Spell>().GetSpellInfo().spellName);
+            SpellInfo opponentsSpell = GetSpellInfo(collision.gameObject.GetComponent<AttackSpell>().GetSpellInfo().ownerPlayerClientId, collision.gameObject.GetComponent<AttackSpell>().GetSpellInfo().spellName);
 
             collisionHandlingResult = spell.CollisionHandling(thisSpell, opponentsSpell);
         }
@@ -263,14 +279,14 @@ public class SpellManager : NetworkBehaviour
         // 충돌한게 플레이어일 경우! 
         // 1. player에게 GetHit() 시킴
         // 2. player가 GameMultiplayer(ServerRPC)에게 보고, player(ClientRPC)업데이트.
-        else if (collision.gameObject.tag == "Player")
+        else if (collision.gameObject.CompareTag("Player"))
         {
             isSpellCollided = false;
             Debug.Log($"Player Hit!");
 
             if (spell.GetSpellInfo() == null)
             {
-                Debug.Log("Spell Info is null");
+                Debug.Log("AttackSpell Info is null");
             }
             //Debug.Log($"Hit!! spell level: {spellInfo.level}");
 
@@ -339,7 +355,7 @@ public class SpellManager : NetworkBehaviour
     {
         // 포구에 마법 발사체 위치시키기
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), spawnPosition.position, Quaternion.identity);
-        spellObject.GetComponent<Spell>().InitSpellInfoDetail(GetSpellInfo(spellOwnerClientId, spellName));
+        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(GetSpellInfo(spellOwnerClientId, spellName));
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         // 마법 발사체 방향 조정하기
@@ -351,7 +367,7 @@ public class SpellManager : NetworkBehaviour
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
 
         // 포구 VFX
-        MuzzleVFX(spellObject.GetComponent<Spell>().GetMuzzleVFXPrefab(), spawnPosition);
+        MuzzleVFX(spellObject.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), spawnPosition);
     }
 
     /// <summary>

@@ -19,10 +19,14 @@ public class SpellSpecifications : MonoBehaviour
 
     private void InitSpellDefaultSpecs()
     {
+        // 공격 마법
         SetSpellDefaultSpec(SpellType.Fire, 2.0f, 10.0f, 10.0f, 30, 1, SpellName.FireBallLv1, SpellState.Ready);
         SetSpellDefaultSpec(SpellType.Water, 2.0f, 10.0f, 10.0f, 30, 1, SpellName.WaterBallLv1, SpellState.Ready);
         SetSpellDefaultSpec(SpellType.Ice, 2.0f, 10.0f, 10.0f, 30, 1, SpellName.IceBallLv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Normal, 2.0f, 1.0f, 10.0f, 30, 1, SpellName.SlashLv1, SpellState.Ready);
+        // 방어 마법
+        SetSpellDefaultSpec(SpellType.Arcane, 10.0f, 2.2f, 0f, 30, 1, SpellName.MagicShieldLv1, SpellState.Ready);
+        // 공격 스킬
+        SetSpellDefaultSpec(SpellType.Stone, 2.0f, 1.0f, 10.0f, 30, 1, SpellName.StoneSlashLv1, SpellState.Ready);        
     }
 
     public SpellInfo GetSpellDefaultSpec(SpellName spellName)

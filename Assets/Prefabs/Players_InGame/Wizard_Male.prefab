@@ -2636,34 +2636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d9a03a873a9884086712713b853b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellInfoListOnClient:
-  - spellType: 0
-    coolTime: 0
-    lifeTime: 0
-    moveSpeed: 0
-    price: 0
-    level: 0
-    spellName: 0
-    spellState: 0
-    ownerPlayerClientId: 0
-  - spellType: 0
-    coolTime: 0
-    lifeTime: 0
-    moveSpeed: 0
-    price: 0
-    level: 0
-    spellName: 0
-    spellState: 0
-    ownerPlayerClientId: 0
-  - spellType: 0
-    coolTime: 0
-    lifeTime: 0
-    moveSpeed: 0
-    price: 0
-    level: 0
-    spellName: 0
-    spellState: 0
-    ownerPlayerClientId: 0
+  SpellInfoListOnClient: []
   restTimeCurrentSpellArrayOnClient:
   - 0
   - 0

@@ -14,19 +14,23 @@ using UnityEngine;
 /// </summary>
 public class SpellController : NetworkBehaviour
 {
+    private const byte defenceSpellIndex = 3;
+    private const byte totalSpellCount = 4;
     // 클라이언트에 저장되는 내용
-    [SerializeField] private List<SpellInfo> spellInfoListOnClient;
-    [SerializeField] private float[] restTimeCurrentSpellArrayOnClient = new float[3];
+    // SpellInfoList의 인덱스 0~2까지는 공격마법, 3은 방어마법 입니다.
+    [SerializeField] private List<SpellInfo> SpellInfoListOnClient;
+    [SerializeField] private float[] restTimeCurrentSpellArrayOnClient;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
-        spellInfoListOnClient = new List<SpellInfo>(3) {};
+        SpellInfoListOnClient = new List<SpellInfo>(totalSpellCount);
+        restTimeCurrentSpellArrayOnClient = new float[totalSpellCount];
     }
-
+        
     private void Update()
     {
         // 쿨타임 관리
-        for (ushort i = 0; i < spellInfoListOnClient.Count; i++)
+        for (ushort i = 0; i < SpellInfoListOnClient.Count; i++)
         {
             Cooltime(i);
         }        
@@ -38,39 +42,35 @@ public class SpellController : NetworkBehaviour
     private void Cooltime(ushort spellIndex)
     {
         //Debug.Log($"spellNumber : {spellIndex}, currentSpellPrefabArray.Length : {currentSpellPrefabArray.Length}");
-        if (spellInfoListOnClient[spellIndex] == null) return;
+        if (SpellInfoListOnClient[spellIndex] == null) return;
         // 쿨타임 관리
-        if (spellInfoListOnClient[spellIndex].spellState == SpellState.Cooltime)
+        if (SpellInfoListOnClient[spellIndex].spellState == SpellState.Cooltime)
         {
             restTimeCurrentSpellArrayOnClient[spellIndex] += Time.deltaTime;
-            if (restTimeCurrentSpellArrayOnClient[spellIndex] >= spellInfoListOnClient[spellIndex].coolTime)
+            if (restTimeCurrentSpellArrayOnClient[spellIndex] >= SpellInfoListOnClient[spellIndex].coolTime)
             {                
                 restTimeCurrentSpellArrayOnClient[spellIndex] = 0f;
                 // 여기서 서버에 Ready로 바뀐 State를 보고 하면 서버에서 다시 콜백해서 현 클라이언트 오브젝트의 State가 Ready로 바뀌긴 하는데, 그 사이에 딜레이가 있어서
                 // 여기서 한 번 클라이언트의 State를 바꿔주고 서버에 보고 해준다.
-                spellInfoListOnClient[spellIndex].spellState = SpellState.Ready;
+                SpellInfoListOnClient[spellIndex].spellState = SpellState.Ready;
                 SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
             }
             //Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
         }
     }
 
-    #region 현재 설정된 마법 시전
+    #region 공격 마법 캐스팅&발사
     /// <summary>
-    /// 마법 캐스팅 시작. 클라이언트에서 동작하는 메소드
+    /// 마법 캐스팅 시작을 서버에 요청합니다. 클라이언트에서 동작하는 메소드입니다.
     /// </summary>
     /// <param name="spellIndex"></param>
     public void StartCastingSpellOnClient(ushort spellIndex)
     {
-        if (spellInfoListOnClient[spellIndex].spellState == SpellState.Cooltime || spellInfoListOnClient[spellIndex].spellState == SpellState.Casting)
-        {
-            //Debug.Log($"마법 {spellInfoListOnClient[spellIndex].spellName}은 현재 시전불가상태입니다.");
-            return;
-        }
+        if (SpellInfoListOnClient[spellIndex].spellState != SpellState.Ready) return;
 
-        // 캐스팅 시작 Server에게 요청.
-        SpellManager.Instance.StartCastingSpellServerRPC(spellInfoListOnClient[spellIndex].spellName, GetComponent<NetworkObject>());
-        // 캐스팅 시작으로 변경된 SpellState 정보 Server에 보고.
+        // 서버에 마법 캐스팅 요청
+        SpellManager.Instance.StartCastingAttackSpellServerRPC(SpellInfoListOnClient[spellIndex].spellName, GetComponent<NetworkObject>());
+        // 해당 SpellState 업데이트
         SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Casting);
     }
 
@@ -79,12 +79,24 @@ public class SpellController : NetworkBehaviour
     /// </summary>
     public void ShootCurrentCastingSpellOnClient(ushort spellIndex)
     {
-        if (spellInfoListOnClient[spellIndex].spellState != SpellState.Casting) return;
+        if (SpellInfoListOnClient[spellIndex].spellState != SpellState.Casting) return;
 
-        // 서버에 발사 요청
-        SpellManager.Instance.ShootSpellObjectServerRPC() ;
-        // 발사로 변경된 SpellState 상태 서버에 보고
+        // 서버에 마법 발사 요청
+        SpellManager.Instance.ShootCastingSpellObjectServerRPC() ;
+        // 해당 SpellState 업데이트
         SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Cooltime);
+    }
+    #endregion
+
+    #region 방어 마법 시전
+    public void ActivateDefenceSpellOnClient()
+    {
+        if (SpellInfoListOnClient[defenceSpellIndex].spellState != SpellState.Ready) return;
+
+        // 서버에 마법 시전 요청
+        SpellManager.Instance.StartActivateDefenceSpellServerRPC(SpellInfoListOnClient[defenceSpellIndex].spellName, GetComponent<NetworkObject>());
+        // 해당 SpellState 업데이트
+        SpellManager.Instance.UpdatePlayerSpellStateServerRPC(defenceSpellIndex, SpellState.Cooltime);
     }
     #endregion
 
@@ -96,8 +108,8 @@ public class SpellController : NetworkBehaviour
     /// <returns></returns>
     public float GetCurrentSpellCoolTimeRatio(ushort spellIndex)
     {
-        if (spellInfoListOnClient[spellIndex] == null) return 0f;
-        float coolTimeRatio = restTimeCurrentSpellArrayOnClient[spellIndex] / spellInfoListOnClient[spellIndex].coolTime;
+        if (SpellInfoListOnClient[spellIndex] == null) return 0f;
+        float coolTimeRatio = restTimeCurrentSpellArrayOnClient[spellIndex] / SpellInfoListOnClient[spellIndex].coolTime;
         return coolTimeRatio;
     }
     #endregion
@@ -112,7 +124,7 @@ public class SpellController : NetworkBehaviour
     /// <returns></returns>
     public SpellState GetSpellStateFromSpellIndexOnClient(ushort spellIndex)
     {
-        return spellInfoListOnClient[spellIndex].spellState;
+        return SpellInfoListOnClient[spellIndex].spellState;
     }
    
     [ClientRpc]
@@ -121,7 +133,7 @@ public class SpellController : NetworkBehaviour
         //Debug.Log($"UpdatePlayerSpellInfoArrayClientRPC. I'm {OwnerClientId}, IsOwner:{IsOwner}");
         // ServerRPC를 요청한 클라이언트에게만 업데이트 되도록 필터링
         if (!IsOwner) return;
-        spellInfoListOnClient = spellInfoArray.ToList<SpellInfo>();
+        SpellInfoListOnClient = spellInfoArray.ToList<SpellInfo>();
     }
 
     /// <summary>
@@ -131,6 +143,6 @@ public class SpellController : NetworkBehaviour
     /// <returns></returns>
     public List<SpellInfo> GetSpellInfoArray()
     {
-        return spellInfoListOnClient;
+        return SpellInfoListOnClient;
     }
 }

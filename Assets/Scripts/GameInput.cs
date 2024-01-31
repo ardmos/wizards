@@ -15,6 +15,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnAttack1Ended;
     public event EventHandler OnAttack2Ended;
     public event EventHandler OnAttack3Ended;
+    public event EventHandler OnDefenceClicked;
 
     private void Awake()
     {
@@ -27,6 +28,13 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Attack2.canceled += Attack2_canceled;
         playerInputActions.Player.Attack3.started += Attack3_started;
         playerInputActions.Player.Attack3.canceled += Attack3_canceled;
+
+        playerInputActions.Player.Defence.started += Defence_started;
+    }
+
+    private void Defence_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnDefenceClicked?.Invoke(this, EventArgs.Empty);
     }
 
     private void Attack1_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -68,9 +76,10 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Attack2.canceled -= Attack2_canceled;
         playerInputActions.Player.Attack3.started -= Attack3_started;
         playerInputActions.Player.Attack3.canceled -= Attack3_canceled;
+
+        playerInputActions.Player.Defence.started -= Defence_started;
         // 재접속 구현의 일부 인풋 액션이 추가되면 여기서 전부 -= 해줘야 한다. 
         playerInputActions.Dispose();
-
     }
 
     public Vector2 GetMovementVectorNormalized()
@@ -81,21 +90,4 @@ public class GameInput : MonoBehaviour
 
         return inputVector;
     }
-
-/*    public float GetIsAttack1()
-    {
-        float isAttack = playerInputActions.Player.Attack1.ReadValue<float>();
-        return isAttack;
-    }
-
-    public float GetIsAttack2()
-    {
-        float isAttack = playerInputActions.Player.Attack2.ReadValue<float>();
-        return isAttack;
-    }
-    public float GetIsAttack3()
-    {
-        float isAttack = playerInputActions.Player.Attack3.ReadValue<float>();
-        return isAttack;
-    }*/
 }

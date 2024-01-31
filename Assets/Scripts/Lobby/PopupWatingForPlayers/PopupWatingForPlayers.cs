@@ -1,9 +1,7 @@
 using System.Collections;
 using TMPro;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
-using static GameMatchReadyManager;
 
 /// <summary>
 /// 게임룸씬을 UI로 대체하기로 했습니다.
@@ -262,6 +260,9 @@ public class PopupWatingForPlayers : MonoBehaviour
         isReadyCountdownUIAnimStarted = false;
         matchingState = MatchingState.WatingForPlayers;
         imgReadyCountdown.fillAmount = 0;
+        ActivateToggleUI(0);
+        UpdateToggleUIState();
+        btnReady.gameObject.SetActive(false);
 
         Debug.Log("팝업 Show()");
         //RunStateMachine();
