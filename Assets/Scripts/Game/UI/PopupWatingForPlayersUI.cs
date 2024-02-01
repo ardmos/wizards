@@ -2,22 +2,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupGameReadyUI : MonoBehaviour
+/// <summary>
+/// 다른 플레이어를 기다릴 때 표시되는 팝업입니다.
+/// </summary>
+public class PopupWatingForPlayersUI : MonoBehaviour
 {
-    [SerializeField] private Button btnReady;
-    [SerializeField] private TextMeshProUGUI txtGameReady;
+    [SerializeField] private TextMeshProUGUI txtMessage;
 
-    private void Awake()
-    {    
-        btnReady.onClick.AddListener(() =>
-        {
-            LocalPlayerReady();
-        });
-    }
     private void Start()
     {
         GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        txtGameReady.text = "Please Ready";
+        txtMessage.text = "Wating for players...";
+        // 자동 레디 보고
+        LocalPlayerReady();
     }
 
     private void OnGameStateChanged(object sender, System.EventArgs e)
@@ -36,12 +33,8 @@ public class PopupGameReadyUI : MonoBehaviour
 
     private void LocalPlayerReady()
     {
-        // hide ready button UI
-        btnReady.gameObject.SetActive(false);
         // report ready state to GameManager???? Complete this work when finish Sync Game State!
         GameManager.Instance.LocalPlayerReadyOnClient();
-        // show "Wating for players" text
-        txtGameReady.text = "Wating for players...";
         // # If every player get ready, the Game State will change.  
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
+/// 로비씬에서 동작하는 UI 입니다.
 /// 게임룸씬을 UI로 대체하기로 했습니다.
 /// 게임룸씬을 대신하는 UI입니다. 
 /// 클라이언트 입장에서 동작하는 UI 입니다.
@@ -15,7 +16,7 @@ using UnityEngine.UI;
 /// 5. 매칭 취소 버튼 추가. 
 /// 6. 매칭 취소 버튼 클릭시 해당 유저 매칭 취소.
 /// </summary>
-public class PopupWatingForPlayers : MonoBehaviour
+public class PopupGameRoomUI : MonoBehaviour
 {
     public enum MatchingState
     {
@@ -32,8 +33,6 @@ public class PopupWatingForPlayers : MonoBehaviour
     public Toggle[] toggleArrayPlayerJoined;
     public bool isCancellationRequested;
     public bool isReadyCountdownUIAnimStarted;
-
-
 
     // Start is called before the first frame update
     void Start()

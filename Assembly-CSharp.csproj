@@ -70,7 +70,6 @@
     <Compile Include="Assets\Scripts\Lobby\PopupLookingForGame\PopupLookingForGameUI.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\GoToLobbyScene.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\PopupGameReadyUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupModUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneCleanUp.cs" />
@@ -136,7 +135,6 @@
     <Compile Include="Assets\Scripts\Players_InGame\MuzzlePos.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerAttackAnimState.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
-    <Compile Include="Assets\Scripts\Lobby\PopupWatingForPlayers\PopupWatingForPlayers.cs" />
     <Compile Include="Assets\Scripts\Game\Item\ScrollFireRateUp.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
@@ -167,6 +165,7 @@
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
+    <Compile Include="Assets\Scripts\Lobby\PopupGameRoom\PopupGameRoomUI.cs" />
     <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
@@ -183,6 +182,7 @@
     <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Test\TestNetworkUIController.cs" />
     <Compile Include="Assets\Scripts\Game\Item\ScrollFlySpeedUp.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\PopupWatingForPlayersUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyBottomUI.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\Game\UI\Popup\SelectSpell\SpellSlot.cs" />

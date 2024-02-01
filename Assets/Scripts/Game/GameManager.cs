@@ -222,7 +222,8 @@ public class GameManager : NetworkBehaviour
             //Debug.Log($"allClientsReady state.Value:{state.Value}");
         }
 
-        //Debug.Log($"SetPlayerReadyServerRpc game state:{state.Value}, allClientsReady: {allClientsReady}");
+        Debug.Log($"SetPlayerReadyServerRpc Requested player client ID: {serverRpcParams.Receive.SenderClientId}, playerReadyList.Count: {playerReadyList.Count}");
+        Debug.Log($"SetPlayerReadyServerRpc game state:{gameState.Value}, allClientsReady: {allClientsReady}");
     }
 
     /// <summary>
@@ -241,7 +242,7 @@ public class GameManager : NetworkBehaviour
     {
         if (gameState.Value == GameState.WatingToStart)
         {
-            //Debug.Log($"LocalPlayerReady game state:{state.Value}");
+            Debug.Log($"LocalPlayerReady game state:{gameState.Value}");
             isLocalPlayerReady = true;
             SetPlayerReadyServerRpc();
         }

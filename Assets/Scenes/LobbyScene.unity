@@ -12067,7 +12067,7 @@ GameObject:
   - component: {fileID: 1001950444}
   - component: {fileID: 1001950445}
   m_Layer: 0
-  m_Name: ==Popup_WatingForPlayers==
+  m_Name: ==Popup_GameRoom==
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12102,7 +12102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1001950443}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 470bf1a4922d1f245a98ecc67d30f160, type: 3}
+  m_Script: {fileID: 11500000, guid: a79a24cb65a9ebc45aa262484c7d9aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   matchingState: 0
@@ -32893,7 +32893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 620810480458504137}
   m_Layer: 0
-  m_Name: WatingForPlayers
+  m_Name: GameRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
