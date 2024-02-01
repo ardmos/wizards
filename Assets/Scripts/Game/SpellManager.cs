@@ -260,18 +260,21 @@ public class SpellManager : NetworkBehaviour
         // 일단 마법 정지
         spell.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
-        Debug.Log($"collision.gameObject.tag: {collision.gameObject.tag}");
+        // 충돌한 오브젝트의 collider 저장
+        Collider collider = collision.collider;
+
+        Debug.Log($"collision.gameObject.tag: {collider.tag}");
 
 
 
         // 충돌한게 Spell일 경우, 스펠간 충돌 결과 처리를 따로 진행합니다
         // 처리결과를 collisionHandlingResult 변수에 저장해뒀다가 DestroyParticle시에 castSpell 시킵니다.
-        if (collision.gameObject.CompareTag("Attack"))
+        if (collider.CompareTag("Attack"))
         {       
             isSpellCollided = true;
             Debug.Log($"AttackSpell Hit!");
             SpellInfo thisSpell = GetSpellInfo(spell.GetSpellInfo().ownerPlayerClientId, spell.GetSpellInfo().spellName);
-            SpellInfo opponentsSpell = GetSpellInfo(collision.gameObject.GetComponent<AttackSpell>().GetSpellInfo().ownerPlayerClientId, collision.gameObject.GetComponent<AttackSpell>().GetSpellInfo().spellName);
+            SpellInfo opponentsSpell = GetSpellInfo(collider.GetComponent<AttackSpell>().GetSpellInfo().ownerPlayerClientId, collider.GetComponent<AttackSpell>().GetSpellInfo().spellName);
 
             collisionHandlingResult = spell.CollisionHandling(thisSpell, opponentsSpell);
         }
@@ -279,7 +282,7 @@ public class SpellManager : NetworkBehaviour
         // 충돌한게 플레이어일 경우! 
         // 1. player에게 GetHit() 시킴
         // 2. player가 GameMultiplayer(ServerRPC)에게 보고, player(ClientRPC)업데이트.
-        else if (collision.gameObject.CompareTag("Player"))
+        else if (collider.CompareTag("Player"))
         {
             isSpellCollided = false;
             Debug.Log($"Player Hit!");
@@ -290,7 +293,7 @@ public class SpellManager : NetworkBehaviour
             }
             //Debug.Log($"Hit!! spell level: {spellInfo.level}");
 
-            Player player = collision.gameObject.GetComponent<Player>();
+            Player player = collider.GetComponent<Player>();
             if (player != null)
             {
                 sbyte damage = (sbyte) GetSpellInfo(spell.GetSpellInfo().ownerPlayerClientId, spell.GetSpellInfo().spellName).level;
@@ -327,7 +330,7 @@ public class SpellManager : NetworkBehaviour
         // 적중 효과 VFX
         SpellManager.Instance.HitVFX(spell.GetHitVFXPrefab(), collision);
 
-        Debug.Log($"Collided Obejct name: {collision.gameObject.name}");
+        Debug.Log($"Collided Obejct name: {collider.name}");
 
         // 스펠끼리 충돌해서 우리 스펠이 이겼을 때
         if (isSpellCollided)
