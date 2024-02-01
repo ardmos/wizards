@@ -37,14 +37,6 @@ public class SpellSpecifications : MonoBehaviour
     /// <summary>
     /// Spell의 기본 스펙을 설정해주는 메소드 입니다.
     /// </summary>
-    /// <param name="spellType"></param>
-    /// <param name="coolTime"></param>
-    /// <param name="lifeTime"></param>
-    /// <param name="moveSpeed"></param>
-    /// <param name="price"></param>
-    /// <param name="level"></param>
-    /// <param name="spellName"></param>
-    /// <param name="spellState"></param>
     /// <returns></returns>
     private void SetSpellDefaultSpec(SpellType spellType, float coolTime, float lifeTime, float moveSpeed, int price, sbyte level, SpellName spellName, SpellState spellState)
     {
