@@ -33,7 +33,7 @@ public class StoneSlashLv1 : AttackSpell  // 임시로 사용. Knight용 스킬 클래스를
         SpellInfo result = new SpellInfo();
 
         // Lvl 비교
-        sbyte resultLevel = (sbyte)(thisSpell.level - opponentsSpell.level);
+        byte resultLevel = (byte)(thisSpell.level - opponentsSpell.level);
         result.level = resultLevel;
         // resultLevel 값이 0보다 같거나 작으면 더 계산할 필요 없음. 
         //      0이면 비긴거니까 만들 필요 없고

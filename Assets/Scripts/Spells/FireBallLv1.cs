@@ -28,7 +28,7 @@ public class FireBallLv1 : FireSpell
     {
         base.Shoot(force, forceMode);
         trails[0].SetActive(true);
-        Debug.Log($"Fireball Lv1 Shoot");
+        //Debug.Log($"Fireball Lv1 Shoot");
 
     }
 }

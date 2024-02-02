@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -15,13 +16,14 @@ public class SpellManager : NetworkBehaviour
     private Dictionary<ulong, Transform> playerMuzzlePairs = new Dictionary<ulong, Transform>();
 
     // 서버에 저장되는 내용
-    [SerializeField] private Dictionary<ulong, List<SpellInfo>> SpellInfoListOnServer = new Dictionary<ulong, List<SpellInfo>>();
+    [SerializeField] private Dictionary<ulong, List<SpellInfo>> spellInfoListOnServer;
 
     private void Awake()
     {      
         Instance = this;
+        spellInfoListOnServer = new Dictionary<ulong, List<SpellInfo>>();
     }
-    
+
     #region SpellInfo
     /// <summary>
     /// 변경된 SpellState를 Server에 보고합니다.
@@ -32,18 +34,17 @@ public class SpellManager : NetworkBehaviour
     public void UpdatePlayerSpellStateServerRPC(ushort spellIndex, SpellState spellState, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
-        if (!SpellInfoListOnServer.ContainsKey(clientId))
+        if (!spellInfoListOnServer.ContainsKey(clientId))
         {
-            Debug.LogError($"UpdatePlayerSpellStateServerRPC. There is no SpellInfoList for this client. clientId:{clientId}");
+            Debug.LogError($"{nameof(UpdatePlayerSpellStateServerRPC)} There is no SpellInfoList for this client. clientId:{clientId}");
             return;
         }
 
-        SpellInfoListOnServer[clientId][spellIndex].spellState = spellState;
-        Debug.Log($"SpellController UpdatePlayerSpellStateServerRPC: {spellIndex}");
+        spellInfoListOnServer[clientId][spellIndex].spellState = spellState;
 
         // 요청한 클라이언트의 currentSpellInfoList 동기화
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(SpellInfoListOnServer[clientId].ToArray());
+        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
     }
 
     /// <summary>
@@ -56,20 +57,21 @@ public class SpellManager : NetworkBehaviour
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
         foreach (SpellName spellName in spellNames)
         {
-            Debug.Log($"spellName: {spellName}");
-            SpellInfo spellInfo = SpellSpecifications.Instance.GetSpellDefaultSpec(spellName);
-            // 마법 실명제. 이 마법에 누군가 당한 경우 알림 띄울 때 사용
+            SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
             spellInfo.ownerPlayerClientId = clientId;
             playerSpellInfoList.Add(spellInfo);
         }
 
-        if (!SpellInfoListOnServer.ContainsKey(clientId))
+        spellInfoListOnServer[clientId] = new List<SpellInfo>(playerSpellInfoList);
+
+
+        if (spellInfoListOnServer.ContainsKey(clientId))
         {
-            SpellInfoListOnServer.Add(clientId, playerSpellInfoList);
+            spellInfoListOnServer[clientId] = new List<SpellInfo>(playerSpellInfoList);
         }
         else
         {
-            SpellInfoListOnServer[clientId] = playerSpellInfoList;
+            spellInfoListOnServer.Add(clientId, new List<SpellInfo>(playerSpellInfoList));
         }
 
         // 요청한 클라이언트의 currentSpellInfoList 동기화
@@ -78,7 +80,7 @@ public class SpellManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// 특정 스펠의 스펠인포를 업데이트해주는 메소드 입니다.
+    /// 특정 스펠의 스펠인포를 업데이트해주는 메소드 입니다.  <----메소드명 변경하는것 고려해보기
     /// 주로 스크롤 획득으로 인한 스펠 강화에 사용됩니다.
     /// 업데이트 후에 자동으로 클라이언트측과 동기화를 합니다.
     /// </summary>
@@ -86,13 +88,13 @@ public class SpellManager : NetworkBehaviour
     public void UpdateScrollEffectServerRPC(Item.ItemName scrollName, sbyte spellIndex, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
-        if (!SpellManager.Instance.SpellInfoListOnServer.ContainsKey(clientId))
+        if (!SpellManager.Instance.spellInfoListOnServer.ContainsKey(clientId))
         {
             Debug.LogError($"UpdateScrollEffectServerRPC. There is no SpellInfoList for this client. clientId:{clientId}");
             return;
         }
 
-        SpellInfo newSpellInfo = SpellInfoListOnServer[clientId][spellIndex];
+        SpellInfo newSpellInfo = spellInfoListOnServer[clientId][spellIndex];
 
         // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
         switch (scrollName)
@@ -119,11 +121,11 @@ public class SpellManager : NetworkBehaviour
         }
 
         // 변경내용 서버에 저장
-        SpellInfoListOnServer[clientId][spellIndex] = newSpellInfo;
+        spellInfoListOnServer[clientId][spellIndex] = newSpellInfo;
 
         // 변경내용을 요청한 클라이언트와도 동기화
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(SpellInfoListOnServer[clientId].ToArray());
+        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
     }
 
     /// <summary>
@@ -134,17 +136,17 @@ public class SpellManager : NetworkBehaviour
     /// <returns></returns>
     public SpellInfo GetSpellInfo(ulong clientId, SpellName spellName)
     {
-        if (!SpellInfoListOnServer.ContainsKey(clientId))
+        if (!spellInfoListOnServer.ContainsKey(clientId))
         {
             Debug.Log($"GetSpellInfo. 스펠정보를 찾을 수 없습니다. clienId:{clientId}, spellName:{spellName}");
             return null;
         }
 
-        foreach (SpellInfo spellInfo in SpellInfoListOnServer[clientId])
+        foreach (SpellInfo spellInfo in spellInfoListOnServer[clientId])
         {
             if(spellInfo.spellName == spellName)
             {
-                Debug.Log($"GetSpellInfo.스펠정보를 찾았습니다.clienId:{clientId}, spellName: {spellName}");
+                //Debug.Log($"GetSpellInfo.스펠정보를 찾았습니다.clienId:{clientId}, spellName: {spellName}");
                 return spellInfo;
             }
                 
@@ -307,7 +309,7 @@ public class SpellManager : NetworkBehaviour
         else
         {
             isSpellCollided = false;
-            Debug.Log($"Object Hit!");
+            Debug.Log($"{collider.name} Hit!");
         }
 
         spell.SetSpellIsCollided(true);
@@ -446,7 +448,7 @@ public class SpellManager : NetworkBehaviour
 
         if (hitVFXPrefab != null)
         {
-            Debug.Log($"hitVFXPrefab is Not null");
+            //Debug.Log($"hitVFXPrefab is Not null");
             var hitVFX = Instantiate(hitVFXPrefab, pos, rot) as GameObject;
             hitVFX.GetComponent<NetworkObject>().Spawn();
             var particleSystem = hitVFX.GetComponent<ParticleSystem>();

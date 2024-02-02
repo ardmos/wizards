@@ -34,7 +34,7 @@ public abstract class AttackSpell : NetworkBehaviour
 
     public virtual void Shoot(Vector3 force, ForceMode forceMode)
     {
-        Debug.Log($"AttackSpell class Shoot()");
+        //Debug.Log($"AttackSpell class Shoot()");
         GetComponent<Rigidbody>().AddForce(force, forceMode);
     }
 

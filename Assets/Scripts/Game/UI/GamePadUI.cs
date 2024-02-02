@@ -31,7 +31,7 @@ public class GamePadUI : MonoBehaviour
 
         for (ushort i = 0; i < spellNames.Length; i++)
         {
-            Debug.Log($"spellName: {spellNames[i]}");
+            //Debug.Log($"spellName: {spellNames[i]}");
             spellIcons[i].sprite = GameAssets.instantiate.GetSpellIconImage(spellNames[i]);
         }       
     }
@@ -48,6 +48,7 @@ public class GamePadUI : MonoBehaviour
 
         for (byte i = 0;i < spellCooltimeImages.Length; i++)
         {
+            //Debug.Log($"{Player.LocalInstance.OwnerClientId}");
             float coolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(i);
             if (coolTimeRatio > 0) 
             {

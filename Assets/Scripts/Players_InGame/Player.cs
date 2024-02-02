@@ -81,10 +81,10 @@ public class Player : NetworkBehaviour
         if (!IsOwner) return;
         LocalInstance = this;
 
-        Debug.Log($"InitializePlayerClientRPC. Player{OwnerClientId}! IsClient?{IsClient}, IsOwner?{IsOwner}, LocalInstance:{LocalInstance}");
+        //Debug.Log($"InitializePlayerClientRPC. Player{OwnerClientId}! IsClient?{IsClient}, IsOwner?{IsOwner}, LocalInstance:{LocalInstance}");
 
         // 보유 스펠을 GamePad UI에 반영          
-        Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
+        //Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
         FindObjectOfType<GamePadUI>().UpdateSpellUI(ownedSpellNameList);
         
         // Input Action 이벤트 구독
@@ -151,7 +151,7 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     public void SetHPClientRPC(ulong clientId, sbyte hp)
     {
-        Debug.Log($"Player{clientId}.SetHPClientPRC() HP Set! hp:{hp}");
+        //Debug.Log($"Player{clientId}.SetHPClientPRC() HP Set! hp:{hp}");
         hPBar.SetHP(hp);
     }
 

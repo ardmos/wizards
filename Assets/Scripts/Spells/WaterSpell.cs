@@ -14,7 +14,7 @@ public abstract class WaterSpell : AttackSpell
         SpellInfo result = thisSpell;
 
         // Lvl 비교
-        sbyte resultLevel = (sbyte)(thisSpell.level - opponentsSpell.level);
+        byte resultLevel = (byte)(thisSpell.level - opponentsSpell.level);
         result.level = resultLevel;
         // resultLevel 값이 0보다 같거나 작으면 더 계산할 필요 없음. (상대 주문보다 레벨이 높은 경우만 속성 계산을 하면 된다.) 
         // 현 메소드를 호출하는 각 마법 스크립트에서는 resultLevel값에 따라 후속 마법 오브젝트 생성여부를 판단하면 됨. 
