@@ -70,7 +70,7 @@ public class PlayerAnimator : NetworkBehaviour
         PlayerAttackAnimStateEventData eventData = (PlayerAttackAnimStateEventData)e;
         NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
         networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdateSpellAnimationOnServer(eventData.playerAttackAnimState);
-        Debug.Log($"Player{eventData.clientId} AttackAnimation OnPlayerAttackAnimStateChanged: {eventData.playerAttackAnimState}");
+        Debug.Log($"{nameof(OnPlayerAttackAnimStateChanged)} Player{eventData.clientId} AttackAnimation OnPlayerAttackAnimStateChanged: {eventData.playerAttackAnimState}");
     }
 
     private void UpdateSpellAnimationOnServer(PlayerAttackAnimState playerAttackAnimState)

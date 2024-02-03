@@ -70,8 +70,10 @@ public class SpellController : NetworkBehaviour
 
         // 서버에 마법 캐스팅 요청
         SpellManager.Instance.StartCastingAttackSpellServerRPC(spellInfoListOnClient[spellIndex].spellName, GetComponent<NetworkObject>());
-        // 해당 SpellState 업데이트
+        // 서버에 해당 SpellState 업데이트
         SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Casting);
+        // 서버에 애니메이션 실행 요청
+        GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServerRPC(OwnerClientId, PlayerAttackAnimState.CastingAttackMagic);
     }
 
     /// <summary>
@@ -85,6 +87,8 @@ public class SpellController : NetworkBehaviour
         SpellManager.Instance.ShootCastingSpellObjectServerRPC() ;
         // 해당 SpellState 업데이트
         SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Cooltime);
+        // 서버에 애니메이션 실행 요청
+        GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServerRPC(OwnerClientId, PlayerAttackAnimState.ShootingMagic);
     }
     #endregion
 
@@ -97,6 +101,8 @@ public class SpellController : NetworkBehaviour
         SpellManager.Instance.StartActivateDefenceSpellServerRPC(spellInfoListOnClient[defenceSpellIndex].spellName, GetComponent<NetworkObject>());
         // 해당 SpellState 업데이트
         SpellManager.Instance.UpdatePlayerSpellStateServerRPC(defenceSpellIndex, SpellState.Cooltime);
+        // 서버에 애니메이션 실행 요청
+        GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServerRPC(OwnerClientId, PlayerAttackAnimState.CastingDefensiveMagic);
     }
     #endregion
 

@@ -230,7 +230,7 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     /// <summary>
-    /// 서버에서 호출해야하는 메소드
+    /// 서버에서 호출해야하는 메소드. 플레이어의 이동 처리부분을 담당하는 스크립트를 따로 만드는게 좋아보인다!! 나중에 코드 정리할 때 참고해서 진행하자.
     /// 특정 플레이어에게 이동 및 특정 자세(비 공격적) 애니메이션을 실행시켜줄 수 있는 메소드 입니다.
     /// </summary>
     /// <param name="clientId">플레이어 캐릭터 특정</param>
@@ -244,7 +244,6 @@ public class GameMultiplayer : NetworkBehaviour
         OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerMoveAnimStateEventData(clientId, playerData.playerMoveAnimState));
     }
 
-
     public void UpdatePlayerAttackAnimStateOnServer(ulong clientId, PlayerAttackAnimState playerAttackAnimState)
     {
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
@@ -253,6 +252,17 @@ public class GameMultiplayer : NetworkBehaviour
         // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
         OnPlayerAttackAnimStateChanged?.Invoke(this, new PlayerAttackAnimStateEventData(clientId, playerData.playerAttackAnimState));
     }
+
+    [ServerRpc (RequireOwnership = false)]
+    public void UpdatePlayerAttackAnimStateOnServerRPC(ulong clientId, PlayerAttackAnimState playerAttackAnimState)
+    {
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+        playerData.playerAttackAnimState = playerAttackAnimState;
+        SetPlayerDataFromClientId(clientId, playerData);
+        // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
+        OnPlayerAttackAnimStateChanged?.Invoke(this, new PlayerAttackAnimStateEventData(clientId, playerData.playerAttackAnimState));
+    }
+
 
 
     /// <summary>
