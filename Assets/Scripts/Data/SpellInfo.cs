@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using UnityEngine;
 
 [System.Serializable]
 public class SpellInfo : INetworkSerializable
@@ -52,34 +53,5 @@ public class SpellInfo : INetworkSerializable
         serializer.SerializeValue(ref spellName);
         serializer.SerializeValue(ref spellState);
         serializer.SerializeValue(ref ownerPlayerClientId);
-    }
-
-    /// <summary>
-    /// 스펠의 레벨에 맞는 이름을 설정해주는 메소드 입니다.
-    /// </summary>
-    /// <param name="level"></param>
-    /// <param name="spellType"></param>
-    public void SetSpellName(byte level, SpellType spellType)
-    {
-        switch(spellType)
-        {
-            case SpellType.Normal:
-                // 기사 마법은 추후 수정 예정. 일단 테스트용.
-                this.spellName = SpellName.SlashSpellStart + level;
-                break;
-            case SpellType.Fire:
-                this.spellName = SpellName.FireSpellStart + level;
-                break;
-
-            case SpellType.Water:
-                this.spellName = SpellName.WaterSpellStart + level;
-                break;
-
-            case SpellType.Ice:
-                this.spellName = SpellName.IceSpellStart + level;
-                break;
-
-            default: break;
-        }
     }
 }

@@ -39,7 +39,7 @@ public abstract class IceSpell : AttackSpell
                 break;
         }
 
-        result.SetSpellName(result.level, result.spellType);
+        result.spellName = SpellNames.GetSpellName(result.level, result.spellType);
         return result;
     }
 }

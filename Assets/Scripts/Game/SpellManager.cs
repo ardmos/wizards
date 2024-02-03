@@ -269,12 +269,13 @@ public class SpellManager : NetworkBehaviour
         // 처리결과를 collisionHandlingResult 변수에 저장해뒀다가 DestroyParticle시에 castSpell 시킵니다.
         if (collider.CompareTag("Attack"))
         {       
-            isSpellCollided = true;
-            Debug.Log($"AttackSpell Hit!");
+            isSpellCollided = true;            
             SpellInfo thisSpell = GetSpellInfo(spell.GetSpellInfo().ownerPlayerClientId, spell.GetSpellInfo().spellName);
             SpellInfo opponentsSpell = GetSpellInfo(collider.GetComponent<AttackSpell>().GetSpellInfo().ownerPlayerClientId, collider.GetComponent<AttackSpell>().GetSpellInfo().spellName);
 
             collisionHandlingResult = spell.CollisionHandling(thisSpell, opponentsSpell);
+
+            Debug.Log($"Spell끼리 충돌! <<<<<<--- 여기부터!!!");
         }
 
         // 충돌한게 플레이어일 경우! 
@@ -329,9 +330,9 @@ public class SpellManager : NetworkBehaviour
         SpellManager.Instance.HitVFX(spell.GetHitVFXPrefab(), collision);
 
         // 스펠끼리 충돌해서 우리 스펠이 이겼을 때
-        if (isSpellCollided)
+        if (collisionHandlingResult.level > 0)
         {
-            Debug.Log($"our spell({spell.GetSpellInfo().spellName}) is win! collisionHandlingResult.level :{collisionHandlingResult.level} ");
+            Debug.Log($"our spell({collisionHandlingResult.spellName}) is win! collisionHandlingResult.level :{collisionHandlingResult.level} ");
             if (collisionHandlingResult.level > 0)
             {             
                 SpawnSpellObjectOnServer(collisionHandlingResult.ownerPlayerClientId, spell.transform, collisionHandlingResult.spellName);
