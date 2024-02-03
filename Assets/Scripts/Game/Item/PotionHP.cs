@@ -16,9 +16,9 @@ public class PotionHP : NetworkBehaviour
         if (!IsServer) return;
 
         ulong collisionedClientId = collision.gameObject.GetComponent<NetworkObject>().OwnerClientId;
-        sbyte newPlayerHP = GetNewPlayerHP(collisionedClientId);
 
-        PlayerHPManager.Instance.SetPlayerHPOnServer(newPlayerHP, collisionedClientId);
+        // Player Èú¸µ È¿°ú Àû¿ë
+        ApplyHealingEffect(collisionedClientId);
 
         // Player Èú¸µ VFX ½ÇÇà
         GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfxHeal, collision.gameObject.transform);
@@ -30,10 +30,11 @@ public class PotionHP : NetworkBehaviour
         GetComponent<NetworkObject>().Despawn();
     }
 
-    private sbyte GetNewPlayerHP(ulong collisionedClientId) {
+    private void ApplyHealingEffect(ulong collisionedClientId) {
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(collisionedClientId);
         sbyte newHP = (sbyte)(playerData.playerHP + healingValue);
         if(newHP > playerData.playerMaxHP) newHP = playerData.playerMaxHP;
-        return newHP;
+
+        PlayerHPManager.Instance.UpdatePlayerHP(collisionedClientId, newHP, playerData.playerMaxHP);
     }
 }

@@ -387,6 +387,7 @@ public class SpellManager : NetworkBehaviour
             // 요청한 플레이어 현재 HP값 가져오기 
             PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
             sbyte playerHP = playerData.playerHP;
+            sbyte playerMaxHP = playerData.playerMaxHP;
 
             // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
             if (playerHP <= damage)
@@ -401,7 +402,7 @@ public class SpellManager : NetworkBehaviour
             }
 
             // 각 Client에 변경HP 전달
-            PlayerHPManager.Instance.UpdatePlayerHP(clientId, playerHP);
+            PlayerHPManager.Instance.UpdatePlayerHP(clientId, playerHP, playerMaxHP);
             Debug.Log($"GameMultiplayer.PlayerGotHitOnServer()  Player{clientId} got {damage} damage new HP:{playerHP}");
         }
     }
@@ -420,7 +421,7 @@ public class SpellManager : NetworkBehaviour
         //Debug.Log($"MuzzleVFX muzzlePos:{muzzleTransform.position}, muzzleLocalPos:{muzzleTransform.localPosition}");
         GameObject muzzleVFX = Instantiate(muzzleVFXPrefab, muzzleTransform.position, Quaternion.identity);
         muzzleVFX.GetComponent<NetworkObject>().Spawn();
-        muzzleVFX.transform.SetParent(muzzleTransform.GetComponentInParent<Player>().transform);
+        muzzleVFX.transform.SetParent(transform);
         muzzleVFX.transform.localPosition = muzzleTransform.localPosition;
         muzzleVFX.transform.forward = muzzleTransform.forward;
         var particleSystem = muzzleVFX.GetComponent<ParticleSystem>();

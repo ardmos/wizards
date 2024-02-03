@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -15,11 +16,8 @@ public class Player : NetworkBehaviour
     [SerializeField] protected GameInput gameInput;
     [SerializeField] protected GameObject virtualCameraObj;
     [SerializeField] protected SpellController spellController;
+    [SerializeField] protected TextMeshProUGUI txtUserName;
     [SerializeField] protected HPBarUI hPBar;
-    [SerializeField] protected Mesh m_Body;
-    [SerializeField] protected Mesh m_Hat;
-    [SerializeField] protected Mesh m_BackPack;
-    [SerializeField] protected Mesh m_Wand;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
@@ -52,16 +50,17 @@ public class Player : NetworkBehaviour
         Debug.Log($"InitializePlayerOnServer. spawnPositionList.Count: {spawnPositionList.Count}, requestedInitializeClientId: {requestedInitializeClientId}, GameMultiplayer.Instance.GetPlayerDataIndexFromClientId: {GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(requestedInitializeClientId)}");
 
         // 스폰 위치 초기화
-        //transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
-        transform.position = spawnPositionList[0];
+        transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
+        //transform.position = spawnPositionList[0];
 
         // HP 초기화 & 브로드캐스팅
         // 최대HP 저장
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(requestedInitializeClientId);
+        playerData.playerHP = hp;
         playerData.playerMaxHP = hp;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(requestedInitializeClientId, playerData);
         // 현재 HP 저장 및 설정
-        PlayerHPManager.Instance.SetPlayerHPOnServer(hp, requestedInitializeClientId);
+        PlayerHPManager.Instance.UpdatePlayerHP(requestedInitializeClientId, playerData.playerHP, playerData.playerMaxHP);
 
         // 특정 플레이어가 보유한 스킬 목록 저장
         SpellManager.Instance.InitPlayerSpellInfoArrayOnServer(requestedInitializeClientId, ownedSpellList);
@@ -77,11 +76,13 @@ public class Player : NetworkBehaviour
         virtualCameraObj.SetActive(IsOwner);
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         GetComponent<Rigidbody>().isKinematic = false;
+        // 플레이어 닉네임 설정
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        txtUserName.text = playerData.playerName.ToString();
+        Debug.Log($"player Name :{playerData.playerName.ToString()}");
 
         if (!IsOwner) return;
         LocalInstance = this;
-
-        //Debug.Log($"InitializePlayerClientRPC. Player{OwnerClientId}! IsClient?{IsClient}, IsOwner?{IsOwner}, LocalInstance:{LocalInstance}");
 
         // 보유 스펠을 GamePad UI에 반영          
         //Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
@@ -149,10 +150,10 @@ public class Player : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void SetHPClientRPC(ulong clientId, sbyte hp)
+    public void SetHPClientRPC(ulong clientId, sbyte hp, sbyte maxHP)
     {
         //Debug.Log($"Player{clientId}.SetHPClientPRC() HP Set! hp:{hp}");
-        hPBar.SetHP(hp);
+        hPBar.SetHP(hp, maxHP);
     }
 
     /// <summary>

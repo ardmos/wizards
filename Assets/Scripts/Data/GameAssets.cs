@@ -85,6 +85,7 @@ public class GameAssets : MonoBehaviour
 
     public GameObject GetSpellPrefab(SpellName spellName)
     {
+        Debug.Log($"{nameof(GetSpellPrefab)} requested spellName: {spellName}");
         return spellAssetsList[SearchSpellNameIndex(spellName)].prefab;
     }
 
