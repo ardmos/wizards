@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 /// <summary>
@@ -13,10 +14,7 @@ public abstract class AttackSpell : NetworkBehaviour
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
 
-    [SerializeField] private bool isCollided;
-    
-    // 마법 상세값 설정
-    public abstract void InitSpellInfoDetail(SpellInfo spellInfoFromServer);
+    //[SerializeField] private bool isCollided;
 
     // 마법 충돌시 속성 계산
     public abstract SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell);
@@ -32,13 +30,21 @@ public abstract class AttackSpell : NetworkBehaviour
         SpellManager.Instance.SpellHitOnServer(collision, this);
     }
 
+    // 마법 상세값 설정
+    public virtual void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
+    {
+        if (!IsServer) return;
+        spellInfo = new SpellInfo(spellInfoFromServer);
+    }
+
     public virtual void Shoot(Vector3 force, ForceMode forceMode)
     {
+        if (!IsServer) return;
         //Debug.Log($"AttackSpell class Shoot()");
         GetComponent<Rigidbody>().AddForce(force, forceMode);
     }
 
-    public void SetSpellIsCollided(bool isCollided)
+/*    public void SetSpellIsCollided(bool isCollided)
     {
         this.isCollided = isCollided;
     }
@@ -46,7 +52,7 @@ public abstract class AttackSpell : NetworkBehaviour
     public bool IsCollided()
     {
         return this.isCollided;
-    }
+    }*/
 
     public SpellInfo GetSpellInfo()
     {

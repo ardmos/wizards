@@ -14,7 +14,7 @@ public class StoneSlashLv1 : AttackSpell  // 임시로 사용. Knight용 스킬 클래스를
     public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
         Debug.Log($"InitSpellInfoDetail() {nameof(StoneSlashLv1)}");
-        spellInfo = spellInfoFromServer;
+        base.InitSpellInfoDetail( spellInfoFromServer );
 
         if (spellInfo == null)
         {

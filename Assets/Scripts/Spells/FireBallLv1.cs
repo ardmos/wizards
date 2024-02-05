@@ -14,8 +14,7 @@ public class FireBallLv1 : FireSpell
     /// </summary>
     public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
-        //Debug.Log("InitSpellInfoDetail() FireBall Lv1");
-        spellInfo = spellInfoFromServer;
+        base.InitSpellInfoDetail(spellInfoFromServer);
     }
 
     // 현재 사용하는 파이어볼 VFX를 자연스럽게 하기위한 부분

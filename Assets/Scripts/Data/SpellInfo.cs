@@ -12,9 +12,9 @@ public class SpellInfo : INetworkSerializable
     public float moveSpeed;
     public int price;
     public byte level;
-
-
     public ulong ownerPlayerClientId;
+
+
 
     public SpellInfo() { }
 
@@ -28,6 +28,7 @@ public class SpellInfo : INetworkSerializable
         this.moveSpeed = spellInfo.moveSpeed;
         this.price = spellInfo.price;
         this.level = spellInfo.level;
+        this.ownerPlayerClientId = spellInfo.ownerPlayerClientId;
     }
 
     public SpellInfo(SpellType spellType, SpellName spellName, SpellState spellState, float coolTime, float lifeTime, float moveSpeed, int price, byte level)

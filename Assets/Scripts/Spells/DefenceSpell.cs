@@ -11,7 +11,7 @@ public abstract class DefenceSpell : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        spellInfo = spellInfoFromServer;
+        spellInfo = new SpellInfo(spellInfoFromServer);
     }
 
     public virtual void Activate() 

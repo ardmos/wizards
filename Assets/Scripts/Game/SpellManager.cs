@@ -62,16 +62,13 @@ public class SpellManager : NetworkBehaviour
             playerSpellInfoList.Add(spellInfo);
         }
 
-        spellInfoListOnServer[clientId] = new List<SpellInfo>(playerSpellInfoList);
-
-
         if (spellInfoListOnServer.ContainsKey(clientId))
         {
-            spellInfoListOnServer[clientId] = new List<SpellInfo>(playerSpellInfoList);
+            spellInfoListOnServer[clientId] = playerSpellInfoList;
         }
         else
         {
-            spellInfoListOnServer.Add(clientId, new List<SpellInfo>(playerSpellInfoList));
+            spellInfoListOnServer.Add(clientId, playerSpellInfoList);
         }
 
         // 요청한 클라이언트의 currentSpellInfoList 동기화
@@ -146,7 +143,6 @@ public class SpellManager : NetworkBehaviour
         {
             if(spellInfo.spellName == spellName)
             {
-                //Debug.Log($"GetSpellInfo.스펠정보를 찾았습니다.clienId:{clientId}, spellName: {spellName}");
                 return spellInfo;
             }
                 
@@ -204,7 +200,10 @@ public class SpellManager : NetworkBehaviour
         // 포구에 발사체 위치시키기
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), muzzleTransform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
-        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(GetSpellInfo(clientId, spellName));
+
+        SpellInfo spellInfo = new SpellInfo(GetSpellInfo(clientId, spellName));
+        Debug.Log($"{nameof(StartCastingAttackSpellServerRPC)} ownerClientId {spellInfo.ownerPlayerClientId}, spellName: {spellInfo.spellName}, spellLv: {spellInfo.level}");
+        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
         spellObject.transform.SetParent(playerObject.transform);
         spellObject.transform.localPosition = muzzleTransform.localPosition;
 
@@ -233,7 +232,7 @@ public class SpellManager : NetworkBehaviour
 
         // 마법 발사
         spellObject.transform.SetParent(this.transform);
-        float moveSpeed = GetSpellInfo(clientId, spellObject.GetComponent<AttackSpell>().GetSpellInfo().spellName).moveSpeed;
+        float moveSpeed = spellObject.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
         spellObject.GetComponent<AttackSpell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
 
         // 포구 VFX
@@ -244,16 +243,11 @@ public class SpellManager : NetworkBehaviour
     #region Spell Hit 
     /// <summary>
     /// 2. CollisionEnter 충돌 처리 (서버 권한 방식)
+    /// Spell 본인의 입장에서 충돌에대한 판정을 서버에게 요청할 때 호출되는 메소드 입니다.
     /// </summary>
     /// <param name="collision"></param>
     public virtual void SpellHitOnServer(Collision collision, AttackSpell spell)
     {
-        if (spell.IsCollided())
-        {
-            Debug.Log("이미 동일한 마법 충돌을 처리중입니다.");
-            return;
-        }
-
         // 충돌한것이 마법인지 확인
         bool isSpellCollided = false;   
         // 충돌 처리결과 저장
@@ -270,12 +264,13 @@ public class SpellManager : NetworkBehaviour
         if (collider.CompareTag("Attack"))
         {       
             isSpellCollided = true;            
-            SpellInfo thisSpell = GetSpellInfo(spell.GetSpellInfo().ownerPlayerClientId, spell.GetSpellInfo().spellName);
-            SpellInfo opponentsSpell = GetSpellInfo(collider.GetComponent<AttackSpell>().GetSpellInfo().ownerPlayerClientId, collider.GetComponent<AttackSpell>().GetSpellInfo().spellName);
+            SpellInfo thisSpell = spell.GetSpellInfo();
+            SpellInfo opponentsSpell = collider.GetComponent<AttackSpell>().GetSpellInfo();
 
             collisionHandlingResult = spell.CollisionHandling(thisSpell, opponentsSpell);
 
-            Debug.Log($"Spell끼리 충돌! <<<<<<--- 여기부터!!!");
+            Debug.Log($"Spell끼리 충돌! ourSpell: name{thisSpell.spellName}, lvl{thisSpell.level}, owner{thisSpell.ownerPlayerClientId}  // " +
+                $"opponentsSpell : name{opponentsSpell.spellName}, lvl{opponentsSpell.level}, owner{opponentsSpell.ownerPlayerClientId}");
         }
 
         // 충돌한게 플레이어일 경우! 
@@ -293,9 +288,7 @@ public class SpellManager : NetworkBehaviour
             Player player = collider.GetComponent<Player>();
             if (player != null)
             {
-                Debug.Log($"Player{player.OwnerClientId} Hit!");
-
-                sbyte damage = (sbyte) GetSpellInfo(spell.GetSpellInfo().ownerPlayerClientId, spell.GetSpellInfo().spellName).level;
+                byte damage = (byte)spell.GetSpellInfo().level;
                 // 플레이어 피격을 서버에서 처리
                 PlayerGotHitOnServer(damage, player.OwnerClientId);
             }
@@ -309,7 +302,7 @@ public class SpellManager : NetworkBehaviour
             Debug.Log($"{collider.name} Hit!");
         }
 
-        spell.SetSpellIsCollided(true);
+        spell.GetComponent<Collider>().enabled = false;
 
         List<GameObject> trails = spell.GetTrails();
         if (trails.Count > 0)
@@ -329,17 +322,13 @@ public class SpellManager : NetworkBehaviour
         // 적중 효과 VFX
         SpellManager.Instance.HitVFX(spell.GetHitVFXPrefab(), collision);
 
-        // 스펠끼리 충돌해서 우리 스펠이 이겼을 때
-        if (collisionHandlingResult.level > 0)
+        // 스펠끼리 충돌해서 우리 스펠이 이겼을 때 계산 결과에 따라 충돌 위치에 새로운 마법 생성. 
+        if (isSpellCollided && collisionHandlingResult.level > 0)
         {
-            Debug.Log($"our spell({collisionHandlingResult.spellName}) is win! collisionHandlingResult.level :{collisionHandlingResult.level} ");
-            if (collisionHandlingResult.level > 0)
-            {             
-                SpawnSpellObjectOnServer(collisionHandlingResult.ownerPlayerClientId, spell.transform, collisionHandlingResult.spellName);
-            }
+            Debug.Log($"our spell is win! generate spell.name:{collisionHandlingResult.spellName}, spell.level :{collisionHandlingResult.level}, spell.owner: {collisionHandlingResult.ownerPlayerClientId} ");
+            SpawnSpellObjectOnServer(collisionHandlingResult, spell.transform);
         }
 
-        // DestroyParticle 하는 이유 확인해보기.   <-----여기부터!!!!!
         Destroy(spell.gameObject, 0.2f);
     }
 
@@ -351,19 +340,20 @@ public class SpellManager : NetworkBehaviour
     /// 필요한것.
     ///     1. 포구 Transform
     ///     2. 쏠 발사체 SpellName
-    public void SpawnSpellObjectOnServer(ulong spellOwnerClientId, Transform spawnPosition, SpellName spellName)
+    public void SpawnSpellObjectOnServer(SpellInfo spellInfo, Transform spawnPosition)
     {
         // 포구에 마법 발사체 위치시키기
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), spawnPosition.position, Quaternion.identity);
-        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(GetSpellInfo(spellOwnerClientId, spellName));
+        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellInfo.spellName), spawnPosition.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
+        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
+        Debug.Log($"SpawnSpellObjectOnServer!! spellInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");
 
         // 마법 발사체 방향 조정하기
         spellObject.transform.forward = spawnPosition.forward;
 
         // 마법 발사
         spellObject.transform.SetParent(this.transform);
-        float moveSpeed = GetSpellInfo(spellOwnerClientId, spellName).moveSpeed;
+        float moveSpeed = spellInfo.moveSpeed;
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
 
         // 포구 VFX
@@ -381,7 +371,7 @@ public class SpellManager : NetworkBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="clientId"></param>
-    public void PlayerGotHitOnServer(sbyte damage, ulong clientId)
+    public void PlayerGotHitOnServer(byte damage, ulong clientId)
     {
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {
@@ -399,7 +389,7 @@ public class SpellManager : NetworkBehaviour
             else
             {
                 // HP 감소 계산
-                playerHP -= damage;
+                playerHP -= (sbyte)damage;
             }
 
             // 각 Client에 변경HP 전달
@@ -422,8 +412,8 @@ public class SpellManager : NetworkBehaviour
         //Debug.Log($"MuzzleVFX muzzlePos:{muzzleTransform.position}, muzzleLocalPos:{muzzleTransform.localPosition}");
         GameObject muzzleVFX = Instantiate(muzzleVFXPrefab, muzzleTransform.position, Quaternion.identity);
         muzzleVFX.GetComponent<NetworkObject>().Spawn();
-        muzzleVFX.transform.SetParent(transform);
-        muzzleVFX.transform.localPosition = muzzleTransform.localPosition;
+        //muzzleVFX.transform.SetParent(transform);
+        muzzleVFX.transform.position = muzzleTransform.position;
         muzzleVFX.transform.forward = muzzleTransform.forward;
         var particleSystem = muzzleVFX.GetComponent<ParticleSystem>();
 
