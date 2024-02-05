@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -15,9 +14,10 @@ public class Player : NetworkBehaviour
 
     [SerializeField] protected GameInput gameInput;
     [SerializeField] protected GameObject virtualCameraObj;
+    [SerializeField] protected DamageTextUIController damageTextUIController;
+    [SerializeField] protected HPBarUIController hPBarUIController;
+    [SerializeField] protected UserNameUIController userNameUIController;
     [SerializeField] protected SpellController spellController;
-    [SerializeField] protected TextMeshProUGUI txtUserName;
-    [SerializeField] protected HPBarUI hPBar;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
@@ -78,7 +78,7 @@ public class Player : NetworkBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
         // 플레이어 닉네임 설정
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        txtUserName.text = playerData.playerName.ToString();
+        userNameUIController.Setup(playerData.playerName.ToString(), IsOwner);
         Debug.Log($"player Name :{playerData.playerName.ToString()}");
 
         if (!IsOwner) return;
@@ -150,10 +150,14 @@ public class Player : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void SetHPClientRPC(ulong clientId, sbyte hp, sbyte maxHP)
+    public void SetHPClientRPC(sbyte hp, sbyte maxHP)
     {
-        //Debug.Log($"Player{clientId}.SetHPClientPRC() HP Set! hp:{hp}");
-        hPBar.SetHP(hp, maxHP);
+        hPBarUIController.SetHP(hp, maxHP);
+    }
+    [ClientRpc]
+    public void ShowDamagePopupClientRPC(byte damageAmount)
+    {
+        damageTextUIController.CreateTextObject(damageAmount);
     }
 
     /// <summary>

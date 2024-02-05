@@ -288,9 +288,9 @@ public class SpellManager : NetworkBehaviour
             Player player = collider.GetComponent<Player>();
             if (player != null)
             {
-                byte damage = (byte)spell.GetSpellInfo().level;
+                byte damage = (byte)spell.GetSpellInfo().level;                
                 // 플레이어 피격을 서버에서 처리
-                PlayerGotHitOnServer(damage, player.OwnerClientId);
+                PlayerGotHitOnServer(damage, player);
             }
             else Debug.LogError("Player is null!");
         }
@@ -371,8 +371,9 @@ public class SpellManager : NetworkBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="clientId"></param>
-    public void PlayerGotHitOnServer(byte damage, ulong clientId)
+    public void PlayerGotHitOnServer(byte damage, Player player)
     {
+        ulong clientId = player.OwnerClientId;
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {
             // 요청한 플레이어 현재 HP값 가져오기 
@@ -392,8 +393,10 @@ public class SpellManager : NetworkBehaviour
                 playerHP -= (sbyte)damage;
             }
 
-            // 각 Client에 변경HP 전달
+            // 각 Client UI 업데이트 지시. HPBar & Damage Popup
             PlayerHPManager.Instance.UpdatePlayerHP(clientId, playerHP, playerMaxHP);
+            player.ShowDamagePopupClientRPC(damage);
+
             Debug.Log($"GameMultiplayer.PlayerGotHitOnServer()  Player{clientId} got {damage} damage new HP:{playerHP}");
         }
     }

@@ -50,11 +50,6 @@ MonoBehaviour:
   IconBonusGold: {fileID: 21300000, guid: 7794a522475a643ac8cb62a283863d9f, type: 3}
   IconExp: {fileID: 21300000, guid: 86991e39c8d864b198c0b90042adfcc5, type: 3}
   s_RemoveAds: {fileID: 21300000, guid: 152333def7fb04fefaac91d426ff1535, type: 3}
-  spellIconsArray:
-  - {fileID: 21300000, guid: 5692db8a476a44e039316aeecbe16bc6, type: 3}
-  - {fileID: 21300000, guid: 155e1dda5a5e148d28643cbf1592fbdd, type: 3}
-  - {fileID: 21300000, guid: 37b235823006c499d915c13924b61e2e, type: 3}
-  - {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
   spellAssetsList:
   - icon: {fileID: 21300000, guid: 5692db8a476a44e039316aeecbe16bc6, type: 3}
     prefab: {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
@@ -66,12 +61,6 @@ MonoBehaviour:
     prefab: {fileID: 3153472991145048103, guid: 1df00a9cc0f78f74b90a97a967a85b30, type: 3}
   - icon: {fileID: 21300000, guid: 1ad309a351498428d824d7ee62bed12d, type: 3}
     prefab: {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}
-  spellPrefabList:
-  - {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
-  - {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
-  - {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
-  - {fileID: 3153472991145048103, guid: 1df00a9cc0f78f74b90a97a967a85b30, type: 3}
-  - {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}
   wizard_Male_ForLobby: {fileID: 7822752010955555959, guid: ed053f82f0a9cad41a1156a5d6c24080, type: 3}
   knight_Male_ForLobby: {fileID: 8406262372636307266, guid: 03b77d822d230814799c565ef95a07aa, type: 3}
   wizard_Male: {fileID: 932501098101691884, guid: 470d188c01e7349468602788c6bbf2de, type: 3}
@@ -87,5 +76,9 @@ MonoBehaviour:
   coin5: {fileID: 5768934563241156221, guid: d0dd099fe31c0e24b92675e199eb6fa4, type: 3}
   vfxHeal: {fileID: 6331275906715107345, guid: e27164d836110ff4da364dd5d38a9118, type: 3}
   vfxSpellUpgrade: {fileID: 8846737274113074935, guid: 95bd805e8c353104da0c42b81e07d12c, type: 3}
+  txtDamageValue: {fileID: 1733173226754330972, guid: 2e19b3b4a75fc12428e277161d0266db, type: 3}
   music_Title: {fileID: 8300000, guid: 0e47ef963992f4e4fa646be25baf7256, type: 3}
   music_Lobby: {fileID: 8300000, guid: 7474e1a01656bd347baabd0911edd59b, type: 3}
+  ownerColor: {r: 0.38731253, g: 1, b: 0, a: 1}
+  allyColor: {r: 0, g: 1, b: 0.9093275, a: 1}
+  enemyColor: {r: 1, g: 0.59621054, b: 0, a: 1}

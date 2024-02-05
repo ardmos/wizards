@@ -33,7 +33,7 @@ public class PlayerHPManager : NetworkBehaviour
 
         // 각 Client 플레이어의 HP바 UI 업데이트
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<Player>().SetHPClientRPC(clientId, playerData.playerHP, playerData.playerMaxHP);
+        networkClient.PlayerObject.GetComponent<Player>().SetHPClientRPC(playerData.playerHP, playerData.playerMaxHP);
         
 
         // 게임오버 처리. 서버권한 방식.

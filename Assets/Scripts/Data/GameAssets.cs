@@ -72,6 +72,9 @@ public class GameAssets : MonoBehaviour
     public GameObject vfxHeal;
     public GameObject vfxSpellUpgrade;
 
+    // UI
+    public GameObject txtDamageValue;
+
     #endregion
 
     #region Music
@@ -81,6 +84,12 @@ public class GameAssets : MonoBehaviour
 
     #region SFX
 
+    #endregion
+
+    #region Colors
+    public Color ownerColor;
+    public Color allyColor; // 동맹시스템 추가시 사용
+    public Color enemyColor;
     #endregion
 
     public GameObject GetSpellPrefab(SpellName spellName)

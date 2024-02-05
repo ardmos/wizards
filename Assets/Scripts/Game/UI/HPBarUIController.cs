@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HPBarUI : MonoBehaviour
+public class HPBarUIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtHPValue;
     [SerializeField] private Slider slider;

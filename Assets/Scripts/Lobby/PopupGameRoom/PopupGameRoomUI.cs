@@ -84,7 +84,7 @@ public class PopupGameRoomUI : MonoBehaviour
                 // 2. 접속중인 인원 표시
                 byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
                 Debug.Log($"(클라이언트)현재 참여중인 총 플레이어 수 : {playerCount}");
-                txtPlayerCount.text = $"Wating For Players... ({playerCount.ToString()}/4)";
+                txtPlayerCount.text = $"Wating For Players... ({playerCount.ToString()}/{ConnectionApprovalHandler.MaxPlayers})";
 
                 // UI에 숫자 반영 
                 ActivateToggleUI(playerCount);

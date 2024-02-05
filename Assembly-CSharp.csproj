@@ -66,10 +66,13 @@
     <Compile Include="Assets\Scripts\Lobby\PopupShop\PopupShopUI.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\HPBarUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupLookingForGame\PopupLookingForGameUI.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\GoToLobbyScene.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\DamageTextUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupModUI.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneCleanUp.cs" />
@@ -113,7 +116,6 @@
     <Compile Include="Assets\Scripts\Game\Item\ScrollLevelUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Wizard.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\HPBarUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\PopupSettingsUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GamePadUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\DamageTextUIController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\TimerUI.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\MuzzlePos.cs" />
