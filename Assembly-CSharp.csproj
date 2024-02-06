@@ -116,6 +116,7 @@
     <Compile Include="Assets\Scripts\Game\Item\ScrollLevelUp.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Wizard.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerSpawnPointsController.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\PopupSettingsUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />

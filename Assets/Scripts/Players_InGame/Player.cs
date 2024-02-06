@@ -18,10 +18,10 @@ public class Player : NetworkBehaviour
     [SerializeField] protected HPBarUIController hPBarUIController;
     [SerializeField] protected UserNameUIController userNameUIController;
     [SerializeField] protected SpellController spellController;
+    [SerializeField] protected PlayerSpawnPointsController spawnPointsController;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
-    [SerializeField] protected List<Vector3> spawnPositionList;    
 
     protected GameAssets gameAssets;
 
@@ -46,19 +46,29 @@ public class Player : NetworkBehaviour
     public void InitializePlayerOnServer(SpellName[] ownedSpellList, ulong requestedInitializeClientId)
     {
         gameAssets = GameAssets.instantiate;
+        spawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
 
-        Debug.Log($"InitializePlayerOnServer. spawnPositionList.Count: {spawnPositionList.Count}, requestedInitializeClientId: {requestedInitializeClientId}, GameMultiplayer.Instance.GetPlayerDataIndexFromClientId: {GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(requestedInitializeClientId)}");
+        if (gameAssets == null)
+        {
+            Debug.Log($"{nameof(InitializePlayerOnServer)}, GameAssets를 찾지 못했습니다.");
+            return;
+        }
 
-        // 스폰 위치 초기화
-        transform.position = spawnPositionList[GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
-        //transform.position = spawnPositionList[0];
+        if (spawnPointsController == null)
+        {
+            Debug.LogError($"{nameof(InitializePlayerOnServer)}, 스폰위치를 특정하지 못했습니다.");
+            return;
+        }
 
-        // HP 초기화 & 브로드캐스팅
-        // 최대HP 저장
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(requestedInitializeClientId);
+        // 스폰 위치 초기화   
+        transform.position = spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId));
+
+        // HP 초기화
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(requestedInitializeClientId);  
         playerData.playerHP = hp;
-        playerData.playerMaxHP = hp;
+        playerData.playerMaxHP = hp;    
         GameMultiplayer.Instance.SetPlayerDataFromClientId(requestedInitializeClientId, playerData);
+
         // 현재 HP 저장 및 설정
         PlayerHPManager.Instance.UpdatePlayerHP(requestedInitializeClientId, playerData.playerHP, playerData.playerMaxHP);
 
@@ -251,8 +261,6 @@ public class Player : NetworkBehaviour
         float moveDistance = moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
         transform.position += moveDir * moveDistance;
 
-        //Debug.Log($"HandleMovementServerRPC playerAnimState: {GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerAnimState}");
-
         // 서버(GameMultiplayer)에 새로운 Player Anim State 저장. (GameOver상태가 아닐 때에만!)
         if (GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerMoveAnimState == PlayerMoveAnimState.GameOver)
             return;
@@ -265,7 +273,6 @@ public class Player : NetworkBehaviour
             GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(serverRpcParams.Receive.SenderClientId, PlayerMoveAnimState.Idle);
         }
 
-        //Debug.Log($"isBtnAttack1Clicked:{isBtnAttack1Clicked}, isBtnAttack2Clicked:{isBtnAttack2Clicked}, isBtnAttack3Clicked:{isBtnAttack3Clicked}");
         // 공격중이 아닐 때에만 진행방향으로 캐릭터 회전
         if (!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked)
         {

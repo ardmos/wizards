@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Netcode;
 
-/// <summary>
-/// 인게임용 플레이어 정보 구조체. 클래스로 변경 가능한지 확인하기!  가능하다면 생성자를 만들어, 매개변수 없는 생성자의 경우 플레이어이름을 Player로 설정하도록 만든다. 
-/// </summary>
 [Serializable]
 public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializable
 {
