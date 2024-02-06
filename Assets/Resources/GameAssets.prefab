@@ -77,8 +77,9 @@ MonoBehaviour:
   vfxHeal: {fileID: 6331275906715107345, guid: e27164d836110ff4da364dd5d38a9118, type: 3}
   vfxSpellUpgrade: {fileID: 8846737274113074935, guid: 95bd805e8c353104da0c42b81e07d12c, type: 3}
   txtDamageValue: {fileID: 1733173226754330972, guid: 2e19b3b4a75fc12428e277161d0266db, type: 3}
-  music_Title: {fileID: 8300000, guid: 0e47ef963992f4e4fa646be25baf7256, type: 3}
-  music_Lobby: {fileID: 8300000, guid: 7474e1a01656bd347baabd0911edd59b, type: 3}
+  music_Title: {fileID: 8300000, guid: be7aecc45e127aa4b936efa9ec76c064, type: 3}
+  music_Lobby: {fileID: 8300000, guid: 126b1fb3ad0ab4645a4e3637cb217dae, type: 3}
+  music_Game: {fileID: 8300000, guid: b0d6a6569013ba04a90f1d97860ece03, type: 3}
   ownerColor: {r: 0.38731253, g: 1, b: 0, a: 1}
   allyColor: {r: 0, g: 1, b: 0.9093275, a: 1}
   enemyColor: {r: 1, g: 0.59621054, b: 0, a: 1}

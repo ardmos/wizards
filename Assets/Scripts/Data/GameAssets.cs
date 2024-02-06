@@ -80,6 +80,7 @@ public class GameAssets : MonoBehaviour
     #region Music
     public AudioClip music_Title;
     public AudioClip music_Lobby;
+    public AudioClip music_Game;
     #endregion
 
     #region SFX
