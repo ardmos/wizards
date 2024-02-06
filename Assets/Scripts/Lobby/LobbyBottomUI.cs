@@ -16,7 +16,7 @@ public class LobbyBottomUI : MonoBehaviour
             NetworkManager.Singleton.StartHost();
             //GameMultiplayer.Instance.StartHost();
             //LoadingSceneManager.Load(LoadingSceneManager.Scene.GameRoomScene);
-            LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
+            //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
         });
 
         btnJoinGame.onClick.AddListener(() =>

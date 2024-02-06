@@ -43,16 +43,6 @@ public abstract class AttackSpell : NetworkBehaviour
         GetComponent<Rigidbody>().AddForce(force, forceMode);
     }
 
-/*    public void SetSpellIsCollided(bool isCollided)
-    {
-        this.isCollided = isCollided;
-    }
-
-    public bool IsCollided()
-    {
-        return this.isCollided;
-    }*/
-
     public SpellInfo GetSpellInfo()
     {
         return spellInfo;

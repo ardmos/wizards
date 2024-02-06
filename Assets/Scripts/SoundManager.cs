@@ -32,14 +32,13 @@ public class SoundManager : MonoBehaviour
 
     private void PlayMusic(string sceneName)
     {
-        if (sceneName == "TitleScene")
+        if (GameAssets.instantiate.GetMusic(sceneName) == null)
         {
-            audioSourceMusic.clip = GameAssets.instantiate.music_Title;
+            audioSourceMusic.Stop();
+            return;
         }
-        if (sceneName == "LobbyScene")
-        {
-            audioSourceMusic.clip = GameAssets.instantiate.music_Lobby;
-        }
+
+        audioSourceMusic.clip = GameAssets.instantiate.GetMusic(sceneName);
         audioSourceMusic.Play();
     }
 }

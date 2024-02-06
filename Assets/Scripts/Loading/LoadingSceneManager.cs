@@ -19,7 +19,6 @@ public static class LoadingSceneManager
         TitleScene,
         LoadingScene,
         LobbyScene,
-        GameRoomScene,
         GameScene,
     }
 

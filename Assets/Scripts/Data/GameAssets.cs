@@ -179,4 +179,29 @@ public class GameAssets : MonoBehaviour
 
         return resultObejct;
     }
+
+    public AudioClip GetMusic(string sceneName)
+    {
+        if (sceneName == LoadingSceneManager.Scene.TitleScene.ToString()) 
+        {
+            return GameAssets.instantiate.music_Title;
+        }
+        else if (sceneName == LoadingSceneManager.Scene.LoadingScene.ToString())
+        {
+            return null;
+        }
+        else if (sceneName == LoadingSceneManager.Scene.LobbyScene.ToString())
+        {
+            return GameAssets.instantiate.music_Lobby;
+        }
+        else if (sceneName == LoadingSceneManager.Scene.GameScene.ToString())
+        {
+            return GameAssets.instantiate.music_Game;
+        }
+        else
+        {
+            Debug.Log($"{nameof(GetMusic)} sceneName 파라미터가 잘못됐습니다.");
+            return null;
+        }
+    }
 }
