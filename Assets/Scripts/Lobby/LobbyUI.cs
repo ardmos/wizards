@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// 캐릭터 위치 배치같은거는 Lobby Manager를 만들어서 처리하는게 더 어울려보인다. 
+/// 이 스크립트는 UI들만 관리토록 하자.  정리 예약 
+/// </summary>
 public class LobbyUI : MonoBehaviour
 {
     // User Info UI
