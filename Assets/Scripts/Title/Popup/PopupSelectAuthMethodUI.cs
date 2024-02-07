@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 /// <summary>
 /// 타이틀씬 로그인 인증 방법 선택 팝업(PopupSelectAuthMethod)을 컨트롤하는 스크립트 입니다.
-/// !!현재 기능
-///     1. 외곽 어두운 영역(BtnCloseBackShadow) 클릭시 팝업 닫기
 /// </summary>
 
 public class PopupSelectAuthMethodUI : MonoBehaviour
@@ -17,12 +15,26 @@ public class PopupSelectAuthMethodUI : MonoBehaviour
 
     private void Start()
     {
-        btnSignInAnonymous.onClick.AddListener(UnityAuthenticationManager.Instance.OnBtnSignInAnonymousClicked);
-        btnSignInGooglePlayGames.onClick.AddListener(UnityAuthenticationManager.Instance.OnBtnSignInGooglePlayGamesClicked);
-        btnClose.onClick.AddListener(OnBtnCloseClicked);
+        btnSignInAnonymous.onClick.AddListener(() => {
+            SoundManager.instance.PlayButtonClickSound();
+            UnityAuthenticationManager.Instance.OnBtnSignInAnonymousClicked();
+        });
+        btnSignInGooglePlayGames.onClick.AddListener(() => {
+            SoundManager.instance.PlayButtonClickSound();
+            UnityAuthenticationManager.Instance.OnBtnSignInGooglePlayGamesClicked(); 
+        });
+        btnClose.onClick.AddListener(() => {
+            SoundManager.instance.PlayButtonClickSound();
+            Hide(); 
+        });
     }
 
-    private void OnBtnCloseClicked()
+    public void Show()
+    {
+        gameObject.transform.localScale = Vector3.one;
+    }
+
+    private void Hide() 
     {
         gameObject.transform.localScale = Vector3.zero;
     }

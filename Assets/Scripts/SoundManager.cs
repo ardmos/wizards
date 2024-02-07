@@ -58,6 +58,12 @@ public class SoundManager : MonoBehaviour
         audioSourceBGM.Play();
     }
 
+    public void PlayButtonClickSound()
+    {
+        audioSourceUI.clip = GameAssets.instantiate.GetButtonClickSound();
+        audioSourceUI.Play();
+    }
+
     public void SetVolumeBGM(float volume) { audioSourceBGM.volume = volume; }
     public void SetVolumeUI(float volume) { audioSourceUI.volume = volume; }
     public float GetVolumeBGM() { return audioSourceBGM.volume; }

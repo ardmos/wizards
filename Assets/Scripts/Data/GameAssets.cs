@@ -84,7 +84,7 @@ public class GameAssets : MonoBehaviour
     #endregion
 
     #region SFX
-
+    public AudioClip sfx_btnClick;
     #endregion
 
     #region Colors
@@ -184,7 +184,7 @@ public class GameAssets : MonoBehaviour
     {
         if (sceneName == LoadingSceneManager.Scene.TitleScene.ToString()) 
         {
-            return GameAssets.instantiate.music_Title;
+            return music_Title;
         }
         else if (sceneName == LoadingSceneManager.Scene.LoadingScene.ToString())
         {
@@ -192,11 +192,11 @@ public class GameAssets : MonoBehaviour
         }
         else if (sceneName == LoadingSceneManager.Scene.LobbyScene.ToString())
         {
-            return GameAssets.instantiate.music_Lobby;
+            return music_Lobby;
         }
         else if (sceneName == LoadingSceneManager.Scene.GameScene.ToString())
         {
-            return GameAssets.instantiate.music_Game;
+            return music_Game;
         }
         else
         {
@@ -204,4 +204,6 @@ public class GameAssets : MonoBehaviour
             return null;
         }
     }
+
+    public AudioClip GetButtonClickSound() { return sfx_btnClick; }
 }
