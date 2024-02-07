@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 /// <summary>
 /// 사운드 볼륨값 저장해뒀다가 타이틀씬 진입시에 로드해서 적용해야함.  <<< 구현필요
+/// 위 내용 구현시 그래픽 설정도 함께 세이브 로드 되도록 구현하기. 
 /// </summary>
 public class SoundManager : MonoBehaviour
 {

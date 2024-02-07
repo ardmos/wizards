@@ -11,6 +11,7 @@ public class PopupSettingsUIController : MonoBehaviour
 
     public MusicGroupUI musicGroup;
     public SoundFXGroupUI soundFXGroup;
+    public GraphicGroupUI graphicGroup;
 
     public PopupSupportUIController popupSupport;
 
@@ -29,6 +30,7 @@ public class PopupSettingsUIController : MonoBehaviour
     {
         musicGroup.Setup();
         soundFXGroup.Setup();
+        graphicGroup.Setup();
     }
 
     public void Show()
