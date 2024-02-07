@@ -1,20 +1,25 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// 사운드 볼륨값 저장해뒀다가 타이틀씬 진입시에 로드해서 적용해야함.  <<< 구현필요
+/// </summary>
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance { get; private set; }
 
     public AudioSource audioSourceBGM;
-    public AudioSource audioSourceUI;
+    public AudioSource audioSourceSFX;
 
     public bool isVolumeUp;
 
-    private void Start()
+    private void Awake()
     {
         if (instance == null) instance = this;
         DontDestroyOnLoad(gameObject);
- 
+    }
+
+    private void Start()
+    {
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
 
         UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
@@ -60,12 +65,12 @@ public class SoundManager : MonoBehaviour
 
     public void PlayButtonClickSound()
     {
-        audioSourceUI.clip = GameAssets.instantiate.GetButtonClickSound();
-        audioSourceUI.Play();
+        audioSourceSFX.clip = GameAssets.instantiate.GetButtonClickSound();
+        audioSourceSFX.Play();
     }
 
     public void SetVolumeBGM(float volume) { audioSourceBGM.volume = volume; }
-    public void SetVolumeUI(float volume) { audioSourceUI.volume = volume; }
+    public void SetVolumeSFX(float volume) { audioSourceSFX.volume = volume; }
     public float GetVolumeBGM() { return audioSourceBGM.volume; }
-    public float GetVolumeUI() {  return audioSourceUI.volume; }
+    public float GetVolumeSFX() {  return audioSourceSFX.volume; }
 }

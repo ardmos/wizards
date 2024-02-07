@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
-using static PopupGameRoomUI;
+using static PopupGameRoomUIController;
 #if UNITY_SERVER || UNITY_EDITOR
 #endif  
 /// <summary>

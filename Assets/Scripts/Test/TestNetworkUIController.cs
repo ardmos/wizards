@@ -5,17 +5,17 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TestNetworkUIController : MonoBehaviour
 {
-    public Button btnStartServer;
-    public Button btnStartClient;
+    public CustomButtonUI btnStartServer;
+    public CustomButtonUI btnStartClient;
 
     // Start is called before the first frame update
     void Start()
     {
-        btnStartServer.onClick.AddListener(()=> {
+        btnStartServer.AddClickListener(()=> {
             GameMultiplayer.Instance.StartServer();
             //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
         });
-        btnStartClient.onClick.AddListener(()=> {
+        btnStartClient.AddClickListener(()=> {
             GameMultiplayer.Instance.StartClient();
         });
     }

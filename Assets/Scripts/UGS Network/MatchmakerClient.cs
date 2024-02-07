@@ -16,16 +16,10 @@ using StatusOptions = Unity.Services.Matchmaker.Models.MultiplayAssignment.Statu
 /// </summary>
 public class MatchmakerClient : MonoBehaviour
 {
-    public Button btnStartMatchmaking;
     // 추후엔 이 팝업이 게임룸을 대신하게될거임. 롤처럼.
-    public PopupLookingForGameUI popupLookingForGame;
+    public PopupLookingForGameUIController popupLookingForGame;
 
     private string ticketId;
-
-    private void Start()
-    {
-        btnStartMatchmaking.onClick.AddListener(StartClient);
-    }
 
     private string GetPlayerID()
     {
