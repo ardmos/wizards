@@ -54,9 +54,9 @@ MonoBehaviour:
   - icon: {fileID: 21300000, guid: 5692db8a476a44e039316aeecbe16bc6, type: 3}
     prefab: {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
   - icon: {fileID: 21300000, guid: 155e1dda5a5e148d28643cbf1592fbdd, type: 3}
-    prefab: {fileID: 1117804056975720, guid: 2749e42d786d63441ac390d62480945b, type: 3}
+    prefab: {fileID: 1117804056975720, guid: 8fa6dba5ce7774349b2bee979e1b5f7d, type: 3}
   - icon: {fileID: 21300000, guid: 37b235823006c499d915c13924b61e2e, type: 3}
-    prefab: {fileID: 1962646870923850, guid: 7fab4424b846e3143ae8d4b09afb2a8c, type: 3}
+    prefab: {fileID: 1979048356021752, guid: 1b4cdd72ad024f9498623f1be3de6dee, type: 3}
   - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
     prefab: {fileID: 3153472991145048103, guid: 1df00a9cc0f78f74b90a97a967a85b30, type: 3}
   - icon: {fileID: 21300000, guid: 1ad309a351498428d824d7ee62bed12d, type: 3}
@@ -79,7 +79,7 @@ MonoBehaviour:
   txtDamageValue: {fileID: 1733173226754330972, guid: 2e19b3b4a75fc12428e277161d0266db, type: 3}
   music_Title: {fileID: 8300000, guid: be7aecc45e127aa4b936efa9ec76c064, type: 3}
   music_Lobby: {fileID: 8300000, guid: 126b1fb3ad0ab4645a4e3637cb217dae, type: 3}
-  music_Game: {fileID: 8300000, guid: b0d6a6569013ba04a90f1d97860ece03, type: 3}
+  music_Game: {fileID: 8300000, guid: 48bd3fc25081b5d4f8ceb452f7cb1744, type: 3}
   ownerColor: {r: 0.38731253, g: 1, b: 0, a: 1}
   allyColor: {r: 0, g: 1, b: 0.9093275, a: 1}
   enemyColor: {r: 1, g: 0.59621054, b: 0, a: 1}

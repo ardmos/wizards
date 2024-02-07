@@ -5,7 +5,10 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance { get; private set; }
 
-    public AudioSource audioSourceMusic;
+    public AudioSource audioSourceBGM;
+    public AudioSource audioSourceUI;
+
+    public bool isVolumeUp;
 
     private void Start()
     {
@@ -34,11 +37,29 @@ public class SoundManager : MonoBehaviour
     {
         if (GameAssets.instantiate.GetMusic(sceneName) == null)
         {
-            audioSourceMusic.Stop();
+            audioSourceBGM.Stop();
             return;
         }
 
-        audioSourceMusic.clip = GameAssets.instantiate.GetMusic(sceneName);
-        audioSourceMusic.Play();
+        // Game씬 BGM 리소스가 볼륨이 작은 관계로 이곳에서 특별히 볼륨조절을 해줍니다.
+        if (isVolumeUp)
+        {
+            isVolumeUp = false;
+            audioSourceBGM.volume /= 6;
+        }
+        if (!isVolumeUp && sceneName == LoadingSceneManager.Scene.GameScene.ToString())
+        {
+            isVolumeUp = true;
+            audioSourceBGM.volume *= 6;
+        }
+
+
+        audioSourceBGM.clip = GameAssets.instantiate.GetMusic(sceneName);
+        audioSourceBGM.Play();
     }
+
+    public void SetVolumeBGM(float volume) { audioSourceBGM.volume = volume; }
+    public void SetVolumeUI(float volume) { audioSourceUI.volume = volume; }
+    public float GetVolumeBGM() { return audioSourceBGM.volume; }
+    public float GetVolumeUI() {  return audioSourceUI.volume; }
 }

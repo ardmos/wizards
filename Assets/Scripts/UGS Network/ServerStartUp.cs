@@ -89,6 +89,8 @@ public class ServerStartUp : MonoBehaviour
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(InternalServerIp, serverPort);
         GameMultiplayer.Instance.StartServer();
         //NetworkManager.Singleton.StartServer();
+
+        // 이 콜백 리스너가 GameMultiplayer에 있는것과 겹친다. 
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }
 
@@ -236,17 +238,16 @@ public class ServerStartUp : MonoBehaviour
         while (backfilling && NeedsPlayers())
         {
             localBackfillTicket = await MatchmakerService.Instance.ApproveBackfillTicketAsync(localBackfillTicket.Id);
+            
+            // 풀방이 되었는지 확인
             if (!NeedsPlayers())
             {
+                // 풀방이 되었을 시 추가 진입 차단
                 await MatchmakerService.Instance.DeleteBackfillTicketAsync(localBackfillTicket.Id);
                 localBackfillTicket.Id = null;
                 backfilling = false;
-
-
-                // 이곳에서 화면 이동 전에, 롤같이 UI 이펙트 추가해주면 좋을 것 같다. 
-
-                // 모든 인원이 모였다! 화면 이동!
-                LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
+                // PopupGameRoomUI.cs의 레디버튼 활성화는 GameMultiplayer의 GetPlayerCount를 통해서 개별로 이루어지기 때문에 여기서는 안해줘도 됩니다.
+                // 이 스크립트에서는 티켓관리만. 
                 return;
             }
 

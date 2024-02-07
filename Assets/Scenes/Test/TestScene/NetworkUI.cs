@@ -2,7 +2,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// 테스트용 스크립트.
+/// Test용. 삭제가능
 /// </summary>
 public class NetworkUI : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class NetworkUI : MonoBehaviour
         btnServer.onClick.AddListener(() => 
         {
             NetworkManager.Singleton.StartServer();
-            LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
+            //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
         });
         btnHost.onClick.AddListener(() =>
         {

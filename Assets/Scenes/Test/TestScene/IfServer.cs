@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
-
+/// <summary>
+/// Test용. 삭제가능
+/// </summary>
 public class IfServer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtClientCount;
@@ -22,7 +24,7 @@ public class IfServer : MonoBehaviour
             if (NetworkManager.Singleton.ConnectedClients.Count >= 2)
             {
                 Debug.Log($"There Is Two Client");
-                LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
+                //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
             }
             txtClientCount.text = NetworkManager.Singleton.ConnectedClients.Count.ToString();
         }

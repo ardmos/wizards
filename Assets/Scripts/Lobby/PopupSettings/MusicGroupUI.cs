@@ -21,7 +21,7 @@ public class MusicGroupUI : MonoBehaviour
 
     private void OnEnable()
     {
-        slider.value = GameObject.FindObjectOfType<SoundManager>().audioSourceMusic.volume;
+        slider.value = GameObject.FindObjectOfType<SoundManager>().GetVolumeBGM();
     }
 
     // Update is called once per frame
@@ -46,6 +46,6 @@ public class MusicGroupUI : MonoBehaviour
 
     private void ChangeMusicValue()
     {
-        GameObject.FindObjectOfType<SoundManager>().audioSourceMusic.volume = slider.value;
+        GameObject.FindObjectOfType<SoundManager>().SetVolumeBGM(slider.value);
     }
 }
