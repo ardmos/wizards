@@ -50,7 +50,7 @@ public class GameMultiplayer : NetworkBehaviour
         OnPlayerListOnServerChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    // UGS Dedicated Server <<< --- 이 메서드의 내용 포함해서 메서드 자체를 ServerStartup으로 옮겨야겠다. 
+    // UGS Dedicated Server <<< --- 이 메서드의 내용 포함해서 메서드 자체를 ServerStartup으로 옮겨야겠다.  리스너 구독 해제 타이밍도 고려해서 구현해야함
     public void StartServer()
     {
         //NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;

@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TestNetworkUIController : MonoBehaviour
 {
-    public CustomButtonUI btnStartServer;
-    public CustomButtonUI btnStartClient;
+    public CustomButton btnStartServer;
+    public CustomButton btnStartClient;
 
     // Start is called before the first frame update
     void Start()

@@ -6,8 +6,8 @@ using TMPro;
 
 public class PopupNameChangeUIController : MonoBehaviour
 {
-    public CustomButtonUI btnOk;
-    public CustomButtonUI btnClose;
+    public CustomButton btnOk;
+    public CustomButton btnClose;
     public TMP_InputField inputFieldUserName;
     public PopupUserInfoUIController popupUserInfoUI;
 

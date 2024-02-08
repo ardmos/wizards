@@ -5,20 +5,14 @@ using UnityEngine.UI;
 
 public class PopupModUIController : MonoBehaviour
 {
-    public CustomButtonUI btnClose;
-    public CustomButtonUI btnHome;
+    public CustomButton btnClose;
+    public CustomButton btnHome;
 
     // Start is called before the first frame update
     void Start()
     {
         btnClose.AddClickListener(Hide);
         btnHome.AddClickListener(Hide);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void Show()

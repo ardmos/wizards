@@ -25,8 +25,13 @@ public class SoundManager : MonoBehaviour
 
         UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-        //Debug.Log($"Current Scene : {sceneName}");
+
         PlayMusic(sceneName);
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= SceneManager_activeSceneChanged;
     }
 
     private void SceneManager_activeSceneChanged(UnityEngine.SceneManagement.Scene current, UnityEngine.SceneManagement.Scene next)
@@ -35,8 +40,6 @@ public class SoundManager : MonoBehaviour
 
         string sceneName = next.name;
         PlayMusic(sceneName);
-
-        //Debug.Log($"Current Scene : {current.name}, {next.name}");
     }
 
     private void PlayMusic(string sceneName)

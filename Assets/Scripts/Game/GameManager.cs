@@ -59,13 +59,25 @@ public class GameManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        gameState.OnValueChanged += State_OnValueChanged;
-        gameState.Value = GameState.WatingToStart; // 생성과 동시에 Default값 설정. 
+        Debug.Log($"GameManager. OnNetworkSpawn");
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
         }
+        gameState.OnValueChanged += State_OnValueChanged;
+        gameState.Value = GameState.WatingToStart; // 생성과 동시에 Default값 설정. 
         currentAlivePlayerCount.OnValueChanged += currentAlivePlayerCount_OnValueChanged;        
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        Debug.Log($"GameManager. OnNetworkDespawn");
+        if (IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManager_OnLoadEventCompleted;
+        }
+        gameState.OnValueChanged -= State_OnValueChanged;
+        currentAlivePlayerCount.OnValueChanged -= currentAlivePlayerCount_OnValueChanged;
     }
 
     /// <summary>
@@ -274,7 +286,7 @@ public class GameManager : NetworkBehaviour
             GameMultiplayer.Instance.SetPlayerDataFromClientId(clientId, playerData);
 
             // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.(게임오버시킨사람 닉네임 공유까지는 아직 미구현)
-            GameUI.instance.notifyUIController.NotifyGameOverPlayerClientRPC(playerData.playerName.ToString());
+            GameUIController.instance.notifyUIController.NotifyGameOverPlayerClientRPC(playerData.playerName.ToString());
 
             // 상단 UI를 위한 AlivePlayersCount 값 업데이트
             gameOverPlayerCount++;

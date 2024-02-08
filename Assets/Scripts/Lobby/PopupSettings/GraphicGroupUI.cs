@@ -24,17 +24,11 @@ public class GraphicGroupUI : MonoBehaviour
         {
             case 0: 
                 tglLow.isOn = true;
-                //tglMedium.isOn = false;
-                //tglHigh.isOn = false;
                 break;
             case 1:
-                //tglLow.isOn = true;
                 tglMedium.isOn = true;
-                //tglHigh.isOn = false;
                 break;
             case 2:
-                //tglLow.isOn = true;
-                //tglMedium.isOn = false;
                 tglHigh.isOn = true;
                 break;
         }
@@ -45,7 +39,7 @@ public class GraphicGroupUI : MonoBehaviour
     {
         SoundManager.instance.PlayButtonClickSound();
         if (tglLow.isOn) { QualitySettings.SetQualityLevel(0, true); }
-        if (tglMedium.isOn) { QualitySettings.SetQualityLevel(1, true); }
-        if (tglHigh.isOn) { QualitySettings.SetQualityLevel(2, true); }
+        else if (tglMedium.isOn) { QualitySettings.SetQualityLevel(1, true); }
+        else if (tglHigh.isOn) { QualitySettings.SetQualityLevel(2, true); }
     }
 }

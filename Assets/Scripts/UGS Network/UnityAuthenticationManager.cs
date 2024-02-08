@@ -53,13 +53,13 @@ public class UnityAuthenticationManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Start()
     {
         ReadyForUseUnityServices();
         //ServerStartUp.ClientInstance += ReadyForUseUnityServices;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         //ServerStartUp.ClientInstance -= ReadyForUseUnityServices;
     }

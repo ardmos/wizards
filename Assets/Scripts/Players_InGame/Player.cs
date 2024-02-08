@@ -96,7 +96,7 @@ public class Player : NetworkBehaviour
 
         // 보유 스펠을 GamePad UI에 반영          
         //Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
-        FindObjectOfType<GamePadUI>().UpdateSpellUI(ownedSpellNameList);
+        FindObjectOfType<GamePadUIController>().UpdateSpellUI(ownedSpellNameList);
         
         // Input Action 이벤트 구독
         gameInput.OnAttack1Started += GameInput_OnAttack1Started;
@@ -187,7 +187,7 @@ public class Player : NetworkBehaviour
         // 이동속도 0
         HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
         // 게임오버 팝업 띄워주기
-        GameUI.instance.popupGameOverUI.Show();
+        GameUIController.instance.popupGameOverUI.Show();
     }
 
     [ClientRpc]
@@ -197,7 +197,7 @@ public class Player : NetworkBehaviour
         if (!IsOwner) return;
 
         // 승리 팝업 띄워주기
-        GameUI.instance.popupWinUI.Show();
+        GameUIController.instance.popupWinUI.Show();
     }
 
     #region Public 플레이어 정보 확인
@@ -219,7 +219,7 @@ public class Player : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        GameUI.instance.popupSelectSpell.Show(scroll);
+        GameUIController.instance.popupSelectSpell.Show(scroll);
     }
 
     // 슬롯 선택시 동작. 클라이언트에서 돌아가는 메소드 입니다.

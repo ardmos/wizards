@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class PopupSettingsUIController : MonoBehaviour
 {
-    public CustomButtonUI btnClose;
-    public CustomButtonUI btnLanguage;
-    public CustomButtonUI btnSupport;
+    public CustomButton btnClose;
+    public CustomButton btnLanguage;
+    public CustomButton btnSupport;
 
     public MusicGroupUI musicGroup;
     public SoundFXGroupUI soundFXGroup;

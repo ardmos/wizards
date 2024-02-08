@@ -7,7 +7,7 @@ using UnityEngine;
 public class TitleSceneUIController : MonoBehaviour
 {
     [SerializeField] private PopupSelectAuthMethodUIController popupSelectAuthMethod;
-    [SerializeField] private CustomButtonUI btnStartAuth;
+    [SerializeField] private CustomButton btnStartAuth;
 
     // Start is called before the first frame update
     void Start()

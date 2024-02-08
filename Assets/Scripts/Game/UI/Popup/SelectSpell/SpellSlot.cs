@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class SpellSlot : MonoBehaviour
 {
     public sbyte slotNumber;
-    public Button btnApply;
+    public CustomButton btnApply;
 
     public TextMeshProUGUI txtScrollName;
     public TextMeshProUGUI txtSpellName;
@@ -27,9 +27,9 @@ public class SpellSlot : MonoBehaviour
         // spell 아이콘 이미지
         imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);
 
-        btnApply.onClick.AddListener(() => {
+        btnApply.AddClickListener(() => {
             Player.LocalInstance.ApplyScrollEffectToSpell(scroll, slotNumber);
-            GetComponentInParent<PopupSelectSpellUI>().Hide();
+            GetComponentInParent<PopupSelectSpellUIController>().Hide();
         });
     }
 }
