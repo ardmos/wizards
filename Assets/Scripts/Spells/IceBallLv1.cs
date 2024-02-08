@@ -8,11 +8,4 @@ using UnityEngine;
 /// </summary>
 public class IceBallLv1 : IceSpell
 {
-    /// <summary>
-    /// 1. 상세 능력치 설정(마법 사용시에 Server에서 부여해주는 능력치 입니다.)
-    /// </summary>
-    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer) 
-    {
-        base.InitSpellInfoDetail(spellInfoFromServer);
-    }
 }

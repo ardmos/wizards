@@ -7,13 +7,18 @@ using UnityEngine;
 /// </summary>
 public abstract class AttackSpell : NetworkBehaviour
 {
+    private const byte sfxCasting = 0;
+    private const byte sfxShooting = 1;
+    private const byte sfxHit = 2;
+
     [SerializeField] protected SpellInfo spellInfo;
 
     [SerializeField] protected GameObject muzzleVFXPrefab;
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
 
-    //[SerializeField] private bool isCollided;
+    public GameObject audioSourcePrefab;
+    public AudioClip[] sfxSounds;
 
     // 마법 충돌시 속성 계산
     public abstract SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell);
@@ -25,22 +30,30 @@ public abstract class AttackSpell : NetworkBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // 서버에서만 처리.
-        if (!IsServer) return;
+        if (IsClient) return;
+
         SpellManager.Instance.SpellHitOnServer(collision, this);
+        // 마법 충돌 사운드 재생
+        PlaySFXClientRPC(sfxHit);
     }
 
-    // 마법 상세값 설정
+    // 마법 캐스팅 시작시 상세값 설정
     public virtual void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
-        if (!IsServer) return;
+        if (IsClient) return;
+
         spellInfo = new SpellInfo(spellInfoFromServer);
+        // 마법 생성 사운드 재생
+        PlaySFXClientRPC(sfxCasting);
     }
 
     public virtual void Shoot(Vector3 force, ForceMode forceMode)
     {
-        if (!IsServer) return;
-        //Debug.Log($"AttackSpell class Shoot()");
+        if (IsClient) return;
+
         GetComponent<Rigidbody>().AddForce(force, forceMode);
+        // 마법 발사 사운드 재생
+        PlaySFXClientRPC(sfxShooting);
     }
 
     public SpellInfo GetSpellInfo()
@@ -58,5 +71,15 @@ public abstract class AttackSpell : NetworkBehaviour
     public List<GameObject> GetTrails()
     {
         return trails;
+    }
+
+    [ClientRpc]
+    private void PlaySFXClientRPC(byte audioClipIndex)
+    {
+        if (audioSourcePrefab == null) return;
+        if (sfxSounds.Length <= 0) return;
+
+        GameObject audioSourceObject = Instantiate(audioSourcePrefab);
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(sfxSounds[audioClipIndex]);       
     }
 }

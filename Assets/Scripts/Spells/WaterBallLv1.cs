@@ -4,8 +4,4 @@ using UnityEngine;
 /// </summary>
 public class WaterBallLv1 : WaterSpell
 {
-    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
-    {
-        base.InitSpellInfoDetail(spellInfoFromServer);
-    }
 }

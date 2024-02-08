@@ -27,7 +27,7 @@ public class DamageTextUI : MonoBehaviour
     {
         // 이동 효과 구현 부분
         transform.localPosition += moveVector * Time.deltaTime;
-        Debug.Log($"transform.localPosition:{transform.localPosition}, moveVector:{moveVector}, Time.deltaTime:{Time.deltaTime}");
+        //Debug.Log($"transform.localPosition:{transform.localPosition}, moveVector:{moveVector}, Time.deltaTime:{Time.deltaTime}");
         moveVector -= moveVector * 8f * Time.deltaTime;
 
         // 크기 변화 효과 구현 부분

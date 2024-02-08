@@ -151,6 +151,7 @@
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NotifyMessageTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\AudioSourceObject.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\NetworkUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupModUIController.cs" />

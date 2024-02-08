@@ -8,15 +8,6 @@ using UnityEngine;
 /// </summary>
 public class FireBallLv1 : FireSpell
 {
-
-    /// <summary>
-    /// 1. 상세 능력치 설정(마법 사용시에 Server에서 부여해주는 능력치 입니다.)
-    /// </summary>
-    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
-    {
-        base.InitSpellInfoDetail(spellInfoFromServer);
-    }
-
     // 현재 사용하는 파이어볼 VFX를 자연스럽게 하기위한 부분
     public override void OnNetworkSpawn()
     {
@@ -26,8 +17,8 @@ public class FireBallLv1 : FireSpell
     public override void Shoot(Vector3 force, ForceMode forceMode)
     {
         base.Shoot(force, forceMode);
-        trails[0].SetActive(true);
-        //Debug.Log($"Fireball Lv1 Shoot");
 
+        // 꼬리연기 효과 활성화
+        trails[0].SetActive(true);
     }
 }
