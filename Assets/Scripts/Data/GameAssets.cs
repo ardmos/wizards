@@ -85,6 +85,9 @@ public class GameAssets : MonoBehaviour
 
     #region SFX
     public AudioClip sfx_btnClick;
+    public AudioClip[] sfx_Fireball_Lv1;
+    public AudioClip[] sfx_Waterball_Lv1;
+    public AudioClip[] sfx_Iceball_Lv1;
     #endregion
 
     #region Colors
@@ -206,4 +209,21 @@ public class GameAssets : MonoBehaviour
     }
 
     public AudioClip GetButtonClickSound() { return sfx_btnClick; }
+
+    public AudioClip GetMagicSFXSound(SpellName spellName, byte state) 
+    {
+        switch (spellName) {
+            case SpellName.FireBallLv1:
+                return sfx_Fireball_Lv1[state];
+            case SpellName.WaterBallLv1:
+                return sfx_Waterball_Lv1[state];
+            case SpellName.IceBallLv1:
+                return sfx_Iceball_Lv1[state];
+            default: 
+                Debug.LogError($"{nameof(GetMagicSFXSound)}. {spellName}은 알맞은 spellName이 아닙니다."); 
+                return null;
+        }
+    }
+
+
 }

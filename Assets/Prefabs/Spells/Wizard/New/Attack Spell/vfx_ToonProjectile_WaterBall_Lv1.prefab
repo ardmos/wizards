@@ -65,6 +65,11 @@ MonoBehaviour:
   hitVFXPrefab: {fileID: 1607111504653374, guid: 3f08a73d9f840254fa5c91759a51a583, type: 3}
   trails:
   - {fileID: 1938363951039914}
+  audioSourcePrefab: {fileID: 992107389769131743, guid: 7e0a7a1a2dab17e42bfc0bfb37d7b39e, type: 3}
+  sfxSounds:
+  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
+  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
+  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
 --- !u!54 &54873829185623922
 Rigidbody:
   m_ObjectHideFlags: 0

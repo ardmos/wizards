@@ -81,6 +81,18 @@ MonoBehaviour:
   music_Lobby: {fileID: 8300000, guid: 126b1fb3ad0ab4645a4e3637cb217dae, type: 3}
   music_Game: {fileID: 8300000, guid: 48bd3fc25081b5d4f8ceb452f7cb1744, type: 3}
   sfx_btnClick: {fileID: 8300000, guid: bdf39f0cf8e25ea48af7afa0a9be325c, type: 3}
+  sfx_Fireball_Lv1:
+  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
+  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
+  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
+  sfx_Waterball_Lv1:
+  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
+  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
+  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
+  sfx_Iceball_Lv1:
+  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
   ownerColor: {r: 0.38731253, g: 1, b: 0, a: 1}
   allyColor: {r: 0, g: 1, b: 0.9093275, a: 1}
   enemyColor: {r: 1, g: 0.59621054, b: 0, a: 1}

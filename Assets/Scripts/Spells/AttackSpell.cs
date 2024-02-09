@@ -17,9 +17,6 @@ public abstract class AttackSpell : NetworkBehaviour
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
 
-    public GameObject audioSourcePrefab;
-    public AudioClip[] sfxSounds;
-
     // 마법 충돌시 속성 계산
     public abstract SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell);
 
@@ -34,7 +31,7 @@ public abstract class AttackSpell : NetworkBehaviour
 
         SpellManager.Instance.SpellHitOnServer(collision, this);
         // 마법 충돌 사운드 재생
-        PlaySFXClientRPC(sfxHit);
+        PlaySFX(sfxHit);
     }
 
     // 마법 캐스팅 시작시 상세값 설정
@@ -44,7 +41,7 @@ public abstract class AttackSpell : NetworkBehaviour
 
         spellInfo = new SpellInfo(spellInfoFromServer);
         // 마법 생성 사운드 재생
-        PlaySFXClientRPC(sfxCasting);
+        PlaySFX(sfxCasting);
     }
 
     public virtual void Shoot(Vector3 force, ForceMode forceMode)
@@ -53,7 +50,7 @@ public abstract class AttackSpell : NetworkBehaviour
 
         GetComponent<Rigidbody>().AddForce(force, forceMode);
         // 마법 발사 사운드 재생
-        PlaySFXClientRPC(sfxShooting);
+        PlaySFX(sfxShooting);
     }
 
     public SpellInfo GetSpellInfo()
@@ -73,13 +70,10 @@ public abstract class AttackSpell : NetworkBehaviour
         return trails;
     }
 
-    [ClientRpc]
-    private void PlaySFXClientRPC(byte audioClipIndex)
+    private void PlaySFX(byte state)
     {
-        if (audioSourcePrefab == null) return;
-        if (sfxSounds.Length <= 0) return;
+        if (SoundManager.instance == null) return;
 
-        GameObject audioSourceObject = Instantiate(audioSourcePrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(sfxSounds[audioClipIndex]);       
+        SoundManager.instance.PlayMagicSFXClientRPC(spellInfo.spellName, state);
     }
 }

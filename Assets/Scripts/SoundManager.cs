@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /// <summary>
@@ -10,6 +11,8 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource audioSourceBGM;
     public AudioSource audioSourceSFX;
+
+    public GameObject audioSourceObjectPrefab;
 
     public bool isVolumeUp;
 
@@ -71,6 +74,13 @@ public class SoundManager : MonoBehaviour
     {
         audioSourceSFX.clip = GameAssets.instantiate.GetButtonClickSound();
         audioSourceSFX.Play();
+    }
+
+    [ClientRpc]
+    public void PlayMagicSFXClientRPC(SpellName spellName, byte state)
+    {
+        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetMagicSFXSound(spellName, state));
     }
 
     public void SetVolumeBGM(float volume) { audioSourceBGM.volume = volume; }
