@@ -1,26 +1,6 @@
 using UnityEngine;
 
-public enum SpellName
-{
-    FireSpellStart,
-    FireBallLv1,
-    FireSpellEnd,
-    WaterSpellStart,
-    WaterBallLv1,
-    WaterSpellEnd,
-    IceSpellStart,
-    IceBallLv1,
-    IceSpellEnd,
-    SlashSpellStart,
-    StoneSlashLv1,
-    SlashSpellEnd,
-    DefenceSpellStart,
-    MagicShieldLv1,
-    DefenceSpellEnd,
-    Max
-}
-
-public class SpellNames
+public class Spell
 {
     /// <summary>
     /// 스펠의 레벨에 맞는 이름을 설정해주는 메소드 입니다.

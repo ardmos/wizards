@@ -34,7 +34,7 @@ public class Player : NetworkBehaviour
     [SerializeField] private bool isPlayerGameOver;
 
     // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
-    [SerializeField] private Dictionary<Item.ItemName, ushort> playerItemDictionaryOnClient;
+    [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
 
     /// <summary>
     /// 서버측 InitializePlayer
@@ -305,9 +305,9 @@ public class Player : NetworkBehaviour
     #endregion
 
 
-    public void SetPlayerItemsDictionaryOnClient(Item.ItemName[] itemNameArray, ushort[] itemCountArray)
+    public void SetPlayerItemsDictionaryOnClient(ItemName[] itemNameArray, ushort[] itemCountArray)
     {
-        Dictionary<Item.ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
+        Dictionary<ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
         Debug.Log($"SetPlayerItemsDictionaryOnClient. player{OwnerClientId}'s playerItemDictionary.Count: {playerItemDictionary.Count} ");
         foreach (var item in playerItemDictionary)
         {

@@ -39,7 +39,7 @@ public abstract class WaterSpell : AttackSpell
                 break;
         }
 
-        result.spellName = SpellNames.GetSpellName(result.level, result.spellType);
+        result.spellName = Spell.GetSpellName(result.level, result.spellType);
         return result;
     }
 }

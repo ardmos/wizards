@@ -70,7 +70,7 @@ public class PopupMagicStoreUI : MonoBehaviour
     /// </summary>
     /// <param name="itemType"></param>
     /// <param name="slotNum"></param>
-    public void TryBuyItem(Item.ItemName itemType, int slotNum)
+    public void TryBuyItem(ItemName itemType, int slotNum)
     {
         storeCustomer.BoughtSpellScroll(itemType, slotNum);
         selectSpellSlotPopup.Hide();

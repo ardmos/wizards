@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectSpellSlotUI : MonoBehaviour
 {
-    private Item.ItemName itemType;
+    private ItemName itemType;
 
     public PopupMagicStoreUI magicStore;
 
@@ -15,7 +15,7 @@ public class SelectSpellSlotUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Show(Item.ItemName itemType)
+    public void Show(ItemName itemType)
     {
         this.itemType = itemType;
         gameObject.SetActive(true);

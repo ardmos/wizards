@@ -26,6 +26,9 @@ public class PotionHP : NetworkBehaviour
         vfxHeal.transform.SetParent(collision.transform);
         vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
 
+        // SFX ½ÇÇà
+        SoundManager.instance.
+
         // ÆÄ±«
         GetComponent<NetworkObject>().Despawn();
     }

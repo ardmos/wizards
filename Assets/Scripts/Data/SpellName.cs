@@ -1,0 +1,19 @@
+public enum SpellName
+{
+    FireSpellStart,
+    FireBallLv1,
+    FireSpellEnd,
+    WaterSpellStart,
+    WaterBallLv1,
+    WaterSpellEnd,
+    IceSpellStart,
+    IceBallLv1,
+    IceSpellEnd,
+    SlashSpellStart,
+    StoneSlashLv1,
+    SlashSpellEnd,
+    DefenceSpellStart,
+    MagicShieldLv1,
+    DefenceSpellEnd,
+    Max
+}

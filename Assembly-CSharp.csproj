@@ -87,7 +87,6 @@
     <Compile Include="Assets\Scripts\Game\UI\PopupGameStartCountdownUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\PushAlarmGroupUI.cs" />
-    <Compile Include="Assets\Scripts\Data\SpellNames.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Player.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupInboxUIController.cs" />
@@ -109,6 +108,7 @@
     <Compile Include="Assets\Scripts\Data\SpellSpecifications.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupClanUIController.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Knight.cs" />
+    <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
     <Compile Include="Assets\Scripts\ClientNetworkTransform.cs" />
     <Compile Include="Assets\Scripts\Game\VFX\VfxHeal.cs" />
@@ -172,6 +172,7 @@
     <Compile Include="Assets\Scripts\Game\VFX\VfxSpellUpgrade.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
+    <Compile Include="Assets\Scripts\Data\Spell.cs" />
     <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Game\UI\Popup\SelectSpell\PopupSelectSpellUIController.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\PopupShopUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\SpellName.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerAttackAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\SpawnProjectiles.cs" />
     <Compile Include="Assets\Scripts\Game\Player\SpellController.cs" />

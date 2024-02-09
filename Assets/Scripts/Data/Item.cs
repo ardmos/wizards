@@ -5,30 +5,6 @@ using UnityEngine;
 /// </summary>
 public class Item
 {
-    public enum ItemName
-    {
-        None,
-        ShopItemStart,
-        RemoveAds,
-        ShopItemEnd,
-        ItemStart,
-        Item_Wizard,
-        Item_Knight,
-        Item_Gold,
-        Item_BonusGold,
-        Item_Exp,
-        ItemEnd,
-        ScrollStart,
-        Scroll_LevelUp,
-        Scroll_FireRateUp,
-        Scroll_FlySpeedUp,
-        Scroll_Attach,
-        Scroll_Guide,
-        ScrollEnd,
-        Max
-    }
-
-
     public static float GetCost(ItemName itemType)
     {
         switch (itemType)

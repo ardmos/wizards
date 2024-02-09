@@ -82,7 +82,7 @@ public class SpellManager : NetworkBehaviour
     /// 업데이트 후에 자동으로 클라이언트측과 동기화를 합니다.
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
-    public void UpdateScrollEffectServerRPC(Item.ItemName scrollName, sbyte spellIndex, ServerRpcParams serverRpcParams = default)
+    public void UpdateScrollEffectServerRPC(ItemName scrollName, sbyte spellIndex, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         if (!SpellManager.Instance.spellInfoListOnServer.ContainsKey(clientId))
@@ -96,20 +96,20 @@ public class SpellManager : NetworkBehaviour
         // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
         switch (scrollName)
         {           
-            case Item.ItemName.Scroll_LevelUp:
+            case ItemName.Scroll_LevelUp:
                 newSpellInfo.level += 1;
                 break;
-            case Item.ItemName.Scroll_FireRateUp:
+            case ItemName.Scroll_FireRateUp:
                 if(newSpellInfo.coolTime > 0.2f) newSpellInfo.coolTime -= 0.2f;
                 else newSpellInfo.coolTime = 0f;
                 break;
-            case Item.ItemName.Scroll_FlySpeedUp:
+            case ItemName.Scroll_FlySpeedUp:
                 newSpellInfo.moveSpeed += 1f;
                 break;
-            case Item.ItemName.Scroll_Attach:
+            case ItemName.Scroll_Attach:
                 newSpellInfo.moveSpeed = 0f;
                 break;
-            case Item.ItemName.Scroll_Guide:
+            case ItemName.Scroll_Guide:
                 // 유도 마법 미구현
                 break;
             default:

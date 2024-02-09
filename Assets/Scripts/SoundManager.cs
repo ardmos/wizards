@@ -83,6 +83,12 @@ public class SoundManager : MonoBehaviour
         audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetMagicSFXSound(spellName, state));
     }
 
+    [ClientRpc]
+    public void PlayItemSFXClientRPC()
+    {
+
+    }
+
     public void SetVolumeBGM(float volume) { audioSourceBGM.volume = volume; }
     public void SetVolumeSFX(float volume) { audioSourceSFX.volume = volume; }
     public float GetVolumeBGM() { return audioSourceBGM.volume; }

@@ -10,7 +10,7 @@ using UnityEngine;
 /// </summary>
 public class MagicStoreItemTemplateUI : MonoBehaviour
 {
-    public Item.ItemName itemType;
+    public ItemName itemType;
     public SelectSpellSlotUI selectSpellSlotPopup;
     public TextMeshProUGUI txtName, txtPrice;
 

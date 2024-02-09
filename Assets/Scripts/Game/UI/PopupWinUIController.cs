@@ -21,11 +21,11 @@ using UnityEngine.UI;
 public class PopupWinUIController : MonoBehaviour
 {
     // 테스트용 보상 아이템 리스트 목록 하드코딩. 따로 구현할 필요 있음.
-    [SerializeField] private Dictionary<Item.ItemName, ushort> rewardItems = new Dictionary<Item.ItemName, ushort>() {
-        { Item.ItemName.Item_BonusGold, 7 },
-        { Item.ItemName.Item_Exp, 25 },
-        { Item.ItemName.Item_Wizard, 2 },
-        { Item.ItemName.Item_Knight, 1 }
+    [SerializeField] private Dictionary<ItemName, ushort> rewardItems = new Dictionary<ItemName, ushort>() {
+        { ItemName.Item_BonusGold, 7 },
+        { ItemName.Item_Exp, 25 },
+        { ItemName.Item_Wizard, 2 },
+        { ItemName.Item_Knight, 1 }
     };
 
     [SerializeField] private Animator animator;
@@ -55,7 +55,7 @@ public class PopupWinUIController : MonoBehaviour
             // 보상 수령. 수령 단계! 수령버튼 클릭 사실 서버에 보고.
             // 1. 클라이언트가 현 btnClaim 클릭 & 서버측에 clientId와 itemName 전송.
             // 2. ServerRPC 통해 전달받음. playerItemDictionary에 저장.
-            GameMultiplayer.Instance.AddPlayerItemServerRPC(rewardItems.Keys.ToArray<Item.ItemName>(), rewardItems.Values.ToArray<ushort>());
+            GameMultiplayer.Instance.AddPlayerItemServerRPC(rewardItems.Keys.ToArray<ItemName>(), rewardItems.Values.ToArray<ushort>());
 
             // NetworkManager 정리
             CleanUp();
@@ -127,17 +127,17 @@ public class PopupWinUIController : MonoBehaviour
 
     private IEnumerator LoadEarnedItems()
     {
-        foreach (KeyValuePair<Item.ItemName, ushort> item in rewardItems)
+        foreach (KeyValuePair<ItemName, ushort> item in rewardItems)
         {
             yield return new WaitForSeconds(0.5f);
 
             GameObject templateObject = null;
             switch (item.Key)
             {
-                case Item.ItemName.Item_BonusGold:
+                case ItemName.Item_BonusGold:
                     templateObject = itemTemplateBlue;
                     break;
-                case Item.ItemName.Item_Exp:
+                case ItemName.Item_Exp:
                     templateObject = itemTemplateYellow;
                     break;
                 default:

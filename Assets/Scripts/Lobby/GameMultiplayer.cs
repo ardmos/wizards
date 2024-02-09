@@ -19,7 +19,7 @@ public class GameMultiplayer : NetworkBehaviour
     // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트
     private NetworkList<PlayerInGameData> playerDataNetworkList;
     // 플레이어들이 보유한 장비 현황
-    [SerializeField] private Dictionary<ulong, Dictionary<Item.ItemName, ushort>> playerItemDictionaryOnServer;    
+    [SerializeField] private Dictionary<ulong, Dictionary<ItemName, ushort>> playerItemDictionaryOnServer;    
 
     public static GameMultiplayer Instance { get; private set; }
 
@@ -35,7 +35,7 @@ public class GameMultiplayer : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
         playerDataNetworkList = new NetworkList<PlayerInGameData>();
 
-        playerItemDictionaryOnServer = new Dictionary<ulong, Dictionary<Item.ItemName, ushort>>();
+        playerItemDictionaryOnServer = new Dictionary<ulong, Dictionary<ItemName, ushort>>();
     }
 
     public override void OnNetworkSpawn()
@@ -269,9 +269,9 @@ public class GameMultiplayer : NetworkBehaviour
     /// 플레이어 보유 아이템 추가. 전부 서버에서 동작하는 메소드 입니다.
     /// </summary>
     [ServerRpc (RequireOwnership = false)]
-    public void AddPlayerItemServerRPC(Item.ItemName[] itemNameArray, ushort[] itemCountArray, ServerRpcParams serverRpcParams = default)
+    public void AddPlayerItemServerRPC(ItemName[] itemNameArray, ushort[] itemCountArray, ServerRpcParams serverRpcParams = default)
     {
-        Dictionary<Item.ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
+        Dictionary<ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
         Debug.Log($"AddPlayerItemServerRPC. player{serverRpcParams.Receive.SenderClientId}'s playerItemDictionary.Count: {playerItemDictionary.Count} ");
         foreach (var item in playerItemDictionary)
         {
@@ -284,7 +284,7 @@ public class GameMultiplayer : NetworkBehaviour
             playerItemDictionaryOnServer.Add(serverRpcParams.Receive.SenderClientId, playerItemDictionary);
     }
     [ServerRpc(RequireOwnership = false)]
-    public void DeletePlayerItemServerRPC(Item.ItemName itemName, ServerRpcParams serverRpcParams = default)
+    public void DeletePlayerItemServerRPC(ItemName itemName, ServerRpcParams serverRpcParams = default)
     {
         if (!playerItemDictionaryOnServer.ContainsKey(serverRpcParams.Receive.SenderClientId)) return;
 

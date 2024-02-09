@@ -15,12 +15,12 @@ public class DailyGroupUI : MonoBehaviour
     public void GenerateItems()
     {
         // 아이템 목록을 바탕으로 생성(Shop 아이템만)
-        for (int i = (int)Item.ItemName.ShopItemStart+1; i < (int)Item.ItemName.ShopItemEnd; i++)
+        for (int i = (int)ItemName.ShopItemStart+1; i < (int)ItemName.ShopItemEnd; i++)
         {
             GameObject item = Instantiate(itemTemplatePrefab);
             item.transform.SetParent(transform, true);
             item.transform.localScale = Vector3.one;
-            item.GetComponent<ItemTemplateUI>()?.InitItem((Item.ItemName)i);
+            item.GetComponent<ItemTemplateUI>()?.InitItem((ItemName)i);
         }       
     }
 

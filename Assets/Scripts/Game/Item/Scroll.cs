@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Scroll : NetworkBehaviour, INetworkSerializable
 {
-    public Item.ItemName scrollName;
+    public ItemName scrollName;
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
