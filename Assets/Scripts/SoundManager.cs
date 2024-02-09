@@ -84,9 +84,10 @@ public class SoundManager : MonoBehaviour
     }
 
     [ClientRpc]
-    public void PlayItemSFXClientRPC()
+    public void PlayItemSFXClientRPC(ItemName itemName)
     {
-
+        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetItemSFXSound(itemName));
     }
 
     public void SetVolumeBGM(float volume) { audioSourceBGM.volume = volume; }

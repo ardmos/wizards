@@ -27,7 +27,7 @@ public class PotionHP : NetworkBehaviour
         vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
 
         // SFX ½ÇÇà
-        SoundManager.instance.
+        SoundManager.instance.PlayItemSFXClientRPC(ItemName.Potion_HP);
 
         // ÆÄ±«
         GetComponent<NetworkObject>().Despawn();

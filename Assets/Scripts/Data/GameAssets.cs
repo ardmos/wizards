@@ -88,6 +88,7 @@ public class GameAssets : MonoBehaviour
     public AudioClip[] sfx_Fireball_Lv1;
     public AudioClip[] sfx_Waterball_Lv1;
     public AudioClip[] sfx_Iceball_Lv1;
+    public AudioClip sfx_PotionHP;
     #endregion
 
     #region Colors
@@ -225,5 +226,15 @@ public class GameAssets : MonoBehaviour
         }
     }
 
+    public AudioClip GetItemSFXSound(ItemName itemName)
+    {
+        switch (itemName)
+        {
+            case ItemName.Potion_HP:
+                return sfx_PotionHP;
+            default:
+                return null;
+        }
+    }
 
 }
