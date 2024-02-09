@@ -94,6 +94,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
   - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
   sfx_PotionHP: {fileID: 8300000, guid: 2ef55505c696278429561b7b43b591ac, type: 3}
+  sfx_ScrollLvUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
+  sfx_ScrollFireRateUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
+  sfx_ScrollFlySpeedUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
+  sfx_ScrollAttach: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
+  sfx_ScrollGuide: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   ownerColor: {r: 0.38731253, g: 1, b: 0, a: 1}
   allyColor: {r: 0, g: 1, b: 0.9093275, a: 1}
   enemyColor: {r: 1, g: 0.59621054, b: 0, a: 1}

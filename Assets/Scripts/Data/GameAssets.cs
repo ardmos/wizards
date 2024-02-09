@@ -89,6 +89,11 @@ public class GameAssets : MonoBehaviour
     public AudioClip[] sfx_Waterball_Lv1;
     public AudioClip[] sfx_Iceball_Lv1;
     public AudioClip sfx_PotionHP;
+    public AudioClip sfx_ScrollLvUp;
+    public AudioClip sfx_ScrollFireRateUp;
+    public AudioClip sfx_ScrollFlySpeedUp;
+    public AudioClip sfx_ScrollAttach;
+    public AudioClip sfx_ScrollGuide;
     #endregion
 
     #region Colors
@@ -232,6 +237,16 @@ public class GameAssets : MonoBehaviour
         {
             case ItemName.Potion_HP:
                 return sfx_PotionHP;
+            case ItemName.Scroll_LevelUp:
+                return sfx_ScrollLvUp;
+            case ItemName.Scroll_FireRateUp:
+                return sfx_ScrollFireRateUp;
+            case ItemName.Scroll_FlySpeedUp:
+                return sfx_ScrollFlySpeedUp;
+            case ItemName.Scroll_Attach:
+                return sfx_ScrollAttach;
+            case ItemName.Scroll_Guide:
+                return sfx_ScrollGuide;
             default:
                 return null;
         }
