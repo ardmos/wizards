@@ -187,7 +187,7 @@ public class Player : NetworkBehaviour
         // 이동속도 0
         HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
         // 게임오버 팝업 띄워주기
-        GameUIController.instance.popupGameOverUI.Show();
+        GameUIController.instance.popupGameOverUIController.Show();
     }
 
     [ClientRpc]
@@ -197,7 +197,7 @@ public class Player : NetworkBehaviour
         if (!IsOwner) return;
 
         // 승리 팝업 띄워주기
-        GameUIController.instance.popupWinUI.Show();
+        GameUIController.instance.popupWinUIController.Show();
     }
 
     #region Public 플레이어 정보 확인
@@ -213,21 +213,46 @@ public class Player : NetworkBehaviour
     }
 
     #region 스킬 스크롤 획득시 동작들
-    // 스크롤 획득시 동작
     [ClientRpc]
+    public void UpdateScrollQueueClientRPC(byte[] scrollSpellSlotArray)
+    {
+        if (!IsOwner) return;
+
+        Queue<byte> scrollSpellSlotQueue = new Queue<byte>(scrollSpellSlotArray);
+
+        SpellManager.Instance.UpdatePlayerScrollSpellSlotQueueOnClient(scrollSpellSlotQueue);
+    }
+
+    public void RequestUniqueRandomScrollsToServer()
+    {
+        SpellManager.Instance.GetUniqueRandomScrollsServerRPC();
+    }
+    /// <summary>
+    /// 서버에서 제공해준 스크롤 효과 목록을 PopupSelectScrollEffectUIController에 적용.
+    /// </summary>
+    /// <param name="scrollNames"></param>
+    [ClientRpc]
+    public void SetScrollEffectsToPopupUIClientRPC(ItemName[] scrollNames)
+    {
+        GameUIController.instance.popupSelectScrollEffectUIController.InitPopup(scrollNames);
+    }
+
+
+/*    [ClientRpc]
     public void ShowSelectSpellPopupClientRPC(Scroll scroll)
     {
         if (!IsOwner) return;
 
         GameUIController.instance.popupSelectSpell.Show(scroll);
-    }
+    }*/
 
     // 슬롯 선택시 동작. 클라이언트에서 돌아가는 메소드 입니다.
-    public void ApplyScrollEffectToSpell(Scroll scroll, sbyte spellIndex)
+    public void RequestApplyScrollEffectToServer(ItemName scrollName, byte spellIndex)
     {
-        // 전달받은 스크롤클래스와 스펠인덱스를 사용해서 효과 적용을 진행한다.
-        scroll.UpdateScrollEffectToServer(spellIndex);
+        // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
+        SpellManager.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
 
+        // 비주얼 효과 실행
         ApplyScrollVFXServerRPC();
     }
 

@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 /// <summary>
 /// 마법을 Server Auth 방식으로 시전할 수 있도록 도와주는 스크립트 입니다.
+/// Scroll의 획득과 적용의 과정도 관리합니다.
 /// 서버에서 동작하는 스크립트들이 모여있어야 합니다. 추후 코드 정리하면서 확인 필요.
 /// </summary>
 public class SpellManager : NetworkBehaviour
@@ -14,15 +17,97 @@ public class SpellManager : NetworkBehaviour
     // Spell Dictionary that the player is casting.
     private Dictionary<ulong, GameObject> playerCastingSpellPairs = new Dictionary<ulong, GameObject>();
     private Dictionary<ulong, Transform> playerMuzzlePairs = new Dictionary<ulong, Transform>();
+    private Dictionary<ulong, List<SpellInfo>> spellInfoListOnServer = new Dictionary<ulong, List<SpellInfo>>();
+    // 특정 플레이어의 ulong(클라이언트ID)값과, 그 플레이어가 Scroll을 획득할 때마다 Scroll의 효과가 적용될 Spell Slot의 Index를 담아두는 Queue를 갖고있는 변수입니다.
+    private Dictionary<ulong, Queue<byte>> playerScrollSpellSlotQueueMapOnServer = new Dictionary<ulong, Queue<byte>>(); 
+    private Queue<byte> playerScrollSpellSlotQueueOnClient = new Queue<byte>();
 
-    // 서버에 저장되는 내용
-    [SerializeField] private Dictionary<ulong, List<SpellInfo>> spellInfoListOnServer;
 
     private void Awake()
     {      
         Instance = this;
-        spellInfoListOnServer = new Dictionary<ulong, List<SpellInfo>>();
     }
+
+    #region Scroll 관련
+    // On Server
+    public void EnqueuePlayerScrollSpellSlotQueueOnServer(ulong clientId, byte queueElement)
+    {
+        playerScrollSpellSlotQueueMapOnServer[clientId].Enqueue(queueElement);
+
+        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
+        networkClient.PlayerObject.GetComponent<Player>().UpdateScrollQueueClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].ToArray());
+    }
+    
+    private void DequeuePlayerScrollSpellSlotQueueOnServer(ulong clientId)
+    {
+        playerScrollSpellSlotQueueMapOnServer[clientId].Dequeue();
+
+        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
+        networkClient.PlayerObject.GetComponent<Player>().UpdateScrollQueueClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].ToArray());
+    }
+
+    /// <summary>
+    /// 랜덤스크롤 생성기 입니다. 플레이어가 PopupSelectScrollEffectUI를 실행할 때 마다 요청해오면 랜덤한 스크롤 효과 3 개를 뽑아줍니다.
+    /// </summary>
+    [ServerRpc (RequireOwnership = false)]
+    public void GetUniqueRandomScrollsServerRPC(ServerRpcParams serverRpcParams = default)
+    {
+        List<int> randomNumbers = GenerateUniqueRandomNumbers();
+        ItemName[] scrollNames = new ItemName[3] {
+              ItemName.ScrollStart+1+randomNumbers[0],
+              ItemName.ScrollStart+1+randomNumbers[1],
+              ItemName.ScrollStart+1+randomNumbers[2]
+        };
+
+        // 랜덤으로 생성된 스크롤 효과 목록을 요청해온 플레이어에게 공유
+        ulong clientId = serverRpcParams.Receive.SenderClientId;
+        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
+        networkClient.PlayerObject.GetComponent<Player>().SetScrollEffectsToPopupUIClientRPC(scrollNames);
+    }
+    private List<int> GenerateUniqueRandomNumbers()
+    {
+        List<int> numbers = new List<int>();
+
+        int scrollItemMaxIndex = ItemName.ScrollEnd - (ItemName.ScrollStart + 1);
+
+        while (numbers.Count < 3)
+        {
+            int randomNumber = UnityEngine.Random.Range(0, scrollItemMaxIndex);
+
+            if (!numbers.Contains(randomNumber))
+            {
+                numbers.Add(randomNumber);
+            }
+        }
+
+        return numbers;
+    }
+
+
+    // On Client
+    public void UpdatePlayerScrollSpellSlotQueueOnClient(Queue<byte> scrollQueue)
+    {
+        playerScrollSpellSlotQueueOnClient = new Queue<byte>(scrollQueue);
+
+        // Spell Scroll Count UI 비활성화
+        if (playerScrollSpellSlotQueueOnClient.Count == 0)
+        {
+            GameUIController.instance.buttonReadSpellScrollUIController.DeactivateUI();
+            return;
+        }
+
+        // Spell Scroll Count UI 활성화 
+        GameUIController.instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
+    }
+    public byte PeekPlayerScrollSpellSlotQueueOnClient()
+    {
+        return playerScrollSpellSlotQueueOnClient.Peek();
+    }
+    public int GetPlayerScrollSpellSlotCount()
+    {
+        return playerScrollSpellSlotQueueOnClient.Count;
+    }
+    #endregion
 
     #region SpellInfo
     /// <summary>
@@ -82,7 +167,7 @@ public class SpellManager : NetworkBehaviour
     /// 업데이트 후에 자동으로 클라이언트측과 동기화를 합니다.
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
-    public void UpdateScrollEffectServerRPC(ItemName scrollName, sbyte spellIndex, ServerRpcParams serverRpcParams = default)
+    public void UpdateScrollEffectServerRPC(ItemName scrollName, byte spellIndex, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         if (!SpellManager.Instance.spellInfoListOnServer.ContainsKey(clientId))
@@ -123,6 +208,9 @@ public class SpellManager : NetworkBehaviour
         // 변경내용을 요청한 클라이언트와도 동기화
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
         networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
+
+        // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
+        DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
     }
 
     /// <summary>

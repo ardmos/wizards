@@ -5,6 +5,6 @@ public class ScrollLevelUp : Scroll
 {
     public override void OnNetworkSpawn()
     {
-        scrollName = ItemName.Scroll_LevelUp;
+        //scrollName = ItemName.Scroll_LevelUp;
     }
 }

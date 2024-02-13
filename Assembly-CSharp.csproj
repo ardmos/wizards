@@ -70,13 +70,16 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\GoToLobbyScene.cs" />
     <Compile Include="Assets\Scripts\Game\UI\DamageTextUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\ButtonReadSpellScrollUIController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupWatingForPlayersUIController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Game\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameUIController.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneCleanUp.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\Popup\SelectSpell\ScrollEffectSlot.cs" />
     <Compile Include="Assets\Scripts\Lobby\MatchmakerUI.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\Popup\SelectSpell\PopupSelectScrollEffectUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\InputSystem\TestingInputSystem.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Assets\Scripts\Players_InGame\Player.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupInboxUIController.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\ItemAcquireUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupHostHasDisconnectedUIController.cs" />
@@ -136,7 +140,6 @@
     <Compile Include="Assets\Scripts\Lobby\PopupEquipmentUIController.cs" />
     <Compile Include="Assets\Scripts\Game\Item\PotionHP.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\NotifyUIController.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\DamageTextUIController.cs" />
@@ -170,7 +173,9 @@
     <Compile Include="Assets\Scripts\Game\PlayerHPManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupLookingForGame\PopupLookingForGameUIController.cs" />
     <Compile Include="Assets\Scripts\Game\VFX\VfxSpellUpgrade.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\NotifyGameOverUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\ItemAcquiredMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
     <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
@@ -195,7 +200,6 @@
     <Compile Include="Assets\Scripts\Lobby\PopupUserInfo\PopupNameChangeUIController.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyBottomUI.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\Popup\SelectSpell\SpellSlot.cs" />
     <Compile Include="Assets\Scripts\Lobby\LobbyManager.cs" />
     <Compile Include="Assets\Scripts\Game\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\Scripts\Data\KillLogData.cs" />
@@ -205,7 +209,6 @@
     <Compile Include="Assets\Scripts\Common UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\Popup\SelectSpell\PopupSelectSpellUIController.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\PopupShopUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SpellName.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerAttackAnimStateEventData.cs" />

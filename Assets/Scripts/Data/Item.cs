@@ -56,5 +56,4 @@ public class Item
     } 
 
     // 마법스크롤 효과 얻기
-
 }

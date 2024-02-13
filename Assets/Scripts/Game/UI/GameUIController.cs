@@ -12,10 +12,11 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private CustomButton btnMenu;
     [SerializeField] private PopupMenuUIController popupMenuUI;
 
-    public NotifyUIController notifyUIController;
-    public PopupGameOverUIController popupGameOverUI;
-    public PopupWinUIController popupWinUI;
-    public PopupSelectSpellUIController popupSelectSpell;
+    public NotifyGameOverUIController notifyUIController;
+    public PopupGameOverUIController popupGameOverUIController;
+    public PopupWinUIController popupWinUIController;
+    public PopupSelectScrollEffectUIController popupSelectScrollEffectUIController;
+    public ButtonReadSpellScrollUIController buttonReadSpellScrollUIController;
 
 
     void Awake()

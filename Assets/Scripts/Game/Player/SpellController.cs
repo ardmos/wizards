@@ -144,7 +144,7 @@ public class SpellController : NetworkBehaviour
     /// </summary>
     /// <param name="clientId">알고싶은 Client의 ID</param>
     /// <returns></returns>
-    public List<SpellInfo> GetSpellInfoArray()
+    public List<SpellInfo> GetSpellInfoList()
     {
         return spellInfoListOnClient;
     }
