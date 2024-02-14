@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3142795043376685255}
   m_Layer: 7
-  m_Name: Scroll Guide
+  m_Name: "Scroll Guide(\uC0AD\uC81C\uAC00\uB2A5)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

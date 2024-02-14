@@ -234,6 +234,7 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     public void SetScrollEffectsToPopupUIClientRPC(ItemName[] scrollNames)
     {
+        if (!IsOwner) return;   
         GameUIController.instance.popupSelectScrollEffectUIController.InitPopup(scrollNames);
     }
 

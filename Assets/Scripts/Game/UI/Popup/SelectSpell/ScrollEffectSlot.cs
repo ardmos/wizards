@@ -29,6 +29,9 @@ public class ScrollEffectSlot : MonoBehaviour
         imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);
 
         btnApply.AddClickListener(() => {
+            if (Player.LocalInstance == null) return;
+            if(GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
+
             Player.LocalInstance.RequestApplyScrollEffectToServer(scrollNames, spellIndexToApply);
             GetComponentInParent<PopupSelectScrollEffectUIController>().Hide();
         });

@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.Netcode;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
 /// <summary>
 /// 마법을 Server Auth 방식으로 시전할 수 있도록 도와주는 스크립트 입니다.
@@ -32,7 +28,13 @@ public class SpellManager : NetworkBehaviour
     // On Server
     public void EnqueuePlayerScrollSpellSlotQueueOnServer(ulong clientId, byte queueElement)
     {
-        playerScrollSpellSlotQueueMapOnServer[clientId].Enqueue(queueElement);
+        if (playerScrollSpellSlotQueueMapOnServer.ContainsKey(clientId))
+        {
+            playerScrollSpellSlotQueueMapOnServer[clientId].Enqueue(queueElement);
+        }
+        else
+            playerScrollSpellSlotQueueMapOnServer.Add(clientId, new Queue<byte>(new byte[] { queueElement }));
+               
 
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
         networkClient.PlayerObject.GetComponent<Player>().UpdateScrollQueueClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].ToArray());

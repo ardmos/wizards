@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3142795043376685255}
   m_Layer: 7
-  m_Name: Scroll Attach
+  m_Name: "Scroll Fly Speed Up(\uC0AD\uC81C\uAC00\uB2A5)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,7 +127,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4182611796368890290}
-  m_Mesh: {fileID: 1012529354333792591, guid: 799143a8ca71196458e82d8ecc64ccd1, type: 3}
+  m_Mesh: {fileID: 6508927454760056656, guid: a4db54d5badaa244485cfb06aa8efaac, type: 3}
 --- !u!23 &2381105905220630631
 MeshRenderer:
   m_ObjectHideFlags: 0
