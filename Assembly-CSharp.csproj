@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\Players_InGame\Wizard.cs" />
     <Compile Include="Assets\Scripts\Title\TitleSceneUIController.cs" />
     <Compile Include="Assets\Scripts\Game\PlayerSpawnPointsController.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\GameOverUIController.cs" />
     <Compile Include="Assets\Scripts\Title\Popup\PopupSelectAuthMethodUIController.cs" />
     <Compile Include="Assets\Scripts\Game\UI\TimerUIController.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Assets\Scripts\Game\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSupportUIController.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\GameOverMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Game\SpellManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupConnectionNotificationUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
@@ -153,7 +155,6 @@
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\NotifyMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\AudioSourceObject.cs" />
     <Compile Include="Assets\Scenes\Test\TestScene\NetworkUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
@@ -173,7 +174,6 @@
     <Compile Include="Assets\Scripts\Game\PlayerHPManager.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupLookingForGame\PopupLookingForGameUIController.cs" />
     <Compile Include="Assets\Scripts\Game\VFX\VfxSpellUpgrade.cs" />
-    <Compile Include="Assets\Scripts\Game\UI\NotifyGameOverUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Game\UI\ItemAcquiredMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />

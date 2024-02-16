@@ -38,7 +38,7 @@ public class PopupUserInfoUIController : MonoBehaviour
     public void UpdateUserName(string userName)
     {
         // 1. Update Player Data
-        PlayerDataManager.Instance.SetPlayerName(userName);
+        PlayerDataManager.Instance.UpdatePlayerName(userName);
         // 2. Update this Popup UI's user name textBox
         txtUserName.UpdateTextValue(userName);
         // 3. Update this In Lobby Scene

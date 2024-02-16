@@ -15,12 +15,12 @@ public class SpellManager : NetworkBehaviour
     private Dictionary<ulong, Transform> playerMuzzlePairs = new Dictionary<ulong, Transform>();
     private Dictionary<ulong, List<SpellInfo>> spellInfoListOnServer = new Dictionary<ulong, List<SpellInfo>>();
     // 특정 플레이어의 ulong(클라이언트ID)값과, 그 플레이어가 Scroll을 획득할 때마다 Scroll의 효과가 적용될 Spell Slot의 Index를 담아두는 Queue를 갖고있는 변수입니다.
-    private Dictionary<ulong, Queue<byte>> playerScrollSpellSlotQueueMapOnServer = new Dictionary<ulong, Queue<byte>>(); 
+    private Dictionary<ulong, Queue<byte>> playerScrollSpellSlotQueueMapOnServer = new Dictionary<ulong, Queue<byte>>();
     private Queue<byte> playerScrollSpellSlotQueueOnClient = new Queue<byte>();
 
 
     private void Awake()
-    {      
+    {
         Instance = this;
     }
 
@@ -34,24 +34,22 @@ public class SpellManager : NetworkBehaviour
         }
         else
             playerScrollSpellSlotQueueMapOnServer.Add(clientId, new Queue<byte>(new byte[] { queueElement }));
-               
+
 
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
         networkClient.PlayerObject.GetComponent<Player>().UpdateScrollQueueClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].ToArray());
+        networkClient.PlayerObject.GetComponent<Player>().ShowItemAcquiredUIClientRPC();
     }
-    
+
     private void DequeuePlayerScrollSpellSlotQueueOnServer(ulong clientId)
     {
         playerScrollSpellSlotQueueMapOnServer[clientId].Dequeue();
-
-        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<Player>().UpdateScrollQueueClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].ToArray());
     }
 
     /// <summary>
     /// 랜덤스크롤 생성기 입니다. 플레이어가 PopupSelectScrollEffectUI를 실행할 때 마다 요청해오면 랜덤한 스크롤 효과 3 개를 뽑아줍니다.
     /// </summary>
-    [ServerRpc (RequireOwnership = false)]
+    [ServerRpc(RequireOwnership = false)]
     public void GetUniqueRandomScrollsServerRPC(ServerRpcParams serverRpcParams = default)
     {
         List<int> randomNumbers = GenerateUniqueRandomNumbers();
@@ -66,6 +64,7 @@ public class SpellManager : NetworkBehaviour
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
         networkClient.PlayerObject.GetComponent<Player>().SetScrollEffectsToPopupUIClientRPC(scrollNames);
     }
+
     private List<int> GenerateUniqueRandomNumbers()
     {
         List<int> numbers = new List<int>();
@@ -85,29 +84,47 @@ public class SpellManager : NetworkBehaviour
         return numbers;
     }
 
-
     // On Client
     public void UpdatePlayerScrollSpellSlotQueueOnClient(Queue<byte> scrollQueue)
     {
+        // Update Queue
         playerScrollSpellSlotQueueOnClient = new Queue<byte>(scrollQueue);
 
-        // Spell Scroll Count UI 비활성화
-        if (playerScrollSpellSlotQueueOnClient.Count == 0)
-        {
-            GameUIController.instance.buttonReadSpellScrollUIController.DeactivateUI();
-            return;
-        }
+        Debug.Log($"UpdatePlayerScrollSpellSlotQueueOnClient. count:{playerScrollSpellSlotQueueOnClient.Count}");
 
-        // Spell Scroll Count UI 활성화 
-        GameUIController.instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
+        // Update UI
+        if (playerScrollSpellSlotQueueOnClient.Count == 0)
+            // Spell Scroll Count UI 비활성화
+            GameUIController.instance.buttonReadSpellScrollUIController.DeactivateUI();
+        else
+            // Spell Scroll Count UI 활성화 
+            GameUIController.instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
     }
+
     public byte PeekPlayerScrollSpellSlotQueueOnClient()
     {
         return playerScrollSpellSlotQueueOnClient.Peek();
     }
+
     public int GetPlayerScrollSpellSlotCount()
     {
         return playerScrollSpellSlotQueueOnClient.Count;
+    }
+
+    public void DequeuePlayerScrollSpellSlotQueueOnClient()
+    {
+        // Dequeue
+        playerScrollSpellSlotQueueOnClient.Dequeue();
+
+        Debug.Log($"DequeuePlayerScrollSpellSlotQueueOnClient. count:{playerScrollSpellSlotQueueOnClient.Count}");
+
+        // Update UI
+        if (playerScrollSpellSlotQueueOnClient.Count == 0)
+            // Spell Scroll Count UI 비활성화
+            GameUIController.instance.buttonReadSpellScrollUIController.DeactivateUI();
+        else
+            // Spell Scroll Count UI 활성화 
+            GameUIController.instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
     }
     #endregion
 
@@ -160,7 +177,7 @@ public class SpellManager : NetworkBehaviour
 
         // 요청한 클라이언트의 currentSpellInfoList 동기화
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(playerSpellInfoList.ToArray());       
+        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(playerSpellInfoList.ToArray());
     }
 
     /// <summary>
@@ -172,33 +189,35 @@ public class SpellManager : NetworkBehaviour
     public void UpdateScrollEffectServerRPC(ItemName scrollName, byte spellIndex, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
-        if (!SpellManager.Instance.spellInfoListOnServer.ContainsKey(clientId))
+        if (!spellInfoListOnServer.ContainsKey(clientId))
         {
             Debug.LogError($"UpdateScrollEffectServerRPC. There is no SpellInfoList for this client. clientId:{clientId}");
             return;
         }
 
-        SpellInfo newSpellInfo = spellInfoListOnServer[clientId][spellIndex];
+        //Debug.Log($"scroll name:{scrollName}, spellIndex:{spellIndex} // spellInfo name:{spellInfoListOnServer[clientId][spellIndex].spellName}, lvl:{spellInfoListOnServer[clientId][spellIndex].level}, cooltime:{spellInfoListOnServer[clientId][spellIndex].coolTime}, moveSpeed:{spellInfoListOnServer[clientId][spellIndex].moveSpeed}");
+
+        SpellInfo newSpellInfo = new SpellInfo(spellInfoListOnServer[clientId][spellIndex]);
 
         // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
         switch (scrollName)
-        {           
+        {
             case ItemName.Scroll_LevelUp:
                 newSpellInfo.level += 1;
                 break;
             case ItemName.Scroll_FireRateUp:
-                if(newSpellInfo.coolTime > 0.2f) newSpellInfo.coolTime -= 0.2f;
+                if (newSpellInfo.coolTime > 0.2f) newSpellInfo.coolTime -= 0.4f;
                 else newSpellInfo.coolTime = 0f;
                 break;
             case ItemName.Scroll_FlySpeedUp:
-                newSpellInfo.moveSpeed += 1f;
+                newSpellInfo.moveSpeed += 10f;
                 break;
-            case ItemName.Scroll_Attach:
+            case ItemName.Scroll_Deploy:
                 newSpellInfo.moveSpeed = 0f;
                 break;
-            case ItemName.Scroll_Guide:
-                // 유도 마법 미구현
-                break;
+            // 유도 마법 미구현
+            //case ItemName.Scroll_Guide:
+            // break;
             default:
                 Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
                 break;
@@ -207,12 +226,15 @@ public class SpellManager : NetworkBehaviour
         // 변경내용 서버에 저장
         spellInfoListOnServer[clientId][spellIndex] = newSpellInfo;
 
+        Debug.Log($"scroll name:{scrollName}, spellIndex:{spellIndex} // new spellInfo name:{spellInfoListOnServer[clientId][spellIndex].spellName}, lvl:{spellInfoListOnServer[clientId][spellIndex].level}, cooltime:{spellInfoListOnServer[clientId][spellIndex].coolTime}, moveSpeed:{spellInfoListOnServer[clientId][spellIndex].moveSpeed}");
+
         // 변경내용을 요청한 클라이언트와도 동기화
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
         networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
 
         // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
         DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
+        networkClient.PlayerObject.GetComponent<Player>().DequeuePlayerScrollSpellSlotQueueClientRPC();
     }
 
     /// <summary>
@@ -231,11 +253,10 @@ public class SpellManager : NetworkBehaviour
 
         foreach (SpellInfo spellInfo in spellInfoListOnServer[clientId])
         {
-            if(spellInfo.spellName == spellName)
+            if (spellInfo.spellName == spellName)
             {
                 return spellInfo;
             }
-                
         }
 
         return null;
@@ -259,7 +280,7 @@ public class SpellManager : NetworkBehaviour
         ulong clientId = playerObject.OwnerClientId;
 
         // 마법 시전
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), playerObject.transform.position, Quaternion.identity);        
+        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), playerObject.transform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(clientId, spellName));
         spellObject.transform.SetParent(playerObject.transform);
@@ -286,7 +307,7 @@ public class SpellManager : NetworkBehaviour
         // 포구 위치 찾기(Local posittion)
         Transform muzzleTransform = playerObject.GetComponentInChildren<MuzzlePos>().transform;
         playerMuzzlePairs[clientId] = muzzleTransform;
- 
+
         // 포구에 발사체 위치시키기
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), muzzleTransform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
@@ -303,7 +324,7 @@ public class SpellManager : NetworkBehaviour
         // 플레이어가 시전중인 마법 목록에 저장하기
         if (playerCastingSpellPairs.ContainsKey(clientId)) playerCastingSpellPairs[clientId] = spellObject;
         else playerCastingSpellPairs.Add(clientId, spellObject);
-    }   
+    }
 
     /// <summary>
     /// 플레이어의 요청으로 현재 캐스팅중인 마법을 발사하는 메소드 입니다.
@@ -339,7 +360,7 @@ public class SpellManager : NetworkBehaviour
     public virtual void SpellHitOnServer(Collision collision, AttackSpell spell)
     {
         // 충돌한것이 마법인지 확인
-        bool isSpellCollided = false;   
+        bool isSpellCollided = false;
         // 충돌 처리결과 저장
         SpellInfo collisionHandlingResult = null;
 
@@ -352,8 +373,8 @@ public class SpellManager : NetworkBehaviour
         // 충돌한게 Spell일 경우, 스펠간 충돌 결과 처리를 따로 진행합니다
         // 처리결과를 collisionHandlingResult 변수에 저장해뒀다가 DestroyParticle시에 castSpell 시킵니다.
         if (collider.CompareTag("Attack"))
-        {       
-            isSpellCollided = true;            
+        {
+            isSpellCollided = true;
             SpellInfo thisSpell = spell.GetSpellInfo();
             SpellInfo opponentsSpell = collider.GetComponent<AttackSpell>().GetSpellInfo();
 
@@ -378,7 +399,7 @@ public class SpellManager : NetworkBehaviour
             Player player = collider.GetComponent<Player>();
             if (player != null)
             {
-                byte damage = (byte)spell.GetSpellInfo().level;                
+                byte damage = (byte)spell.GetSpellInfo().level;
                 // 플레이어 피격을 서버에서 처리
                 PlayerGotHitOnServer(damage, player);
             }

@@ -16,44 +16,33 @@ public class ScrollEffectSlot : MonoBehaviour
     public TextMeshProUGUI txtScrollName;
     public TextMeshProUGUI txtSpellName;
     public Image imgSpellIcon;
+    public Image imgScrollEffectIcon;
 
-
-    public void InitUI(ItemName scrollNames, byte spellIndexToApply)
+    /// <summary>
+    ///  scroll정보에 맞춰 UI의 정보를 초기화 해주는 메소드 입니다.
+    /// </summary>
+    public void InitUI(ItemName scrollName, byte spellIndexToApply)
     {
+        //Debug.Log($"InitUI. scrollName:{scrollName}, spellIndexToApply:{spellIndexToApply}");
+
         // scroll 이름
-        txtScrollName.text = $"{Item.GetName(scrollNames)}!!";
+        txtScrollName.text = $"{Item.GetName(scrollName)}!!";
         // spell 이름
         SpellName spellName = Player.LocalInstance.GetSpellController().GetSpellInfoList()[spellIndexToApply].spellName;
         txtSpellName.text = spellName.ToString();
         // spell 아이콘 이미지
         imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);
+        // scroll effect 아이콘 이미지
+        imgScrollEffectIcon.sprite = GameAssets.instantiate.GetScrollEffectIconImage(scrollName);
 
+        // 버튼 기능 설정   
+        btnApply.onClick.RemoveAllListeners();
         btnApply.AddClickListener(() => {
             if (Player.LocalInstance == null) return;
             if(GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
 
-            Player.LocalInstance.RequestApplyScrollEffectToServer(scrollNames, spellIndexToApply);
+            Player.LocalInstance.RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);
             GetComponentInParent<PopupSelectScrollEffectUIController>().Hide();
         });
     }
-
-
-
-    /// <summary>
-    /// 슬롯의 slotNumber와 이 팝업의 scroll정보에 맞춰 슬롯 UI의 정보를 초기화 해주는 메소드 입니다.
-    /// </summary>
-/*    public void InitUI(Scroll scroll, SpellName spellName)
-    {
-        // scroll 이름
-        txtScrollName.text = $"{Item.GetName(scroll.scrollName)}!!";
-        // spell 이름
-        txtSpellName.text = spellName.ToString();
-        // spell 아이콘 이미지
-        imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);
-
-        btnApply.AddClickListener(() => {
-            Player.LocalInstance.ApplyScrollEffectToSpell(scroll, slotNumber);
-            GetComponentInParent<PopupSelectSpellUIController>().Hide();
-        });
-    }*/
 }

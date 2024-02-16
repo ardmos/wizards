@@ -18,8 +18,8 @@ public enum ItemName
     Scroll_LevelUp,
     Scroll_FireRateUp,
     Scroll_FlySpeedUp,
-    Scroll_Attach,
-    Scroll_Guide,
+    Scroll_Deploy,
+    //Scroll_Guide,
     ScrollEnd,
     Max
 }

@@ -19,11 +19,16 @@ public class GameAssets : MonoBehaviour
     }
 
     #region Item Icons
-    public Sprite IconWizardClass;
-    public Sprite IconKnightClass;
-    public Sprite IconGold;
-    public Sprite IconBonusGold;
-    public Sprite IconExp;
+    public Sprite iconWizardClass;
+    public Sprite iconKnightClass;
+    public Sprite iconGold;
+    public Sprite iconBonusGold;
+    public Sprite iconExp;
+
+    public Sprite iconScrollEffect_LevelUp;
+    public Sprite iconScrollEffect_FireRateUp;
+    public Sprite iconScrollEffect_FlySpeedUp;
+    public Sprite iconScrollEffect_Deploy;
     #endregion
 
 
@@ -111,6 +116,23 @@ public class GameAssets : MonoBehaviour
     public Sprite GetSpellIconImage(SpellName spellName)
     {
         return spellAssetsList[SearchSpellNameIndex(spellName)].icon;
+    }
+
+    public Sprite GetScrollEffectIconImage(ItemName itemName)
+    {
+        switch (itemName)
+        {
+            case ItemName.Scroll_LevelUp:
+                return iconScrollEffect_LevelUp;
+            case ItemName.Scroll_FireRateUp:
+                return iconScrollEffect_FireRateUp;
+            case ItemName.Scroll_FlySpeedUp:
+                return iconScrollEffect_FlySpeedUp;
+            case ItemName.Scroll_Deploy:
+                return iconScrollEffect_Deploy;
+            default:
+                return null;
+        }
     }
 
     /// <summary>
@@ -243,10 +265,10 @@ public class GameAssets : MonoBehaviour
                 return sfx_ScrollFireRateUp;
             case ItemName.Scroll_FlySpeedUp:
                 return sfx_ScrollFlySpeedUp;
-            case ItemName.Scroll_Attach:
+            case ItemName.Scroll_Deploy:
                 return sfx_ScrollAttach;
-            case ItemName.Scroll_Guide:
-                return sfx_ScrollGuide;
+//            case ItemName.Scroll_Guide:
+//                return sfx_ScrollGuide;
             default:
                 return null;
         }

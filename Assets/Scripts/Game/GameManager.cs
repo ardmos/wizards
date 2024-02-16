@@ -286,7 +286,7 @@ public class GameManager : NetworkBehaviour
             GameMultiplayer.Instance.SetPlayerDataFromClientId(clientId, playerData);
 
             // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.(게임오버시킨사람 닉네임 공유까지는 아직 미구현)
-            GameUIController.instance.notifyUIController.NotifyGameOverPlayerClientRPC(playerData.playerName.ToString());
+            GameUIController.instance.notifyUIController.ShowGameOverPlayerClientRPC(playerData.playerName.ToString());
 
             // 상단 UI를 위한 AlivePlayersCount 값 업데이트
             gameOverPlayerCount++;

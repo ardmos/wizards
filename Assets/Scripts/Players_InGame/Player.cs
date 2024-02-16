@@ -164,6 +164,7 @@ public class Player : NetworkBehaviour
     {
         hPBarUIController.SetHP(hp, maxHP);
     }
+
     [ClientRpc]
     public void ShowDamagePopupClientRPC(byte damageAmount)
     {
@@ -220,13 +221,23 @@ public class Player : NetworkBehaviour
 
         Queue<byte> scrollSpellSlotQueue = new Queue<byte>(scrollSpellSlotArray);
 
+        // Queue 업데이트
         SpellManager.Instance.UpdatePlayerScrollSpellSlotQueueOnClient(scrollSpellSlotQueue);
+    }
+
+    [ClientRpc]
+    public void ShowItemAcquiredUIClientRPC()
+    {
+        if (!IsOwner) return;
+        // 알림 UI 실행
+        GameUIController.instance.itemAcquireUIController.ShowItemAcquireUI();
     }
 
     public void RequestUniqueRandomScrollsToServer()
     {
         SpellManager.Instance.GetUniqueRandomScrollsServerRPC();
     }
+
     /// <summary>
     /// 서버에서 제공해준 스크롤 효과 목록을 PopupSelectScrollEffectUIController에 적용.
     /// </summary>
@@ -238,23 +249,23 @@ public class Player : NetworkBehaviour
         GameUIController.instance.popupSelectScrollEffectUIController.InitPopup(scrollNames);
     }
 
-
-/*    [ClientRpc]
-    public void ShowSelectSpellPopupClientRPC(Scroll scroll)
-    {
-        if (!IsOwner) return;
-
-        GameUIController.instance.popupSelectSpell.Show(scroll);
-    }*/
-
     // 슬롯 선택시 동작. 클라이언트에서 돌아가는 메소드 입니다.
     public void RequestApplyScrollEffectToServer(ItemName scrollName, byte spellIndex)
     {
+        //Debug.Log($"RequestApplyScrollEffectToServer. scrollNames:{scrollName}, spellIndexToApply:{spellIndex}");
+
         // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
         SpellManager.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
 
         // 비주얼 효과 실행
         ApplyScrollVFXServerRPC();
+    }
+
+    [ClientRpc]
+    public void DequeuePlayerScrollSpellSlotQueueClientRPC()
+    {
+        if (!IsOwner) return;
+        SpellManager.Instance.DequeuePlayerScrollSpellSlotQueueOnClient();
     }
 
     [ServerRpc]

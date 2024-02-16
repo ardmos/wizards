@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemAcquireUIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject ItemAcquiredMessageContainer;
+    public GameObject ItemAcquiredMessagePrefab;
 
-    // Update is called once per frame
-    void Update()
+    public void ShowItemAcquireUI()
     {
-        
+        GameObject messageObject = Instantiate(ItemAcquiredMessagePrefab);
+        messageObject.transform.SetParent(ItemAcquiredMessageContainer.transform, false);
     }
 }

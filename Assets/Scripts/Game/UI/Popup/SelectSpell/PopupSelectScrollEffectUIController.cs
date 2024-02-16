@@ -27,26 +27,11 @@ public class PopupSelectScrollEffectUIController : MonoBehaviour
         Hide();
     }
 
-    /*    public void InitPopup(Scroll scroll)
-        {
-            // 슬롯 UI 정보 초기화
-            spellInfos = Player.LocalInstance.GetSpellController().GetSpellInfoArray();
-            spellSlot0.InitUI(scroll, spellInfos[0].spellName);
-            spellSlot1.InitUI(scroll, spellInfos[1].spellName);
-            spellSlot2.InitUI(scroll, spellInfos[2].spellName);
-        }*/
-
-    /*    public void Show(Scroll scroll)
-        {
-            gameObject.SetActive(true);
-            InitPopup(scroll);
-        }*/
-
     public void InitPopup(ItemName[] scrollNames)
     {
-        // 슬롯 UI 정보 초기화. 효과가 적용될 Spell Slot은 서버로부터 공유받은 큐에 저장된 첫번째 값.
+        // 슬롯 UI 정보 초기화. Scroll 효과가 적용될 Spell Slot은 서버로부터 공유받은 큐에 저장된 첫번째 값.
         spellIndexToApply = SpellManager.Instance.PeekPlayerScrollSpellSlotQueueOnClient();
-        // 슬롯 UI 정보 초기화. 플레이어에게 랜덤의 스펠 기능 세 가지를 선택지로 제시.
+        //Debug.Log($"InitPopup. spellIndexToApply:{spellIndexToApply}, scrollNames[0]:{scrollNames[0]}, [1]:{scrollNames[1]}, [2]:{scrollNames[2]}");
 
         scrollEffectSlot0.InitUI(scrollNames[0], spellIndexToApply);
         scrollEffectSlot1.InitUI(scrollNames[1], spellIndexToApply);
@@ -56,6 +41,8 @@ public class PopupSelectScrollEffectUIController : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+
+        // 슬롯 UI 정보 초기화. 플레이어에게 랜덤의 스펠 기능 세 가지를 선택지로 제시.
         Player.LocalInstance.RequestUniqueRandomScrollsToServer();
     }
 

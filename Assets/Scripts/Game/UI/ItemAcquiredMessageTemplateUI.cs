@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ItemAcquiredMessageTemplateUI : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public TextMeshProUGUI txtMessage;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        txtMessage.text = "Obtained the scroll!";
+        Destroy(gameObject, 3f);
     }
 }

@@ -23,7 +23,7 @@ public class SpellController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        spellInfoListOnClient = new List<SpellInfo>(totalSpellCount);
+        spellInfoListOnClient = new List<SpellInfo>();
         restTimeCurrentSpellArrayOnClient = new float[totalSpellCount];
     }
         

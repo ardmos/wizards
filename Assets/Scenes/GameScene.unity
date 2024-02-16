@@ -1768,9 +1768,9 @@ GameObject:
   m_Component:
   - component: {fileID: 332276039}
   - component: {fileID: 332276042}
+  - component: {fileID: 332276043}
   - component: {fileID: 332276041}
   - component: {fileID: 332276040}
-  - component: {fileID: 332276043}
   m_Layer: 0
   m_Name: Spell Slot 2
   m_TagString: Untagged
@@ -1870,6 +1870,7 @@ MonoBehaviour:
   txtScrollName: {fileID: 858474764}
   txtSpellName: {fileID: 1324053784}
   imgSpellIcon: {fileID: 1022926068}
+  imgScrollEffectIcon: {fileID: 1664613854}
 --- !u!1 &333684465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,7 +2401,7 @@ GameObject:
   - component: {fileID: 439096275}
   - component: {fileID: 439096274}
   m_Layer: 0
-  m_Name: Icon_Add
+  m_Name: img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8629,10 +8630,10 @@ RectTransform:
   - {fileID: 1833389774}
   m_Father: {fileID: 1057068785570481195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 55.86499}
-  m_SizeDelta: {x: 499, y: 149.49847}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1486132327
 MonoBehaviour:
@@ -8646,6 +8647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4428f83b67fa24aa0c19af4d278a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemAcquiredMessageContainer: {fileID: 1833389773}
+  ItemAcquiredMessagePrefab: {fileID: 2821513600648931757, guid: c610a5429731e45f3941c3738a28aa89, type: 3}
 --- !u!1 &1488944256
 GameObject:
   m_ObjectHideFlags: 0
@@ -9892,7 +9895,7 @@ GameObject:
   - component: {fileID: 1664613855}
   - component: {fileID: 1664613854}
   m_Layer: 0
-  m_Name: Icon_Add
+  m_Name: img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10444,7 +10447,7 @@ GameObject:
   - component: {fileID: 1713142545}
   - component: {fileID: 1713142546}
   m_Layer: 0
-  m_Name: =Notify GameOver UI Controller=
+  m_Name: =GameOver UI Controller=
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10482,8 +10485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f2cdee1e602884e81601c6af190f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notifyMessageGroup: {fileID: 1057068785227432289}
-  notifyMessageTemplatePrefab: {fileID: 5238298021885568913, guid: 908b1aae7453cc648ab8c267dce1e614, type: 3}
+  gameOverMessageContainer: {fileID: 1057068785227432289}
+  gameOverMessagePrefab: {fileID: 5238298021885568913, guid: 908b1aae7453cc648ab8c267dce1e614, type: 3}
 --- !u!114 &1713142546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10993,9 +10996,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1808196489}
   - component: {fileID: 1808196492}
+  - component: {fileID: 1808196493}
   - component: {fileID: 1808196491}
   - component: {fileID: 1808196490}
-  - component: {fileID: 1808196493}
   m_Layer: 0
   m_Name: Spell Slot 1
   m_TagString: Untagged
@@ -11095,6 +11098,7 @@ MonoBehaviour:
   txtScrollName: {fileID: 1430869794}
   txtSpellName: {fileID: 1451360637}
   imgSpellIcon: {fileID: 677036229}
+  imgScrollEffectIcon: {fileID: 439096274}
 --- !u!1 &1812485573
 GameObject:
   m_ObjectHideFlags: 0
@@ -11422,7 +11426,7 @@ GameObject:
   - component: {fileID: 1833389776}
   - component: {fileID: 1833389775}
   m_Layer: 0
-  m_Name: Item Acquired_Message_Group
+  m_Name: Item Acquired_Message_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11442,11 +11446,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1486132326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -343}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1833389775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12878,7 +12882,7 @@ GameObject:
   - component: {fileID: 2050571227}
   - component: {fileID: 2050571226}
   m_Layer: 0
-  m_Name: Icon_Add
+  m_Name: ScrollEffect_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12989,7 +12993,7 @@ GameObject:
   - component: {fileID: 2085942653}
   - component: {fileID: 2085942652}
   m_Layer: 0
-  m_Name: Icon_Add
+  m_Name: ScrollEffect_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14254,7 +14258,7 @@ GameObject:
   - component: {fileID: 151966438889387490}
   - component: {fileID: 151966438889387491}
   m_Layer: 0
-  m_Name: Icon_Add
+  m_Name: ScrollEffect_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14463,7 +14467,7 @@ GameObject:
   - component: {fileID: 151966439042821212}
   - component: {fileID: 151966439042821213}
   m_Layer: 0
-  m_Name: Icon_Add
+  m_Name: img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15075,9 +15079,9 @@ GameObject:
   m_Component:
   - component: {fileID: 151966439718198607}
   - component: {fileID: 151966439718198640}
+  - component: {fileID: 151966439718198642}
   - component: {fileID: 151966439718198641}
   - component: {fileID: 151966439718198606}
-  - component: {fileID: 151966439718198642}
   m_Layer: 0
   m_Name: Spell Slot 0
   m_TagString: Untagged
@@ -15177,6 +15181,7 @@ MonoBehaviour:
   txtScrollName: {fileID: 151966439224406314}
   txtSpellName: {fileID: 151966438342948931}
   imgSpellIcon: {fileID: 151966438583976857}
+  imgScrollEffectIcon: {fileID: 151966439042821213}
 --- !u!1 &151966439768327284
 GameObject:
   m_ObjectHideFlags: 0
@@ -15871,7 +15876,7 @@ GameObject:
   - component: {fileID: 1057068785227432292}
   - component: {fileID: 1057068785227432295}
   m_Layer: 0
-  m_Name: Notify GameOver_Message_Group
+  m_Name: GameOver_Message_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16344,6 +16349,7 @@ MonoBehaviour:
   popupWinUIController: {fileID: 2016762743}
   popupSelectScrollEffectUIController: {fileID: 1667906402}
   buttonReadSpellScrollUIController: {fileID: 715300001}
+  itemAcquireUIController: {fileID: 1486132327}
 --- !u!224 &1057068785643306476
 RectTransform:
   m_ObjectHideFlags: 0

@@ -112,7 +112,7 @@ public class PlayerDataManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerName(string newName)
+    public void UpdatePlayerName(string newName)
     {
         playerData.playerInGameData.playerName = newName;
         SavePlayerData();

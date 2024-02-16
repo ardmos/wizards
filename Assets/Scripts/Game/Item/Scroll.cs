@@ -24,7 +24,7 @@ public class Scroll : NetworkBehaviour//, INetworkSerializable
     {
         if (!IsServer) return;
         // spell slot ·£´ý ¼³Á¤
-        spellSlotIndex = (byte) Random.Range(0, 2);
+        spellSlotIndex = (byte) Random.Range(0, 3);
         Debug.Log($"spellSlotIndex: {spellSlotIndex}");
     }
 

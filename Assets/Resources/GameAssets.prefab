@@ -44,11 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cccfcea7d901a4983bc821d5b7c7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IconWizardClass: {fileID: 21300000, guid: a01e08a846bcb44b79f7e2811e634c47, type: 3}
-  IconKnightClass: {fileID: 21300000, guid: 805a91a7fbf7f4d52a7f9f376932c065, type: 3}
-  IconGold: {fileID: 21300000, guid: 575678395c08d4dbe9f1cd800a0d55bb, type: 3}
-  IconBonusGold: {fileID: 21300000, guid: 7794a522475a643ac8cb62a283863d9f, type: 3}
-  IconExp: {fileID: 21300000, guid: 86991e39c8d864b198c0b90042adfcc5, type: 3}
+  iconWizardClass: {fileID: 21300000, guid: de1d1d0ee82a341ac9886207d636de67, type: 3}
+  iconKnightClass: {fileID: 21300000, guid: 1ad309a351498428d824d7ee62bed12d, type: 3}
+  iconGold: {fileID: 21300000, guid: 575678395c08d4dbe9f1cd800a0d55bb, type: 3}
+  iconBonusGold: {fileID: 21300000, guid: 5af79eb3a18364553b0025f22115dbce, type: 3}
+  iconExp: {fileID: 21300000, guid: 05eabfa686c634d5680ef198ee66da87, type: 3}
+  iconScrollEffect_LevelUp: {fileID: 21300000, guid: ec3ea431811d94a4e98fbddce2d77740, type: 3}
+  iconScrollEffect_FireRateUp: {fileID: 21300000, guid: 98dbae1b612a8408ca9252d6c026b3ca, type: 3}
+  iconScrollEffect_FlySpeedUp: {fileID: 21300000, guid: a28b79b4ffa724c82a6248fe4cb64fd9, type: 3}
+  iconScrollEffect_Deploy: {fileID: 21300000, guid: 542e7747006214d9480ef4dcf8d97026, type: 3}
   s_RemoveAds: {fileID: 21300000, guid: 152333def7fb04fefaac91d426ff1535, type: 3}
   spellAssetsList:
   - icon: {fileID: 21300000, guid: 5692db8a476a44e039316aeecbe16bc6, type: 3}
