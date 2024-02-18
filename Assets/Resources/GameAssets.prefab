@@ -104,6 +104,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
   - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
   sfx_PotionHP: {fileID: 8300000, guid: 2ef55505c696278429561b7b43b591ac, type: 3}
+  sfx_OpenScroll: {fileID: 8300000, guid: 72cf99bf9fd5a6a4bbcf5d2226c04df8, type: 3}
   sfx_ScrollLvUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollFireRateUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollFlySpeedUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}

@@ -94,7 +94,8 @@ public class GameAssets : MonoBehaviour
     public AudioClip[] sfx_Waterball_Lv1;
     public AudioClip[] sfx_Iceball_Lv1;
     public AudioClip sfx_PotionHP;
-    public AudioClip sfx_ScrollLvUp;
+    public AudioClip sfx_OpenScroll;
+    public AudioClip sfx_ScrollLvUp;    
     public AudioClip sfx_ScrollFireRateUp;
     public AudioClip sfx_ScrollFlySpeedUp;
     public AudioClip sfx_ScrollAttach;
@@ -283,5 +284,8 @@ public class GameAssets : MonoBehaviour
     public AudioClip[] GetLoseSFXSound()
     {
         return sfx_Lose;
+    }
+    public AudioClip GetOpenScrollItemSFXSound() {
+        return sfx_OpenScroll;
     }
 }
