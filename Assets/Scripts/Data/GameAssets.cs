@@ -85,7 +85,7 @@ public class GameAssets : MonoBehaviour
     #region Music
     public AudioClip music_Title;
     public AudioClip music_Lobby;
-    public AudioClip music_Game;
+    public AudioClip[] music_Game;
     #endregion
 
     #region SFX
@@ -99,6 +99,8 @@ public class GameAssets : MonoBehaviour
     public AudioClip sfx_ScrollFlySpeedUp;
     public AudioClip sfx_ScrollAttach;
     public AudioClip sfx_ScrollGuide;
+
+
     #endregion
 
     #region Colors
@@ -227,7 +229,7 @@ public class GameAssets : MonoBehaviour
         }
         else if (sceneName == LoadingSceneManager.Scene.GameScene.ToString())
         {
-            return music_Game;
+            return music_Game[UnityEngine.Random.Range(0, music_Game.Length)];
         }
         else
         {

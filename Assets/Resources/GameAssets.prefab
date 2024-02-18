@@ -83,7 +83,13 @@ MonoBehaviour:
   txtDamageValue: {fileID: 4629728454598587928, guid: 073ca05b2ec617c448769c6f91ae2fab, type: 3}
   music_Title: {fileID: 8300000, guid: be7aecc45e127aa4b936efa9ec76c064, type: 3}
   music_Lobby: {fileID: 8300000, guid: 126b1fb3ad0ab4645a4e3637cb217dae, type: 3}
-  music_Game: {fileID: 8300000, guid: 48bd3fc25081b5d4f8ceb452f7cb1744, type: 3}
+  music_Game:
+  - {fileID: 8300000, guid: 48bd3fc25081b5d4f8ceb452f7cb1744, type: 3}
+  - {fileID: 8300000, guid: a6b230004d2b33549a512891e8801cca, type: 3}
+  - {fileID: 8300000, guid: dc165caa8e9a2944ba02e9eb07f2df5f, type: 3}
+  - {fileID: 8300000, guid: a20acde70e102c64f9e414c66148ded4, type: 3}
+  - {fileID: 8300000, guid: d6a9eeb2939fd934e9394986dfb1e9d7, type: 3}
+  - {fileID: 8300000, guid: 5e445e3e90353bd44ae0ec6a7317fb27, type: 3}
   sfx_btnClick: {fileID: 8300000, guid: bdf39f0cf8e25ea48af7afa0a9be325c, type: 3}
   sfx_Fireball_Lv1:
   - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
