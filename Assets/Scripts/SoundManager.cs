@@ -113,6 +113,14 @@ public class SoundManager : MonoBehaviour
         audioSourceSFX.Play();
     }
 
+    public void PlayOpenScrollSound()
+    {
+        if (audioSourceSFX == null) return;
+
+        audioSourceSFX.clip = GameAssets.instantiate.GetOpenScrollItemSFXSound();
+        audioSourceSFX.Play();
+    }
+
     [ClientRpc]
     public void PlayMagicSFXClientRPC(SpellName spellName, byte state)
     {
@@ -124,6 +132,14 @@ public class SoundManager : MonoBehaviour
 
     [ClientRpc]
     public void PlayItemSFXClientRPC(ItemName itemName)
+    {
+        if (audioSourceObjectPrefab == null) return;
+
+        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetItemSFXSound(itemName));
+    }
+
+    public void PlayItemSFX(ItemName itemName)
     {
         if (audioSourceObjectPrefab == null) return;
 

@@ -223,6 +223,9 @@ public class Player : NetworkBehaviour
 
         // Queue 업데이트
         SpellManager.Instance.UpdatePlayerScrollSpellSlotQueueOnClient(scrollSpellSlotQueue);
+
+        // SFX 실행
+        SoundManager.instance.PlayOpenScrollSound();
     }
 
     [ClientRpc]
@@ -257,7 +260,9 @@ public class Player : NetworkBehaviour
         // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
         SpellManager.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
 
-        // 비주얼 효과 실행
+        // SFX 재생
+        SoundManager.instance.PlayItemSFX(scrollName);
+        // VFX 재생
         ApplyScrollVFXServerRPC();
     }
 
