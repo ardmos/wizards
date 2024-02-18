@@ -75,7 +75,9 @@ public class PopupWinUIController : MonoBehaviour
 
     public void Show()
     {
+        //Debug.Log($"Win Popup Show()");
         gameObject.SetActive(true);
+        SoundManager.instance.PlayWinPopupSound();
     }
 
     private void Hide()

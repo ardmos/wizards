@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,6 +48,8 @@ public class SoundManager : MonoBehaviour
 
     private void PlayMusic(string sceneName)
     {
+        if (audioSourceBGM == null) return;
+
         if (GameAssets.instantiate.GetMusic(sceneName) == null)
         {
             audioSourceBGM.Stop();
@@ -70,8 +73,42 @@ public class SoundManager : MonoBehaviour
         audioSourceBGM.Play();
     }
 
+    private void StopMusic()
+    {
+        if (audioSourceBGM == null) return;
+
+        audioSourceBGM.Stop();
+    }
+
+    public void PlayWinPopupSound()
+    {
+        if (audioSourceSFX == null) return;
+        StopMusic();
+        StartCoroutine(PlaySFXWithDelay(GameAssets.instantiate.GetWinSFXSound()));
+    }
+
+    public void PlayLosePopupSound()
+    {
+        if (audioSourceSFX == null) return;
+        StopMusic();
+        StartCoroutine(PlaySFXWithDelay(GameAssets.instantiate.GetLoseSFXSound()));
+    }
+
+    private IEnumerator PlaySFXWithDelay(AudioClip[] audioClips)
+    {
+        foreach (AudioClip audioClip in audioClips)
+        {
+            audioSourceSFX.clip = audioClip;
+            audioSourceSFX.Play();
+            Debug.Log($"PlaySFXWithDelay. audioClip:{audioClip.name}, {audioClip.length}");
+            yield return new WaitForSeconds(audioClip.length);
+        }
+    }
+
     public void PlayButtonClickSound()
     {
+        if (audioSourceSFX == null) return;
+
         audioSourceSFX.clip = GameAssets.instantiate.GetButtonClickSound();
         audioSourceSFX.Play();
     }
@@ -79,6 +116,8 @@ public class SoundManager : MonoBehaviour
     [ClientRpc]
     public void PlayMagicSFXClientRPC(SpellName spellName, byte state)
     {
+        if (audioSourceObjectPrefab == null) return;
+
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
         audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetMagicSFXSound(spellName, state));
     }
@@ -86,6 +125,8 @@ public class SoundManager : MonoBehaviour
     [ClientRpc]
     public void PlayItemSFXClientRPC(ItemName itemName)
     {
+        if (audioSourceObjectPrefab == null) return;
+
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
         audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetItemSFXSound(itemName));
     }

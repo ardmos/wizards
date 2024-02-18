@@ -100,7 +100,8 @@ public class GameAssets : MonoBehaviour
     public AudioClip sfx_ScrollAttach;
     public AudioClip sfx_ScrollGuide;
 
-
+    public AudioClip[] sfx_Win;
+    public AudioClip[] sfx_Lose;
     #endregion
 
     #region Colors
@@ -276,4 +277,11 @@ public class GameAssets : MonoBehaviour
         }
     }
 
+    public AudioClip[] GetWinSFXSound() {
+        return sfx_Win;
+    }
+    public AudioClip[] GetLoseSFXSound()
+    {
+        return sfx_Lose;
+    }
 }

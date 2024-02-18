@@ -109,6 +109,12 @@ MonoBehaviour:
   sfx_ScrollFlySpeedUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollAttach: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollGuide: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
+  sfx_Win:
+  - {fileID: 8300000, guid: f36d6b00e962da94280f3d48cc0b370a, type: 3}
+  - {fileID: 8300000, guid: 552a060d2cec76245a36b15805d9671f, type: 3}
+  sfx_Lose:
+  - {fileID: 8300000, guid: ca20427f156ae1b45a5c784c8f11d518, type: 3}
+  - {fileID: 8300000, guid: 23d3dcb14c4564b43a17078ef550f505, type: 3}
   ownerColor: {r: 0.38731253, g: 1, b: 0, a: 1}
   allyColor: {r: 0, g: 1, b: 0.9093275, a: 1}
   enemyColor: {r: 1, g: 0.59621054, b: 0, a: 1}

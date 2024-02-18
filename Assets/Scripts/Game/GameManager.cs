@@ -36,12 +36,12 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private float gamePlayingTimerMax = 10000f;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
     [SerializeField] private bool isLocalPlayerReady;
- 
+
 
     void Awake()
     {
         Instance = this;
-        playerReadyList = new Dictionary<ulong, bool>();       
+        playerReadyList = new Dictionary<ulong, bool>();
     }
 
     // Start is called before the first frame update
@@ -66,7 +66,7 @@ public class GameManager : NetworkBehaviour
         }
         gameState.OnValueChanged += State_OnValueChanged;
         gameState.Value = GameState.WatingToStart; // 생성과 동시에 Default값 설정. 
-        currentAlivePlayerCount.OnValueChanged += currentAlivePlayerCount_OnValueChanged;        
+        currentAlivePlayerCount.OnValueChanged += currentAlivePlayerCount_OnValueChanged;
     }
 
     public override void OnNetworkDespawn()
@@ -137,7 +137,7 @@ public class GameManager : NetworkBehaviour
 
     private void RunStateMachine()
     {
-        if(!IsServer) { return; }
+        if (!IsServer) { return; }
 
         switch (gameState.Value)
         {
@@ -177,13 +177,19 @@ public class GameManager : NetworkBehaviour
                     PlayerInGameData winPlayer = new PlayerInGameData();
                     foreach (PlayerInGameData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
                     {
-                        if(playerData.playerGameState == PlayerGameState.Playing)
+                        if (playerData.playerGameState == PlayerGameState.Playing)
                         {
                             winPlayer = playerData;
                         }
                     }
+
+                    if (!NetworkManager.ConnectedClients.ContainsKey(winPlayer.clientId)) return;
+
+                    if (winPlayer.playerGameState == PlayerGameState.Win) return;
+
                     // 생존자 State Win 으로 변경
                     winPlayer.playerGameState = PlayerGameState.Win;
+                    GameMultiplayer.Instance.SetPlayerDataFromClientId(winPlayer.clientId, winPlayer);
 
                     // 생존자 화면에 Win 팝업 실행
                     NetworkClient networkClient = NetworkManager.ConnectedClients[winPlayer.clientId];
@@ -194,7 +200,7 @@ public class GameManager : NetworkBehaviour
                 {
                     // 타임아웃으로 끝난 경우. 생존자들 Draw. 처리
                     // 생존자들 State Draw로 변경
-                    
+
                     // 생존자들 화면에 Draw 팝업 실행
 
                 }
@@ -215,7 +221,7 @@ public class GameManager : NetworkBehaviour
         bool allClientsReady = true;
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            if(!playerReadyList.ContainsKey(clientId) || !playerReadyList[clientId])
+            if (!playerReadyList.ContainsKey(clientId) || !playerReadyList[clientId])
             {
                 // 이 clientId 플레이어는 레디 안한 플레이어입니다
                 allClientsReady = false;
@@ -244,7 +250,7 @@ public class GameManager : NetworkBehaviour
     public void UpdateCurrentAlivePlayerCount()
     {
         // 게임중인 플레이어 숫자(게임오버 안당하고)
-        currentAlivePlayerCount.Value = startedPlayerCount.Value - gameOverPlayerCount;        
+        currentAlivePlayerCount.Value = startedPlayerCount.Value - gameOverPlayerCount;
         //Debug.Log($"UpdateCurrentAlivePlayerCount playerCount:{currentAlivePlayerCount.Value}");
     }
 
@@ -273,16 +279,18 @@ public class GameManager : NetworkBehaviour
         //Debug.Log($"UpdatePlayerGameOverOnServer. gameOver player : player{clientId}");
 
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
-        {          
+        {
             // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
             PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
 
-            if (playerData.playerGameState == PlayerGameState.GameOver) {
+            if (playerData.playerGameState == PlayerGameState.GameOver)
+            {
                 Debug.Log($"player{clientId}는 이미 게임오버처리된 플레이어입니다.");
                 return;
             }
-            
+
             playerData.playerGameState = PlayerGameState.GameOver;
+            Debug.Log($"UpdatePlayerGameOverOnServer. player.clientId:{clientId}. playerGameState:{playerData.playerGameState}");
             GameMultiplayer.Instance.SetPlayerDataFromClientId(clientId, playerData);
 
             // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.(게임오버시킨사람 닉네임 공유까지는 아직 미구현)
@@ -330,7 +338,7 @@ public class GameManager : NetworkBehaviour
 
     public float GetGamePlayingTimer()
     {
-        if(gamePlayingTimer.Value == 0f) return 0f;
+        if (gamePlayingTimer.Value == 0f) return 0f;
 
         return gamePlayingTimerMax - gamePlayingTimer.Value;
     }
