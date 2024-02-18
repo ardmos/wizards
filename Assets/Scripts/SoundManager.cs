@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour
 
     public bool isVolumeUp;
 
+    private Coroutine bgmCoroutine = null;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -55,7 +57,7 @@ public class SoundManager : MonoBehaviour
             audioSourceBGM.Stop();
             return;
         }
-
+        
         // Game씬 BGM 리소스가 볼륨이 작은 관계로 이곳에서 특별히 볼륨조절을 해줍니다.
         if (isVolumeUp)
         {
@@ -68,9 +70,27 @@ public class SoundManager : MonoBehaviour
             audioSourceBGM.volume *= 6;
         }
 
+        if (bgmCoroutine != null)
+        {
+            StopCoroutine(bgmCoroutine);
+            bgmCoroutine = null;
+            Debug.Log("bgmCoroutine stopped");
+        }
 
-        audioSourceBGM.clip = GameAssets.instantiate.GetMusic(sceneName);
-        audioSourceBGM.Play();
+        bgmCoroutine = StartCoroutine(AutoPlay(sceneName));
+        Debug.Log("bgmCoroutine started");
+    }
+
+    // 자동 다음 재생 기능
+    private IEnumerator AutoPlay(string sceneName)
+    {
+        while (true)
+        {
+            Debug.Log("AutoPlay!");
+            audioSourceBGM.clip = GameAssets.instantiate.GetMusic(sceneName);
+            audioSourceBGM.Play();
+            yield return new WaitForSeconds(audioSourceBGM.clip.length);
+        }
     }
 
     private void StopMusic()
