@@ -19,10 +19,13 @@ public class SoundManager : MonoBehaviour
 
     private Coroutine bgmCoroutine = null;
 
+    [SerializeField] private SoundVolumeData volumeData;
+
     private void Awake()
     {
         if (instance == null) instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadVolumeData();
     }
 
     private void Start()
@@ -31,6 +34,11 @@ public class SoundManager : MonoBehaviour
 
         UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
+
+        if (string.IsNullOrEmpty(sceneName)) return;
+        if (audioSourceBGM == null) return;
+        if (audioSourceSFX == null) return;
+        volumeData = new SoundVolumeData(audioSourceBGM.volume, audioSourceSFX.volume);
 
         PlayMusic(sceneName);
     }
@@ -167,8 +175,61 @@ public class SoundManager : MonoBehaviour
         audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetItemSFXSound(itemName));
     }
 
-    public void SetVolumeBGM(float volume) { audioSourceBGM.volume = volume; }
-    public void SetVolumeSFX(float volume) { audioSourceSFX.volume = volume; }
-    public float GetVolumeBGM() { return audioSourceBGM.volume; }
-    public float GetVolumeSFX() {  return audioSourceSFX.volume; }
+    public void SetVolumeBGM(float volume) {
+        if (audioSourceBGM == null) return;
+        if (audioSourceSFX == null) return;
+        if (volumeData == null) return;
+
+        audioSourceBGM.volume = volume;
+        volumeData.UpdateData(audioSourceBGM.volume, audioSourceSFX.volume);
+        // SaveData에 저장.
+    }
+    public void SetVolumeSFX(float volume) {
+        if (audioSourceBGM == null) return;
+        if (audioSourceSFX == null) return;
+        if (volumeData == null) return;  
+
+        audioSourceSFX.volume = volume;
+        volumeData.UpdateData(audioSourceBGM.volume, audioSourceSFX.volume);
+        // SaveData에 저장.
+        // 위 UpdateData  과정과 세트임. 묶어서 처리하면 깔끔할듯
+    }
+    public float GetVolumeBGM() {
+        if (audioSourceBGM == null) { return 0f; }
+
+        return audioSourceBGM.volume; 
+    }
+    public float GetVolumeSFX() { 
+        if (audioSourceSFX == null) { return 0f; }
+
+        return audioSourceSFX.volume; 
+    }
+    public SoundVolumeData GetSoundVolumeData()
+    {
+        if(volumeData == null) return null;
+        return volumeData;
+    }
+
+    private bool LoadVolumeData()
+    {
+        SoundVolumeData soundVolumeData = SaveSystem.LoadSoundVolumeData();
+        if (soundVolumeData != null)
+        {
+            Debug.Log($"사운드 볼륨 정보 로드 성공!");
+            if (volumeData == null) return false;
+            if (audioSourceBGM == null) { return false; }
+            if (audioSourceSFX == null) { return false; }
+
+            this.volumeData = soundVolumeData;
+            audioSourceBGM.volume = volumeData.BGMVolume;
+            audioSourceSFX.volume = volumeData.SFXVolume;
+
+            return true;
+        }
+        else
+        {
+            Debug.Log($"로드할사운드 볼륨 정보가 없습니다.");
+            return false;
+        }
+    }
 }

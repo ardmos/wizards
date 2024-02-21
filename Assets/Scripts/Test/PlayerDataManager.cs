@@ -55,7 +55,7 @@ public class PlayerDataManager : MonoBehaviour
     /// 
     /// </summary>
 
-    // 1. Player정보 저장 <<<<<<<<-------------- 이걸 활용하는 부분부터 하면 됩니다.
+    // 1. Player정보 저장
     private void SavePlayerData()
     {
         try
@@ -103,7 +103,7 @@ public class PlayerDataManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            Debug.Log("PlayerProfileData");
+            //Debug.Log("PlayerProfileData");
             DontDestroyOnLoad(gameObject);
         }
         else

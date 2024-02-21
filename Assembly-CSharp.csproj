@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingSceneManager.cs" />
     <Compile Include="Assets\Scripts\Game\UI\PopupGameStartCountdownUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
+    <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\PushAlarmGroupUI.cs" />
     <Compile Include="Assets\Scripts\Players_InGame\Player.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\GraphicGroupUI.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Assets\Scripts\Common UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
+    <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupShop\PopupShopUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SpellName.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerAttackAnimStateEventData.cs" />

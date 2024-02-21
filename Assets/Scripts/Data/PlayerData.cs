@@ -1,4 +1,3 @@
-
 /// <summary>
 /// 플레이어 데이터 클래스. 현재는 로컬에 저장됩니다.
 /// </summary>
@@ -13,4 +12,5 @@ public class PlayerData
         this.playerInGameData = playerInGameData;
         this.playerOutGameData = playerOutGameData; 
     }
+
 }

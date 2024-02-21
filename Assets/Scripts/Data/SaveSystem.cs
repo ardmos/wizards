@@ -16,8 +16,9 @@ public static class SaveSystem
  
         FileStream fileStream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = playerData;
-        binaryFormatter.Serialize(fileStream, data);
+        //PlayerData data = playerData;
+        SaveData saveData = new SaveData(playerData, SoundManager.instance.GetSoundVolumeData());
+        binaryFormatter.Serialize(fileStream, saveData);
         fileStream.Close();
     }
 
@@ -28,7 +29,28 @@ public static class SaveSystem
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream fileStream = new FileStream (path, FileMode.Open);
 
-            PlayerData data = binaryFormatter.Deserialize(fileStream) as PlayerData;
+            SaveData saveData = binaryFormatter.Deserialize(fileStream) as SaveData;
+            PlayerData data = saveData.playerData;
+            fileStream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogError($"Save file not found in {path}");
+            return null;
+        }
+    }
+
+    public static SoundVolumeData LoadSoundVolumeData()
+    {
+        //Debug.Log($"{path}");
+        if (File.Exists(path))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(path, FileMode.Open);
+
+            SaveData saveData = binaryFormatter.Deserialize(fileStream) as SaveData;
+            SoundVolumeData data = saveData.soundVolumeData;
             fileStream.Close();
             return data;
         }
