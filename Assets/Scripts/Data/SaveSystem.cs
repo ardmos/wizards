@@ -16,7 +16,7 @@ public static class SaveSystem
  
         FileStream fileStream = new FileStream(path, FileMode.Create);
 
-        SaveData saveData = new SaveData(playerData, SoundManager.instance.GetSoundVolumeData());
+        SaveData saveData = new SaveData(playerData, SoundManager.instance.GetSoundVolumeData(), new GraphicQualitySettingsData(GraphicQualityManager.instance.GetQualityLevel()));
         binaryFormatter.Serialize(fileStream, saveData);
         fileStream.Close();
     }
@@ -46,14 +46,13 @@ public static class SaveSystem
 
         FileStream fileStream = new FileStream(path, FileMode.Create);
 
-        SaveData saveData = new SaveData(PlayerDataManager.Instance.GetPlayerData(), soundVolumeData);
+        SaveData saveData = new SaveData(PlayerDataManager.Instance.GetPlayerData(), soundVolumeData, new GraphicQualitySettingsData(GraphicQualityManager.instance.GetQualityLevel()));
         binaryFormatter.Serialize(fileStream, saveData);
         fileStream.Close();
     }
 
     public static SoundVolumeData LoadSoundVolumeData()
     {
-        //Debug.Log($"{path}");
         if (File.Exists(path))
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -61,6 +60,36 @@ public static class SaveSystem
 
             SaveData saveData = binaryFormatter.Deserialize(fileStream) as SaveData;
             SoundVolumeData data = saveData.soundVolumeData;
+            fileStream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogError($"Save file not found in {path}");
+            return null;
+        }
+    }
+
+    public static void SaveGrahpicQualitySettingsData(GraphicQualitySettingsData graphicQualitySettingsData)
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+        FileStream fileStream = new FileStream(path, FileMode.Create);
+
+        SaveData saveData = new SaveData(PlayerDataManager.Instance.GetPlayerData(), SoundManager.instance.GetSoundVolumeData(), graphicQualitySettingsData);
+        binaryFormatter.Serialize(fileStream, saveData);
+        fileStream.Close();
+    }
+
+    public static GraphicQualitySettingsData LoadGrahpicQualitySettingsData()
+    {
+        if (File.Exists(path))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(path, FileMode.Open);
+
+            SaveData saveData = binaryFormatter.Deserialize(fileStream) as SaveData;
+            GraphicQualitySettingsData data = saveData.graphicQualitySettingsData;
             fileStream.Close();
             return data;
         }

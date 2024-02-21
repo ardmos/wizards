@@ -134,6 +134,7 @@
     <Compile Include="Assets\GPGSIds.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameOverMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Game\SpellManager.cs" />
+    <Compile Include="Assets\Scripts\Data\GraphicQualitySettingsData.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupConnectionNotificationUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\Lobby\PopupSettings\SwitchUI.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
     <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
+    <Compile Include="Assets\Scripts\GraphicQualityManager.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
     <Compile Include="Assets\Scripts\Game\Item\ScrollGuide.cs" />

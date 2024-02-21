@@ -19,7 +19,7 @@ public class GraphicGroupUI : MonoBehaviour
 
     public void Setup()
     {
-        int qualityLevel = QualitySettings.GetQualityLevel();
+        int qualityLevel = GraphicQualityManager.instance.GetQualityLevel();
         switch (qualityLevel)
         {
             case 0: 
@@ -38,8 +38,8 @@ public class GraphicGroupUI : MonoBehaviour
     private void OnToggleValueChanged()
     {
         SoundManager.instance.PlayButtonClickSound();
-        if (tglLow.isOn) { QualitySettings.SetQualityLevel(0, true); }
-        else if (tglMedium.isOn) { QualitySettings.SetQualityLevel(1, true); }
-        else if (tglHigh.isOn) { QualitySettings.SetQualityLevel(2, true); }
+        if (tglLow.isOn) { GraphicQualityManager.instance.SetQualityLevel(0); }
+        else if (tglMedium.isOn) { GraphicQualityManager.instance.SetQualityLevel(1); }
+        else if (tglHigh.isOn) { GraphicQualityManager.instance.SetQualityLevel(2); }
     }
 }

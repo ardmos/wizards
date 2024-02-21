@@ -25,7 +25,6 @@ public class SoundManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         DontDestroyOnLoad(gameObject);
-        LoadVolumeData();
     }
 
     private void Start()
@@ -38,6 +37,7 @@ public class SoundManager : MonoBehaviour
         if (string.IsNullOrEmpty(sceneName)) return;
         if (audioSourceBGM == null) return;
         if (audioSourceSFX == null) return;
+        LoadVolumeData();
         volumeData = new SoundVolumeData(audioSourceBGM.volume, audioSourceSFX.volume);
 
         PlayMusic(sceneName);
@@ -215,26 +215,22 @@ public class SoundManager : MonoBehaviour
         return volumeData;
     }
 
-    private bool LoadVolumeData()
+    private void LoadVolumeData()
     {
         SoundVolumeData soundVolumeData = SaveSystem.LoadSoundVolumeData();
         if (soundVolumeData != null)
         {
             Debug.Log($"사운드 볼륨 정보 로드 성공!");
-            if (volumeData == null) return false;
-            if (audioSourceBGM == null) { return false; }
-            if (audioSourceSFX == null) { return false; }
+            if (volumeData == null) return;
 
             this.volumeData = soundVolumeData;
             audioSourceBGM.volume = volumeData.BGMVolume;
             audioSourceSFX.volume = volumeData.SFXVolume;
-
-            return true;
+            Debug.Log($"사운드 볼륨 정보 적용 성공!");
         }
         else
         {
-            Debug.Log($"로드할사운드 볼륨 정보가 없습니다.");
-            return false;
+            Debug.Log($"로드할 사운드 볼륨 정보가 없습니다.");
         }
     }
 }
