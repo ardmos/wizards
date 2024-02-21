@@ -725,6 +725,9 @@ MonoBehaviour:
   audioSourceSFX: {fileID: 112598288}
   audioSourceObjectPrefab: {fileID: 992107389769131743, guid: 7e0a7a1a2dab17e42bfc0bfb37d7b39e, type: 3}
   isVolumeUp: 0
+  volumeData:
+    BGMVolume: 0
+    SFXVolume: 0
 --- !u!1 &1349329231
 GameObject:
   m_ObjectHideFlags: 0

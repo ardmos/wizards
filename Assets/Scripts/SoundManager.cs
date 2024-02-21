@@ -183,7 +183,9 @@ public class SoundManager : MonoBehaviour
         audioSourceBGM.volume = volume;
         volumeData.UpdateData(audioSourceBGM.volume, audioSourceSFX.volume);
         // SaveData에 저장.
+        SaveSystem.SaveSoundVolumeData(volumeData);
     }
+
     public void SetVolumeSFX(float volume) {
         if (audioSourceBGM == null) return;
         if (audioSourceSFX == null) return;
@@ -192,18 +194,21 @@ public class SoundManager : MonoBehaviour
         audioSourceSFX.volume = volume;
         volumeData.UpdateData(audioSourceBGM.volume, audioSourceSFX.volume);
         // SaveData에 저장.
-        // 위 UpdateData  과정과 세트임. 묶어서 처리하면 깔끔할듯
+        SaveSystem.SaveSoundVolumeData(volumeData);
     }
+
     public float GetVolumeBGM() {
         if (audioSourceBGM == null) { return 0f; }
 
         return audioSourceBGM.volume; 
     }
+
     public float GetVolumeSFX() { 
         if (audioSourceSFX == null) { return 0f; }
 
         return audioSourceSFX.volume; 
     }
+
     public SoundVolumeData GetSoundVolumeData()
     {
         if(volumeData == null) return null;
