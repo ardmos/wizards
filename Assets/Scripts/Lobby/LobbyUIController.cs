@@ -49,8 +49,8 @@ public class LobbyUIController : MonoBehaviour
         // 상점기능 잠시 구현중. 주석처리.
         //btnShop.onClick.AddListener(() => { popupShop.Show(); });        
         btnMod.AddClickListener(popupMod.Show);
-        //테스트중이라서 잠시 주석 처리.
-        //btnStartPlay.AddClickListener(matchmakerClient.StartClient);
+        // 클라이언트 매칭 시작 (매치메이킹 부분 코드 정리중. 02/22)
+        btnStartPlay.AddClickListener(matchmakerClient.StartClient);
         btnUserInfo.AddClickListener(popupUserInfoUI.Show);
         btnSettings.AddClickListener(popupSettingsUI.Show);
 

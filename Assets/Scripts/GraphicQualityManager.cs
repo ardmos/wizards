@@ -11,7 +11,6 @@ public class GraphicQualityManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         DontDestroyOnLoad(gameObject);
-
     }
 
     void Start()
@@ -51,7 +50,5 @@ public class GraphicQualityManager : MonoBehaviour
         {
             Debug.Log($"로드할 그래픽 퀄리티 설정 정보가 없습니다.");
         }
-
-
     }
 }

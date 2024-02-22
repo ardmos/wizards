@@ -1,4 +1,4 @@
-#if UNITY_SERVER || UNITY_EDITOR
+#if UNITY_SERVER || UNITY_EDITOR       // <---- 내용 확인. 
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
