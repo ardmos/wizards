@@ -174,7 +174,7 @@ public class UnityAuthenticationManager : MonoBehaviour
 
             Debug.Log("Sign in anonymously succeeded!");
             // 로비 씬으로 이동
-            LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
+            LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         };
 
         AuthenticationService.Instance.SignInFailed += (err) =>
@@ -240,7 +240,7 @@ public class UnityAuthenticationManager : MonoBehaviour
             Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
 
             // 로비 씬으로 이동
-            LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
+            LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         }
         catch (AuthenticationException ex)
         {

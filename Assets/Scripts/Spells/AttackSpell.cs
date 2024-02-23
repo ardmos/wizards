@@ -72,8 +72,8 @@ public abstract class AttackSpell : NetworkBehaviour
 
     private void PlaySFX(byte state)
     {
-        if (SoundManager.instance == null) return;
+        if (SoundManager.Instance == null) return;
 
-        SoundManager.instance.PlayMagicSFXClientRPC(spellInfo.spellName, state);
+        SoundManager.Instance.PlayMagicSFXClientRPC(spellInfo.spellName, state);
     }
 }

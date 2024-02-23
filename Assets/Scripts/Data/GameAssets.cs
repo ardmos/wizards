@@ -217,19 +217,19 @@ public class GameAssets : MonoBehaviour
 
     public AudioClip GetMusic(string sceneName)
     {
-        if (sceneName == LoadingSceneManager.Scene.TitleScene.ToString()) 
+        if (sceneName == LoadSceneManager.Scene.TitleScene.ToString()) 
         {
             return music_Title;
         }
-        else if (sceneName == LoadingSceneManager.Scene.LoadingScene.ToString())
+        else if (sceneName == LoadSceneManager.Scene.LoadingScene.ToString())
         {
             return null;
         }
-        else if (sceneName == LoadingSceneManager.Scene.LobbyScene.ToString())
+        else if (sceneName == LoadSceneManager.Scene.LobbyScene.ToString())
         {
             return music_Lobby;
         }
-        else if (sceneName == LoadingSceneManager.Scene.GameScene.ToString())
+        else if (sceneName == LoadSceneManager.Scene.GameScene.ToString())
         {
             return music_Game[UnityEngine.Random.Range(0, music_Game.Length)];
         }

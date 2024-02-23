@@ -16,7 +16,7 @@ using StatusOptions = Unity.Services.Matchmaker.Models.MultiplayAssignment.Statu
 /// </summary>
 public class MatchmakerClient : MonoBehaviour
 {
-    // 추후엔 이 팝업이 게임룸을 대신하게될거임. 롤처럼.
+    // 게임룸을 대신하는 팝업
     public PopupLookingForGameUIController popupLookingForGame;
 
     private string ticketId;
@@ -28,7 +28,7 @@ public class MatchmakerClient : MonoBehaviour
     
     // 진짜 매칭 시작 메서드. (매치메이킹 부분 코드 정리중. 02/22)
     // 매치메이킹 시작 메서드. (매치메이킹 버튼 UI가 클릭됐을 때 호출된다.)
-    public void StartClient()
+    public void StartMatchmaking()
     {
         CreateATicket();
     }
@@ -104,47 +104,6 @@ public class MatchmakerClient : MonoBehaviour
         //NetworkManager.Singleton.StartClient();
         GameMultiplayer.Instance.StartClient();
     }
-
-
-    // GameMultiplayer에서 가져온 코드들 (매치메이킹 부분 코드 정리중. 02/22)
-    public void StartClient()
-    {
-        //OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
-        NetworkManager.Singleton.OnClientConnectedCallback += Client_OnClientConnectedCallback;
-        NetworkManager.Singleton.OnClientDisconnectCallback += Client_OnClientDisconnectCallback;
-        NetworkManager.Singleton.StartClient();
-    }
-
-    public void StopClient()
-    {
-        NetworkManager.Singleton.OnClientConnectedCallback -= Client_OnClientConnectedCallback;
-        NetworkManager.Singleton.OnClientDisconnectCallback -= Client_OnClientDisconnectCallback;
-
-        // 클라이언트측 네트워크매니저를 껐다가 다시 켤 때, OnNetworkSpawn도 호출됩니다. 그 때 아래 이벤트가 또다시 등록되기때문에 구독취소를 해주고있습니다.
-        playerDataNetworkList.OnListChanged -= OnServerListChanged;
-        NetworkManager.Singleton.Shutdown();
-    }
-
-    /// <summary>
-    ///  클라이언트 측에서. 접속 성공시 할 일들
-    ///  1. NetworkList인 PlayerDataList에 현재 선택중인 클래스 정보를 등록한다.
-    /// </summary>
-    private void Client_OnClientConnectedCallback(ulong clientId)
-    {
-        // 매칭 UI 실행을 위한 이벤트 핸들러 호출
-        OnSucceededToJoinMatch?.Invoke(this, EventArgs.Empty);
-        // 서버RPC를 통해 서버에 저장
-        Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerDataManager.Instance.GetCurrentPlayerClass()}");
-        //ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
-        SavePlayerInGameDataOnServer(PlayerDataManager.Instance.GetPlayerInGameData());
-    }
-    private void Client_OnClientDisconnectCallback(ulong obj)
-    {
-        Debug.Log($"OnClientDisconnectCallback : {obj}");
-        // 매칭 UI 숨김을 위한 이벤트 핸들러 호출. 
-        OnFailedToJoinMatch?.Invoke(this, EventArgs.Empty);
-    }
-    // (매치메이킹 부분 코드 정리중. 02/22)
 
     [Serializable]
     public class MatchmakingPlayerData
