@@ -78,8 +78,8 @@
     <Compile Include="Assets\Scripts\GameScene\UI\HPBarUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
-    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollGuide.cs" />
+    <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIController.cs" />
@@ -139,8 +139,8 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\UGS Network\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupNewsUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupLookingForGameUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SwitchUI.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupLookingForGameUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PlayerDataManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverUIController.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimState.cs" />
