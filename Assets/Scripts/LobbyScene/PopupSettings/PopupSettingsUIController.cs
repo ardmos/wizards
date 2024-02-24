@@ -18,6 +18,10 @@ public class PopupSettingsUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_SERVER
+        return;
+#endif
+
         InitPopupSettings();
 
         btnClose.AddClickListener(Hide);

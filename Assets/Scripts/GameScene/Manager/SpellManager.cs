@@ -341,6 +341,8 @@ public class SpellManager : NetworkBehaviour
             return;
         }
 
+        Debug.Log($"{nameof(ShootCastingSpellObjectServerRPC)} ownerClientId {clientId}");
+
         // 마법 발사
         spellObject.transform.SetParent(this.transform);
         float moveSpeed = spellObject.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;

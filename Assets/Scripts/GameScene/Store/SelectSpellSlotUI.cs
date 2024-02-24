@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 상점기능을 봉인중이어서 사용하지 않고있는 스크립트. 
+/// </summary>
 public class SelectSpellSlotUI : MonoBehaviour
 {
     private ItemName itemType;

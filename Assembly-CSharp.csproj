@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\PopupSelectScrollEffectUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupClanUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\HPBarUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="Assets\Scripts\GameScene\SFX\AudioSourceObject.cs" />
     <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\ScrollEffectSlotUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ItemAcquireUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />

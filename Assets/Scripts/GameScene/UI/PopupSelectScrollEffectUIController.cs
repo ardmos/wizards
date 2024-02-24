@@ -16,9 +16,9 @@ public class PopupSelectScrollEffectUIController : MonoBehaviour
 
         List<SpellInfo> spellInfos;*/
 
-    public ScrollEffectSlotUI scrollEffectSlot0;
-    public ScrollEffectSlotUI scrollEffectSlot1;
-    public ScrollEffectSlotUI scrollEffectSlot2;
+    public SelectScrollEffectPopupItemTemplateUI scrollEffectSlot0;
+    public SelectScrollEffectPopupItemTemplateUI scrollEffectSlot1;
+    public SelectScrollEffectPopupItemTemplateUI scrollEffectSlot2;
 
     public byte spellIndexToApply;
 

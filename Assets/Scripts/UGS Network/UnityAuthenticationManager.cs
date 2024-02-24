@@ -234,6 +234,7 @@ public class UnityAuthenticationManager : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            
             Debug.Log("Sign in anonymously succeeded!");
 
             // Shows how to get the playerID
