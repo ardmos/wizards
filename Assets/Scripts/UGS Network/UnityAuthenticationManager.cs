@@ -148,7 +148,7 @@ public class UnityAuthenticationManager : MonoBehaviour
                 });
 
                 // 로비 씬으로 이동
-                LoadingSceneManager.Load(LoadingSceneManager.Scene.LobbyScene);
+                LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
             }
             else
             {

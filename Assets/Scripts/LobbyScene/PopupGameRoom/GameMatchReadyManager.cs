@@ -32,20 +32,6 @@ public class GameMatchReadyManager : NetworkBehaviour
         OnClintPlayerReadyDictionaryChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private async void Start()
-    {
-#if DEDICATED_SERVER
-        Debug.Log("DEDICATED_SERVER GAME ROOM READY MANAGER");
-
-        // 서버를 플레이어 수용 대기중 상태로 만듦. Backfill을 위한 것. 지금은 ServerStartup에서 다 관리. 플레이어 재접속 문제 관련 참고가 필요할경우를 대비해서 주석으로 남겨둠.
-        //Debug.Log("ReadyServerForPlayersAsync");
-        //await MultiplayService.Instance.ReadyServerForPlayersAsync();
-
-        // 이거 해줘야 에러 안남
-        //Camera.main.enabled = false;
-#endif
-    }
-
     /// <summary>
     /// 모든 플레이어의 레디상태를 취소해주는 메소드 입니다.
     /// 클라이언트가 매칭에서 나갔을 경우에 사용됩니다.

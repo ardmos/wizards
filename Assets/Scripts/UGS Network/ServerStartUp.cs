@@ -114,9 +114,11 @@ public class ServerStartUp : MonoBehaviour
             if (matchmakingPayload != null)
             {
                 Debug.Log($"Got payload: {matchmakingPayload}");
-                //MaxPlayer 10에서4으로 변경하고 Pool 룰 최대 플레이어 카운트 9에서 1로 변경했음. 팀은 4로 변경하고. 테스트를 위해!
-                // 1. GameRoomScene으로 이동 <<<<< 대신, UI를 띄워주기로 했습니다. 현재 구현중. 
-                //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);     
+                //MaxPlayer 10에서4으로 변경하고 Pool 룰 최대 플레이어 카운트 9에서 1로 변경했음. 팀은 4로 변경하고. 테스트를 위해!              
+
+                // matchmakingPayload가 null이 아니란건, Allocation이 완료됐다는 뜻! 서버를 플레이어 수용 대기 상태로 만듭니다. ReadyServerForPlayersAsync()는 Server가 Allocate상태가 되고 나서 호출해야하는 메소드 입니다.
+                Debug.Log("ReadyServerForPlayersAsync");
+                await MultiplayService.Instance.ReadyServerForPlayersAsync();
 
                 await StartBackfill(matchmakingPayload);
             }
@@ -228,7 +230,7 @@ public class ServerStartUp : MonoBehaviour
         }
 
         backfilling = true;
-        #pragma warning disable 4014
+#pragma warning disable 4014
         BackfillLoop();
         #pragma warning restore 4014
     }

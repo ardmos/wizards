@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
 #if UNITY_SERVER || UNITY_EDITOR
-//using Unity.Services.Multiplay;
+using Unity.Services.Multiplay;
 #endif
 
 
@@ -47,13 +48,10 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-#if DEDICATED_SERVER
-        // Backfill?? ?????? ServerStartup???? ???????? ?????? ???? ???? ????. ???? ?????? ?????? ????.
-        // 서버의 플레이어 수용 상태 를 비수용 상태로 변경
-        //await MultiplayService.Instance.UnreadyServerAsync();
-
-        // 여기서도 이거 해줘야 에러 안남
-        //Camera.main.enabled = false;
+#if UNITY_SERVER || UNITY_EDITOR
+        Debug.Log("#if UNITY_SERVER || UNITY_EDITOR 되는지 확인용!! 로그!");
+        // Game씬 진입!  더이상 플레이어 진입은 필요하지 않습니다. 서버의 플레이어 수용 상태를 비수용 상태로 변경합니다.
+        await MultiplayService.Instance.UnreadyServerAsync();
 #endif
     }
 
