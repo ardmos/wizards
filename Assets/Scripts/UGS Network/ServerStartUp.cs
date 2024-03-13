@@ -1,4 +1,4 @@
-#if UNITY_SERVER || UNITY_EDITOR       // <---- 내용 확인. 
+#if UNITY_SERVER || UNITY_EDITOR 
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
@@ -10,9 +10,12 @@ using Unity.Services.Matchmaker.Models;
 using Unity.Services.Multiplay;
 using UnityEngine;
 
+/// <summary>
+/// Matchmaking 서비스를 위한 서버 설정 스크립트 입니다. 
+/// 기타 주요 서버 기능들은 GameMultiplayer.cs에 구현되어있습니다. 
+/// </summary>
 public class ServerStartUp : MonoBehaviour
 {
-    //public static event System.Action ClientInstance;
     public static ServerStartUp Instance = null;
 
     private const string InternalServerIp = "0.0.0.0";
@@ -48,7 +51,7 @@ public class ServerStartUp : MonoBehaviour
         
         bool server = false;
         var args = System.Environment.GetCommandLineArgs();
-        // 디버깅용
+
         string commandLineArgs = "";
         foreach (var arg in args)
         {
@@ -78,19 +81,18 @@ public class ServerStartUp : MonoBehaviour
             StartServer();
             await StartServerServices();
         }
-        else
-        {
-            //ClientInstance?.Invoke();
-        }
+    }
+
+    public void OnDestroy()
+    {
+        Dispose();
     }
 
     private void StartServer()
     {
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(InternalServerIp, serverPort);
         GameMultiplayer.Instance.StartServer();
-        //NetworkManager.Singleton.StartServer();
 
-        // 이 콜백 리스너가 GameMultiplayer에 있는것과 겹친다. 
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }
 
@@ -113,10 +115,9 @@ public class ServerStartUp : MonoBehaviour
             matchmakingPayload = await GetMatchmakerPayload(multiplayServiceTimeout);
             if (matchmakingPayload != null)
             {
-                Debug.Log($"Got payload: {matchmakingPayload}");
-                //MaxPlayer 10에서4으로 변경하고 Pool 룰 최대 플레이어 카운트 9에서 1로 변경했음. 팀은 4로 변경하고. 테스트를 위해!              
+                Debug.Log($"Got payload: {matchmakingPayload}");        
 
-                // matchmakingPayload가 null이 아니란건, Allocation이 완료됐다는 뜻! 서버를 플레이어 수용 대기 상태로 만듭니다. ReadyServerForPlayersAsync()는 Server가 Allocate상태가 되고 나서 호출해야하는 메소드 입니다.
+                // matchmakingPayload가 null이 아니란건, Allocation이 완료됐다는 뜻! 서버를 플레이어 수용 대기 상태로 만듭니다.
                 Debug.Log("ReadyServerForPlayersAsync");
                 await MultiplayService.Instance.ReadyServerForPlayersAsync();
 
@@ -247,9 +248,7 @@ public class ServerStartUp : MonoBehaviour
                 // 풀방이 되었을 시 추가 진입 차단
                 await MatchmakerService.Instance.DeleteBackfillTicketAsync(localBackfillTicket.Id);
                 localBackfillTicket.Id = null;
-                backfilling = false;
-                // PopupGameRoomUI.cs의 레디버튼 활성화는 GameMultiplayer의 GetPlayerCount를 통해서 개별로 이루어지기 때문에 여기서는 안해줘도 됩니다.
-                // 이 스크립트에서는 티켓관리만. 
+                backfilling = false;              
                 return;
             }
 
@@ -262,7 +261,6 @@ public class ServerStartUp : MonoBehaviour
 
     private bool NeedsPlayers()
     {
-        //Debug.Log($"ConnectedClients.Count: {NetworkManager.Singleton.ConnectedClients.Count}, MaxPlayer: {ConnectionApprovalHandler.MaxPlayers}");
         return NetworkManager.Singleton.ConnectedClients.Count < ConnectionApprovalHandler.MaxPlayers;
     }
 
@@ -279,6 +277,7 @@ public class ServerStartUp : MonoBehaviour
     // 메모리 누수를 막기 위한 메서드. 실행시점을 고민 후 적용하자
     private void Dispose()
     {
+        NetworkManager.Singleton.OnClientDisconnectCallback -= ClientDisconnected;
         serverCallbacks.Allocate -= OnMultiplayAllocation;
         serverEvents?.UnsubscribeAsync();
     }

@@ -8,7 +8,6 @@ using UnityEngine;
 /// UGS Start Server, Start Client
 /// NetworkList 관리
 /// </summary>
-
 public class GameMultiplayer : NetworkBehaviour
 {
     // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트
@@ -54,7 +53,7 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     // --- 서버
-    // UGS Dedicated Server <<< --- 이 메서드의 내용 포함해서 메서드 자체를 ServerStartup으로 옮겨야겠다.  리스너 구독 해제 타이밍도 고려해서 구현해야함
+    // UGS Dedicated Server
     public void StartServer()
     {
         NetworkManager.Singleton.OnClientDisconnectCallback += Server_OnClientDisconnectCallback;
@@ -62,8 +61,7 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     /// <summary>
-    /// 서버에 참여중인 플레이어가 나간 경우 처리해주는 부분.
-    /// 현재는 게임도중 나갔을 경우에대한 처리만 해주고 있습니다.
+    /// 게임도중 플레이어가 나갔을 경우에대한 처리입니다.
     /// </summary>
     /// <param name="clientId"></param>
     private void Server_OnClientDisconnectCallback(ulong clientId)
@@ -234,10 +232,8 @@ public class GameMultiplayer : NetworkBehaviour
 
     // 클라이언트 ---
 
-    // (매치메이킹 부분 코드 정리중. 02/23)
     public void StartClient()
     {
-        //OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
         NetworkManager.Singleton.OnClientConnectedCallback += Client_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartClient();
@@ -280,5 +276,4 @@ public class GameMultiplayer : NetworkBehaviour
     {
         UpdatePlayerInGameDataServerRPC(playerData);
     }
-    // (매치메이킹 부분 코드 정리중. 02/23)
 }

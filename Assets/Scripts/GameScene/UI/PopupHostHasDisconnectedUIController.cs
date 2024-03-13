@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PopupHostHasDisconnectedUIController : MonoBehaviour
 {
-    [SerializeField] private CustomButton btnPlayAgain;
+    [SerializeField] private CustomClickSoundButton btnPlayAgain;
 
     private void Start()
     {

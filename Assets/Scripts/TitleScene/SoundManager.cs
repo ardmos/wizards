@@ -3,8 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /// <summary>
-/// 사운드 볼륨값 저장해뒀다가 타이틀씬 진입시에 로드해서 적용해야함.  <<< 구현필요
-/// 위 내용 구현시 그래픽 설정도 함께 세이브 로드 되도록 구현하기. 
+/// 
 /// </summary>
 public class SoundManager : MonoBehaviour
 {
@@ -29,6 +28,11 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_SERVER
+        Debug.Log("Server에서는 SoundManager를 실행하지 않습니다.");
+        return;
+#endif
+
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
 
         UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
@@ -162,7 +166,7 @@ public class SoundManager : MonoBehaviour
     [ClientRpc]
     public void PlayItemSFXClientRPC(ItemName itemName)
     {
-        Debug.Log($"PlayItemSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}");
+        Debug.Log($"PlayItemSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}, itemName : {itemName}, audioClip : {GameAssets.instantiate.GetItemSFXSound(itemName)}");
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);

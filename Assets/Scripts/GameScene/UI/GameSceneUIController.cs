@@ -9,7 +9,7 @@ public class GameSceneUIController : MonoBehaviour
 {
     public static GameSceneUIController Instance;
 
-    [SerializeField] private CustomButton btnMenu;
+    [SerializeField] private CustomClickSoundButton btnMenu;
     [SerializeField] private PopupMenuUIController popupMenuUI;
 
     public GameOverUIController notifyUIController;

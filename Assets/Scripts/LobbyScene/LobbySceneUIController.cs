@@ -11,20 +11,20 @@ using TMPro;
 public class LobbySceneUIController : MonoBehaviour
 {
     // User Info UI
-    public CustomButton btnUserInfo;
+    public CustomClickSoundButton btnUserInfo;
     public TextMeshProUGUI txtUserName;     // [SerializeField] private ---> public
 
-    [SerializeField] private CustomButton btnSettings;
-    [SerializeField] private CustomButton btnClassChange;
-    [SerializeField] private CustomButton btnShop;
-    [SerializeField] private CustomButton btnEquipment;
-    [SerializeField] private CustomButton btnSkill;
-    [SerializeField] private CustomButton btnClan;
-    [SerializeField] private CustomButton btnMod;
-    [SerializeField] private CustomButton btnStartPlay;
+    [SerializeField] private CustomClickSoundButton btnSettings;
+    [SerializeField] private CustomClickSoundButton btnClassChange;
+    [SerializeField] private CustomClickSoundButton btnShop;
+    [SerializeField] private CustomClickSoundButton btnEquipment;
+    [SerializeField] private CustomClickSoundButton btnSkill;
+    [SerializeField] private CustomClickSoundButton btnClan;
+    [SerializeField] private CustomClickSoundButton btnMod;
+    [SerializeField] private CustomClickSoundButton btnStartPlay;
 
-    [SerializeField] private CustomButton btnInbox;
-    [SerializeField] private CustomButton btnNews;
+    [SerializeField] private CustomClickSoundButton btnInbox;
+    [SerializeField] private CustomClickSoundButton btnNews;
 
     [SerializeField] private PopupUserInfoUIController popupUserInfoUI;
     [SerializeField] private PopupSettingsUIController popupSettingsUI;

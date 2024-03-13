@@ -1,39 +1,18 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
-using UnityEngine.InputSystem.Layouts;
-using UnityEngine.InputSystem.Utilities;
-using UnityEngine.UI;
-using UnityEngine.InputSystem.OnScreen;
-using UnityEngine.InputSystem;
 using UnityEngine;
-using Unity.VisualScripting;
-
-#if UNITY_EDITOR
-using UnityEditor;
-using UnityEditor.AnimatedValues;
-#endif
-////TODO: custom icon for OnScreenStick component
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Layouts;
+using UnityEngine.InputSystem.OnScreen;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 /// <summary>
-/// A stick control displayed on screen and moved around by touch or other pointer
-/// input.
+/// 기존 InputSystem의 OnScreenSick에 다이나믹 터치 기능을 추가한 커스텀 스크립트 입니다.
 /// </summary>
-/// <remarks>
-/// The <see cref="OnScreenStick"/> works by simulating events from the device specified in the <see cref="OnScreenControl.controlPath"/>
-/// property. Some parts of the Input System, such as the <see cref="PlayerInput"/> component, can be set up to
-/// auto-switch to a new device when input from them is detected. When a device is switched, any currently running
-/// inputs from the previously active device are cancelled. In the case of <see cref="OnScreenStick"/>, this can mean that the
-/// <see cref="IPointerUpHandler.OnPointerUp"/> method will be called and the stick will jump back to center, even though
-/// the pointer input has not physically been released.
-///
-/// To avoid this situation, set the <see cref="useIsolatedInputActions"/> property to true. This will create a set of local
-/// Input Actions to drive the stick that are not cancelled when device switching occurs.
-/// </remarks>
-//[AddComponentMenu("Input/On-Screen Stick")]
-//[HelpURL(InputSystem.kDocUrl + "/manual/OnScreen.html#on-screen-sticks")]
-public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
+
+public class CustomOnScreenStickWithDynamicTouch : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     private const string kDynamicOriginClickable = "DynamicOriginClickable";
 
@@ -113,7 +92,7 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
             m_PointerMoveAction.Enable();
         }
 
-        m_StartPos = handleObject.anchoredPosition;
+        m_StartPos = realJoystickHandle.anchoredPosition;
 
         if (m_Behaviour != Behaviour.ExactPositionWithDynamicOrigin) return;
         m_PointerDownPos = m_StartPos;
@@ -130,6 +109,9 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
         rectTransform.anchoredPosition3D = Vector3.zero;
     }
 
+    /// <summary>
+    /// 유저가 화면(정해진 인식 범위. 여기서는 canvasRect 변수 입니다.)을 터치했을 때 동작하는 메소드 입니다. 
+    /// </summary>
     private void BeginInteraction(Vector2 pointerPosition, Camera uiCamera)
     {
         var canvasRect = transform.parent?.GetComponentInParent<RectTransform>();
@@ -149,24 +131,26 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
                 MoveStick(pointerPosition, uiCamera);
                 break;
             case Behaviour.ExactPositionWithDynamicOrigin:
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, pointerPosition, uiCamera, out var pointerDown);
-                //m_PointerDownPos = ((RectTransform)transform).anchoredPosition = pointerDown;
-                m_PointerDownPos = pointerDown;
-                //Debug.Log($"pointerDown: {pointerDown}");
-                // joystickOffObject를 꺼줍니다
-                joystickOffObject.gameObject.SetActive(false);
-                // 핸들, 배경 오브젝트는 켜줍니다.
-                handleObject.gameObject.SetActive(true);
-                backGroundObject.gameObject.SetActive(true);   
-                // 핸들 오브젝트도 터치가 시작된 위치로 옮겨줍니다
-                handleObject.anchoredPosition = pointerDown;
-                // 배경이미지 오브젝트도 터치가 시작된 위치로 옮겨줍니다
-                backGroundObject.anchoredPosition = pointerDown;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, pointerPosition, uiCamera, out var pointerDown);            
+               
+                // 더미 조이스틱을 비활성화 시킵니다,
+                dummyJoystickObject.gameObject.SetActive(false);
 
+                // 실제 조이스틱을 활성화 시킵니다.
+                realJoystickHandle.gameObject.SetActive(true);
+                realJoystickBackGoundObject.gameObject.SetActive(true);
+
+                // 유저가 터치한 곳으로 조이스틱의 위치를 설정
+                m_PointerDownPos = pointerDown;
+                realJoystickHandle.anchoredPosition = pointerDown;
+                realJoystickBackGoundObject.anchoredPosition = pointerDown;
                 break;
         }
     }
 
+    /// <summary>
+    /// 조이스틱 핸들을 움직이고, 유저가 조작한 값을 InputSystem에 넘겨주는 메소드. 
+    /// </summary>
     private void MoveStick(Vector2 pointerPosition, Camera uiCamera)
     {
         var canvasRect = transform.parent?.GetComponentInParent<RectTransform>();
@@ -182,18 +166,18 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
         {
             case Behaviour.RelativePositionWithStaticOrigin:
                 delta = Vector2.ClampMagnitude(delta, movementRange);
-                handleObject.anchoredPosition = (Vector2)m_StartPos + delta;
+                realJoystickHandle.anchoredPosition = (Vector2)m_StartPos + delta;
                 break;
 
             case Behaviour.ExactPositionWithStaticOrigin:
                 delta = position - (Vector2)m_StartPos;
                 delta = Vector2.ClampMagnitude(delta, movementRange);
-                handleObject.anchoredPosition = (Vector2)m_StartPos + delta;
+                realJoystickHandle.anchoredPosition = (Vector2)m_StartPos + delta;
                 break;
 
             case Behaviour.ExactPositionWithDynamicOrigin:
                 delta = Vector2.ClampMagnitude(delta, movementRange);
-                handleObject.anchoredPosition = m_PointerDownPos + delta;
+                realJoystickHandle.anchoredPosition = m_PointerDownPos + delta;
                 break;
         }
 
@@ -201,18 +185,22 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
         SendValueToControl(newPos);
     }
 
+    /// <summary>
+    /// 유저의 조작이 끝났을 때 동작하는 메소드
+    /// </summary>
     private void EndInteraction()
-    {
+    {  
+        // 더미 조이스틱을 활성화 시킵니다
+        dummyJoystickObject.gameObject.SetActive(true);
+
+        // 실제 조이스틱은 비활성화 시킵니다
+        realJoystickHandle.gameObject.SetActive(false);
+        realJoystickBackGoundObject.gameObject.SetActive(false);
+
+        // 조이스틱 위치 초기화
         m_PointerDownPos = m_StartPos;
-        // joystickOffObject를 켜줍니다
-        joystickOffObject.gameObject.SetActive(true);
-        // 핸들, 배경 오브젝트는 꺼줍니다.
-        handleObject.gameObject.SetActive(false);
-        backGroundObject.gameObject.SetActive(false);
-        // 핸들 오브젝트도 위치를 초기화 시켜줍니다.
-        handleObject.anchoredPosition = m_StartPos;
-        // 배경이미지 오브젝트도 위치를 초기화 시켜줍니다.
-        backGroundObject.anchoredPosition = m_StartPos;
+        realJoystickHandle.anchoredPosition = m_StartPos;
+        realJoystickBackGoundObject.anchoredPosition = m_StartPos;
         SendValueToControl(Vector2.zero);
     }
 
@@ -273,17 +261,14 @@ public class CustomOnScreenStick : OnScreenControl, IPointerDownHandler, IPointe
     }
 
     /// <summary>
-    /// 다이나믹터치시 함께 이동할 배경 이미지
+    /// 실제 조이스틱 오브젝트
     /// </summary>
-    public RectTransform backGroundObject;
+    public RectTransform realJoystickBackGoundObject;
+    public RectTransform realJoystickHandle;
     /// <summary>
-    /// 다이나믹터치시 함께 이동할 핸들 이미지
+    /// 유저로부터의 입력이 없을 때(다이나믹 터치 비활성화시) 보여줄 더미 조이스틱 오브젝트
     /// </summary>
-    public RectTransform handleObject;
-    /// <summary>
-    /// 다이나믹터치 사용시 조작하지 않는 상태일 때 보여줄 조이스틱 배경&핸들 이미지
-    /// </summary>
-    public RectTransform joystickOffObject;
+    public RectTransform dummyJoystickObject;
 
     /// <summary>
     /// The distance from the onscreen control's center of origin, around which the control can move.

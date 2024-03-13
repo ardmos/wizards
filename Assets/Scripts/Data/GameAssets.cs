@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// 이 스크립트 정리 필요. 깔끔하게. 
-/// 
-/// 게임에 필요한 애셋들(Mesh 등등...)을 갖고있는 스크립트
-/// 필요할때마다 접근해서 꺼내 쓰면 된다.
+/// 게임에서 사용되는 애셋들을 관리하는 스크립트 입니다.
+/// 애셋들을 동적으로 요청하여 얻을 수 있습니다.
 /// </summary>
 public class GameAssets : MonoBehaviour
 {
@@ -18,24 +16,18 @@ public class GameAssets : MonoBehaviour
         }
     }
 
-    #region Item Icons
-    public Sprite iconWizardClass;
-    public Sprite iconKnightClass;
-    public Sprite iconGold;
-    public Sprite iconBonusGold;
-    public Sprite iconExp;
-
-    public Sprite iconScrollEffect_LevelUp;
-    public Sprite iconScrollEffect_FireRateUp;
-    public Sprite iconScrollEffect_FlySpeedUp;
-    public Sprite iconScrollEffect_Deploy;
+    #region Icons
+    public Sprite icon_WizardClass;
+    public Sprite icon_KnightClass;
+    public Sprite icon_Gold;
+    public Sprite icon_BonusGold;
+    public Sprite icon_Exp;
+    public Sprite icon_ScrollEffect_LevelUp;
+    public Sprite icon_ScrollEffect_FireRateUp;
+    public Sprite icon_ScrollEffect_FlySpeedUp;
+    public Sprite icon_ScrollEffect_Deploy;
+    public Sprite icon_RemoveAds;
     #endregion
-
-
-    #region Sprites
-    public Sprite s_RemoveAds;
-    #endregion
-
 
     #region Spells
     [System.Serializable]
@@ -48,38 +40,17 @@ public class GameAssets : MonoBehaviour
     public List<SpellAssets> spellAssetsList = new List<SpellAssets>();
     #endregion
 
-
-    #region Prefab etc
-    // 캐릭터 프리팹\
+    #region etc
+    // 캐릭터
     public GameObject wizard_Male_ForLobby;
     public GameObject knight_Male_ForLobby;
     public GameObject wizard_Male;
-    public GameObject knight_Male;
-
-    // Game씬 획득 가능현 아이템들 프리팹
-    /// <summary>
-    /// 1. 레벨업
-    /// 2. 발사속도
-    /// 3. 점착
-    /// 4. 유도(호버링 )
-    /// </summary>
-    public GameObject scrollLevelUp;
-    public GameObject scrollFireRateUp;
-    public GameObject scrollFlySpeedUp;
-    public GameObject scrollAttach;
-    public GameObject scrollGuide;
-    public GameObject potionHP;
-    public GameObject coin1;
-    public GameObject coin3;
-    public GameObject coin5;
+    public GameObject knight_Male;    
 
     // VFX
-    public GameObject vfxHeal;
-    public GameObject vfxSpellUpgrade;
-
-    // UI
-    public GameObject txtDamageValue;
-
+    public GameObject vfx_Heal;
+    public GameObject vfx_SpellUpgrade;
+    public GameObject vfx_txtDamageValue;
     #endregion
 
     #region Music
@@ -106,14 +77,13 @@ public class GameAssets : MonoBehaviour
     #endregion
 
     #region Colors
-    public Color ownerColor;
-    public Color allyColor; // 동맹시스템 추가시 사용
-    public Color enemyColor;
+    public Color color_Owner;
+    public Color color_Ally; // 동맹시스템 추가시 사용
+    public Color color_Enemy;
     #endregion
 
     public GameObject GetSpellPrefab(SpellName spellName)
     {
-        //Debug.Log($"{nameof(GetSpellPrefab)} requested spellName: {spellName}");
         return spellAssetsList[SearchSpellNameIndex(spellName)].prefab;
     }
 
@@ -127,13 +97,13 @@ public class GameAssets : MonoBehaviour
         switch (itemName)
         {
             case ItemName.Scroll_LevelUp:
-                return iconScrollEffect_LevelUp;
+                return icon_ScrollEffect_LevelUp;
             case ItemName.Scroll_FireRateUp:
-                return iconScrollEffect_FireRateUp;
+                return icon_ScrollEffect_FireRateUp;
             case ItemName.Scroll_FlySpeedUp:
-                return iconScrollEffect_FlySpeedUp;
+                return icon_ScrollEffect_FlySpeedUp;
             case ItemName.Scroll_Deploy:
-                return iconScrollEffect_Deploy;
+                return icon_ScrollEffect_Deploy;
             default:
                 return null;
         }
@@ -145,8 +115,6 @@ public class GameAssets : MonoBehaviour
     /// 마법 카테고리가 아닌, 하나 하나의 마법들이 추가되거나 순서가 변경되는건 상관없습니다.
     /// 마법 카테고리 : ex) 물마법Lv1의 경우 FireSpellStart, FireSpellEnd, WaterSpellStart 총 세 개를 빼야하기 때문에 adjustValue가 3이 됩니다.
     /// </summary>
-    /// <param name="spellName"></param>
-    /// <returns></returns>
     private byte SearchSpellNameIndex(SpellName spellName)
     {
         byte adjustValue = 0;
@@ -174,11 +142,11 @@ public class GameAssets : MonoBehaviour
         return (byte)(spellName - adjustValue);
     }
 
-    // Lobby Scene 전용. Client 내부 저장용 
+    /// <summary>
+    /// 인게임용 아닌, 로비씬 등에서 사용되는 캐릭터 프리팹을 리턴해는 메소드 입니다.
+    /// </summary>
     public GameObject GetCharacterPrefab_NotInGame(CharacterClass characterClass)
     {
-        //Debug.Log($"GetCurrentSelectedCharacterPrefab_NotInGame currentSelectedClass: {currentSelectedClass}");
-        // 원래는 여기서 복장상태 반영해서 반환해줘야함. 지금은 클래스만 반영해서 반환해줌
         GameObject resultObejct = null;
         switch (characterClass)
         {
@@ -189,16 +157,17 @@ public class GameAssets : MonoBehaviour
                 resultObejct = knight_Male_ForLobby;
                 break;
             default:
+                Debug.LogError($"적절하지 않은 characterClass 정보입니다. characterClass: {characterClass}");
                 break;
         }
-        //Debug.Log($"GetCurrentSelectedCharacterPrefab_NotInGame resultObject: {resultObejct?.name}");
         return resultObejct;
     }
 
-    // Lobby Scene 전용. Client 내부 저장용
+    /// <summary>
+    /// 인게임용 캐릭터 프리팹을 리턴해주는 메소드 입니다
+    /// </summary>
     public GameObject GetCharacterPrefab_InGame(CharacterClass characterClass)
     {
-        // 원래는 여기서 복장상태 반영해서 반환해줘야함. 지금은 클래스만 반영해서 반환해줌
         GameObject resultObejct = null;
         switch (characterClass)
         {
@@ -209,9 +178,9 @@ public class GameAssets : MonoBehaviour
                 resultObejct = knight_Male;
                 break;
             default:
+                Debug.LogError($"적절하지 않은 characterClass 정보입니다. characterClass: {characterClass}");
                 break;
         }
-
         return resultObejct;
     }
 
@@ -271,9 +240,8 @@ public class GameAssets : MonoBehaviour
                 return sfx_ScrollFlySpeedUp;
             case ItemName.Scroll_Deploy:
                 return sfx_ScrollAttach;
-//            case ItemName.Scroll_Guide:
-//                return sfx_ScrollGuide;
             default:
+                Debug.LogError($"적절하지 않은 itemName 정보입니다. itemName: {itemName}");
                 return null;
         }
     }

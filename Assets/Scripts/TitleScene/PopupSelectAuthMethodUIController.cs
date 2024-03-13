@@ -9,9 +9,9 @@ using UnityEngine.UI;
 
 public class PopupSelectAuthMethodUIController : MonoBehaviour
 {
-    [SerializeField] private CustomButton btnSignInAnonymous;
-    [SerializeField] private CustomButton btnSignInGooglePlayGames;
-    [SerializeField] private CustomButton btnClose;
+    [SerializeField] private CustomClickSoundButton btnSignInAnonymous;
+    [SerializeField] private CustomClickSoundButton btnSignInGooglePlayGames;
+    [SerializeField] private CustomClickSoundButton btnClose;
 
     private void Start()
     {

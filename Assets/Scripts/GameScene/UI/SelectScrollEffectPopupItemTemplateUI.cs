@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
 {
     //public sbyte slotNumber;
-    public CustomButton btnApply;
+    public CustomClickSoundButton btnApply;
 
     public TextMeshProUGUI txtScrollName;
     public TextMeshProUGUI txtSpellName;

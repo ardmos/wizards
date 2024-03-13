@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PopupModUIController : MonoBehaviour
 {
-    public CustomButton btnClose;
-    public CustomButton btnHome;
+    public CustomClickSoundButton btnClose;
+    public CustomClickSoundButton btnHome;
 
     // Start is called before the first frame update
     void Start()

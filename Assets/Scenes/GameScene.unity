@@ -8390,7 +8390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1686214686}
   m_Layer: 0
-  m_Name: Joystick UI Set_Off
+  m_Name: Dummy Joystick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9187,9 +9187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03804ebc05d3fd242b809454886e1baa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backGroundObject: {fileID: 1057068784696847325}
-  handleObject: {fileID: 1057068786375670241}
-  joystickOffObject: {fileID: 1686214686}
+  realJoystickBackGoundObject: {fileID: 1057068784696847325}
+  realJoystickHandle: {fileID: 1057068786375670241}
+  dummyJoystickObject: {fileID: 1686214686}
   m_MovementRange: 50
   m_DynamicOriginRange: 500
   m_ControlPath: <Gamepad>/leftStick
@@ -10894,7 +10894,7 @@ GameObject:
   - component: {fileID: 1057068784696847298}
   - component: {fileID: 1057068784696847326}
   m_Layer: 0
-  m_Name: Joystick_Direction
+  m_Name: 'Real Joystick BackGround_HighLight Direction '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12433,7 +12433,7 @@ GameObject:
   - component: {fileID: 1057068786375670247}
   - component: {fileID: 1057068786375670246}
   m_Layer: 0
-  m_Name: Handle
+  m_Name: Real Joystick Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

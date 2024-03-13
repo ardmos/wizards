@@ -26,8 +26,8 @@ public class PopupGameRoomUIController : MonoBehaviour
 
     public MatchingState matchingState = MatchingState.WatingForPlayers;
 
-    public CustomButton btnCancel;
-    public CustomButton btnReady;
+    public CustomClickSoundButton btnCancel;
+    public CustomClickSoundButton btnReady;
     public Image imgReadyCountdown;
     public TextMeshProUGUI txtPlayerCount;
     public Toggle[] toggleArrayPlayerJoined;

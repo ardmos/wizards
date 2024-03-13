@@ -12,8 +12,8 @@ public class UserNameUIController : MonoBehaviour
         txtUserName.text = userName;
 
         if (isOwner)
-            txtUserName.color = GameAssets.instantiate.ownerColor;
+            txtUserName.color = GameAssets.instantiate.color_Owner;
         else
-            txtUserName.color = GameAssets.instantiate.enemyColor;
+            txtUserName.color = GameAssets.instantiate.color_Enemy;
     }
 }

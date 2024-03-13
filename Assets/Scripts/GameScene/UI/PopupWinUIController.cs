@@ -50,7 +50,7 @@ public class PopupWinUIController : MonoBehaviour
         btnClaim2x.SetActive(false);
 
         // 모든 상품 수령 & 로비씬 이동
-        btnClaim.GetComponent<CustomButton>().AddClickListener(() =>
+        btnClaim.GetComponent<CustomClickSoundButton>().AddClickListener(() =>
         {
             // 보상 수령. 수령 단계! 수령버튼 클릭 사실 서버에 보고.
             // 1. 클라이언트가 현 btnClaim 클릭 & 서버측에 clientId와 itemName 전송.
@@ -64,7 +64,7 @@ public class PopupWinUIController : MonoBehaviour
         });
 
         // 클릭시 광고영상 재생 ( 미구현 )
-        btnClaim2x.GetComponent<CustomButton>().AddClickListener(() =>
+        btnClaim2x.GetComponent<CustomClickSoundButton>().AddClickListener(() =>
         {
             // 1. 광고 시청 실패시 원상복귀
             // 2. 광고 시청 완료시 모든 상품 2배 수령(배틀패스 포함) & 로비씬 이동

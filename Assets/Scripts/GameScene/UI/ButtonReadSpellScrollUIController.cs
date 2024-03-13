@@ -15,10 +15,10 @@ public class ButtonReadSpellScrollUIController : MonoBehaviour
 
     private void Start()
     {
-        if (GetComponent<CustomButton>() == null) return;
+        if (GetComponent<CustomClickSoundButton>() == null) return;
         if(txtSpellScrollCount == null) return ;
 
-        GetComponent<CustomButton>().AddClickListener(() =>
+        GetComponent<CustomClickSoundButton>().AddClickListener(() =>
         {
             GameSceneUIController.Instance.popupSelectScrollEffectUIController.Show();
         });

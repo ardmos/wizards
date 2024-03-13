@@ -12,7 +12,7 @@ public class PopupConnectionNotificationUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtInfo;
     [SerializeField] private Color colorWarning;
     [SerializeField] private Color colorInfo;
-    [SerializeField] private CustomButton btnClose;
+    [SerializeField] private CustomClickSoundButton btnClose;
 
     private void Start()
     {

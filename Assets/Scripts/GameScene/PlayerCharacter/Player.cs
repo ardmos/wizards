@@ -277,7 +277,7 @@ public class Player : NetworkBehaviour
     private void ApplyScrollVFXServerRPC()
     {
         // 스크롤 활용. 스킬 강화 VFX 실행
-        GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfxSpellUpgrade, transform);
+        GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfx_SpellUpgrade, transform);
         vfxHeal.GetComponent<NetworkObject>().Spawn();
         vfxHeal.transform.SetParent(transform);
         vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);

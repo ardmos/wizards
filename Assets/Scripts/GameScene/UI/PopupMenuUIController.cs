@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class PopupMenuUIController : MonoBehaviour
 {
     // 메뉴팝업 닫기
-    [SerializeField] private CustomButton btnContinue;
+    [SerializeField] private CustomClickSoundButton btnContinue;
     // 로비로
-    [SerializeField] private CustomButton btnHome;
+    [SerializeField] private CustomClickSoundButton btnHome;
     // 게임 포기. 관전하기 ( 관전시스템 추후 구축 )
 
     private void Start()

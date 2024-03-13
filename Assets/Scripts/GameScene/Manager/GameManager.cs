@@ -48,11 +48,10 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        if (IsServer)
-        {
-            // Game씬 진입!  더이상 플레이어 진입은 필요하지 않습니다. 서버의 플레이어 수용 상태를 비수용 상태로 변경합니다.
-            await MultiplayService.Instance.UnreadyServerAsync();
-        }
+#if UNITY_SERVER || UNITY_EDITOR
+        // Game씬 진입!  더이상 플레이어 진입은 필요하지 않습니다. 서버의 플레이어 수용 상태를 비수용 상태로 변경합니다.
+        await MultiplayService.Instance.UnreadyServerAsync();
+#endif
     }
 
     public override void OnNetworkSpawn()

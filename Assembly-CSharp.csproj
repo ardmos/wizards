@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Player.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
-    <Compile Include="Assets\Scripts\Custom UI\CustomButton.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
+    <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ItemAcquireUIController.cs" />
+    <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\Coin.cs" />
@@ -150,7 +151,6 @@
     <Compile Include="Assets\Scripts\GameScene\Manager\PlayerHPManager.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\JoystickDirectionUI.cs" />
-    <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStick.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\UserNameUIController.cs" />
@@ -192,7 +192,6 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SoundFXGroupUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
-    <Compile Include="Assets\Scripts\Data\KillLogData.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />

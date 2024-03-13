@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class PopupGameOverUIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtScoreCount;
-    [SerializeField] private CustomButton btnClaim;
-    [SerializeField] private CustomButton btnClaim2x;
+    [SerializeField] private CustomClickSoundButton btnClaim;
+    [SerializeField] private CustomClickSoundButton btnClaim2x;
 
     private void Start()
     {

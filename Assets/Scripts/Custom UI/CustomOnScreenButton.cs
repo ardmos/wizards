@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -8,11 +7,7 @@ using UnityEngine.Serialization;
 
 /// <summary>
 /// GamePad의 Skill버튼용 스크립트 입니다.
-/// 누르면 드래그되고, 드래그되는동안 플레이어에게 회전방향값을 넘겨서 플레이어를 회전시켜야 합니다.
-/// 
-/// 할일
-/// 1. 쿨타임중 드래그반응 안하기   완료
-/// 2. 드래그중 플레이어 회전시키기  완료
+/// 누르면 드래그되고, 드래그되는동안 플레이어에게 회전방향값을 넘겨서 플레이어를 회전시킬 수 있도록 합니다.
 /// </summary>
 public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -32,6 +27,7 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
 
         BeginInteraction(eventData.position, eventData.pressEventCamera);       
     }
+
     /// <summary>
     /// 드래그되는동안 
     /// 1. UI 위치 드래그중인 곳으로 변경
@@ -52,6 +48,7 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         // 플레이어 회전
         Player.LocalInstance.RotateByDragSpellBtn(new Vector3(dir.x, 0f, dir.y));
     }
+
     /// <summary>
     /// 터치 끝
     /// </summary>
@@ -90,7 +87,6 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         transform.GetComponent<RectTransform>().anchoredPosition = (Vector2)m_StartPos + delta;
 
         var newPos = new Vector2(delta.x / movementRange, delta.y / movementRange);
-        //SendValueToControl(newPos);
 
         return dir;
     }
@@ -102,22 +98,11 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         transform.GetComponent<RectTransform>().anchoredPosition = m_StartPos;
         SendValueToControl(0.0f);
     }
-
-    ////TODO: pressure support
-    /*
-    /// <summary>
-    /// If true, the button's value is driven from the pressure value of touch or pen input.
-    /// </summary>
-    /// <remarks>
-    /// This essentially allows having trigger-like buttons as on-screen controls.
-    /// </remarks>
-    [SerializeField] private bool m_UsePressure;
-    */
+   
     [InputControl(layout = "Button")]
     [SerializeField]
     private string m_ControlPath;
 
-    // 드래그를 위한 변수들
     [FormerlySerializedAs("movementRange")]
     [SerializeField]
     [Min(0)]

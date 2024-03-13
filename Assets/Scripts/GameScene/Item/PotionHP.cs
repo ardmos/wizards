@@ -21,7 +21,7 @@ public class PotionHP : NetworkBehaviour
         ApplyHealingEffect(collisionedClientId);
 
         // Player Èú¸µ VFX ½ÇÇà
-        GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfxHeal, collision.gameObject.transform);
+        GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfx_Heal, collision.gameObject.transform);
         vfxHeal.GetComponent<NetworkObject>().Spawn();
         vfxHeal.transform.SetParent(collision.transform);
         vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);

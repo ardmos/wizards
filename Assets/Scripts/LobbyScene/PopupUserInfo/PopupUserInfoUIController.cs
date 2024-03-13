@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class PopupUserInfoUIController : MonoBehaviour
 {
-    public CustomButton btnClose;
-    public CustomButton btnUserName;
+    public CustomClickSoundButton btnClose;
+    public CustomClickSoundButton btnUserName;
     public TextFieldUI txtUserName;
     public LobbySceneUIController lobbyUI;
 

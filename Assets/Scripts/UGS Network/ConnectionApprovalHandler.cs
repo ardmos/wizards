@@ -20,6 +20,7 @@ public class ConnectionApprovalHandler : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (NetworkManager.Singleton == null) return;
         NetworkManager.Singleton.ConnectionApprovalCallback -= ApprovalCheck;
     }
 

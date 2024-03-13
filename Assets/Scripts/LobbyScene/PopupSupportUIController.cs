@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PopupSupportUIController : MonoBehaviour
 {
-    public CustomButton btnClose;
+    public CustomClickSoundButton btnClose;
 
     // Start is called before the first frame update
     void Start()

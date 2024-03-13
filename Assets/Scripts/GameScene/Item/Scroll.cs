@@ -17,7 +17,7 @@ public class Scroll : NetworkBehaviour
         if (!IsServer) return;
         // spell slot ·£´ý ¼³Á¤
         spellSlotIndex = (byte) Random.Range(0, 3);
-        Debug.Log($"spellSlotIndex: {spellSlotIndex}");
+        //Debug.Log($"spellSlotIndex: {spellSlotIndex}");
     }
 
     /// <summary>
