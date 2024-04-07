@@ -9793,11 +9793,6 @@ MonoBehaviour:
   trails:
   - {fileID: 1588689682261560}
   - {fileID: 1514313384593206}
-  audioSourcePrefab: {fileID: 992107389769131743, guid: 7e0a7a1a2dab17e42bfc0bfb37d7b39e, type: 3}
-  sfxSounds:
-  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
-  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
-  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
 --- !u!54 &54419324461462068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9985,7 +9980,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -14847,14 +14842,14 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0.1
+    scalar: 0
     minScalar: 0
     maxCurve:
       serializedVersion: 2
