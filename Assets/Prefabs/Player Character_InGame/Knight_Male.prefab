@@ -2590,9 +2590,9 @@ GameObject:
   m_Component:
   - component: {fileID: 932501098101691874}
   - component: {fileID: 5577225032273852061}
+  - component: {fileID: -3331297196142442222}
   - component: {fileID: 6631467521865965885}
   - component: {fileID: 3569301515384591240}
-  - component: {fileID: -3331297196142442222}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
   - component: {fileID: 5033900459084263869}
@@ -2650,6 +2650,18 @@ MonoBehaviour:
   score: 0
   isPlayerGameOver: 0
   ownedSpellList: 
+--- !u!114 &-3331297196142442222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2ae86f6bc5a384ca03f87bf25f11f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6631467521865965885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2687,18 +2699,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-3331297196142442222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932501098101691884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c2ae86f6bc5a384ca03f87bf25f11f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &4842463508567140202
 Rigidbody:
   m_ObjectHideFlags: 0

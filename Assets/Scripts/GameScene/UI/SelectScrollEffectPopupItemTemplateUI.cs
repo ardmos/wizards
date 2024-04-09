@@ -26,7 +26,7 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         // scroll 이름
         txtScrollName.text = $"{Item.GetName(scrollName)}!!";
         // spell 이름
-        SpellName spellName = Player.LocalInstance.GetSpellController().GetSpellInfoList()[spellIndexToApply].spellName;
+        SpellName spellName = Player.Instance.GetSpellController().GetSpellInfoList()[spellIndexToApply].spellName;
         txtSpellName.text = spellName.ToString();
         // spell 아이콘 이미지
         imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);
@@ -36,10 +36,10 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         // 버튼 기능 설정   
         btnApply.onClick.RemoveAllListeners();
         btnApply.AddClickListener(() => {
-            if (Player.LocalInstance == null) return;
+            if (Player.Instance == null) return;
             if(GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
 
-            Player.LocalInstance.RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);
+            Player.Instance.RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);
             GetComponentInParent<PopupSelectScrollEffectUIController>().Hide();
         });
     }

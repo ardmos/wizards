@@ -516,6 +516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knight_Male_Electric
       objectReference: {fileID: 0}
+    - target: {fileID: 932501098101691884, guid: ffad87a8b5984754eb42effbdf5887df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3569301515384591240, guid: ffad87a8b5984754eb42effbdf5887df, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3256235280

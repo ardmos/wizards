@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class Player : NetworkBehaviour
 {
-    public static Player LocalInstance { get; private set; }
+    public static Player Instance { get; private set; }
 
     // PlayerData변수를 만들어서 사용하는것으로 코드 정리 해야함. HP같은 변수들 따루 있을 이유가 없음.
 
@@ -92,7 +92,7 @@ public class Player : NetworkBehaviour
         Debug.Log($"player Name :{playerData.playerName.ToString()}");
 
         if (!IsOwner) return;
-        LocalInstance = this;
+        Instance = this;
 
         // 보유 스펠을 GamePad UI에 반영          
         //Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
@@ -357,5 +357,10 @@ public class Player : NetworkBehaviour
         }
 
         playerItemDictionaryOnClient = playerItemDictionary;
+    }
+
+    public bool GetPlayerGameOver()
+    {
+        return isPlayerGameOver;
     }
 }

@@ -25,7 +25,7 @@ public class GamePadUIController : MonoBehaviour
     /// </summary>
     public void UpdateSpellUI(SpellName[] spellNames)
     {
-        if (Player.LocalInstance == null) return;
+        if (Player.Instance == null) return;
 
         for (ushort i = 0; i < spellNames.Length; i++)
         {
@@ -39,7 +39,7 @@ public class GamePadUIController : MonoBehaviour
     /// </summary>
     private void CoolTimePresenter()
     {
-        if (Player.LocalInstance == null)
+        if (Player.Instance == null)
         {
             return;
         }
@@ -47,7 +47,7 @@ public class GamePadUIController : MonoBehaviour
         for (byte i = 0;i < spellCooltimeImages.Length; i++)
         {
             //Debug.Log($"{Player.LocalInstance.OwnerClientId}");
-            float coolTimeRatio = Player.LocalInstance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(i);
+            float coolTimeRatio = Player.Instance.gameObject.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(i);
             if (coolTimeRatio > 0) 
             {
                 spellCooltimeImages[i].fillAmount = 1 - coolTimeRatio;

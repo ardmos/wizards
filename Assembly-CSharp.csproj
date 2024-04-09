@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\PlayerMovementClient.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\SpellController.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupEquipmentUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Server\PlayerMovementServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupUserInfoUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameOverUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
