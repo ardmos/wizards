@@ -34,6 +34,9 @@ public class SoundManager : MonoBehaviour
 #endif
 
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
+        Player.Instance.OnPlayerGameOver += OnPlayerGameOver;
+        Player.Instance.OnPlayerWin += OnPlayerWin;
+
 
         UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
@@ -45,6 +48,16 @@ public class SoundManager : MonoBehaviour
         volumeData = new SoundVolumeData(audioSourceBGM.volume, audioSourceSFX.volume);
 
         PlayMusic(sceneName);
+    }
+
+    private void OnPlayerWin(object sender, System.EventArgs e)
+    {
+        PlayWinPopupSound();
+    }
+
+    private void OnPlayerGameOver(object sender, System.EventArgs e)
+    {
+        PlayLosePopupSound();
     }
 
     private void OnDestroy()

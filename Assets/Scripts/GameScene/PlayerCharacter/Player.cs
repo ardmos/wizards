@@ -10,6 +10,10 @@ public class Player : NetworkBehaviour
 {
     public static Player Instance { get; private set; }
 
+    public event EventHandler OnPlayerGameOver;
+    public event EventHandler OnPlayerWin;
+
+
     // PlayerData변수를 만들어서 사용하는것으로 코드 정리 해야함. HP같은 변수들 따루 있을 이유가 없음.
 
     [SerializeField] protected GameInput gameInput;
@@ -19,22 +23,21 @@ public class Player : NetworkBehaviour
     [SerializeField] protected UserNameUIController userNameUIController;
     [SerializeField] protected SpellController spellController;
     [SerializeField] protected PlayerSpawnPointsController spawnPointsController;
-    [SerializeField] protected float moveSpeed;
+
     [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
 
     protected GameAssets gameAssets;
 
-    //protected bool isWalking;
-    protected bool isBtnAttack1Clicked;
-    protected bool isBtnAttack2Clicked;
-    protected bool isBtnAttack3Clicked;
-
-    // 플레이어 조작 제어를 위한 변수
-    [SerializeField] private bool isPlayerGameOver;
+    protected bool isAttackButtonClicked;
 
     // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
+
+    private void Awake()
+    {
+        Debug.Log("Player Awake()");
+    }
 
     /// <summary>
     /// 서버측 InitializePlayer
@@ -92,6 +95,7 @@ public class Player : NetworkBehaviour
         Debug.Log($"player Name :{playerData.playerName.ToString()}");
 
         if (!IsOwner) return;
+
         Instance = this;
 
         // 보유 스펠을 GamePad UI에 반영          
@@ -110,52 +114,45 @@ public class Player : NetworkBehaviour
 
     private void GameInput_OnDefenceClicked(object sender, EventArgs e)
     {
-        if (isPlayerGameOver) return;
         spellController.ActivateDefenceSpellOnClient();
     }
 
     private void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
-        if (isPlayerGameOver) return;
-        isBtnAttack1Clicked = true;
+        isAttackButtonClicked = true;
         spellController.StartCastingSpellOnClient(0);
     }
 
     private void GameInput_OnAttack2Started(object sender, EventArgs e)
     {
-        if (isPlayerGameOver) return;
-        isBtnAttack2Clicked = true;
+        isAttackButtonClicked = true;
         spellController.StartCastingSpellOnClient(1);
     }
 
     private void GameInput_OnAttack3Started(object sender, EventArgs e)
     {
-        if (isPlayerGameOver) return;
-        isBtnAttack3Clicked = true;
+        isAttackButtonClicked = true;
         spellController.StartCastingSpellOnClient(2);
     }
 
     private void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-        if (isPlayerGameOver) return;
-        if (!isBtnAttack1Clicked) return;
-        isBtnAttack1Clicked = false;
+        if (!isAttackButtonClicked) return;
+        isAttackButtonClicked = false;
         spellController.ShootCurrentCastingSpellOnClient(0);
     }
 
     private void GameInput_OnAttack2Ended(object sender, EventArgs e)
     {
-        if (isPlayerGameOver) return;
-        if (!isBtnAttack2Clicked) return;
-        isBtnAttack2Clicked = false;
+        if (!isAttackButtonClicked) return;
+        isAttackButtonClicked = false;
         spellController.ShootCurrentCastingSpellOnClient(1);
     }
 
     private void GameInput_OnAttack3Ended(object sender, EventArgs e)
     {
-        if (isPlayerGameOver) return;
-        if (!isBtnAttack3Clicked) return;
-        isBtnAttack3Clicked = false;
+        if (!isAttackButtonClicked) return;
+        isAttackButtonClicked = false;
         spellController.ShootCurrentCastingSpellOnClient(2);
     }
 
@@ -183,12 +180,7 @@ public class Player : NetworkBehaviour
         // 이 게임오버 캐릭터의 소유자가 아니면 리턴. RPC라 소유자 체크 한 번 해줘야 함. 
         if(!IsOwner) return;
 
-        // 플레이어가 캐릭터 조작 불가
-        isPlayerGameOver = true;
-        // 이동속도 0
-        HandleMovementServerRPC(Vector2.zero, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
-        // 게임오버 팝업 띄워주기
-        GameSceneUIController.Instance.popupGameOverUIController.Show();
+        OnPlayerGameOver.Invoke(this, EventArgs.Empty);
     }
 
     [ClientRpc]
@@ -197,8 +189,7 @@ public class Player : NetworkBehaviour
         // 이 승리 캐릭터의 소유자가 아니면 리턴.
         if (!IsOwner) return;
 
-        // 승리 팝업 띄워주기
-        GameSceneUIController.Instance.popupWinUIController.Show();
+        OnPlayerWin.Invoke(this, EventArgs.Empty);
     }
 
     #region Public 플레이어 정보 확인
@@ -284,69 +275,6 @@ public class Player : NetworkBehaviour
     }
     #endregion
 
-    #region Private&Protect 캐릭터 조작
-    // Server Auth 방식의 이동 처리 (현 오브젝트에 Network Transform이 필요)
-    protected void HandleMovementServerAuth()
-    {
-        if (isPlayerGameOver) return;
-
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-        HandleMovementServerRPC(inputVector, isBtnAttack1Clicked, isBtnAttack2Clicked, isBtnAttack3Clicked);
-    }
-    [ServerRpc]
-    private void HandleMovementServerRPC(Vector2 inputVector, bool isBtnAttack1Clicked, bool isBtnAttack2Clicked, bool isBtnAttack3Clicked, ServerRpcParams serverRpcParams = default)
-    {
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-
-        // 서버권한방식의 네트워크에서 이동처리 할 때 서버의 DeltaTime이 클라이언트의 델타타임과는 다른 경우가 생김. 따라서 아래처럼 수정해야함
-        //float moveDistance = moveSpeed * Time.deltaTime;
-        float moveDistance = moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
-        transform.position += moveDir * moveDistance;
-
-        // 서버(GameMultiplayer)에 새로운 Player Anim State 저장. (GameOver상태가 아닐 때에만!)
-        if (GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerMoveAnimState == PlayerMoveAnimState.GameOver)
-            return;
-
-        if (moveDir != Vector3.zero) {
-            GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(serverRpcParams.Receive.SenderClientId, PlayerMoveAnimState.Walking);
-        }
-        else
-        {
-            GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(serverRpcParams.Receive.SenderClientId, PlayerMoveAnimState.Idle);
-        }
-
-        // 공격중이 아닐 때에만 진행방향으로 캐릭터 회전
-        if (!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked)
-        {
-            Rotate(moveDir);
-        }
-    }
-
-    /// <summary>
-    /// GamePad UI 스킬버튼 드래그에서 호출하여 플레이어를 회전시키는 메소드.
-    /// </summary>
-    public void RotateByDragSpellBtn(Vector3 dir)
-    {
-        //Debug.Log($"RotateByDragSpellBtn dir:{dir}");
-        RotateByDragSpellBtnServerRPC(dir);
-    }
-    [ServerRpc (RequireOwnership = false)]
-    private void RotateByDragSpellBtnServerRPC(Vector3 dir)
-    {
-        Rotate(dir);
-    }
-
-    private void Rotate(Vector3 moveDir)
-    {
-        if (moveDir == Vector3.zero) return;
-
-        float rotateSpeed = 30f;
-        Vector3 slerpResult = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
-        transform.forward = slerpResult;
-    }
-    #endregion
-
-
     public void SetPlayerItemsDictionaryOnClient(ItemName[] itemNameArray, ushort[] itemCountArray)
     {
         Dictionary<ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
@@ -359,8 +287,8 @@ public class Player : NetworkBehaviour
         playerItemDictionaryOnClient = playerItemDictionary;
     }
 
-    public bool GetPlayerGameOver()
+    public bool GetIsAttackButtonClicked()
     {
-        return isPlayerGameOver;
+        return isAttackButtonClicked;
     }
 }

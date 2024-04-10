@@ -2559,11 +2559,13 @@ GameObject:
   m_Component:
   - component: {fileID: 932501098101691874}
   - component: {fileID: -2686748507231774534}
+  - component: {fileID: 854047434301573314}
+  - component: {fileID: 532842309490800541}
   - component: {fileID: 6631467521865965885}
-  - component: {fileID: 3569301515384591240}
   - component: {fileID: -3331297196142442222}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
+  - component: {fileID: 3569301515384591240}
   - component: {fileID: 5033900459084263869}
   - component: {fileID: 1026839346395833499}
   m_Layer: 3
@@ -2612,16 +2614,36 @@ MonoBehaviour:
   hPBarUIController: {fileID: 2648681988919741548}
   userNameUIController: {fileID: 4649931589576448986}
   spellController: {fileID: 6631467521865965885}
+  spawnPointsController: {fileID: 0}
   moveSpeed: 2.2
   hp: 5
   score: 0
-  spawnPositionList:
-  - {x: 0, y: 1, z: 5}
-  - {x: 5, y: 1, z: 0}
-  - {x: -5, y: 1, z: 0}
-  - {x: 0, y: 1, z: -5}
   isPlayerGameOver: 0
   ownedSpellList: 
+--- !u!114 &854047434301573314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ae9b522c03dcbc4da7ed1814c3c9444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &532842309490800541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac0682c8d9cb97448002e31b5cca9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6631467521865965885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2639,26 +2661,6 @@ MonoBehaviour:
   - 0
   - 0
   - 0
---- !u!114 &3569301515384591240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932501098101691884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &-3331297196142442222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2721,6 +2723,26 @@ CapsuleCollider:
   m_Height: 1.55
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &3569301515384591240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &5033900459084263869
 MonoBehaviour:
   m_ObjectHideFlags: 0

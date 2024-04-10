@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+/// <summary>
+/// 이동속도(moveSpeen)는 서버측에서 관리. 
+/// </summary>
 public class PlayerMovementServer : MonoBehaviour
 {
-    /*[ServerRpc]
-    public void HandleMovementServerRPC(Vector2 inputVector, bool isBtnAttack1Clicked, bool isBtnAttack2Clicked, bool isBtnAttack3Clicked, ServerRpcParams serverRpcParams = default)
+    [SerializeField] protected float moveSpeed;
+
+    [ServerRpc]
+    public void HandleMovementServerRPC(Vector2 inputVector, bool isAttackButtonClicked, ServerRpcParams serverRpcParams = default)
     {
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -16,29 +21,29 @@ public class PlayerMovementServer : MonoBehaviour
         transform.position += moveDir * moveDistance;
 
         // 서버(GameMultiplayer)에 새로운 Player Anim State 저장. (GameOver상태가 아닐 때에만!)
-        if (GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerMoveAnimState == PlayerMoveAnimState.GameOver)
-            return;
-
+        if (GameMultiplayer.Instance.GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).playerMoveAnimState == PlayerMoveAnimState.GameOver) return;
         if (moveDir != Vector3.zero)
-        {
             GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(serverRpcParams.Receive.SenderClientId, PlayerMoveAnimState.Walking);
-        }
         else
-        {
             GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(serverRpcParams.Receive.SenderClientId, PlayerMoveAnimState.Idle);
-        }
 
         // 공격중이 아닐 때에만 진행방향으로 캐릭터 회전
-        if (!isBtnAttack1Clicked && !isBtnAttack2Clicked && !isBtnAttack3Clicked)
-        {
-            Rotate(moveDir);
-        }
+        if (isAttackButtonClicked) return;
+        Rotate(moveDir);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void RotateByDragSpellBtnServerRPC(Vector3 dir)
+    public void RotateByDragSpellButtonServerRPC(Vector3 dir)
     {
         Rotate(dir);
     }
-*/
+
+    private void Rotate(Vector3 moveDir)
+    {
+        if (moveDir == Vector3.zero) return;
+
+        float rotateSpeed = 30f;
+        Vector3 slerpResult = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
+        transform.forward = slerpResult;
+    }
 }

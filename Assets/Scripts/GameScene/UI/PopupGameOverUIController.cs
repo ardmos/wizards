@@ -26,12 +26,18 @@ public class PopupGameOverUIController : MonoBehaviour
 
 
         Hide();
+
+        Player.Instance.OnPlayerGameOver += OnPlayerGameOver;
+    }
+
+    private void OnPlayerGameOver(object sender, System.EventArgs e)
+    {
+        Show();
     }
 
     public void Show()
     {
         gameObject.SetActive(true);
-        SoundManager.Instance.PlayLosePopupSound();
     }
 
     private void Hide()

@@ -71,13 +71,19 @@ public class PopupWinUIController : MonoBehaviour
         });
 
         Hide();
+
+        Player.Instance.OnPlayerWin += OnPlayerWin;
+    }
+
+    private void OnPlayerWin(object sender, System.EventArgs e)
+    {
+        Show();
     }
 
     public void Show()
     {
         //Debug.Log($"Win Popup Show()");
         gameObject.SetActive(true);
-        SoundManager.Instance.PlayWinPopupSound();
     }
 
     private void Hide()
