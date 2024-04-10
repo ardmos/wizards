@@ -8,8 +8,7 @@ public class Knight : Player
 {
     public SpellName[] ownedSpellList;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!IsOwner) return;
 

@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerMovementServer : NetworkBehaviour
 {
-    [SerializeField] protected float moveSpeed;
+    public float moveSpeed { get; private set; } = 10f;
 
     [ServerRpc (RequireOwnership = false)]
     public void HandleMovementServerRPC(Vector2 inputVector, bool isAttackButtonClicked, ServerRpcParams serverRpcParams = default)
@@ -45,5 +45,10 @@ public class PlayerMovementServer : NetworkBehaviour
         float rotateSpeed = 30f;
         Vector3 slerpResult = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
         transform.forward = slerpResult;
+    }
+
+    public void SetMoveSpeed(float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
     }
 }

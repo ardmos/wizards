@@ -23,7 +23,6 @@ public class Player : NetworkBehaviour
     [SerializeField] protected UserNameUIController userNameUIController;
     [SerializeField] protected SpellController spellController;
     [SerializeField] protected PlayerSpawnPointsController spawnPointsController;
-    
 
     [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
