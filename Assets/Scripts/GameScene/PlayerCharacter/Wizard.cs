@@ -12,7 +12,7 @@ public class Wizard : Player
     {
         if (!IsOwner) return;
 
-        HandleMovementServerAuth();
+        GetComponent<PlayerMovementClient>().HandleMovementServerAuth();
     }
 
 

@@ -6,11 +6,11 @@ using UnityEngine;
 /// <summary>
 /// 이동속도(moveSpeen)는 서버측에서 관리. 
 /// </summary>
-public class PlayerMovementServer : MonoBehaviour
+public class PlayerMovementServer : NetworkBehaviour
 {
     [SerializeField] protected float moveSpeed;
 
-    [ServerRpc]
+    [ServerRpc (RequireOwnership = false)]
     public void HandleMovementServerRPC(Vector2 inputVector, bool isAttackButtonClicked, ServerRpcParams serverRpcParams = default)
     {
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);

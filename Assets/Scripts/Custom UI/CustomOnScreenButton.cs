@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -46,7 +47,7 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         // 버튼 이동
         Vector2 dir = MoveButton(eventData.position, eventData.pressEventCamera);
         // 플레이어 회전
-        Player.Instance.RotateByDragSpellBtn(new Vector3(dir.x, 0f, dir.y));
+        Player.Instance.gameObject.GetComponent<PlayerMovementClient>().RotateByDragSpellButton(new Vector3(dir.x, 0f, dir.y));
     }
 
     /// <summary>

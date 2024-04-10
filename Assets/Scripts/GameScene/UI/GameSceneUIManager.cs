@@ -5,9 +5,9 @@ using UnityEngine.UI;
 /// 1. GameScene의 UI들에게 접근이 필요할 때 중계 역할을 합니다.
 /// 게임패드는 스크립트가 따로 있습니다
 /// </summary>
-public class GameSceneUIController : MonoBehaviour
+public class GameSceneUIManager : MonoBehaviour
 {
-    public static GameSceneUIController Instance;
+    public static GameSceneUIManager Instance;
 
     [SerializeField] private CustomClickSoundButton btnMenu;
     [SerializeField] private PopupMenuUIController popupMenuUI;

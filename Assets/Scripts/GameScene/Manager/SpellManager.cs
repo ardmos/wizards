@@ -95,10 +95,10 @@ public class SpellManager : NetworkBehaviour
         // Update UI
         if (playerScrollSpellSlotQueueOnClient.Count == 0)
             // Spell Scroll Count UI 비활성화
-            GameSceneUIController.Instance.buttonReadSpellScrollUIController.DeactivateUI();
+            GameSceneUIManager.Instance.buttonReadSpellScrollUIController.DeactivateUI();
         else
             // Spell Scroll Count UI 활성화 
-            GameSceneUIController.Instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
+            GameSceneUIManager.Instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
     }
 
     public byte PeekPlayerScrollSpellSlotQueueOnClient()
@@ -121,10 +121,10 @@ public class SpellManager : NetworkBehaviour
         // Update UI
         if (playerScrollSpellSlotQueueOnClient.Count == 0)
             // Spell Scroll Count UI 비활성화
-            GameSceneUIController.Instance.buttonReadSpellScrollUIController.DeactivateUI();
+            GameSceneUIManager.Instance.buttonReadSpellScrollUIController.DeactivateUI();
         else
             // Spell Scroll Count UI 활성화 
-            GameSceneUIController.Instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
+            GameSceneUIManager.Instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
     }
     #endregion
 

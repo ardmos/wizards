@@ -15,7 +15,7 @@ public class Knight : Player
 
         // == 이동 ==
         // Server Auth 방식의 이동 처리
-        HandleMovementServerAuth();
+        GetComponent<PlayerMovementClient>().HandleMovementServerAuth();
         //테스트용 Client Auth 방식 이동 처리
         //HandleMovement(); 
 

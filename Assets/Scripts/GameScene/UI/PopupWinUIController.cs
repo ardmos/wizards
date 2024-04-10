@@ -71,13 +71,6 @@ public class PopupWinUIController : MonoBehaviour
         });
 
         Hide();
-
-        Player.Instance.OnPlayerWin += OnPlayerWin;
-    }
-
-    private void OnPlayerWin(object sender, System.EventArgs e)
-    {
-        Show();
     }
 
     public void Show()

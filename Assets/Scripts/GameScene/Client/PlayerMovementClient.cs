@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerMovementClient : MonoBehaviour
+public class PlayerMovementClient : NetworkBehaviour
 {
     private GameInput gameInput;
     private PlayerMovementServer playerMovementServer;
@@ -26,7 +26,7 @@ public class PlayerMovementClient : MonoBehaviour
     }
 
     // Server Auth 방식의 이동 처리 (현 오브젝트에 Network Transform이 필요)
-    protected void HandleMovementServerAuth()
+    public void HandleMovementServerAuth()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         playerMovementServer.HandleMovementServerRPC(inputVector, Player.Instance.GetIsAttackButtonClicked());

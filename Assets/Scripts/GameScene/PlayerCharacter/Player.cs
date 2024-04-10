@@ -23,6 +23,7 @@ public class Player : NetworkBehaviour
     [SerializeField] protected UserNameUIController userNameUIController;
     [SerializeField] protected SpellController spellController;
     [SerializeField] protected PlayerSpawnPointsController spawnPointsController;
+    
 
     [SerializeField] protected sbyte hp;
     [SerializeField] protected int score = 0;
@@ -172,6 +173,7 @@ public class Player : NetworkBehaviour
     /// 게임 오버시 동작시키는 메소드.
     /// 1. 플레이어 조작 불가
     /// 2. 게임오버 팝업 띄우기
+    /// 3. 팝업 BGM 재생
     /// </summary>
     [ClientRpc]
     public void SetPlayerGameOverClientRPC()
@@ -181,6 +183,10 @@ public class Player : NetworkBehaviour
         if(!IsOwner) return;
 
         OnPlayerGameOver.Invoke(this, EventArgs.Empty);
+        // Popup 보여주기
+        GameSceneUIManager.Instance.popupGameOverUIController.Show();
+        // BGM 재생
+        SoundManager.Instance.PlayLosePopupSound();
     }
 
     [ClientRpc]
@@ -190,6 +196,10 @@ public class Player : NetworkBehaviour
         if (!IsOwner) return;
 
         OnPlayerWin.Invoke(this, EventArgs.Empty);
+        // Popup 보여주기
+        GameSceneUIManager.Instance.popupWinUIController.Show();
+        // BGM 재생
+        SoundManager.Instance.PlayWinPopupSound();
     }
 
     #region Public 플레이어 정보 확인
@@ -224,7 +234,7 @@ public class Player : NetworkBehaviour
     {
         if (!IsOwner) return;
         // 알림 UI 실행
-        GameSceneUIController.Instance.itemAcquireUIController.ShowItemAcquireUI();
+        GameSceneUIManager.Instance.itemAcquireUIController.ShowItemAcquireUI();
     }
 
     public void RequestUniqueRandomScrollsToServer()
@@ -240,7 +250,7 @@ public class Player : NetworkBehaviour
     public void SetScrollEffectsToPopupUIClientRPC(ItemName[] scrollNames)
     {
         if (!IsOwner) return;   
-        GameSceneUIController.Instance.popupSelectScrollEffectUIController.InitPopup(scrollNames);
+        GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(scrollNames);
     }
 
     // 슬롯 선택시 동작. 클라이언트에서 돌아가는 메소드 입니다.

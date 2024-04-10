@@ -156,7 +156,7 @@ public class GameMultiplayer : NetworkBehaviour
     /// </summary>
     public void SetPlayerDataFromClientId(ulong clientId, PlayerInGameData newPlayerData)
     {
-        //Debug.Log("SetPlayerDataFromClientId");
+        Debug.Log($"SetPlayerDataFromClientId IsServer: {IsServer}, IsClient: {IsClient}");
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
     }
 

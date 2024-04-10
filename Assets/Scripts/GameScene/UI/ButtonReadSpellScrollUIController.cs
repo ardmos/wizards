@@ -20,7 +20,7 @@ public class ButtonReadSpellScrollUIController : MonoBehaviour
 
         GetComponent<CustomClickSoundButton>().AddClickListener(() =>
         {
-            GameSceneUIController.Instance.popupSelectScrollEffectUIController.Show();
+            GameSceneUIManager.Instance.popupSelectScrollEffectUIController.Show();
         });
 
         txtSpellScrollCount.text = "";
