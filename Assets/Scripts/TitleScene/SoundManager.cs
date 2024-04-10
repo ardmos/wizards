@@ -28,11 +28,6 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_SERVER
-        Debug.Log("Server에서는 SoundManager를 실행하지 않습니다.");
-        return;
-#endif
-
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
 
         UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
@@ -62,6 +57,10 @@ public class SoundManager : MonoBehaviour
 
     private void PlayMusic(string sceneName)
     {
+#if UNITY_SERVER
+        Debug.Log("Server에서는 SoundManager를 실행하지 않습니다.");
+        return;
+#endif
         if (audioSourceBGM == null) return;
 
         if (GameAssets.instantiate.GetMusic(sceneName) == null)
@@ -86,11 +85,11 @@ public class SoundManager : MonoBehaviour
         {
             StopCoroutine(bgmCoroutine);
             bgmCoroutine = null;
-            Debug.Log("bgmCoroutine stopped");
+            //Debug.Log("bgmCoroutine stopped");
         }
 
         bgmCoroutine = StartCoroutine(AutoPlay(sceneName));
-        Debug.Log("bgmCoroutine started");
+        //Debug.Log("bgmCoroutine started");
     }
 
     // 자동 다음 재생 기능
@@ -98,7 +97,7 @@ public class SoundManager : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("AutoPlay!");
+            //Debug.Log("AutoPlay!");
             audioSourceBGM.clip = GameAssets.instantiate.GetMusic(sceneName);
             audioSourceBGM.Play();
             yield return new WaitForSeconds(audioSourceBGM.clip.length);
@@ -132,7 +131,7 @@ public class SoundManager : MonoBehaviour
         {
             audioSourceSFX.clip = audioClip;
             audioSourceSFX.Play();
-            Debug.Log($"PlaySFXWithDelay. audioClip:{audioClip.name}, {audioClip.length}");
+            //Debug.Log($"PlaySFXWithDelay. audioClip:{audioClip.name}, {audioClip.length}");
             yield return new WaitForSeconds(audioClip.length);
         }
     }
@@ -156,7 +155,7 @@ public class SoundManager : MonoBehaviour
     [ClientRpc]
     public void PlayMagicSFXClientRPC(SpellName spellName, byte state)
     {
-        Debug.Log($"PlayMagicSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}");
+        //Debug.Log($"PlayMagicSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}");
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
@@ -166,7 +165,7 @@ public class SoundManager : MonoBehaviour
     [ClientRpc]
     public void PlayItemSFXClientRPC(ItemName itemName)
     {
-        Debug.Log($"PlayItemSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}, itemName : {itemName}, audioClip : {GameAssets.instantiate.GetItemSFXSound(itemName)}");
+        //Debug.Log($"PlayItemSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}, itemName : {itemName}, audioClip : {GameAssets.instantiate.GetItemSFXSound(itemName)}");
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);

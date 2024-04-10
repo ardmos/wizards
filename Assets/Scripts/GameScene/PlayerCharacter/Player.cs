@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+
 /// <summary>
 /// 1. 인게임에서 사용되는 플레이어 스크립트입니다.
 /// </summary>
@@ -14,7 +15,7 @@ public class Player : NetworkBehaviour
     public event EventHandler OnPlayerWin;
 
 
-    // PlayerData변수를 만들어서 사용하는것으로 코드 정리 해야함. HP같은 변수들 따루 있을 이유가 없음.
+    // PlayerData변수를 만들어서 사용하는것으로 코드 정리 해야함. HP같은 변수들 따로 있을 이유가 없음.
 
     [SerializeField] protected GameInput gameInput;
     [SerializeField] protected GameObject virtualCameraObj;
@@ -34,10 +35,12 @@ public class Player : NetworkBehaviour
     // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
 
-    private void Awake()
+/*    private void Update()
     {
-        Debug.Log("Player Awake()");
-    }
+        if (!IsOwner) return;
+
+        GetComponent<PlayerMovementClient>().HandleMovementServerAuth();
+    }*/
 
     /// <summary>
     /// 서버측 InitializePlayer
@@ -48,6 +51,8 @@ public class Player : NetworkBehaviour
     /// <param name="ownedSpellList"></param>
     public void InitializePlayerOnServer(SpellName[] ownedSpellList, ulong requestedInitializeClientId)
     {
+        Debug.Log($"OwnerClientId{OwnerClientId} Player InitializePlayerOnServer");
+
         gameAssets = GameAssets.instantiate;
         spawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
 
@@ -82,9 +87,11 @@ public class Player : NetworkBehaviour
         InitializePlayerClientRPC(ownedSpellList);
     }
 
-    [ClientRpc]
+/*    [ClientRpc]
     private void InitializePlayerClientRPC(SpellName[] ownedSpellNameList)
     {
+        Debug.Log($"OwnerClientId {OwnerClientId} Player InitializePlayerClientRPC");
+
         // 카메라 위치 초기화. 소유자만 따라다니도록 함 
         virtualCameraObj.SetActive(IsOwner);
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
@@ -92,7 +99,7 @@ public class Player : NetworkBehaviour
         // 플레이어 닉네임 설정
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         userNameUIController.Setup(playerData.playerName.ToString(), IsOwner);
-        Debug.Log($"player Name :{playerData.playerName.ToString()}");
+        //Debug.Log($"player Name :{playerData.playerName.ToString()}");
 
         if (!IsOwner) return;
 
@@ -109,10 +116,16 @@ public class Player : NetworkBehaviour
         gameInput.OnAttack1Ended += GameInput_OnAttack1Ended;
         gameInput.OnAttack2Ended += GameInput_OnAttack2Ended;
         gameInput.OnAttack3Ended += GameInput_OnAttack3Ended;
-        gameInput.OnDefenceClicked += GameInput_OnDefenceClicked;
+        gameInput.OnDefenceStarted += GameInput_OnDefenceStarted;
+        gameInput.OnDefenceEnded += GameInput_OnDefenceEnded;
+    }*/
+
+   /* private void GameInput_OnDefenceEnded(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
     }
 
-    private void GameInput_OnDefenceClicked(object sender, EventArgs e)
+    private void GameInput_OnDefenceStarted(object sender, EventArgs e)
     {
         spellController.ActivateDefenceSpellOnClient();
     }
@@ -154,9 +167,9 @@ public class Player : NetworkBehaviour
         if (!isAttackButtonClicked) return;
         isAttackButtonClicked = false;
         spellController.ShootCurrentCastingSpellOnClient(2);
-    }
+    }*/
 
-    [ClientRpc]
+/*    [ClientRpc]
     public void SetHPClientRPC(sbyte hp, sbyte maxHP)
     {
         hPBarUIController.SetHP(hp, maxHP);
@@ -166,9 +179,9 @@ public class Player : NetworkBehaviour
     public void ShowDamagePopupClientRPC(byte damageAmount)
     {
         damageTextUIController.CreateTextObject(damageAmount);
-    }
+    }*/
 
-    /// <summary>
+/*    /// <summary>
     /// 게임 오버시 동작시키는 메소드.
     /// 1. 플레이어 조작 불가
     /// 2. 게임오버 팝업 띄우기
@@ -199,7 +212,7 @@ public class Player : NetworkBehaviour
         GameSceneUIManager.Instance.popupWinUIController.Show();
         // BGM 재생
         SoundManager.Instance.PlayWinPopupSound();
-    }
+    }*/
 
     #region Public 플레이어 정보 확인
     public int GetScore()

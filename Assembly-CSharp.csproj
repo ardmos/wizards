@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\GameScene\Store\StoreTriggerAreaCollider.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupSelectScrollEffectUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Server\PlayerServer.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupClanUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollLevelUp.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Wizard.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollAttach.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\PlayerClient.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupNameChangeUIController.cs" />

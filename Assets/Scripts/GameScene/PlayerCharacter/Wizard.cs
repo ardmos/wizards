@@ -7,19 +7,11 @@ public class Wizard : Player
 {
     public SpellName[] ownedSpellList;
 
-    private void Update()
-    {
-        if (!IsOwner) return;
-
-        GetComponent<PlayerMovementClient>().HandleMovementServerAuth();
-    }
-
-
     public override void OnNetworkSpawn()
     {
         if(IsServer)
         {
-            Debug.Log($"{nameof(OnNetworkSpawn)}, Player{OwnerClientId} requested Initialize PlayerInGameData.");
+            Debug.Log($"OwnerClientId{OwnerClientId} requested Initialize PlayerInGameData.");
 
             ownedSpellList = new SpellName[]{
                 SpellName.FireBallLv1,

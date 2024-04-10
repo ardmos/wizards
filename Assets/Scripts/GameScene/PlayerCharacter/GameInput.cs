@@ -7,17 +7,21 @@ using UnityEngine;
 /// </summary>
 public class GameInput : MonoBehaviour
 {
-    private PlayerInputActions playerInputActions;
-
     public event EventHandler OnAttack1Started;
     public event EventHandler OnAttack2Started;
     public event EventHandler OnAttack3Started;
     public event EventHandler OnAttack1Ended;
     public event EventHandler OnAttack2Ended;
     public event EventHandler OnAttack3Ended;
-    public event EventHandler OnDefenceClicked;
+    public event EventHandler OnDefenceStarted;
+    public event EventHandler OnDefenceEnded;
 
-    public bool isPlayerControllable;
+    private bool isPlayerControllable;
+    private bool isAttackButtonClicked;
+
+    private PlayerInputActions playerInputActions;
+
+
 
     private void Awake()
     {
@@ -32,6 +36,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Attack3.started += Attack3_started;
         playerInputActions.Player.Attack3.canceled += Attack3_canceled;
         playerInputActions.Player.Defence.started += Defence_started;
+        playerInputActions.Player.Defence.canceled += Defence_canceled;
 
         GetComponent<Player>().OnPlayerGameOver += OnPlayerGameOver;
     }
@@ -46,6 +51,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Attack3.canceled -= Attack3_canceled;
 
         playerInputActions.Player.Defence.started -= Defence_started;
+        playerInputActions.Player.Defence.canceled -= Defence_canceled;
 
         playerInputActions.Dispose();
     }
@@ -61,46 +67,55 @@ public class GameInput : MonoBehaviour
         return inputVector;
     }
 
-    private void Defence_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (!isPlayerControllable) return;
-        OnDefenceClicked?.Invoke(this, EventArgs.Empty);
-    }
-
     private void Attack1_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
+        isAttackButtonClicked = true;
         OnAttack1Started?.Invoke(this, EventArgs.Empty);
+    }
+    private void Attack2_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (!isPlayerControllable) return;
+        isAttackButtonClicked = true;
+        OnAttack2Started?.Invoke(this, EventArgs.Empty);
+    }
+    private void Attack3_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (!isPlayerControllable) return;
+        isAttackButtonClicked = true;
+        OnAttack3Started?.Invoke(this, EventArgs.Empty);
+    }
+    private void Defence_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (!isPlayerControllable) return;
+        OnDefenceStarted?.Invoke(this, EventArgs.Empty);
     }
 
     private void Attack1_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
+        if (!isAttackButtonClicked) return;
+        isAttackButtonClicked = false;
         OnAttack1Ended?.Invoke(this, EventArgs.Empty);
     }
-
-    private void Attack2_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (!isPlayerControllable) return;
-        OnAttack2Started?.Invoke(this, EventArgs.Empty);
-    }
-
     private void Attack2_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
+        if (!isAttackButtonClicked) return;
+        isAttackButtonClicked = false;
         OnAttack2Ended?.Invoke(this, EventArgs.Empty);
     }
-
-    private void Attack3_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (!isPlayerControllable) return;
-        OnAttack3Started?.Invoke(this, EventArgs.Empty);
-    }
-
     private void Attack3_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
+        if (!isAttackButtonClicked) return;
+        isAttackButtonClicked = false;
         OnAttack3Ended?.Invoke(this, EventArgs.Empty);
+    }
+    private void Defence_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (!isPlayerControllable) return;
+        OnDefenceEnded?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnPlayerGameOver(object sender, EventArgs e)

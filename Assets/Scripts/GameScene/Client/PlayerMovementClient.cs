@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PlayerMovementClient : NetworkBehaviour
 {
@@ -14,6 +11,18 @@ public class PlayerMovementClient : NetworkBehaviour
         gameInput = GetComponent<GameInput>();
         playerMovementServer = GetComponent<PlayerMovementServer>();
         GetComponent<Player>().OnPlayerGameOver += OnPlayerGameOver;
+    }
+
+    private void Update()
+    {
+        if (!IsOwner) return;
+
+        HandleMovementServerAuth();
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<Player>().OnPlayerGameOver -= OnPlayerGameOver;
     }
 
     /// <summary>
