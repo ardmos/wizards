@@ -10,7 +10,7 @@ public class PlayerMovementClient : NetworkBehaviour
     {
         gameInput = GetComponent<GameInput>();
         playerMovementServer = GetComponent<PlayerMovementServer>();
-        GetComponent<Player>().OnPlayerGameOver += OnPlayerGameOver;
+        GetComponent<PlayerClient>().OnPlayerGameOver += OnPlayerGameOver;
     }
 
     private void Update()
@@ -22,7 +22,7 @@ public class PlayerMovementClient : NetworkBehaviour
 
     private void OnDisable()
     {
-        GetComponent<Player>().OnPlayerGameOver -= OnPlayerGameOver;
+        GetComponent<PlayerClient>().OnPlayerGameOver -= OnPlayerGameOver;
     }
 
     /// <summary>
@@ -38,12 +38,12 @@ public class PlayerMovementClient : NetworkBehaviour
     public void HandleMovementServerAuth()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-        playerMovementServer.HandleMovementServerRPC(inputVector, Player.Instance.GetIsAttackButtonClicked());
+        playerMovementServer.HandleMovementServerRPC(inputVector, PlayerClient.Instance.GetComponent<GameInput>().GetIsAttackButtonClicked());
     }
 
     private void OnPlayerGameOver(object sender, System.EventArgs e)
     {
-        playerMovementServer.HandleMovementServerRPC(Vector2.zero, Player.Instance.GetIsAttackButtonClicked());
+        playerMovementServer.HandleMovementServerRPC(Vector2.zero, PlayerClient.Instance.GetComponent<GameInput>().GetIsAttackButtonClicked());
     }
 }
 

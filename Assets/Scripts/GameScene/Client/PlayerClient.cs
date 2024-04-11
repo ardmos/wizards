@@ -1,15 +1,23 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms.Impl;
 
 public abstract class PlayerClient : NetworkBehaviour
 {
     public static PlayerClient Instance {  get; private set; }
+    public event EventHandler OnPlayerGameOver;
+    //public event EventHandler OnPlayerWin;
 
     private GameInput gameInput;
+
+    // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
+    [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
 
     private void Awake()
     {
@@ -17,17 +25,17 @@ public abstract class PlayerClient : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void InitializePlayerClientRPC(SpellName[] ownedSpellNameList)
+    public void InitializePlayerClientRPC(SpellName[] ownedSpellNameList)
     {
         Debug.Log($"OwnerClientId {OwnerClientId} Player InitializePlayerClientRPC");
 
         // 카메라 위치 초기화. 소유자만 따라다니도록 함 
-        virtualCameraObj.SetActive(IsOwner);
+        GetComponentInChildren<CinemachineVirtualCamera>()?.gameObject.SetActive(IsOwner);
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         GetComponent<Rigidbody>().isKinematic = false;
         // 플레이어 닉네임 설정
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        userNameUIController.Setup(playerData.playerName.ToString(), IsOwner);
+        GetComponentInChildren<UserNameUIController>()?.Setup(playerData.playerName.ToString(), IsOwner);
         //Debug.Log($"player Name :{playerData.playerName.ToString()}");
 
         if (!IsOwner) return;
@@ -74,13 +82,13 @@ public abstract class PlayerClient : NetworkBehaviour
     [ClientRpc]
     public void SetHPClientRPC(sbyte hp, sbyte maxHP)
     {
-        hPBarUIController.SetHP(hp, maxHP);
+        GetComponentInChildren<HPBarUIController>()?.SetHP(hp, maxHP);
     }
 
     [ClientRpc]
     public void ShowDamagePopupClientRPC(byte damageAmount)
     {
-        damageTextUIController.CreateTextObject(damageAmount);
+        GetComponentInChildren<DamageTextUIController>()?.CreateTextObject(damageAmount);
     }
 
     /// <summary>
@@ -109,15 +117,60 @@ public abstract class PlayerClient : NetworkBehaviour
         // 이 승리 캐릭터의 소유자가 아니면 리턴.
         if (!IsOwner) return;
 
-        OnPlayerWin.Invoke(this, EventArgs.Empty);
+        //OnPlayerWin.Invoke(this, EventArgs.Empty);
         // Popup 보여주기
         GameSceneUIManager.Instance.popupWinUIController.Show();
         // BGM 재생
         SoundManager.Instance.PlayWinPopupSound();
     }
 
-    // PlayerClient와 PlayerServer로 코드 분류중. 마저 분류하고 인터페이스 적용까지 하기. Knight에도.
-    // 1. WIzard, Knight에 알맞게 abstract 메서드 내용 구현하기
-    // 2. GetScore, GetSpellController 등 필요성 확인 후 위치or삭제하기
-    // 3. 
+    public int GetPlayerScore()
+    {
+        return GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId).playerScore;
+    }
+
+    [ClientRpc]
+    public void UpdateScrollQueueClientRPC(byte[] scrollSpellSlotArray)
+    {
+        if (!IsOwner) return;
+
+        Queue<byte> scrollSpellSlotQueue = new Queue<byte>(scrollSpellSlotArray);
+
+        // Queue 업데이트
+        GetComponent<PlayerSpellScrollQueueControllerClient>().UpdatePlayerScrollSpellSlotQueueOnClient(scrollSpellSlotQueue);
+
+        // SFX 실행
+        SoundManager.Instance.PlayOpenScrollSound();
+    }
+
+    [ClientRpc]
+    public void ShowItemAcquiredUIClientRPC()
+    {
+        if (!IsOwner) return;
+        // 알림 UI 실행
+        GameSceneUIManager.Instance.itemAcquireUIController.ShowItemAcquireUI();
+    }
+
+    /// <summary>
+    /// 서버에서 제공해준 스크롤 효과 목록을 PopupSelectScrollEffectUIController에 적용.
+    /// </summary>
+    /// <param name="scrollNames"></param>
+    [ClientRpc]
+    public void SetScrollEffectsToPopupUIClientRPC(ItemName[] scrollNames)
+    {
+        if (!IsOwner) return;
+        GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(scrollNames);
+    }
+
+    public void SetPlayerItemsDictionaryOnClient(ItemName[] itemNameArray, ushort[] itemCountArray)
+    {
+        Dictionary<ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
+        Debug.Log($"SetPlayerItemsDictionaryOnClient. player{OwnerClientId}'s playerItemDictionary.Count: {playerItemDictionary.Count} ");
+        foreach (var item in playerItemDictionary)
+        {
+            Debug.Log($"{item.Key}, {item.Value}");
+        }
+
+        playerItemDictionaryOnClient = playerItemDictionary;
+    }
 }

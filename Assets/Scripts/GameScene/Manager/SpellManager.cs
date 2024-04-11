@@ -16,7 +16,7 @@ public class SpellManager : NetworkBehaviour
     private Dictionary<ulong, List<SpellInfo>> spellInfoListOnServer = new Dictionary<ulong, List<SpellInfo>>();
     // 특정 플레이어의 ulong(클라이언트ID)값과, 그 플레이어가 Scroll을 획득할 때마다 Scroll의 효과가 적용될 Spell Slot의 Index를 담아두는 Queue를 갖고있는 변수입니다.
     private Dictionary<ulong, Queue<byte>> playerScrollSpellSlotQueueMapOnServer = new Dictionary<ulong, Queue<byte>>();
-    private Queue<byte> playerScrollSpellSlotQueueOnClient = new Queue<byte>();
+/*    private Queue<byte> playerScrollSpellSlotQueueOnClient = new Queue<byte>();*/
 
 
     private void Awake()
@@ -37,8 +37,8 @@ public class SpellManager : NetworkBehaviour
 
 
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<Player>().UpdateScrollQueueClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].ToArray());
-        networkClient.PlayerObject.GetComponent<Player>().ShowItemAcquiredUIClientRPC();
+        networkClient.PlayerObject.GetComponent<PlayerClient>().UpdateScrollQueueClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].ToArray());
+        networkClient.PlayerObject.GetComponent<PlayerClient>().ShowItemAcquiredUIClientRPC();
     }
 
     private void DequeuePlayerScrollSpellSlotQueueOnServer(ulong clientId)
@@ -62,7 +62,7 @@ public class SpellManager : NetworkBehaviour
         // 랜덤으로 생성된 스크롤 효과 목록을 요청해온 플레이어에게 공유
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<Player>().SetScrollEffectsToPopupUIClientRPC(scrollNames);
+        networkClient.PlayerObject.GetComponent<PlayerClient>().SetScrollEffectsToPopupUIClientRPC(scrollNames);
     }
 
     private List<int> GenerateUniqueRandomNumbers()
@@ -84,7 +84,7 @@ public class SpellManager : NetworkBehaviour
         return numbers;
     }
 
-    // On Client
+/*    // On Client
     public void UpdatePlayerScrollSpellSlotQueueOnClient(Queue<byte> scrollQueue)
     {
         // Update Queue
@@ -99,9 +99,9 @@ public class SpellManager : NetworkBehaviour
         else
             // Spell Scroll Count UI 활성화 
             GameSceneUIManager.Instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
-    }
+    }*/
 
-    public byte PeekPlayerScrollSpellSlotQueueOnClient()
+/*    public byte PeekPlayerScrollSpellSlotQueueOnClient()
     {
         return playerScrollSpellSlotQueueOnClient.Peek();
     }
@@ -125,7 +125,7 @@ public class SpellManager : NetworkBehaviour
         else
             // Spell Scroll Count UI 활성화 
             GameSceneUIManager.Instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
-    }
+    }*/
     #endregion
 
     #region SpellInfo
@@ -234,7 +234,7 @@ public class SpellManager : NetworkBehaviour
 
         // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
         DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
-        networkClient.PlayerObject.GetComponent<Player>().DequeuePlayerScrollSpellSlotQueueClientRPC();
+        networkClient.PlayerObject.GetComponent<Player>().GetComponent<PlayerSpellScrollQueueControllerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
     }
 
     /// <summary>
@@ -508,7 +508,7 @@ public class SpellManager : NetworkBehaviour
 
             // 각 Client UI 업데이트 지시. HPBar & Damage Popup
             PlayerHPManager.Instance.UpdatePlayerHP(clientId, playerHP, playerMaxHP);
-            player.ShowDamagePopupClientRPC(damage);
+            player.GetComponent<PlayerClient>().ShowDamagePopupClientRPC(damage);
 
             Debug.Log($"GameMultiplayer.PlayerGotHitOnServer()  Player{clientId} got {damage} damage new HP:{playerHP}");
         }

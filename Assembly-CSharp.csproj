@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollFlySpeedUp.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\PlayerSpellScrollQueueControllerClient.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Player.cs" />

@@ -4,6 +4,13 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 
+
+// Player 클래스 마저 분리해야함. 
+// PlayerClient와 PlayerServer로 코드 분류중. 마저 분류하고 인터페이스 적용까지 하기. Knight에도.
+// 1. WIzard, Knight에 알맞게 abstract 메서드 내용 구현하기
+// 2. GetScore, GetSpellController 등 필요성 확인 후 위치or삭제하기
+// 3. 
+
 /// <summary>
 /// 1. 인게임에서 사용되는 플레이어 스크립트입니다.
 /// </summary>
@@ -11,29 +18,27 @@ public class Player : NetworkBehaviour
 {
     public static Player Instance { get; private set; }
 
-    public event EventHandler OnPlayerGameOver;
-    public event EventHandler OnPlayerWin;
+/*    public event EventHandler OnPlayerGameOver;
+    public event EventHandler OnPlayerWin;*/
 
 
     // PlayerData변수를 만들어서 사용하는것으로 코드 정리 해야함. HP같은 변수들 따로 있을 이유가 없음.
-
-    [SerializeField] protected GameInput gameInput;
-    [SerializeField] protected GameObject virtualCameraObj;
-    [SerializeField] protected DamageTextUIController damageTextUIController;
-    [SerializeField] protected HPBarUIController hPBarUIController;
-    [SerializeField] protected UserNameUIController userNameUIController;
+    /*
+        [SerializeField] protected GameInput gameInput;
+        [SerializeField] protected GameObject virtualCameraObj;
+        [SerializeField] protected DamageTextUIController damageTextUIController;
+        [SerializeField] protected HPBarUIController hPBarUIController;
+        [SerializeField] protected UserNameUIController userNameUIController;*/
     [SerializeField] protected SpellController spellController;
     [SerializeField] protected PlayerSpawnPointsController spawnPointsController;
 
     [SerializeField] protected sbyte hp;
-    [SerializeField] protected int score = 0;
+    //[SerializeField] protected int score = 0;
 
     protected GameAssets gameAssets;
 
-    protected bool isAttackButtonClicked;
-
-    // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
-    [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
+/*    // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
+    [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;*/
 
 /*    private void Update()
     {
@@ -42,7 +47,7 @@ public class Player : NetworkBehaviour
         GetComponent<PlayerMovementClient>().HandleMovementServerAuth();
     }*/
 
-    /// <summary>
+/*    /// <summary>
     /// 서버측 InitializePlayer
     /// 1. 스폰위치 초기화
     /// 2. HP 초기화 & 브로드캐스팅
@@ -85,7 +90,7 @@ public class Player : NetworkBehaviour
 
         // Spawn된 클라이언트측 InitializePlayer 시작
         InitializePlayerClientRPC(ownedSpellList);
-    }
+    }*/
 
 /*    [ClientRpc]
     private void InitializePlayerClientRPC(SpellName[] ownedSpellNameList)
@@ -214,20 +219,16 @@ public class Player : NetworkBehaviour
         SoundManager.Instance.PlayWinPopupSound();
     }*/
 
-    #region Public 플레이어 정보 확인
+/*    #region Public 플레이어 정보 확인
     public int GetScore()
     {
         return score;
     }
     #endregion
-
-    public SpellController GetSpellController()
-    {
-        return spellController;
-    }
+*/
 
     #region 스킬 스크롤 획득시 동작들
-    [ClientRpc]
+/*    [ClientRpc]
     public void UpdateScrollQueueClientRPC(byte[] scrollSpellSlotArray)
     {
         if (!IsOwner) return;
@@ -247,13 +248,8 @@ public class Player : NetworkBehaviour
         if (!IsOwner) return;
         // 알림 UI 실행
         GameSceneUIManager.Instance.itemAcquireUIController.ShowItemAcquireUI();
-    }
-
-    public void RequestUniqueRandomScrollsToServer()
-    {
-        SpellManager.Instance.GetUniqueRandomScrollsServerRPC();
-    }
-
+    }*/
+/*
     /// <summary>
     /// 서버에서 제공해준 스크롤 효과 목록을 PopupSelectScrollEffectUIController에 적용.
     /// </summary>
@@ -263,41 +259,10 @@ public class Player : NetworkBehaviour
     {
         if (!IsOwner) return;   
         GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(scrollNames);
-    }
-
-    // 슬롯 선택시 동작. 클라이언트에서 돌아가는 메소드 입니다.
-    public void RequestApplyScrollEffectToServer(ItemName scrollName, byte spellIndex)
-    {
-        //Debug.Log($"RequestApplyScrollEffectToServer. scrollNames:{scrollName}, spellIndexToApply:{spellIndex}");
-
-        // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
-        SpellManager.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
-
-        // SFX 재생
-        SoundManager.Instance.PlayItemSFX(scrollName);
-        // VFX 재생
-        ApplyScrollVFXServerRPC();
-    }
-
-    [ClientRpc]
-    public void DequeuePlayerScrollSpellSlotQueueClientRPC()
-    {
-        if (!IsOwner) return;
-        SpellManager.Instance.DequeuePlayerScrollSpellSlotQueueOnClient();
-    }
-
-    [ServerRpc]
-    private void ApplyScrollVFXServerRPC()
-    {
-        // 스크롤 활용. 스킬 강화 VFX 실행
-        GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfx_SpellUpgrade, transform);
-        vfxHeal.GetComponent<NetworkObject>().Spawn();
-        vfxHeal.transform.SetParent(transform);
-        vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
-    }
+    }*/
     #endregion
 
-    public void SetPlayerItemsDictionaryOnClient(ItemName[] itemNameArray, ushort[] itemCountArray)
+/*    public void SetPlayerItemsDictionaryOnClient(ItemName[] itemNameArray, ushort[] itemCountArray)
     {
         Dictionary<ItemName, ushort> playerItemDictionary = Enumerable.Range(0, itemNameArray.Length).ToDictionary(i => itemNameArray[i], i => itemCountArray[i]);
         Debug.Log($"SetPlayerItemsDictionaryOnClient. player{OwnerClientId}'s playerItemDictionary.Count: {playerItemDictionary.Count} ");
@@ -307,10 +272,5 @@ public class Player : NetworkBehaviour
         }
 
         playerItemDictionaryOnClient = playerItemDictionary;
-    }
-
-    public bool GetIsAttackButtonClicked()
-    {
-        return isAttackButtonClicked;
-    }
+    }*/
 }

@@ -38,7 +38,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Defence.started += Defence_started;
         playerInputActions.Player.Defence.canceled += Defence_canceled;
 
-        GetComponent<Player>().OnPlayerGameOver += OnPlayerGameOver;
+        GetComponent<PlayerClient>().OnPlayerGameOver += OnPlayerGameOver;
     }
 
     private void OnDestroy()
@@ -53,6 +53,8 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Defence.started -= Defence_started;
         playerInputActions.Player.Defence.canceled -= Defence_canceled;
 
+        GetComponent<PlayerClient>().OnPlayerGameOver -= OnPlayerGameOver;
+
         playerInputActions.Dispose();
     }
 
@@ -65,6 +67,11 @@ public class GameInput : MonoBehaviour
         inputVector = inputVector.normalized;
 
         return inputVector;
+    }
+
+    public bool GetIsAttackButtonClicked()
+    {
+        return isAttackButtonClicked;
     }
 
     private void Attack1_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
