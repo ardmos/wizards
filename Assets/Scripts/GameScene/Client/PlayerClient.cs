@@ -35,7 +35,7 @@ public abstract class PlayerClient : NetworkBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
         // 플레이어 닉네임 설정
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        GetComponentInChildren<UserNameUIController>()?.Setup(playerData.playerName.ToString(), IsOwner);
+        GetComponentInChildren<UserNameUIController>()?.Setup(playerData.characterData.playerName.ToString(), IsOwner);
         //Debug.Log($"player Name :{playerData.playerName.ToString()}");
 
         if (!IsOwner) return;
@@ -126,7 +126,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
     public int GetPlayerScore()
     {
-        return GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId).playerScore;
+        return GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId).characterData.score;
     }
 
     [ClientRpc]

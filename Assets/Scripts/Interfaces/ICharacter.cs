@@ -12,7 +12,6 @@ public interface ICharacter
     CharacterClass characterClass { get; set; }
     public SkillName[] skills { get; set; }
 
-    void SetCharacterData(FixedString64Bytes playerName, sbyte hp, float moveSpeed, SkillName[] skills);
+    void SetCharacterData(ICharacter characterData);
     ICharacter GetCharacterData();
 }
-/// PlayerInGameData 내에 ICharacter 반영시키는중이었다.  PlayerClient.Init 부분 작업중 
