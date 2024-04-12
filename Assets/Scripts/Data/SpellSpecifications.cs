@@ -9,7 +9,7 @@ public class SpellSpecifications : MonoBehaviour
 {
     public static SpellSpecifications Instance;
 
-    private SpellInfo[] spellDefaultSpec = new SpellInfo[(int)SpellName.Max];
+    private SpellInfo[] spellDefaultSpec = new SpellInfo[(int)SkillName.Max];
 
     private void Awake()
     {
@@ -20,16 +20,16 @@ public class SpellSpecifications : MonoBehaviour
     private void InitSpellDefaultSpecs()
     {
         // 공격 마법
-        SetSpellDefaultSpec(SpellType.Fire, 2.0f, 10.0f, 10.0f, 30, 1, SpellName.FireBallLv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Water, 2.0f, 10.0f, 10.0f, 30, 1, SpellName.WaterBallLv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Ice, 2.0f, 10.0f, 10.0f, 30, 1, SpellName.IceBallLv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Fire, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.FireBallLv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Water, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.WaterBallLv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Ice, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.IceBallLv1, SpellState.Ready);
         // 방어 마법
-        SetSpellDefaultSpec(SpellType.Arcane, 10.0f, 2.2f, 0f, 30, 1, SpellName.MagicShieldLv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Arcane, 10.0f, 2.2f, 0f, 30, 1, SkillName.MagicShieldLv1, SpellState.Ready);
         // 공격 스킬
-        SetSpellDefaultSpec(SpellType.Stone, 2.0f, 1.0f, 10.0f, 30, 1, SpellName.StoneSlashLv1, SpellState.Ready);        
+        SetSpellDefaultSpec(SpellType.Stone, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.StoneSlashLv1, SpellState.Ready);        
     }
 
-    public SpellInfo GetSpellDefaultSpec(SpellName spellName)
+    public SpellInfo GetSpellDefaultSpec(SkillName spellName)
     {
         return spellDefaultSpec[(int)spellName];
     }
@@ -38,7 +38,7 @@ public class SpellSpecifications : MonoBehaviour
     /// Spell의 기본 스펙을 설정해주는 메소드 입니다.
     /// </summary>
     /// <returns></returns>
-    private void SetSpellDefaultSpec(SpellType spellType, float coolTime, float lifeTime, float moveSpeed, int price, byte level, SpellName spellName, SpellState spellState)
+    private void SetSpellDefaultSpec(SpellType spellType, float coolTime, float lifeTime, float moveSpeed, int price, byte level, SkillName spellName, SpellState spellState)
     {
         SpellInfo spellInfo;
         spellInfo = new SpellInfo(spellType,

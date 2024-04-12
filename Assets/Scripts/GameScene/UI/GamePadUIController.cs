@@ -23,7 +23,7 @@ public class GamePadUIController : MonoBehaviour
     /// <summary>
     /// 게임패드 스킬 아이콘을 업데이트 해주는 메소드
     /// </summary>
-    public void UpdateSpellUI(SpellName[] spellNames)
+    public void UpdateSpellUI(SkillName[] spellNames)
     {
         if (Player.Instance == null) return;
 

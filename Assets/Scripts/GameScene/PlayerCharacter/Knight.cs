@@ -4,25 +4,30 @@ using UnityEngine;
 /// <summary>
 /// 1. Knight 스탯 관리
 /// </summary>
-public class Knight : Player
+public class Knight : ICharacter
 {
-    public SpellName[] ownedSpellList;
-
-    public override void OnNetworkSpawn()
-    {
-        // 서버에서 생성해준다
-        PlayerSpawnServerRPC();
-    }
-
-    [ServerRpc]
-    private void PlayerSpawnServerRPC(ServerRpcParams serverRpcParams = default)
-    {
-        // 테스트 목적으로 스펠리스트 하드코딩. 로비씬에서 선택해줘야함.
-        ownedSpellList = new SpellName[]{
-                SpellName.StoneSlashLv1,
-                SpellName.StoneSlashLv1,
-                SpellName.StoneSlashLv1
+    public string playerName { get; set; }
+    public sbyte hp { get; set; } = 0;
+    public float moveSpeed { get; set; } = 10f;
+    public SkillName[] skills { get; set; } = new SkillName[]{
+                SkillName.ElectricSlashAttack1_Lv1,
+                SkillName.ElectricSlashAttack2_Lv1,
+                SkillName.ElectricSlashAttack1_Lv1,
+                SkillName.Dash_Lv1
                 };
-        InitializePlayerOnServer(ownedSpellList, serverRpcParams.Receive.SenderClientId);
+
+    public void SetCharacterData(string playerName, sbyte hp, float moveSpeed, SkillName[] skills)
+    {
+        this.playerName = playerName;
+        this.hp = hp;
+        this.moveSpeed = moveSpeed;
+        this.skills = skills;
     }
+
+    public ICharacter GetCharacterData()
+    {
+        return this;
+    }
+
+
 }

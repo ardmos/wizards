@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Wizard : Player
 {
-    public SpellName[] ownedSpellList;
+    public SkillName[] ownedSpellList;
 
     public override void OnNetworkSpawn()
     {
@@ -13,11 +13,11 @@ public class Wizard : Player
         {
             Debug.Log($"OwnerClientId{OwnerClientId} requested Initialize PlayerInGameData.");
 
-            ownedSpellList = new SpellName[]{
-                SpellName.FireBallLv1,
-                SpellName.WaterBallLv1,
-                SpellName.IceBallLv1,
-                SpellName.MagicShieldLv1
+            ownedSpellList = new SkillName[]{
+                SkillName.FireBallLv1,
+                SkillName.WaterBallLv1,
+                SkillName.IceBallLv1,
+                SkillName.MagicShieldLv1
                 };
 
             InitializePlayerOnServer(ownedSpellList, OwnerClientId);

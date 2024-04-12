@@ -156,10 +156,10 @@ public class SpellManager : NetworkBehaviour
     /// 플레이어 최초 생성시 호출됩니다.
     /// 업데이트가 끝나면 클라이언트측과 SpellInfo 정보를 동기화합니다.
     /// </summary>
-    public void InitPlayerSpellInfoArrayOnServer(ulong clientId, SpellName[] spellNames)
+    public void InitPlayerSpellInfoArrayOnServer(ulong clientId, SkillName[] spellNames)
     {
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
-        foreach (SpellName spellName in spellNames)
+        foreach (SkillName spellName in spellNames)
         {
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
             spellInfo.ownerPlayerClientId = clientId;
@@ -243,7 +243,7 @@ public class SpellManager : NetworkBehaviour
     /// <param name="clientId">알고싶은 Client의 ID</param>
     /// <param name="spellName">알고싶은 마법의 이름</param>
     /// <returns></returns>
-    public SpellInfo GetSpellInfo(ulong clientId, SpellName spellName)
+    public SpellInfo GetSpellInfo(ulong clientId, SkillName spellName)
     {
         if (!spellInfoListOnServer.ContainsKey(clientId))
         {
@@ -269,7 +269,7 @@ public class SpellManager : NetworkBehaviour
     /// </summary>
     /// <param name="player"></param>
     [ServerRpc(RequireOwnership = false)]
-    public void StartActivateDefenceSpellServerRPC(SpellName spellName, NetworkObjectReference player)
+    public void StartActivateDefenceSpellServerRPC(SkillName spellName, NetworkObjectReference player)
     {
         // GameObject 얻어내기 실패시 로그 출력
         if (!player.TryGet(out NetworkObject playerObject))
@@ -294,7 +294,7 @@ public class SpellManager : NetworkBehaviour
     /// 공격 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
-    public void StartCastingAttackSpellServerRPC(SpellName spellName, NetworkObjectReference player)
+    public void StartCastingAttackSpellServerRPC(SkillName spellName, NetworkObjectReference player)
     {
         // GameObject 얻어내기 실패시 로그 출력
         if (!player.TryGet(out NetworkObject playerObject))

@@ -82,12 +82,12 @@ public class GameAssets : MonoBehaviour
     public Color color_Enemy;
     #endregion
 
-    public GameObject GetSpellPrefab(SpellName spellName)
+    public GameObject GetSpellPrefab(SkillName spellName)
     {
         return spellAssetsList[SearchSpellNameIndex(spellName)].prefab;
     }
 
-    public Sprite GetSpellIconImage(SpellName spellName)
+    public Sprite GetSpellIconImage(SkillName spellName)
     {
         return spellAssetsList[SearchSpellNameIndex(spellName)].icon;
     }
@@ -115,26 +115,26 @@ public class GameAssets : MonoBehaviour
     /// 마법 카테고리가 아닌, 하나 하나의 마법들이 추가되거나 순서가 변경되는건 상관없습니다.
     /// 마법 카테고리 : ex) 물마법Lv1의 경우 FireSpellStart, FireSpellEnd, WaterSpellStart 총 세 개를 빼야하기 때문에 adjustValue가 3이 됩니다.
     /// </summary>
-    private byte SearchSpellNameIndex(SpellName spellName)
+    private byte SearchSpellNameIndex(SkillName spellName)
     {
         byte adjustValue = 0;
-        if (spellName >= SpellName.DefenceSpellStart)
+        if (spellName >= SkillName.DefenceSpellStart)
         {
             adjustValue = 9;
         }
-        else if(spellName >= SpellName.SlashSpellStart)
+        else if(spellName >= SkillName.SlashSkillStart)
         {
             adjustValue = 7;
         }
-        else if(spellName >= SpellName.IceSpellStart)
+        else if(spellName >= SkillName.IceSpellStart)
         {
             adjustValue = 5;
         }
-        else if (spellName >= SpellName.WaterSpellStart)
+        else if (spellName >= SkillName.WaterSpellStart)
         {
             adjustValue = 3;
         }
-        else if (spellName >= SpellName.FireSpellStart)
+        else if (spellName >= SkillName.FireSpellStart)
         {
             adjustValue = 1;
         }
@@ -211,14 +211,14 @@ public class GameAssets : MonoBehaviour
 
     public AudioClip GetButtonClickSound() { return sfx_btnClick; }
 
-    public AudioClip GetMagicSFXSound(SpellName spellName, byte state) 
+    public AudioClip GetMagicSFXSound(SkillName spellName, byte state) 
     {
         switch (spellName) {
-            case SpellName.FireBallLv1:
+            case SkillName.FireBallLv1:
                 return sfx_Fireball_Lv1[state];
-            case SpellName.WaterBallLv1:
+            case SkillName.WaterBallLv1:
                 return sfx_Waterball_Lv1[state];
-            case SpellName.IceBallLv1:
+            case SkillName.IceBallLv1:
                 return sfx_Iceball_Lv1[state];
             default: 
                 Debug.LogError($"{nameof(GetMagicSFXSound)}. {spellName}은 알맞은 spellName이 아닙니다."); 

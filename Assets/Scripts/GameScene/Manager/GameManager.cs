@@ -190,7 +190,7 @@ public class GameManager : NetworkBehaviour
 
                     // 생존자 화면에 Win 팝업 실행
                     NetworkClient networkClient = NetworkManager.ConnectedClients[winPlayer.clientId];
-                    networkClient.PlayerObject.GetComponent<Player>().SetPlayerGameWinClientRPC();
+                    networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameWinClientRPC();
                 }
                 // 타임아웃.
                 else if (gamePlayingTimer.Value < 0f)

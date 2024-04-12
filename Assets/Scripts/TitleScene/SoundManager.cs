@@ -153,7 +153,7 @@ public class SoundManager : MonoBehaviour
     }
 
     [ClientRpc]
-    public void PlayMagicSFXClientRPC(SpellName spellName, byte state)
+    public void PlayMagicSFXClientRPC(SkillName spellName, byte state)
     {
         //Debug.Log($"PlayMagicSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}");
         if (audioSourceObjectPrefab == null) return;

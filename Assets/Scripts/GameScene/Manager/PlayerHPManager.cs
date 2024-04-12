@@ -33,7 +33,7 @@ public class PlayerHPManager : NetworkBehaviour
 
         // 각 Client 플레이어의 HP바 UI 업데이트
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<Player>().SetHPClientRPC(playerData.playerHP, playerData.playerMaxHP);
+        networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.playerHP, playerData.playerMaxHP);
         
 
         // 게임오버 처리. 서버권한 방식.
@@ -46,7 +46,7 @@ public class PlayerHPManager : NetworkBehaviour
             GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(clientId, PlayerMoveAnimState.GameOver);
 
             // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
-            networkClient.PlayerObject.GetComponent<Player>().SetPlayerGameOverClientRPC();
+            networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameOverClientRPC();
         }
 
     }

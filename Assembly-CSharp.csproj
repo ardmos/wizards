@@ -170,6 +170,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupNameChangeUIController.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadSceneManager.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManager.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
     <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
@@ -198,11 +199,11 @@
     <Compile Include="Assets\Scripts\GameScene\Store\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
+    <Compile Include="Assets\Scripts\Data\SkillName.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
-    <Compile Include="Assets\Scripts\Data\SpellName.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerAttackAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpellInfo : INetworkSerializable
 {
     public SpellType spellType;
-    public SpellName spellName;
+    public SkillName spellName;
     public SpellState spellState;
     public float coolTime;
     public float lifeTime;
@@ -31,7 +31,7 @@ public class SpellInfo : INetworkSerializable
         this.ownerPlayerClientId = spellInfo.ownerPlayerClientId;
     }
 
-    public SpellInfo(SpellType spellType, SpellName spellName, SpellState spellState, float coolTime, float lifeTime, float moveSpeed, int price, byte level)
+    public SpellInfo(SpellType spellType, SkillName spellName, SpellState spellState, float coolTime, float lifeTime, float moveSpeed, int price, byte level)
     {
         this.spellType = spellType;
         this.spellName = spellName; 

@@ -25,7 +25,7 @@ public abstract class PlayerClient : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void InitializePlayerClientRPC(SpellName[] ownedSpellNameList)
+    public void InitializePlayerClientRPC(ICharacter character)
     {
         Debug.Log($"OwnerClientId {OwnerClientId} Player InitializePlayerClientRPC");
 
@@ -44,7 +44,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
         // 보유 스펠을 GamePad UI에 반영          
         //Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
-        FindObjectOfType<GamePadUIController>().UpdateSpellUI(ownedSpellNameList);
+        FindObjectOfType<GamePadUIController>().UpdateSpellUI(character.skills);
 
         // Input Action 이벤트 구독
         gameInput.OnAttack1Started += GameInput_OnAttack1Started;

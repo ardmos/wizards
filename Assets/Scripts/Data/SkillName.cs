@@ -1,4 +1,4 @@
-public enum SpellName
+public enum SkillName
 {
     FireSpellStart,
     FireBallLv1,
@@ -9,11 +9,14 @@ public enum SpellName
     IceSpellStart,
     IceBallLv1,
     IceSpellEnd,
-    SlashSpellStart,
+    SlashSkillStart,
     StoneSlashLv1,
-    SlashSpellEnd,
+    ElectricSlashAttack1_Lv1,
+    ElectricSlashAttack2_Lv1,
+    SlashSkillEnd,
     DefenceSpellStart,
     MagicShieldLv1,
+    Dash_Lv1,
     DefenceSpellEnd,
     Max
 }
