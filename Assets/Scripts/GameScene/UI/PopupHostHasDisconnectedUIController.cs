@@ -14,7 +14,10 @@ public class PopupHostHasDisconnectedUIController : MonoBehaviour
             // 로비로 이동.
             LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         });
-        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+
+        if (NetworkManager.Singleton != null)
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+
         Hide();
     }
 

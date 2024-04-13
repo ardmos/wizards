@@ -6,7 +6,7 @@ public enum SpellType
     Fire,
     Water,
     Ice,
-    Lightning,
+    Electric,
     Arcane,
     Stone
 }

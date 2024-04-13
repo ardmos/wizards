@@ -6,12 +6,12 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerServer : NetworkBehaviour
 {
-
+    public PlayerClient playerClient;
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
 
-        ICharacter character = GetComponent<ICharacter>();
+        ICharacter character = (ICharacter)playerClient; //GetComponent<ICharacter>();
         InitializePlayerOnServer(character, OwnerClientId);
     }
 
@@ -23,7 +23,7 @@ public class PlayerServer : NetworkBehaviour
     /// </summary>
     public void InitializePlayerOnServer(ICharacter character, ulong requestedInitializeClientId)
     {
-        Debug.Log($"OwnerClientId{OwnerClientId} Player InitializePlayerOnServer");
+        Debug.Log($"OwnerClientId{OwnerClientId} Player (class : {character.characterClass.ToString()}) InitializePlayerOnServer");
 
         PlayerSpawnPointsController spawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
 
@@ -44,18 +44,18 @@ public class PlayerServer : NetworkBehaviour
 
         // HP 초기화
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(requestedInitializeClientId);
-        playerData.playerHP = character.hp;
-        playerData.playerMaxHP = character.hp;
+        playerData.hp = character.hp;
+        playerData.maxHp = character.maxHp;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(requestedInitializeClientId, playerData);
 
         // 현재 HP 저장 및 설정
-        PlayerHPManager.Instance.UpdatePlayerHP(requestedInitializeClientId, playerData.playerHP, playerData.playerMaxHP);
+        PlayerHPManager.Instance.UpdatePlayerHP(requestedInitializeClientId, playerData.hp, playerData.maxHp);
 
-        // 특정 플레이어가 보유한 스킬 목록 저장
+        // 플레이어가 보유한 스킬 목록 서버측(SpellManager)에 저장 ( 수정해야함
         SpellManager.Instance.InitPlayerSpellInfoArrayOnServer(requestedInitializeClientId, character.skills);
 
-        // Spawn된 클라이언트측 InitializePlayer 시작
-        GetComponent<PlayerClient>().InitializePlayerClientRPC(character);
+        // 플레이어 InitializePlayer 시작, 스킬 목록을 클라이언트측(SpellController)에 저장 ( 수정해야함
+        GetComponent<PlayerClient>().InitializePlayerClientRPC(character.skills);
     }
 
     // 스크롤 활용. 스킬 강화 VFX 실행

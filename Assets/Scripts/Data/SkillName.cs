@@ -1,22 +1,11 @@
 public enum SkillName
 {
-    FireSpellStart,
     FireBallLv1,
-    FireSpellEnd,
-    WaterSpellStart,
     WaterBallLv1,
-    WaterSpellEnd,
-    IceSpellStart,
     IceBallLv1,
-    IceSpellEnd,
-    SlashSkillStart,
-    StoneSlashLv1,
+    StoneSlashAttack1_Lv1,
     ElectricSlashAttack1_Lv1,
     ElectricSlashAttack2_Lv1,
-    SlashSkillEnd,
-    DefenceSpellStart,
     MagicShieldLv1,
     Dash_Lv1,
-    DefenceSpellEnd,
-    Max
 }

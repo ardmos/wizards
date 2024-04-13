@@ -1,6 +1,7 @@
-
 using UnityEngine;
+
 /// <summary>
+/// ========= 수정 필요.  스펙들은 Wizard나 Knight처럼 각각 스크립트에 담겨있는게 나을지도 모릅니다. ==================
 /// 각 스펠들의 상세 스펙을 담고있는 스크립트입니다.
 /// 요청받으면 스펙을 제공합니다.
 /// Game씬의 SpellSpecifications 오브젝트의 컴포넌트 입니다. Game씬과 라이프사이클을 함께합니다.
@@ -9,7 +10,7 @@ public class SpellSpecifications : MonoBehaviour
 {
     public static SpellSpecifications Instance;
 
-    private SpellInfo[] spellDefaultSpec = new SpellInfo[(int)SkillName.Max];
+    private SpellInfo[] spellDefaultSpec = new SpellInfo[(int)SkillName.Dash_Lv1];
 
     private void Awake()
     {
@@ -26,7 +27,9 @@ public class SpellSpecifications : MonoBehaviour
         // 방어 마법
         SetSpellDefaultSpec(SpellType.Arcane, 10.0f, 2.2f, 0f, 30, 1, SkillName.MagicShieldLv1, SpellState.Ready);
         // 공격 스킬
-        SetSpellDefaultSpec(SpellType.Stone, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.StoneSlashLv1, SpellState.Ready);        
+        SetSpellDefaultSpec(SpellType.Stone, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.StoneSlashAttack1_Lv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttack1_Lv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttack2_Lv1, SpellState.Ready);
     }
 
     public SpellInfo GetSpellDefaultSpec(SkillName spellName)

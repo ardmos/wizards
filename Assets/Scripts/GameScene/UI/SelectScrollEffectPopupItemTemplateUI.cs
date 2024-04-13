@@ -27,7 +27,7 @@ public class SelectScrollEffectPopupItemTemplateUI : NetworkBehaviour
         // scroll 이름
         txtScrollName.text = $"{Item.GetName(scrollName)}!!";
         // spell 이름
-        SkillName spellName = Player.Instance.GetComponent<SpellController>().GetSpellInfoList()[spellIndexToApply].spellName;
+        SkillName spellName = PlayerClient.Instance.GetComponent<SpellController>().GetSpellInfoList()[spellIndexToApply].spellName;
         txtSpellName.text = spellName.ToString();
         // spell 아이콘 이미지
         imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);
@@ -37,7 +37,7 @@ public class SelectScrollEffectPopupItemTemplateUI : NetworkBehaviour
         // 버튼 기능 설정   
         btnApply.onClick.RemoveAllListeners();
         btnApply.AddClickListener(() => {
-            if (Player.Instance == null) return;
+            if (PlayerClient.Instance == null) return;
             if(GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
 
             RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);

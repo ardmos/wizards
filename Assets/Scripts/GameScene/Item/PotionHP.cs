@@ -35,9 +35,9 @@ public class PotionHP : NetworkBehaviour
 
     private void ApplyHealingEffect(ulong collisionedClientId) {
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(collisionedClientId);
-        sbyte newHP = (sbyte)(playerData.playerHP + healingValue);
-        if(newHP > playerData.playerMaxHP) newHP = playerData.playerMaxHP;
+        sbyte newHP = (sbyte)(playerData.hp + healingValue);
+        if(newHP > playerData.maxHp) newHP = playerData.maxHp;
 
-        PlayerHPManager.Instance.UpdatePlayerHP(collisionedClientId, newHP, playerData.playerMaxHP);
+        PlayerHPManager.Instance.UpdatePlayerHP(collisionedClientId, newHP, playerData.maxHp);
     }
 }

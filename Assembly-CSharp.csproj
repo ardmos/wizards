@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollFlySpeedUp.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Client\PlayerSpellScrollQueueControllerClient.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Player.cs" />
@@ -107,6 +106,7 @@
     <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\Knight.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\Coin.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxSpellUpgrade.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
@@ -133,6 +133,7 @@
     <Compile Include="Assets\Scripts\GameScene\Item\Scroll.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\PopupGameRoomUIController.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\Wizard.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\SpellController.cs" />
@@ -157,12 +158,12 @@
     <Compile Include="Assets\Scripts\GameScene\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\PlayerSpellScrollQueueManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameStartCountdownUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\DailyGroupUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollLevelUp.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Wizard.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollAttach.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerClient.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
@@ -207,7 +208,6 @@
     <Compile Include="Assets\Scripts\Data\PlayerAttackAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Knight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

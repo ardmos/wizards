@@ -14,8 +14,6 @@ public class SpellInfo : INetworkSerializable
     public byte level;
     public ulong ownerPlayerClientId;
 
-
-
     public SpellInfo() { }
 
     public SpellInfo(SpellInfo spellInfo) 

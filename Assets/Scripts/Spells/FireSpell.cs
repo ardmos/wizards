@@ -40,7 +40,7 @@ public abstract class FireSpell : AttackSpell
             default:
                 result.spellType = SpellType.Fire;         
                 break;
-            case SpellType.Lightning:
+            case SpellType.Electric:
                 result.spellType = SpellType.Arcane;
                 break;
         }

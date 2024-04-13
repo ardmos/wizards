@@ -27,13 +27,13 @@ public class PlayerHPManager : NetworkBehaviour
 
         // 변경된 HP값 서버에 저장
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
-        playerData.playerHP = currentHP;
-        playerData.playerMaxHP = maxHP;
+        playerData.hp = currentHP;
+        playerData.maxHp = maxHP;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(clientId, playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.playerHP, playerData.playerMaxHP);
+        networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);
         
 
         // 게임오버 처리. 서버권한 방식.

@@ -16,8 +16,8 @@ using UnityEngine;
 /// </summary>
 public class Player : NetworkBehaviour
 {
-    public static Player Instance { get; private set; }
-
+/*    public static Player Instance { get; private set; }
+*/
 /*    public event EventHandler OnPlayerGameOver;
     public event EventHandler OnPlayerWin;*/
 
@@ -29,13 +29,13 @@ public class Player : NetworkBehaviour
         [SerializeField] protected DamageTextUIController damageTextUIController;
         [SerializeField] protected HPBarUIController hPBarUIController;
         [SerializeField] protected UserNameUIController userNameUIController;*/
-    [SerializeField] protected SpellController spellController;
+/*    [SerializeField] protected SpellController spellController;
     [SerializeField] protected PlayerSpawnPointsController spawnPointsController;
 
-    [SerializeField] protected sbyte hp;
+    [SerializeField] protected sbyte hp;*/
     //[SerializeField] protected int score = 0;
-
-    protected GameAssets gameAssets;
+/*
+    protected GameAssets gameAssets;*/
 
 /*    // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;*/

@@ -33,7 +33,7 @@ public abstract class WaterSpell : AttackSpell
             case SpellType.Water:
             case SpellType.Ice:
             case SpellType.Arcane:
-            case SpellType.Lightning:
+            case SpellType.Electric:
             default:
                 result.spellType = SpellType.Water;
                 break;

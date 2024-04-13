@@ -18,6 +18,7 @@ public class GameSceneUIManager : MonoBehaviour
     public PopupSelectScrollEffectUIController popupSelectScrollEffectUIController;
     public ButtonReadSpellScrollUIController buttonReadSpellScrollUIController;
     public ItemAcquireUIController itemAcquireUIController;
+    public GamePadUIController gamePadUIController;
 
     void Awake()
     {

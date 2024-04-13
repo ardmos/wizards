@@ -2560,9 +2560,11 @@ GameObject:
   - component: {fileID: 932501098101691874}
   - component: {fileID: -2686748507231774534}
   - component: {fileID: 854047434301573314}
-  - component: {fileID: 532842309490800541}
-  - component: {fileID: 6631467521865965885}
+  - component: {fileID: 4579991518944106865}
   - component: {fileID: -3331297196142442222}
+  - component: {fileID: 6631467521865965885}
+  - component: {fileID: 294066641757979093}
+  - component: {fileID: 532842309490800541}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
   - component: {fileID: 3569301515384591240}
@@ -2608,18 +2610,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0b2ec62b4a5747b4059f0f3fd4bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameInput: {fileID: -3331297196142442222}
-  virtualCameraObj: {fileID: 4859955840248925076}
-  damageTextUIController: {fileID: 3422639390078374823}
-  hPBarUIController: {fileID: 2648681988919741548}
+  VirtualCamera: {fileID: 4487991525872706357}
+  mRigidbody: {fileID: 4842463508567140202}
   userNameUIController: {fileID: 4649931589576448986}
+  playerSpellScrollQueueManager: {fileID: 4579991518944106865}
+  gameInput: {fileID: -3331297196142442222}
   spellController: {fileID: 6631467521865965885}
-  spawnPointsController: {fileID: 0}
-  moveSpeed: 2.2
-  hp: 5
-  score: 0
-  isPlayerGameOver: 0
-  ownedSpellList: 
 --- !u!114 &854047434301573314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2632,7 +2628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae9b522c03dcbc4da7ed1814c3c9444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &532842309490800541
+--- !u!114 &4579991518944106865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2641,7 +2637,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac0682c8d9cb97448002e31b5cca9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: d37b9f53519cefc49a08ef60a8d97e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3331297196142442222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2ae86f6bc5a384ca03f87bf25f11f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6631467521865965885
@@ -2661,7 +2669,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
---- !u!114 &-3331297196142442222
+--- !u!114 &294066641757979093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2670,7 +2678,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c2ae86f6bc5a384ca03f87bf25f11f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cebec3ae8547de4cae4a684d6416cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerClient: {fileID: -2686748507231774534}
+--- !u!114 &532842309490800541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac0682c8d9cb97448002e31b5cca9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &4842463508567140202
@@ -5404,7 +5425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b891d0fd50f5e4ab73d7dc548a58ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: -2686748507231774534}
+  player: {fileID: 0}
 --- !u!114 &1844094944237122789
 MonoBehaviour:
   m_ObjectHideFlags: 0

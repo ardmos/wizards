@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerSpellScrollQueueControllerClient : MonoBehaviour
+public class PlayerSpellScrollQueueManagerClient : MonoBehaviour
 {
     public Queue<byte> playerScrollSpellSlotQueueOnClient = new Queue<byte>();
 

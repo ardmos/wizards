@@ -140,6 +140,24 @@ public class SpellController : NetworkBehaviour
     }
 
     /// <summary>
+    /// Player Server에서 Player Init시 InitPlayerSpellInfoArrayOnServer와 함께 호출되는 메서드 입니다. 
+    /// 플레이어의 스킬 리스트 정보를 저장합니다
+    /// </summary>
+    /// <param name="skills"></param>
+    public void InitPlayerSpellInfoListClient(SkillName[] skills)
+    {
+        List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
+        foreach (SkillName skill in skills)
+        {
+            SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(skill));
+            spellInfo.ownerPlayerClientId = OwnerClientId;
+            playerSpellInfoList.Add(spellInfo);
+        }
+
+        spellInfoListOnClient = playerSpellInfoList;
+    }
+
+    /// <summary>
     /// 특정 client가 현재 보유중인 마법의 정보를 알려주는 메소드 입니다.  
     /// </summary>
     /// <param name="clientId">알고싶은 Client의 ID</param>

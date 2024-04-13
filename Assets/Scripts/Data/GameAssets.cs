@@ -82,14 +82,18 @@ public class GameAssets : MonoBehaviour
     public Color color_Enemy;
     #endregion
 
-    public GameObject GetSpellPrefab(SkillName spellName)
+    public GameObject GetSpellPrefab(SkillName skillName)
     {
-        return spellAssetsList[SearchSpellNameIndex(spellName)].prefab;
+        //int index = SearchSpellNameIndex(spellName);
+        int index = (int)skillName;
+        return spellAssetsList[index].prefab;
     }
 
-    public Sprite GetSpellIconImage(SkillName spellName)
+    public Sprite GetSpellIconImage(SkillName skillName)
     {
-        return spellAssetsList[SearchSpellNameIndex(spellName)].icon;
+        //int index = SearchSpellNameIndex(spellName);
+        int index = (int)skillName;
+        return spellAssetsList[index].icon;
     }
 
     public Sprite GetScrollEffectIconImage(ItemName itemName)
@@ -107,39 +111,6 @@ public class GameAssets : MonoBehaviour
             default:
                 return null;
         }
-    }
-
-    /// <summary>
-    /// 스펠 네임을 넣으면 마법 카테고리의 시작과 끝을 알리는 Start&End 이넘의 개수을 제외한 해당 스펠의 순수한 Index값을 알려주는 메소드 입니다.
-    /// SpellName에 새로운 마법 Start&End 카테고리가 추가되거나, 마법 카테고리 순서가 변경될 경우 이 메소드도 함께 수정해주어야 합니다.
-    /// 마법 카테고리가 아닌, 하나 하나의 마법들이 추가되거나 순서가 변경되는건 상관없습니다.
-    /// 마법 카테고리 : ex) 물마법Lv1의 경우 FireSpellStart, FireSpellEnd, WaterSpellStart 총 세 개를 빼야하기 때문에 adjustValue가 3이 됩니다.
-    /// </summary>
-    private byte SearchSpellNameIndex(SkillName spellName)
-    {
-        byte adjustValue = 0;
-        if (spellName >= SkillName.DefenceSpellStart)
-        {
-            adjustValue = 9;
-        }
-        else if(spellName >= SkillName.SlashSkillStart)
-        {
-            adjustValue = 7;
-        }
-        else if(spellName >= SkillName.IceSpellStart)
-        {
-            adjustValue = 5;
-        }
-        else if (spellName >= SkillName.WaterSpellStart)
-        {
-            adjustValue = 3;
-        }
-        else if (spellName >= SkillName.FireSpellStart)
-        {
-            adjustValue = 1;
-        }
-
-        return (byte)(spellName - adjustValue);
     }
 
     /// <summary>

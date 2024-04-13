@@ -23,14 +23,14 @@ public class GamePadUIController : MonoBehaviour
     /// <summary>
     /// 게임패드 스킬 아이콘을 업데이트 해주는 메소드
     /// </summary>
-    public void UpdateSpellUI(SkillName[] spellNames)
+    public void UpdateSpellUI(SkillName[] skills)
     {
-        if (Player.Instance == null) return;
+        if (PlayerClient.Instance == null) return;
 
-        for (ushort i = 0; i < spellNames.Length; i++)
+        for (ushort i = 0; i < skills.Length; i++)
         {
-            //Debug.Log($"spellName: {spellNames[i]}");
-            spellIcons[i].sprite = GameAssets.instantiate.GetSpellIconImage(spellNames[i]);
+            Debug.Log($"GamePadUIController.UpdateSpellUI() skills: {skills[i]}");
+            spellIcons[i].sprite = GameAssets.instantiate.GetSpellIconImage(skills[i]);
         }       
     }
 
@@ -39,7 +39,7 @@ public class GamePadUIController : MonoBehaviour
     /// </summary>
     private void CoolTimePresenter()
     {
-        if (Player.Instance == null)
+        if (PlayerClient.Instance == null)
         {
             return;
         }
@@ -47,7 +47,7 @@ public class GamePadUIController : MonoBehaviour
         for (byte i = 0;i < spellCooltimeImages.Length; i++)
         {
             //Debug.Log($"{Player.LocalInstance.OwnerClientId}");
-            float coolTimeRatio = Player.Instance.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(i);
+            float coolTimeRatio = PlayerClient.Instance.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(i);
             if (coolTimeRatio > 0) 
             {
                 spellCooltimeImages[i].fillAmount = 1 - coolTimeRatio;

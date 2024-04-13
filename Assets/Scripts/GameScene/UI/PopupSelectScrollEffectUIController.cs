@@ -10,12 +10,6 @@ using UnityEngine.UI;
 /// </summary>
 public class PopupSelectScrollEffectUIController : MonoBehaviour
 {
-    /*    public SpellSlot spellSlot0;
-        public SpellSlot spellSlot1;
-        public SpellSlot spellSlot2;
-
-        List<SpellInfo> spellInfos;*/
-
     public SelectScrollEffectPopupItemTemplateUI scrollEffectSlot0;
     public SelectScrollEffectPopupItemTemplateUI scrollEffectSlot1;
     public SelectScrollEffectPopupItemTemplateUI scrollEffectSlot2;
@@ -30,7 +24,7 @@ public class PopupSelectScrollEffectUIController : MonoBehaviour
     public void InitPopup(ItemName[] scrollNames)
     {
         // 슬롯 UI 정보 초기화. Scroll 효과가 적용될 Spell Slot은 서버로부터 공유받은 큐에 저장된 첫번째 값.
-        spellIndexToApply = SpellManager.Instance.PeekPlayerScrollSpellSlotQueueOnClient();
+        spellIndexToApply = PlayerClient.Instance.GetComponent<PlayerSpellScrollQueueManagerClient>().PeekPlayerScrollSpellSlotQueueOnClient();
         //Debug.Log($"InitPopup. spellIndexToApply:{spellIndexToApply}, scrollNames[0]:{scrollNames[0]}, [1]:{scrollNames[1]}, [2]:{scrollNames[2]}");
 
         scrollEffectSlot0.InitUI(scrollNames[0], spellIndexToApply);

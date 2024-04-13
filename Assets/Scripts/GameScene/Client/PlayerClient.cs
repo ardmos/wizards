@@ -14,37 +14,41 @@ public abstract class PlayerClient : NetworkBehaviour
     public event EventHandler OnPlayerGameOver;
     //public event EventHandler OnPlayerWin;
 
-    private GameInput gameInput;
+    public CinemachineVirtualCamera VirtualCamera;
+    public Rigidbody mRigidbody;
+    public UserNameUIController userNameUIController;
+    public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManager;
+
+    public GameInput gameInput;
+    public SpellController spellController;
 
     // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
 
-    private void Awake()
-    {
-        gameInput = GetComponent<GameInput>();
-    }
-
     [ClientRpc]
-    public void InitializePlayerClientRPC(ICharacter character)
+    public void InitializePlayerClientRPC(SkillName[] skills)
     {
         Debug.Log($"OwnerClientId {OwnerClientId} Player InitializePlayerClientRPC");
 
         // 카메라 위치 초기화. 소유자만 따라다니도록 함 
-        GetComponentInChildren<CinemachineVirtualCamera>()?.gameObject.SetActive(IsOwner);
+        VirtualCamera?.gameObject.SetActive(IsOwner);
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
-        GetComponent<Rigidbody>().isKinematic = false;
+        mRigidbody.isKinematic = false;
         // 플레이어 닉네임 설정
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        GetComponentInChildren<UserNameUIController>()?.Setup(playerData.characterData.playerName.ToString(), IsOwner);
+        userNameUIController?.Setup(playerData.playerName.ToString(), IsOwner);
         //Debug.Log($"player Name :{playerData.playerName.ToString()}");
 
         if (!IsOwner) return;
 
         Instance = this;
 
-        // 보유 스펠을 GamePad UI에 반영          
-        //Debug.Log($"ownedSpellNameList.Length : {ownedSpellNameList.Length}");
-        FindObjectOfType<GamePadUIController>().UpdateSpellUI(character.skills);
+        // 보유 skill 정보를 GamePad UI에 반영          
+        Debug.Log($"PlayerClient.InitializePlayerClientRPC() skills.Length : {skills.Length}");
+        GameSceneUIManager.Instance.gamePadUIController.UpdateSpellUI(skills);
+
+        // 보유 skill 정보를 클라이언트측에 저장.  ( 근데 spellController에 저장하는게 맞는지 확인 필요. 클래스명을 바꾸던지. ) 
+        spellController.InitPlayerSpellInfoListClient(skills);
 
         // Input Action 이벤트 구독
         gameInput.OnAttack1Started += GameInput_OnAttack1Started;
@@ -126,7 +130,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
     public int GetPlayerScore()
     {
-        return GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId).characterData.score;
+        return GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId).score;
     }
 
     [ClientRpc]
@@ -137,7 +141,7 @@ public abstract class PlayerClient : NetworkBehaviour
         Queue<byte> scrollSpellSlotQueue = new Queue<byte>(scrollSpellSlotArray);
 
         // Queue 업데이트
-        GetComponent<PlayerSpellScrollQueueControllerClient>().UpdatePlayerScrollSpellSlotQueueOnClient(scrollSpellSlotQueue);
+        playerSpellScrollQueueManager.UpdatePlayerScrollSpellSlotQueueOnClient(scrollSpellSlotQueue);
 
         // SFX 실행
         SoundManager.Instance.PlayOpenScrollSound();

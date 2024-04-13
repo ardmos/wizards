@@ -154,7 +154,6 @@ public class SpellManager : NetworkBehaviour
     /// <summary>
     /// Server측에서 보유한 SpellInfo 리스트 초기화 메소드 입니다.
     /// 플레이어 최초 생성시 호출됩니다.
-    /// 업데이트가 끝나면 클라이언트측과 SpellInfo 정보를 동기화합니다.
     /// </summary>
     public void InitPlayerSpellInfoArrayOnServer(ulong clientId, SkillName[] spellNames)
     {
@@ -174,10 +173,6 @@ public class SpellManager : NetworkBehaviour
         {
             spellInfoListOnServer.Add(clientId, playerSpellInfoList);
         }
-
-        // 요청한 클라이언트의 currentSpellInfoList 동기화
-        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(playerSpellInfoList.ToArray());
     }
 
     /// <summary>
@@ -234,7 +229,7 @@ public class SpellManager : NetworkBehaviour
 
         // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
         DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
-        networkClient.PlayerObject.GetComponent<Player>().GetComponent<PlayerSpellScrollQueueControllerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
+        networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
     }
 
     /// <summary>
@@ -398,7 +393,7 @@ public class SpellManager : NetworkBehaviour
                 Debug.Log("AttackSpell Info is null");
             }
 
-            Player player = collider.GetComponent<Player>();
+            PlayerClient player = collider.GetComponent<PlayerClient>();
             if (player != null)
             {
                 byte damage = (byte)spell.GetSpellInfo().level;
@@ -484,15 +479,15 @@ public class SpellManager : NetworkBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="clientId"></param>
-    public void PlayerGotHitOnServer(byte damage, Player player)
+    public void PlayerGotHitOnServer(byte damage, PlayerClient player)
     {
         ulong clientId = player.OwnerClientId;
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {
             // 요청한 플레이어 현재 HP값 가져오기 
             PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
-            sbyte playerHP = playerData.playerHP;
-            sbyte playerMaxHP = playerData.playerMaxHP;
+            sbyte playerHP = playerData.hp;
+            sbyte playerMaxHP = playerData.maxHp;
 
             // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
             if (playerHP <= damage)

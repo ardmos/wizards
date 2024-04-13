@@ -40,14 +40,14 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
             throw new System.ArgumentNullException(nameof(eventData));
 
         // 혹시나. 예외 체크. Spell State 체크. Casting이 아닌 경우는 무시
-        if (Player.Instance.GetComponent<SpellController>().GetSpellStateFromSpellIndexOnClient(spellIndex) != SpellState.Casting)
+        if (PlayerClient.Instance.GetComponent<SpellController>().GetSpellStateFromSpellIndexOnClient(spellIndex) != SpellState.Casting)
         {
             return;
         }
         // 버튼 이동
         Vector2 dir = MoveButton(eventData.position, eventData.pressEventCamera);
         // 플레이어 회전
-        Player.Instance.GetComponent<PlayerMovementClient>().RotateByDragSpellButton(new Vector3(dir.x, 0f, dir.y));
+        PlayerClient.Instance.GetComponent<PlayerMovementClient>().RotateByDragSpellButton(new Vector3(dir.x, 0f, dir.y));
     }
 
     /// <summary>
