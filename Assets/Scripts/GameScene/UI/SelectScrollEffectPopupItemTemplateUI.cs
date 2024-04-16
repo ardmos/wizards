@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 1. 버튼 클릭시 -> 선택된 기능을 지정된 스펠 슬롯에 적용
 /// </summary>
-public class SelectScrollEffectPopupItemTemplateUI : NetworkBehaviour
+public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
 {
     //public sbyte slotNumber;
     public CustomClickSoundButton btnApply;
