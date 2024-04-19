@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class Wizard : PlayerClient, ICharacter
 {
+    public SpellControllerClientWizard spellController;
     public CharacterClass characterClass { get; set; } = CharacterClass.Wizard;
     public sbyte hp { get; set; } = 5;
     public sbyte maxHp { get; set; } = 5;
@@ -18,6 +19,13 @@ public class Wizard : PlayerClient, ICharacter
                 SkillName.IceBallLv1,
                 SkillName.MagicShieldLv1
                 };
+
+    public override void InitializePlayerClientRPC(SkillName[] skills)
+    {
+        base.InitializePlayerClientRPC(skills);
+        // 보유 skill 정보를 클라이언트측 캐릭터의 스킬 컨트롤러에 전달.
+        spellController.InitPlayerSpellInfoListClient(skills);
+    }
 
     public ICharacter GetCharacterData()
     {

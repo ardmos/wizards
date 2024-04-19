@@ -20,13 +20,12 @@ public abstract class PlayerClient : NetworkBehaviour
     public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManager;
 
     public GameInput gameInput;
-    public SpellController spellController;
 
     // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
 
     [ClientRpc]
-    public void InitializePlayerClientRPC(SkillName[] skills)
+    public virtual void InitializePlayerClientRPC(SkillName[] skills)
     {
         Debug.Log($"OwnerClientId {OwnerClientId} Player InitializePlayerClientRPC");
 
@@ -46,9 +45,6 @@ public abstract class PlayerClient : NetworkBehaviour
         // 보유 skill 정보를 GamePad UI에 반영          
         Debug.Log($"PlayerClient.InitializePlayerClientRPC() skills.Length : {skills.Length}");
         GameSceneUIManager.Instance.gamePadUIController.UpdateSpellUI(skills);
-
-        // 보유 skill 정보를 클라이언트측에 저장.  ( 근데 spellController에 저장하는게 맞는지 확인 필요. 클래스명을 바꾸던지. ) 
-        spellController.InitPlayerSpellInfoListClient(skills);
 
         // Input Action 이벤트 구독
         gameInput.OnAttack1Started += GameInput_OnAttack1Started;

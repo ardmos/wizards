@@ -54,23 +54,31 @@ MonoBehaviour:
   icon_ScrollEffect_FlySpeedUp: {fileID: 21300000, guid: a28b79b4ffa724c82a6248fe4cb64fd9, type: 3}
   icon_ScrollEffect_Deploy: {fileID: 21300000, guid: 542e7747006214d9480ef4dcf8d97026, type: 3}
   icon_RemoveAds: {fileID: 21300000, guid: 152333def7fb04fefaac91d426ff1535, type: 3}
-  spellAssetsList:
+  skillAssetsList:
   - icon: {fileID: 21300000, guid: 5692db8a476a44e039316aeecbe16bc6, type: 3}
     prefab: {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
+    name: FireBallLv1
   - icon: {fileID: 21300000, guid: 155e1dda5a5e148d28643cbf1592fbdd, type: 3}
     prefab: {fileID: 1117804056975720, guid: 8fa6dba5ce7774349b2bee979e1b5f7d, type: 3}
-  - icon: {fileID: 21300000, guid: 37b235823006c499d915c13924b61e2e, type: 3}
+    name: WaterBallLv1
+  - icon: {fileID: 21300000, guid: d06a9ce0b696341a4a1844b63f11239c, type: 3}
     prefab: {fileID: 1979048356021752, guid: 1b4cdd72ad024f9498623f1be3de6dee, type: 3}
+    name: IceBallLv1
   - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
-    prefab: {fileID: 3153472991145048103, guid: 1df00a9cc0f78f74b90a97a967a85b30, type: 3}
+    prefab: {fileID: 3153472991145048103, guid: 8297505af0fe106459b44a4a610effef, type: 3}
+    name: StoneSlashAttack1_Lv1
   - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
-    prefab: {fileID: 0}
+    prefab: {fileID: 1171201465392465800, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
+    name: ElectricSlashAttack1_Lv1
   - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
-    prefab: {fileID: 0}
+    prefab: {fileID: 1171201465392465800, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
+    name: ElectricSlashAttack2_Lv1
   - icon: {fileID: 21300000, guid: 1ad309a351498428d824d7ee62bed12d, type: 3}
     prefab: {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}
+    name: MagicShieldLv1
   - icon: {fileID: 21300000, guid: e1683a1acccb446889b2eb95ce0cbaae, type: 3}
     prefab: {fileID: 0}
+    name: Dash_Lv1
   wizard_Male_ForLobby: {fileID: 7822752010955555959, guid: ed053f82f0a9cad41a1156a5d6c24080, type: 3}
   knight_Male_ForLobby: {fileID: 8406262372636307266, guid: 03b77d822d230814799c565ef95a07aa, type: 3}
   wizard_Male: {fileID: 932501098101691884, guid: 470d188c01e7349468602788c6bbf2de, type: 3}

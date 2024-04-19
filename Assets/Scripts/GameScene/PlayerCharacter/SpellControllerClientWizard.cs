@@ -10,9 +10,9 @@ using UnityEngine;
 ///   3. 현재 보유 마법에 대한 정보를 공유
 ///   4. 현재 캐스팅중인 마법 오브젝트 관리
 ///   
-/// 쿨타임같은건 클라쪽에서 관리중.  추후 정리할 때 점검 필요
+/// 얘는 다 클라이언트야. 
 /// </summary>
-public class SpellController : NetworkBehaviour
+public class SpellControllerClientWizard : NetworkBehaviour
 {
     private const byte defenceSpellIndex = 3;
     private const byte totalSpellCount = 4;
@@ -70,7 +70,7 @@ public class SpellController : NetworkBehaviour
 
         // 서버에 마법 캐스팅 요청
         SpellManager.Instance.StartCastingAttackSpellServerRPC(spellInfoListOnClient[spellIndex].spellName, GetComponent<NetworkObject>());
-        // 서버에 해당 SpellState 업데이트
+        // 서버에 해당 플레이어의 마법 SpellState 업데이트
         SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Casting);
         // 서버에 애니메이션 실행 요청
         GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServerRPC(OwnerClientId, PlayerAttackAnimState.CastingAttackMagic);

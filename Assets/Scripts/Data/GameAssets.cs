@@ -31,13 +31,14 @@ public class GameAssets : MonoBehaviour
 
     #region Spells
     [System.Serializable]
-    public struct SpellAssets
+    public struct SkillAssets
     {
         public Sprite icon;
         public GameObject prefab;
+        public string name;
     }
     // ½ºÆç ¾ÆÀÌÄÜ°ú ÇÁ¸®ÆÕ
-    public List<SpellAssets> spellAssetsList = new List<SpellAssets>();
+    public List<SkillAssets> skillAssetsList = new List<SkillAssets>();
     #endregion
 
     #region etc
@@ -86,14 +87,14 @@ public class GameAssets : MonoBehaviour
     {
         //int index = SearchSpellNameIndex(spellName);
         int index = (int)skillName;
-        return spellAssetsList[index].prefab;
+        return skillAssetsList[index].prefab;
     }
 
     public Sprite GetSpellIconImage(SkillName skillName)
     {
         //int index = SearchSpellNameIndex(spellName);
         int index = (int)skillName;
-        return spellAssetsList[index].icon;
+        return skillAssetsList[index].icon;
     }
 
     public Sprite GetScrollEffectIconImage(ItemName itemName)

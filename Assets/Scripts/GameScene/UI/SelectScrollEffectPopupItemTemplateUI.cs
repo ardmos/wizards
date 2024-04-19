@@ -27,7 +27,7 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         // scroll 이름
         txtScrollName.text = $"{Item.GetName(scrollName)}!!";
         // spell 이름
-        SkillName spellName = PlayerClient.Instance.GetComponent<SpellController>().GetSpellInfoList()[spellIndexToApply].spellName;
+        SkillName spellName = PlayerClient.Instance.GetComponent<SpellControllerClientWizard>().GetSpellInfoList()[spellIndexToApply].spellName;
         txtSpellName.text = spellName.ToString();
         // spell 아이콘 이미지
         imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);

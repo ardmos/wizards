@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ItemAcquiredMessageTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\SpellControllerClientWizard.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Data\SpellSpecifications.cs" />
@@ -135,7 +136,6 @@
     <Compile Include="Assets\Scripts\GameScene\Client\Wizard.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\SpellController.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupEquipmentUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\PlayerMovementServer.cs" />

@@ -15,59 +15,55 @@ public class Knight : PlayerClient, ICharacter
                 SkillName.Dash_Lv1
                 };
 
-/*    public void SetCharacterData(ICharacter characterData)
+    public override void InitializePlayerClientRPC(SkillName[] skills)
     {
-        this.playerName = characterData.playerName;
-        this.hp = characterData.hp;
-        this.maxHp = characterData.maxHp;
-        this.score = characterData.score;
-        this.moveSpeed = characterData.moveSpeed;
-        this.characterClass = characterData.characterClass;
-        this.skills = characterData.skills;
-    }*/
+        base.InitializePlayerClientRPC(skills);
+        // 보유 skill 정보를 클라이언트측 캐릭터의 스킬 컨트롤러에 전달.
+        spellController.InitPlayerSpellInfoListClient(skills);
+    }
 
     public ICharacter GetCharacterData()
     {
         return this;
     }
 
-    protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
     protected override void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+
     }
 
-    protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
+    protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+
     }
 
     protected override void GameInput_OnAttack2Started(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+
     }
 
-    protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
+    protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+
     }
 
     protected override void GameInput_OnAttack3Started(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+
     }
 
-    protected override void GameInput_OnDefenceEnded(object sender, EventArgs e)
+    protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+
     }
 
     protected override void GameInput_OnDefenceStarted(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+
+    }
+
+    protected override void GameInput_OnDefenceEnded(object sender, EventArgs e)
+    {
+       
     }
 }

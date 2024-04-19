@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
+/// 마법 관련된 처리. 기사가 쓰는 기술들 관련된 처리는 SkillManager가 담당합니다. 
 /// 마법을 Server Auth 방식으로 시전할 수 있도록 도와주는 스크립트 입니다.
 /// Scroll의 획득과 적용의 과정도 관리합니다.
 /// 서버에서 동작하는 스크립트들이 모여있어야 합니다. 추후 코드 정리하면서 확인 필요.
@@ -148,7 +149,7 @@ public class SpellManager : NetworkBehaviour
 
         // 요청한 클라이언트의 currentSpellInfoList 동기화
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
+        networkClient.PlayerObject.GetComponent<SpellControllerClientWizard>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
     }
 
     /// <summary>
@@ -225,7 +226,7 @@ public class SpellManager : NetworkBehaviour
 
         // 변경내용을 요청한 클라이언트와도 동기화
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<SpellController>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
+        networkClient.PlayerObject.GetComponent<SpellControllerClientWizard>().UpdatePlayerSpellInfoArrayClientRPC(spellInfoListOnServer[clientId].ToArray());
 
         // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
         DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
@@ -307,6 +308,7 @@ public class SpellManager : NetworkBehaviour
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), muzzleTransform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
+        // 발사체 스펙 초기화 해주기
         SpellInfo spellInfo = new SpellInfo(GetSpellInfo(clientId, spellName));
         Debug.Log($"{nameof(StartCastingAttackSpellServerRPC)} ownerClientId {spellInfo.ownerPlayerClientId}, spellName: {spellInfo.spellName}, spellLv: {spellInfo.level}");
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);

@@ -47,7 +47,7 @@ public class GamePadUIController : MonoBehaviour
         for (byte i = 0;i < spellCooltimeImages.Length; i++)
         {
             //Debug.Log($"{Player.LocalInstance.OwnerClientId}");
-            float coolTimeRatio = PlayerClient.Instance.GetComponent<SpellController>().GetCurrentSpellCoolTimeRatio(i);
+            float coolTimeRatio = PlayerClient.Instance.GetComponent<SpellControllerClientWizard>().GetCurrentSpellCoolTimeRatio(i);
             if (coolTimeRatio > 0) 
             {
                 spellCooltimeImages[i].fillAmount = 1 - coolTimeRatio;
