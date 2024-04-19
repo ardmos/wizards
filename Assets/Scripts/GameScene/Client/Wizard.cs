@@ -24,43 +24,43 @@ public class Wizard : PlayerClient, ICharacter
         return this;
     }
 
-    protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
     protected override void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        spellController.StartCastingSpellOnClient(0);
     }
 
-    protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
+    protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        spellController.ShootCurrentCastingSpellOnClient(0);
     }
 
     protected override void GameInput_OnAttack2Started(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        spellController.StartCastingSpellOnClient(1);
     }
 
-    protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
+    protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        spellController.ShootCurrentCastingSpellOnClient(1);
     }
 
     protected override void GameInput_OnAttack3Started(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        spellController.StartCastingSpellOnClient(2);
     }
 
-    protected override void GameInput_OnDefenceEnded(object sender, EventArgs e)
+    protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        spellController.ShootCurrentCastingSpellOnClient(2);
     }
 
     protected override void GameInput_OnDefenceStarted(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        spellController.ActivateDefenceSpellOnClient();
+    }
+
+    protected override void GameInput_OnDefenceEnded(object sender, EventArgs e)
+    {
+
     }
 }

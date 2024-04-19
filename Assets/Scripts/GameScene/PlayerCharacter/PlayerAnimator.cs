@@ -13,7 +13,6 @@ public class PlayerAnimator : NetworkBehaviour
     private const string IS_CASTING_DEFENSIVE_MAGIC = "IsCastingDefensiveMagic";
     private const string IS_GAMEOVER = "IsGameOver";
 
-    [SerializeField] private Player player;
     private Animator animator;
 
     private void Awake()
