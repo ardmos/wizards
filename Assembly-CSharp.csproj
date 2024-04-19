@@ -62,7 +62,6 @@
     <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Player.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
