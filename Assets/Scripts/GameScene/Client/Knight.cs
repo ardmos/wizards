@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode;
 /// <summary>
 /// 1. Knight 스탯 관리
 /// </summary>
@@ -15,11 +16,12 @@ public class Knight : PlayerClient, ICharacter
                 SkillName.Dash_Lv1
                 };
 
+    [ClientRpc]
     public override void InitializePlayerClientRPC(SkillName[] skills)
     {
         base.InitializePlayerClientRPC(skills);
         // 보유 skill 정보를 클라이언트측 캐릭터의 스킬 컨트롤러에 전달.
-        spellController.InitPlayerSpellInfoListClient(skills);
+        //spellController.InitPlayerSpellInfoListClient(skills);
     }
 
     public ICharacter GetCharacterData()

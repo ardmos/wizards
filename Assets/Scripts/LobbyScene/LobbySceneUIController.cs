@@ -53,9 +53,10 @@ public class LobbySceneUIController : MonoBehaviour
         btnStartPlay.AddClickListener(matchmakerClient.StartMatchmaking);
         btnUserInfo.AddClickListener(popupUserInfoUI.Show);
         btnSettings.AddClickListener(popupSettingsUI.Show);
+        btnClassChange.onClick.AddListener(ChangePlayerClass);
 
         // 지금은 사용하지 않는 버튼들입니다.
-        /*        btnClassChange.onClick.AddListener(ChangePlayerClass);
+        /*        
                 btnEquipment.onClick.AddListener(() => { popupEquipment.Show(); });
                 btnClan.onClick.AddListener(() => { popupClan.Show(); });
                 btnInbox.onClick.AddListener(() => { popupInbox.Show(); });

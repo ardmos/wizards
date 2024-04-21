@@ -20,6 +20,7 @@ public class Wizard : PlayerClient, ICharacter
                 SkillName.MagicShieldLv1
                 };
 
+    [ClientRpc]
     public override void InitializePlayerClientRPC(SkillName[] skills)
     {
         base.InitializePlayerClientRPC(skills);

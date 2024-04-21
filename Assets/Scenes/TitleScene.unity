@@ -2433,7 +2433,6 @@ GameObject:
   - component: {fileID: 1979584187}
   - component: {fileID: 1979685439}
   - component: {fileID: 114573445072103757}
-  - component: {fileID: 114573445072103758}
   m_Layer: 5
   m_Name: IngameDebugConsole
   m_TagString: Untagged
@@ -5002,18 +5001,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   embeddedEventSystem: {fileID: 1968238843}
---- !u!114 &114573445072103758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968398213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1459f164fe106f48bc6e07e10e837fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114575086400536253
 MonoBehaviour:
   m_ObjectHideFlags: 0
