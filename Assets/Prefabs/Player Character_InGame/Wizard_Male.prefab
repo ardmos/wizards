@@ -2661,14 +2661,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35d9a03a873a9884086712713b853b55, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c370b72a7f6fa74cb86848368d3f41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spellInfoListOnClient: []
-  restTimeCurrentSpellArrayOnClient:
-  - 0
-  - 0
-  - 0
+  restTimeCurrentSpellArrayOnClient: []
 --- !u!114 &294066641757979093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5425,7 +5422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b891d0fd50f5e4ab73d7dc548a58ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &1844094944237122789
 MonoBehaviour:
   m_ObjectHideFlags: 0
