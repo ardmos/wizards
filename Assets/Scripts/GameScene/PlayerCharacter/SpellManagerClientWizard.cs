@@ -3,17 +3,18 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
-/// 플레이어 캐릭터 오브젝트에 붙이는 스크립트
+/// 기본 Wizard_Male 플레이어 캐릭터 오브젝트에 붙이는 스크립트
 /// 현재 기능
 ///   1. 현재 캐릭터 마법 보유 현황 관리
 ///   2. 캐릭터 보유 마법 발동 
 ///   3. 현재 보유 마법에 대한 정보를 공유
 ///   4. 현재 캐스팅중인 마법 오브젝트 관리
 ///   
-/// 얘는 다 클라이언트야. 
 /// </summary>
-public class SpellControllerClientWizard : NetworkBehaviour
+public class SpellManagerClientWizard : NetworkBehaviour
 {
+    public SpellManagerServerWizard spellManagerServerWizard;
+
     private const byte defenceSpellIndex = 3;
     private const byte totalSpellCount = 4;
     // 클라이언트에 저장되는 내용
@@ -53,7 +54,7 @@ public class SpellControllerClientWizard : NetworkBehaviour
                 // 여기서 서버에 Ready로 바뀐 State를 보고 하면 서버에서 다시 콜백해서 현 클라이언트 오브젝트의 State가 Ready로 바뀌긴 하는데, 그 사이에 딜레이가 있어서
                 // 여기서 한 번 클라이언트의 State를 바꿔주고 서버에 보고 해준다.
                 spellInfoListOnClient[spellIndex].spellState = SpellState.Ready;
-                SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
+                spellManagerServerWizard.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
             }
             //Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
         }
@@ -69,9 +70,9 @@ public class SpellControllerClientWizard : NetworkBehaviour
         if (spellInfoListOnClient[spellIndex].spellState != SpellState.Ready) return;
 
         // 서버에 마법 캐스팅 요청
-        SpellManager.Instance.StartCastingAttackSpellServerRPC(spellInfoListOnClient[spellIndex].spellName, GetComponent<NetworkObject>());
+        spellManagerServerWizard.StartCastingAttackSpellServerRPC(spellInfoListOnClient[spellIndex].spellName, GetComponent<NetworkObject>());
         // 서버에 해당 플레이어의 마법 SpellState 업데이트
-        SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Casting);
+        spellManagerServerWizard.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Casting);
         // 서버에 애니메이션 실행 요청
         GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServerRPC(OwnerClientId, PlayerAttackAnimState.CastingAttackMagic);
     }
@@ -84,9 +85,9 @@ public class SpellControllerClientWizard : NetworkBehaviour
         if (spellInfoListOnClient[spellIndex].spellState != SpellState.Casting) return;
 
         // 서버에 마법 발사 요청
-        SpellManager.Instance.ShootCastingSpellObjectServerRPC() ;
+        spellManagerServerWizard.ShootCastingSpellObjectServerRPC() ;
         // 해당 SpellState 업데이트
-        SpellManager.Instance.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Cooltime);
+        spellManagerServerWizard.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Cooltime);
         // 서버에 애니메이션 실행 요청
         GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServerRPC(OwnerClientId, PlayerAttackAnimState.ShootingMagic);
     }
@@ -98,9 +99,9 @@ public class SpellControllerClientWizard : NetworkBehaviour
         if (spellInfoListOnClient[defenceSpellIndex].spellState != SpellState.Ready) return;
 
         // 서버에 마법 시전 요청
-        SpellManager.Instance.StartActivateDefenceSpellServerRPC(spellInfoListOnClient[defenceSpellIndex].spellName, GetComponent<NetworkObject>());
+        spellManagerServerWizard.StartActivateDefenceSpellServerRPC(spellInfoListOnClient[defenceSpellIndex].spellName, GetComponent<NetworkObject>());
         // 해당 SpellState 업데이트
-        SpellManager.Instance.UpdatePlayerSpellStateServerRPC(defenceSpellIndex, SpellState.Cooltime);
+        spellManagerServerWizard.UpdatePlayerSpellStateServerRPC(defenceSpellIndex, SpellState.Cooltime);
         // 서버에 애니메이션 실행 요청
         GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServerRPC(OwnerClientId, PlayerAttackAnimState.CastingDefensiveMagic);
     }

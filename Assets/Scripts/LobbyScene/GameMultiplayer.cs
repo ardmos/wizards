@@ -5,6 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
+/// 이거 서버/클라 나눠야함./
 /// UGS Start Server, Start Client
 /// NetworkList 관리
 /// </summary>

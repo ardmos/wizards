@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class Wizard : PlayerClient, ICharacter
 {
-    public SpellControllerClientWizard spellController;
+    public SpellManagerClientWizard spellController;
     public CharacterClass characterClass { get; set; } = CharacterClass.Wizard;
     public sbyte hp { get; set; } = 5;
     public sbyte maxHp { get; set; } = 5;

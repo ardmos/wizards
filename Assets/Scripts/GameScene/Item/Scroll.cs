@@ -30,7 +30,7 @@ public class Scroll : NetworkBehaviour
 
         // 충돌한 플레이어의 Scroll Queue에 추가.
         ulong collisionedClientId = collision.gameObject.GetComponent<NetworkObject>().OwnerClientId;
-        SpellManager.Instance.EnqueuePlayerScrollSpellSlotQueueOnServer(collisionedClientId, spellSlotIndex);
+        ScrollManagerServer.Instance.EnqueuePlayerScrollSpellSlotQueueOnServer(collisionedClientId, spellSlotIndex);
 
         // 오브젝트 파괴
         GetComponent<NetworkObject>().Despawn();

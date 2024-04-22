@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Attack
-  - Defence
+  - AttackSpell
+  - DefenceSpell
   layers:
   - Default
   - TransparentFX

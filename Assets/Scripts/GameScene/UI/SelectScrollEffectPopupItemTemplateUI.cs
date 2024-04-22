@@ -27,7 +27,7 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         // scroll 이름
         txtScrollName.text = $"{Item.GetName(scrollName)}!!";
         // spell 이름
-        SkillName spellName = PlayerClient.Instance.GetComponent<SpellControllerClientWizard>().GetSpellInfoList()[spellIndexToApply].spellName;
+        SkillName spellName = PlayerClient.Instance.GetComponent<SpellManagerClientWizard>().GetSpellInfoList()[spellIndexToApply].spellName;
         txtSpellName.text = spellName.ToString();
         // spell 아이콘 이미지
         imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);
@@ -51,7 +51,7 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         //Debug.Log($"RequestApplyScrollEffectToServer. scrollNames:{scrollName}, spellIndexToApply:{spellIndex}");
 
         // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
-        SpellManager.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
+        ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
 
         // SFX 재생
         SoundManager.Instance.PlayItemSFX(scrollName);
