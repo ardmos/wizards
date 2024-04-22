@@ -2559,11 +2559,12 @@ GameObject:
   m_Component:
   - component: {fileID: 932501098101691874}
   - component: {fileID: -2686748507231774534}
+  - component: {fileID: 294066641757979093}
   - component: {fileID: 854047434301573314}
   - component: {fileID: 4579991518944106865}
   - component: {fileID: -3331297196142442222}
   - component: {fileID: 6631467521865965885}
-  - component: {fileID: 294066641757979093}
+  - component: {fileID: 1543831547272748415}
   - component: {fileID: 532842309490800541}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
@@ -2616,6 +2617,20 @@ MonoBehaviour:
   playerSpellScrollQueueManager: {fileID: 4579991518944106865}
   gameInput: {fileID: -3331297196142442222}
   spellController: {fileID: 6631467521865965885}
+--- !u!114 &294066641757979093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cebec3ae8547de4cae4a684d6416cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerClient: {fileID: -2686748507231774534}
+  spellManagerServerWizard: {fileID: 0}
 --- !u!114 &854047434301573314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2661,12 +2676,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c370b72a7f6fa74cb86848368d3f41b, type: 3}
+  m_Script: {fileID: 11500000, guid: fa032cbefb2bd704d83e4d4422175151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellManagerServerWizard: {fileID: 1543831547272748415}
   spellInfoListOnClient: []
   restTimeCurrentSpellArrayOnClient: []
---- !u!114 &294066641757979093
+--- !u!114 &1543831547272748415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2675,10 +2691,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cebec3ae8547de4cae4a684d6416cb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 464cba5c9a34b4c4fa63b42ce89327b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerClient: {fileID: -2686748507231774534}
+  spellManagerClientWizard: {fileID: 6631467521865965885}
+  playerOwnedSpellInfoListOnServer: []
 --- !u!114 &532842309490800541
 MonoBehaviour:
   m_ObjectHideFlags: 0

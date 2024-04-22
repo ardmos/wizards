@@ -156,35 +156,6 @@ public class SpellManagerServerWizard : NetworkBehaviour
         // 충돌한 오브젝트의 collider 저장
         Collider collider = collision.collider;
 
-        // 충돌한게 플레이어일 경우! 
-        // 1. player에게 GetHit() 시킴
-        // 2. player가 GameMultiplayer(ServerRPC)에게 보고, player(ClientRPC)업데이트.
-        else if (collider.CompareTag("Player"))
-        {
-            isSpellCollided = false;
-
-            if (spell.GetSpellInfo() == null)
-            {
-                Debug.Log("AttackSpell Info is null");
-            }
-
-            PlayerClient player = collider.GetComponent<PlayerClient>();
-            if (player != null)
-            {
-                byte damage = (byte)spell.GetSpellInfo().level;
-                // 플레이어 피격을 서버에서 처리
-                PlayerGotHitOnServer(damage, player);
-            }
-            else Debug.LogError("Player is null!");
-        }
-
-        // 기타 오브젝트 충돌
-        else
-        {
-            isSpellCollided = false;
-            Debug.Log($"{collider.name} Hit!");
-        }
-
         spell.GetComponent<Collider>().enabled = false;
 
         List<GameObject> trails = spell.GetTrails();

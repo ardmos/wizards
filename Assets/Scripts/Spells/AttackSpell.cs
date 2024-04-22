@@ -30,6 +30,9 @@ public abstract class AttackSpell : NetworkBehaviour
         // 서버에서만 처리.
         if (IsClient) return;
 
+        // 충돌을 중복 처리하는것을 방지하기 위한 처리
+        GetComponent<Collider>().enabled = false;
+
         Collider collider = collision.collider;
 
         // 충돌한게 공격마법일 경우, 어떤 마법이 살아남을지 계산에 들어감
@@ -40,7 +43,7 @@ public abstract class AttackSpell : NetworkBehaviour
         // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
         else if (collider.CompareTag("Player"))
         {
-            if (spell.GetSpellInfo() == null)
+            if (GetSpellInfo() == null)
             {
                 Debug.Log("AttackSpell Info is null");
             }
@@ -48,11 +51,16 @@ public abstract class AttackSpell : NetworkBehaviour
             PlayerClient player = collider.GetComponent<PlayerClient>();
             if (player != null)
             {
-                byte damage = (byte)spell.GetSpellInfo().level;
+                byte damage = (byte)GetSpellInfo().level;
                 // 플레이어 피격을 서버에서 처리
-                PlayerGotHitOnServer(damage, player);
+                // 여기부터 하면 됩니다.  Player Server에서 하면 좋을듯 싶은데! PlayerGotHitOnServer(damage, player);
             }
             else Debug.LogError("Player is null!");
+        }
+        // 기타 오브젝트 충돌
+        else
+        {
+            Debug.Log($"{collider.name} Hit!");
         }
 
         // 마법 충돌 사운드 재생
