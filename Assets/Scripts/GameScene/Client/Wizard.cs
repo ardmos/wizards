@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class Wizard : PlayerClient, ICharacter
 {
-    public SpellManagerClientWizard spellController;
+    public SpellManagerClientWizard spellManagerClientWizard;
     public CharacterClass characterClass { get; set; } = CharacterClass.Wizard;
     public sbyte hp { get; set; } = 5;
     public sbyte maxHp { get; set; } = 5;
@@ -25,7 +25,8 @@ public class Wizard : PlayerClient, ICharacter
     {
         base.InitializePlayerClientRPC(skills);
         // 보유 skill 정보를 클라이언트측 캐릭터의 스킬 컨트롤러에 전달.
-        spellController.InitPlayerSpellInfoListClient(skills);
+        spellManagerClientWizard.InitPlayerSpellInfoListClient(skills);
+        Debug.Log("1. Wizard.InitializePlayerClientRPC");
     }
 
     public ICharacter GetCharacterData()
@@ -35,37 +36,37 @@ public class Wizard : PlayerClient, ICharacter
 
     protected override void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
-        spellController.StartCastingSpellOnClient(0);
+        spellManagerClientWizard.CastingSpell(0);
     }
 
     protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-        spellController.ShootCurrentCastingSpellOnClient(0);
+        spellManagerClientWizard.ShootSpell(0);
     }
 
     protected override void GameInput_OnAttack2Started(object sender, EventArgs e)
     {
-        spellController.StartCastingSpellOnClient(1);
+        spellManagerClientWizard.CastingSpell(1);
     }
 
     protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
     {
-        spellController.ShootCurrentCastingSpellOnClient(1);
+        spellManagerClientWizard.ShootSpell(1);
     }
 
     protected override void GameInput_OnAttack3Started(object sender, EventArgs e)
     {
-        spellController.StartCastingSpellOnClient(2);
+        spellManagerClientWizard.CastingSpell(2);
     }
 
     protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
     {
-        spellController.ShootCurrentCastingSpellOnClient(2);
+        spellManagerClientWizard.ShootSpell(2);
     }
 
     protected override void GameInput_OnDefenceStarted(object sender, EventArgs e)
     {
-        spellController.ActivateDefenceSpellOnClient();
+        spellManagerClientWizard.ActivateDefenceSpellOnClient();
     }
 
     protected override void GameInput_OnDefenceEnded(object sender, EventArgs e)

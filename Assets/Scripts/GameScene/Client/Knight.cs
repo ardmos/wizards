@@ -5,6 +5,7 @@ using Unity.Netcode;
 /// </summary>
 public class Knight : PlayerClient, ICharacter
 {
+    public SkillManagerClientKnight skillManagerClientKnight;
     public CharacterClass characterClass { get; set; } = CharacterClass.Knight;
     public sbyte hp { get; set; } = 10;
     public sbyte maxHp { get; set; } = 10;
@@ -21,7 +22,7 @@ public class Knight : PlayerClient, ICharacter
     {
         base.InitializePlayerClientRPC(skills);
         // 보유 skill 정보를 클라이언트측 캐릭터의 스킬 컨트롤러에 전달.
-        //spellController.InitPlayerSpellInfoListClient(skills);
+        skillManagerClientKnight.InitPlayerSpellInfoListClient(skills);
     }
 
     public ICharacter GetCharacterData()

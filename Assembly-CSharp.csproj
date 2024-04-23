@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollFlySpeedUp.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\SpellManagerClientWizard.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\SelectSpellSlotUI.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\StoreTriggerAreaCollider.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
@@ -91,7 +93,6 @@
     <Compile Include="Assets\Scripts\TitleScene\SoundManager.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\SpellManagerClientWizard.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Spells\IceSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverMessageTemplateUI.cs" />
@@ -117,11 +118,13 @@
     <Compile Include="Assets\Scripts\GameScene\UI\TimerUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Server\SkillSpellManagerServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerSpawnPointsController.cs" />
     <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\PopupShopUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Server\SpellManagerServerWizard.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollFireRateUp.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerSpellScrollQueueManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\UserNameUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Client\SkillSpellManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameStartCountdownUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\DailyGroupUI.cs" />
@@ -169,7 +173,6 @@
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupNameChangeUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Manager\SpellManagerServerWizard.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadSceneManager.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
@@ -205,6 +208,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Server\SkillManagerServerKnight.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerAttackAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />

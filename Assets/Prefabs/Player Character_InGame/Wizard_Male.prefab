@@ -2616,7 +2616,7 @@ MonoBehaviour:
   userNameUIController: {fileID: 4649931589576448986}
   playerSpellScrollQueueManager: {fileID: 4579991518944106865}
   gameInput: {fileID: -3331297196142442222}
-  spellController: {fileID: 6631467521865965885}
+  spellManagerClientWizard: {fileID: 6631467521865965885}
 --- !u!114 &294066641757979093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2667,7 +2667,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa032cbefb2bd704d83e4d4422175151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellManagerServerWizard: {fileID: 1543831547272748415}
+  skillSpellManagerServer: {fileID: 1543831547272748415}
+  playerAnimator: {fileID: 2441054021172676538}
   spellInfoListOnClient: []
   restTimeCurrentSpellArrayOnClient: []
 --- !u!114 &1543831547272748415
@@ -2682,8 +2683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464cba5c9a34b4c4fa63b42ce89327b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellManagerClientWizard: {fileID: 6631467521865965885}
-  playerOwnedSpellInfoListOnServer: []
+  skillSpellManagerClient: {fileID: 6631467521865965885}
+  playerAnimator: {fileID: 2441054021172676538}
 --- !u!114 &4579991518944106865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5439,6 +5440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b891d0fd50f5e4ab73d7dc548a58ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAttackAnimState: 0
 --- !u!114 &1844094944237122789
 MonoBehaviour:
   m_ObjectHideFlags: 0

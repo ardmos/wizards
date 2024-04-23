@@ -22,7 +22,7 @@ public class GameMultiplayer : NetworkBehaviour
     public event EventHandler OnFailedToJoinMatch;
     public event EventHandler OnPlayerListOnServerChanged;
     public event EventHandler OnPlayerMoveAnimStateChanged;
-    public event EventHandler OnPlayerAttackAnimStateChanged;
+    //public event EventHandler OnPlayerAttackAnimStateChanged;
 
     private void Awake()
     {
@@ -175,16 +175,16 @@ public class GameMultiplayer : NetworkBehaviour
         OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerMoveAnimStateEventData(clientId, playerData.playerMoveAnimState));
     }
 
-    public void UpdatePlayerAttackAnimStateOnServer(ulong clientId, PlayerAttackAnimState playerAttackAnimState)
+/*    public void UpdatePlayerAttackAnimStateOnServer(ulong clientId, PlayerAttackAnimState playerAttackAnimState)
     {
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
         playerData.playerAttackAnimState = playerAttackAnimState;
         SetPlayerDataFromClientId(clientId, playerData);
         // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
         OnPlayerAttackAnimStateChanged?.Invoke(this, new PlayerAttackAnimStateEventData(clientId, playerData.playerAttackAnimState));
-    }
+    }*/
 
-    [ServerRpc (RequireOwnership = false)]
+    /*[ServerRpc (RequireOwnership = false)]
     public void UpdatePlayerAttackAnimStateOnServerRPC(ulong clientId, PlayerAttackAnimState playerAttackAnimState)
     {
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
@@ -192,7 +192,7 @@ public class GameMultiplayer : NetworkBehaviour
         SetPlayerDataFromClientId(clientId, playerData);
         // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
         OnPlayerAttackAnimStateChanged?.Invoke(this, new PlayerAttackAnimStateEventData(clientId, playerData.playerAttackAnimState));
-    }
+    }*/
 
     /// <summary>
     /// 플레이어 보유 아이템 추가. 전부 서버에서 동작하는 메소드 입니다.

@@ -9740,7 +9740,7 @@ GameObject:
   - component: {fileID: 135538216425402534}
   m_Layer: 0
   m_Name: vfx_ToonProjectile_MegaBomb01Red 1
-  m_TagString: Attack
+  m_TagString: AttackSpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

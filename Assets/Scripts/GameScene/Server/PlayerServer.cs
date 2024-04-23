@@ -53,7 +53,7 @@ public class PlayerServer : NetworkBehaviour
         // 현재 HP 저장 및 설정
         PlayerHPManager.Instance.UpdatePlayerHP(requestedInitializeClientId, playerData.hp, playerData.maxHp);
 
-        // 플레이어가 보유한 스킬 목록 서버측(SpellManager)에 저장 ( 수정해야함
+        // 플레이어가 보유한 스킬 목록 저장
         spellManagerServerWizard.InitPlayerSpellInfoArrayOnServer(character.skills);
 
         // 플레이어 InitializePlayer 시작, 스킬 목록을 클라이언트측(SpellController)에 저장 ( 수정해야함

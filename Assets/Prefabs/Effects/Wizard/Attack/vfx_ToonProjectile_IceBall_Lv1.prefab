@@ -19465,7 +19465,7 @@ GameObject:
   - component: {fileID: 7898306305771445380}
   m_Layer: 0
   m_Name: vfx_ToonProjectile_IceBall_Lv1
-  m_TagString: Attack
+  m_TagString: AttackSpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19518,11 +19518,6 @@ MonoBehaviour:
   - {fileID: 1890649862769804}
   - {fileID: 1210068337201960}
   - {fileID: 1615150988019640}
-  audioSourcePrefab: {fileID: 992107389769131743, guid: 7e0a7a1a2dab17e42bfc0bfb37d7b39e, type: 3}
-  sfxSounds:
-  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
-  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
-  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
 --- !u!54 &54189310121592036
 Rigidbody:
   m_ObjectHideFlags: 0

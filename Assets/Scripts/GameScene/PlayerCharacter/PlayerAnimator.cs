@@ -8,6 +8,8 @@ using UnityEngine;
 /// </summary>
 public class PlayerAnimator : NetworkBehaviour
 {
+    public PlayerAttackAnimState playerAttackAnimState;
+
     private const string IS_WALKING = "IsWalking";
     private const string IS_CASTING_ATTACK_MAGIC = "IsCastingAttackMagic";
     private const string IS_CASTING_DEFENSIVE_MAGIC = "IsCastingDefensiveMagic";
@@ -19,13 +21,13 @@ public class PlayerAnimator : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
 
-        GameMultiplayer.Instance.OnPlayerAttackAnimStateChanged += OnPlayerAttackAnimStateChanged;
+        //GameMultiplayer.Instance.OnPlayerAttackAnimStateChanged += OnPlayerAttackAnimStateChanged;
         GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged += OnPlayerMoveAnimStateChanged;
     }
 
     public override void OnNetworkDespawn()
     {
-        GameMultiplayer.Instance.OnPlayerAttackAnimStateChanged -= OnPlayerAttackAnimStateChanged;
+        //GameMultiplayer.Instance.OnPlayerAttackAnimStateChanged -= OnPlayerAttackAnimStateChanged;
         GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged -= OnPlayerMoveAnimStateChanged;
     }
 
@@ -60,7 +62,7 @@ public class PlayerAnimator : NetworkBehaviour
         }
     }
 
-    /// <summary>
+/*    /// <summary>
     /// AttackAnimState에 맞게 애니메이션을 실행시켜주는 메소드 입니다.
     /// AttackAnimState가 변경된 서버상의 플레이어 오브젝트에게 애니메이션을 바꾸라고 알려줍니다.(서버권한방식 애니메이션 변경)
     /// </summary>
@@ -70,9 +72,9 @@ public class PlayerAnimator : NetworkBehaviour
         NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
         networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdateSpellAnimationOnServer(eventData.playerAttackAnimState);
         //Debug.Log($"{nameof(OnPlayerAttackAnimStateChanged)} Player{eventData.clientId} AttackAnimation OnPlayerAttackAnimStateChanged: {eventData.playerAttackAnimState}");
-    }
+    }*/
 
-    private void UpdateSpellAnimationOnServer(PlayerAttackAnimState playerAttackAnimState)
+    public void UpdateSpellAnimationOnServer(PlayerAttackAnimState playerAttackAnimState)
     {
         switch (playerAttackAnimState)
         {

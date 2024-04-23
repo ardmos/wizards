@@ -2,6 +2,11 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+/// <summary>
+/// 게임씬에서 동작하는 스크롤 매니저 스크립트
+/// Server에서만 동작하도록 제한을 걸어줄 필요가 있습니다.
+/// </summary>
+
 public class ScrollManagerServer : NetworkBehaviour
 {
     public static ScrollManagerServer Instance { get; private set; }
@@ -65,7 +70,7 @@ public class ScrollManagerServer : NetworkBehaviour
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
         SpellManagerServerWizard spellManagerServerWizard = networkClient.PlayerObject.GetComponent<SpellManagerServerWizard>();
-        SpellInfo newSpellInfo = new SpellInfo(spellManagerServerWizard.playerOwnedSpellInfoListOnServer[spellIndex]);
+        SpellInfo newSpellInfo = new SpellInfo(spellManagerServerWizard.GetSpellInfo(spellIndex));
 
         // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
         switch (scrollName)
@@ -92,10 +97,10 @@ public class ScrollManagerServer : NetworkBehaviour
         }
 
         // 변경내용 서버에 저장
-        spellManagerServerWizard.playerOwnedSpellInfoListOnServer[spellIndex] = newSpellInfo;
+        spellManagerServerWizard.SetSpellInfo(spellIndex, newSpellInfo);
 
         // 변경내용을 요청한 클라이언트와도 동기화
-        networkClient.PlayerObject.GetComponent<SpellManagerClientWizard>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.playerOwnedSpellInfoListOnServer.ToArray());
+        networkClient.PlayerObject.GetComponent<SpellManagerClientWizard>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
 
         // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
         DequeuePlayerScrollSpellSlotQueueOnServer(clientId);

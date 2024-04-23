@@ -24384,7 +24384,7 @@ GameObject:
   - component: {fileID: 114851035589019760}
   m_Layer: 0
   m_Name: vfx_ToonProjectile_MegaBomb02Purple 1
-  m_TagString: Attack
+  m_TagString: AttackSpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

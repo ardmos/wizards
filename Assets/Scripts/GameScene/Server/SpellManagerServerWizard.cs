@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -6,65 +7,9 @@ using UnityEngine;
 /// Scroll의 획득과 적용의 과정도 관리합니다.
 /// 서버에서 동작하는 스크립트들이 모여있어야 합니다. 추후 코드 정리하면서 확인 필요.
 /// </summary>
-public class SpellManagerServerWizard : NetworkBehaviour
+public class SpellManagerServerWizard : SkillSpellManagerServer
 {
-    public SpellManagerClientWizard spellManagerClientWizard;
-    public List<SpellInfo> playerOwnedSpellInfoListOnServer = new List<SpellInfo>();
-
-    // Spell Dictionary that the player is casting.
     private GameObject playerCastingSpell;
-
-    #region SpellInfo
-    /// <summary>
-    /// 변경된 SpellState를 Server에 보고합니다.
-    /// </summary>
-    /// <param name="spellIndex">업데이트하고싶은 마법의 Index</param>
-    /// <param name="spellState">마법의 상태</param>
-    [ServerRpc(RequireOwnership = false)]
-    public void UpdatePlayerSpellStateServerRPC(ushort spellIndex, SpellState spellState, ServerRpcParams serverRpcParams = default)
-    {
-
-        playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
-
-        // 요청한 클라이언트의 playerOwnedSpellInfoList와 동기화
-        spellManagerClientWizard.UpdatePlayerSpellInfoArrayClientRPC(playerOwnedSpellInfoListOnServer.ToArray());
-    }
-
-    /// <summary>
-    /// Server측에서 보유한 SpellInfo 리스트 초기화 메소드 입니다.
-    /// 플레이어 최초 생성시 호출됩니다.
-    /// </summary>
-    public void InitPlayerSpellInfoArrayOnServer(SkillName[] skillNames)
-    {
-        List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
-        foreach (SkillName spellName in skillNames)
-        {
-            SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
-            spellInfo.ownerPlayerClientId = OwnerClientId;
-            playerSpellInfoList.Add(spellInfo);
-        }
-
-        playerOwnedSpellInfoListOnServer = playerSpellInfoList;
-    }
-
-    /// <summary>
-    /// 현재 client가 보유중인 특정 마법의 정보를 알려주는 메소드 입니다.  
-    /// </summary>
-    /// <param name="spellName">알고싶은 마법의 이름</param>
-    /// <returns></returns>
-    public SpellInfo GetSpellInfo(SkillName spellName)
-    {
-        foreach (SpellInfo spellInfo in playerOwnedSpellInfoListOnServer)
-        {
-            if (spellInfo.spellName == spellName)
-            {
-                return spellInfo;
-            }
-        }
-
-        return null;
-    }
-    #endregion
 
     #region Defence Spell Cast
     /// <summary>
@@ -72,23 +17,33 @@ public class SpellManagerServerWizard : NetworkBehaviour
     /// </summary>
     /// <param name="player"></param>
     [ServerRpc(RequireOwnership = false)]
-    public void StartActivateDefenceSpellServerRPC(SkillName spellName, NetworkObjectReference player)
+    public void StartActivateDefenceSpellServerRPC()
     {
-        // GameObject 얻어내기 실패시 로그 출력
-        if (!player.TryGet(out NetworkObject playerObject))
-        {
-            Debug.LogError("StartActivateDefenceSpellServerRPC Failed to Get NetworkObject from NetwrokObjectRefernce!");
-            return;
-        }
-        ulong clientId = playerObject.OwnerClientId;
-
         // 마법 시전
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), playerObject.transform.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(GetSpellInfo(defenceSpellIndex).spellName), transform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
-        spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(spellName));
-        spellObject.transform.SetParent(playerObject.transform);
+        spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(defenceSpellIndex));
+        spellObject.transform.SetParent(transform);
         spellObject.transform.localPosition = Vector3.zero;
         spellObject.GetComponent<DefenceSpell>().Activate();
+
+        // 해당 SpellState 업데이트
+        UpdatePlayerSpellState(defenceSpellIndex, SpellState.Cooltime);
+
+        // 애니메이션 실행
+        StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifeTime));
+    }
+
+    IEnumerator StartAndResetAnimState(float lifeTime)
+    {
+        playerAnimator.UpdateSpellAnimationOnServer(PlayerAttackAnimState.CastingDefensiveMagic);
+        yield return new WaitForSeconds(lifeTime);
+
+        // 플레이어 캐릭터가 Casting 애니메이션중이 아닐 경우에만 Idle로 변경
+        if (!playerAnimator.playerAttackAnimState.Equals(PlayerAttackAnimState.CastingAttackMagic))
+        {
+            playerAnimator.UpdateSpellAnimationOnServer(PlayerAttackAnimState.Idle);
+        }
     }
     #endregion
 
@@ -97,17 +52,17 @@ public class SpellManagerServerWizard : NetworkBehaviour
     /// 공격 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
-    public void StartCastingAttackSpellServerRPC(SkillName spellName, NetworkObjectReference player)
+    public void CastingSpellServerRPC(ushort spellIndex)
     {
         // 포구 위치 찾기(Local posittion)
         Transform muzzleTransform = GetComponentInChildren<MuzzlePos>().transform;
 
         // 포구에 발사체 위치시키기
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellName), muzzleTransform.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzleTransform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         // 발사체 스펙 초기화 해주기
-        SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellName));
+        SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
         spellObject.transform.SetParent(transform);
         spellObject.transform.localPosition = muzzleTransform.localPosition;
@@ -117,6 +72,12 @@ public class SpellManagerServerWizard : NetworkBehaviour
 
         // 플레이어가 시전중인 마법에 저장하기
         playerCastingSpell = spellObject;
+
+        // 해당 플레이어의 마법 SpellState 업데이트
+        UpdatePlayerSpellState(spellIndex, SpellState.Casting);
+
+        // 캐스팅 애니메이션 실행
+        playerAnimator.UpdateSpellAnimationOnServer(PlayerAttackAnimState.CastingAttackMagic);
     }
 
     /// <summary>
@@ -124,17 +85,20 @@ public class SpellManagerServerWizard : NetworkBehaviour
     /// </summary>
     /// <param name="serverRpcParams"></param>
     [ServerRpc(RequireOwnership = false)]
-    public void ShootCastingSpellObjectServerRPC(ServerRpcParams serverRpcParams = default)
+    public void ShootSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         GameObject spellObject = playerCastingSpell;
         if (spellObject == null)
         {
-            Debug.Log($"ShootCastingSpellObjectServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
+            Debug.Log($"ShootSpellServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
             return;
         }
 
-        Debug.Log($"{nameof(ShootCastingSpellObjectServerRPC)} ownerClientId {clientId}");
+        // 해당 SpellState 업데이트
+        UpdatePlayerSpellState(spellIndex, SpellState.Cooltime);
+
+        Debug.Log($"{nameof(ShootSpellServerRPC)} ownerClientId {clientId}");
 
         spellObject.transform.SetParent(GameManager.Instance.transform);
 
@@ -144,6 +108,9 @@ public class SpellManagerServerWizard : NetworkBehaviour
 
         // 포구 VFX
         MuzzleVFX(spellObject.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
+
+        // 발사 애니메이션 실행
+        playerAnimator.UpdateSpellAnimationOnServer(PlayerAttackAnimState.ShootingMagic);
     }
     #endregion
 

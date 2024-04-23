@@ -7,7 +7,7 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
 {
     public ulong clientId;
     public PlayerMoveAnimState playerMoveAnimState;
-    public PlayerAttackAnimState playerAttackAnimState;
+    //public PlayerAttackAnimState playerAttackAnimState;
     public PlayerGameState playerGameState;
     public FixedString64Bytes playerName;
     public sbyte score;
@@ -25,7 +25,7 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
         return
             clientId == other.clientId &&
             playerMoveAnimState == other.playerMoveAnimState &&
-            playerAttackAnimState == other.playerAttackAnimState &&
+            //playerAttackAnimState == other.playerAttackAnimState &&
             playerGameState == other.playerGameState &&
             playerName == other.playerName &&
             hp == other.hp &&
@@ -43,7 +43,7 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
     {
         serializer.SerializeValue(ref clientId);
         serializer.SerializeValue(ref playerMoveAnimState);
-        serializer.SerializeValue(ref playerAttackAnimState);
+        //serializer.SerializeValue(ref playerAttackAnimState);
         serializer.SerializeValue(ref playerGameState);
         serializer.SerializeValue(ref playerName);
         serializer.SerializeValue(ref hp);

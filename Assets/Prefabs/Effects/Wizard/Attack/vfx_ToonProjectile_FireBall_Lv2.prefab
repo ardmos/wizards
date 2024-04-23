@@ -19470,7 +19470,7 @@ GameObject:
   - component: {fileID: -801365901283699015}
   m_Layer: 0
   m_Name: vfx_ToonProjectile_FireBall_Lv2
-  m_TagString: Attack
+  m_TagString: AttackSpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19509,20 +19509,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellInfo:
     spellType: 0
+    spellName: 0
+    spellState: 0
     coolTime: 0
     lifeTime: 0
     moveSpeed: 0
     price: 0
     level: 0
-    spellName: 0
-    spellState: 0
     ownerPlayerClientId: 0
   muzzleVFXPrefab: {fileID: 1486444696406430, guid: ba1295ef26a8b874eae8969b7aadfd8a, type: 3}
   hitVFXPrefab: {fileID: 1221116321114522, guid: 13e7b1908d4d5094e9ba37c20eb5a0a0, type: 3}
   trails:
   - {fileID: 1219879106134026}
   - {fileID: 1483740840959512}
-  isCollided: 0
 --- !u!65 &65324946821253012
 BoxCollider:
   m_ObjectHideFlags: 0
