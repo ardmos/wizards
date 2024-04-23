@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
@@ -48,12 +47,12 @@ public abstract class AttackSpell : NetworkBehaviour
                 Debug.Log("AttackSpell Info is null");
             }
 
-            PlayerClient player = collider.GetComponent<PlayerClient>();
+            PlayerServer player = collider.GetComponent<PlayerServer>();
             if (player != null)
             {
                 byte damage = (byte)GetSpellInfo().level;
                 // 플레이어 피격을 서버에서 처리
-                // 여기부터 하면 됩니다.  Player Server에서 하면 좋을듯 싶은데! PlayerGotHitOnServer(damage, player);
+                player.PlayerGotHitOnServer(damage, player);
             }
             else Debug.LogError("Player is null!");
         }
@@ -135,6 +134,8 @@ public abstract class AttackSpell : NetworkBehaviour
         spellObject.GetComponent<NetworkObject>().Spawn();
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
         Debug.Log($"SpawnSpellObjectOnServer!! spellInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");
+
+        spellObject.transform.SetParent(GameManager.Instance.transform);
 
         // 마법 발사체 방향 조정하기
         spellObject.transform.forward = spawnPosition.forward;

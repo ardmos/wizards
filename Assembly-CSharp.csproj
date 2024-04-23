@@ -91,8 +91,8 @@
     <Compile Include="Assets\Scripts\TitleScene\SoundManager.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
-    <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\SpellManagerClientWizard.cs" />
+    <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Spells\IceSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimStateEventData.cs" />

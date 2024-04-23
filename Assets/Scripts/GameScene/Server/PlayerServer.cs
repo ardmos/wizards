@@ -69,4 +69,45 @@ public class PlayerServer : NetworkBehaviour
         vfxHeal.transform.SetParent(transform);
         vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
     }
+
+    /// <summary>
+    /// 스킬 충돌 처리(서버에서 동작)
+    /// 플레이어 적중시 ( 다른 마법이나 구조물과의 충돌 처리는 Spell.cs에 있다. 코드 정리 필요)
+    /// clientID와 HP 연계해서 처리. 
+    /// 충돌 녀석이 플레이어일 경우 실행. 
+    /// ClientID로 리스트 검색 후 HP 수정시키고 업데이트된 내용 브로드캐스팅.
+    /// 수신측은 ClientID의 플레이어 HP 업데이트. 
+    /// 서버에서 구동되는 스크립트.
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="clientId"></param>
+    public void PlayerGotHitOnServer(byte damage, PlayerServer player)
+    {
+        ulong clientId = player.OwnerClientId;
+        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
+        {
+            // 요청한 플레이어 현재 HP값 가져오기 
+            PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
+            sbyte playerHP = playerData.hp;
+            sbyte playerMaxHP = playerData.maxHp;
+
+            // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
+            if (playerHP <= damage)
+            {
+                // HP 0
+                playerHP = 0;
+            }
+            else
+            {
+                // HP 감소 계산
+                playerHP -= (sbyte)damage;
+            }
+
+            // 각 Client UI 업데이트 지시. HPBar & Damage Popup
+            PlayerHPManager.Instance.UpdatePlayerHP(clientId, playerHP, playerMaxHP);
+            player.GetComponent<PlayerClient>().ShowDamagePopupClientRPC(damage);
+
+            Debug.Log($"GameMultiplayer.PlayerGotHitOnServer()  Player{clientId} got {damage} damage new HP:{playerHP}");
+        }
+    }
 }
