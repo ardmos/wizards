@@ -38,12 +38,12 @@ public class PlayerMovementClient : NetworkBehaviour
     public void HandleMovementServerAuth()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-        playerMovementServer.HandleMovementServerRPC(inputVector, PlayerClient.Instance.GetComponent<GameInput>().GetIsAttackButtonClicked());
+        playerMovementServer.HandleMovementServerRPC(inputVector, gameInput.GetIsAttackButtonClicked());
     }
 
     private void OnPlayerGameOver(object sender, System.EventArgs e)
     {
-        playerMovementServer.HandleMovementServerRPC(Vector2.zero, PlayerClient.Instance.GetComponent<GameInput>().GetIsAttackButtonClicked());
+        playerMovementServer.HandleMovementServerRPC(Vector2.zero, gameInput.GetIsAttackButtonClicked());
     }
 }
 

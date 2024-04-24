@@ -100,7 +100,7 @@ public class ScrollManagerServer : NetworkBehaviour
         spellManagerServerWizard.SetSpellInfo(spellIndex, newSpellInfo);
 
         // 변경내용을 요청한 클라이언트와도 동기화
-        networkClient.PlayerObject.GetComponent<SpellManagerClientWizard>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
+        networkClient.PlayerObject.GetComponent<SkillSpellManagerClient>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
 
         // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
         DequeuePlayerScrollSpellSlotQueueOnServer(clientId);

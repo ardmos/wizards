@@ -7,7 +7,7 @@ using UnityEngine.TextCore.Text;
 public class PlayerServer : NetworkBehaviour
 {
     public PlayerClient playerClient;
-    public SpellManagerServerWizard spellManagerServerWizard;
+    public SkillSpellManagerServer skillSpellManagerServer;
 
     public override void OnNetworkSpawn()
     {
@@ -54,7 +54,7 @@ public class PlayerServer : NetworkBehaviour
         PlayerHPManager.Instance.UpdatePlayerHP(requestedInitializeClientId, playerData.hp, playerData.maxHp);
 
         // 플레이어가 보유한 스킬 목록 저장
-        spellManagerServerWizard.InitPlayerSpellInfoArrayOnServer(character.skills);
+        skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
 
         // 플레이어 InitializePlayer 시작, 스킬 목록을 클라이언트측(SpellController)에 저장 ( 수정해야함
         playerClient.InitializePlayerClientRPC(character.skills);

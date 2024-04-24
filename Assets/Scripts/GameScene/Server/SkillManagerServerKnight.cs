@@ -20,6 +20,12 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         {
             Dash();
         }
+
+        // State 업데이트
+        UpdatePlayerSpellState(defenceSpellIndex, SpellState.Casting);
+
+        // Anim 실행
+        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Dash);
     }
 
     public void Dash()

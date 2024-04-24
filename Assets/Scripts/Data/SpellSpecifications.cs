@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -10,7 +11,7 @@ public class SpellSpecifications : MonoBehaviour
 {
     public static SpellSpecifications Instance;
 
-    private SpellInfo[] spellDefaultSpec = new SpellInfo[(int)SkillName.Dash_Lv1];
+    private SpellInfo[] spellDefaultSpec = new SpellInfo[Enum.GetNames(typeof(SkillName)).Length];
 
     private void Awake()
     {
@@ -20,20 +21,27 @@ public class SpellSpecifications : MonoBehaviour
 
     private void InitSpellDefaultSpecs()
     {
+        // Wizard_Male
         // 공격 마법
         SetSpellDefaultSpec(SpellType.Fire, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.FireBallLv1, SpellState.Ready);
         SetSpellDefaultSpec(SpellType.Water, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.WaterBallLv1, SpellState.Ready);
         SetSpellDefaultSpec(SpellType.Ice, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.IceBallLv1, SpellState.Ready);
         // 방어 마법
         SetSpellDefaultSpec(SpellType.Arcane, 10.0f, 2.2f, 0f, 30, 1, SkillName.MagicShieldLv1, SpellState.Ready);
+
+        // Knight_Male
         // 공격 스킬
         SetSpellDefaultSpec(SpellType.Stone, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.StoneSlashAttack1_Lv1, SpellState.Ready);
         SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttack1_Lv1, SpellState.Ready);
         SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttack2_Lv1, SpellState.Ready);
+        //방어
+        SetSpellDefaultSpec(SpellType.Normal, 2.0f, 0f, 0f, 30, 1, SkillName.Dash_Lv1, SpellState.Ready);
     }
 
     public SpellInfo GetSpellDefaultSpec(SkillName spellName)
     {
+        if (spellDefaultSpec.Length <= (int)spellName) return null;
+
         return spellDefaultSpec[(int)spellName];
     }
 
@@ -44,7 +52,8 @@ public class SpellSpecifications : MonoBehaviour
     private void SetSpellDefaultSpec(SpellType spellType, float coolTime, float lifeTime, float moveSpeed, int price, byte level, SkillName spellName, SpellState spellState)
     {
         SpellInfo spellInfo;
-        spellInfo = new SpellInfo(spellType,
+        spellInfo = new SpellInfo(
+            spellType,
             spellName,
             spellState,
             coolTime,

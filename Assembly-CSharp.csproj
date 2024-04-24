@@ -131,7 +131,6 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\WinPopupItemTemplateUI.cs" />
-    <Compile Include="Assets\Scripts\Data\PlayerAttackAnimState.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\GameInput.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\Scroll.cs" />
@@ -192,6 +191,7 @@
     <Compile Include="Assets\Scripts\Data\PlayerInGameData.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ButtonReadSpellScrollUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\AnimationStateEnums.cs" />
     <Compile Include="Assets\Scripts\Spells\StoneSlashLv1.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
@@ -209,7 +209,6 @@
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillManagerServerKnight.cs" />
-    <Compile Include="Assets\Scripts\Data\PlayerAttackAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
   </ItemGroup>

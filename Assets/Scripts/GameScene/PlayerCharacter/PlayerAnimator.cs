@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerAnimator : NetworkBehaviour
 {
-    public PlayerAttackAnimState playerAttackAnimState;
+    public WizardMaleAnimState playerAttackAnimState;
 
     private const string IS_WALKING = "IsWalking";
     private const string IS_CASTING_ATTACK_MAGIC = "IsCastingAttackMagic";
@@ -62,39 +62,56 @@ public class PlayerAnimator : NetworkBehaviour
         }
     }
 
-/*    /// <summary>
-    /// AttackAnimState에 맞게 애니메이션을 실행시켜주는 메소드 입니다.
-    /// AttackAnimState가 변경된 서버상의 플레이어 오브젝트에게 애니메이션을 바꾸라고 알려줍니다.(서버권한방식 애니메이션 변경)
-    /// </summary>
-    private void OnPlayerAttackAnimStateChanged(object sender, System.EventArgs e)
-    {
-        PlayerAttackAnimStateEventData eventData = (PlayerAttackAnimStateEventData)e;
-        NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
-        networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdateSpellAnimationOnServer(eventData.playerAttackAnimState);
-        //Debug.Log($"{nameof(OnPlayerAttackAnimStateChanged)} Player{eventData.clientId} AttackAnimation OnPlayerAttackAnimStateChanged: {eventData.playerAttackAnimState}");
-    }*/
-
-    public void UpdateSpellAnimationOnServer(PlayerAttackAnimState playerAttackAnimState)
-    {
-        switch (playerAttackAnimState)
+    /*    /// <summary>
+        /// AttackAnimState에 맞게 애니메이션을 실행시켜주는 메소드 입니다.
+        /// AttackAnimState가 변경된 서버상의 플레이어 오브젝트에게 애니메이션을 바꾸라고 알려줍니다.(서버권한방식 애니메이션 변경)
+        /// </summary>
+        private void OnPlayerAttackAnimStateChanged(object sender, System.EventArgs e)
         {
-            case PlayerAttackAnimState.Idle:
+            PlayerAttackAnimStateEventData eventData = (PlayerAttackAnimStateEventData)e;
+            NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
+            networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdateSpellAnimationOnServer(eventData.playerAttackAnimState);
+            //Debug.Log($"{nameof(OnPlayerAttackAnimStateChanged)} Player{eventData.clientId} AttackAnimation OnPlayerAttackAnimStateChanged: {eventData.playerAttackAnimState}");
+        }*/
+
+    /// <summary>
+    /// Wizard_male용 애니메이션
+    /// </summary>
+    /// <param name="wizardMaleAnimState"></param>
+    public void UpdateWizardMaleAnimationOnServer(WizardMaleAnimState wizardMaleAnimState)
+    {
+        switch (wizardMaleAnimState)
+        {
+            case WizardMaleAnimState.Idle:
                 animator.SetBool(IS_CASTING_ATTACK_MAGIC, false);
                 animator.SetBool(IS_CASTING_DEFENSIVE_MAGIC, false);
                 break;
-            case PlayerAttackAnimState.CastingAttackMagic:
+            case WizardMaleAnimState.CastingAttackMagic:
                 animator.SetBool(IS_CASTING_ATTACK_MAGIC, true);
                 animator.SetBool(IS_CASTING_DEFENSIVE_MAGIC, false);
                 break;
-            case PlayerAttackAnimState.ShootingMagic:
+            case WizardMaleAnimState.ShootingMagic:
                 animator.SetBool(IS_CASTING_ATTACK_MAGIC, false);
                 animator.SetBool(IS_CASTING_DEFENSIVE_MAGIC, false);
                 break;
-            case PlayerAttackAnimState.CastingDefensiveMagic:
+            case WizardMaleAnimState.CastingDefensiveMagic:
                 animator.SetBool(IS_CASTING_ATTACK_MAGIC, false);
                 animator.SetBool(IS_CASTING_DEFENSIVE_MAGIC, true);
                 break;
-            default:
+        }
+    }
+
+    public void UpdateKnightMaleAnimationOnServer(KnightMaleAnimState knightMaleAnimState)
+    {
+        switch (knightMaleAnimState)
+        {
+            case KnightMaleAnimState.Idle: 
+                break;
+            case KnightMaleAnimState.Attack1: 
+                break;
+            case KnightMaleAnimState.Attack2: 
+                break;
+            case KnightMaleAnimState.Dash:
                 break;
         }
     }

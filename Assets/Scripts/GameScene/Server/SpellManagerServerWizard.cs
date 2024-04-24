@@ -36,13 +36,13 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
 
     IEnumerator StartAndResetAnimState(float lifeTime)
     {
-        playerAnimator.UpdateSpellAnimationOnServer(PlayerAttackAnimState.CastingDefensiveMagic);
+        playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingDefensiveMagic);
         yield return new WaitForSeconds(lifeTime);
 
         // 플레이어 캐릭터가 Casting 애니메이션중이 아닐 경우에만 Idle로 변경
-        if (!playerAnimator.playerAttackAnimState.Equals(PlayerAttackAnimState.CastingAttackMagic))
+        if (!playerAnimator.playerAttackAnimState.Equals(WizardMaleAnimState.CastingAttackMagic))
         {
-            playerAnimator.UpdateSpellAnimationOnServer(PlayerAttackAnimState.Idle);
+            playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.Idle);
         }
     }
     #endregion
@@ -77,7 +77,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         UpdatePlayerSpellState(spellIndex, SpellState.Casting);
 
         // 캐스팅 애니메이션 실행
-        playerAnimator.UpdateSpellAnimationOnServer(PlayerAttackAnimState.CastingAttackMagic);
+        playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingAttackMagic);
     }
 
     /// <summary>
@@ -110,7 +110,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         MuzzleVFX(spellObject.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
 
         // 발사 애니메이션 실행
-        playerAnimator.UpdateSpellAnimationOnServer(PlayerAttackAnimState.ShootingMagic);
+        playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
     }
     #endregion
 

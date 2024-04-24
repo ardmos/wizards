@@ -14,6 +14,8 @@ public abstract class PlayerClient : NetworkBehaviour
     public event EventHandler OnPlayerGameOver;
     //public event EventHandler OnPlayerWin;
 
+    public HPBarUIController hPBarUIController;
+    public DamageTextUIController damageTextUIController;
     public CinemachineVirtualCamera VirtualCamera;
     public Rigidbody mRigidbody;
     public UserNameUIController userNameUIController;
@@ -82,13 +84,13 @@ public abstract class PlayerClient : NetworkBehaviour
     [ClientRpc]
     public void SetHPClientRPC(sbyte hp, sbyte maxHP)
     {
-        GetComponentInChildren<HPBarUIController>()?.SetHP(hp, maxHP);
+        hPBarUIController?.SetHP(hp, maxHP);
     }
 
     [ClientRpc]
     public void ShowDamagePopupClientRPC(byte damageAmount)
     {
-        GetComponentInChildren<DamageTextUIController>()?.CreateTextObject(damageAmount);
+        damageTextUIController?.CreateTextObject(damageAmount);
     }
 
     /// <summary>

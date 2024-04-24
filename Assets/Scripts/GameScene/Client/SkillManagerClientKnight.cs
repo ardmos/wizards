@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SkillManagerClientKnight : SkillSpellManagerClient
 {
+    // 0. 쿨타임 관리
+
 
     // 1.  공격 스킬 시전
     public void ActivateAttackSkillOnClient()
@@ -24,4 +26,6 @@ public class SkillManagerClientKnight : SkillSpellManagerClient
         // 서버에 애니메이션 실행 요청
         GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServerRPC(OwnerClientId, PlayerAttackAnimState.CastingDefensiveMagic);*/
     }
+
+    
 }

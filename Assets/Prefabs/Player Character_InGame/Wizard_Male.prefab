@@ -2611,6 +2611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0b2ec62b4a5747b4059f0f3fd4bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hPBarUIController: {fileID: 2648681988919741548}
+  damageTextUIController: {fileID: 3422639390078374823}
   VirtualCamera: {fileID: 4487991525872706357}
   mRigidbody: {fileID: 4842463508567140202}
   userNameUIController: {fileID: 4649931589576448986}
@@ -2630,7 +2632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: -2686748507231774534}
-  spellManagerServerWizard: {fileID: 1543831547272748415}
+  skillSpellManagerServer: {fileID: 1543831547272748415}
 --- !u!114 &854047434301573314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2668,7 +2670,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillSpellManagerServer: {fileID: 1543831547272748415}
-  playerAnimator: {fileID: 2441054021172676538}
   spellInfoListOnClient: []
   restTimeCurrentSpellArrayOnClient: []
 --- !u!114 &1543831547272748415
