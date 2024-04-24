@@ -392,8 +392,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1122503257}
   imageAssets:
-  - {fileID: 21300000, guid: 54916d62273a58d45b20287c9c8173a9, type: 3}
-  - {fileID: 21300000, guid: 78f6f065e4cd2204d8e1e5ecb58220bd, type: 3}
+  - {fileID: 21300000, guid: 7aca1e12660a99b469817a7e737d6f5e, type: 3}
+  - {fileID: 21300000, guid: 72172cc3e0e0c8840a3c2e34467f5f15, type: 3}
+  - {fileID: 21300000, guid: d29abb318145bf44fb5b76fc1dc0a0d2, type: 3}
 --- !u!1 &1570441767
 GameObject:
   m_ObjectHideFlags: 0
