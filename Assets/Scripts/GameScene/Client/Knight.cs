@@ -1,5 +1,7 @@
 using System;
 using Unity.Netcode;
+using UnityEngine;
+
 /// <summary>
 /// 1. Knight ½ºÅÈ °ü¸®
 /// </summary>
@@ -32,12 +34,12 @@ public class Knight : PlayerClient, ICharacter
 
     protected override void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
-
+        Debug.Log("GameInput_OnAttack1Started");
     }
 
     protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-
+        Debug.Log("GameInput_OnAttack1Ended");
     }
 
     protected override void GameInput_OnAttack2Started(object sender, EventArgs e)
@@ -62,11 +64,12 @@ public class Knight : PlayerClient, ICharacter
 
     protected override void GameInput_OnDefenceStarted(object sender, EventArgs e)
     {
-
+        Debug.Log("GameInput_OnDefenceStarted");
+        skillManagerClientKnight.ActivateDefenceSkillOnClient();
     }
 
     protected override void GameInput_OnDefenceEnded(object sender, EventArgs e)
     {
-       
+        Debug.Log("GameInput_OnDefenceEnded");
     }
 }

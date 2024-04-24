@@ -10,10 +10,20 @@ public class PlayerAnimator : NetworkBehaviour
 {
     public WizardMaleAnimState playerAttackAnimState;
 
+    // 아래 상수 String들 따로 스크립트 만들어서 정리해주기
     private const string IS_WALKING = "IsWalking";
+    private const string IS_GAMEOVER = "IsGameOver";
+    private const string IS_VICTORY = "IsVictory";
+
+    // Wizard_Male
     private const string IS_CASTING_ATTACK_MAGIC = "IsCastingAttackMagic";
     private const string IS_CASTING_DEFENSIVE_MAGIC = "IsCastingDefensiveMagic";
-    private const string IS_GAMEOVER = "IsGameOver";
+
+    // Knight_Male
+    private const string IS_ATTACK1 = "IsAttack1";
+    private const string IS_ATTACK2 = "IsAttack2";
+    private const string IS_Dash = "IsDash";
+
 
     private Animator animator;
 
@@ -105,13 +115,19 @@ public class PlayerAnimator : NetworkBehaviour
     {
         switch (knightMaleAnimState)
         {
-            case KnightMaleAnimState.Idle: 
+            case KnightMaleAnimState.Idle:
+                animator.SetBool(IS_ATTACK1, false);
+                animator.SetBool(IS_ATTACK2, false);
+                animator.SetBool(IS_Dash, false);
                 break;
             case KnightMaleAnimState.Attack1: 
                 break;
             case KnightMaleAnimState.Attack2: 
                 break;
             case KnightMaleAnimState.Dash:
+                animator.SetBool(IS_ATTACK1, false);
+                animator.SetBool(IS_ATTACK2, false);
+                animator.SetBool(IS_Dash, true);
                 break;
         }
     }

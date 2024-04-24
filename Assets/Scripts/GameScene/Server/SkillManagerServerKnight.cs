@@ -13,16 +13,13 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
     /// </summary>
     /// <param name="player"></param>
     [ServerRpc(RequireOwnership = false)]
-    public void StartActivateDefenceSpellServerRPC(SkillName spellName)
+    public void StartActivateDefenceSpellServerRPC()
     {
         // 마법 시전
-        if(spellName == SkillName.Dash_Lv1)
-        {
-            Dash();
-        }
+        Dash();
 
         // State 업데이트
-        UpdatePlayerSpellState(defenceSpellIndex, SpellState.Casting);
+        UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
 
         // Anim 실행
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Dash);
@@ -50,5 +47,8 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
             transform.position = Vector3.Lerp(startPos, endPos, t);
             yield return null;
         }
+
+        // 대쉬 끝나면 다시 캐릭터 애니메이션 Idle로 
+        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Idle);
     }
 }

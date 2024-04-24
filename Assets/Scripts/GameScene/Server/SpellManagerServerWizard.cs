@@ -20,15 +20,15 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     public void StartActivateDefenceSpellServerRPC()
     {
         // 마법 시전
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(GetSpellInfo(defenceSpellIndex).spellName), transform.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT).spellName), transform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
-        spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(defenceSpellIndex));
+        spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT));
         spellObject.transform.SetParent(transform);
         spellObject.transform.localPosition = Vector3.zero;
         spellObject.GetComponent<DefenceSpell>().Activate();
 
         // 해당 SpellState 업데이트
-        UpdatePlayerSpellState(defenceSpellIndex, SpellState.Cooltime);
+        UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
 
         // 애니메이션 실행
         StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifeTime));

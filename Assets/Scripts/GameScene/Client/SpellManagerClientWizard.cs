@@ -41,8 +41,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
     #region 방어 마법 시전
     public void ActivateDefenceSpellOnClient()
     {
-        ushort defenceSpellIndex = 3;
-        if (spellInfoListOnClient[defenceSpellIndex].spellState != SpellState.Ready) return;
+        if (spellInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
 
         // 서버에 마법 시전 요청
         skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().StartActivateDefenceSpellServerRPC();

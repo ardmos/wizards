@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class SkillSpellManagerServer : NetworkBehaviour
 {
+    // SpellInfoList의 인덱스 0~2까지는 공격마법, 3은 방어마법 입니다.
+    public const byte DEFENCE_SPELL_INDEX_DEFAULT = 3;
     public SkillSpellManagerClient skillSpellManagerClient;
     public PlayerAnimator playerAnimator;
     private List<SpellInfo> playerOwnedSpellInfoListOnServer = new List<SpellInfo>();
-
-    // SpellInfoList의 인덱스 0~2까지는 공격마법, 3은 방어마법 입니다.
-    protected const byte defenceSpellIndex = 3;
 
     #region SpellInfo
     [ServerRpc (RequireOwnership = false)]
