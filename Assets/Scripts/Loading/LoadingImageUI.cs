@@ -12,8 +12,6 @@ public class LoadingImageUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        image.sprite = imageAssets[Random.Range(0, 3)];
+        image.sprite = imageAssets[Random.Range(0, imageAssets.Length)];
     }
-
-
 }
