@@ -25,6 +25,9 @@ public class SkillSpellManagerServer : NetworkBehaviour
     public void UpdatePlayerSpellState(ushort spellIndex, SpellState spellState)
     {
         playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
+
+        // 요청한 클라이언트의 playerOwnedSpellInfoList와 동기화
+        skillSpellManagerClient.UpdatePlayerSpellInfoArrayClientRPC(playerOwnedSpellInfoListOnServer.ToArray());
     }
 
     /// <summary>

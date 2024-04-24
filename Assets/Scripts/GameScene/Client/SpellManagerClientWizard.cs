@@ -31,7 +31,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
     /// </summary>
     public void ShootSpell(ushort spellIndex)
     {
-        if (spellInfoListOnClient[spellIndex].spellState != SpellState.Casting) return;
+        if (spellInfoListOnClient[spellIndex].spellState != SpellState.Casting) return;   // 여기때문인가 확인해보자
 
         // 서버에 마법 발사 요청
         skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().ShootSpellServerRPC(spellIndex) ;
