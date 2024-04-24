@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -26,6 +25,9 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         spellObject.transform.SetParent(transform);
         spellObject.transform.localPosition = Vector3.zero;
         spellObject.GetComponent<DefenceSpell>().Activate();
+
+        // 마법 생성 사운드 재생
+        spellObject.GetComponent<DefenceSpell>().PlaySFX(AttackSpell.SFX_CASTING);
 
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
@@ -57,7 +59,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         // 포구 위치 찾기(Local posittion)
         Transform muzzleTransform = GetComponentInChildren<MuzzlePos>().transform;
 
-        // 포구에 발사체 위치시키기
+        // 발사체 오브젝트 생성
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzleTransform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
@@ -65,7 +67,11 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
         spellObject.transform.SetParent(transform);
+        // 포구에 발사체 위치시키기
         spellObject.transform.localPosition = muzzleTransform.localPosition;
+
+        // 마법 생성 사운드 재생
+        spellObject.GetComponent<AttackSpell>().PlaySFX(AttackSpell.SFX_CASTING);
 
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = transform.forward;

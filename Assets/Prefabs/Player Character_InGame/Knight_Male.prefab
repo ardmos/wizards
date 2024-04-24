@@ -2453,50 +2453,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &932501096560631535
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 932501096560631534}
-  - component: {fileID: 4593355730981297291}
-  m_Layer: 3
-  m_Name: Muzzle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &932501096560631534
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932501096560631535}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24, y: 0.81, z: 1.51}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 932501098101691874}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4593355730981297291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932501096560631535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b684f6a58efe3fe4a9b55e5d3cacb393, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &932501097988159003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,12 +2580,9 @@ Transform:
   m_Children:
   - {fileID: 3074706332397935873}
   - {fileID: 932501097988159002}
-  - {fileID: 932501096560631534}
   - {fileID: 4581583772931097980}
   - {fileID: 2093146661360044936}
   - {fileID: 8909977629314831837}
-  - {fileID: 8207503022147797770}
-  - {fileID: 1439433496249870460}
   - {fileID: 9217177973508345175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2704,7 +2657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillSpellManagerServer: {fileID: 2317913567860431100}
-  spellInfoListOnClient: []
+  skillInfoListOnClient: []
   restTimeCurrentSpellArrayOnClient: []
 --- !u!114 &2317913567860431100
 MonoBehaviour:
@@ -2722,6 +2675,8 @@ MonoBehaviour:
   playerAnimator: {fileID: 2441054021172676538}
   dashDistance: 5
   dashDuration: 0.5
+  attack1Muzzle: {fileID: 2811791840965660635}
+  attack2Muzzle: {fileID: 7488439861874168249}
 --- !u!114 &2005663916033335820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9033,6 +8988,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2698831877673623217}
+  - {fileID: 8207503022147797770}
+  - {fileID: 1439433496249870460}
   m_Father: {fileID: 932501098101691874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -16475,14 +16432,14 @@ RectTransform:
   m_GameObject: {fileID: 7034930908417310360}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 932501098101691874}
+  m_Father: {fileID: 8909977629314831837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.2}
+  m_AnchoredPosition: {x: 0, y: -0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &346433743489428568
@@ -21855,16 +21812,16 @@ RectTransform:
   m_GameObject: {fileID: 8832412109370877551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1070981977912450316}
   - {fileID: 310396446425021473}
-  m_Father: {fileID: 932501098101691874}
+  m_Father: {fileID: 8909977629314831837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.2}
+  m_AnchoredPosition: {x: 0, y: -0}
   m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1342484061549834625

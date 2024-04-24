@@ -20,7 +20,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
     /// <param name="spellIndex"></param>
     public void CastingSpell(ushort spellIndex)
     {
-        if (spellInfoListOnClient[spellIndex].spellState != SpellState.Ready) return;
+        if (skillInfoListOnClient[spellIndex].spellState != SpellState.Ready) return;
 
         // 서버에 마법 캐스팅 요청
         skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().CastingSpellServerRPC(spellIndex);
@@ -31,7 +31,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
     /// </summary>
     public void ShootSpell(ushort spellIndex)
     {
-        if (spellInfoListOnClient[spellIndex].spellState != SpellState.Casting) return;   // 여기때문인가 확인해보자
+        if (skillInfoListOnClient[spellIndex].spellState != SpellState.Casting) return;
 
         // 서버에 마법 발사 요청
         skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().ShootSpellServerRPC(spellIndex) ;
@@ -41,7 +41,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
     #region 방어 마법 시전
     public void ActivateDefenceSpellOnClient()
     {
-        if (spellInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
+        if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
 
         // 서버에 마법 시전 요청
         skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().StartActivateDefenceSpellServerRPC();

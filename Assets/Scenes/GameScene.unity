@@ -10453,10 +10453,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1057068786283933256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3566226ee0309604bb2a378f707c89a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonSouth
+  m_MovementRange: 50
+  spellIndex: 3
 --- !u!1 &1057068786375670240
 GameObject:
   m_ObjectHideFlags: 0

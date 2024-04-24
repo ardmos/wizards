@@ -12,8 +12,8 @@ public class HPBarUIController : MonoBehaviour
 
     public void SetHP(sbyte currentHP, sbyte maxHP)
     {
-        slider.value = currentHP;
         slider.maxValue = maxHP;
+        slider.value = currentHP;
         UpdateHPBarColorAndTextValue(currentHP, maxHP);
     }
 

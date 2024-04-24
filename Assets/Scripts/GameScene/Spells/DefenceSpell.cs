@@ -26,21 +26,13 @@ public abstract class DefenceSpell : NetworkBehaviour
         Destroy(gameObject, spellInfo.lifeTime);
         //StartCoroutine(StartCountdown(spellInfo.lifeTime));
     }
-/*    /// <summary>
-    /// lifeTime 뒤에 오브젝트 파괴 및 플레이어 애니메이션 업데이트 보고
-    /// </summary>
-    private IEnumerator StartCountdown(float lifeTime)
+
+    public void PlaySFX(byte state)
     {
-        yield return new WaitForSeconds(lifeTime);
+        if (SoundManager.Instance == null) return;
 
-        // 플레이어 캐릭터가 Casting 애니메이션중이 아닐 경우에만 Idle로 변경
-        if (!GameMultiplayer.Instance.GetPlayerDataFromClientId(spellInfo.ownerPlayerClientId).playerAttackAnimState.Equals(PlayerAttackAnimState.CastingAttackMagic))
-        {
-            GameMultiplayer.Instance.UpdatePlayerAttackAnimStateOnServer(spellInfo.ownerPlayerClientId, PlayerAttackAnimState.Idle);
-        }
-
-        Destroy(gameObject);
-    }*/
+        SoundManager.Instance.PlayWizardSpellSFXClientRPC(spellInfo.spellName, state);
+    }
 
     /// <summary>
     /// CollisionEnter 충돌 처리 (서버 권한 방식)

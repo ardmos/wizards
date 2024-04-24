@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public abstract class AttackSpell : NetworkBehaviour
 {
-    private const byte sfxCasting = 0;
-    private const byte sfxShooting = 1;
-    private const byte sfxHit = 2;
+    public const byte SFX_CASTING = 0;
+    public const byte SFX_SHOOTING = 1;
+    public const byte SFX_HIT = 2;
 
     [SerializeField] protected SpellInfo spellInfo;
 
@@ -45,16 +45,19 @@ public abstract class AttackSpell : NetworkBehaviour
             if (GetSpellInfo() == null)
             {
                 Debug.Log("AttackSpell Info is null");
+                return;
             }
 
             PlayerServer player = collider.GetComponent<PlayerServer>();
-            if (player != null)
+            if (player == null)
             {
-                byte damage = (byte)GetSpellInfo().level;
-                // 플레이어 피격을 서버에서 처리
-                player.PlayerGotHitOnServer(damage, player);
+                Debug.LogError("Player is null!");
+                return;
             }
-            else Debug.LogError("Player is null!");
+
+            byte damage = (byte)GetSpellInfo().level;
+            // 플레이어 피격을 서버에서 처리
+            player.PlayerGotHitOnServer(damage, player);
         }
         // 기타 오브젝트 충돌
         else
@@ -63,7 +66,7 @@ public abstract class AttackSpell : NetworkBehaviour
         }
 
         // 마법 충돌 사운드 재생
-        PlaySFX(sfxHit);
+        PlaySFX(SFX_HIT);
 
         // 적중 효과 VFX
         HitVFX(GetHitVFXPrefab(), collision);
@@ -133,7 +136,7 @@ public abstract class AttackSpell : NetworkBehaviour
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellInfo.spellName), spawnPosition.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
-        Debug.Log($"SpawnSpellObjectOnServer!! spellInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");
+        Debug.Log($"SpawnSpellObjectOnServer!! skillInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");
 
         spellObject.transform.SetParent(GameManager.Instance.transform);
 
@@ -145,14 +148,12 @@ public abstract class AttackSpell : NetworkBehaviour
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
     }
 
-    // 마법 캐스팅 시작시 상세값 설정
+    // 마법 상세값 설정
     public virtual void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
         if (IsClient) return;
 
         spellInfo = new SpellInfo(spellInfoFromServer);
-        // 마법 생성 사운드 재생
-        PlaySFX(sfxCasting);
     }
 
     public virtual void Shoot(Vector3 force, ForceMode forceMode)
@@ -161,7 +162,7 @@ public abstract class AttackSpell : NetworkBehaviour
 
         GetComponent<Rigidbody>().AddForce(force, forceMode);
         // 마법 발사 사운드 재생
-        PlaySFX(sfxShooting);
+        PlaySFX(SFX_SHOOTING);
     }
 
     public SpellInfo GetSpellInfo()
@@ -181,10 +182,10 @@ public abstract class AttackSpell : NetworkBehaviour
         return trails;
     }
 
-    private void PlaySFX(byte state)
+    public void PlaySFX(byte state)
     {
         if (SoundManager.Instance == null) return;
 
-        SoundManager.Instance.PlayMagicSFXClientRPC(spellInfo.spellName, state);
+        SoundManager.Instance.PlayWizardSpellSFXClientRPC(spellInfo.spellName, state);
     }
 }

@@ -12,19 +12,19 @@ public class SkillSpellManagerClient : NetworkBehaviour
     public SkillSpellManagerServer skillSpellManagerServer;
 
     protected const byte totalSpellCount = 4;
-    [SerializeField] protected List<SpellInfo> spellInfoListOnClient;
+    [SerializeField] protected List<SpellInfo> skillInfoListOnClient;
     [SerializeField] protected float[] restTimeCurrentSpellArrayOnClient;
 
     public override void OnNetworkSpawn()
     {
-        spellInfoListOnClient = new List<SpellInfo>();
+        skillInfoListOnClient = new List<SpellInfo>();
         restTimeCurrentSpellArrayOnClient = new float[totalSpellCount];
     }
 
     private void Update()
     {
         // 쿨타임 관리
-        for (ushort i = 0; i < spellInfoListOnClient.Count; i++)
+        for (ushort i = 0; i < skillInfoListOnClient.Count; i++)
         {
             Cooltime(i);
         }
@@ -36,17 +36,17 @@ public class SkillSpellManagerClient : NetworkBehaviour
     private void Cooltime(ushort spellIndex)
     {
         //Debug.Log($"spellNumber : {spellIndex}, currentSpellPrefabArray.Length : {currentSpellPrefabArray.Length}");
-        if (spellInfoListOnClient[spellIndex] == null) return;
+        if (skillInfoListOnClient[spellIndex] == null) return;
         // 쿨타임 관리
-        if (spellInfoListOnClient[spellIndex].spellState == SpellState.Cooltime)
+        if (skillInfoListOnClient[spellIndex].spellState == SpellState.Cooltime)
         {
             restTimeCurrentSpellArrayOnClient[spellIndex] += Time.deltaTime;
-            if (restTimeCurrentSpellArrayOnClient[spellIndex] >= spellInfoListOnClient[spellIndex].coolTime)
+            if (restTimeCurrentSpellArrayOnClient[spellIndex] >= skillInfoListOnClient[spellIndex].coolTime)
             {
                 restTimeCurrentSpellArrayOnClient[spellIndex] = 0f;
                 // 여기서 서버에 Ready로 바뀐 State를 보고 하면 서버에서 다시 콜백해서 현 클라이언트 오브젝트의 State가 Ready로 바뀌긴 하는데, 그 사이에 딜레이가 있어서
                 // 여기서 한 번 클라이언트의 State를 바꿔주고 서버에 보고 해준다.
-                spellInfoListOnClient[spellIndex].spellState = SpellState.Ready;
+                skillInfoListOnClient[spellIndex].spellState = SpellState.Ready;
                 skillSpellManagerServer.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
             }
             //Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
@@ -60,7 +60,7 @@ public class SkillSpellManagerClient : NetworkBehaviour
     /// <returns></returns>
     public SpellState GetSpellStateFromSpellIndexOnClient(ushort spellIndex)
     {
-        return spellInfoListOnClient[spellIndex].spellState;
+        return skillInfoListOnClient[spellIndex].spellState;
     }
 
     [ClientRpc]
@@ -69,7 +69,7 @@ public class SkillSpellManagerClient : NetworkBehaviour
         // ServerRPC를 요청한 클라이언트에게만 업데이트 되도록 필터링
         if (!IsOwner) return;
 
-        spellInfoListOnClient = new List<SpellInfo>(spellInfoArray.ToList<SpellInfo>());
+        skillInfoListOnClient = new List<SpellInfo>(spellInfoArray.ToList<SpellInfo>());
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public class SkillSpellManagerClient : NetworkBehaviour
             playerSpellInfoList.Add(spellInfo);
         }
 
-        spellInfoListOnClient = playerSpellInfoList;
+        skillInfoListOnClient = playerSpellInfoList;
         Debug.Log("2. SkillSpellManagerClient.InitPlayerSpellInfoListClient");
     }
 
@@ -98,7 +98,7 @@ public class SkillSpellManagerClient : NetworkBehaviour
     /// <returns></returns>
     public List<SpellInfo> GetSpellInfoList()
     {
-        return spellInfoListOnClient;
+        return skillInfoListOnClient;
     }
 
     #region 현재 마법 restTime/coolTime 얻기
@@ -109,9 +109,9 @@ public class SkillSpellManagerClient : NetworkBehaviour
     /// <returns></returns>
     public float GetCurrentSpellCoolTimeRatio(ushort spellIndex)
     {
-        if (spellInfoListOnClient.Count <= spellIndex) return 0f;
-        if (spellInfoListOnClient[spellIndex] == null) return 0f;
-        float coolTimeRatio = restTimeCurrentSpellArrayOnClient[spellIndex] / spellInfoListOnClient[spellIndex].coolTime;
+        if (skillInfoListOnClient.Count <= spellIndex) return 0f;
+        if (skillInfoListOnClient[spellIndex] == null) return 0f;
+        float coolTimeRatio = restTimeCurrentSpellArrayOnClient[spellIndex] / skillInfoListOnClient[spellIndex].coolTime;
         return coolTimeRatio;
     }
     #endregion

@@ -65,6 +65,10 @@ public class GameAssets : MonoBehaviour
     public AudioClip[] sfx_Fireball_Lv1;
     public AudioClip[] sfx_Waterball_Lv1;
     public AudioClip[] sfx_Iceball_Lv1;
+    public AudioClip[] sfx_MagicShield_Lv1;
+    public AudioClip[] sfx_ElectricSlashAttack1_Lv1;
+    public AudioClip[] sfx_ElectricSlashAttack2_Lv1;
+    public AudioClip[] sfx_Dash_Lv1;
     public AudioClip sfx_PotionHP;
     public AudioClip sfx_OpenScroll;
     public AudioClip sfx_ScrollLvUp;    
@@ -192,8 +196,28 @@ public class GameAssets : MonoBehaviour
                 return sfx_Waterball_Lv1[state];
             case SkillName.IceBallLv1:
                 return sfx_Iceball_Lv1[state];
+            case SkillName.MagicShieldLv1:
+                return sfx_MagicShield_Lv1[state];
             default: 
                 Debug.LogError($"{nameof(GetMagicSFXSound)}. {spellName}은 알맞은 spellName이 아닙니다."); 
+                return null;
+        }
+    }
+
+    public AudioClip GetSkillSFXSound(SkillName skillName, byte state)
+    {
+        switch (skillName)
+        {
+            case SkillName.StoneSlashAttack1_Lv1:
+                return sfx_ElectricSlashAttack1_Lv1[state];
+            case SkillName.ElectricSlashAttack1_Lv1:
+                return sfx_ElectricSlashAttack1_Lv1[state];
+            case SkillName.ElectricSlashAttack2_Lv1:
+                return sfx_ElectricSlashAttack2_Lv1[state];
+            case SkillName.Dash_Lv1:
+                return sfx_Dash_Lv1[state];
+            default:
+                Debug.LogError($"{nameof(GetSkillSFXSound)}. {skillName}은 알맞은 skillName이 아닙니다.");
                 return null;
         }
     }

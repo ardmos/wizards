@@ -108,6 +108,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
   - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
   - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+  sfx_MagicShield_Lv1:
+  - {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
+  - {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
+  - {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
+  sfx_ElectricSlashAttack1_Lv1:
+  - {fileID: 8300000, guid: be7f6c1d95d537346b12f008d777c9f1, type: 3}
+  - {fileID: 8300000, guid: be7f6c1d95d537346b12f008d777c9f1, type: 3}
+  - {fileID: 8300000, guid: be7f6c1d95d537346b12f008d777c9f1, type: 3}
+  sfx_ElectricSlashAttack2_Lv1:
+  - {fileID: 8300000, guid: d8d92bac699a7824da6208386157a77a, type: 3}
+  - {fileID: 8300000, guid: d8d92bac699a7824da6208386157a77a, type: 3}
+  - {fileID: 8300000, guid: d8d92bac699a7824da6208386157a77a, type: 3}
+  sfx_Dash_Lv1:
+  - {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
+  - {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
+  - {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
   sfx_PotionHP: {fileID: 8300000, guid: 2ef55505c696278429561b7b43b591ac, type: 3}
   sfx_OpenScroll: {fileID: 8300000, guid: 72cf99bf9fd5a6a4bbcf5d2226c04df8, type: 3}
   sfx_ScrollLvUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
