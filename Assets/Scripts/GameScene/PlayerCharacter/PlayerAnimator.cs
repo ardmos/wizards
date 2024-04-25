@@ -120,9 +120,15 @@ public class PlayerAnimator : NetworkBehaviour
                 animator.SetBool(IS_ATTACK2, false);
                 animator.SetBool(IS_Dash, false);
                 break;
-            case KnightMaleAnimState.Attack1: 
+            case KnightMaleAnimState.Attack1:
+                animator.SetBool(IS_ATTACK1, true);
+                animator.SetBool(IS_ATTACK2, false);
+                animator.SetBool(IS_Dash, false);
                 break;
-            case KnightMaleAnimState.Attack2: 
+            case KnightMaleAnimState.Attack2:
+                animator.SetBool(IS_ATTACK1, false);
+                animator.SetBool(IS_ATTACK2, true);
+                animator.SetBool(IS_Dash, false);
                 break;
             case KnightMaleAnimState.Dash:
                 animator.SetBool(IS_ATTACK1, false);

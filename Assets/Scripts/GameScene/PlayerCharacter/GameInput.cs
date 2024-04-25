@@ -95,6 +95,7 @@ public class GameInput : MonoBehaviour
     private void Defence_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
+        isAttackButtonClicked = true;
         OnDefenceStarted?.Invoke(this, EventArgs.Empty);
     }
 
@@ -122,6 +123,8 @@ public class GameInput : MonoBehaviour
     private void Defence_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
+        if (!isAttackButtonClicked) return;
+        isAttackButtonClicked = false;
         OnDefenceEnded?.Invoke(this, EventArgs.Empty);
     }
 

@@ -8,12 +8,13 @@ public class SlashSkill : NetworkBehaviour
 
     [SerializeField] private SpellInfo skillInfo;
     [SerializeField] private GameObject hitVFXPrefab;
+    [SerializeField] private ParticleSystem particleSystemMain;
 
     // 스킬 자동파괴 설정
     public void SetSelfDestroy()
     {
         // 4. 스킬 오브젝트 제거
-        Destroy(gameObject, GetComponent<ParticleSystem>().main.duration);
+        Destroy(gameObject, particleSystemMain.main.duration);
     }
 
     // 스킬 상세값 설정
@@ -22,6 +23,25 @@ public class SlashSkill : NetworkBehaviour
         if (IsClient) return;
 
         skillInfo = new SpellInfo(spellInfoFromServer);
+
+        // 플레이어 Layer 설정
+        switch (skillInfo.ownerPlayerClientId)
+        {
+            case 0:
+                gameObject.layer = LayerMask.NameToLayer("Player0");
+                break;
+            case 1:
+                gameObject.layer = LayerMask.NameToLayer("Player1");
+                break;
+            case 2:
+                gameObject.layer = LayerMask.NameToLayer("Player2");
+                break;
+            case 3:
+                gameObject.layer = LayerMask.NameToLayer("Player3");
+                break;
+            default:
+                break;
+        }
     }
 
     // 1. Hit(충돌) 인식
@@ -29,6 +49,12 @@ public class SlashSkill : NetworkBehaviour
     {
         // 서버에서만 처리.
         if (IsClient) return;
+        // 시전자 자신은 충돌차리 안함
+        if (collision.collider.gameObject.layer == gameObject.layer)
+        {
+            Debug.Log("자신과 충돌");
+            return;
+        }
 
         // 충돌을 중복 처리하는것을 방지하기 위한 처리
         GetComponent<Collider>().enabled = false;
@@ -64,6 +90,7 @@ public class SlashSkill : NetworkBehaviour
         else
         {
             Debug.Log($"{skillInfo.spellName}이(가) {collider.name}와(과) Hit!");
+            return;
         }
 
         // 2. 충돌지점에 Hit VFX 재생

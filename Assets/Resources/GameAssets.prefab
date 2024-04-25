@@ -68,10 +68,10 @@ MonoBehaviour:
     prefab: {fileID: 3153472991145048103, guid: 8297505af0fe106459b44a4a610effef, type: 3}
     name: StoneSlashAttack1_Lv1
   - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
-    prefab: {fileID: 1171201465392465800, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
+    prefab: {fileID: 8017458754016935794, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
     name: ElectricSlashAttack1_Lv1
   - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
-    prefab: {fileID: 1171201465392465800, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
+    prefab: {fileID: 8017458754016935794, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
     name: ElectricSlashAttack2_Lv1
   - icon: {fileID: 21300000, guid: 1ad309a351498428d824d7ee62bed12d, type: 3}
     prefab: {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}

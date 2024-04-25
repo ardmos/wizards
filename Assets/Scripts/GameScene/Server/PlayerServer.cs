@@ -14,7 +14,7 @@ public class PlayerServer : NetworkBehaviour
         if (!IsServer) return;
 
         ICharacter character = (ICharacter)playerClient; //GetComponent<ICharacter>();
-        InitializePlayerOnServer(character, OwnerClientId);
+        InitializePlayerOnServer(character);
     }
 
     /// <summary>
@@ -23,7 +23,7 @@ public class PlayerServer : NetworkBehaviour
     /// 2. HP 초기화 & 브로드캐스팅
     /// 3. 특정 플레이어가 보유한 스킬 목록 저장 & 해당플레이어에게 공유
     /// </summary>
-    public void InitializePlayerOnServer(ICharacter character, ulong requestedInitializeClientId)
+    public void InitializePlayerOnServer(ICharacter character)
     {
         Debug.Log($"OwnerClientId{OwnerClientId} Player (class : {character.characterClass.ToString()}) InitializePlayerOnServer");
 
@@ -45,23 +45,42 @@ public class PlayerServer : NetworkBehaviour
         transform.position = spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId));
 
         // HP 초기화
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(requestedInitializeClientId);
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         playerData.hp = character.hp;
         playerData.maxHp = character.maxHp;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(requestedInitializeClientId, playerData);
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
 
         // 현재 HP 저장 및 설정
-        PlayerHPManager.Instance.UpdatePlayerHP(requestedInitializeClientId, playerData.hp, playerData.maxHp);
+        PlayerHPManager.Instance.UpdatePlayerHP(OwnerClientId, playerData.hp, playerData.maxHp);
 
         // 플레이어가 보유한 스킬 목록 저장
         skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
 
         // 플레이어 InitializePlayer 시작, 스킬 목록을 클라이언트측(SpellController)에 저장 ( 수정해야함
         playerClient.InitializePlayerClientRPC(character.skills);
+
+        // 플레이어 Layer 설정
+        switch (OwnerClientId)
+        {
+            case 0:
+                gameObject.layer = LayerMask.NameToLayer("Player0");
+                break;
+            case 1:
+                gameObject.layer = LayerMask.NameToLayer("Player1");
+                break;
+            case 2:
+                gameObject.layer = LayerMask.NameToLayer("Player2");
+                break;
+            case 3:
+                gameObject.layer = LayerMask.NameToLayer("Player3");
+                break;
+            default: 
+                break;
+        }
     }
 
     // 스크롤 활용. 스킬 강화 VFX 실행
-    [ServerRpc (RequireOwnership = false)]
+    [ServerRpc(RequireOwnership = false)]
     public void StartApplyScrollVFXServerRPC()
     {
         GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfx_SpellUpgrade, transform);

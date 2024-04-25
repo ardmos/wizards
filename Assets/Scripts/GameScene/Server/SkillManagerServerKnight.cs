@@ -47,11 +47,13 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)0));
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(skillInfo.spellName), attack1Muzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
+        skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
         spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
         spellObject.transform.SetParent(transform);
         // 위치 설정
         spellObject.transform.localPosition = attack1Muzzle.localPosition;
+        spellObject.transform.localRotation = attack1Muzzle.localRotation;
 
         // State 업데이트
         UpdatePlayerSpellState(0, SpellState.Cooltime);
@@ -69,11 +71,13 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)1));
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(skillInfo.spellName), attack2Muzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
+        skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
         spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
         spellObject.transform.SetParent(transform);
         // 위치 설정
         spellObject.transform.localPosition = attack2Muzzle.localPosition;
+        spellObject.transform.localRotation = attack2Muzzle.localRotation;
 
         // State 업데이트
         UpdatePlayerSpellState(1, SpellState.Cooltime);
@@ -91,11 +95,13 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)1));
         GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(skillInfo.spellName), attack1Muzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
+        skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
         spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
         spellObject.transform.SetParent(transform);
         // 위치 설정
         spellObject.transform.localPosition = attack1Muzzle.localPosition;
+        spellObject.transform.localRotation = attack1Muzzle.localRotation;
 
         // State 업데이트 쿨타임은 attack1과 다르게 가야하기 때문에 인덱스를 신경써줍니다
         UpdatePlayerSpellState(2, SpellState.Cooltime);
