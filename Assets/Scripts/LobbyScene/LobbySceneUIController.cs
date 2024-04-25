@@ -113,6 +113,11 @@ public class LobbySceneUIController : MonoBehaviour
         character.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
+    public void PlayAnimCharacterVictory()
+    {
+        character.GetComponentInChildren<Animator>().SetTrigger("IsVictory");
+    }
+
     public GameObject GetSelectedCharacter3DObject() { return character; }
 
     public PopupNameChangeUIController GetPopupNameChangeUIController()

@@ -51,6 +51,8 @@ public class PopupSelectCharacterUIController : MonoBehaviour
     {
         currentClickedCard  = characterCard;
         ShowCharacterInfo(currentClickedCard.characterCardInfo);
+        // 캐릭터 선택 애니메이션(승리포즈) 재생
+        lobbySceneUIController.PlayAnimCharacterVictory();
     }
 
     private void SelectCharacter()
@@ -73,11 +75,6 @@ public class PopupSelectCharacterUIController : MonoBehaviour
         imgIconSkill4.sprite = GameAssets.instantiate.GetSpellIconImage(characterCardInfo.characterSkillSet[3]);
 
         lobbySceneUIController.ChangePlayerCharacter(characterCardInfo.character);
-        // 3D 오브젝트를 월드 스페이스에서 Screen Space - Camera로 변환
-        /*        worldObject = lobbySceneUIController.GetSelectedCharacter3DObject();
-                Vector3 screenPos = worldSpaceCamera.WorldToScreenPoint(worldObject.transform.position);
-                worldObject.transform.SetParent(uiCanvas.transform, true);
-                worldObject.transform.position = screenPos;*/
     }
 
     public void Show()
