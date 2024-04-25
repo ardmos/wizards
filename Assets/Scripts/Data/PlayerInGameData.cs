@@ -11,7 +11,7 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
     public PlayerGameState playerGameState;
     public FixedString64Bytes playerName;
     public sbyte score;
-    public CharacterClass characterClass;
+    public Character characterClass;
     public sbyte hp;
     public sbyte maxHp;
     public float moveSpeed;

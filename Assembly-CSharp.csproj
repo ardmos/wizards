@@ -70,6 +70,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIManager.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\CharacterCardController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\SelectSpellSlotUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUIController.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameStartCountdownUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\DailyGroupUI.cs" />
+    <Compile Include="Assets\Scriptable Objects\CharacterCardInfo.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollLevelUp.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\ScrollAttach.cs" />
     <Compile Include="Assets\Scripts\GameScene\Spells\SlashSkill.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Spells\IceBallLv1.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\PopupSelectCharacterUIController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

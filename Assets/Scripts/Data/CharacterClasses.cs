@@ -1,4 +1,4 @@
-public enum CharacterClass
+public enum Character
 {
     Wizard,
     Knight

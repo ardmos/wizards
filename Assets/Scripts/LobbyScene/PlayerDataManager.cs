@@ -125,13 +125,13 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     // Lobby Scene 전용. Client 내부 저장용
-    public void SetCurrentPlayerClass(CharacterClass characterClass) 
+    public void SetCurrentPlayerClass(Character characterClass) 
     { 
         playerData.playerInGameData.characterClass = characterClass;
         SavePlayerData();
     }
 
-    public CharacterClass GetCurrentPlayerClass() 
+    public Character GetCurrentPlayerClass() 
     {
         return playerData.playerInGameData.characterClass; 
     }

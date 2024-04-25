@@ -88,7 +88,7 @@ public class GameManager : NetworkBehaviour
             // Player Character Client 历厘 规侥
             //GameObject player = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).playerClass));
             // Player Character Server 历厘 规侥
-            CharacterClass playerClass = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).characterClass;
+            Character playerClass = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).characterClass;
             GameObject playerPrefab = GetCurrentPlayerCharacterPrefab(playerClass);
             GameObject player = Instantiate(playerPrefab);
             if (player != null)
@@ -98,15 +98,15 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    private GameObject GetCurrentPlayerCharacterPrefab(CharacterClass playerClass)
+    private GameObject GetCurrentPlayerCharacterPrefab(Character playerClass)
     {
         GameObject playerPrefab = null;
         switch (playerClass)
         {
-            case CharacterClass.Wizard:
+            case Character.Wizard:
                 playerPrefab = GameAssets.instantiate.wizard_Male;
                 break;
-            case CharacterClass.Knight:
+            case Character.Knight:
                 playerPrefab = GameAssets.instantiate.knight_Male;
                 break;
             default:

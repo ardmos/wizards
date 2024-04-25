@@ -9,7 +9,7 @@ using UnityEngine;
 public class Wizard : PlayerClient, ICharacter
 {
     public SpellManagerClientWizard spellManagerClientWizard;
-    public CharacterClass characterClass { get; set; } = CharacterClass.Wizard;
+    public Character characterClass { get; set; } = Character.Wizard;
     public sbyte hp { get; set; } = 5;
     public sbyte maxHp { get; set; } = 5;
     public float moveSpeed { get; set; } = 10f;

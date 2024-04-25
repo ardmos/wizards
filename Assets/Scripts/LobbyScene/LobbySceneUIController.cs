@@ -15,7 +15,7 @@ public class LobbySceneUIController : MonoBehaviour
     public TextMeshProUGUI txtUserName;     // [SerializeField] private ---> public
 
     [SerializeField] private CustomClickSoundButton btnSettings;
-    [SerializeField] private CustomClickSoundButton btnClassChange;
+    [SerializeField] private CustomClickSoundButton btnChangeCharacter;
     [SerializeField] private CustomClickSoundButton btnShop;
     [SerializeField] private CustomClickSoundButton btnEquipment;
     [SerializeField] private CustomClickSoundButton btnSkill;
@@ -36,6 +36,8 @@ public class LobbySceneUIController : MonoBehaviour
     [SerializeField] private PopupInboxUIController popupInbox;
     [SerializeField] private PopupNewsUIController popupNews;
 
+    [SerializeField] private PopupSelectCharacterUIController popupSelectCharacterUI;
+
     [SerializeField] private GameObject characterPos;
     [SerializeField] private GameObject character;
 
@@ -53,7 +55,7 @@ public class LobbySceneUIController : MonoBehaviour
         btnStartPlay.AddClickListener(matchmakerClient.StartMatchmaking);
         btnUserInfo.AddClickListener(popupUserInfoUI.Show);
         btnSettings.AddClickListener(popupSettingsUI.Show);
-        btnClassChange.onClick.AddListener(ChangePlayerClass);
+        btnChangeCharacter.AddClickListener(popupSelectCharacterUI.Show);
 
         // 지금은 사용하지 않는 버튼들입니다.
         /*        
@@ -65,7 +67,7 @@ public class LobbySceneUIController : MonoBehaviour
         // 임시로 현 스크립트(클라이언트)에서 player class 저장. 잘 가지고 있다가 Server가 Allocate 되면 GameMultiplyer의 서버RPC를 통해 서버에 넘겨준다. 
         // 이후에 UGS 클라우드 서버가 구축되면, 그곳에서 관리할것이다.
         //PlayerProfileData.Instance.SetCurrentSelectedClass(CharacterClasses.Class.Wizard);
-        UpdatePlayerClass();
+        UpdatePlayerCharacter();
         UpdateUserInfoUI();
     }
 
@@ -78,50 +80,40 @@ public class LobbySceneUIController : MonoBehaviour
         txtUserName.text = PlayerDataManager.Instance.GetPlayerName();
     }
 
-
     /// <summary>
     ///  아래 클래스 변경 내용은 클래스스크립트를 따로 만들어서 구현하는것이 보기 좋을  것 같다! 어쨌든 지금은 안씀. 나이트 추가 후에 사용 예정!
     /// </summary>
-    private void ChangePlayerClass()
+    public void ChangePlayerCharacter(Character character)
     {
-        switch (PlayerDataManager.Instance.GetCurrentPlayerClass())
-        {
-            case CharacterClass.Wizard:
-                PlayerDataManager.Instance.SetCurrentPlayerClass(CharacterClass.Knight);
-                break;
-            case CharacterClass.Knight:
-                PlayerDataManager.Instance.SetCurrentPlayerClass(CharacterClass.Wizard);
-                break;
-            default:
-                Debug.LogError("UpdateCurrentClass() Class Error");
-                break;
-        }
+        PlayerDataManager.Instance.SetCurrentPlayerClass(character);
 
-        UpdatePlayerClass();      
+        UpdatePlayerCharacter();
     }
 
-    private void UpdatePlayerClass()
+    private void UpdatePlayerCharacter()
     {
-        if (character != null) { Destroy(character); }        
+        if (character != null) { Destroy(character); }
 
         switch (PlayerDataManager.Instance.GetCurrentPlayerClass())
         {
-            case CharacterClass.Wizard:
-                btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
+            case Character.Wizard:
+                btnChangeCharacter.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
                 character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerDataManager.Instance.GetCurrentPlayerClass()));
-                break; 
-            case CharacterClass.Knight:
-                btnClassChange.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
+                break;
+            case Character.Knight:
+                btnChangeCharacter.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
                 character = Instantiate(GameAssets.instantiate.GetCharacterPrefab_NotInGame(PlayerDataManager.Instance.GetCurrentPlayerClass()));
-                break; 
+                break;
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");
                 break;
         }
         character.transform.SetParent(characterPos.transform);
         character.transform.localPosition = Vector3.zero;
-        character.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);        
+        character.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
     }
+
+    public GameObject GetSelectedCharacter3DObject() { return character; }
 
     public PopupNameChangeUIController GetPopupNameChangeUIController()
     {

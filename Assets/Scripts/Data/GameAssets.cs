@@ -121,15 +121,15 @@ public class GameAssets : MonoBehaviour
     /// <summary>
     /// 인게임용 아닌, 로비씬 등에서 사용되는 캐릭터 프리팹을 리턴해는 메소드 입니다.
     /// </summary>
-    public GameObject GetCharacterPrefab_NotInGame(CharacterClass characterClass)
+    public GameObject GetCharacterPrefab_NotInGame(Character characterClass)
     {
         GameObject resultObejct = null;
         switch (characterClass)
         {
-            case CharacterClass.Wizard:
+            case Character.Wizard:
                 resultObejct = wizard_Male_ForLobby;
                 break;
-            case CharacterClass.Knight:
+            case Character.Knight:
                 resultObejct = knight_Male_ForLobby;
                 break;
             default:
@@ -142,15 +142,15 @@ public class GameAssets : MonoBehaviour
     /// <summary>
     /// 인게임용 캐릭터 프리팹을 리턴해주는 메소드 입니다
     /// </summary>
-    public GameObject GetCharacterPrefab_InGame(CharacterClass characterClass)
+    public GameObject GetCharacterPrefab_InGame(Character characterClass)
     {
         GameObject resultObejct = null;
         switch (characterClass)
         {
-            case CharacterClass.Wizard:
+            case Character.Wizard:
                 resultObejct = wizard_Male;
                 break;
-            case CharacterClass.Knight:
+            case Character.Knight:
                 resultObejct = knight_Male;
                 break;
             default:
