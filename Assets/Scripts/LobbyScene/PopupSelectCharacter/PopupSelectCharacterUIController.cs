@@ -33,9 +33,9 @@ public class PopupSelectCharacterUIController : MonoBehaviour
 
 
     // 3D 캐릭터를 보여주기 위한 변수들
-    public GameObject uiCanvas; // UI 캔버스
+/*    public GameObject uiCanvas; // UI 캔버스
     public GameObject worldObject; // 3D 오브젝트
-    public Camera worldSpaceCamera; // 3D 오브젝트를 렌더링할 카메라
+    public Camera worldSpaceCamera; // 3D 오브젝트를 렌더링할 카메라*/
 
     private CharacterCardController selectedCard;
     private CharacterCardController currentClickedCard;
@@ -72,13 +72,12 @@ public class PopupSelectCharacterUIController : MonoBehaviour
         imgIconSkill3.sprite = GameAssets.instantiate.GetSpellIconImage(characterCardInfo.characterSkillSet[2]);
         imgIconSkill4.sprite = GameAssets.instantiate.GetSpellIconImage(characterCardInfo.characterSkillSet[3]);
 
-
-        // 3D 오브젝트를 월드 스페이스에서 Screen Space - Camera로 변환
         lobbySceneUIController.ChangePlayerCharacter(characterCardInfo.character);
-        worldObject = lobbySceneUIController.GetSelectedCharacter3DObject();
-        Vector3 screenPos = worldSpaceCamera.WorldToScreenPoint(worldObject.transform.position);
-        worldObject.transform.SetParent(uiCanvas.transform, true);
-        worldObject.transform.position = screenPos;
+        // 3D 오브젝트를 월드 스페이스에서 Screen Space - Camera로 변환
+        /*        worldObject = lobbySceneUIController.GetSelectedCharacter3DObject();
+                Vector3 screenPos = worldSpaceCamera.WorldToScreenPoint(worldObject.transform.position);
+                worldObject.transform.SetParent(uiCanvas.transform, true);
+                worldObject.transform.position = screenPos;*/
     }
 
     public void Show()
@@ -98,7 +97,7 @@ public class PopupSelectCharacterUIController : MonoBehaviour
         CharacterCardController[] formalData = containerCharacterCards.GetComponentsInChildren<CharacterCardController>();
         foreach(CharacterCardController characterCard in formalData)
         {
-            Destroy(characterCard);
+            Destroy(characterCard.gameObject);
         }
 
         foreach (CharacterCardInfo cardInfo in characterCardInfos)
@@ -109,6 +108,7 @@ public class PopupSelectCharacterUIController : MonoBehaviour
             if(cardInfo.character == PlayerDataManager.Instance.GetCurrentPlayerClass())
             {
                 selectedCard = characterCardObject.GetComponent<CharacterCardController>();
+                selectedCard.SetFocus(true);
                 ShowCharacterInfo(cardInfo);
             }
         }
