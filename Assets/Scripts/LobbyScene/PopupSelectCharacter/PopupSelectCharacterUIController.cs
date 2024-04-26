@@ -32,10 +32,10 @@ public class PopupSelectCharacterUIController : MonoBehaviour
     public Image imgIconSkill4;
 
 
-    // 3D 캐릭터를 보여주기 위한 변수들
-/*    public GameObject uiCanvas; // UI 캔버스
-    public GameObject worldObject; // 3D 오브젝트
-    public Camera worldSpaceCamera; // 3D 오브젝트를 렌더링할 카메라*/
+    // 3D 캐릭터를 렌더링할 카메라
+    public Camera popupSelectCharacterCamera;
+    // 기본 카메라
+    public Camera mainCamera;
 
     private CharacterCardController selectedCard;
     private CharacterCardController currentClickedCard;
@@ -81,12 +81,16 @@ public class PopupSelectCharacterUIController : MonoBehaviour
     {
         gameObject.SetActive(true);
         SetupCharacterCards();  
+        mainCamera.enabled = false;
+        popupSelectCharacterCamera.enabled = true;
     }
 
     private void Hide()
     {
         gameObject.SetActive(false);
         lobbySceneUIController.ChangePlayerCharacter(selectedCard.characterCardInfo.character);
+        mainCamera.enabled = true;
+        popupSelectCharacterCamera.enabled = false;
     }
 
     private void SetupCharacterCards()

@@ -2408,7 +2408,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451099654}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -7141,6 +7141,8 @@ MonoBehaviour:
   imgIconSkill2: {fileID: 2305354829394047757}
   imgIconSkill3: {fileID: 2305354830177590264}
   imgIconSkill4: {fileID: 843581207}
+  popupSelectCharacterCamera: {fileID: 451099657}
+  mainCamera: {fileID: 1702166898}
 --- !u!1 &1623423306
 GameObject:
   m_ObjectHideFlags: 0
