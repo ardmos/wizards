@@ -14908,7 +14908,6 @@ GameObject:
   - component: {fileID: 1457226660186444870}
   - component: {fileID: 5506146684877743394}
   - component: {fileID: 3971068125732371342}
-  - component: {fileID: 7901154092261622607}
   m_Layer: 0
   m_Name: Book Stack 05
   m_TagString: Untagged
@@ -25987,7 +25986,6 @@ GameObject:
   - component: {fileID: 8390963197798102467}
   - component: {fileID: 5121058565018542445}
   - component: {fileID: 6521946867110689540}
-  - component: {fileID: 7102055340364461861}
   m_Layer: 0
   m_Name: Floor 03 (35)
   m_TagString: Untagged
@@ -27521,27 +27519,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!65 &367733387142373251
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8967166470944323703}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 0.20000082, z: 5}
-  m_Center: {x: 0, y: 0.10000001, z: 0}
 --- !u!1 &380930209191821841
 GameObject:
   m_ObjectHideFlags: 0
@@ -27726,27 +27703,6 @@ RectTransform:
   m_AnchoredPosition: {x: 35, y: -50}
   m_SizeDelta: {x: 70, y: 69}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!65 &506985192018980370
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7761617839543081020}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.111926906, y: 0.241355, z: 0.21011756}
-  m_Center: {x: 0, y: 0.120677486, z: -0.000000037252903}
 --- !u!1 &516617913283986741
 GameObject:
   m_ObjectHideFlags: 0
@@ -28547,7 +28503,6 @@ GameObject:
   - component: {fileID: 3684514084733887092}
   - component: {fileID: 260250785069953548}
   - component: {fileID: 3881680825973011916}
-  - component: {fileID: 1611495670216928311}
   m_Layer: 0
   m_Name: Book 04
   m_TagString: Untagged
@@ -28612,7 +28567,6 @@ GameObject:
   - component: {fileID: 1522871777157612998}
   - component: {fileID: 4368699885742567755}
   - component: {fileID: 1022708309964621147}
-  - component: {fileID: 8631560749112032443}
   m_Layer: 0
   m_Name: Book 01
   m_TagString: Untagged
@@ -34404,7 +34358,6 @@ GameObject:
   - component: {fileID: 7196291336829646017}
   - component: {fileID: 7483365203878556}
   - component: {fileID: 8604653499287615344}
-  - component: {fileID: 2797027443997013636}
   m_Layer: 0
   m_Name: Floor 03 (28)
   m_TagString: Untagged
@@ -34512,7 +34465,6 @@ GameObject:
   - component: {fileID: 7931655976879268105}
   - component: {fileID: 6010331254362929763}
   - component: {fileID: 2673484548065015279}
-  - component: {fileID: 5838219884984469896}
   m_Layer: 0
   m_Name: Floor 03 (42)
   m_TagString: Untagged
@@ -54969,7 +54921,6 @@ GameObject:
   - component: {fileID: 8559343382193390040}
   - component: {fileID: 2372668404543957738}
   - component: {fileID: 2703183363843890495}
-  - component: {fileID: 1528634325102944067}
   m_Layer: 0
   m_Name: Book Stack 02
   m_TagString: Untagged
@@ -58823,27 +58774,6 @@ Transform:
   - {fileID: 7450109469802457853}
   m_Father: {fileID: 2160790551852817562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1213639201321555794
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3977090946733093240}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.87527275, y: 0.3021801, z: 0.21989514}
-  m_Center: {x: 0, y: 0.15109003, z: -0.000000044703494}
 --- !u!23 &1250127148869228693
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58886,27 +58816,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1258317067942243300
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6924546270620071980}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.87527275, y: 0.3021801, z: 0.21989514}
-  m_Center: {x: 0, y: 0.15109003, z: -0.000000044703494}
 --- !u!4 &1292199294975253638
 Transform:
   m_ObjectHideFlags: 0
@@ -59168,69 +59077,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4016158236086410021}
   m_LocalEulerAnglesHint: {x: -20.265001, y: 32.087, z: -102.25201}
---- !u!65 &1528634325102944067
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180094866406002515}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.87527275, y: 0.3021801, z: 0.21989514}
-  m_Center: {x: 0, y: 0.15109003, z: -0.000000044703494}
---- !u!65 &1611495670216928311
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668447332963140730}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.07883242, y: 0.26512006, z: 0.2122919}
-  m_Center: {x: 0, y: 0.13256, z: -0.000000026077032}
---- !u!65 &1634421773192309901
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3711766258122806344}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 0.20000082, z: 5}
-  m_Center: {x: 0, y: 0.10000001, z: 0}
 --- !u!4 &1662338752948862878
 Transform:
   m_ObjectHideFlags: 0
@@ -59849,27 +59695,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!65 &2039055048014062000
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3161326002174164454}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.111926906, y: 0.241355, z: 0.21011756}
-  m_Center: {x: 0, y: 0.120677486, z: -0.000000037252903}
 --- !u!33 &2051429666849341298
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -64763,27 +64588,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.101960786}
   m_EffectDistance: {x: 0, y: -8}
   m_UseGraphicAlpha: 1
---- !u!65 &2797027443997013636
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923565336936020143}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 0.20000082, z: 5}
-  m_Center: {x: 0, y: 0.10000001, z: 0}
 --- !u!4 &2801186070376417092
 Transform:
   m_ObjectHideFlags: 0
@@ -64850,27 +64654,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!65 &2869901895388439977
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7082032677076467071}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.1348651, y: 0.1529118, z: 0.13486513}
-  m_Center: {x: 0, y: 0.07599684, z: -0.0000000037252903}
 --- !u!33 &2874579319082504535
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -65104,7 +64887,6 @@ GameObject:
   - component: {fileID: 322992331134973668}
   - component: {fileID: 5858389100074553598}
   - component: {fileID: 8421453206175112159}
-  - component: {fileID: 2039055048014062000}
   m_Layer: 0
   m_Name: Book 03
   m_TagString: Untagged
@@ -70499,27 +70281,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3575192373852727169
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7337410031828354455}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.20336005, y: 0.2627638, z: 0.21989515}
-  m_Center: {x: 0, y: 0.13138187, z: -0.00000003725291}
 --- !u!33 &3576993444843541354
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -70810,7 +70571,6 @@ GameObject:
   - component: {fileID: 6884780349350455380}
   - component: {fileID: 6410315258811416613}
   - component: {fileID: 7203567287463174479}
-  - component: {fileID: 1634421773192309901}
   m_Layer: 0
   m_Name: Floor 03 (37)
   m_TagString: Untagged
@@ -71110,27 +70870,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3897325423186685053
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3986069571256169385}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.15688476, y: 0.4290951, z: 0.15688469}
-  m_Center: {x: 0, y: 0.21452042, z: 0}
 --- !u!33 &3898208908815386534
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -71283,7 +71022,6 @@ GameObject:
   - component: {fileID: 8742641793844864388}
   - component: {fileID: 9141196844350412783}
   - component: {fileID: 738762282872762828}
-  - component: {fileID: 1213639201321555794}
   m_Layer: 0
   m_Name: Book Stack 02
   m_TagString: Untagged
@@ -71310,7 +71048,6 @@ GameObject:
   - component: {fileID: 690848051219895610}
   - component: {fileID: 670458356855745549}
   - component: {fileID: 2692662968257879876}
-  - component: {fileID: 3897325423186685053}
   m_Layer: 0
   m_Name: Candle 02 (1)
   m_TagString: Untagged
@@ -71686,7 +71423,6 @@ GameObject:
   - component: {fileID: 3001987527028595386}
   - component: {fileID: 1453446074208813290}
   - component: {fileID: 4846907603213046964}
-  - component: {fileID: 8023750907031790981}
   m_Layer: 0
   m_Name: Candle 02
   m_TagString: Untagged
@@ -71994,7 +71730,6 @@ GameObject:
   - component: {fileID: 4855319119566891441}
   - component: {fileID: 7882381548784505496}
   - component: {fileID: 1351637468852496689}
-  - component: {fileID: 8443814840838756055}
   m_Layer: 0
   m_Name: Floor 03 (32)
   m_TagString: Untagged
@@ -72064,48 +71799,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!65 &4506538940388214907
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4812988121415496756}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.15688476, y: 0.4290951, z: 0.15688469}
-  m_Center: {x: 0, y: 0.21452042, z: 0}
---- !u!65 &4507818926952765853
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6878504781337976757}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.40957662, y: 0.3021801, z: 0.21989515}
-  m_Center: {x: 0, y: 0.15109003, z: -0.00000003725291}
 --- !u!1 &4511945711898728291
 GameObject:
   m_ObjectHideFlags: 0
@@ -72273,7 +71966,6 @@ GameObject:
   - component: {fileID: 3109394292313713473}
   - component: {fileID: 1857925641634943407}
   - component: {fileID: 5168043567669336015}
-  - component: {fileID: 5523621468192708227}
   m_Layer: 0
   m_Name: Book Stack 03
   m_TagString: Untagged
@@ -72427,27 +72119,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!65 &4792696390177971961
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9199171595634570487}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.1348651, y: 0.1529118, z: 0.13486513}
-  m_Center: {x: 0, y: 0.07599684, z: -0.0000000037252903}
 --- !u!114 &4797482598192887389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72584,7 +72255,6 @@ GameObject:
   - component: {fileID: 7593263841306943882}
   - component: {fileID: 6562215949656369477}
   - component: {fileID: 7844590776521265403}
-  - component: {fileID: 4506538940388214907}
   m_Layer: 0
   m_Name: Candle 02 (2)
   m_TagString: Untagged
@@ -72649,27 +72319,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2681961609329835007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4881062026229555855
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5639260859937505610}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5680418, y: 0.27441224, z: 0.21989514}
-  m_Center: {x: 0, y: 0.13720609, z: -0.000000044703494}
 --- !u!224 &4883691941266943484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -78168,7 +77817,6 @@ GameObject:
   - component: {fileID: 6047680020420789081}
   - component: {fileID: 4443627462315180774}
   - component: {fileID: 5850296376044306590}
-  - component: {fileID: 8984336707489174855}
   m_Layer: 0
   m_Name: Book Stack 04
   m_TagString: Untagged
@@ -78307,27 +77955,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!65 &5268393303055904933
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8713345073142765877}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.111926906, y: 0.2804659, z: 0.25535125}
-  m_Center: {x: 0, y: 0.14023292, z: -0.000000037252903}
 --- !u!23 &5296612267139292215
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -79116,27 +78743,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &5523621468192708227
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4589705458373184071}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.40957662, y: 0.3021801, z: 0.21989515}
-  m_Center: {x: 0, y: 0.15109003, z: -0.00000003725291}
 --- !u!1 &5546922853817754586
 GameObject:
   m_ObjectHideFlags: 0
@@ -79190,7 +78796,6 @@ GameObject:
   - component: {fileID: 8316023197222811055}
   - component: {fileID: 8460246869965772522}
   - component: {fileID: 6798443844230956581}
-  - component: {fileID: 8202957089513982001}
   m_Layer: 0
   m_Name: Book Stack 05
   m_TagString: Untagged
@@ -79300,7 +78905,6 @@ GameObject:
   - component: {fileID: 9027269578202874831}
   - component: {fileID: 6196327702425050743}
   - component: {fileID: 2587346655404690686}
-  - component: {fileID: 4881062026229555855}
   m_Layer: 0
   m_Name: Book Stack 05
   m_TagString: Untagged
@@ -79785,27 +79389,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!65 &5838219884984469896
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020665714227235582}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 0.20000082, z: 5}
-  m_Center: {x: 0, y: 0.10000001, z: 0}
 --- !u!23 &5850296376044306590
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -102797,7 +102380,6 @@ GameObject:
   - component: {fileID: 8387528205929508719}
   - component: {fileID: 8561633616762043221}
   - component: {fileID: 2672061842206067688}
-  - component: {fileID: 4507818926952765853}
   m_Layer: 0
   m_Name: Book Stack 03 (1)
   m_TagString: Untagged
@@ -102909,7 +102491,6 @@ GameObject:
   - component: {fileID: 7201894378801964279}
   - component: {fileID: 4891660309550834830}
   - component: {fileID: 4895895326439294061}
-  - component: {fileID: 1258317067942243300}
   m_Layer: 0
   m_Name: Book Stack 02
   m_TagString: Untagged
@@ -103477,7 +103058,6 @@ GameObject:
   - component: {fileID: 5335704745738894527}
   - component: {fileID: 3981899003465413565}
   - component: {fileID: 1236919956646503}
-  - component: {fileID: 2869901895388439977}
   m_Layer: 0
   m_Name: Candle 01 (1)
   m_TagString: Untagged
@@ -103485,27 +103065,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!65 &7102055340364461861
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325451455682809508}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 0.20000082, z: 5}
-  m_Center: {x: 0, y: 0.10000001, z: 0}
 --- !u!1 &7145308078660178092
 GameObject:
   m_ObjectHideFlags: 0
@@ -103630,7 +103189,6 @@ GameObject:
   - component: {fileID: 8740727185359744912}
   - component: {fileID: 2993298838144437435}
   - component: {fileID: 7743121375961853992}
-  - component: {fileID: 8924182595408675001}
   m_Layer: 0
   m_Name: Book Stack 05 (1)
   m_TagString: Untagged
@@ -103749,7 +103307,6 @@ GameObject:
   - component: {fileID: 8450685546143980739}
   - component: {fileID: 2635894046400896119}
   - component: {fileID: 8417729756977945188}
-  - component: {fileID: 3575192373852727169}
   m_Layer: 0
   m_Name: Book Stack 04
   m_TagString: Untagged
@@ -104105,27 +103662,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &7506816591161828396
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9101113892407948035}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.1348651, y: 0.1529118, z: 0.13486513}
-  m_Center: {x: 0, y: 0.07599684, z: -0.0000000037252903}
 --- !u!224 &7534915299572207964
 RectTransform:
   m_ObjectHideFlags: 0
@@ -104609,7 +104145,6 @@ GameObject:
   - component: {fileID: 8292124358812777281}
   - component: {fileID: 4579309090972718474}
   - component: {fileID: 1293517205453204579}
-  - component: {fileID: 506985192018980370}
   m_Layer: 0
   m_Name: Book 03
   m_TagString: Untagged
@@ -104815,27 +104350,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4452172825105406874}
   m_Mesh: {fileID: -7306004216123574508, guid: 0c2e0e922336f77439295eb3f115dab2, type: 3}
---- !u!65 &7901154092261622607
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199629538727284664}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5680418, y: 0.27441224, z: 0.21989514}
-  m_Center: {x: 0, y: 0.13720609, z: -0.000000044703494}
 --- !u!4 &7931655976879268105
 Transform:
   m_ObjectHideFlags: 0
@@ -104877,27 +104391,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!65 &8023750907031790981
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223130274183057380}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.15688476, y: 0.4290951, z: 0.15688469}
-  m_Center: {x: 0, y: 0.21452042, z: 0}
 --- !u!114 &8035030328748775216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105605,27 +105098,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8186998372877865640}
   m_CullTransparentMesh: 0
---- !u!65 &8202957089513982001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5618406162157987577}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5680418, y: 0.27441224, z: 0.21989514}
-  m_Center: {x: 0, y: 0.13720609, z: -0.000000044703494}
 --- !u!23 &8215635657953648541
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -106028,27 +105500,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8631563707015457833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30.000002}
---- !u!65 &8443814840838756055
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4452172825105406874}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 0.20000082, z: 5}
-  m_Center: {x: 0, y: 0.10000001, z: 0}
 --- !u!4 &8450685546143980739
 Transform:
   m_ObjectHideFlags: 0
@@ -106648,27 +106099,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8044618203424831819}
   m_Mesh: {fileID: 905453463087976406, guid: d84325cbb017adb4aa36b5499fc6ae8f, type: 3}
---- !u!65 &8631560749112032443
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693424025164911745}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.111926906, y: 0.2804659, z: 0.25535125}
-  m_Center: {x: 0, y: 0.14023292, z: -0.000000037252903}
 --- !u!4 &8631563707015457833
 Transform:
   m_ObjectHideFlags: 0
@@ -106732,7 +106162,6 @@ GameObject:
   - component: {fileID: 5395918531196484894}
   - component: {fileID: 8811281393404710742}
   - component: {fileID: 4365466748217021765}
-  - component: {fileID: 5268393303055904933}
   m_Layer: 0
   m_Name: Book 01
   m_TagString: Untagged
@@ -118309,27 +117738,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8899696780390511896}
   m_CullTransparentMesh: 0
---- !u!65 &8924182595408675001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7255522818252141789}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5680418, y: 0.27441224, z: 0.21989514}
-  m_Center: {x: 0, y: 0.13720609, z: -0.000000044703494}
 --- !u!198 &8935091508514284293
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -123092,7 +122500,6 @@ GameObject:
   - component: {fileID: 1001766808875212862}
   - component: {fileID: 5659801598239858259}
   - component: {fileID: 8216197744751891803}
-  - component: {fileID: 367733387142373251}
   m_Layer: 0
   m_Name: Floor 03 (29)
   m_TagString: Untagged
@@ -132230,27 +131637,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &8984336707489174855
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160142049916798539}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.20336005, y: 0.2627638, z: 0.21989515}
-  m_Center: {x: 0, y: 0.13138187, z: -0.00000003725291}
 --- !u!23 &8988614683378372361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -132436,7 +131822,6 @@ GameObject:
   - component: {fileID: 4523783083010056425}
   - component: {fileID: 4514854711089958824}
   - component: {fileID: 4185694324456622184}
-  - component: {fileID: 7506816591161828396}
   m_Layer: 0
   m_Name: Candle 01
   m_TagString: Untagged
@@ -132676,7 +132061,6 @@ GameObject:
   - component: {fileID: 6032003072982284096}
   - component: {fileID: 8391571521321175879}
   - component: {fileID: 3877185116712763128}
-  - component: {fileID: 4792696390177971961}
   m_Layer: 0
   m_Name: Candle 01 (2)
   m_TagString: Untagged
