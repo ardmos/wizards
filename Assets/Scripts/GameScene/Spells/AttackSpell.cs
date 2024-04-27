@@ -133,7 +133,7 @@ public abstract class AttackSpell : NetworkBehaviour
     public void SpawnSpellObjectOnServer(SpellInfo spellInfo, Transform spawnPosition)
     {
         // 포구에 마법 발사체 위치시키기
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(spellInfo.spellName), spawnPosition.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(spellInfo.spellName), spawnPosition.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
         Debug.Log($"SpawnSpellObjectOnServer!! skillInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "NewCharacterCardInfo", menuName = "ScriptableObjects/CharacterCardInfo", order = 0)]
 public class CharacterCardInfo : ScriptableObject
 {
     public Character character;

@@ -23,12 +23,12 @@ public class Item
     {
         switch (itemType)
         {
-            case ItemName.RemoveAds: return GameAssets.instantiate.icon_RemoveAds;
-            case ItemName.Item_Wizard: return GameAssets.instantiate.icon_WizardClass;
-            case ItemName.Item_Knight: return GameAssets.instantiate.icon_KnightClass;
-            case ItemName.Item_Gold: return GameAssets.instantiate.icon_Gold;
-            case ItemName.Item_BonusGold: return GameAssets.instantiate.icon_BonusGold;
-            case ItemName.Item_Exp: return GameAssets.instantiate.icon_Exp;
+            case ItemName.RemoveAds: return GameAssetsManager.Instance.gameAssets.icon_RemoveAds;
+            case ItemName.Item_Wizard: return GameAssetsManager.Instance.gameAssets.icon_WizardClass;
+            case ItemName.Item_Knight: return GameAssetsManager.Instance.gameAssets.icon_KnightClass;
+            case ItemName.Item_Gold: return GameAssetsManager.Instance.gameAssets.icon_Gold;
+            case ItemName.Item_BonusGold: return GameAssetsManager.Instance.gameAssets.icon_BonusGold;
+            case ItemName.Item_Exp: return GameAssetsManager.Instance.gameAssets.icon_Exp;
             default:
                 Debug.Log("No Image");
                 return null;               

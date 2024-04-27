@@ -29,7 +29,7 @@ public class PlayerServer : NetworkBehaviour
 
         PlayerSpawnPointsController spawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
 
-        if (GameAssets.instantiate == null)
+        if (GameAssetsManager.Instance == null)
         {
             Debug.Log($"{nameof(InitializePlayerOnServer)}, GameAssets를 찾지 못했습니다.");
             return;
@@ -83,7 +83,7 @@ public class PlayerServer : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void StartApplyScrollVFXServerRPC()
     {
-        GameObject vfxHeal = Instantiate(GameAssets.instantiate.vfx_SpellUpgrade, transform);
+        GameObject vfxHeal = Instantiate(GameAssetsManager.Instance.gameAssets.vfx_SpellUpgrade, transform);
         vfxHeal.GetComponent<NetworkObject>().Spawn();
         vfxHeal.transform.SetParent(transform);
         vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);

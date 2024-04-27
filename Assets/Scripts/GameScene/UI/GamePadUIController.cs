@@ -30,7 +30,7 @@ public class GamePadUIController : MonoBehaviour
         for (ushort i = 0; i < skills.Length; i++)
         {
             Debug.Log($"GamePadUIController.UpdateSpellUI() skills: {skills[i]}");
-            spellIcons[i].sprite = GameAssets.instantiate.GetSpellIconImage(skills[i]);
+            spellIcons[i].sprite = GameAssetsManager.Instance.GetSpellIconImage(skills[i]);
         }       
     }
 

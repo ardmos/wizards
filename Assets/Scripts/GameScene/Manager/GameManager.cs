@@ -104,10 +104,10 @@ public class GameManager : NetworkBehaviour
         switch (playerClass)
         {
             case Character.Wizard:
-                playerPrefab = GameAssets.instantiate.wizard_Male;
+                playerPrefab = GameAssetsManager.Instance.gameAssets.wizard_Male;
                 break;
             case Character.Knight:
-                playerPrefab = GameAssets.instantiate.knight_Male;
+                playerPrefab = GameAssetsManager.Instance.gameAssets.knight_Male;
                 break;
             default:
                 break;

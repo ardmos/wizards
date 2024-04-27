@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\StoreTriggerAreaCollider.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
+    <Compile Include="Assets\Scripts\Data\GameAssetsManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupSelectScrollEffectUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Spells\StoneSlashLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\PlayerServer.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupLookingForGameUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PlayerDataManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverUIController.cs" />
+    <Compile Include="Assets\Scriptable Objects\GameAssetsScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimState.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\TitleScene\TitleSceneUIController.cs" />

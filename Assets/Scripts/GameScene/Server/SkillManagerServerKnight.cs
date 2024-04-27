@@ -45,7 +45,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
     {
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)0));
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(skillInfo.spellName), attack1Muzzle.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attack1Muzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
@@ -69,7 +69,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
     {
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)1));
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(skillInfo.spellName), attack2Muzzle.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attack2Muzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
@@ -93,7 +93,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
     {
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)1));
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(skillInfo.spellName), attack1Muzzle.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attack1Muzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);

@@ -69,10 +69,10 @@ public class PopupSelectCharacterUIController : MonoBehaviour
         imgIconRole.sprite = characterCardInfo.iconRole;
         txtCharacterName.text = characterCardInfo.characterName;
         txtCharacterDescription.text = characterCardInfo.characterDescription;
-        imgIconSkill1.sprite = GameAssets.instantiate.GetSpellIconImage(characterCardInfo.characterSkillSet[0]);
-        imgIconSkill2.sprite = GameAssets.instantiate.GetSpellIconImage(characterCardInfo.characterSkillSet[1]);
-        imgIconSkill3.sprite = GameAssets.instantiate.GetSpellIconImage(characterCardInfo.characterSkillSet[2]);
-        imgIconSkill4.sprite = GameAssets.instantiate.GetSpellIconImage(characterCardInfo.characterSkillSet[3]);
+        imgIconSkill1.sprite = GameAssetsManager.Instance.GetSpellIconImage(characterCardInfo.characterSkillSet[0]);
+        imgIconSkill2.sprite = GameAssetsManager.Instance.GetSpellIconImage(characterCardInfo.characterSkillSet[1]);
+        imgIconSkill3.sprite = GameAssetsManager.Instance.GetSpellIconImage(characterCardInfo.characterSkillSet[2]);
+        imgIconSkill4.sprite = GameAssetsManager.Instance.GetSpellIconImage(characterCardInfo.characterSkillSet[3]);
 
         lobbySceneUIController.ChangePlayerCharacter(characterCardInfo.character);
     }

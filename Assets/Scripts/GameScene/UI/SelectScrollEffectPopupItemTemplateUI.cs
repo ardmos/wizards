@@ -30,9 +30,9 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         SkillName spellName = PlayerClient.Instance.GetComponent<SkillSpellManagerClient>().GetSpellInfoList()[spellIndexToApply].spellName;
         txtSpellName.text = spellName.ToString();
         // spell 아이콘 이미지
-        imgSpellIcon.sprite = GameAssets.instantiate.GetSpellIconImage(spellName);
+        imgSpellIcon.sprite = GameAssetsManager.Instance.GetSpellIconImage(spellName);
         // scroll effect 아이콘 이미지
-        imgScrollEffectIcon.sprite = GameAssets.instantiate.GetScrollEffectIconImage(scrollName);
+        imgScrollEffectIcon.sprite = GameAssetsManager.Instance.GetScrollEffectIconImage(scrollName);
 
         // 버튼 기능 설정   
         btnApply.onClick.RemoveAllListeners();

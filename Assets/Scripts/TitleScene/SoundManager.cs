@@ -63,7 +63,7 @@ public class SoundManager : MonoBehaviour
 #endif
         if (audioSourceBGM == null) return;
 
-        if (GameAssets.instantiate.GetMusic(sceneName) == null)
+        if (GameAssetsManager.Instance.GetMusic(sceneName) == null)
         {
             audioSourceBGM.Stop();
             return;
@@ -98,7 +98,7 @@ public class SoundManager : MonoBehaviour
         while (true)
         {
             //Debug.Log("AutoPlay!");
-            audioSourceBGM.clip = GameAssets.instantiate.GetMusic(sceneName);
+            audioSourceBGM.clip = GameAssetsManager.Instance.GetMusic(sceneName);
             audioSourceBGM.Play();
             yield return new WaitForSeconds(audioSourceBGM.clip.length);
         }
@@ -115,14 +115,14 @@ public class SoundManager : MonoBehaviour
     {
         if (audioSourceSFX == null) return;
         StopMusic();
-        StartCoroutine(PlaySFXWithDelay(GameAssets.instantiate.GetWinSFXSound()));
+        StartCoroutine(PlaySFXWithDelay(GameAssetsManager.Instance.GetWinSFXSound()));
     }
 
     public void PlayLosePopupSound()
     {
         if (audioSourceSFX == null) return;
         StopMusic();
-        StartCoroutine(PlaySFXWithDelay(GameAssets.instantiate.GetLoseSFXSound()));
+        StartCoroutine(PlaySFXWithDelay(GameAssetsManager.Instance.GetLoseSFXSound()));
     }
 
     private IEnumerator PlaySFXWithDelay(AudioClip[] audioClips)
@@ -140,7 +140,7 @@ public class SoundManager : MonoBehaviour
     {
         if (audioSourceSFX == null) return;
 
-        audioSourceSFX.clip = GameAssets.instantiate.GetButtonClickSound();
+        audioSourceSFX.clip = GameAssetsManager.Instance.GetButtonClickSound();
         audioSourceSFX.Play();
     }
 
@@ -148,7 +148,7 @@ public class SoundManager : MonoBehaviour
     {
         if (audioSourceSFX == null) return;
 
-        audioSourceSFX.clip = GameAssets.instantiate.GetOpenScrollItemSFXSound();
+        audioSourceSFX.clip = GameAssetsManager.Instance.GetOpenScrollItemSFXSound();
         audioSourceSFX.Play();
     }
 
@@ -159,7 +159,7 @@ public class SoundManager : MonoBehaviour
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetMagicSFXSound(spellName, state));
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetMagicSFXSound(spellName, state));
     }
 
     [ClientRpc]
@@ -169,7 +169,7 @@ public class SoundManager : MonoBehaviour
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetSkillSFXSound(spellName, state));
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetSkillSFXSound(spellName, state));
     }
 
     [ClientRpc]
@@ -179,7 +179,7 @@ public class SoundManager : MonoBehaviour
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetItemSFXSound(itemName));
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetItemSFXSound(itemName));
     }
 
     public void PlayItemSFX(ItemName itemName)
@@ -187,7 +187,7 @@ public class SoundManager : MonoBehaviour
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssets.instantiate.GetItemSFXSound(itemName));
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetItemSFXSound(itemName));
     }
 
     public void SetVolumeBGM(float volume) {

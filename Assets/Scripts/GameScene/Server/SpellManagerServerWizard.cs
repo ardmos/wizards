@@ -19,7 +19,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     public void StartActivateDefenceSpellServerRPC()
     {
         // 마법 시전
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT).spellName), transform.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT).spellName), transform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT));
         spellObject.transform.SetParent(transform);
@@ -60,7 +60,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         Transform muzzleTransform = GetComponentInChildren<MuzzlePos>().transform;
 
         // 발사체 오브젝트 생성
-        GameObject spellObject = Instantiate(GameAssets.instantiate.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzleTransform.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzleTransform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         // 발사체 스펙 초기화 해주기
