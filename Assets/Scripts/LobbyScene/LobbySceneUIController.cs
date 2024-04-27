@@ -115,7 +115,7 @@ public class LobbySceneUIController : MonoBehaviour
 
     public void PlayAnimCharacterVictory()
     {
-        character.GetComponentInChildren<Animator>().SetTrigger(PlayerAnimator.IS_VICTORY);
+        character.GetComponentInChildren<Animator>().SetTrigger("IsVictory");
     }
 
     public GameObject GetSelectedCharacter3DObject() { return character; }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 /// <summary>
 /// 서버상의 각 플레이어 오브젝트에서 동작하는 스크립트 입니다.
 /// 서버 권한 방식 애니메이션 컨트롤.
@@ -11,18 +12,18 @@ public class PlayerAnimator : NetworkBehaviour
     public WizardMaleAnimState playerAttackAnimState;
 
     // 아래 상수 String들 따로 스크립트 만들어서 정리해주기
-    public const int IS_WALKING = 0;
-    public const int IS_GAMEOVER = 1;
-    public const int IS_VICTORY = 2;
+    public int k_IS_WALKING;
+    public int k_IS_GAMEOVER;
+    public int k_IS_VICTORY;
 
     // Wizard_Male
-    public const int IS_CASTING_ATTACK_MAGIC = 4;
-    public const int IS_CASTING_DEFENSIVE_MAGIC = 3;
+    public int k_IS_CASTING_ATTACK_MAGIC;
+    public int k_IS_CASTING_DEFENSIVE_MAGIC;
 
     // Knight_Male
-    public const int IS_ATTACK1 = 4;
-    public const int IS_ATTACK2 = 5;
-    public const int IS_Dash = 3;
+    public int k_IS_ATTACK1;
+    public int k_IS_ATTACK2;
+    public int k_IS_Dash;
 
 
     private Animator animator;
@@ -31,6 +32,18 @@ public class PlayerAnimator : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
 
+        k_IS_WALKING = GetAnimatorParameterID("IsWalking");
+        k_IS_GAMEOVER = GetAnimatorParameterID("IsGameOver");
+        k_IS_VICTORY = GetAnimatorParameterID("IsVictory");
+        k_IS_CASTING_ATTACK_MAGIC = GetAnimatorParameterID("IsCastingAttackMagic");
+        k_IS_CASTING_DEFENSIVE_MAGIC = GetAnimatorParameterID("IsCastingDefensiveMagic");
+        k_IS_ATTACK1 = GetAnimatorParameterID("IsAttack1");
+        k_IS_ATTACK2 = GetAnimatorParameterID("IsAttack2");
+        k_IS_Dash = GetAnimatorParameterID("IsDash");
+    }
+
+    public override void OnNetworkSpawn()
+    {
         //GameMultiplayer.Instance.OnPlayerAttackAnimStateChanged += OnPlayerAttackAnimStateChanged;
         GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged += OnPlayerMoveAnimStateChanged;
     }
@@ -39,6 +52,12 @@ public class PlayerAnimator : NetworkBehaviour
     {
         //GameMultiplayer.Instance.OnPlayerAttackAnimStateChanged -= OnPlayerAttackAnimStateChanged;
         GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged -= OnPlayerMoveAnimStateChanged;
+    }
+
+    private int GetAnimatorParameterID(string parameterName)
+    {
+        // 파라미터의 이름을 사용하여 해시 값 얻기
+        return Animator.StringToHash(parameterName);
     }
 
     /// <summary>
@@ -60,29 +79,17 @@ public class PlayerAnimator : NetworkBehaviour
         switch(playerMoveAnimState)
         {
             case PlayerMoveAnimState.Idle:
-                animator.SetBool(IS_WALKING, false);
+                animator.SetBool(k_IS_WALKING, false);
                 break;
             case PlayerMoveAnimState.Walking:
-                animator.SetBool(IS_WALKING, true);
+                animator.SetBool(k_IS_WALKING, true);
                 break;
             case PlayerMoveAnimState.GameOver:
-                animator.SetBool(IS_WALKING, false);
-                animator.SetTrigger(IS_GAMEOVER);
+                animator.SetBool(k_IS_WALKING, false);
+                animator.SetTrigger(k_IS_GAMEOVER);
                 break;               
         }
     }
-
-    /*    /// <summary>
-        /// AttackAnimState에 맞게 애니메이션을 실행시켜주는 메소드 입니다.
-        /// AttackAnimState가 변경된 서버상의 플레이어 오브젝트에게 애니메이션을 바꾸라고 알려줍니다.(서버권한방식 애니메이션 변경)
-        /// </summary>
-        private void OnPlayerAttackAnimStateChanged(object sender, System.EventArgs e)
-        {
-            PlayerAttackAnimStateEventData eventData = (PlayerAttackAnimStateEventData)e;
-            NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
-            networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdateSpellAnimationOnServer(eventData.playerAttackAnimState);
-            //Debug.Log($"{nameof(OnPlayerAttackAnimStateChanged)} Player{eventData.clientId} AttackAnimation OnPlayerAttackAnimStateChanged: {eventData.playerAttackAnimState}");
-        }*/
 
     /// <summary>
     /// Wizard_male용 애니메이션
@@ -93,20 +100,20 @@ public class PlayerAnimator : NetworkBehaviour
         switch (wizardMaleAnimState)
         {
             case WizardMaleAnimState.Idle:
-                animator.SetBool(IS_CASTING_ATTACK_MAGIC, false);
-                animator.SetBool(IS_CASTING_DEFENSIVE_MAGIC, false);
+                animator.SetBool(k_IS_CASTING_ATTACK_MAGIC, false);
+                animator.SetBool(k_IS_CASTING_DEFENSIVE_MAGIC, false);
                 break;
             case WizardMaleAnimState.CastingAttackMagic:
-                animator.SetBool(IS_CASTING_ATTACK_MAGIC, true);
-                animator.SetBool(IS_CASTING_DEFENSIVE_MAGIC, false);
+                animator.SetBool(k_IS_CASTING_ATTACK_MAGIC, true);
+                animator.SetBool(k_IS_CASTING_DEFENSIVE_MAGIC, false);
                 break;
             case WizardMaleAnimState.ShootingMagic:
-                animator.SetBool(IS_CASTING_ATTACK_MAGIC, false);
-                animator.SetBool(IS_CASTING_DEFENSIVE_MAGIC, false);
+                animator.SetBool(k_IS_CASTING_ATTACK_MAGIC, false);
+                animator.SetBool(k_IS_CASTING_DEFENSIVE_MAGIC, false);
                 break;
             case WizardMaleAnimState.CastingDefensiveMagic:
-                animator.SetBool(IS_CASTING_ATTACK_MAGIC, false);
-                animator.SetBool(IS_CASTING_DEFENSIVE_MAGIC, true);
+                animator.SetBool(k_IS_CASTING_ATTACK_MAGIC, false);
+                animator.SetBool(k_IS_CASTING_DEFENSIVE_MAGIC, true);
                 break;
         }
     }
@@ -116,24 +123,24 @@ public class PlayerAnimator : NetworkBehaviour
         switch (knightMaleAnimState)
         {
             case KnightMaleAnimState.Idle:
-                animator.SetBool(IS_ATTACK1, false);
-                animator.SetBool(IS_ATTACK2, false);
-                animator.SetBool(IS_Dash, false);
+                animator.SetBool(k_IS_ATTACK1, false);
+                animator.SetBool(k_IS_ATTACK2, false);
+                animator.SetBool(k_IS_Dash, false);
                 break;
             case KnightMaleAnimState.Attack1:
-                animator.SetBool(IS_ATTACK1, true);
-                animator.SetBool(IS_ATTACK2, false);
-                animator.SetBool(IS_Dash, false);
+                animator.SetBool(k_IS_ATTACK1, true);
+                animator.SetBool(k_IS_ATTACK2, false);
+                animator.SetBool(k_IS_Dash, false);
                 break;
             case KnightMaleAnimState.Attack2:
-                animator.SetBool(IS_ATTACK1, false);
-                animator.SetBool(IS_ATTACK2, true);
-                animator.SetBool(IS_Dash, false);
+                animator.SetBool(k_IS_ATTACK1, false);
+                animator.SetBool(k_IS_ATTACK2, true);
+                animator.SetBool(k_IS_Dash, false);
                 break;
             case KnightMaleAnimState.Dash:
-                animator.SetBool(IS_ATTACK1, false);
-                animator.SetBool(IS_ATTACK2, false);
-                animator.SetBool(IS_Dash, true);
+                animator.SetBool(k_IS_ATTACK1, false);
+                animator.SetBool(k_IS_ATTACK2, false);
+                animator.SetBool(k_IS_Dash, true);
                 break;
         }
     }
