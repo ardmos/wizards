@@ -11,18 +11,18 @@ public class PlayerAnimator : NetworkBehaviour
     public WizardMaleAnimState playerAttackAnimState;
 
     // 아래 상수 String들 따로 스크립트 만들어서 정리해주기
-    private const int IS_WALKING = 0;
-    private const int IS_GAMEOVER = 1;
-    private const int IS_VICTORY = 2;
+    public const int IS_WALKING = 0;
+    public const int IS_GAMEOVER = 1;
+    public const int IS_VICTORY = 2;
 
     // Wizard_Male
-    private const int IS_CASTING_ATTACK_MAGIC = 4;
-    private const int IS_CASTING_DEFENSIVE_MAGIC = 3;
+    public const int IS_CASTING_ATTACK_MAGIC = 4;
+    public const int IS_CASTING_DEFENSIVE_MAGIC = 3;
 
     // Knight_Male
-    private const int IS_ATTACK1 = 4;
-    private const int IS_ATTACK2 = 5;
-    private const int IS_Dash = 3;
+    public const int IS_ATTACK1 = 4;
+    public const int IS_ATTACK2 = 5;
+    public const int IS_Dash = 3;
 
 
     private Animator animator;
