@@ -51,10 +51,4 @@ public class FloorGenerator : MonoBehaviour
         transform.position = new Vector3(transform.position.x - (mapSizeX-1f) * tileInterval / 2, transformYValue, transform.position.z - (mapSizeZ - 1f) * tileInterval / 2);
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

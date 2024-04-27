@@ -11,12 +11,6 @@ public class PopupNewsUIController : MonoBehaviour
         btnClose.onClick.AddListener(()=> { SoundManager.Instance.PlayButtonClickSound(); Hide(); });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Show()
     {
         gameObject.SetActive(true);

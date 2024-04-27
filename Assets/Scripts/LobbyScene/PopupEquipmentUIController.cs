@@ -15,11 +15,6 @@ public class PopupEquipmentUIController : MonoBehaviour
         btnHome.onClick.AddListener(Hide);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void Show()
     {
