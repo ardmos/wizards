@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3262108379738329995}
   - component: {fileID: 766070434397431617}
   - component: {fileID: 5337911999485768577}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tile_Solo_Island
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

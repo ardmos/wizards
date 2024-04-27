@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4868617151935518}
   - component: {fileID: 198248827528020638}
   - component: {fileID: 199291968807724500}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.0000005, z: 1.0000005}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4689315996536884}
@@ -4821,7 +4821,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c884ac9379b5a5748ab3cf9e37aa1fc4, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4883,7 +4882,7 @@ GameObject:
   - component: {fileID: 4260258621903580}
   - component: {fileID: -6777112217611055847}
   - component: {fileID: 5943795509804293334}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: vfx_ToonHit_WaterBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4970,7 +4969,7 @@ GameObject:
   - component: {fileID: 4203494456441446}
   - component: {fileID: 198637217293238026}
   - component: {fileID: 199442785195235636}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4987,7 +4986,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4260258621903580}
@@ -9771,7 +9770,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 84100193c4bd15d47a96b1cb7d3b7d6b, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9833,7 +9831,7 @@ GameObject:
   - component: {fileID: 4646026520757210}
   - component: {fileID: 198399497516185370}
   - component: {fileID: 199585533725617838}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WaterSplash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9850,7 +9848,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4260258621903580}
@@ -14634,7 +14632,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 580b54c06630b9d4190f42625d40ccec, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14696,7 +14693,7 @@ GameObject:
   - component: {fileID: 4970123469885706}
   - component: {fileID: 198181558743305704}
   - component: {fileID: 199389896515989236}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14713,7 +14710,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.1500001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4260258621903580}
@@ -19497,7 +19494,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 84100193c4bd15d47a96b1cb7d3b7d6b, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19559,7 +19555,7 @@ GameObject:
   - component: {fileID: 4689315996536884}
   - component: {fileID: 198510665211071596}
   - component: {fileID: 199711610251037756}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: ParticlesGravity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19576,7 +19572,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4470489727838596}
@@ -24412,7 +24408,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 580b54c06630b9d4190f42625d40ccec, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24474,7 +24469,7 @@ GameObject:
   - component: {fileID: 4470489727838596}
   - component: {fileID: 198959808271088112}
   - component: {fileID: 199061748539051198}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24491,7 +24486,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4689315996536884}
@@ -29293,7 +29288,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 580b54c06630b9d4190f42625d40ccec, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

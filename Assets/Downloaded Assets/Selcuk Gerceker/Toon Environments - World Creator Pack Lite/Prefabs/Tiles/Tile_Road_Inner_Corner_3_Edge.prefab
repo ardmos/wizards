@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7163309573028310216}
   - component: {fileID: 4939823527714953218}
   - component: {fileID: 9133164190186386816}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tile_Road_Inner_Corner_3_Edge
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

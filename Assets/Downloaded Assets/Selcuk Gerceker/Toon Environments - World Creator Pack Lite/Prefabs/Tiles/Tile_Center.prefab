@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1054480715464267231}
   - component: {fileID: 2974262337133846805}
   - component: {fileID: -6795156506864114322}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tile_Center
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 958086852143887969}
   - component: {fileID: 3075740445378265771}
   - component: {fileID: -4782435362952428455}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tile_Road_End_Edge
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

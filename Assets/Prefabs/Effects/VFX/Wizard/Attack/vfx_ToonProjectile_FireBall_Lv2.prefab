@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4591482416179360}
   - component: {fileID: 198104659941469864}
   - component: {fileID: 199905605206525764}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4874,7 +4874,7 @@ GameObject:
   - component: {fileID: 4461053600395122}
   - component: {fileID: 198856098785468116}
   - component: {fileID: 199043428466493242}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SemiCircles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9737,7 +9737,7 @@ GameObject:
   - component: {fileID: 4966973175474416}
   - component: {fileID: 198459663313855402}
   - component: {fileID: 199106186406500366}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CirclePositive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14600,7 +14600,7 @@ GameObject:
   - component: {fileID: 4736827081711578}
   - component: {fileID: 198288014223568208}
   - component: {fileID: 199869160312367188}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19468,7 +19468,7 @@ GameObject:
   - component: {fileID: 2397951536728205951}
   - component: {fileID: -3840635593799578917}
   - component: {fileID: -801365901283699015}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: vfx_ToonProjectile_FireBall_Lv2
   m_TagString: AttackSpell
   m_Icon: {fileID: 0}
@@ -19672,7 +19672,7 @@ GameObject:
   - component: {fileID: 4324256608989342}
   - component: {fileID: 198949876830985348}
   - component: {fileID: 199508842230404208}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CircleNegative
   m_TagString: Untagged
   m_Icon: {fileID: 0}

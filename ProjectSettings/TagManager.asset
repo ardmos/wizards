@@ -6,6 +6,8 @@ TagManager:
   tags:
   - AttackSpell
   - DefenceSpell
+  - Defence
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -16,12 +18,12 @@ TagManager:
   - OverUI
   - Item
   - Magic Shield
-  - 
+  - Attack Magic
   - Player0
   - Player1
   - Player2
   - Player3
-  - 
+  - Floor
   - 
   - 
   - 

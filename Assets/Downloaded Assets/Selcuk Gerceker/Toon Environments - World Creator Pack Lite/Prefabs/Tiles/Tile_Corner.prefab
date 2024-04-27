@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7205208687854325230}
   - component: {fileID: 4907512274527025444}
   - component: {fileID: -6469950275550338801}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tile_Corner
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

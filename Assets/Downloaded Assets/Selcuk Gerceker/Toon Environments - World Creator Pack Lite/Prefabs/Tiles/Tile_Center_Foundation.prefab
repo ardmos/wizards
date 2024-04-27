@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3908809585518272422}
   - component: {fileID: 1286365736333585260}
   - component: {fileID: 2652236474754733326}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tile_Center_Foundation
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4857904876787926}
   - component: {fileID: 198826632911470244}
   - component: {fileID: 199348874529347446}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: ParticlesGravity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4822265180401832}
@@ -4864,7 +4864,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 580b54c06630b9d4190f42625d40ccec, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4926,7 +4925,7 @@ GameObject:
   - component: {fileID: 4541045830664578}
   - component: {fileID: 198531846626839738}
   - component: {fileID: 199699052476387146}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WaterSpash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4943,7 +4942,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.15000004, z: -0.049999945}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4682610123935532}
@@ -9727,7 +9726,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 580b54c06630b9d4190f42625d40ccec, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9789,7 +9787,7 @@ GameObject:
   - component: {fileID: 4682610123935532}
   - component: {fileID: 198744144873946334}
   - component: {fileID: 199812871009121184}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9806,7 +9804,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0.15}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4541045830664578}
@@ -14591,7 +14589,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 84100193c4bd15d47a96b1cb7d3b7d6b, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14653,7 +14650,7 @@ GameObject:
   - component: {fileID: 4822265180401832}
   - component: {fileID: 198954831605351766}
   - component: {fileID: 199348430254177994}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14670,7 +14667,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4857904876787926}
@@ -19472,7 +19469,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 580b54c06630b9d4190f42625d40ccec, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19534,7 +19530,7 @@ GameObject:
   - component: {fileID: 4797513919122206}
   - component: {fileID: 198638950863401862}
   - component: {fileID: 199034966218231852}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19551,7 +19547,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.0000005, z: 1.0000005}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4857904876787926}
@@ -24344,7 +24340,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c884ac9379b5a5748ab3cf9e37aa1fc4, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24406,7 +24401,7 @@ GameObject:
   - component: {fileID: 4405978174225874}
   - component: {fileID: 7474644739601078779}
   - component: {fileID: 5152273647733076282}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: vfx_ToonMuzzle_WaterBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

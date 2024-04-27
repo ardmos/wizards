@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4994875111573052}
   - component: {fileID: 198667171598259164}
   - component: {fileID: 199434484288920812}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4857,7 +4857,7 @@ GameObject:
   - component: {fileID: 2195209228925459045}
   - component: {fileID: -8735335947383380867}
   - component: {fileID: -6391829865979051816}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: vfx_ToonProjectile_FireBall_Lv3
   m_TagString: AttackSpell
   m_Icon: {fileID: 0}
@@ -5062,7 +5062,7 @@ GameObject:
   - component: {fileID: 4163626532172742}
   - component: {fileID: 198607849344611192}
   - component: {fileID: 199021581083774594}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SemiCircles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9924,7 +9924,7 @@ GameObject:
   - component: {fileID: 4108007317640270}
   - component: {fileID: 198819489941162064}
   - component: {fileID: 199987376086988776}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SemiCircles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14786,7 +14786,7 @@ GameObject:
   - component: {fileID: 4587198618109998}
   - component: {fileID: 198286544338886702}
   - component: {fileID: 199666470891354172}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19649,7 +19649,7 @@ GameObject:
   - component: {fileID: 4577093045313028}
   - component: {fileID: 198139053913092596}
   - component: {fileID: 199278801189650666}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5669300439911011374}
   - component: {fileID: 7586755574231752932}
   - component: {fileID: -3688789094774626039}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tile_Road_Solo
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

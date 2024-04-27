@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4698423768554506}
   - component: {fileID: 198889640520066370}
   - component: {fileID: 199188070078490044}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4117384310806112}
@@ -4873,7 +4873,7 @@ GameObject:
   - component: {fileID: 4020335181417212}
   - component: {fileID: 198388765001262384}
   - component: {fileID: 199974899971501500}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4890,7 +4890,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4117384310806112}
@@ -9735,7 +9735,7 @@ GameObject:
   - component: {fileID: 4533852245168910}
   - component: {fileID: 198496596407192940}
   - component: {fileID: 199038030137307812}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MainBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9752,7 +9752,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4117384310806112}
@@ -14597,7 +14597,7 @@ GameObject:
   - component: {fileID: 4322264633762328}
   - component: {fileID: 198077082354940164}
   - component: {fileID: 199526015498460232}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GlowBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14614,7 +14614,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4117384310806112}
@@ -19463,7 +19463,7 @@ GameObject:
   - component: {fileID: 1277603763932389763}
   - component: {fileID: -3725250325532762164}
   - component: {fileID: 7898306305771445380}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: vfx_ToonProjectile_IceBall_Lv1
   m_TagString: AttackSpell
   m_Icon: {fileID: 0}

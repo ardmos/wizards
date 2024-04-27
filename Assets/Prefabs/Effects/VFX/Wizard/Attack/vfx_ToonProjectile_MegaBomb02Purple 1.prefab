@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4453096868740478}
   - component: {fileID: 198953312448963888}
   - component: {fileID: 199105242406069618}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4883,7 +4883,7 @@ GameObject:
   - component: {fileID: 4729163753790384}
   - component: {fileID: 199744643762038018}
   - component: {fileID: 198546192193305468}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9791,7 +9791,7 @@ GameObject:
   - component: {fileID: 4870507592040896}
   - component: {fileID: 198472216650335460}
   - component: {fileID: 199578911953309804}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14654,7 +14654,7 @@ GameObject:
   - component: {fileID: 4296593016995226}
   - component: {fileID: 198506694154565030}
   - component: {fileID: 199935446500979338}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SemiCircles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19517,7 +19517,7 @@ GameObject:
   - component: {fileID: 4307058942844714}
   - component: {fileID: 198450588855144190}
   - component: {fileID: 199940660209509022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SemiCircles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24382,7 +24382,7 @@ GameObject:
   - component: {fileID: 54853060352524088}
   - component: {fileID: 135786263562659490}
   - component: {fileID: 114851035589019760}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: vfx_ToonProjectile_MegaBomb02Purple 1
   m_TagString: AttackSpell
   m_Icon: {fileID: 0}
@@ -24523,7 +24523,7 @@ GameObject:
   - component: {fileID: 4633853215356700}
   - component: {fileID: 198156641611115020}
   - component: {fileID: 199760811344123818}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
