@@ -12,6 +12,30 @@ using UnityEngine.Serialization;
 /// </summary>
 public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+    [InputControl(layout = "Button")]
+    [SerializeField]
+    private string m_ControlPath;
+
+    [FormerlySerializedAs("movementRange")]
+    [SerializeField]
+    [Min(0)]
+    private float m_MovementRange = 50;
+    private Vector3 m_StartPos;
+    private Vector2 m_PointerDownPos;
+    public float movementRange
+    {
+        get => m_MovementRange;
+        set => m_MovementRange = value;
+    }
+
+    [SerializeField] private ushort spellIndex;
+
+    protected override string controlPathInternal
+    {
+        get => m_ControlPath;
+        set => m_ControlPath = value;
+    }
+
     private void Start()
     {
         m_StartPos = transform.GetComponent<RectTransform>().anchoredPosition;
@@ -87,7 +111,7 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         Vector2 delta = Vector2.ClampMagnitude(dir, movementRange);
         transform.GetComponent<RectTransform>().anchoredPosition = (Vector2)m_StartPos + delta;
 
-        var newPos = new Vector2(delta.x / movementRange, delta.y / movementRange);
+        //var newPos = new Vector2(delta.x / movementRange, delta.y / movementRange);
 
         return dir;
     }
@@ -98,29 +122,5 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
         // 핸들 오브젝트도 위치를 초기화 시켜줍니다.
         transform.GetComponent<RectTransform>().anchoredPosition = m_StartPos;
         SendValueToControl(0.0f);
-    }
-   
-    [InputControl(layout = "Button")]
-    [SerializeField]
-    private string m_ControlPath;
-
-    [FormerlySerializedAs("movementRange")]
-    [SerializeField]
-    [Min(0)]
-    private float m_MovementRange = 50;
-    private Vector3 m_StartPos;
-    private Vector2 m_PointerDownPos;
-    public float movementRange
-    {
-        get => m_MovementRange;
-        set => m_MovementRange = value;
-    }
-
-    [SerializeField] private ushort spellIndex;
-
-    protected override string controlPathInternal
-    {
-        get => m_ControlPath;
-        set => m_ControlPath = value;
     }
 }

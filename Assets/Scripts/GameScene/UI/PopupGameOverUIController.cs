@@ -10,6 +10,8 @@ public class PopupGameOverUIController : MonoBehaviour
     [SerializeField] private CustomClickSoundButton btnClaim;
     [SerializeField] private CustomClickSoundButton btnClaim2x;
 
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(0.4f);
+
     private void Start()
     {
         btnClaim.gameObject.SetActive(false);
@@ -62,12 +64,12 @@ public class PopupGameOverUIController : MonoBehaviour
     private IEnumerator ShowDetails()
     {
         // 1. 얻은 트로피 개수 보여주기(킬수 + 등수점수(10-등수))
-        yield return new WaitForSeconds(0.4f);
+        yield return waitForSeconds;
         txtScoreCount.text = $"+ {PlayerClient.Instance.GetComponent<PlayerClient>().GetPlayerScore() + (10 - (GameManager.Instance.GetCurrentAlivePlayerCount()))}";
         // 2. 버튼들 등장
-        yield return new WaitForSeconds(0.4f);
+        yield return waitForSeconds;
         btnClaim.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
+        yield return waitForSeconds;
         btnClaim2x.gameObject.SetActive(true);  
     }
 }
