@@ -6,15 +6,19 @@ public class HPBarUIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtHPValue;
     [SerializeField] private Slider slider;
+    [SerializeField] private Image imgBG;
     [SerializeField] private Image imgFill;
 
     [SerializeField] private Color[] hpColors;
 
-    public void SetHP(sbyte currentHP, sbyte maxHP)
+    public void SetHP(sbyte currentHP, sbyte maxHP, bool isOwner)
     {
         slider.maxValue = maxHP;
         slider.value = currentHP;
         UpdateHPBarColorAndTextValue(currentHP, maxHP);
+
+        if (!isOwner)
+            imgBG.color = GameAssetsManager.Instance.gameAssets.color_Enemy;
     }
 
     private void UpdateHPBarColorAndTextValue(sbyte currentHP, sbyte maxHP)

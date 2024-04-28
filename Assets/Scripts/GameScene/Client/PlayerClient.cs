@@ -84,7 +84,7 @@ public abstract class PlayerClient : NetworkBehaviour
     [ClientRpc]
     public void SetHPClientRPC(sbyte hp, sbyte maxHP)
     {
-        hPBarUIController?.SetHP(hp, maxHP);
+        hPBarUIController?.SetHP(hp, maxHP, IsOwner);
     }
 
     [ClientRpc]

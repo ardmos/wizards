@@ -946,6 +946,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAttackAnimState: 0
+  k_IS_WALKING: 0
+  k_IS_GAMEOVER: 0
+  k_IS_VICTORY: 0
+  k_IS_CASTING_ATTACK_MAGIC: 0
+  k_IS_CASTING_DEFENSIVE_MAGIC: 0
+  k_IS_ATTACK1: 0
+  k_IS_ATTACK2: 0
+  k_IS_Dash: 0
 --- !u!114 &8331512526756930400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3576,6 +3584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtHPValue: {fileID: 7706179745023223085}
   slider: {fileID: 5512357941397607862}
+  imgBG: {fileID: 4149090017931121696}
   imgFill: {fileID: 7401049848895182496}
   hpColors:
   - {r: 0.16078432, g: 0.87843144, b: 0.6117647, a: 1}
