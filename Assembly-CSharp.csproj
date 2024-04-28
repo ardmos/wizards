@@ -201,7 +201,6 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SoundFXGroupUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
-    <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
     <Compile Include="Assets\Scripts\Data\SkillName.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />

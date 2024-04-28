@@ -44,14 +44,14 @@ public abstract class AttackSpell : NetworkBehaviour
         {
             if (GetSpellInfo() == null)
             {
-                Debug.Log("AttackSpell Info is null");
+                //Debug.Log("AttackSpell Info is null");
                 return;
             }
 
             PlayerServer player = collider.GetComponent<PlayerServer>();
             if (player == null)
             {
-                Debug.LogError("Player is null!");
+                //Debug.LogError("Player is null!");
                 return;
             }
 
@@ -62,7 +62,24 @@ public abstract class AttackSpell : NetworkBehaviour
         // 기타 오브젝트 충돌
         else
         {
-            Debug.Log($"{collider.name} Hit!");
+            //Debug.Log($"{collider.name} Hit!");
+        }
+
+        // 혹시 시전자가 Casting 상태였으면 Cooltime 상태로 넘겨주기 
+        ulong spellOwnerClientId = GetSpellInfo().ownerPlayerClientId;
+        NetworkClient networkClient = NetworkManager.ConnectedClients[spellOwnerClientId];
+        SpellManagerServerWizard spellManagerServerWizard = networkClient.PlayerObject.GetComponent<SpellManagerServerWizard>();
+        if (spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState==SpellState.Casting)
+        {
+            Debug.Log($"캐스팅 상태에서 폭발했습니다!!! 스킬 상태를 종료합니다. spellState:{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState} -> ");
+            int spellIndex = spellManagerServerWizard.GetSpellIndexBySpellName(GetSpellInfo().spellName);
+            if(spellIndex != -1)
+            {
+                spellManagerServerWizard.UpdatePlayerSpellState((ushort)spellIndex, SpellState.Cooltime);
+                spellManagerServerWizard.playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
+                Debug.Log($"{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState}.");
+            }
+            else Debug.Log($"스펠 인덱스를 찾지 못했습니다.");
         }
 
         // 마법 충돌 사운드 재생
@@ -89,13 +106,13 @@ public abstract class AttackSpell : NetworkBehaviour
 
         collisionHandlingResult = CollisionHandling(thisSpell, opponentsSpell);
 
-        Debug.Log($"Spell끼리 충돌! ourSpell: name{thisSpell.spellName}, lvl{thisSpell.level}, owner{thisSpell.ownerPlayerClientId}  // " +
-            $"opponentsSpell : name{opponentsSpell.spellName}, lvl{opponentsSpell.level}, owner{opponentsSpell.ownerPlayerClientId}");
+        //Debug.Log($"Spell끼리 충돌! ourSpell: name{thisSpell.spellName}, lvl{thisSpell.level}, owner{thisSpell.ownerPlayerClientId}  // " +
+            //$"opponentsSpell : name{opponentsSpell.spellName}, lvl{opponentsSpell.level}, owner{opponentsSpell.ownerPlayerClientId}");
 
         // 스펠끼리 충돌해서 우리 스펠이 이겼을 때 계산 결과에 따라 충돌 위치에 새로운 마법 생성. 
         if (collisionHandlingResult.level > 0)
         {
-            Debug.Log($"our spell is win! generate spell.name:{collisionHandlingResult.spellName}, spell.level :{collisionHandlingResult.level}, spell.owner: {collisionHandlingResult.ownerPlayerClientId} ");
+            //Debug.Log($"our spell is win! generate spell.name:{collisionHandlingResult.spellName}, spell.level :{collisionHandlingResult.level}, spell.owner: {collisionHandlingResult.ownerPlayerClientId} ");
             SpawnSpellObjectOnServer(collisionHandlingResult, transform);
         }
     }
@@ -136,7 +153,7 @@ public abstract class AttackSpell : NetworkBehaviour
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(spellInfo.spellName), spawnPosition.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
-        Debug.Log($"SpawnSpellObjectOnServer!! skillInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");
+        //Debug.Log($"SpawnSpellObjectOnServer!! skillInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");
 
         spellObject.transform.SetParent(GameManager.Instance.transform);
 

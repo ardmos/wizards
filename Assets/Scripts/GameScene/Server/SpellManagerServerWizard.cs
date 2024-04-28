@@ -97,14 +97,14 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         GameObject spellObject = playerCastingSpell;
         if (spellObject == null)
         {
-            Debug.Log($"ShootSpellServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
+            //Debug.Log($"ShootSpellServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
             return;
         }
 
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(spellIndex, SpellState.Cooltime);
 
-        Debug.Log($"{nameof(ShootSpellServerRPC)} ownerClientId {clientId}");
+        //Debug.Log($"{nameof(ShootSpellServerRPC)} ownerClientId {clientId}");
 
         spellObject.transform.SetParent(GameManager.Instance.transform);
 
@@ -126,7 +126,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     {
         if (muzzleVFXPrefab == null)
         {
-            Debug.Log($"MuzzleVFX muzzleVFXPrefab is null");
+            //Debug.Log($"MuzzleVFX muzzleVFXPrefab is null");
             return;
         }
 

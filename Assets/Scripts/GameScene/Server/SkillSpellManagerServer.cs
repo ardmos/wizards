@@ -80,6 +80,26 @@ public class SkillSpellManagerServer : NetworkBehaviour
         if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return;
         playerOwnedSpellInfoListOnServer[spellIndex] = newSpellInfo;
     }
+
+    /// <summary>
+    /// -1을 반환하면 못찾았다는 뜻
+    /// </summary>
+    /// <param name="skillName"></param>
+    /// <returns></returns>
+    public int GetSpellIndexBySpellName(SkillName skillName)
+    {
+        int index = -1;
+
+        for (int i = 0; i<playerOwnedSpellInfoListOnServer.Count; i++)
+        {
+            if (playerOwnedSpellInfoListOnServer[i].spellName.Equals(skillName))
+            {
+                index = i; 
+                break;   
+            }
+        }
+        return index;
+    }
     #endregion
 
 }
