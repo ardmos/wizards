@@ -86,7 +86,7 @@ public class PlayerServer : NetworkBehaviour
         GameObject vfxHeal = Instantiate(GameAssetsManager.Instance.gameAssets.vfx_SpellUpgrade, transform);
         vfxHeal.GetComponent<NetworkObject>().Spawn();
         vfxHeal.transform.SetParent(transform);
-        vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
+        //vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
     }
 
     /// <summary>

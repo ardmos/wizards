@@ -58,7 +58,6 @@
     <Analyzer Include="D:\UnityEditor\2022.3.10f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollFlySpeedUp.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SpellManagerClientWizard.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
@@ -87,7 +86,6 @@
     <Compile Include="Assets\Scripts\GameScene\UI\HPBarUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollGuide.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
@@ -130,7 +128,6 @@
     <Compile Include="Assets\Scripts\GameScene\PlayerSpawnPointsController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\PopupShopUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SpellManagerServerWizard.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollFireRateUp.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
@@ -171,8 +168,6 @@
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\DailyGroupUI.cs" />
     <Compile Include="Assets\Scriptable Objects\CharacterCardInfo.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollLevelUp.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollAttach.cs" />
     <Compile Include="Assets\Scripts\GameScene\Spells\SlashSkill.cs" />
     <Compile Include="Assets\Scripts\GameScene\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerClient.cs" />
