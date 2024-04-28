@@ -21,8 +21,10 @@ public class PlayerAnimator : NetworkBehaviour
     public int k_IS_CASTING_DEFENSIVE_MAGIC;
 
     // Knight_Male
-    public int k_IS_ATTACK1;
-    public int k_IS_ATTACK2;
+    public int k_IS_ATTACK_VERTICAL_REAY;
+    public int k_IS_ATTACK_VERTICAL;
+    public int k_IS_ATTACK_WHIRLWIND_REAY;
+    public int k_IS_ATTACK_WHIRLWIND;
     public int k_IS_Dash;
 
 
@@ -37,8 +39,10 @@ public class PlayerAnimator : NetworkBehaviour
         k_IS_VICTORY = GetAnimatorParameterID("IsVictory");
         k_IS_CASTING_ATTACK_MAGIC = GetAnimatorParameterID("IsCastingAttackMagic");
         k_IS_CASTING_DEFENSIVE_MAGIC = GetAnimatorParameterID("IsCastingDefensiveMagic");
-        k_IS_ATTACK1 = GetAnimatorParameterID("IsAttack1");
-        k_IS_ATTACK2 = GetAnimatorParameterID("IsAttack2");
+        k_IS_ATTACK_VERTICAL_REAY = GetAnimatorParameterID("IsAttackVerticalReady");
+        k_IS_ATTACK_VERTICAL = GetAnimatorParameterID("IsAttackVertical");
+        k_IS_ATTACK_WHIRLWIND_REAY = GetAnimatorParameterID("IsAttackWhirlwindReady");
+        k_IS_ATTACK_WHIRLWIND = GetAnimatorParameterID("IsAttackWhirlwind");
         k_IS_Dash = GetAnimatorParameterID("IsDash");
     }
 
@@ -123,23 +127,25 @@ public class PlayerAnimator : NetworkBehaviour
         switch (knightMaleAnimState)
         {
             case KnightMaleAnimState.Idle:
-                animator.SetBool(k_IS_ATTACK1, false);
-                animator.SetBool(k_IS_ATTACK2, false);
+                animator.SetBool(k_IS_ATTACK_VERTICAL_REAY, false);
+                animator.SetBool(k_IS_ATTACK_WHIRLWIND_REAY, false);
                 animator.SetBool(k_IS_Dash, false);
                 break;
-            case KnightMaleAnimState.Attack1:
-                animator.SetBool(k_IS_ATTACK1, true);
-                animator.SetBool(k_IS_ATTACK2, false);
-                animator.SetBool(k_IS_Dash, false);
+            case KnightMaleAnimState.AttackVerticalReady:
+                animator.SetBool(k_IS_ATTACK_VERTICAL_REAY, true);
                 break;
-            case KnightMaleAnimState.Attack2:
-                animator.SetBool(k_IS_ATTACK1, false);
-                animator.SetBool(k_IS_ATTACK2, true);
-                animator.SetBool(k_IS_Dash, false);
+            case KnightMaleAnimState.AttackVertical:
+                animator.SetBool(k_IS_ATTACK_VERTICAL_REAY, false);
+                animator.SetTrigger(k_IS_ATTACK_VERTICAL);
+                break;
+            case KnightMaleAnimState.AttackWhirlwindReady:
+                animator.SetBool(k_IS_ATTACK_WHIRLWIND_REAY, true);
+                break;
+            case KnightMaleAnimState.AttackWhirlwind:
+                animator.SetBool(k_IS_ATTACK_WHIRLWIND_REAY, false);
+                animator.SetTrigger(k_IS_ATTACK_WHIRLWIND);
                 break;
             case KnightMaleAnimState.Dash:
-                animator.SetBool(k_IS_ATTACK1, false);
-                animator.SetBool(k_IS_ATTACK2, false);
                 animator.SetBool(k_IS_Dash, true);
                 break;
         }

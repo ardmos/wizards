@@ -13,11 +13,28 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
     public Transform attack1Muzzle;
     public Transform attack2Muzzle;
 
-    // 게임패트UI 스킬 버튼 드래그도중 조준이 가능하도록 하기 위한 메서드
     [ServerRpc(RequireOwnership = false)]
-    public void SetPlayerSpellStateToCastingServerRPC(ushort spellIndex)
+    public void ReadyAttackSkillServerRPC(ushort skillIndex)
     {
-        UpdatePlayerSpellState(spellIndex, SpellState.Casting);
+        // 게임패트UI 스킬 버튼 드래그도중 조준이 가능하도록 하기 위한 처리
+        UpdatePlayerSpellState(skillIndex, SpellState.Casting);
+
+        // 준비자세 애니메이션 실행
+        switch (skillIndex)
+        {
+            case 0:
+                playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVerticalReady);
+                break;
+            case 1:
+                playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackWhirlwindReady);
+                break;
+            case 2:
+                // 차징 어택인데, 일단 애니메이션 세로공격이랑 같이 쓰게 설정.
+                playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVerticalReady);
+                break;
+            default:
+                break;
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -59,7 +76,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         UpdatePlayerSpellState(0, SpellState.Cooltime);
 
         // Anim 실행
-        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Attack1);
+        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVertical);
 
         // SFX 실행
         spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
@@ -83,7 +100,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         UpdatePlayerSpellState(1, SpellState.Cooltime);
 
         // Anim 실행
-        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Attack2);
+        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackWhirlwind);
 
         // SFX 실행
         spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
@@ -107,7 +124,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         UpdatePlayerSpellState(2, SpellState.Cooltime);
 
         // Anim 실행
-        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Attack1);
+        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVertical);
 
         // SFX 실행
         spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);

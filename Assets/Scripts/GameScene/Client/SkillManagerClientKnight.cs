@@ -9,7 +9,7 @@ public class SkillManagerClientKnight : SkillSpellManagerClient
     public void AimingSkill(ushort skillIndex)
     {
         if (skillInfoListOnClient[skillIndex].spellState != SpellState.Ready) return;
-        skillSpellManagerServer.GetComponent<SkillManagerServerKnight>().SetPlayerSpellStateToCastingServerRPC(skillIndex);
+        skillSpellManagerServer.GetComponent<SkillManagerServerKnight>().ReadyAttackSkillServerRPC(skillIndex);
     }
 
     // 1.  공격 스킬 시전

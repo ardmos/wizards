@@ -9,7 +9,9 @@ public enum WizardMaleAnimState
 public enum KnightMaleAnimState
 {
     Idle, 
-    Attack1,
-    Attack2,
+    AttackVerticalReady,
+    AttackVertical,
+    AttackWhirlwindReady,
+    AttackWhirlwind,
     Dash
 }

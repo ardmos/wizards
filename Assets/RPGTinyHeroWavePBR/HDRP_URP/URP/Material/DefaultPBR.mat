@@ -28,7 +28,7 @@ Material:
   - _EMISSION
   - _METALLICSPECGLOSSMAP
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -39,6 +39,26 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_07e733e00f35424da4eb1fa0e7788158:
+        m_Texture: {fileID: 2800000, guid: 2b33ecf7ab8baf5488638fd4a2fab00b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_1d75964074f841a6a59fe0aee3c4ee05:
+        m_Texture: {fileID: 2800000, guid: a0ee9d562ffda6346b2a681ad69d73e2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_48F7EBCA:
+        m_Texture: {fileID: 2800000, guid: 8221dc44e70c0db4ab060ab03ad5ed9a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_55FDBEBE:
+        m_Texture: {fileID: 2800000, guid: c537304dae934574c83263b8935bf6fa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_811EFFB:
+        m_Texture: {fileID: 2800000, guid: a63884258dc521b4085d9bc96fe60c86, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: a63884258dc521b4085d9bc96fe60c86, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -105,6 +125,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: a63884258dc521b4085d9bc96fe60c86, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask03:
+        m_Texture: {fileID: 2800000, guid: acd1491b46b794a4a840e9e1d5c78d57, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskFReflection:
@@ -189,6 +213,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Vector1_147A751B: 5.94
+    - Vector1_28C8683: 5.54
+    - Vector1_6AEDE23: 5.3
+    - Vector1_D15D16DF: 4.55
+    - Vector1_D682A6C5: 5.59
+    - Vector1_E784DED5: 10.64
     - _AffectShadow: 1
     - _AlphaBaseCutout: 1
     - _AlphaClip: 0
@@ -200,6 +230,9 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _Color07Power: 5.01
+    - _Color08Power: 6.29
+    - _Color09Power: 3.86
     - _Compa: 4
     - _Cull: 2
     - _CustomLightDirectionFollowObjectRotation: 0
@@ -334,6 +367,7 @@ Material:
     - _Parallax: 0.02
     - _PointLightSVD: 0
     - _PointSpotlightIntensity: 0.1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _RELG: 1
     - _ReceiveShadows: 1
@@ -415,8 +449,18 @@ Material:
     - _XYZHardness: 14
     - _ZWrite: 1
     m_Colors:
+    - Color_22DC93C2: {r: 0.15641686, g: 0.26963726, b: 0.8962264, a: 1}
+    - Color_31457282: {r: 0.14414936, g: 0.5566037, b: 0, a: 1}
+    - Color_593132F8: {r: 0.8623396, g: 0.25204697, b: 0.9056604, a: 0}
+    - Color_B672769A: {r: 1, g: 0.6531649, b: 0, a: 0}
+    - Color_C5D962E7: {r: 0.40351287, g: 0.22321102, b: 0.8301887, a: 0}
+    - Color_E64BA0E: {r: 1, g: 0, b: 0.009498596, a: 0}
+    - Color_df356a6b29d64aee805a61f7bcdc2368: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color07: {r: 0.6415094, g: 0.21751776, b: 0.05749373, a: 0}
+    - _Color08: {r: 0.28301886, g: 0.28301886, b: 0.28301886, a: 0}
+    - _Color09_Skin: {r: 0.9056604, g: 0.64112663, b: 0.44001427, a: 0}
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
     - _DepthColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 14.807843, g: 14.807843, b: 14.807843, a: 1}
