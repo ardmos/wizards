@@ -13,9 +13,9 @@ public class Knight : PlayerClient, ICharacter
     public sbyte maxHp { get; set; } = 10;
     public float moveSpeed { get; set; } = 10f;
     public SkillName[] skills { get; set; } = new SkillName[]{
-                SkillName.ElectricSlashAttack1_Lv1,
-                SkillName.ElectricSlashAttack2_Lv1,
-                SkillName.ElectricSlashAttack1_Lv1,
+                SkillName.ElectricSlashAttackVertical_Lv1,
+                SkillName.ElectricSlashAttackWhirlwind_Lv1,
+                SkillName.ElectricSlashAttackVertical_Lv1,
                 SkillName.Dash_Lv1
                 };
 

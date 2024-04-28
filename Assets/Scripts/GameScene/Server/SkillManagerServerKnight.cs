@@ -10,14 +10,18 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
     public float dashDuration = 0.3f; // 대쉬 지속 시간
 
     // 스킬 시전 위치
-    public Transform attack1Muzzle;
-    public Transform attack2Muzzle;
+    public Transform attackVerticalMuzzle;
+    public Transform attackWhirlwindMuzzle;
+    public Transform attackChargeReadyMuzzle;
+    public Transform attackChargeShootMuzzle;
+
+    private GameObject chargeEffectObject;
 
     [ServerRpc(RequireOwnership = false)]
     public void ReadyAttackSkillServerRPC(ushort skillIndex)
     {
         // 게임패트UI 스킬 버튼 드래그도중 조준이 가능하도록 하기 위한 처리
-        UpdatePlayerSpellState(skillIndex, SpellState.Casting);
+        UpdatePlayerSpellState(skillIndex, SpellState.Aiming);
 
         // 준비자세 애니메이션 실행
         switch (skillIndex)
@@ -29,8 +33,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
                 playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackWhirlwindReady);
                 break;
             case 2:
-                // 차징 어택인데, 일단 애니메이션 세로공격이랑 같이 쓰게 설정.
-                playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVerticalReady);
+                AttackChargeReady();
                 break;
             default:
                 break;
@@ -45,32 +48,33 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         switch (skillIndex)
         {
             case 0:
-                Attack1();
+                AttackVertical();
                 break;
             case 1:
-                Attack2();
+                AttackWhirlwind();
                 break;
             case 2:
-                Attack3();
+                AttackChargeShoot();
                 break;
             default: 
                 break;
         }
     }
 
-    private void Attack1()
+    private void AttackVertical()
     {
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)0));
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attack1Muzzle.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackVerticalMuzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
         spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
-        spellObject.transform.SetParent(transform);
+
         // 위치 설정
-        spellObject.transform.localPosition = attack1Muzzle.localPosition;
-        spellObject.transform.localRotation = attack1Muzzle.localRotation;
+        spellObject.transform.SetParent(transform);
+        spellObject.transform.localPosition = attackVerticalMuzzle.localPosition;
+        spellObject.transform.localRotation = attackVerticalMuzzle.localRotation;
 
         // State 업데이트
         UpdatePlayerSpellState(0, SpellState.Cooltime);
@@ -82,19 +86,19 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
     }
 
-    private void Attack2()
+    private void AttackWhirlwind()
     {
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)1));
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attack2Muzzle.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackWhirlwindMuzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
-        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
-        spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
-        spellObject.transform.SetParent(transform);
+/*        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
+        spellObject.GetComponent<SlashSkill>().SetSelfDestroy();*/
+
         // 위치 설정
-        spellObject.transform.localPosition = attack2Muzzle.localPosition;
-        spellObject.transform.localRotation = attack2Muzzle.localRotation;
+        spellObject.transform.SetParent(transform);
+        spellObject.transform.localPosition = attackWhirlwindMuzzle.localPosition;
 
         // State 업데이트
         UpdatePlayerSpellState(1, SpellState.Cooltime);
@@ -103,22 +107,41 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackWhirlwind);
 
         // SFX 실행
-        spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
+        //spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
     }
 
-    private void Attack3()
+    private void AttackChargeReady()
     {
         // 스킬 이펙트 생성
-        SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)1));
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attack1Muzzle.position, Quaternion.identity);
+        chargeEffectObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.ElectricSlashAttackCharge_Lv1), attackChargeReadyMuzzle.position, Quaternion.identity);
+        chargeEffectObject.GetComponent<NetworkObject>().Spawn();
+        // 위치 설정
+        chargeEffectObject.transform.SetParent(transform);
+        chargeEffectObject.transform.localPosition = attackChargeReadyMuzzle.localPosition;
+
+        // 차징 어택인데, 일단 애니메이션 세로공격이랑 같이 쓰게 설정.
+        playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVerticalReady);
+
+        // SFX 실행 (충전 효과음 필요)
+        //spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
+    }
+
+    private void AttackChargeShoot()
+    {
+        // 충전 이펙트 오브젝트 제거
+        Destroy(chargeEffectObject);
+
+        // 스킬 이펙트 생성
+        SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)2));
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackChargeShootMuzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
-        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
-        spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
-        spellObject.transform.SetParent(transform);
+/*        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
+        spellObject.GetComponent<SlashSkill>().SetSelfDestroy();*/
         // 위치 설정
-        spellObject.transform.localPosition = attack1Muzzle.localPosition;
-        spellObject.transform.localRotation = attack1Muzzle.localRotation;
+        spellObject.transform.position = attackChargeShootMuzzle.position;
+/*        spellObject.transform.localPosition = attackChargeShootMuzzle.localPosition;
+        spellObject.transform.localRotation = attackChargeShootMuzzle.localRotation;*/
 
         // State 업데이트 쿨타임은 attack1과 다르게 가야하기 때문에 인덱스를 신경써줍니다
         UpdatePlayerSpellState(2, SpellState.Cooltime);
@@ -127,7 +150,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVertical);
 
         // SFX 실행
-        spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
+        //spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
     }
 
     /// <summary>
@@ -147,6 +170,15 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Dash);
 
         // SFX 실행
+        // 스킬 이펙트 생성
+        SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)3));
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), transform.position, Quaternion.identity);
+        spellObject.GetComponent<NetworkObject>().Spawn();
+
+        Destroy(spellObject, 3f);
+        // 위치 설정
+        spellObject.transform.SetParent(transform);
+        spellObject.transform.localPosition = Vector3.zero;
     }
 
     private void Dash()

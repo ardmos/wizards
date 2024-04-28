@@ -32,8 +32,9 @@ public class SpellSpecifications : MonoBehaviour
         // Knight_Male
         // 공격 스킬
         SetSpellDefaultSpec(SpellType.Stone, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.StoneSlashAttack1_Lv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttack1_Lv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttack2_Lv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttackVertical_Lv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttackWhirlwind_Lv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttackChargeSlash_Lv1, SpellState.Ready);
         //방어
         SetSpellDefaultSpec(SpellType.Normal, 2.0f, 0f, 0f, 30, 1, SkillName.Dash_Lv1, SpellState.Ready);
     }

@@ -140,9 +140,9 @@ public class GameAssetsManager : MonoBehaviour
         {
             case SkillName.StoneSlashAttack1_Lv1:
                 return gameAssets.sfx_ElectricSlashAttack1_Lv1[state];
-            case SkillName.ElectricSlashAttack1_Lv1:
+            case SkillName.ElectricSlashAttackVertical_Lv1:
                 return gameAssets.sfx_ElectricSlashAttack1_Lv1[state];
-            case SkillName.ElectricSlashAttack2_Lv1:
+            case SkillName.ElectricSlashAttackWhirlwind_Lv1:
                 return gameAssets.sfx_ElectricSlashAttack2_Lv1[state];
             case SkillName.Dash_Lv1:
                 return gameAssets.sfx_Dash_Lv1[state];

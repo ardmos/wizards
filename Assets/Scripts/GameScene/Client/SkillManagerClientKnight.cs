@@ -16,7 +16,7 @@ public class SkillManagerClientKnight : SkillSpellManagerClient
     public void ActivateAttackSkillOnClient(ushort skillIndex)
     {
         Debug.Log($"ActivateAttackSkillOnClient skillIndex:{skillIndex}, skillstate:{skillInfoListOnClient[skillIndex].spellState}");
-        if (skillInfoListOnClient[skillIndex].spellState != SpellState.Casting) return;
+        if (skillInfoListOnClient[skillIndex].spellState != SpellState.Aiming) return;
         // 서버에 공격 스킬 시전 요청
         skillSpellManagerServer.GetComponent<SkillManagerServerKnight>().StartAttackSkillServerRPC(skillIndex);
     }
@@ -24,7 +24,7 @@ public class SkillManagerClientKnight : SkillSpellManagerClient
     // 2. 방어 스킬 시전 (대쉬)
     public void ActivateDefenceSkillOnClient()
     {
-        if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Casting) return;
+        if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Aiming) return;
 
         // 서버에 방어 스킬 시전 요청
         skillSpellManagerServer.GetComponent<SkillManagerServerKnight>().StartDefenceSkillServerRPC();

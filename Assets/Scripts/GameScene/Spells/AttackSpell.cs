@@ -69,7 +69,7 @@ public abstract class AttackSpell : NetworkBehaviour
         ulong spellOwnerClientId = GetSpellInfo().ownerPlayerClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[spellOwnerClientId];
         SpellManagerServerWizard spellManagerServerWizard = networkClient.PlayerObject.GetComponent<SpellManagerServerWizard>();
-        if (spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState==SpellState.Casting)
+        if (spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState==SpellState.Aiming)
         {
             Debug.Log($"캐스팅 상태에서 폭발했습니다!!! 스킬 상태를 종료합니다. spellState:{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState} -> ");
             int spellIndex = spellManagerServerWizard.GetSpellIndexBySpellName(GetSpellInfo().spellName);

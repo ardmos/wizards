@@ -80,7 +80,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         playerCastingSpell = spellObject;
 
         // 해당 플레이어의 마법 SpellState 업데이트
-        UpdatePlayerSpellState(spellIndex, SpellState.Casting);
+        UpdatePlayerSpellState(spellIndex, SpellState.Aiming);
 
         // 캐스팅 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingAttackMagic);
