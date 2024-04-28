@@ -58,9 +58,10 @@ public class PopupSelectCharacterUIController : MonoBehaviour
     private void SelectCharacter()
     {
         if (currentClickedCard == null) return;
-        selectedCard?.SetFocus(false);
+        //selectedCard?.SetFocus(false);
         selectedCard = currentClickedCard;
-        selectedCard.SetFocus(true);
+        //selectedCard.SetFocus(true);
+        Hide();
     }
 
     private void ShowCharacterInfo(CharacterCardInfo characterCardInfo)
