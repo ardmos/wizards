@@ -35,7 +35,7 @@ public abstract class AttackSpell : NetworkBehaviour
         Collider collider = collision.collider;
 
         // 충돌한게 공격마법일 경우, 어떤 마법이 살아남을지 계산에 들어감
-        if (collider.CompareTag("AttackSpell"))
+        if (collider.CompareTag("AttackSpell") || collider.CompareTag("AttackSkill"))
         {
             SpellHitHandlerOnServer(collider);
         }

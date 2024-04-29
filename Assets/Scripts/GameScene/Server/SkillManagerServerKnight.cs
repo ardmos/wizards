@@ -65,7 +65,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
     {
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)0));
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackVerticalMuzzle.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackVerticalMuzzle.position, attackVerticalMuzzle.localRotation);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
@@ -93,8 +93,8 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackWhirlwindMuzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
-/*        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
-        spellObject.GetComponent<SlashSkill>().SetSelfDestroy();*/
+        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
+        spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
 
         // 위치 설정
         spellObject.transform.SetParent(transform);

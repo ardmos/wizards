@@ -144,6 +144,8 @@ public class GameAssetsManager : MonoBehaviour
                 return gameAssets.sfx_ElectricSlashAttack1_Lv1[state];
             case SkillName.ElectricSlashAttackWhirlwind_Lv1:
                 return gameAssets.sfx_ElectricSlashAttack2_Lv1[state];
+            case SkillName.ElectricSlashAttackChargeSlash_Lv1:
+                return gameAssets.sfx_ElectricSlashAttack2_Lv1[state];
             case SkillName.Dash_Lv1:
                 return gameAssets.sfx_Dash_Lv1[state];
             default:

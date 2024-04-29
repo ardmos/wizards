@@ -9,6 +9,7 @@ public class SlashSkill : NetworkBehaviour
     [SerializeField] private SpellInfo skillInfo;
     [SerializeField] private GameObject hitVFXPrefab;
     [SerializeField] private ParticleSystem particleSystemMain;
+    [SerializeField] private Collider mCollider;
 
     // 스킬 자동파괴 설정
     public void SetSelfDestroy()
@@ -42,6 +43,9 @@ public class SlashSkill : NetworkBehaviour
             default:
                 break;
         }
+
+        // 플레이어 본인 Layer는 충돌체크에서 제외합니다
+        Physics.IgnoreLayerCollision(mCollider.gameObject.layer, gameObject.layer, true);
     }
 
     // 1. Hit(충돌) 인식
@@ -57,12 +61,12 @@ public class SlashSkill : NetworkBehaviour
         }
 
         // 충돌을 중복 처리하는것을 방지하기 위한 처리
-        GetComponent<Collider>().enabled = false;
-
+        mCollider.enabled = false;
+       
         Collider collider = collision.collider;
 
         // 충돌한게 공격마법일 경우
-        if (collider.CompareTag("AttackSpell"))
+        if (collider.CompareTag("AttackSpell") || collider.CompareTag("AttackSkill"))
         {
             Debug.Log($"{skillInfo.spellName}이(가) 공격마법{collider.name}와(과) 충돌했습니다.");
         }

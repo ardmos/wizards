@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2772737237073575135}
   - component: {fileID: 8808559429368629810}
   - component: {fileID: 7604583647459939107}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Electro Slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4898,7 +4898,7 @@ GameObject:
   - component: {fileID: 2144735869764483193}
   - component: {fileID: 3217192102863851879}
   - component: {fileID: 1236368163725741671}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Electro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9794,9 +9794,12 @@ GameObject:
   - component: {fileID: 9165218250103322635}
   - component: {fileID: 7810927736608793267}
   - component: {fileID: 450029543644919312}
-  m_Layer: 0
+  - component: {fileID: -1129675487470534048}
+  - component: {fileID: -6831102077331689942}
+  - component: {fileID: 2871868628434309456}
+  m_Layer: 15
   m_Name: Electro Slash
-  m_TagString: Untagged
+  m_TagString: AttackSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9841,6 +9844,8 @@ MonoBehaviour:
     ownerPlayerClientId: 0
   hitVFXPrefab: {fileID: 9158866014028539438, guid: 3f5a483e59c33ab499278597fec73c7e, type: 3}
   particleSystemMain: {fileID: 8808559429368629810}
+  rb: {fileID: -6831102077331689942}
+  mCollider: {fileID: 2871868628434309456}
 --- !u!114 &7810927736608793267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9891,3 +9896,63 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-1129675487470534048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017458754016935794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &-6831102077331689942
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017458754016935794}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2871868628434309456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017458754016935794}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6, y: 1, z: 6}
+  m_Center: {x: 0, y: 0, z: 0}
