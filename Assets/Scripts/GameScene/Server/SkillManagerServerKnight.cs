@@ -141,8 +141,12 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         // 위치 설정
         spellObject.transform.SetParent(GameManager.Instance.transform);
         spellObject.transform.position = attackChargeShootMuzzle.position;
-/*        spellObject.transform.localPosition = attackChargeShootMuzzle.localPosition;
-        spellObject.transform.localRotation = attackChargeShootMuzzle.localRotation;*/
+        // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
+        spellObject.transform.forward = transform.forward;
+        float moveSpeed = 10f;
+        spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
+        /*        spellObject.transform.localPosition = attackChargeShootMuzzle.localPosition;
+                spellObject.transform.localRotation = attackChargeShootMuzzle.localRotation;*/
 
         // State 업데이트 쿨타임은 attack1과 다르게 가야하기 때문에 인덱스를 신경써줍니다
         UpdatePlayerSpellState(2, SpellState.Cooltime);
