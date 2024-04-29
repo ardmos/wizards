@@ -934,7 +934,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 50642ce9af17dff4a9f4e1eff9409f3a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -960,8 +960,10 @@ MonoBehaviour:
   k_IS_VICTORY: 0
   k_IS_CASTING_ATTACK_MAGIC: 0
   k_IS_CASTING_DEFENSIVE_MAGIC: 0
-  k_IS_ATTACK1: 0
-  k_IS_ATTACK2: 0
+  k_IS_ATTACK_VERTICAL_REAY: 0
+  k_IS_ATTACK_VERTICAL: 0
+  k_IS_ATTACK_WHIRLWIND_REAY: 0
+  k_IS_ATTACK_WHIRLWIND: 0
   k_IS_Dash: 0
 --- !u!114 &1844094944237122789
 MonoBehaviour:

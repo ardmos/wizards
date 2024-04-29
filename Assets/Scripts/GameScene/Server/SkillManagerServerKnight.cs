@@ -6,8 +6,8 @@ using UnityEngine;
 public class SkillManagerServerKnight : SkillSpellManagerServer
 {
     // 대쉬 스킬 정보를 일단 하드코딩으로 넣어뒀습니다. 추후 구글시트와 JSON을 활용한 연결을 할 때 수정하면 됩니다.
-    public float dashDistance = 10f; // 대쉬 거리
-    public float dashDuration = 0.3f; // 대쉬 지속 시간
+    public float dashDistance = 15f; // 대쉬 거리
+    public float dashDuration = 0.05f; // 대쉬 지속 시간
 
     // 스킬 시전 위치
     public Transform attackVerticalMuzzle;

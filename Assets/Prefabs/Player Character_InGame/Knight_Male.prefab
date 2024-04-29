@@ -1014,7 +1014,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 263dc68e0106c014aacac8b74142944b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1064,13 +1064,6 @@ MonoBehaviour:
     DestinationState: -1317599340
     TransitionDuration: 0.1
     TriggerNameHash: -927557141
-    TransitionIndex: 0
-  - IsCrossFadeExit: 0
-    Layer: 1
-    OriginatingState: -1762099426
-    DestinationState: 1863185543
-    TransitionDuration: 0.1
-    TriggerNameHash: -1148350052
     TransitionIndex: 0
   m_Animator: {fileID: 3251938006140859288}
 --- !u!1 &2606542618240068504

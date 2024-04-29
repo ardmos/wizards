@@ -129,7 +129,6 @@ public class PlayerAnimator : NetworkBehaviour
             case KnightMaleAnimState.Idle:
                 animator.SetBool(k_IS_ATTACK_VERTICAL_REAY, false);
                 animator.SetBool(k_IS_ATTACK_WHIRLWIND_REAY, false);
-                animator.SetBool(k_IS_Dash, false);
                 break;
             case KnightMaleAnimState.AttackVerticalReady:
                 animator.SetBool(k_IS_ATTACK_VERTICAL_REAY, true);
@@ -146,7 +145,7 @@ public class PlayerAnimator : NetworkBehaviour
                 animator.SetTrigger(k_IS_ATTACK_WHIRLWIND);
                 break;
             case KnightMaleAnimState.Dash:
-                animator.SetBool(k_IS_Dash, true);
+                animator.SetTrigger(k_IS_Dash);
                 break;
         }
     }
