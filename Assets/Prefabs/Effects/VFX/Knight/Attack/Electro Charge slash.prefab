@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8898006082188285377}
   - component: {fileID: 5941843236721121672}
   - component: {fileID: 2018604056409400296}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3742,7 +3742,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3850,11 +3850,11 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 114440
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -4897,7 +4897,7 @@ GameObject:
   - component: {fileID: 3786826812710422067}
   - component: {fileID: 7262892816584100522}
   - component: {fileID: 5928867185390775338}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Slash2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9783,7 +9783,7 @@ GameObject:
   - component: {fileID: 1874904606162243869}
   - component: {fileID: 272730999946704338}
   - component: {fileID: 3672302708842713124}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GlowForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14671,9 +14671,11 @@ GameObject:
   - component: {fileID: 8301444944079137904}
   - component: {fileID: 8132418319304724361}
   - component: {fileID: 7571304985448346101}
-  m_Layer: 0
+  - component: {fileID: 7595745374825167163}
+  - component: {fileID: 3880765925718567244}
+  m_Layer: 15
   m_Name: Electro Charge slash
-  m_TagString: Untagged
+  m_TagString: AttackSpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14785,3 +14787,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7595745374825167163
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453253170470012855}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2.21, z: 5.2}
+  m_Center: {x: 0, y: 0.69, z: 3.22}
+--- !u!114 &3880765925718567244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453253170470012855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20769d9eda18004cb82ccb7d47f9c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillInfo:
+    spellType: 0
+    spellName: 0
+    spellState: 0
+    coolTime: 0
+    lifeTime: 0
+    moveSpeed: 0
+    price: 0
+    level: 0
+    ownerPlayerClientId: 0
+  hitVFXPrefab: {fileID: 9158866014028539438, guid: 3f5a483e59c33ab499278597fec73c7e, type: 3}
+  particleSystemMain: {fileID: 5941843236721121672}

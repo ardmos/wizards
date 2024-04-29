@@ -136,8 +136,8 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackChargeShootMuzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
-/*        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
-        spellObject.GetComponent<SlashSkill>().SetSelfDestroy();*/
+        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
+        spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
         // 위치 설정
         spellObject.transform.SetParent(GameManager.Instance.transform);
         spellObject.transform.position = attackChargeShootMuzzle.position;
@@ -145,8 +145,6 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         spellObject.transform.forward = transform.forward;
         float moveSpeed = 10f;
         spellObject.GetComponent<Rigidbody>().AddForce(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
-        /*        spellObject.transform.localPosition = attackChargeShootMuzzle.localPosition;
-                spellObject.transform.localRotation = attackChargeShootMuzzle.localRotation;*/
 
         // State 업데이트 쿨타임은 attack1과 다르게 가야하기 때문에 인덱스를 신경써줍니다
         UpdatePlayerSpellState(2, SpellState.Cooltime);
