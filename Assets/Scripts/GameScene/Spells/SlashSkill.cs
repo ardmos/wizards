@@ -44,6 +44,7 @@ public class SlashSkill : NetworkBehaviour
                 break;
         }
 
+
         // 플레이어 본인 Layer는 충돌체크에서 제외합니다
         Physics.IgnoreLayerCollision(mCollider.gameObject.layer, gameObject.layer, true);
     }
