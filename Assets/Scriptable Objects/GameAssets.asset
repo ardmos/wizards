@@ -35,22 +35,22 @@ MonoBehaviour:
   - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
     prefab: {fileID: 8017458754016935794, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
     name: StoneSlashAttack1_Lv1
-  - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
+  - icon: {fileID: 21300000, guid: 377651a58f05df54fadbab3c35f7a702, type: 3}
     prefab: {fileID: 8017458754016935794, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
     name: ElectricSlashAttackVertical_Lv1
-  - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
+  - icon: {fileID: 21300000, guid: f1189c4b32ef221498670c54368510ca, type: 3}
     prefab: {fileID: 7647375919561907788, guid: 3ebd60e2dd154364bb905aabdf4363aa, type: 3}
     name: ElectricSlashAttackWhirlwind_Lv1
-  - icon: {fileID: 21300000, guid: 19927fa1c46ec465e96a55e955d65636, type: 3}
+  - icon: {fileID: 21300000, guid: 08d49f30221779549a5a2bcaab4e58b0, type: 3}
     prefab: {fileID: 3367314013316085171, guid: b75a84abb1e32da4eb0abc47657ecc3c, type: 3}
     name: ElectricSlashAttackCharge_Lv1
-  - icon: {fileID: 21300000, guid: 19927fa1c46ec465e96a55e955d65636, type: 3}
+  - icon: {fileID: 21300000, guid: 08d49f30221779549a5a2bcaab4e58b0, type: 3}
     prefab: {fileID: 7453253170470012855, guid: ed995d8b5186bfd4eb3ffdc8c40d0a7f, type: 3}
     name: ElectricSlashAttackChargeSlash_Lv1
   - icon: {fileID: 21300000, guid: cbca8551cadba4ca389b4d7683e1f506, type: 3}
     prefab: {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}
     name: MagicShieldLv1
-  - icon: {fileID: 21300000, guid: e1683a1acccb446889b2eb95ce0cbaae, type: 3}
+  - icon: {fileID: 21300000, guid: 12c528d90e0ceb94181e3a423b9b9afd, type: 3}
     prefab: {fileID: 7131401307255788800, guid: 461773b960265f34ba34717eda37779e, type: 3}
     name: Dash_Lv1
   wizard_Male_ForLobby: {fileID: 7822752010955555959, guid: ed053f82f0a9cad41a1156a5d6c24080, type: 3}
@@ -71,33 +71,54 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 48bd3fc25081b5d4f8ceb452f7cb1744, type: 3}
   sfx_btnClick: {fileID: 8300000, guid: bdf39f0cf8e25ea48af7afa0a9be325c, type: 3}
   sfx_Fireball_Lv1:
-  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
-  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
-  - {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
   sfx_Waterball_Lv1:
-  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
-  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
-  - {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
   sfx_Iceball_Lv1:
-  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
-  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
-  - {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
   sfx_MagicShield_Lv1:
-  - {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
-  - {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
-  - {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
   sfx_ElectricSlashAttack1_Lv1:
-  - {fileID: 8300000, guid: be7f6c1d95d537346b12f008d777c9f1, type: 3}
-  - {fileID: 8300000, guid: be7f6c1d95d537346b12f008d777c9f1, type: 3}
-  - {fileID: 8300000, guid: be7f6c1d95d537346b12f008d777c9f1, type: 3}
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
   sfx_ElectricSlashAttack2_Lv1:
-  - {fileID: 8300000, guid: d8d92bac699a7824da6208386157a77a, type: 3}
-  - {fileID: 8300000, guid: d8d92bac699a7824da6208386157a77a, type: 3}
-  - {fileID: 8300000, guid: d8d92bac699a7824da6208386157a77a, type: 3}
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
   sfx_Dash_Lv1:
-  - {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
-  - {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
-  - {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
+  - audioClip: {fileID: 0}
+    audioName: 
   sfx_PotionHP: {fileID: 8300000, guid: 2ef55505c696278429561b7b43b591ac, type: 3}
   sfx_OpenScroll: {fileID: 8300000, guid: 72cf99bf9fd5a6a4bbcf5d2226c04df8, type: 3}
   sfx_ScrollLvUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
