@@ -15,7 +15,7 @@ public class Knight : PlayerClient, ICharacter
     public SkillName[] skills { get; set; } = new SkillName[]{
                 SkillName.ElectricSlashAttackVertical_Lv1,
                 SkillName.ElectricSlashAttackWhirlwind_Lv1,
-                SkillName.ElectricSlashAttackVertical_Lv1,
+                SkillName.ElectricSlashAttackChargeSlash_Lv1,
                 SkillName.Dash_Lv1
                 };
 

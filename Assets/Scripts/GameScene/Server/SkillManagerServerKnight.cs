@@ -139,6 +139,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
 /*        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
         spellObject.GetComponent<SlashSkill>().SetSelfDestroy();*/
         // 위치 설정
+        spellObject.transform.SetParent(GameManager.Instance.transform);
         spellObject.transform.position = attackChargeShootMuzzle.position;
 /*        spellObject.transform.localPosition = attackChargeShootMuzzle.localPosition;
         spellObject.transform.localRotation = attackChargeShootMuzzle.localRotation;*/
