@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 295005377281302220}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 0.5
+  simulationSpeed: 0.35
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -4928,7 +4928,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1122064384950867322}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 0.5
+  simulationSpeed: 0.35
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -9814,7 +9814,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1602426106229116799}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 0.5
+  simulationSpeed: 0.35
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -14722,7 +14722,6 @@ MonoBehaviour:
     ownerPlayerClientId: 0
   hitVFXPrefab: {fileID: 9158866014028539438, guid: 3f5a483e59c33ab499278597fec73c7e, type: 3}
   particleSystemMain: {fileID: 5941843236721121672}
-  rb: {fileID: 7571304985448346101}
   mCollider: {fileID: 7595745374825167163}
 --- !u!114 &3825150919973988957
 MonoBehaviour:
