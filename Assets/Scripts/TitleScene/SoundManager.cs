@@ -153,23 +153,23 @@ public class SoundManager : MonoBehaviour
     }
 
     [ClientRpc]
-    public void PlayWizardSpellSFXClientRPC(SkillName spellName, byte state)
+    public void PlayWizardSpellSFXClientRPC(SkillName spellName, SFX_Type sFX_Type)
     {
         //Debug.Log($"PlayMagicSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}");
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetMagicSFXSound(spellName, state));
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetMagicSFXSound(spellName, sFX_Type));
     }
 
     [ClientRpc]
-    public void PlayKnightSkillSFXClientRPC(SkillName spellName, byte state)
+    public void PlayKnightSkillSFXClientRPC(SkillName spellName, SFX_Type sFX_Type)
     {
         //Debug.Log($"PlayMagicSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}");
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetSkillSFXSound(spellName, state));
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetSkillSFXSound(spellName, sFX_Type));
     }
 
     [ClientRpc]

@@ -83,7 +83,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVertical);
 
         // SFX 실행
-        spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
+        spellObject.GetComponent<SlashSkill>().PlaySFX(SFX_Type.Shooting);
     }
 
     private void AttackWhirlwind()
@@ -107,7 +107,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackWhirlwind);
 
         // SFX 실행
-        //spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
+        SoundManager.Instance?.PlayKnightSkillSFXClientRPC(SkillName.ElectricSlashAttackWhirlwind_Lv1, SFX_Type.Shooting);
     }
 
     private void AttackChargeReady()
@@ -123,7 +123,8 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVerticalReady);
 
         // SFX 실행 (충전 효과음 필요)
-        //spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
+        //chargeEffectObject.GetComponent<SlashSkill>().PlaySFX(SFX_Type.Aiming);
+        SoundManager.Instance?.PlayKnightSkillSFXClientRPC(SkillName.ElectricSlashAttackChargeSlash_Lv1, SFX_Type.Aiming);
     }
 
     private void AttackChargeShoot()
@@ -153,7 +154,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVertical);
 
         // SFX 실행
-        //spellObject.GetComponent<SlashSkill>().PlaySFX(SlashSkill.SFX_SHOOTING);
+        SoundManager.Instance?.PlayKnightSkillSFXClientRPC(SkillName.ElectricSlashAttackChargeSlash_Lv1, SFX_Type.Shooting);
     }
 
     /// <summary>
@@ -173,6 +174,8 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Dash);
 
         // SFX 실행
+        SoundManager.Instance?.PlayKnightSkillSFXClientRPC(SkillName.Dash_Lv1, SFX_Type.Shooting);
+
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)3));
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), transform.position, Quaternion.identity);

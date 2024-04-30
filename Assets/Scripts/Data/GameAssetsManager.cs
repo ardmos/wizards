@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameAssetsScriptableObject;
 
 public class GameAssetsManager : MonoBehaviour
 {
@@ -116,38 +117,53 @@ public class GameAssetsManager : MonoBehaviour
 
     public AudioClip GetButtonClickSound() { return gameAssets.sfx_btnClick; }
 
-    public AudioClip GetMagicSFXSound(SkillName spellName, byte state)
+    public AudioClip GetMagicSFXSound(SkillName spellName, SFX_Type sFX_Type)
     {
         switch (spellName)
         {
             case SkillName.FireBallLv1:
-                return gameAssets.sfx_Fireball_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_Fireball_Lv1, sFX_Type);
             case SkillName.WaterBallLv1:
-                return gameAssets.sfx_Waterball_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_Waterball_Lv1, sFX_Type);
             case SkillName.IceBallLv1:
-                return gameAssets.sfx_Iceball_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_Iceball_Lv1, sFX_Type);
             case SkillName.MagicShieldLv1:
-                return gameAssets.sfx_MagicShield_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_MagicShield_Lv1, sFX_Type);
             default:
                 Debug.LogError($"{nameof(GetMagicSFXSound)}. {spellName}은 알맞은 spellName이 아닙니다.");
                 return null;
         }
     }
 
-    public AudioClip GetSkillSFXSound(SkillName skillName, byte state)
+    private AudioClip GetSFXAudioClip(SFX_Clip sFX_Clip, SFX_Type sFX_Type)
+    {
+        switch (sFX_Type)
+        {
+            case SFX_Type.Aiming:
+                return sFX_Clip.audioClipAiming;
+            case SFX_Type.Shooting:
+                return sFX_Clip.audioClipShooting;
+            case SFX_Type.Hit:
+                return sFX_Clip.audioClipHit;
+            default: 
+                return null;
+        }
+    }
+
+    public AudioClip GetSkillSFXSound(SkillName skillName, SFX_Type sFX_Type)
     {
         switch (skillName)
         {
             case SkillName.StoneSlashAttack1_Lv1:
-                return gameAssets.sfx_ElectricSlashAttack1_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackVertical_Lv1, sFX_Type);
             case SkillName.ElectricSlashAttackVertical_Lv1:
-                return gameAssets.sfx_ElectricSlashAttack1_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackVertical_Lv1, sFX_Type);
             case SkillName.ElectricSlashAttackWhirlwind_Lv1:
-                return gameAssets.sfx_ElectricSlashAttack2_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackWhirlwind_Lv1, sFX_Type);
             case SkillName.ElectricSlashAttackChargeSlash_Lv1:
-                return gameAssets.sfx_ElectricSlashAttack2_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackChargeSlash_Lv1, sFX_Type);
             case SkillName.Dash_Lv1:
-                return gameAssets.sfx_Dash_Lv1[state].audioClip;
+                return GetSFXAudioClip(gameAssets.sfx_Dash_Lv1, sFX_Type);
             default:
                 Debug.LogError($"{nameof(GetSkillSFXSound)}. {skillName}은 알맞은 skillName이 아닙니다.");
                 return null;

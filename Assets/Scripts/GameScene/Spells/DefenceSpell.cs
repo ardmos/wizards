@@ -27,11 +27,11 @@ public abstract class DefenceSpell : NetworkBehaviour
         //StartCoroutine(StartCountdown(spellInfo.lifeTime));
     }
 
-    public void PlaySFX(byte state)
+    public void PlaySFX(SFX_Type sFX_Type)
     {
         if (SoundManager.Instance == null) return;
 
-        SoundManager.Instance.PlayWizardSpellSFXClientRPC(spellInfo.spellName, state);
+        SoundManager.Instance.PlayWizardSpellSFXClientRPC(spellInfo.spellName, sFX_Type);
     }
 
     /// <summary>

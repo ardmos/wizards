@@ -7,10 +7,6 @@ using UnityEngine;
 /// </summary>
 public abstract class AttackSpell : NetworkBehaviour
 {
-    public const byte SFX_CASTING = 0;
-    public const byte SFX_SHOOTING = 1;
-    public const byte SFX_HIT = 2;
-
     [SerializeField] protected SpellInfo spellInfo;
 
     [SerializeField] protected GameObject muzzleVFXPrefab;
@@ -83,7 +79,7 @@ public abstract class AttackSpell : NetworkBehaviour
         }
 
         // 마법 충돌 사운드 재생
-        PlaySFX(SFX_HIT);
+        PlaySFX(SFX_Type.Hit);
 
         // 적중 효과 VFX
         HitVFX(GetHitVFXPrefab(), collision);
@@ -179,7 +175,7 @@ public abstract class AttackSpell : NetworkBehaviour
 
         GetComponent<Rigidbody>().AddForce(force, forceMode);
         // 마법 발사 사운드 재생
-        PlaySFX(SFX_SHOOTING);
+        PlaySFX(SFX_Type.Shooting);
     }
 
     public SpellInfo GetSpellInfo()
@@ -199,10 +195,10 @@ public abstract class AttackSpell : NetworkBehaviour
         return trails;
     }
 
-    public void PlaySFX(byte state)
+    public void PlaySFX(SFX_Type sFX_Type)
     {
         if (SoundManager.Instance == null) return;
 
-        SoundManager.Instance.PlayWizardSpellSFXClientRPC(spellInfo.spellName, state);
+        SoundManager.Instance.PlayWizardSpellSFXClientRPC(spellInfo.spellName, sFX_Type);
     }
 }

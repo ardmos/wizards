@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class SlashSkill : NetworkBehaviour
 {
-    public const byte SFX_SHOOTING = 1;
-    public const byte SFX_HIT = 2;
-
     [SerializeField] private SpellInfo skillInfo;
     [SerializeField] private GameObject hitVFXPrefab;
     [SerializeField] private ParticleSystem particleSystemMain;
@@ -102,7 +99,7 @@ public class SlashSkill : NetworkBehaviour
         HitVFX(collision);
 
         // 3. Hit SFX 재생
-        PlaySFX(SFX_HIT);
+        PlaySFX(SFX_Type.Hit);
 
         // 4. 스킬 오브젝트 제거
         Destroy(gameObject, 0.2f);
@@ -129,12 +126,10 @@ public class SlashSkill : NetworkBehaviour
         else Debug.Log($"hitVFXPrefab is null");
     }
 
-    // 3. 해당 슬래쉬 스킬의 다양한 SFX 재생 ( 시전: 1, Hit: 2 )
-    public void PlaySFX(byte state)
+    // 3. 해당 슬래쉬 스킬의 다양한 SFX 재생
+    public void PlaySFX(SFX_Type sFX_Type)
     {
-        if (SoundManager.Instance == null) return;
-
-        SoundManager.Instance.PlayKnightSkillSFXClientRPC(skillInfo.spellName, state);
+        SoundManager.Instance?.PlayKnightSkillSFXClientRPC(skillInfo.spellName, sFX_Type);
     }
 
 }

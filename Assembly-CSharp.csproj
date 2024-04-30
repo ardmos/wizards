@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\GameScene\Item\PotionHP.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSupportUIController.cs" />
     <Compile Include="Assets\Scripts\Data\GraphicQualitySettingsData.cs" />
+    <Compile Include="Assets\Scripts\Data\SFXType.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\TimerUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />

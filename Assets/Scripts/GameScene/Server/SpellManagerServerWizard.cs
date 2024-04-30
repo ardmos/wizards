@@ -27,7 +27,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         spellObject.GetComponent<DefenceSpell>().Activate();
 
         // 마법 생성 사운드 재생
-        spellObject.GetComponent<DefenceSpell>().PlaySFX(AttackSpell.SFX_CASTING);
+        spellObject.GetComponent<DefenceSpell>().PlaySFX(SFX_Type.Aiming);
 
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
@@ -71,7 +71,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         spellObject.transform.localPosition = muzzleTransform.localPosition;
 
         // 마법 생성 사운드 재생
-        spellObject.GetComponent<AttackSpell>().PlaySFX(AttackSpell.SFX_CASTING);
+        spellObject.GetComponent<AttackSpell>().PlaySFX(SFX_Type.Aiming);
 
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = transform.forward;

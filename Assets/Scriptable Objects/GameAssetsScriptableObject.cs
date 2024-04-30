@@ -51,19 +51,21 @@ public class GameAssetsScriptableObject : ScriptableObject
     [System.Serializable]
     public struct SFX_Clip
     {
-        public AudioClip audioClip;
-        public string audioName;
+        public AudioClip audioClipAiming;
+        public AudioClip audioClipShooting;
+        public AudioClip audioClipHit;
     }
 
     public AudioClip sfx_btnClick;
     [Header("0:Casting, 1:Shooting, 2:Hit")]
-    public SFX_Clip[] sfx_Fireball_Lv1;
-    public SFX_Clip[] sfx_Waterball_Lv1;
-    public SFX_Clip[] sfx_Iceball_Lv1;
-    public SFX_Clip[] sfx_MagicShield_Lv1;
-    public SFX_Clip[] sfx_ElectricSlashAttack1_Lv1;
-    public SFX_Clip[] sfx_ElectricSlashAttack2_Lv1;
-    public SFX_Clip[] sfx_Dash_Lv1;
+    public SFX_Clip sfx_Fireball_Lv1;
+    public SFX_Clip sfx_Waterball_Lv1;
+    public SFX_Clip sfx_Iceball_Lv1;
+    public SFX_Clip sfx_MagicShield_Lv1;
+    public SFX_Clip sfx_ElectricSlashAttackVertical_Lv1;
+    public SFX_Clip sfx_ElectricSlashAttackWhirlwind_Lv1;
+    public SFX_Clip sfx_ElectricSlashAttackChargeSlash_Lv1;
+    public SFX_Clip sfx_Dash_Lv1;
     public AudioClip sfx_PotionHP;
     public AudioClip sfx_OpenScroll;
     public AudioClip sfx_ScrollLvUp;

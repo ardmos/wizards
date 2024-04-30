@@ -71,54 +71,37 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 48bd3fc25081b5d4f8ceb452f7cb1744, type: 3}
   sfx_btnClick: {fileID: 8300000, guid: bdf39f0cf8e25ea48af7afa0a9be325c, type: 3}
   sfx_Fireball_Lv1:
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
+    audioClipAiming: {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 8613f58cc428e0349b3a049c7b677ddd, type: 3}
   sfx_Waterball_Lv1:
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
+    audioClipAiming: {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 9bfec01df1bbf8745ac809ecd286068c, type: 3}
   sfx_Iceball_Lv1:
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
+    audioClipAiming: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
   sfx_MagicShield_Lv1:
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  sfx_ElectricSlashAttack1_Lv1:
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  sfx_ElectricSlashAttack2_Lv1:
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
+    audioClipAiming: {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 91b244569b5d3b44dbb435c6e10b952f, type: 3}
+  sfx_ElectricSlashAttackVertical_Lv1:
+    audioClipAiming: {fileID: 8300000, guid: 8d65515010013d2439d567380b622635, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: be7f6c1d95d537346b12f008d777c9f1, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 8d65515010013d2439d567380b622635, type: 3}
+  sfx_ElectricSlashAttackWhirlwind_Lv1:
+    audioClipAiming: {fileID: 8300000, guid: 8d65515010013d2439d567380b622635, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: 8d65515010013d2439d567380b622635, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 8d65515010013d2439d567380b622635, type: 3}
+  sfx_ElectricSlashAttackChargeSlash_Lv1:
+    audioClipAiming: {fileID: 8300000, guid: 8d65515010013d2439d567380b622635, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: d8d92bac699a7824da6208386157a77a, type: 3}
+    audioClipHit: {fileID: 8300000, guid: cdd46f5a0f730c34a9bf21e798efc585, type: 3}
   sfx_Dash_Lv1:
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
-  - audioClip: {fileID: 0}
-    audioName: 
+    audioClipAiming: {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
   sfx_PotionHP: {fileID: 8300000, guid: 2ef55505c696278429561b7b43b591ac, type: 3}
   sfx_OpenScroll: {fileID: 8300000, guid: 72cf99bf9fd5a6a4bbcf5d2226c04df8, type: 3}
   sfx_ScrollLvUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
