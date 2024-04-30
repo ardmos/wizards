@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerMovementServer : NetworkBehaviour
 {
-    public float moveSpeed { get; private set; } = 10f;
+    public float moveSpeed { get; private set; } = 5f;
 
     [ServerRpc (RequireOwnership = false)]
     public void HandleMovementServerRPC(Vector2 inputVector, bool isAttackButtonClicked, ServerRpcParams serverRpcParams = default)
