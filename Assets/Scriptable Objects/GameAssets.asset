@@ -60,20 +60,25 @@ MonoBehaviour:
   vfx_Heal: {fileID: 6331275906715107345, guid: e27164d836110ff4da364dd5d38a9118, type: 3}
   vfx_SpellUpgrade: {fileID: 8846737274113074935, guid: 95bd805e8c353104da0c42b81e07d12c, type: 3}
   vfx_txtDamageValue: {fileID: 1733173226754330972, guid: 2e19b3b4a75fc12428e277161d0266db, type: 3}
-  music_Title: {fileID: 8300000, guid: be7aecc45e127aa4b936efa9ec76c064, type: 3}
-  music_Lobby: {fileID: 8300000, guid: 126b1fb3ad0ab4645a4e3637cb217dae, type: 3}
+  music_Title:
+  - {fileID: 8300000, guid: bf17d3a88e3294185953a4c2aa69b03d, type: 3}
+  - {fileID: 8300000, guid: 1afd1ae47c6af48c08a65b91f3a4adb4, type: 3}
+  music_Lobby:
+  - {fileID: 8300000, guid: 62bdfb8ea2338034a86638fd407a9251, type: 3}
+  - {fileID: 8300000, guid: ac81e521cc4fffd4cb560d4ddc70d306, type: 3}
+  - {fileID: 8300000, guid: 6b99e4ca54feb1c499bd45b2c95dfde1, type: 3}
+  - {fileID: 8300000, guid: 845f28f9ae11b4b4181d3f627c5c4a1f, type: 3}
+  - {fileID: 8300000, guid: 1afd1ae47c6af48c08a65b91f3a4adb4, type: 3}
   music_Game:
-  - {fileID: 8300000, guid: a6b230004d2b33549a512891e8801cca, type: 3}
-  - {fileID: 8300000, guid: dc165caa8e9a2944ba02e9eb07f2df5f, type: 3}
-  - {fileID: 8300000, guid: a20acde70e102c64f9e414c66148ded4, type: 3}
-  - {fileID: 8300000, guid: d6a9eeb2939fd934e9394986dfb1e9d7, type: 3}
-  - {fileID: 8300000, guid: 5e445e3e90353bd44ae0ec6a7317fb27, type: 3}
-  - {fileID: 8300000, guid: 48bd3fc25081b5d4f8ceb452f7cb1744, type: 3}
-  sfx_btnClick: {fileID: 8300000, guid: bdf39f0cf8e25ea48af7afa0a9be325c, type: 3}
+  - {fileID: 8300000, guid: e2b8e48b56586054a88cc64ed099a61f, type: 3}
+  - {fileID: 8300000, guid: b90b002a8cd137243a4b5e955f3b220f, type: 3}
+  - {fileID: 8300000, guid: 68555d1896b9aac418853a35be8b19f4, type: 3}
+  - {fileID: 8300000, guid: bf17d3a88e3294185953a4c2aa69b03d, type: 3}
+  sfx_btnClick: {fileID: 8300000, guid: d923860589a0748e981a2145fbc32489, type: 3}
   sfx_Fireball_Lv1:
     audioClipAiming: {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
     audioClipShooting: {fileID: 8300000, guid: ef84f74993962bc4586696c38f08c108, type: 3}
-    audioClipHit: {fileID: 8300000, guid: 8613f58cc428e0349b3a049c7b677ddd, type: 3}
+    audioClipHit: {fileID: 8300000, guid: c2b06cd68616eb94c8c592179ec592e3, type: 3}
   sfx_Waterball_Lv1:
     audioClipAiming: {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
     audioClipShooting: {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
@@ -97,12 +102,13 @@ MonoBehaviour:
   sfx_ElectricSlashAttackChargeSlash_Lv1:
     audioClipAiming: {fileID: 8300000, guid: 8d65515010013d2439d567380b622635, type: 3}
     audioClipShooting: {fileID: 8300000, guid: d8d92bac699a7824da6208386157a77a, type: 3}
-    audioClipHit: {fileID: 8300000, guid: cdd46f5a0f730c34a9bf21e798efc585, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 5e32052836c5d2a4a87ddc0f6ea91203, type: 3}
   sfx_Dash_Lv1:
     audioClipAiming: {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
     audioClipShooting: {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
     audioClipHit: {fileID: 8300000, guid: 4a38c5ea12d564c489d9f788d103e31c, type: 3}
   sfx_PotionHP: {fileID: 8300000, guid: 2ef55505c696278429561b7b43b591ac, type: 3}
+  sfx_PickupScroll: {fileID: 8300000, guid: aefff84a12c287b4a8012f4034d9f224, type: 3}
   sfx_OpenScroll: {fileID: 8300000, guid: 72cf99bf9fd5a6a4bbcf5d2226c04df8, type: 3}
   sfx_ScrollLvUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollFireRateUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
@@ -110,11 +116,19 @@ MonoBehaviour:
   sfx_ScrollAttach: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollGuide: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_Win:
-  - {fileID: 8300000, guid: f36d6b00e962da94280f3d48cc0b370a, type: 3}
+  - {fileID: 8300000, guid: 63354c465446f964d822e667fe255f02, type: 3}
   - {fileID: 8300000, guid: 552a060d2cec76245a36b15805d9671f, type: 3}
   sfx_Lose:
-  - {fileID: 8300000, guid: ca20427f156ae1b45a5c784c8f11d518, type: 3}
+  - {fileID: 8300000, guid: cf3291b7346dd604dbfa69186adc9540, type: 3}
   - {fileID: 8300000, guid: 23d3dcb14c4564b43a17078ef550f505, type: 3}
+  sfx_GameMatchFound: {fileID: 8300000, guid: c1e016fd7823f54438f11939a0bb77ff, type: 3}
+  sfx_GameMatchCanceled: {fileID: 8300000, guid: 12f1a5cc53c0f6a4ea699679e7cdf414, type: 3}
+  sfx_GameStartCountdown:
+  - {fileID: 8300000, guid: c2a45429d64c1fb4a8c13ba4c7154c82, type: 3}
+  - {fileID: 8300000, guid: 718573f6a42a5194eb2948be2839ff78, type: 3}
+  - {fileID: 8300000, guid: 1e08d8f56f46e124ca812b93b424fdc3, type: 3}
+  - {fileID: 8300000, guid: 4d518cef8fde8f34b9f1ba5ebc12362b, type: 3}
+  sfx_GetHit: {fileID: 0}
   color_Owner: {r: 0.13679248, g: 1, b: 0.27996466, a: 1}
   color_Ally: {r: 0, g: 0, b: 0, a: 0}
   color_Enemy: {r: 1, g: 0.31488872, b: 0, a: 1}

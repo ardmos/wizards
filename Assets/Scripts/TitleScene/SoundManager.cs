@@ -115,17 +115,17 @@ public class SoundManager : MonoBehaviour
     {
         if (audioSourceSFX == null) return;
         StopMusic();
-        StartCoroutine(PlaySFXWithDelay(GameAssetsManager.Instance.GetWinSFXSound()));
+        StartCoroutine(PlaySequentialSFXWithDelay(GameAssetsManager.Instance.GetWinSFXSound()));
     }
 
     public void PlayLosePopupSound()
     {
         if (audioSourceSFX == null) return;
         StopMusic();
-        StartCoroutine(PlaySFXWithDelay(GameAssetsManager.Instance.GetLoseSFXSound()));
+        StartCoroutine(PlaySequentialSFXWithDelay(GameAssetsManager.Instance.GetLoseSFXSound()));
     }
 
-    private IEnumerator PlaySFXWithDelay(AudioClip[] audioClips)
+    private IEnumerator PlaySequentialSFXWithDelay(AudioClip[] audioClips)
     {
         foreach (AudioClip audioClip in audioClips)
         {
@@ -188,6 +188,22 @@ public class SoundManager : MonoBehaviour
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
         audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetItemSFXSound(itemName));
+    }
+
+    public void PlayCountdownAnnouncer(double countdownTime)
+    {
+        if (audioSourceObjectPrefab == null) return;
+
+        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetCountdownAnnouncerSFXSound((int)countdownTime));
+    }
+
+    public void PlayUISFX(UISFX_Type uISFX_Type)
+    {
+        if (audioSourceObjectPrefab == null) return;
+
+        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
+        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetUISFX(uISFX_Type));
     }
 
     public void SetVolumeBGM(float volume) {

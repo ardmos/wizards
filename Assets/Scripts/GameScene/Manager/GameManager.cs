@@ -142,7 +142,7 @@ public class GameManager : NetworkBehaviour
                 break;
             case GameState.CountdownToStart:
                 countdownToStartTimer.Value -= Time.deltaTime;
-                if (countdownToStartTimer.Value < 0f)
+                if (countdownToStartTimer.Value < -1f)
                 {
                     gameState.Value = GameState.GamePlaying;
                     gamePlayingTimer.Value = gamePlayingTimerMax;

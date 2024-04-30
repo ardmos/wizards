@@ -94,7 +94,7 @@ public class GameAssetsManager : MonoBehaviour
     {
         if (sceneName == LoadSceneManager.Scene.TitleScene.ToString())
         {
-            return gameAssets.music_Title;
+            return gameAssets.music_Title[UnityEngine.Random.Range(0, gameAssets.music_Title.Length)];
         }
         else if (sceneName == LoadSceneManager.Scene.LoadingScene.ToString())
         {
@@ -102,7 +102,7 @@ public class GameAssetsManager : MonoBehaviour
         }
         else if (sceneName == LoadSceneManager.Scene.LobbyScene.ToString())
         {
-            return gameAssets.music_Lobby;
+            return gameAssets.music_Lobby[UnityEngine.Random.Range(0, gameAssets.music_Lobby.Length)];
         }
         else if (sceneName == LoadSceneManager.Scene.GameScene.ToString())
         {
@@ -184,10 +184,29 @@ public class GameAssetsManager : MonoBehaviour
                 return gameAssets.sfx_ScrollFlySpeedUp;
             case ItemName.Scroll_Deploy:
                 return gameAssets.sfx_ScrollAttach;
+            case ItemName.ScrollStart:
+                return gameAssets.sfx_PickupScroll;
             default:
                 Debug.LogError($"적절하지 않은 itemName 정보입니다. itemName: {itemName}");
                 return null;
         }
+    }
+
+    public AudioClip GetUISFX(UISFX_Type uISFX_Type)
+    {
+        switch (uISFX_Type)
+        {
+            case UISFX_Type.Succeeded_Match:
+                return gameAssets.sfx_GameMatchFound;
+            case UISFX_Type.Failed_Match:
+                return gameAssets.sfx_GameMatchCanceled;
+            default: return null;
+        }
+    }
+
+    public AudioClip GetCountdownAnnouncerSFXSound(int index)
+    {
+        return gameAssets.sfx_GameStartCountdown[index];
     }
 
     public AudioClip[] GetWinSFXSound()

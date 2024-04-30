@@ -65,6 +65,8 @@ public class PopupGameRoomUIController : MonoBehaviour
             // 현 플레이어가 매칭 티켓에서 퇴장하려는 단계
             // 1. 퇴장 실행
             GameMultiplayer.Instance.StopClient();
+            // 매칭 실패 SFX 재생
+            SoundManager.Instance?.PlayUISFX(UISFX_Type.Failed_Match);
             Hide();
         }
 
@@ -174,14 +176,19 @@ public class PopupGameRoomUIController : MonoBehaviour
         if (playerCount == ConnectionApprovalHandler.MaxPlayers)
         {
             RunStateMachine();
-            // 1. 레디 버튼 활성화
+            // 레디 버튼 활성화
             btnReady.gameObject.SetActive(true);
+            // 레디 대기 상태로 변경
             matchingState = MatchingState.WatingForReady;
+
+            // 매칭 성공 SFX 재생
+            SoundManager.Instance?.PlayUISFX(UISFX_Type.Succeeded_Match);
         }
         else
         {
-            // 1. 레디 버튼 활성화
+            // 레디 버튼 비활성화
             btnReady.gameObject.SetActive(false);
+            // 다시 플레이어 모집 상태로 변경
             matchingState = MatchingState.WatingForPlayers;
         }
 
@@ -262,9 +269,6 @@ public class PopupGameRoomUIController : MonoBehaviour
         ActivateToggleUI(0);
         UpdateToggleUIState();
         btnReady.gameObject.SetActive(false);
-
-        Debug.Log("팝업 Show()");
-        //RunStateMachine();
     }
 
     private void Hide()

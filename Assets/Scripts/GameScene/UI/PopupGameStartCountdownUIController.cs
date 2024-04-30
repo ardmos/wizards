@@ -6,6 +6,7 @@ public class PopupGameStartCountdownUIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtCountdown;
 
+    private double tmpCountdownValue = 0;
     private void Start()
     {
         GameManager.Instance.OnGameStateChanged += GameManager_OnStateChanged;
@@ -19,7 +20,22 @@ public class PopupGameStartCountdownUIController : MonoBehaviour
 
     private void Update()
     {
-        txtCountdown.text = Math.Ceiling(GameManager.Instance.GetCountdownToStartTimer()).ToString();
+        double countdownTime = Math.Ceiling(GameManager.Instance.GetCountdownToStartTimer());
+        if (tmpCountdownValue == countdownTime) return;
+        switch (countdownTime)
+        {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                tmpCountdownValue = countdownTime;
+                SoundManager.Instance?.PlayCountdownAnnouncer(countdownTime);
+                break;
+            default:
+                break;
+        }
+
+        txtCountdown.text = countdownTime.ToString();
     }
 
     private void GameManager_OnStateChanged(object sender, EventArgs e)

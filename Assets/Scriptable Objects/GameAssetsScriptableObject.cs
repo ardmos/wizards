@@ -42,8 +42,8 @@ public class GameAssetsScriptableObject : ScriptableObject
     #endregion
 
     #region Music
-    public AudioClip music_Title;
-    public AudioClip music_Lobby;
+    public AudioClip[] music_Title;
+    public AudioClip[] music_Lobby;
     public AudioClip[] music_Game;
     #endregion
 
@@ -67,6 +67,7 @@ public class GameAssetsScriptableObject : ScriptableObject
     public SFX_Clip sfx_ElectricSlashAttackChargeSlash_Lv1;
     public SFX_Clip sfx_Dash_Lv1;
     public AudioClip sfx_PotionHP;
+    public AudioClip sfx_PickupScroll;
     public AudioClip sfx_OpenScroll;
     public AudioClip sfx_ScrollLvUp;
     public AudioClip sfx_ScrollFireRateUp;
@@ -76,6 +77,10 @@ public class GameAssetsScriptableObject : ScriptableObject
 
     public AudioClip[] sfx_Win;
     public AudioClip[] sfx_Lose;
+    public AudioClip sfx_GameMatchFound;
+    public AudioClip sfx_GameMatchCanceled;
+    public AudioClip[] sfx_GameStartCountdown;
+    public AudioClip sfx_GetHit;
     #endregion
 
     #region Colors
