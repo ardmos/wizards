@@ -23,13 +23,13 @@ MonoBehaviour:
   icon_ScrollEffect_Deploy: {fileID: 21300000, guid: 542e7747006214d9480ef4dcf8d97026, type: 3}
   icon_RemoveAds: {fileID: 21300000, guid: 152333def7fb04fefaac91d426ff1535, type: 3}
   skillAssetsList:
-  - icon: {fileID: 21300000, guid: 5692db8a476a44e039316aeecbe16bc6, type: 3}
+  - icon: {fileID: 21300000, guid: 6a708b7478cb0364b9e52e278c41fa44, type: 3}
     prefab: {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
     name: FireBallLv1
-  - icon: {fileID: 21300000, guid: 155e1dda5a5e148d28643cbf1592fbdd, type: 3}
+  - icon: {fileID: 21300000, guid: 5ec51d7467e669846aed6cbe4ad410ca, type: 3}
     prefab: {fileID: 1117804056975720, guid: 8fa6dba5ce7774349b2bee979e1b5f7d, type: 3}
     name: WaterBallLv1
-  - icon: {fileID: 21300000, guid: d06a9ce0b696341a4a1844b63f11239c, type: 3}
+  - icon: {fileID: 21300000, guid: db141a9974c113044a9471f3e18c9b24, type: 3}
     prefab: {fileID: 1979048356021752, guid: 1b4cdd72ad024f9498623f1be3de6dee, type: 3}
     name: IceBallLv1
   - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
@@ -47,7 +47,7 @@ MonoBehaviour:
   - icon: {fileID: 21300000, guid: 08d49f30221779549a5a2bcaab4e58b0, type: 3}
     prefab: {fileID: 7453253170470012855, guid: ed995d8b5186bfd4eb3ffdc8c40d0a7f, type: 3}
     name: ElectricSlashAttackChargeSlash_Lv1
-  - icon: {fileID: 21300000, guid: cbca8551cadba4ca389b4d7683e1f506, type: 3}
+  - icon: {fileID: 21300000, guid: 64b54bd0434c4ed4db166708cc61867f, type: 3}
     prefab: {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}
     name: MagicShieldLv1
   - icon: {fileID: 21300000, guid: 12c528d90e0ceb94181e3a423b9b9afd, type: 3}
