@@ -191,7 +191,7 @@ Material:
     - _DstBlendAlpha: 10
     - _DynamicNoisyOutline: 0
     - _EmissionEnabled: 0
-    - _EnvironmentalLightingIntensity: 4
+    - _EnvironmentalLightingIntensity: 10
     - _FarDistanceMaxWidth: 10
     - _FlipbookBlending: 0
     - _FlipbookMode: 0
