@@ -177,14 +177,14 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         SoundManager.Instance?.PlayKnightSkillSFXClientRPC(SkillName.Dash_Lv1, SFX_Type.Shooting);
 
         // 스킬 이펙트 생성
-        SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)3));
+/*        SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)3));
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), transform.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         Destroy(spellObject, 3f);
         // 위치 설정
         spellObject.transform.SetParent(transform);
-        spellObject.transform.localPosition = Vector3.zero;
+        spellObject.transform.localPosition = Vector3.zero;*/
     }
 
     private void Dash()

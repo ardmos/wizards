@@ -91,7 +91,7 @@ public class SlashSkill : NetworkBehaviour
         // 기타 오브젝트 충돌
         else
         {
-            Debug.Log($"{skillInfo.spellName}이(가) {collider.name}와(과) Hit!");
+            //Debug.Log($"{skillInfo.spellName}이(가) {collider.name}와(과) Hit!");
             return;
         }
 
@@ -101,8 +101,8 @@ public class SlashSkill : NetworkBehaviour
         // 3. Hit SFX 재생
         PlaySFX(SFX_Type.Hit);
 
-        // 4. 스킬 오브젝트 제거
-        Destroy(gameObject, 0.2f);
+        // 4. 스킬 오브젝트 제거 <-- SetSelfDestroy()로 따로 해주고있습니다.
+        //Destroy(gameObject, 0.2f);
     }
 
     // 2. 충돌지점에 Hit VFX 재생

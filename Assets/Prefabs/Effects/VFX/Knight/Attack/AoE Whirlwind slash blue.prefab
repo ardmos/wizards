@@ -14626,8 +14626,8 @@ GameObject:
   - component: {fileID: 925947500662580147}
   - component: {fileID: 3375823969225393113}
   - component: {fileID: 6108998073669004768}
-  - component: {fileID: 3230608229170063230}
   - component: {fileID: -5787560436656179482}
+  - component: {fileID: 3230608229170063230}
   m_Layer: 15
   m_Name: AoE Whirlwind slash blue
   m_TagString: AttackSkill
@@ -14679,7 +14679,6 @@ MonoBehaviour:
     ownerPlayerClientId: 0
   hitVFXPrefab: {fileID: 9158866014028539438, guid: 3f5a483e59c33ab499278597fec73c7e, type: 3}
   particleSystemMain: {fileID: 5473588508934549075}
-  rb: {fileID: -5787560436656179482}
   mCollider: {fileID: 3230608229170063230}
 --- !u!198 &5473588508934549075
 ParticleSystem:
@@ -19596,27 +19595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &3230608229170063230
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7647375919561907788}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.2601995, y: 4.2601995, z: 4.2601995}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-5787560436656179482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19642,8 +19620,29 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &3230608229170063230
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7647375919561907788}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.2601995, y: 4.2601995, z: 4.2601995}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8007076293822412050
 GameObject:
   m_ObjectHideFlags: 0

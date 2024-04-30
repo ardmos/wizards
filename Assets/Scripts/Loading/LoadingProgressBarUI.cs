@@ -22,7 +22,7 @@ public class LoadingProgressBarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Loading Progess : " + LoadSceneManager.GetLoadingProgress());
+        //Debug.Log("Loading Progess : " + LoadSceneManager.GetLoadingProgress());
         //progressBar.value = LoadingSceneManager.GetLoadingProgress() * 100f;
         UpdateTxtValue();
     }
