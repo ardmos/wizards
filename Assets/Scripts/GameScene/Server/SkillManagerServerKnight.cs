@@ -134,7 +134,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
 
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)2));
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackChargeShootMuzzle.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackChargeShootMuzzle.position, attackChargeShootMuzzle.rotation);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
         spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
