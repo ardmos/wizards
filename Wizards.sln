@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParrelSync", "ParrelSync.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Play.Games.Editor", "Google.Play.Games.Editor.csproj", "{8B3CE402-E5C9-4F6C-A8B7-61E7F7CC8B68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{B7B76D57-2D52-851F-B40F-0631FBD3A2E7}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngameDebugConsole.Editor", "IngameDebugConsole.Editor.csproj", "{0822653F-8344-E92C-D91D-F180CC00FB96}"
 EndProject
 Global
@@ -39,6 +41,10 @@ Global
 		{8B3CE402-E5C9-4F6C-A8B7-61E7F7CC8B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B3CE402-E5C9-4F6C-A8B7-61E7F7CC8B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B3CE402-E5C9-4F6C-A8B7-61E7F7CC8B68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7B76D57-2D52-851F-B40F-0631FBD3A2E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7B76D57-2D52-851F-B40F-0631FBD3A2E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7B76D57-2D52-851F-B40F-0631FBD3A2E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7B76D57-2D52-851F-B40F-0631FBD3A2E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0822653F-8344-E92C-D91D-F180CC00FB96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0822653F-8344-E92C-D91D-F180CC00FB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0822653F-8344-E92C-D91D-F180CC00FB96}.Release|Any CPU.ActiveCfg = Release|Any CPU

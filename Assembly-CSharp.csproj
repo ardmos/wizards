@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\GameScene\Client\SpellManagerClientWizard.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
+    <Compile Include="Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Manual.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\ScrollManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIManager.cs" />
+    <Compile Include="Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\CharacterCardController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\SelectSpellSlotUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SkillManagerClientKnight.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerMovementClient.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\TitleScene\SoundManager.cs" />
+    <Compile Include="Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverMessageTemplateUI.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="Assets\Scripts\GameScene\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
+    <Compile Include="Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Default.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\WinPopupItemTemplateUI.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
@@ -218,8 +222,13 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\GooglePlayGames\com.google.play.games\Proguard\games.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\RealToon\For VRoid-VRM users.txt" />
+    <None Include="Assets\RealToon\RealToon Shader Packages\SRP (LWRP - URP - HDRP)\URP\Please read before you unpack or import.txt" />
+    <None Include="Assets\RealToon\What&apos;s New.txt" />
+    <None Include="Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_Core.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\RealToon\RealToon Shaders\Version 5\URP\Default\D_Default_URP.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Shaders\Legacy\AdditiveMobile_Scroll01.shader" />
     <None Include="Assets\Downloaded Assets\Lana Studio\Hyper Casual FX\Demo\Readme.txt" />
@@ -231,8 +240,11 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_PROP.hlsl" />
+    <None Include="Assets\RealToon\ReadMe - Important - Guide.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\RealToon\Change - Fix Log.txt" />
     <None Include="Assets\RPGTinyHeroWavePBR\HowToTestHDRP_URP.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />

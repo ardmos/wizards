@@ -21,13 +21,43 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DefaultPBR
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - N_F_EAL_ON
+  - N_F_O_ON
+  - N_F_RDC_ON
+  - N_F_RELGI_ON
+  - N_F_SS_ON
+  - N_F_TRANSAFFSHA_ON
+  m_InvalidKeywords:
+  - N_F_TRANSAFFSHA
+  - _CUSTOMLIGHTDIRECTIONFOLLOWOBJECTROTATION_OFF
   - _EMISSION
+  - _GIFLATSHADE_OFF
+  - _GLOSSTEXTUREFOLLOWOBJECTROTATION_OFF
+  - _LIGHTAFFECTOUTLINECOLOR_OFF
+  - _LIGHTAFFECTRIMLIGHTCOLOR_OFF
+  - _LIGHTAFFECTSHADOW_OFF
+  - _LIGHTFALLOFFAFFECTSHADOWT_OFF
+  - _LIGIGNOYNORDIR_OFF
+  - _MCIALO_OFF
   - _METALLICSPECGLOSSMAP
-  m_InvalidKeywords: []
+  - _MIXMAINTEXTOOUTLINE_OFF
+  - _MVCOL_OFF
+  - _OUTLINEWIDTHAFFECTEDBYVIEWDISTANCE_OFF
+  - _PSGLOTEX_OFF
+  - _SELFSHADOWAFFECTEDBYLIGHTSHADOWSTRENGTH_OFF
+  - _SELFSHADOWSHADOWTATVIEWDIRECTION_OFF
+  - _SHOWNORMAL_OFF
+  - _SPECMODE_OFF
+  - _STIL_OFF
+  - _TEXTUREPATTERNSTYLE_OFF
+  - _USESECONDARYCUTOUT_OFF
+  - _VERTEXCOLORBLUEAFFECTOUTLINEWITDH_OFF
+  - _VERTEXCOLORGREENCONTROLSELFSHADOWTHRESHOLD_OFF
+  - _VERTEXCOLORREDCONTROLSMOOTHOBJECTNORMAL_OFF
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -223,6 +253,8 @@ Material:
     - _AlphaBaseCutout: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _BleModDest: 0
+    - _BleModSour: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BrushLowerCut: 0
@@ -234,7 +266,9 @@ Material:
     - _Color08Power: 6.29
     - _Color09Power: 3.86
     - _Compa: 4
+    - _ComputeMeshIndex: 0
     - _Cull: 2
+    - _Culling: 2
     - _CustomLightDirectionFollowObjectRotation: 0
     - _CustomLightDirectionIntensity: 0
     - _Cutoff: 0.5
@@ -242,6 +276,7 @@ Material:
     - _Depth: 0.2
     - _DepthColorPower: 1.8
     - _DepthEdgeHardness: 0.1
+    - _DepthThreshold: 900
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DiffuseStep: 0
@@ -275,6 +310,7 @@ Material:
     - _GlossTextureSoftness: 0
     - _Glossiness: 0
     - _GlossyReflections: 1
+    - _Glow_Edge_Width: 1
     - _HairSpecExponent: 128
     - _HairSpecNoiseStrength: 1
     - _HairSpecularSize: 0.8
@@ -311,6 +347,7 @@ Material:
     - _L_F_SS: 1
     - _L_F_ST: 0
     - _L_F_UOAL: 0
+    - _LigIgnoYNorDir: 0
     - _LightAffectOutlineColor: 0
     - _LightAffectRimLightColor: 0
     - _LightAffectShadow: 0
@@ -320,14 +357,22 @@ Material:
     - _MCIALO: 0
     - _MCapIntensity: 1
     - _MVCOL: 0
+    - _MaiColPo: 0.8
     - _MainColorAffectTexture: 0
+    - _MaxFadDistance: 2
     - _Metallic: 1
+    - _MinFadDistance: 0
     - _MixMainTexToOutline: 0
     - _Mode: 0
     - _N_F_CA: 0
     - _N_F_CLD: 0
     - _N_F_CO: 0
+    - _N_F_COEDGL: 0
     - _N_F_D: 0
+    - _N_F_DCS: 0
+    - _N_F_DDMD: 0
+    - _N_F_EAL: 1
+    - _N_F_ESSAO: 0
     - _N_F_FR: 0
     - _N_F_GLO: 0
     - _N_F_GLOT: 0
@@ -335,11 +380,15 @@ Material:
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
     - _N_F_MC: 0
+    - _N_F_MSSOLTFO: 0
+    - _N_F_NFD: 0
     - _N_F_NLASOBF: 0
     - _N_F_NM: 0
     - _N_F_O: 1
+    - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
+    - _N_F_RDC: 1
     - _N_F_RL: 0
     - _N_F_SCT: 0
     - _N_F_SL: 0
@@ -371,6 +420,7 @@ Material:
     - _QueueOffset: 0
     - _RELG: 1
     - _ReceiveShadows: 1
+    - _ReduSha: 0.5
     - _ReduceOutlineBackFace: 0
     - _ReduceShadowPointLight: 0
     - _ReduceShadowSpotDirectionalLight: 10
@@ -380,6 +430,7 @@ Material:
     - _ReflectionRoughtness: 0
     - _RefractionIntensity: 1
     - _RimEnabled: 0
+    - _RimLigInt: 1
     - _RimLightAlign: 0
     - _RimLightColorPower: 10
     - _RimLightInLight: 1
@@ -399,7 +450,7 @@ Material:
     - _SelfShadowHardness: 1
     - _SelfShadowIntensity: 1
     - _SelfShadowRealTimeShadowColorPower: 1
-    - _SelfShadowRealtimeShadowIntensity: 1
+    - _SelfShadowRealtimeShadowIntensity: 0.473
     - _SelfShadowShadowTAtViewDirection: 0
     - _SelfShadowThreshold: 0.85
     - _ShadowColorTexturePower: 0
@@ -412,7 +463,9 @@ Material:
     - _ShowInAmbientLightShadowIntensity: 1
     - _ShowInAmbientLightShadowThreshold: 0.4
     - _ShowNormal: 0
+    - _SimTrans: 0
     - _SizeFalloff: 0
+    - _SkinMatrixIndex: 0
     - _SmoothObjectNormal: 0
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
@@ -430,6 +483,7 @@ Material:
     - _StepViaRampTexture: 0
     - _Surface: 0
     - _TEXMCOLINT: 1
+    - _TRANSMODE: 0
     - _TessellationFar: 1
     - _TessellationNear: 1
     - _TessellationSmoothness: 0.5
@@ -438,10 +492,12 @@ Material:
     - _TexturePatternStyle: 0
     - _ToonBlending: 1
     - _ToonEnabled: 0
+    - _TransAffSha: 1
     - _TransparentThreshold: 0
     - _UVSec: 0
     - _UseRampColor: 0
     - _UseSecondaryCutout: 0
+    - _UseTLB: 0
     - _VertexColorBlueAffectOutlineWitdh: 0
     - _VertexColorGreenControlSelfShadowThreshold: 0
     - _VertexColorRedControlSmoothObjectNormal: 0
@@ -467,6 +523,7 @@ Material:
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _HalfToneColor: {r: 0, g: 0, b: 0, a: 1}
     - _HatchingColor: {r: 0, g: 0, b: 0, a: 1}
@@ -476,8 +533,10 @@ Material:
     - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SSAOColor: {r: 0, g: 0, b: 0, a: 0}
     - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfShadowColor: {r: 1, g: 1, b: 1, a: 1}
     - _SelfShadowRealTimeShadowColor: {r: 1, g: 1, b: 1, a: 1}
