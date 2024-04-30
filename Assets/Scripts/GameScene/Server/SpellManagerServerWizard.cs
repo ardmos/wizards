@@ -34,12 +34,18 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
 
         // 애니메이션 실행
         StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifeTime));
+
+        // 잠시 무적 처리
+        tag = "Invincible";
     }
 
     IEnumerator StartAndResetAnimState(float lifeTime)
     {
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingDefensiveMagic);
         yield return new WaitForSeconds(lifeTime);
+
+        // 무적 해제
+        tag = "Player";
 
         // 플레이어 캐릭터가 Casting 애니메이션중이 아닐 경우에만 Idle로 변경
         if (!playerAnimator.playerAttackAnimState.Equals(WizardMaleAnimState.CastingAttackMagic))

@@ -9,6 +9,8 @@ TagManager:
   - Defence
   - Floor
   - AttackSkill
+  - Wall
+  - Invincible
   layers:
   - Default
   - TransparentFX
