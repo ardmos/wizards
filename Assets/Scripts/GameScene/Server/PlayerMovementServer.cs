@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerMovementServer : NetworkBehaviour
 {
-    public float moveSpeed { get; private set; } = 5f;
+    public PlayerClient playerClient;
 
     [ServerRpc (RequireOwnership = false)]
     public void HandleMovementServerRPC(Vector2 inputVector, bool isAttackButtonClicked, ServerRpcParams serverRpcParams = default)
@@ -15,7 +15,7 @@ public class PlayerMovementServer : NetworkBehaviour
 
         // 서버권한방식의 네트워크에서 이동처리 할 때 서버의 DeltaTime이 클라이언트의 델타타임과는 다른 경우가 생김. 따라서 아래처럼 수정해야함
         //float moveDistance = moveSpeed * Time.deltaTime;
-        float moveDistance = moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
+        float moveDistance = ((ICharacter)playerClient).moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
         transform.position += moveDir * moveDistance;
 
         // 서버(GameMultiplayer)에 새로운 Player Anim State 저장. (GameOver상태가 아닐 때에만!)
@@ -47,6 +47,6 @@ public class PlayerMovementServer : NetworkBehaviour
 
     public void SetMoveSpeed(float moveSpeed)
     {
-        this.moveSpeed = moveSpeed;
+        ((ICharacter)playerClient).moveSpeed = moveSpeed;
     }
 }
