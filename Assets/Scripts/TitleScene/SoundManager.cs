@@ -69,7 +69,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
         
-        // Game씬 BGM 리소스가 볼륨이 작은 관계로 이곳에서 특별히 볼륨조절을 해줍니다.
+/*        // Game씬 BGM 리소스가 볼륨이 작은 관계로 이곳에서 특별히 볼륨조절을 해줍니다.
         if (isVolumeUp)
         {
             isVolumeUp = false;
@@ -79,7 +79,7 @@ public class SoundManager : MonoBehaviour
         {
             isVolumeUp = true;
             audioSourceBGM.volume *= 6;
-        }
+        }*/
 
         if (bgmCoroutine != null)
         {
