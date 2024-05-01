@@ -49,13 +49,25 @@ public class SoundManager : MonoBehaviour
 
     private void SceneManager_activeSceneChanged(UnityEngine.SceneManagement.Scene current, UnityEngine.SceneManagement.Scene next)
     {
-        UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
-
+        //UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = next.name;
+
+        // Game씬의 경우 씬이 시작되었을때 자동으로 BGM을 실행시키지 않고, GameState.GamePlaying 상태일 때 BGM을 실행시킵니다. GameManager에서 요청해올겁니다.
+        if (sceneName == LoadSceneManager.Scene.GameScene.ToString())
+        {
+            audioSourceBGM.Stop();
+            if (bgmCoroutine != null)
+            {
+                StopCoroutine(bgmCoroutine);
+                bgmCoroutine = null;
+            }
+            return;
+        }
+
         PlayMusic(sceneName);
     }
 
-    private void PlayMusic(string sceneName)
+    public void PlayMusic(string sceneName)
     {
 #if UNITY_SERVER
         Debug.Log("Server에서는 SoundManager를 실행하지 않습니다.");
@@ -98,6 +110,7 @@ public class SoundManager : MonoBehaviour
         while (true)
         {
             //Debug.Log("AutoPlay!");
+            audioSourceBGM.Stop();
             audioSourceBGM.clip = GameAssetsManager.Instance.GetMusic(sceneName);
             audioSourceBGM.Play();
             yield return new WaitForSeconds(audioSourceBGM.clip.length);

@@ -37,6 +37,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private float gamePlayingTimerMax = 10000f;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
     [SerializeField] private bool isLocalPlayerReady;
+    [SerializeField] private bool isBGMStarted;
 
 
     void Awake()
@@ -128,6 +129,14 @@ public class GameManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        // BGM 실행
+        //Debug.Log($"GetGamePlayingTimer(): {GetGamePlayingTimer()}, isBGMStarted:{isBGMStarted}");
+        if (GetGamePlayingTimer() > 2f && !isBGMStarted)
+        {
+            isBGMStarted = true;
+            SoundManager.Instance?.PlayMusic(LoadSceneManager.Scene.GameScene.ToString());
+        }
+
         // Update 대신에 State 바뀔때마다 호출되는 Eventhandler 사용하기  <--- 여기부터. 시간 계산기랑 EventListener랑 분리해서 구현하면 됨.
         RunStateMachine();
     }
@@ -182,6 +191,7 @@ public class GameManager : NetworkBehaviour
 
                     if (!NetworkManager.ConnectedClients.ContainsKey(winPlayer.clientId)) return;
 
+                    // 이미 한 번 처리된 경우는 재처리 안해줍니다 <<<-- 수정필요
                     if (winPlayer.playerGameState == PlayerGameState.Win) return;
 
                     // 생존자 State Win 으로 변경

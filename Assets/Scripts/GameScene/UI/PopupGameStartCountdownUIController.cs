@@ -7,6 +7,8 @@ public class PopupGameStartCountdownUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtCountdown;
 
     private double tmpCountdownValue = 0;
+    private bool[] isAnnounced = new bool[4] { false, false, false, false }; 
+
     private void Start()
     {
         GameManager.Instance.OnGameStateChanged += GameManager_OnStateChanged;
@@ -18,7 +20,7 @@ public class PopupGameStartCountdownUIController : MonoBehaviour
         GameManager.Instance.OnGameStateChanged -= GameManager_OnStateChanged;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         double countdownTime = Math.Ceiling(GameManager.Instance.GetCountdownToStartTimer());
         if (tmpCountdownValue == countdownTime) return;
@@ -29,7 +31,9 @@ public class PopupGameStartCountdownUIController : MonoBehaviour
             case 2:
             case 3:
                 tmpCountdownValue = countdownTime;
+                if (!isAnnounced[(int)countdownTime])
                 SoundManager.Instance?.PlayCountdownAnnouncer(countdownTime);
+                isAnnounced[(int)countdownTime] = true;
                 break;
             default:
                 break;
