@@ -14,6 +14,8 @@ public abstract class PlayerClient : NetworkBehaviour
     public event EventHandler OnPlayerGameOver;
     //public event EventHandler OnPlayerWin;
 
+    public AudioListener audioListener;
+
     public HPBarUIController hPBarUIController;
     public DamageTextUIController damageTextUIController;
     public CinemachineVirtualCamera VirtualCamera;
@@ -39,6 +41,9 @@ public abstract class PlayerClient : NetworkBehaviour
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         userNameUIController?.Setup(playerData.playerName.ToString(), IsOwner);
         //Debug.Log($"player Name :{playerData.playerName.ToString()}");
+        // 오디오리스너 초기화
+        audioListener.enabled = IsOwner;
+
 
         if (!IsOwner) return;
 
@@ -141,8 +146,8 @@ public abstract class PlayerClient : NetworkBehaviour
         // Queue 업데이트
         playerSpellScrollQueueManager.UpdatePlayerScrollSpellSlotQueueOnClient(scrollSpellSlotQueue);
 
-        // SFX 실행
-        SoundManager.Instance.PlayOpenScrollSound();
+        // SFX 재생
+        SoundManager.Instance.PlayItemSFXServerRPC(ItemName.PickupScroll, PlayerClient.Instance.transform.position);
     }
 
     [ClientRpc]

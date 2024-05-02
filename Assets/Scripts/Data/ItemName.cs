@@ -15,6 +15,8 @@ public enum ItemName
     Potion_HP,
     PotionEnd,
     ScrollStart,
+    PickupScroll,
+    OpenScroll,
     Scroll_LevelUp,
     Scroll_FireRateUp,
     Scroll_FlySpeedUp,

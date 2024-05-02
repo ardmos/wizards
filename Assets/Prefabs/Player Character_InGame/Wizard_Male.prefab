@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 3569301515384591240}
   - component: {fileID: 5033900459084263869}
   - component: {fileID: 1026839346395833499}
+  - component: {fileID: 819323531288302397}
   m_Layer: 3
   m_Name: Wizard_Male
   m_TagString: Player
@@ -411,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0b2ec62b4a5747b4059f0f3fd4bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioListener: {fileID: 819323531288302397}
   hPBarUIController: {fileID: 2648681988919741548}
   damageTextUIController: {fileID: 3422639390078374823}
   VirtualCamera: {fileID: 4487991525872706357}
@@ -623,6 +625,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &819323531288302397
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
 --- !u!1 &1025514995993102176
 GameObject:
   m_ObjectHideFlags: 0

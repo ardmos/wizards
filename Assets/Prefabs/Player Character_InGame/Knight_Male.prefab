@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 7039472144025679976}
   - component: {fileID: 5033900459084263869}
   - component: {fileID: 1026839346395833499}
+  - component: {fileID: 4781052245357589818}
   m_Layer: 3
   m_Name: Knight_Male
   m_TagString: Player
@@ -346,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de669b7434fd13146b2422a01d6de14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioListener: {fileID: 4781052245357589818}
   hPBarUIController: {fileID: 1342484061549834625}
   damageTextUIController: {fileID: 346433743489428568}
   VirtualCamera: {fileID: 4487991525872706357}
@@ -564,6 +566,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &4781052245357589818
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
 --- !u!1 &1025514995993102176
 GameObject:
   m_ObjectHideFlags: 0

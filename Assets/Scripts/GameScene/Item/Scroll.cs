@@ -33,7 +33,7 @@ public class Scroll : NetworkBehaviour
         ScrollManagerServer.Instance?.EnqueuePlayerScrollSpellSlotQueueOnServer(collisionedClientId, spellSlotIndex);
 
         // È¹µæ SFX Àç»ý
-        SoundManager.Instance?.PlayItemSFXClientRPC(ItemName.ScrollStart);
+        SoundManager.Instance?.PlayItemSFX(ItemName.ScrollStart, transform);
 
         // ¿ÀºêÁ§Æ® ÆÄ±«
         GetComponent<NetworkObject>().Despawn();

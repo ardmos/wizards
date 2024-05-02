@@ -49,7 +49,7 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-#if UNITY_SERVER || UNITY_EDITOR
+#if UNITY_SERVER //|| UNITY_EDITOR
         // Game씬 진입!  더이상 플레이어 진입은 필요하지 않습니다. 서버의 플레이어 수용 상태를 비수용 상태로 변경합니다.
         await MultiplayService.Instance.UnreadyServerAsync();
 #endif
@@ -57,7 +57,6 @@ public class GameManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log($"GameManager. OnNetworkSpawn");
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
@@ -69,7 +68,6 @@ public class GameManager : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        Debug.Log($"GameManager. OnNetworkDespawn");
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManager_OnLoadEventCompleted;
@@ -210,6 +208,7 @@ public class GameManager : NetworkBehaviour
 
                     // 생존자들 화면에 Draw 팝업 실행
 
+                    // 아니면 Draw 대신에 스코어로 승패 결정
                 }
 
                 break;
@@ -247,8 +246,8 @@ public class GameManager : NetworkBehaviour
             //Debug.Log($"allClientsReady state.Value:{state.Value}");
         }
 
-        Debug.Log($"SetPlayerReadyServerRpc Requested player client ID: {serverRpcParams.Receive.SenderClientId}, playerReadyList.Count: {playerReadyList.Count}");
-        Debug.Log($"SetPlayerReadyServerRpc game state:{gameState.Value}, allClientsReady: {allClientsReady}");
+        //Debug.Log($"SetPlayerReadyServerRpc Requested player client ID: {serverRpcParams.Receive.SenderClientId}, playerReadyList.Count: {playerReadyList.Count}");
+        //Debug.Log($"SetPlayerReadyServerRpc game state:{gameState.Value}, allClientsReady: {allClientsReady}");
     }
 
     /// <summary>
@@ -267,7 +266,7 @@ public class GameManager : NetworkBehaviour
     {
         if (gameState.Value == GameState.WatingToStart)
         {
-            Debug.Log($"LocalPlayerReady game state:{gameState.Value}");
+            //Debug.Log($"LocalPlayerReady game state:{gameState.Value}");
             isLocalPlayerReady = true;
             SetPlayerReadyServerRpc();
         }
@@ -297,7 +296,7 @@ public class GameManager : NetworkBehaviour
             }
 
             playerData.playerGameState = PlayerGameState.GameOver;
-            Debug.Log($"UpdatePlayerGameOverOnServer. player.clientId:{clientId}. playerGameState:{playerData.playerGameState}");
+            //Debug.Log($"UpdatePlayerGameOverOnServer. player.clientId:{clientId}. playerGameState:{playerData.playerGameState}");
             GameMultiplayer.Instance.SetPlayerDataFromClientId(clientId, playerData);
 
             // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.(게임오버시킨사람 닉네임 공유까지는 아직 미구현)

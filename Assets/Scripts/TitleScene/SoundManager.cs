@@ -1,11 +1,13 @@
 using System.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 /// <summary>
 /// 
 /// </summary>
-public class SoundManager : MonoBehaviour
+public class SoundManager : NetworkBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
@@ -42,7 +44,7 @@ public class SoundManager : MonoBehaviour
         PlayMusic(sceneName);
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         SceneManager.activeSceneChanged -= SceneManager_activeSceneChanged;
     }
@@ -81,18 +83,6 @@ public class SoundManager : MonoBehaviour
             return;
         }
         
-/*        // Game씬 BGM 리소스가 볼륨이 작은 관계로 이곳에서 특별히 볼륨조절을 해줍니다.
-        if (isVolumeUp)
-        {
-            isVolumeUp = false;
-            audioSourceBGM.volume /= 6;
-        }
-        if (!isVolumeUp && sceneName == LoadSceneManager.Scene.GameScene.ToString())
-        {
-            isVolumeUp = true;
-            audioSourceBGM.volume *= 6;
-        }*/
-
         if (bgmCoroutine != null)
         {
             StopCoroutine(bgmCoroutine);
@@ -157,66 +147,68 @@ public class SoundManager : MonoBehaviour
         audioSourceSFX.Play();
     }
 
-    public void PlayOpenScrollSound()
-    {
-        if (audioSourceSFX == null) return;
-
-        audioSourceSFX.clip = GameAssetsManager.Instance.GetOpenScrollItemSFXSound();
-        audioSourceSFX.Play();
-    }
-
-    [ClientRpc]
-    public void PlayWizardSpellSFXClientRPC(SkillName spellName, SFX_Type sFX_Type)
-    {
-        //Debug.Log($"PlayMagicSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}");
-        if (audioSourceObjectPrefab == null) return;
-
-        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetMagicSFXSound(spellName, sFX_Type));
-    }
-
-    [ClientRpc]
-    public void PlayKnightSkillSFXClientRPC(SkillName spellName, SFX_Type sFX_Type)
-    {
-        //Debug.Log($"PlayMagicSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}");
-        if (audioSourceObjectPrefab == null) return;
-
-        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetSkillSFXSound(spellName, sFX_Type));
-    }
-
-    [ClientRpc]
-    public void PlayItemSFXClientRPC(ItemName itemName)
-    {
-        //Debug.Log($"PlayItemSFXClientRPC.  audioSourceObjectPrefab : {audioSourceObjectPrefab}, itemName : {itemName}, audioClip : {GameAssets.instantiate.GetItemSFXSound(itemName)}");
-        if (audioSourceObjectPrefab == null) return;
-
-        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetItemSFXSound(itemName));
-    }
-
-    public void PlayItemSFX(ItemName itemName)
+    public void PlayWizardSpellSFX(SkillName spellName, SFX_Type sFX_Type, Transform position)
     {
         if (audioSourceObjectPrefab == null) return;
 
         GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetItemSFXSound(itemName));
+        audioSourceObject.GetComponent<NetworkObject>().Spawn();
+        audioSourceObject.GetComponent<AudioSourceObject>().SetupClientRPC(spellName, sFX_Type, position.position);
+        Destroy(audioSourceObject, GameAssetsManager.Instance.GetSkillSFXSound(spellName, sFX_Type).length);
     }
+
+    /// <summary>
+    /// 서버 중심적으로 사운드 관리.  사운드 매니저를 서버하고 클라하고 구분할 필요가 있겠다. 
+    /// </summary>
+    /// <param name="spellName"></param>
+    /// <param name="sFX_Type"></param>
+    /// <param name="position">사운드 재생 위치</param>
+    public void PlayKnightSkillSFX(SkillName spellName, SFX_Type sFX_Type, Transform position)
+    {
+        if (audioSourceObjectPrefab == null) return;
+
+        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
+        audioSourceObject.GetComponent<NetworkObject>().Spawn();
+        audioSourceObject.GetComponent<AudioSourceObject>().SetupClientRPC(spellName, sFX_Type, position.position);
+        Destroy(audioSourceObject, GameAssetsManager.Instance.GetSkillSFXSound(spellName, sFX_Type).length);
+    }
+
+    public void PlayItemSFX(ItemName itemName, Transform position)
+    {
+        if (audioSourceObjectPrefab == null) return;
+
+        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
+        audioSourceObject.GetComponent<NetworkObject>().Spawn();
+        audioSourceObject.GetComponent<AudioSourceObject>().SetupClientRPC(itemName, position.position);
+        Destroy(audioSourceObject, GameAssetsManager.Instance.GetItemSFXSound(itemName).length);
+    }
+
+    [ServerRpc (RequireOwnership = false)]
+    public void PlayItemSFXServerRPC(ItemName itemName, Vector3 position)
+    {
+        if (audioSourceObjectPrefab == null) return;
+
+        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
+        audioSourceObject.GetComponent<NetworkObject>().Spawn();
+        audioSourceObject.GetComponent<AudioSourceObject>().SetupClientRPC(itemName, position);
+        Destroy(audioSourceObject, GameAssetsManager.Instance.GetItemSFXSound(itemName).length);
+    }
+
 
     public void PlayCountdownAnnouncer(double countdownTime)
     {
-        if (audioSourceObjectPrefab == null) return;
+        if (audioSourceSFX == null) return;
 
-        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetCountdownAnnouncerSFXSound((int)countdownTime));
+        audioSourceSFX.clip = GameAssetsManager.Instance.GetCountdownAnnouncerSFXSound((int)countdownTime);
+        audioSourceSFX.Play();
     }
 
     public void PlayUISFX(UISFX_Type uISFX_Type)
     {
-        if (audioSourceObjectPrefab == null) return;
+        if (audioSourceSFX == null) return;
 
-        GameObject audioSourceObject = Instantiate(audioSourceObjectPrefab);
-        audioSourceObject.GetComponent<AudioSourceObject>().Setup(GameAssetsManager.Instance.GetUISFX(uISFX_Type));
+        audioSourceSFX.clip = GameAssetsManager.Instance.GetUISFX(uISFX_Type);
+        audioSourceSFX.Play();
     }
 
     public void SetVolumeBGM(float volume) {

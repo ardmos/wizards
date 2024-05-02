@@ -129,7 +129,7 @@ public class SlashSkill : NetworkBehaviour
     // 3. 해당 슬래쉬 스킬의 다양한 SFX 재생
     public void PlaySFX(SFX_Type sFX_Type)
     {
-        SoundManager.Instance?.PlayKnightSkillSFXClientRPC(skillInfo.spellName, sFX_Type);
+        //SoundManager.Instance?.PlayKnightSkillSFXClientRPC(skillInfo.spellName, sFX_Type);
     }
 
 }

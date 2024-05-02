@@ -54,7 +54,8 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
 
         // SFX 재생
-        SoundManager.Instance.PlayItemSFX(scrollName);
+        SoundManager.Instance.PlayItemSFXServerRPC(scrollName, transform.position);
+
         // VFX 재생
         PlayerClient.Instance.GetComponent<PlayerServer>().StartApplyScrollVFXServerRPC();
     }

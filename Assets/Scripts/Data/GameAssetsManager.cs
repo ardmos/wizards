@@ -117,24 +117,6 @@ public class GameAssetsManager : MonoBehaviour
 
     public AudioClip GetButtonClickSound() { return gameAssets.sfx_btnClick; }
 
-    public AudioClip GetMagicSFXSound(SkillName spellName, SFX_Type sFX_Type)
-    {
-        switch (spellName)
-        {
-            case SkillName.FireBallLv1:
-                return GetSFXAudioClip(gameAssets.sfx_Fireball_Lv1, sFX_Type);
-            case SkillName.WaterBallLv1:
-                return GetSFXAudioClip(gameAssets.sfx_Waterball_Lv1, sFX_Type);
-            case SkillName.IceBallLv1:
-                return GetSFXAudioClip(gameAssets.sfx_Iceball_Lv1, sFX_Type);
-            case SkillName.MagicShieldLv1:
-                return GetSFXAudioClip(gameAssets.sfx_MagicShield_Lv1, sFX_Type);
-            default:
-                Debug.LogError($"{nameof(GetMagicSFXSound)}. {spellName}은 알맞은 spellName이 아닙니다.");
-                return null;
-        }
-    }
-
     private AudioClip GetSFXAudioClip(SFX_Clip sFX_Clip, SFX_Type sFX_Type)
     {
         switch (sFX_Type)
@@ -154,6 +136,14 @@ public class GameAssetsManager : MonoBehaviour
     {
         switch (skillName)
         {
+            case SkillName.FireBallLv1:
+                return GetSFXAudioClip(gameAssets.sfx_Fireball_Lv1, sFX_Type);
+            case SkillName.WaterBallLv1:
+                return GetSFXAudioClip(gameAssets.sfx_Waterball_Lv1, sFX_Type);
+            case SkillName.IceBallLv1:
+                return GetSFXAudioClip(gameAssets.sfx_Iceball_Lv1, sFX_Type);
+            case SkillName.MagicShieldLv1:
+                return GetSFXAudioClip(gameAssets.sfx_MagicShield_Lv1, sFX_Type);
             case SkillName.StoneSlashAttack1_Lv1:
                 return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackVertical_Lv1, sFX_Type);
             case SkillName.ElectricSlashAttackVertical_Lv1:
@@ -186,6 +176,10 @@ public class GameAssetsManager : MonoBehaviour
                 return gameAssets.sfx_ScrollAttach;
             case ItemName.ScrollStart:
                 return gameAssets.sfx_PickupScroll;
+            case ItemName.OpenScroll:
+                return gameAssets.sfx_OpenScroll;
+            case ItemName.PickupScroll:
+                return gameAssets.sfx_PickupScroll;
             default:
                 Debug.LogError($"적절하지 않은 itemName 정보입니다. itemName: {itemName}");
                 return null;
@@ -216,9 +210,5 @@ public class GameAssetsManager : MonoBehaviour
     public AudioClip[] GetLoseSFXSound()
     {
         return gameAssets.sfx_Lose;
-    }
-    public AudioClip GetOpenScrollItemSFXSound()
-    {
-        return gameAssets.sfx_OpenScroll;
     }
 }

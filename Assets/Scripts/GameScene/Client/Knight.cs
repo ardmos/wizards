@@ -34,13 +34,13 @@ public class Knight : PlayerClient, ICharacter
 
     protected override void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
-        Debug.Log("GameInput_OnAttack1Started");
+        //Debug.Log("GameInput_OnAttack1Started");
         skillManagerClientKnight.AimingSkill(0);
     }
 
     protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-        Debug.Log("GameInput_OnAttack1Ended");
+        //Debug.Log("GameInput_OnAttack1Ended");
         skillManagerClientKnight.ActivateAttackSkillOnClient(0);
     }
 
@@ -66,13 +66,13 @@ public class Knight : PlayerClient, ICharacter
 
     protected override void GameInput_OnDefenceStarted(object sender, EventArgs e)
     {
-        Debug.Log("GameInput_OnDefenceStarted");
+        //Debug.Log("GameInput_OnDefenceStarted");
         skillManagerClientKnight.AimingSkill(SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT);
     }
 
     protected override void GameInput_OnDefenceEnded(object sender, EventArgs e)
     {
-        Debug.Log("GameInput_OnDefenceEnded");
+        //Debug.Log("GameInput_OnDefenceEnded");
         skillManagerClientKnight.ActivateDefenceSkillOnClient();
     }
 }

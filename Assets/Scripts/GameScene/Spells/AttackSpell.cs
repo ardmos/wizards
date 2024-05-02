@@ -197,8 +197,6 @@ public abstract class AttackSpell : NetworkBehaviour
 
     public void PlaySFX(SFX_Type sFX_Type)
     {
-        if (SoundManager.Instance == null) return;
-
-        SoundManager.Instance.PlayWizardSpellSFXClientRPC(spellInfo.spellName, sFX_Type);
+        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, sFX_Type, transform);
     }
 }

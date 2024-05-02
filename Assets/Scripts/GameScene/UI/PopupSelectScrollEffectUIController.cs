@@ -36,8 +36,8 @@ public class PopupSelectScrollEffectUIController : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        // 효과음 재생
-        SoundManager.Instance.PlayOpenScrollSound();
+        // 효과음 재생        
+        SoundManager.Instance.PlayItemSFXServerRPC(ItemName.OpenScroll, PlayerClient.Instance.transform.position);
 
         // 슬롯 UI 정보 초기화. 플레이어에게 랜덤의 스펠 기능 세 가지를 선택지로 제시.
         ScrollManagerServer.Instance.GetUniqueRandomScrollsServerRPC();
