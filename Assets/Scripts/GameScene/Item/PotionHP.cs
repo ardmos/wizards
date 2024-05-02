@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.Playables;
 
@@ -14,6 +15,7 @@ public class PotionHP : NetworkBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (!IsServer) return;
+        if(!collision.collider.CompareTag("Player")) return;
 
         ulong collisionedClientId = collision.gameObject.GetComponent<NetworkObject>().OwnerClientId;
 

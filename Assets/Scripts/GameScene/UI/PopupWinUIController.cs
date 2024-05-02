@@ -41,6 +41,8 @@ public class PopupWinUIController : MonoBehaviour
     [SerializeField] private GameObject itemTemplateYellow;
     [SerializeField] private Transform itemGroup;
 
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(0.4f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,10 +108,10 @@ public class PopupWinUIController : MonoBehaviour
         // 3. 꽃가루 등장
         imgEffect.SetActive(true);
         // 4. 버튼들 등장
-        yield return new WaitForSeconds(0.4f);
+        yield return waitForSeconds;
         btnClaim.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
-        btnClaim2x.SetActive(true); //광고 구현 후 진행
+        yield return waitForSeconds;
+        //btnClaim2x.SetActive(true); //광고 구현 후 진행
     }
 
     private IEnumerator FillSliderValue(float maxValue)
@@ -130,7 +132,7 @@ public class PopupWinUIController : MonoBehaviour
     {
         foreach (KeyValuePair<ItemName, ushort> item in rewardItems)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return waitForSeconds;
 
             GameObject templateObject = null;
             switch (item.Key)

@@ -143,6 +143,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         // 위치 설정
         spellObject.transform.SetParent(GameManager.Instance.transform);
         spellObject.transform.position = attackChargeShootMuzzle.position;
+        spellObject.transform.rotation = attackChargeShootMuzzle.rotation;
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = transform.forward;
         float moveSpeed = 10f;

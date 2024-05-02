@@ -70,6 +70,6 @@ public class PopupGameOverUIController : MonoBehaviour
         yield return waitForSeconds;
         btnClaim.gameObject.SetActive(true);
         yield return waitForSeconds;
-        btnClaim2x.gameObject.SetActive(true);  
+        //btnClaim2x.gameObject.SetActive(true);  
     }
 }
