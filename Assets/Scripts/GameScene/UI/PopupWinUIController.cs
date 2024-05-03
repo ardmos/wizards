@@ -100,11 +100,11 @@ public class PopupWinUIController : MonoBehaviour
     /// </summary>
     private IEnumerator ShowDetails()
     {
-        sliderBattlePath.gameObject.SetActive(true);
+        //sliderBattlePath.gameObject.SetActive(true);
         // 1. 배틀패스 슬라이더값 차오르는 애니메이션 (테스트용으로 value 0% -> 10% 까지 채워주기. 배틀패스 추가 후에는 해당 값으로 채워주기)
-        yield return StartCoroutine(FillSliderValue(10f));
+        //yield return StartCoroutine(FillSliderValue(10f));
         // 2. 얻은 아이템들 순서대로 등장
-        yield return StartCoroutine(LoadEarnedItems());
+        //yield return StartCoroutine(LoadEarnedItems());
         // 3. 꽃가루 등장
         imgEffect.SetActive(true);
         // 4. 버튼들 등장
