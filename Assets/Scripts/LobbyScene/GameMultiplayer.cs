@@ -11,7 +11,7 @@ using UnityEngine;
 /// </summary>
 public class GameMultiplayer : NetworkBehaviour
 {
-    // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트
+    // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트 <<--- 여기있는 HP같은것들. 컴포넌츠 패턴으로 인터페이스를 추가하는 식으로 각자 캐릭터의 스크립트에 붙어있습니다.  이 PlayerInGameData가 필요가 없도록 하는게 깔끔해보입니다.
     private NetworkList<PlayerInGameData> playerDataNetworkList;
     // 플레이어들이 보유한 장비 현황
     [SerializeField] private Dictionary<ulong, Dictionary<ItemName, ushort>> playerItemDictionaryOnServer;    
@@ -229,6 +229,29 @@ public class GameMultiplayer : NetworkBehaviour
         networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerItemsDictionaryOnClient(playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId].Keys.ToArray(), playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId].Values.ToArray());      
     }
 
+    /// <summary>
+    /// 플레이어 스코어 추가.
+    /// </summary>
+    /// <param name="clientID"></param>
+    /// <param name="score"></param>
+    public void AddPlayerScore(ulong clientID , int score)
+    {
+        PlayerInGameData playerData = GetPlayerDataFromClientId(clientID);
+
+        playerData.score += score;
+
+        SetPlayerDataFromClientId(clientID, playerData);
+    }
+
+    /// <summary>
+    /// 플레이어 스코어 얻기.
+    /// </summary>
+    /// <param name="clientID"></param>
+    /// <returns></returns>
+    public int GetPlayerScore(ulong clientID)
+    {
+        return GetPlayerDataFromClientId(clientID).score;
+    }
 
     // 클라이언트 ---
 

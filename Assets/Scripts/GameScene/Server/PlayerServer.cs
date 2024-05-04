@@ -45,13 +45,8 @@ public class PlayerServer : NetworkBehaviour
         transform.position = spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId));
 
         // HP 초기화
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        playerData.hp = character.hp;
-        playerData.maxHp = character.maxHp;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
-
         // 현재 HP 저장 및 설정
-        PlayerHPManager.Instance.UpdatePlayerHP(OwnerClientId, playerData.hp, playerData.maxHp);
+        PlayerHPManager.Instance.InitPlayerHP(character);
 
         // 플레이어가 보유한 스킬 목록 저장
         skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
@@ -100,33 +95,10 @@ public class PlayerServer : NetworkBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="clientId"></param>
-    public void PlayerGotHitOnServer(byte damage, PlayerServer player)
+    public void PlayerGotHitOnServer(sbyte damage, ulong clientWhoAttacked)
     {
-        ulong clientId = player.OwnerClientId;
-        if (NetworkManager.ConnectedClients.ContainsKey(clientId))
-        {
-            // 요청한 플레이어 현재 HP값 가져오기 
-            PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
-            sbyte playerHP = playerData.hp;
-            sbyte playerMaxHP = playerData.maxHp;
-
-            // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
-            if (playerHP <= damage)
-            {
-                // HP 0
-                playerHP = 0;
-            }
-            else
-            {
-                // HP 감소 계산
-                playerHP -= (sbyte)damage;
-            }
-
-            // 각 Client UI 업데이트 지시. HPBar & Damage Popup
-            PlayerHPManager.Instance.UpdatePlayerHP(clientId, playerHP, playerMaxHP);
-            player.GetComponent<PlayerClient>().ShowDamagePopupClientRPC(damage);
-
-            Debug.Log($"GameMultiplayer.PlayerGotHitOnServer()  Player{clientId} got {damage} damage new HP:{playerHP}");
-        }
+        // 각 Client UI 업데이트 지시. HPBar & Damage Popup
+        PlayerHPManager.Instance.TakingDamage(damage, clientWhoAttacked);
+        playerClient.ShowDamagePopupClientRPC(damage);
     }
 }

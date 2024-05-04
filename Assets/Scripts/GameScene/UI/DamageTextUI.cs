@@ -13,7 +13,7 @@ public class DamageTextUI : MonoBehaviour
     private Vector3 moveVector;
 
 
-    public void Setup(byte damageAmount)
+    public void Setup(sbyte damageAmount)
     {
         txtColor = txtDamage.color;
         txtDamage.text = damageAmount.ToString();

@@ -18,15 +18,16 @@ using UnityEngine.UI;
 /// Step1. Victory 문구 최초 중앙 등장 이후 상승 & Detail영역 x축 scale값 상승 애니메이션(자동 실행)
 /// Step2. Step1 이후 배틀패스 슬라이더 값 차오르는 애니메이션 & 얻은 아이템들 순서대로 또잉또잉 등장
 /// </summary>
-public class PopupWinUIController : MonoBehaviour
+public class PopupWinUIController : NetworkBehaviour
 {
-    // 테스트용 보상 아이템 리스트 목록 하드코딩. 따로 구현할 필요 있음.
-    [SerializeField] private Dictionary<ItemName, ushort> rewardItems = new Dictionary<ItemName, ushort>() {
+    // 테스트용 보상 아이템 리스트 목록 하드코딩. 따로 구현할 필요 있음. << 몹 1킬 10골드, 플레이어 1킬 300골드
+    [SerializeField] private Dictionary<ItemName, ushort> rewardItems = new Dictionary<ItemName, ushort>();
+    /*= new Dictionary<ItemName, ushort>() {
         { ItemName.Item_BonusGold, 7 },
         { ItemName.Item_Exp, 25 },
         { ItemName.Item_Wizard, 2 },
         { ItemName.Item_Knight, 1 }
-    };
+    };*/
 
     [SerializeField] private Animator animator;
     [SerializeField] private Slider sliderBattlePath;
@@ -102,9 +103,9 @@ public class PopupWinUIController : MonoBehaviour
     {
         //sliderBattlePath.gameObject.SetActive(true);
         // 1. 배틀패스 슬라이더값 차오르는 애니메이션 (테스트용으로 value 0% -> 10% 까지 채워주기. 배틀패스 추가 후에는 해당 값으로 채워주기)
-        //yield return StartCoroutine(FillSliderValue(10f));
+        yield return StartCoroutine(FillSliderValue(10f));
         // 2. 얻은 아이템들 순서대로 등장
-        //yield return StartCoroutine(LoadEarnedItems());
+        yield return StartCoroutine(LoadEarnedItems());
         // 3. 꽃가루 등장
         imgEffect.SetActive(true);
         // 4. 버튼들 등장
@@ -112,6 +113,16 @@ public class PopupWinUIController : MonoBehaviour
         btnClaim.SetActive(true);
         yield return waitForSeconds;
         //btnClaim2x.SetActive(true); //광고 구현 후 진행
+    }
+
+    private void GenerateRewardItems()
+    {
+        // 1. 스코어 기반
+        int playerScore = GameMultiplayer.Instance.GetPlayerScore(OwnerClientId);
+
+        int playerGold = playerScore;
+
+        rewardItems.Add(ItemName.Item_Gold, (ushort)playerGold);
     }
 
     private IEnumerator FillSliderValue(float maxValue)
@@ -130,6 +141,9 @@ public class PopupWinUIController : MonoBehaviour
 
     private IEnumerator LoadEarnedItems()
     {
+        // 얻은 아이템 리스트 생성하기
+        GenerateRewardItems();
+
         foreach (KeyValuePair<ItemName, ushort> item in rewardItems)
         {
             yield return waitForSeconds;
@@ -137,6 +151,9 @@ public class PopupWinUIController : MonoBehaviour
             GameObject templateObject = null;
             switch (item.Key)
             {
+                case ItemName.Item_Gold:
+                    templateObject = itemTemplateYellow;
+                    break;
                 case ItemName.Item_BonusGold:
                     templateObject = itemTemplateBlue;
                     break;

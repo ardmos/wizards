@@ -93,7 +93,7 @@ public abstract class PlayerClient : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void ShowDamagePopupClientRPC(byte damageAmount)
+    public void ShowDamagePopupClientRPC(sbyte damageAmount)
     {
         damageTextUIController?.CreateTextObject(damageAmount);
     }

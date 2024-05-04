@@ -10,7 +10,7 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
     //public PlayerAttackAnimState playerAttackAnimState;
     public PlayerGameState playerGameState;
     public FixedString64Bytes playerName;
-    public sbyte score;
+    public int score;
     public Character characterClass;
     public sbyte hp;
     public sbyte maxHp;

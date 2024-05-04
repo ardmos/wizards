@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 /// <summary>
 /// Player HP를  Server Auth 방식으로 관리할수 있도록 도와주는 스크립트 입니다.
@@ -6,48 +7,80 @@ using UnityEngine;
 /// </summary>
 public class PlayerHPManager : NetworkBehaviour
 {
-    public static PlayerHPManager Instance {  get; private set; }
+/*    public static PlayerHPManager Instance {  get; private set; }
 
     private void Awake()
     {
         Instance = this;
+    }*/
+
+    public void InitPlayerHP(ICharacter character)
+    {
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerData.hp = character.hp; 
+        playerData.maxHp = character.maxHp;
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+
+        GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);
+    }
+
+    public void ApplyHeal(sbyte healingValue)
+    {
+        /// 여기하기   힐 적용하는중
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        sbyte newHP = (sbyte)(playerData.hp + healingValue);
+        if (newHP > playerData.maxHp) newHP = playerData.maxHp;
+
+        
     }
 
     /// <summary>
     /// 서버에서 호출해야하는 메서드. 서버에서 동작합니다.
     /// </summary>
-    public void UpdatePlayerHP(ulong clientId, sbyte currentHP, sbyte maxHP)
+    public void TakingDamage(sbyte damage, ulong clientWhoAttacked)
     {
-        if (!NetworkManager.ConnectedClients.ContainsKey(clientId))
-        {
-            Debug.Log($"{nameof(UpdatePlayerHP)} 존재하지 않는 ClientId값입니다.");
-            return;
-        }
+        // 요청한 플레이어 현재 HP값 가져오기 
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        sbyte newPlayerHP = playerData.hp;
 
+        // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
+        if (newPlayerHP <= damage)
+        {
+            // HP 0
+            newPlayerHP = 0;
+
+            // 게임오버 처리
+            GameOver(clientWhoAttacked);
+        }
+        else
+        {
+            // HP 감소 계산
+            newPlayerHP -= (sbyte)damage;
+        }
 
         // 변경된 HP값 서버에 저장
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
-        playerData.hp = currentHP;
-        playerData.maxHp = maxHP;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(clientId, playerData);
+        playerData.hp = newPlayerHP;
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트
-        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);
-        
+        /*NetworkClient networkClient = NetworkManager.ConnectedClients[OwnerClientId];
+        networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);*/
+        GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);
+    }
 
-        // 게임오버 처리. 서버권한 방식.
-        if (currentHP <= 0)
-        {
-            // 게임오버 플레이어 사실을 서버에 기록.
-            GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
+    // 게임오버 처리. 서버권한 방식.
+    private void GameOver(ulong clientWhoAttacked)
+    {
+        // 킬한 플레이어 스코어 업데이트
+        GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, 300);
 
-            // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행. 
-            GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(clientId, PlayerMoveAnimState.GameOver);
+        // 게임오버 플레이어 사실을 서버에 기록.
+        GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId);
 
-            // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
-            networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameOverClientRPC();
-        }
+        // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행. 
+        GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(OwnerClientId, PlayerMoveAnimState.GameOver);
 
+        // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
+        GetComponent<PlayerClient>().SetPlayerGameOverClientRPC();
     }
 }

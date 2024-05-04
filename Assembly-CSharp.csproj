@@ -153,8 +153,8 @@
     <Compile Include="Assets\Scripts\GameScene\Client\Wizard.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupEquipmentUIController.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupEquipmentUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\PlayerMovementServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupUserInfoUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameOverUIController.cs" />

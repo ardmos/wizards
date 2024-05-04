@@ -51,9 +51,9 @@ public abstract class AttackSpell : NetworkBehaviour
                 return;
             }
 
-            byte damage = (byte)GetSpellInfo().level;
+            sbyte damage = (sbyte)GetSpellInfo().level;
             // 플레이어 피격을 서버에서 처리
-            player.PlayerGotHitOnServer(damage, player);
+            player.PlayerGotHitOnServer(damage, OwnerClientId);
         }
         // 기타 오브젝트 충돌
         else
