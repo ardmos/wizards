@@ -27,6 +27,8 @@ public class GameManager : NetworkBehaviour
     public event EventHandler OnGameStateChanged;
     public event EventHandler OnAlivePlayerCountChanged;
 
+    public AudioListener audioListenerServerOnly;
+
     [SerializeField] private NetworkVariable<GameState> gameState = new NetworkVariable<GameState>(GameState.WatingToStart);
     [SerializeField] private NetworkVariable<int> startedPlayerCount = new NetworkVariable<int>(0);
     [SerializeField] private NetworkVariable<int> currentAlivePlayerCount = new NetworkVariable<int>(0);
@@ -51,8 +53,10 @@ public class GameManager : NetworkBehaviour
     {
 #if UNITY_SERVER //|| UNITY_EDITOR
         // Game씬 진입!  더이상 플레이어 진입은 필요하지 않습니다. 서버의 플레이어 수용 상태를 비수용 상태로 변경합니다.
-        await MultiplayService.Instance.UnreadyServerAsync();
+        await MultiplayService.Instance.UnreadyServerAsync();    
 #endif
+        // 서버면 서버용 오디오 리스너를 활성화합니다
+        audioListenerServerOnly.enabled = IsServer;
     }
 
     public override void OnNetworkSpawn()

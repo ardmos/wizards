@@ -1,22 +1,16 @@
 using Unity.Netcode;
-using UnityEditor.PackageManager;
-using UnityEngine;
 /// <summary>
 /// Player HP를  Server Auth 방식으로 관리할수 있도록 도와주는 스크립트 입니다.
 /// 서버에서 동작합니다.
+/// 각 플레이어블 캐릭터 오브젝트의 컴포넌트로 붙여서 사용합니다
 /// </summary>
-public class PlayerHPManager : NetworkBehaviour
+public class PlayerHPManagerServer : NetworkBehaviour
 {
-/*    public static PlayerHPManager Instance {  get; private set; }
-
-    private void Awake()
-    {
-        Instance = this;
-    }*/
+    PlayerInGameData playerData;
 
     public void InitPlayerHP(ICharacter character)
     {
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         playerData.hp = character.hp; 
         playerData.maxHp = character.maxHp;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
@@ -26,12 +20,10 @@ public class PlayerHPManager : NetworkBehaviour
 
     public void ApplyHeal(sbyte healingValue)
     {
-        /// 여기하기   힐 적용하는중
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        /// 힐 적용하는중
+        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         sbyte newHP = (sbyte)(playerData.hp + healingValue);
-        if (newHP > playerData.maxHp) newHP = playerData.maxHp;
-
-        
+        if (newHP > playerData.maxHp) newHP = playerData.maxHp;   
     }
 
     /// <summary>
@@ -40,11 +32,11 @@ public class PlayerHPManager : NetworkBehaviour
     public void TakingDamage(sbyte damage, ulong clientWhoAttacked)
     {
         // 요청한 플레이어 현재 HP값 가져오기 
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         sbyte newPlayerHP = playerData.hp;
 
         // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
-        if (newPlayerHP <= damage)
+        if (newPlayerHP <= damage  && newPlayerHP != 0)
         {
             // HP 0
             newPlayerHP = 0;

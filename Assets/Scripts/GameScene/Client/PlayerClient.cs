@@ -126,7 +126,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
         //OnPlayerWin.Invoke(this, EventArgs.Empty);
         // Popup 보여주기
-        GameSceneUIManager.Instance.popupWinUIController.Show();
+        GameSceneUIManager.Instance.popupWinUIController.Show(OwnerClientId);
         // BGM 재생
         SoundManager.Instance.PlayWinPopupSound();
     }

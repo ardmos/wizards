@@ -84,9 +84,9 @@ public class SlashSkill : NetworkBehaviour
                 return;
             }
 
-            byte damage = (byte)skillInfo.level;
+            sbyte damage = (sbyte)skillInfo.level;
             // 플레이어 피격을 서버에서 처리
-            player.PlayerGotHitOnServer(damage, player);
+            player.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId);
         }
         // 기타 오브젝트 충돌
         else
@@ -132,4 +132,8 @@ public class SlashSkill : NetworkBehaviour
         //SoundManager.Instance?.PlayKnightSkillSFXClientRPC(skillInfo.spellName, sFX_Type);
     }
 
+    public SpellInfo GetSkillInfo()
+    {
+        return skillInfo;
+    }
 }

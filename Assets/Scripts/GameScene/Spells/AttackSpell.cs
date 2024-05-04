@@ -29,6 +29,7 @@ public abstract class AttackSpell : NetworkBehaviour
         GetComponent<Collider>().enabled = false;
 
         Collider collider = collision.collider;
+        ulong spellOwnerClientId = GetSpellInfo().ownerPlayerClientId;
 
         // 충돌한게 공격마법일 경우, 어떤 마법이 살아남을지 계산에 들어감
         if (collider.CompareTag("AttackSpell") || collider.CompareTag("AttackSkill"))
@@ -53,7 +54,7 @@ public abstract class AttackSpell : NetworkBehaviour
 
             sbyte damage = (sbyte)GetSpellInfo().level;
             // 플레이어 피격을 서버에서 처리
-            player.PlayerGotHitOnServer(damage, OwnerClientId);
+            player.PlayerGotHitOnServer(damage, spellOwnerClientId);
         }
         // 기타 오브젝트 충돌
         else
@@ -62,18 +63,17 @@ public abstract class AttackSpell : NetworkBehaviour
         }
 
         // 혹시 시전자가 Casting 상태였으면 Cooltime 상태로 넘겨주기 
-        ulong spellOwnerClientId = GetSpellInfo().ownerPlayerClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[spellOwnerClientId];
         SpellManagerServerWizard spellManagerServerWizard = networkClient.PlayerObject.GetComponent<SpellManagerServerWizard>();
         if (spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState==SpellState.Aiming)
         {
-            Debug.Log($"캐스팅 상태에서 폭발했습니다!!! 스킬 상태를 종료합니다. spellState:{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState} -> ");
+            //Debug.Log($"캐스팅 상태에서 폭발했습니다!!! 스킬 상태를 종료합니다. spellState:{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState} -> ");
             int spellIndex = spellManagerServerWizard.GetSpellIndexBySpellName(GetSpellInfo().spellName);
             if(spellIndex != -1)
             {
                 spellManagerServerWizard.UpdatePlayerSpellState((ushort)spellIndex, SpellState.Cooltime);
                 spellManagerServerWizard.playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
-                Debug.Log($"{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState}.");
+                //Debug.Log($"{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState}.");
             }
             else Debug.Log($"스펠 인덱스를 찾지 못했습니다.");
         }

@@ -18,8 +18,10 @@ using UnityEngine.UI;
 /// Step1. Victory 문구 최초 중앙 등장 이후 상승 & Detail영역 x축 scale값 상승 애니메이션(자동 실행)
 /// Step2. Step1 이후 배틀패스 슬라이더 값 차오르는 애니메이션 & 얻은 아이템들 순서대로 또잉또잉 등장
 /// </summary>
-public class PopupWinUIController : NetworkBehaviour
+public class PopupWinUIController : MonoBehaviour
 {
+    public ulong ownerClientId;
+
     // 테스트용 보상 아이템 리스트 목록 하드코딩. 따로 구현할 필요 있음. << 몹 1킬 10골드, 플레이어 1킬 300골드
     [SerializeField] private Dictionary<ItemName, ushort> rewardItems = new Dictionary<ItemName, ushort>();
     /*= new Dictionary<ItemName, ushort>() {
@@ -76,9 +78,10 @@ public class PopupWinUIController : NetworkBehaviour
         Hide();
     }
 
-    public void Show()
+    public void Show(ulong ownerClientId)
     {
         //Debug.Log($"Win Popup Show()");
+        this.ownerClientId = ownerClientId;
         gameObject.SetActive(true);
     }
 
@@ -101,7 +104,7 @@ public class PopupWinUIController : NetworkBehaviour
     /// </summary>
     private IEnumerator ShowDetails()
     {
-        //sliderBattlePath.gameObject.SetActive(true);
+        sliderBattlePath.gameObject.SetActive(true);
         // 1. 배틀패스 슬라이더값 차오르는 애니메이션 (테스트용으로 value 0% -> 10% 까지 채워주기. 배틀패스 추가 후에는 해당 값으로 채워주기)
         yield return StartCoroutine(FillSliderValue(10f));
         // 2. 얻은 아이템들 순서대로 등장
@@ -118,11 +121,13 @@ public class PopupWinUIController : NetworkBehaviour
     private void GenerateRewardItems()
     {
         // 1. 스코어 기반
-        int playerScore = GameMultiplayer.Instance.GetPlayerScore(OwnerClientId);
+        int playerScore = GameMultiplayer.Instance.GetPlayerScore(ownerClientId);
 
         int playerGold = playerScore;
 
-        rewardItems.Add(ItemName.Item_Gold, (ushort)playerGold);
+        Debug.Log($"player{ownerClientId}'s Score:{playerScore}");
+        if(playerGold > 0) 
+            rewardItems.Add(ItemName.Item_Gold, (ushort)playerGold);
     }
 
     private IEnumerator FillSliderValue(float maxValue)

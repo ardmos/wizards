@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Data\SpellSpecifications.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Manager\PlayerHPManagerServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\SFX\AudioSourceObject.cs" />
     <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
@@ -171,7 +172,6 @@
     <Compile Include="Assets\Scripts\GameScene\UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\TitleScene\TitleSceneUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupWinUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Manager\PlayerHPManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerSpellScrollQueueManagerClient.cs" />

@@ -7,6 +7,7 @@ using UnityEngine.TextCore.Text;
 public class PlayerServer : NetworkBehaviour
 {
     public PlayerClient playerClient;
+    public PlayerHPManagerServer playerHPManager;
     public SkillSpellManagerServer skillSpellManagerServer;
 
     public override void OnNetworkSpawn()
@@ -46,7 +47,7 @@ public class PlayerServer : NetworkBehaviour
 
         // HP 초기화
         // 현재 HP 저장 및 설정
-        PlayerHPManager.Instance.InitPlayerHP(character);
+        playerHPManager.InitPlayerHP(character);
 
         // 플레이어가 보유한 스킬 목록 저장
         skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
@@ -98,7 +99,7 @@ public class PlayerServer : NetworkBehaviour
     public void PlayerGotHitOnServer(sbyte damage, ulong clientWhoAttacked)
     {
         // 각 Client UI 업데이트 지시. HPBar & Damage Popup
-        PlayerHPManager.Instance.TakingDamage(damage, clientWhoAttacked);
+        playerHPManager.TakingDamage(damage, clientWhoAttacked);
         playerClient.ShowDamagePopupClientRPC(damage);
     }
 }

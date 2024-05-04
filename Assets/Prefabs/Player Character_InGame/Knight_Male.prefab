@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 2317913567860431100}
   - component: {fileID: 2005663916033335820}
   - component: {fileID: -3331297196142442222}
+  - component: {fileID: -589006806228386185}
   - component: {fileID: 3569301515384591240}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
@@ -369,6 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: 5577225032273852061}
+  playerHPManager: {fileID: -589006806228386185}
   skillSpellManagerServer: {fileID: 2317913567860431100}
 --- !u!114 &655598229613874014
 MonoBehaviour:
@@ -452,6 +454,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c2ae86f6bc5a384ca03f87bf25f11f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-589006806228386185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3873d19903b12f54db8df6eb840933fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3569301515384591240
@@ -573,7 +587,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932501098101691884}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &1025514995993102176
 GameObject:
   m_ObjectHideFlags: 0

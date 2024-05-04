@@ -3345,8 +3345,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.33504936, y: 2.2837665e-16, z: -7.585679e-18, w: 0.9422006}
-  m_LocalPosition: {x: -9.04934, y: 10.200001, z: -23.939602}
+  m_LocalRotation: {x: 0.33504933, y: 0, z: 0, w: 0.9422006}
+  m_LocalPosition: {x: 0, y: 9.2, z: -11.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6564,71 +6564,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!1 &1732728132
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1732728135}
-  - component: {fileID: 1732728134}
-  - component: {fileID: 1732728133}
-  m_Layer: 0
-  m_Name: PlayerHPManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1732728133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732728132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1595965999
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
---- !u!114 &1732728134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732728132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3873d19903b12f54db8df6eb840933fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1732728135
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732728132}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.842157, y: 1.7142272, z: 15.074001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746236879
 GameObject:
   m_ObjectHideFlags: 0
@@ -8352,6 +8287,7 @@ GameObject:
   - component: {fileID: 2141758591}
   - component: {fileID: 2141758590}
   - component: {fileID: 2141758592}
+  - component: {fileID: 2141758593}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8371,6 +8307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57635e1f62beba84c8a19bb95771a506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioListenerServerOnly: {fileID: 2141758593}
   gameState:
     m_InternalValue: 0
   startedPlayerCount:
@@ -8420,6 +8357,14 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!81 &2141758593
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141758589}
+  m_Enabled: 0
 --- !u!114 &109639947374977130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16841,7 +16786,6 @@ SceneRoots:
   - {fileID: 1984308094}
   - {fileID: 1568701509}
   - {fileID: 2141758591}
-  - {fileID: 1732728135}
   - {fileID: 615357148}
   - {fileID: 2140973039}
   - {fileID: 1433388762}
