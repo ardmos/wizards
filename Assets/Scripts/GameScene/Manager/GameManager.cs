@@ -185,6 +185,7 @@ public class GameManager : NetworkBehaviour
                     PlayerInGameData winPlayer = new PlayerInGameData();
                     foreach (PlayerInGameData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
                     {
+                        Debug.Log($"playerData clientId:{playerData.clientId}, gameState:{playerData.playerGameState}");
                         if (playerData.playerGameState == PlayerGameState.Playing)
                         {
                             winPlayer = playerData;
@@ -192,7 +193,6 @@ public class GameManager : NetworkBehaviour
                     }
 
                     if (!NetworkManager.ConnectedClients.ContainsKey(winPlayer.clientId)) return;
-
                     // 이미 한 번 처리된 경우는 재처리 안해줍니다 <<<-- 수정필요
                     if (winPlayer.playerGameState == PlayerGameState.Win) return;
 

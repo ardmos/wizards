@@ -80,7 +80,7 @@ public class PopupWinUIController : MonoBehaviour
 
     public void Show(ulong ownerClientId)
     {
-        //Debug.Log($"Win Popup Show()");
+        Debug.Log($"Win Popup Show() ownerClientId:{ownerClientId}");
         this.ownerClientId = ownerClientId;
         gameObject.SetActive(true);
     }

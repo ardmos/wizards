@@ -40,6 +40,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         {
             // HP 0
             newPlayerHP = 0;
+            playerData.playerGameState = PlayerGameState.GameOver; // 아래에서 HP값을 저장할 때 새로 SetPlayerData를 하기 때문에...! 일단 여기서 한 번더 게임오버 스테이트를 저장해주고 있는데, GameOver()에서 이미 게임오버처리를 해주고 있다. 일단은 동작하지만 수정 필요.
 
             // 게임오버 처리
             GameOver(clientWhoAttacked);
