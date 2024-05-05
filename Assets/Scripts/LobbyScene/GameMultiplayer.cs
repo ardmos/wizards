@@ -158,7 +158,7 @@ public class GameMultiplayer : NetworkBehaviour
     public void SetPlayerDataFromClientId(ulong clientId, PlayerInGameData newPlayerData)
     {
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
-        Debug.Log($"SetPlayerDataFromClientId. player.clientId:{clientId}. playerGameState:{playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)].playerGameState}");
+        //Debug.Log($"SetPlayerDataFromClientId. player.clientId:{clientId}. playerGameState:{playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)].playerGameState}");
     }
 
     /// <summary>
