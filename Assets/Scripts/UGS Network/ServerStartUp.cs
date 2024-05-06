@@ -266,11 +266,12 @@ public class ServerStartUp : MonoBehaviour
 
     private void ClientDisconnected(ulong clientId)
     {
+        Debug.Log($"ServerStartUp.cs_ ClientDisconnected: disconnected client:{clientId}");
         if (!backfilling && NetworkManager.Singleton.ConnectedClients.Count > 0 && NeedsPlayers())
         {
-            #pragma warning disable 4014
+#pragma warning disable 4014
             BeginBackfilling(matchmakingPayload);
-            #pragma warning restore 4014
+#pragma warning restore 4014
         }
     }
 

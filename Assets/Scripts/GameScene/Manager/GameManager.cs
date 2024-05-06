@@ -185,7 +185,7 @@ public class GameManager : NetworkBehaviour
                     PlayerInGameData winPlayer = new PlayerInGameData();
                     foreach (PlayerInGameData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
                     {
-                        Debug.Log($"playerData clientId:{playerData.clientId}, gameState:{playerData.playerGameState}");
+                        //Debug.Log($"playerData clientId:{playerData.clientId}, gameState:{playerData.playerGameState}");
                         if (playerData.playerGameState == PlayerGameState.Playing)
                         {
                             winPlayer = playerData;

@@ -78,7 +78,42 @@ public class GameMultiplayer : NetworkBehaviour
         // Game중이라면 GameManager에서 죽은걸로 처리. 어차피 재접속 안되게끔 구현할거니까 재접속시 처리는 안해도 된다. 해당 리스트 아이템을 삭제할 필요도 없다.
         if (GetPlayerDataIndexFromClientId(clientId) != -1)
             GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
-        Debug.Log($"Server_OnClientDisconnectCallback");
+
+
+        // 플레이어 이탈 처리
+        if (GetPlayerDataIndexFromClientId(clientId) != -1)
+            playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
+
+
+        Debug.Log($"Server_OnClientDisconnectCallback, Player Count :{playerDataNetworkList.Count}");
+        // 혹시 모든 플레이어가 나갔으면, 서버도 다시 로비씬으로 돌아간다
+        if (playerDataNetworkList.Count == 0)
+        {
+            Debug.Log($"Server_OnClientDisconnectCallback, Go to Lobby");
+            CleanUp();
+            // 로비씬으로 이동
+            LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
+        }
+
+    }
+    // 로비씬으로 돌아기 전 초기화
+    private void CleanUp()
+    {
+        #if UNITY_SERVER
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.Shutdown();
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        if(ServerStartUp.Instance != null)
+        {
+            Destroy(ServerStartUp.Instance.gameObject);
+        }
+        #endif
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -175,25 +210,6 @@ public class GameMultiplayer : NetworkBehaviour
         // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
         OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerMoveAnimStateEventData(clientId, playerData.playerMoveAnimState));
     }
-
-/*    public void UpdatePlayerAttackAnimStateOnServer(ulong clientId, PlayerAttackAnimState playerAttackAnimState)
-    {
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
-        playerData.playerAttackAnimState = playerAttackAnimState;
-        SetPlayerDataFromClientId(clientId, playerData);
-        // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
-        OnPlayerAttackAnimStateChanged?.Invoke(this, new PlayerAttackAnimStateEventData(clientId, playerData.playerAttackAnimState));
-    }*/
-
-    /*[ServerRpc (RequireOwnership = false)]
-    public void UpdatePlayerAttackAnimStateOnServerRPC(ulong clientId, PlayerAttackAnimState playerAttackAnimState)
-    {
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
-        playerData.playerAttackAnimState = playerAttackAnimState;
-        SetPlayerDataFromClientId(clientId, playerData);
-        // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
-        OnPlayerAttackAnimStateChanged?.Invoke(this, new PlayerAttackAnimStateEventData(clientId, playerData.playerAttackAnimState));
-    }*/
 
     /// <summary>
     /// 플레이어 보유 아이템 추가. 전부 서버에서 동작하는 메소드 입니다.
