@@ -26,7 +26,7 @@ public class PlayerDataManager : MonoBehaviour
         // Title씬에서는 1.로그아웃상태가 false일때, 이미 저장된 playerData파일이 있는 경우, 로그인과정 생략. 그냥 바로 시작 
         // Lobby씬에서는 로그아웃 기능 구현. 로그아웃 state를 true로 변경, Title씬으로 이동. 자연스레 로그인 과정 시작. 
 
-#if !UNITY_SERVER || UNITY_EDITOR
+#if !UNITY_SERVER
         if (!LoadPlayerData())
         {
             // 로드할 플레이어 정보가 없었던 경우. 

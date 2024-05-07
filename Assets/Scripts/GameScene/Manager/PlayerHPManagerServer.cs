@@ -68,7 +68,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, 300);
 
         // 게임오버 플레이어 사실을 서버에 기록.
-        GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId);
+        GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);
 
         // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행. 
         GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(OwnerClientId, PlayerMoveAnimState.GameOver);

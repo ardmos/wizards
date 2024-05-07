@@ -17,14 +17,14 @@ public class GameOverMessageTemplateUI : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
-    public void SetPlayerName(string playerName)
+    public void SetMessage(string gameOverPlayerName, string attackedPlayerName)
     {
-        if(playerName.IsNullOrEmpty())
+        if(gameOverPlayerName.IsNullOrEmpty())
         {
-            playerName = "---";
-            Debug.LogError($"{nameof(SetPlayerName)}. playerName is null or Empty. Please check.");
+            gameOverPlayerName = "---";
+            Debug.LogError($"{nameof(SetMessage)}. playerName is null or Empty. Please check.");
         }
-        Debug.Log($"{nameof(SetPlayerName)}. SetPlayerName {playerName}");
-        txtPlayerName.text = $"{playerName} has been defeated!";
+        //Debug.Log($"{nameof(SetMessage)}. SetMessage {gameOverPlayerName}");
+        txtPlayerName.text = $"'{gameOverPlayerName}' has been taken down by '{attackedPlayerName}'!";
     }
 }

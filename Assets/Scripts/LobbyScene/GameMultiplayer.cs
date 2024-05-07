@@ -121,6 +121,13 @@ public class GameMultiplayer : NetworkBehaviour
     private void UpdatePlayerInGameDataServerRPC(PlayerInGameData playerData, ServerRpcParams serverRpcParams = default)
     {
         // 새로운 유저
+        // 이미 추가된 유저인지 한 번 필터링
+        if(GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).hp != 0)
+        {
+            Debug.Log($"플레이어{serverRpcParams.Receive.SenderClientId}는 이미 추가된 유저입니다!");
+            return;
+        }
+
         playerDataNetworkList.Add(new PlayerInGameData
         {
             clientId = serverRpcParams.Receive.SenderClientId,
