@@ -150,6 +150,7 @@
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\GameInput.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\Scroll.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\PopupGameRoomUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Water.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\Wizard.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
@@ -270,6 +271,7 @@
     <None Include="Assets\RealToon\Change - Fix Log.txt" />
     <None Include="Assets\RPGTinyHeroWavePBR\HowToTestHDRP_URP.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\Shaders\MyLavaShader(개선 필요).shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />

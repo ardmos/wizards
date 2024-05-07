@@ -7940,6 +7940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8273c89c9f4f5d748a56f288a5de6886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ownerClientId: 0
   animator: {fileID: 2016762744}
   sliderBattlePath: {fileID: 7519042239576358731}
   detailArea: {fileID: 7519042238476839172}
@@ -14657,6 +14658,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 420746989773629937, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.58
+      objectReference: {fileID: 0}
     - target: {fileID: 451445173789290891, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
       propertyPath: m_Layer
       value: 16
@@ -14957,6 +14962,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 8361197690625739139, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361197690625739139, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
+      propertyPath: m_TagString
+      value: Water
+      objectReference: {fileID: 0}
     - target: {fileID: 8384120937173821346, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
       propertyPath: m_Layer
       value: 16
@@ -14984,8 +14997,53 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8361197690625739139, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5233341590138611851}
+    - targetCorrespondingSourceObject: {fileID: 8361197690625739139, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5233341590138611850}
   m_SourcePrefab: {fileID: 100100000, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
+--- !u!1 &5233341590138611849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8361197690625739139, guid: 67adb73d42cd8564690cbd5cfaafbfe6, type: 3}
+  m_PrefabInstance: {fileID: 5233341590138611848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5233341590138611850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233341590138611849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2132465515
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &5233341590138611851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233341590138611849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6e7ed6381d93945b24ad3b744c3405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageValue: 1
+  intervalTime: 1
 --- !u!224 &5600589082907996706
 RectTransform:
   m_ObjectHideFlags: 0

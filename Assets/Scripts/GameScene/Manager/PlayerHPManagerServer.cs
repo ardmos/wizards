@@ -35,8 +35,10 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         sbyte newPlayerHP = playerData.hp;
 
+        if (newPlayerHP == 0) return;
+
         // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
-        if (newPlayerHP <= damage  && newPlayerHP != 0)
+        if (newPlayerHP <= damage)
         {
             // HP 0
             newPlayerHP = 0;
@@ -64,8 +66,19 @@ public class PlayerHPManagerServer : NetworkBehaviour
     // 게임오버 처리. 서버권한 방식.
     private void GameOver(ulong clientWhoAttacked)
     {
-        // 킬한 플레이어 스코어 업데이트
-        GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, 300);
+        // 킬한 플레이어 스코어 업데이트. 킬한 플레이어가 본인일 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
+        // 킬한 플레이어가 본인일 경우(ex, Water로 인한 사망)
+        if(clientWhoAttacked == OwnerClientId)
+        {
+            foreach(PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList()){
+                GameMultiplayer.Instance.AddPlayerScore(playerInGameData.clientId, 300);
+            }
+        }
+        else
+        {
+            GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, 300);
+        }
+        
 
         // 게임오버 플레이어 사실을 서버에 기록.
         GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);

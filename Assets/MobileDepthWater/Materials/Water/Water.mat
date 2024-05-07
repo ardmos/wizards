@@ -85,7 +85,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TextureVisibility: 1
+    - _TextureVisibility: 0.772
     - _UVSec: 0
     - _WaterDeep: 0
     - _WaterDepth: 0
@@ -99,5 +99,6 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MoveDirection: {r: 0.21, g: 0, b: 0.3, a: 0}
     - _Tiling: {r: 0.1, g: 0.1, b: 0, a: 0}
-    - _WaterColor: {r: 0, g: 0.59685165, b: 0.7254902, a: 1}
+    - _WaterColor: {r: 0, g: 0.51761705, b: 0.7254902, a: 1}
+    - _WaterTexColor: {r: 1, g: 0.92926645, b: 0, a: 1}
   m_BuildTextureStacks: []
