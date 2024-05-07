@@ -26,7 +26,7 @@ public class Wizard : PlayerClient, ICharacter
         base.InitializePlayerClientRPC(skills);
         // 보유 skill 정보를 클라이언트측 캐릭터의 스킬 컨트롤러에 전달.
         spellManagerClientWizard.InitPlayerSpellInfoListClient(skills);
-        Debug.Log("1. Wizard.InitializePlayerClientRPC");
+        //Debug.Log("1. Wizard.InitializePlayerClientRPC");
     }
 
     public ICharacter GetCharacterData()

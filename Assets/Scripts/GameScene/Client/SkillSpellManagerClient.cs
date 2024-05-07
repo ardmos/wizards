@@ -88,7 +88,7 @@ public class SkillSpellManagerClient : NetworkBehaviour
         }
 
         skillInfoListOnClient = playerSpellInfoList;
-        Debug.Log("2. SkillSpellManagerClient.InitPlayerSpellInfoListClient");
+        //Debug.Log("2. SkillSpellManagerClient.InitPlayerSpellInfoListClient");
     }
 
     /// <summary>

@@ -1,4 +1,6 @@
+using System.Collections;
 using Unity.Netcode;
+using UnityEngine;
 /// <summary>
 /// Player HP를  Server Auth 방식으로 관리할수 있도록 도와주는 스크립트 입니다.
 /// 서버에서 동작합니다.
@@ -7,6 +9,8 @@ using Unity.Netcode;
 public class PlayerHPManagerServer : NetworkBehaviour
 {
     PlayerInGameData playerData;
+    public PlayerClient playerClient;
+    public Material playerMaterial;
 
     public void InitPlayerHP(ICharacter character)
     {
@@ -15,7 +19,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerData.maxHp = character.maxHp;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
 
-        GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);
+        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
     }
 
     public void ApplyHeal(sbyte healingValue)
@@ -60,7 +64,28 @@ public class PlayerHPManagerServer : NetworkBehaviour
         // 각 Client 플레이어의 HP바 UI 업데이트
         /*NetworkClient networkClient = NetworkManager.ConnectedClients[OwnerClientId];
         networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);*/
-        GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);
+        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+
+        // 쉐이더 피격 이펙트 실행
+        // FlashAmount 속성을 1로 설정하여 Flash 효과를 활성화합니다.
+        playerMaterial.SetFloat("HighlightColorPower", 100f);
+        // 일정 시간이 지난 후에 FlashAmount 속성을 다시 1으로 설정하여 Flash 효과를 비활성화합니다.
+        StartCoroutine(ResetFlashEffect());
+        // 피격 애니메이션 실행
+
+        // 피격 카메라 효과 실행 ClientRPC
+
+        // 피격 사운드 효과 실행
+
+    }
+
+    // Flash 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
+    private IEnumerator ResetFlashEffect()
+    {
+        yield return new WaitForSeconds(1f); // 예시로 0.1초 후에 효과를 비활성화하도록 설정합니다.
+
+        // FlashAmount 속성을 0으로 설정하여 Flash 효과를 비활성화합니다.
+        playerMaterial.SetFloat("HighlightColorPower", 1f);
     }
 
     // 게임오버 처리. 서버권한 방식.
@@ -87,6 +112,6 @@ public class PlayerHPManagerServer : NetworkBehaviour
         GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(OwnerClientId, PlayerMoveAnimState.GameOver);
 
         // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
-        GetComponent<PlayerClient>().SetPlayerGameOverClientRPC();
+        playerClient.SetPlayerGameOverClientRPC();
     }
 }

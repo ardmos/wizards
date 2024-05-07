@@ -136,7 +136,7 @@ public class PopupGameRoomUIController : MonoBehaviour
         // 이 팝업 오브젝트가 활성화되지 않았단건 서버란 뜻. 서버에선 구치 실행해줄 필요 없는 내용입니다.
         if (!gameObject.activeSelf) return;
 
-        Debug.Log("팝업 OnReadyChanged()");
+        //Debug.Log("팝업 OnReadyChanged()");
         UpdateToggleUIState();
         RunStateMachine();
     }

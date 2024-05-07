@@ -205,7 +205,7 @@ public class SoundManager : NetworkBehaviour
 
     public void PlayUISFX(UISFX_Type uISFX_Type)
     {
-        Debug.Log($"4.");
+        //Debug.Log($"4.");
         if (audioSourceSFX == null) return;
 
         audioSourceSFX.clip = GameAssetsManager.Instance.GetUISFX(uISFX_Type);

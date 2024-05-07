@@ -41,7 +41,7 @@ public class AudioSourceObject : NetworkBehaviour
         audioSource.clip = audioClip;
         audioSource.Play();
 
-        float distance = Vector3.Distance(transform.position, PlayerClient.Instance.transform.position);
-        Debug.Log($"Distance: {distance}");
+        //float distance = Vector3.Distance(transform.position, PlayerClient.Instance.transform.position);
+        //Debug.Log($"Distance: {distance}");
     }
 }
