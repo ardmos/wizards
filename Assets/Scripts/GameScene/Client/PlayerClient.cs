@@ -25,6 +25,10 @@ public abstract class PlayerClient : NetworkBehaviour
 
     public GameInput gameInput;
 
+    public Material originalMaterial;
+    public Material highlightMaterial;
+    public Renderer[] ownRenderers;
+
     // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
 
@@ -85,6 +89,27 @@ public abstract class PlayerClient : NetworkBehaviour
     protected abstract void GameInput_OnAttack2Ended(object sender, EventArgs e);
     protected abstract void GameInput_OnAttack3Ended(object sender, EventArgs e);
     protected abstract void GameInput_OnDefenceEnded(object sender, EventArgs e);
+
+    [ClientRpc]
+    public void ActivateHitEffectClientRPC()
+    {
+        foreach(Renderer renderer in ownRenderers)
+        {
+            renderer.material = highlightMaterial;
+        }
+        
+        StartCoroutine(ResetFlashEffect());
+    }
+    // 피격 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
+    private IEnumerator ResetFlashEffect()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        foreach (Renderer renderer in ownRenderers)
+        {
+            renderer.material = originalMaterial;
+        }
+    }
 
     [ClientRpc]
     public void SetHPClientRPC(sbyte hp, sbyte maxHP)

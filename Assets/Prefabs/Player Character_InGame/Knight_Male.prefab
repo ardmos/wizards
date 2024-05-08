@@ -356,6 +356,13 @@ MonoBehaviour:
   userNameUIController: {fileID: 3360987132556806349}
   playerSpellScrollQueueManager: {fileID: 2005663916033335820}
   gameInput: {fileID: -3331297196142442222}
+  originalMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 8f5611d6ff98e58408979d37f88255c1, type: 2}
+  ownRenderers:
+  - {fileID: 5741220342459673286}
+  - {fileID: 5197971927643740928}
+  - {fileID: 9042863021568186041}
+  - {fileID: 8870307728246101435}
   skillManagerClientKnight: {fileID: 1344688005986462694}
 --- !u!114 &5296506001102751864
 MonoBehaviour:
@@ -469,7 +476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: 5577225032273852061}
-  playerMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -422,6 +422,13 @@ MonoBehaviour:
   userNameUIController: {fileID: 4649931589576448986}
   playerSpellScrollQueueManager: {fileID: 4579991518944106865}
   gameInput: {fileID: -3331297196142442222}
+  originalMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 8f5611d6ff98e58408979d37f88255c1, type: 2}
+  ownRenderers:
+  - {fileID: 9198693276682285898}
+  - {fileID: 3344687823725704899}
+  - {fileID: 8054825543133005109}
+  - {fileID: 8653536894580035756}
   spellManagerClientWizard: {fileID: 6631467521865965885}
 --- !u!114 &294066641757979093
 MonoBehaviour:
@@ -529,7 +536,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: -2686748507231774534}
-  playerMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
 --- !u!54 &4842463508567140202
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -10,7 +11,6 @@ public class PlayerHPManagerServer : NetworkBehaviour
 {
     PlayerInGameData playerData;
     public PlayerClient playerClient;
-    public Material playerMaterial;
 
     public void InitPlayerHP(ICharacter character)
     {
@@ -66,11 +66,9 @@ public class PlayerHPManagerServer : NetworkBehaviour
         networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);*/
         playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
 
-        // 쉐이더 피격 이펙트 실행
-        // FlashAmount 속성을 1로 설정하여 Flash 효과를 활성화합니다.
-        playerMaterial.SetFloat("HighlightColorPower", 100f);
-        // 일정 시간이 지난 후에 FlashAmount 속성을 다시 1으로 설정하여 Flash 효과를 비활성화합니다.
-        StartCoroutine(ResetFlashEffect());
+        // 각 Client의 화면에서 쉐이더 피격 이펙트 실행
+        playerClient.ActivateHitEffectClientRPC();
+
         // 피격 애니메이션 실행
 
         // 피격 카메라 효과 실행 ClientRPC
@@ -79,14 +77,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
 
     }
 
-    // Flash 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
-    private IEnumerator ResetFlashEffect()
-    {
-        yield return new WaitForSeconds(1f); // 예시로 0.1초 후에 효과를 비활성화하도록 설정합니다.
 
-        // FlashAmount 속성을 0으로 설정하여 Flash 효과를 비활성화합니다.
-        playerMaterial.SetFloat("HighlightColorPower", 1f);
-    }
 
     // 게임오버 처리. 서버권한 방식.
     private void GameOver(ulong clientWhoAttacked)
