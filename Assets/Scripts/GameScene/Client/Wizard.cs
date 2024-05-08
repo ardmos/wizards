@@ -12,7 +12,7 @@ public class Wizard : PlayerClient, ICharacter
     public Character characterClass { get; set; } = Character.Wizard;
     public sbyte hp { get; set; } = 5;
     public sbyte maxHp { get; set; } = 5;
-    public float moveSpeed { get; set; } = 5f;
+    public float moveSpeed { get; set; } = 4f;
     public SkillName[] skills { get; set; } = new SkillName[]{
                 SkillName.FireBallLv1,
                 SkillName.WaterBallLv1,
