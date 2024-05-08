@@ -121,7 +121,7 @@ public class PopupWinUIController : MonoBehaviour
     private void GenerateRewardItems()
     {
         // 0. 기본 승리 소득
-        rewardItems.Add(ItemName.Item_BonusGold, 100);
+        rewardItems.Add(ItemName.Item_Gold, 100);
 
         // 1. 스코어 기반
         int playerScore = GameMultiplayer.Instance.GetPlayerScore(ownerClientId);
