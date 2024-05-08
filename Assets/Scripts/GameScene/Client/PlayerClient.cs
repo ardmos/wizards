@@ -6,6 +6,8 @@ using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SocialPlatforms.Impl;
 
 public abstract class PlayerClient : NetworkBehaviour
@@ -90,6 +92,8 @@ public abstract class PlayerClient : NetworkBehaviour
     protected abstract void GameInput_OnAttack3Ended(object sender, EventArgs e);
     protected abstract void GameInput_OnDefenceEnded(object sender, EventArgs e);
 
+
+    // 피격 이펙트 실행
     [ClientRpc]
     public void ActivateHitEffectClientRPC()
     {
@@ -109,6 +113,27 @@ public abstract class PlayerClient : NetworkBehaviour
         {
             renderer.material = originalMaterial;
         }
+    }
+
+
+    // 피격 사운드 실행
+
+    // 피격 카메라 효과 실행
+    [ClientRpc]
+    public void ActivateHitCameraEffectClientRPC()
+    {
+        // 피격당한 플레이어에만 실행될 효과
+        if (!IsOwner) return;
+
+        FindObjectOfType<Volume>().profile.TryGet(out Vignette vignette);
+        vignette.intensity.value = 0.25f;
+        StartCoroutine(ResetCameraEffect(vignette));
+    }
+    // 피격 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
+    private IEnumerator ResetCameraEffect(Vignette vignette)
+    {
+        yield return new WaitForSeconds(0.1f);
+        vignette.intensity.value = 0f;
     }
 
     [ClientRpc]

@@ -61,19 +61,20 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerData.hp = newPlayerHP;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
 
-        // 각 Client 플레이어의 HP바 UI 업데이트
+        // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC
         /*NetworkClient networkClient = NetworkManager.ConnectedClients[OwnerClientId];
         networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);*/
         playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
 
-        // 각 Client의 화면에서 쉐이더 피격 이펙트 실행
+        // 각 Client의 화면에서 쉐이더 피격 이펙트 실행 ClientRPC
         playerClient.ActivateHitEffectClientRPC();
 
-        // 피격 애니메이션 실행
+        // 피격 애니메이션 실행 Server
 
         // 피격 카메라 효과 실행 ClientRPC
+        playerClient.ActivateHitCameraEffectClientRPC();
 
-        // 피격 사운드 효과 실행
+        // 피격 사운드 효과 실행 ClientRPC
 
     }
 

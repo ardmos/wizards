@@ -100,7 +100,7 @@ public class GameMultiplayer : NetworkBehaviour
     private void CleanUp()
     {
         // 클라이언트 빌드용 if 옵션.
-        #if UNITY_SERVER
+#if UNITY_SERVER
         if (NetworkManager.Singleton != null)
         {
             NetworkManager.Singleton.Shutdown();
@@ -114,7 +114,8 @@ public class GameMultiplayer : NetworkBehaviour
         {
             Destroy(ServerStartUp.Instance.gameObject);
         }
-        #endif
+        playerDataNetworkList.Clear();
+#endif
     }
 
     [ServerRpc(RequireOwnership = false)]
