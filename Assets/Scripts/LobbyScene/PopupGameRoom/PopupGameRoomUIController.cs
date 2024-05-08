@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ using UnityEngine.UI;
 /// 5. 매칭 취소 버튼 추가. 
 /// 6. 매칭 취소 버튼 클릭시 해당 유저 매칭 취소.
 /// </summary>
-public class PopupGameRoomUIController : MonoBehaviour
+public class PopupGameRoomUIController : NetworkBehaviour
 {
     public enum MatchingState
     {

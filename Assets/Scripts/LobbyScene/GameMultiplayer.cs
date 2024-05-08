@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -98,12 +99,14 @@ public class GameMultiplayer : NetworkBehaviour
     }
     // 로비씬으로 돌아기 전 초기화
     private void CleanUp()
-    {
+    {        
         // 클라이언트 빌드용 if 옵션.
 #if UNITY_SERVER
         if (NetworkManager.Singleton != null)
         {
+            //Debug.Log("CleanUp NetworkManager!");
             NetworkManager.Singleton.Shutdown();
+            //NetworkManager.Shutdown();
             Destroy(NetworkManager.Singleton.gameObject);
         }
         if (Instance != null)

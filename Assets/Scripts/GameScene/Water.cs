@@ -46,6 +46,7 @@ public class Water : NetworkBehaviour
         // 각 플레이어에게 대미지 주기. 공격자는 플레이어 자신으로 처리
         foreach (var player in playersInWater)
         {
+            if(player == null &&  player.gameObject == null) continue;
             player.GetComponent<PlayerHPManagerServer>().TakingDamage(damageValue,
                 player.GetComponent<PlayerClient>().OwnerClientId);
         }

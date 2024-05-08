@@ -115,7 +115,6 @@ public abstract class PlayerClient : NetworkBehaviour
         }
     }
 
-
     // 피격 사운드 실행
 
     // 피격 카메라 효과 실행
