@@ -24,7 +24,7 @@ public class SpellSpecifications : MonoBehaviour
         // Wizard_Male
         // 공격 마법
         SetSpellDefaultSpec(SpellType.Fire, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.FireBallLv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Water, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.WaterBallLv1, SpellState.Ready);
+        SetSpellDefaultSpec(SpellType.Water, 2.0f, 10.0f, 5.0f, 30, 1, SkillName.WaterBallLv1, SpellState.Ready);
         SetSpellDefaultSpec(SpellType.Ice, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.IceBallLv1, SpellState.Ready);
         // 방어 마법
         SetSpellDefaultSpec(SpellType.Arcane, 10.0f, 2.2f, 0f, 30, 1, SkillName.MagicShieldLv1, SpellState.Ready);

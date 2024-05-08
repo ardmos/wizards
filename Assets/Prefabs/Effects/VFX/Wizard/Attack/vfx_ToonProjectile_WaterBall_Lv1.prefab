@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4797478012653496}
   - component: {fileID: -6914790846728542146}
+  - component: {fileID: 3319697127376216426}
   - component: {fileID: 54873829185623922}
   - component: {fileID: 135482376466425384}
   - component: {fileID: 7331521178580127373}
@@ -65,6 +66,31 @@ MonoBehaviour:
   hitVFXPrefab: {fileID: 1607111504653374, guid: 3f08a73d9f840254fa5c91759a51a583, type: 3}
   trails:
   - {fileID: 1938363951039914}
+--- !u!114 &3319697127376216426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117804056975720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8c02c4c81c45d4882eed78b5bc4abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 54873829185623922}
+  _target: {fileID: 0}
+  _shooterClientID: 0
+  _startHoming: 0
+  _speed: 0
+  _rotateSpeed: 95
+  _maxDistancePredict: 5
+  _minDistancePredict: 1
+  _maxTimePrediction: 2
+  _standardPrediction: {x: 0, y: 0, z: 0}
+  _deviatedPrediction: {x: 0, y: 0, z: 0}
+  _deviationAmount: 50
+  _deviationSpeed: 2
 --- !u!54 &54873829185623922
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -90,7 +116,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!135 &135482376466425384
 SphereCollider:

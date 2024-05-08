@@ -379,6 +379,7 @@ MonoBehaviour:
   playerClient: {fileID: 5577225032273852061}
   playerHPManager: {fileID: -589006806228386185}
   skillSpellManagerServer: {fileID: 2317913567860431100}
+  rb: {fileID: 4842463508567140202}
 --- !u!114 &655598229613874014
 MonoBehaviour:
   m_ObjectHideFlags: 0

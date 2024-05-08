@@ -60,7 +60,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     /// 공격 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
-    public void CastingSpellServerRPC(ushort spellIndex)
+    public void CastingSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
     {
         // 포구 위치 찾기(Local posittion)
         Transform muzzleTransform = GetComponentInChildren<MuzzlePos>().transform;
@@ -72,6 +72,12 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         // 발사체 스펙 초기화 해주기
         SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
+        // 호밍 마법이라면 호밍 마법에 소유자 등록 & 속도 설정
+        if (spellObject.TryGetComponent<HomingMissile>(out var ex))
+        {
+            ex.SetOwner(spellInfo.ownerPlayerClientId);
+            ex.SetSpeed(spellInfo.moveSpeed);
+        }
         spellObject.transform.SetParent(transform);
         // 포구에 발사체 위치시키기
         spellObject.transform.localPosition = muzzleTransform.localPosition;
@@ -99,7 +105,6 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     [ServerRpc(RequireOwnership = false)]
     public void ShootSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
     {
-        ulong clientId = serverRpcParams.Receive.SenderClientId;
         GameObject spellObject = playerCastingSpell;
         if (spellObject == null)
         {
@@ -114,10 +119,14 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
 
         spellObject.transform.SetParent(GameManager.Instance.transform);
 
+        // 호밍 마법이라면 호밍 시작 처리
+        if (spellObject.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
         // 마법 발사 (기본 직선 비행 마법)
-        float moveSpeed = spellObject.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
-        spellObject.GetComponent<AttackSpell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
-
+        else
+        {
+            float moveSpeed = spellObject.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
+            spellObject.GetComponent<AttackSpell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
+        }
         // 포구 VFX
         MuzzleVFX(spellObject.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
 
