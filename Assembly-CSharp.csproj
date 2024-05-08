@@ -77,7 +77,6 @@
     <Compile Include="Assets\Scripts\GameScene\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\StoreTriggerAreaCollider.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\HomingMissle.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssetsManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupSelectScrollEffectUIController.cs" />
@@ -89,7 +88,6 @@
     <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupClanUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\TargetOfHomingMissle.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\HPBarUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
@@ -104,6 +102,7 @@
     <Compile Include="Assets\Scripts\TitleScene\SoundManager.cs" />
     <Compile Include="Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Spells\HomingMissile.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimStateEventData.cs" />
@@ -207,7 +206,6 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\ItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupHostHasDisconnectedUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\GraphicGroupUI.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IExplode.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerInGameData.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ButtonReadSpellScrollUIController.cs" />

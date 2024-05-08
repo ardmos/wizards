@@ -9,6 +9,7 @@ public class PlayerServer : NetworkBehaviour
     public PlayerClient playerClient;
     public PlayerHPManagerServer playerHPManager;
     public SkillSpellManagerServer skillSpellManagerServer;
+    public Rigidbody rb;
 
     public override void OnNetworkSpawn()
     {
