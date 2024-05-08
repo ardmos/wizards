@@ -36,7 +36,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
 
     [SerializeField] private ushort gameOverPlayerCount = 0;
-    [SerializeField] private float gamePlayingTimerMax = 10000f;
+    [SerializeField] private float gamePlayingTimerMax = 1000000f;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
     [SerializeField] private bool isLocalPlayerReady;
     [SerializeField] private bool isBGMStarted;
