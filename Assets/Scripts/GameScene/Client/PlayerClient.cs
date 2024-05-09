@@ -31,6 +31,8 @@ public abstract class PlayerClient : NetworkBehaviour
     public Material highlightMaterial;
     public Renderer[] ownRenderers;
 
+    public CameraShake cameraShake;
+
     // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
 
@@ -128,6 +130,14 @@ public abstract class PlayerClient : NetworkBehaviour
         vignette.intensity.value = 0.25f;
         StartCoroutine(ResetCameraEffect(vignette));
     }
+    // 피격 카메라 쉐이크 효과 실행
+    [ClientRpc]
+    public void ActivateHitCameraShakeClientRPC()
+    {
+        if (!IsOwner) return;
+        cameraShake.ShakeCamera(5f, 0.2f);
+    }
+
     // 피격 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
     private IEnumerator ResetCameraEffect(Vignette vignette)
     {

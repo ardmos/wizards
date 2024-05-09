@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxSpellUpgrade.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
     <Compile Include="Assets\Scripts\Data\UISFX_Type.cs" />
+    <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\PotionHP.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSupportUIController.cs" />
     <Compile Include="Assets\Scripts\Data\GraphicQualitySettingsData.cs" />

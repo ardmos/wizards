@@ -429,6 +429,7 @@ MonoBehaviour:
   - {fileID: 3344687823725704899}
   - {fileID: 8054825543133005109}
   - {fileID: 8653536894580035756}
+  cameraShake: {fileID: 4764148587749578273}
   spellManagerClientWizard: {fileID: 6631467521865965885}
 --- !u!114 &294066641757979093
 MonoBehaviour:
@@ -1917,6 +1918,7 @@ GameObject:
   - component: {fileID: 4871952190531119791}
   - component: {fileID: 677933887927889240}
   - component: {fileID: 6749644109108202182}
+  - component: {fileID: 4319015826766009948}
   m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
@@ -2000,6 +2002,23 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!114 &4319015826766009948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4154177147846944695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 5
+  mNoiseOffsets: {x: -63.66504, y: 333.90637, z: 247.74991}
 --- !u!1 &4444680418094787280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,6 +2143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2093146661360044936}
   - component: {fileID: 4487991525872706357}
+  - component: {fileID: 4764148587749578273}
   m_Layer: 3
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -2139,7 +2159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4859955840248925076}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.33504936, y: -0.0000000090019405, z: 0.0000000032011158, w: 0.9422006}
+  m_LocalRotation: {x: 0.33504933, y: 0.0000000109025775, z: -0.0000000038769894, w: 0.9422006}
   m_LocalPosition: {x: 0, y: 9.2, z: -11.299999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2186,6 +2206,19 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2981371222939896625}
+--- !u!114 &4764148587749578273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4859955840248925076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378bd47dd58364a4cbcd918ade8820e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 4487991525872706357}
 --- !u!1 &4876650605904619362
 GameObject:
   m_ObjectHideFlags: 0

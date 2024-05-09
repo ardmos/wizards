@@ -74,6 +74,9 @@ public class PlayerHPManagerServer : NetworkBehaviour
         // 피격 카메라 효과 실행 ClientRPC
         playerClient.ActivateHitCameraEffectClientRPC();
 
+        // 피격 카메라 쉐이크 효과 실행 ClientRPC
+        playerClient.ActivateHitCameraShakeClientRPC();
+
         // 피격 사운드 효과 실행 ClientRPC
 
     }

@@ -317,6 +317,8 @@ namespace CartoonFX
 
                         ps.textureSheetAnimation.SetSprite(0, sprite);
 
+                        //mainModule.startRotation = Mathf.Deg2Rad * rotation;
+                        //rotation = Random.Range(-90f, 90f);
                         mainModule.startRotation = Mathf.Deg2Rad * rotation;
                         mainModule.startColor = backgroundColor;
 
