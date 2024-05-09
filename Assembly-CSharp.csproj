@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
+    <Compile Include="Assets\Scripts\Spells\HomingMissile.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SpellManagerClientWizard.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
@@ -66,7 +67,6 @@
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\ScrollManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\MagicShieldLv1.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIManager.cs" />
@@ -80,11 +80,9 @@
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssetsManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupSelectScrollEffectUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\StoneSlashLv1.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterPropertyBlockSetter.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\PlayerServer.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\TouchRotator.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\DefenceSpell.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupClanUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
@@ -95,15 +93,16 @@
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerMovementClient.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\FPSUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
+    <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
     <Compile Include="Assets\Scripts\TitleScene\SoundManager.cs" />
     <Compile Include="Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\HomingMissile.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
+    <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
+    <Compile Include="Assets\Scripts\Spells\IceSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimStateEventData.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ItemAcquiredMessageTemplateUI.cs" />
@@ -114,7 +113,6 @@
     <Compile Include="Assets\Scripts\GameScene\SFX\AudioSourceObject.cs" />
     <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\IceSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ItemAcquireUIController.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupMagicStoreUI.cs" />
@@ -133,15 +131,13 @@
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillSpellManagerServer.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\FireBallLv2.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerSpawnPointsController.cs" />
+    <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\PopupShopUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SpellManagerServerWizard.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Default.cs" />
@@ -154,10 +150,12 @@
     <Compile Include="Assets\Scripts\GameScene\Water.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\Wizard.cs" />
+    <Compile Include="Assets\Scripts\Spells\SlashSkill.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupEquipmentUIController.cs" />
+    <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\PlayerMovementServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupUserInfoUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameOverUIController.cs" />
@@ -174,8 +172,10 @@
     <Compile Include="Assets\Scripts\GameScene\UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\TitleScene\TitleSceneUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupWinUIController.cs" />
+    <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
+    <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerSpellScrollQueueManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SkillSpellManagerClient.cs" />
@@ -184,8 +184,6 @@
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\DailyGroupUI.cs" />
     <Compile Include="Assets\Scriptable Objects\CharacterCardInfo.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\SlashSkill.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerClient.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
@@ -194,7 +192,9 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterArea.cs" />
+    <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
+    <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUI.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\PopupSettingsUIController.cs" />
@@ -202,7 +202,6 @@
     <Compile Include="Assets\Scripts\UGS Network\ClientNetworkTransform.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenButton.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupWatingForPlayersUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\AttackSpell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\ItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupHostHasDisconnectedUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\GraphicGroupUI.cs" />
@@ -210,7 +209,9 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ButtonReadSpellScrollUIController.cs" />
     <Compile Include="Assets\Scripts\Data\AnimationStateEnums.cs" />
+    <Compile Include="Assets\Scripts\Spells\StoneSlashLv1.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Test\TestNetworkUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PlayerCountUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\FloorGenerator.cs" />
@@ -220,13 +221,12 @@
     <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SkillName.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
+    <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillManagerServerKnight.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Spells\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\PopupSelectCharacterUIController.cs" />
   </ItemGroup>
   <ItemGroup>

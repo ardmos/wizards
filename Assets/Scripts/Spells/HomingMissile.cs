@@ -11,6 +11,7 @@ public class HomingMissile : NetworkBehaviour
         [SerializeField] private GameObject _muzzlePrefab;
         [SerializeField] private sbyte damage = 1;*/
     [SerializeField] private bool _startHoming = false;
+    LayerMask shooterLayer;
 
     [Header("MOVEMENT")]
     [SerializeField] private float _speed = 0;
@@ -63,28 +64,33 @@ public class HomingMissile : NetworkBehaviour
     public void SetOwner(ulong shooterClientID)
     {
         _shooterClientID = shooterClientID;
-
+     
         // 플레이어 Layer 설정
         switch (_shooterClientID)
         {
             case 0:
-                gameObject.layer = LayerMask.NameToLayer("Player0");
+                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player0");
+                shooterLayer = LayerMask.NameToLayer("Player0");
                 break;
             case 1:
-                gameObject.layer = LayerMask.NameToLayer("Player1");
+                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player1");
+                shooterLayer = LayerMask.NameToLayer("Player1");
                 break;
             case 2:
-                gameObject.layer = LayerMask.NameToLayer("Player2");
+                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player2");
+                shooterLayer = LayerMask.NameToLayer("Player2");
                 break;
             case 3:
-                gameObject.layer = LayerMask.NameToLayer("Player3");
+                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player3");
+                shooterLayer = LayerMask.NameToLayer("Player3");
                 break;
             default:
+                shooterLayer = LayerMask.NameToLayer("Player");
                 break;
         }
 
         // 플레이어 본인 Layer는 충돌체크에서 제외합니다
-        Physics.IgnoreLayerCollision(gameObject.layer, gameObject.layer, true);
+        Physics.IgnoreLayerCollision(gameObject.layer, shooterLayer, true);
 /*        Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Floor"), true);
         Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Item"), true);*/
     }
@@ -123,7 +129,7 @@ public class HomingMissile : NetworkBehaviour
             //Debug.Log($"호밍 디텍티드! 호밍미사일:{gameObject.layer}, 디텍티드:{collider.gameObject.layer}");
             // _target으로 설정할 오브젝트의 조건을 여기에 추가합니다.
             // 예를 들어, 태그가 "Player"이고, 네트워크 상에서 유효한 오브젝트인 경우에만 _target으로 설정할 수 있습니다.
-            if (collider.CompareTag("Player") && collider.gameObject.layer != gameObject.layer)
+            if (collider.CompareTag("Player") && collider.gameObject.layer != shooterLayer)
             {
                 _target = collider.GetComponent<PlayerServer>();
                 break; // 첫 번째로 발견된 오브젝트만 타겟으로 설정합니다.
@@ -134,11 +140,11 @@ public class HomingMissile : NetworkBehaviour
     private void RotateRocket()
     {
         var heading = _deviatedPrediction - transform.position;
-        //heading.y = 1f;
-        //Debug.Log($"_deviatedPrediction{_deviatedPrediction}, transform.position{transform.position}, heading{heading}");
         var rotation = Quaternion.LookRotation(heading);
-        //rotation = new Quaternion(rotation.x, 0, rotation.z, rotation.w);
-        //Debug.Log($"회전 rotation:{rotation}");
+
+        // 위나 아래로는 이동할 필요가 없기 때문에 Y축 회전만 하도록 만듭니다.  
+        rotation = new Quaternion(0, rotation.y, 0, rotation.w);
+
         _rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, rotation, _rotateSpeed * Time.deltaTime));
     }
 

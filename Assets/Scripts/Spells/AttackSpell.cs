@@ -34,9 +34,13 @@ public abstract class AttackSpell : NetworkBehaviour
         ulong spellOwnerClientId = GetSpellInfo().ownerPlayerClientId;
 
         // 충돌한게 공격마법일 경우, 어떤 마법이 살아남을지 계산에 들어감
-        if (collider.CompareTag("AttackSpell") || collider.CompareTag("AttackSkill"))
+        if (collider.CompareTag("AttackSpell"))
         {
             SpellHitHandlerOnServer(collider);
+        }
+        else if (collider.CompareTag("AttackSkill"))
+        {
+
         }
         // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
         else if (collider.CompareTag("Player"))

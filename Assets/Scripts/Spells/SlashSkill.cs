@@ -18,31 +18,37 @@ public class SlashSkill : NetworkBehaviour
     // 스킬 상세값 설정
     public virtual void InitSkillInfoDetail(SpellInfo spellInfoFromServer)
     {
-        if (IsClient) return;
+        if (!IsServer) return;
 
         skillInfo = new SpellInfo(spellInfoFromServer);
+        LayerMask shooterLayer;
 
         // 플레이어 Layer 설정
         switch (skillInfo.ownerPlayerClientId)
         {
             case 0:
-                gameObject.layer = LayerMask.NameToLayer("Player0");
+                gameObject.layer = LayerMask.NameToLayer("Attack Skill Player0");
+                shooterLayer = LayerMask.NameToLayer("Player0");
                 break;
             case 1:
-                gameObject.layer = LayerMask.NameToLayer("Player1");
+                gameObject.layer = LayerMask.NameToLayer("Attack Skill Player1");
+                shooterLayer = LayerMask.NameToLayer("Player1");
                 break;
             case 2:
-                gameObject.layer = LayerMask.NameToLayer("Player2");
+                gameObject.layer = LayerMask.NameToLayer("Attack Skill Player2");
+                shooterLayer = LayerMask.NameToLayer("Player2");
                 break;
             case 3:
-                gameObject.layer = LayerMask.NameToLayer("Player3");
+                gameObject.layer = LayerMask.NameToLayer("Attack Skill Player3");
+                shooterLayer = LayerMask.NameToLayer("Player3");
                 break;
             default:
+                shooterLayer = LayerMask.NameToLayer("Player");
                 break;
         }
 
         // 플레이어 본인 Layer는 충돌체크에서 제외합니다
-        Physics.IgnoreLayerCollision(gameObject.layer, gameObject.layer, true);
+        Physics.IgnoreLayerCollision(gameObject.layer, shooterLayer, true);
     }
 
     // 1. Hit(충돌) 인식
