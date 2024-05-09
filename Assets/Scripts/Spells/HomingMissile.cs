@@ -18,7 +18,7 @@ public class HomingMissile : NetworkBehaviour
     [SerializeField] private float _rotateSpeed = 95;
 
     [Header("PREDICTION")]
-    [SerializeField] private float _maxDistancePredict = 5;
+    [SerializeField] private float _maxDistancePredict = 8;
     [SerializeField] private float _minDistancePredict = 1;
     [SerializeField] private float _maxTimePrediction = 2;
     [SerializeField] private Vector3 _standardPrediction, _deviatedPrediction;
