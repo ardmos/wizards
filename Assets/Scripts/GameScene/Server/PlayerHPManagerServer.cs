@@ -47,6 +47,9 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// </summary>
     public void TakingDamage(sbyte damage, ulong clientWhoAttacked)
     {
+        // GamePlaying중이 아니면 전부 리턴. 게임이 끝나면 무적처리 되도록.
+        if (!GameManager.Instance.IsGamePlaying()) return;
+
         // 요청한 플레이어 현재 HP값 가져오기 
         playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         sbyte newPlayerHP = playerData.hp;

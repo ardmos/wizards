@@ -285,36 +285,35 @@ public class GameManager : NetworkBehaviour
     /// 3. NotifyUI에 현재 게임오버 된 플레이어와 게임오버 시킨 플레이어의 닉네임을 공유해줍니다. (게임오버 시킨 플레이어의 닉네임 공유는 아직 미구현입니다.)
     /// </summary>
     /// <param name="serverRpcParams"></param>
-    public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver, ulong clientWhoAttacked)
+    public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver, ulong clientWhoAttacked = 100)
     {
-        //Debug.Log($"UpdatePlayerGameOverOnServer. gameOver player : player{clientId}");
-
         if (NetworkManager.ConnectedClients.ContainsKey(clientWhoGameOver))
         {
             // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
             PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoGameOver);
-
             if (playerData.playerGameState == PlayerGameState.GameOver)
             {
                 Debug.Log($"player{clientWhoGameOver}는 이미 게임오버처리된 플레이어입니다.");
                 return;
             }
-
             playerData.playerGameState = PlayerGameState.GameOver;
-            //Debug.Log($"UpdatePlayerGameOverOnServer. player.clientId:{clientId}. playerGameState:{playerData.playerGameState}");
             GameMultiplayer.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
 
-            // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.(게임오버시킨사람 닉네임 공유까지는 아직 미구현)
-            GameSceneUIManager.Instance.notifyUIController.ShowGameOverPlayerClientRPC(playerData.playerName.ToString(), GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoAttacked).playerName.ToString());
+            // 접속중인 모든 Client들의 NotifyUI에 게임오버 소식을 브로드캐스트해줍니다.
+            string playerWhoAttacked = "";
+            if (clientWhoAttacked == 100) playerWhoAttacked = "\'Disconnect\'";
+            else playerWhoAttacked = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoAttacked).playerName.ToString();
+            GameSceneUIManager.Instance.notifyUIController.ShowGameOverPlayerClientRPC(playerData.playerName.ToString(), playerWhoAttacked);
 
             // 상단 UI를 위한 AlivePlayersCount 값 업데이트
             gameOverPlayerCount++;
             UpdateCurrentAlivePlayerCount();
         }
     }
-    public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver)
+/*    public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver)
     {
-        //Debug.Log($"UpdatePlayerGameOverOnServer. gameOver player : player{clientId}");
+        // GamePlaying중이 아니면 전부 리턴
+        if (gameState.Value != GameState.GamePlaying) return;
 
         if (NetworkManager.ConnectedClients.ContainsKey(clientWhoGameOver))
         {
@@ -331,14 +330,14 @@ public class GameManager : NetworkBehaviour
             //Debug.Log($"UpdatePlayerGameOverOnServer. player.clientId:{clientId}. playerGameState:{playerData.playerGameState}");
             GameMultiplayer.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
 
-            // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.(게임오버시킨사람 닉네임 공유까지는 아직 미구현)
+            // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.
             GameSceneUIManager.Instance.notifyUIController.ShowGameOverPlayerClientRPC(playerData.playerName.ToString(), "\'Disconnect\'");
 
             // 상단 UI를 위한 AlivePlayersCount 값 업데이트
             gameOverPlayerCount++;
             UpdateCurrentAlivePlayerCount();
         }
-    }
+    }*/
 
     /// <summary>
     /// 게임씬 종료용 클린업 메서드. 
