@@ -1,3 +1,4 @@
+using CartoonFX;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,11 @@ public class DamageTextUIController : MonoBehaviour
         GameObject damageTextObj = Instantiate(GameAssetsManager.Instance.gameAssets.vfx_txtDamageValue, transform.position, Quaternion.identity);
         damageTextObj.transform.SetParent(transform, false);
         damageTextObj.transform.localPosition = Vector3.zero;
-        DamageTextUI damageTextUI = damageTextObj.GetComponent<DamageTextUI>();
-        damageTextUI.Setup(damageAmount);       
+        /*        DamageTextUI damageTextUI = damageTextObj.GetComponent<DamageTextUI>();
+                damageTextUI.Setup(damageAmount);       */
+        if(damageTextObj.TryGetComponent<CFXR_ParticleText>(out CFXR_ParticleText damageTextUI))
+        {
+            damageTextUI.UpdateText(damageAmount.ToString());
+        }
     } 
 }

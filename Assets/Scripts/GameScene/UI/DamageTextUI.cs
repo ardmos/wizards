@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
-
+/// <summary>
+/// 안쓰는 스크립트 입니다. 이 스크립트를 사용하는 프리팹과 함께 삭제해도 됩니다.
+/// </summary>
 public class DamageTextUI : MonoBehaviour
 {
     private const float DISAPPEAR_TIME_MAX = 0.8f;
