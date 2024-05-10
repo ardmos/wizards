@@ -121,7 +121,7 @@ public class PopupWinUIController : MonoBehaviour
     private void GenerateRewardItems()
     {
         // 0. 기본 승리 소득
-        rewardItems.Add(ItemName.Item_Gold, 100);
+        AddRewardItems(ItemName.Item_Gold, 100);
 
         // 1. 스코어 기반
         int playerScore = GameMultiplayer.Instance.GetPlayerScore(ownerClientId);
@@ -129,8 +129,20 @@ public class PopupWinUIController : MonoBehaviour
         int playerGold = playerScore;
 
         Debug.Log($"player{ownerClientId}'s Score:{playerScore}");
-        if(playerGold > 0) 
-            rewardItems.Add(ItemName.Item_Gold, (ushort)playerGold);
+        if (playerGold > 0)
+            AddRewardItems(ItemName.Item_Gold, (ushort)playerGold);
+    }
+
+    private void AddRewardItems(ItemName itemName, ushort value)
+    {
+        if(rewardItems.ContainsKey(itemName))
+        {
+            rewardItems[itemName] += value;
+        }
+        else
+        {
+            rewardItems.Add(itemName, value);
+        }
     }
 
     private IEnumerator FillSliderValue(float maxValue)
