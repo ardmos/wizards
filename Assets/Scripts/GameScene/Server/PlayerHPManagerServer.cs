@@ -11,6 +11,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
 {
     PlayerInGameData playerData;
     public PlayerClient playerClient;
+    public PlayerAnimator playerAnimator;
 
     public void InitPlayerHP(ICharacter character)
     {
@@ -79,6 +80,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerClient.ActivateHitEffectClientRPC();
 
         // 피격 애니메이션 실행 Server
+        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
 
         // 피격 카메라 효과 실행 ClientRPC
         playerClient.ActivateHitCameraEffectClientRPC();
@@ -112,8 +114,9 @@ public class PlayerHPManagerServer : NetworkBehaviour
         // 게임오버 플레이어 사실을 서버에 기록.
         GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);
 
-        // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행. 
-        GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(OwnerClientId, PlayerMoveAnimState.GameOver);
+        // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행.  애니메이션 실행은 PlayerMovementServer에서 해줍니다
+        //GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(OwnerClientId, PlayerMoveAnimState.GameOver);
+        //playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
 
         // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
         playerClient.SetPlayerGameOverClientRPC();

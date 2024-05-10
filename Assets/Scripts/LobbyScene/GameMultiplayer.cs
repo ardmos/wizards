@@ -140,7 +140,7 @@ public class GameMultiplayer : NetworkBehaviour
         {
             clientId = serverRpcParams.Receive.SenderClientId,
             characterClass = playerData.characterClass,
-            playerMoveAnimState = PlayerMoveAnimState.Idle,
+            //playerMoveAnimState = PlayerMoveAnimState.Idle,
             playerGameState = PlayerGameState.Playing,
             playerName = playerData.playerName
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
@@ -218,14 +218,14 @@ public class GameMultiplayer : NetworkBehaviour
     /// </summary>
     /// <param name="clientId">플레이어 캐릭터 특정</param>
     /// <param name="playerAnimState">실행시키고싶은 애니메이션 state</param>
-    public void UpdatePlayerMoveAnimStateOnServer(ulong clientId, PlayerMoveAnimState playerMoveAnimState)
+/*    public void UpdatePlayerMoveAnimStateOnServer(ulong clientId, PlayerMoveAnimState playerMoveAnimState)
     {
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
         playerData.playerMoveAnimState = playerMoveAnimState;
         SetPlayerDataFromClientId(clientId, playerData);
         // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
         OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerMoveAnimStateEventData(clientId, playerData.playerMoveAnimState));
-    }
+    }*/
 
     /// <summary>
     /// 플레이어 보유 아이템 추가. 전부 서버에서 동작하는 메소드 입니다.

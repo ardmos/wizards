@@ -99,8 +99,9 @@ public class PlayerServer : NetworkBehaviour
     /// <param name="clientId"></param>
     public void PlayerGotHitOnServer(sbyte damage, ulong clientWhoAttacked)
     {
-        // 각 Client UI 업데이트 지시. HPBar & Damage Popup
+        // 피격 처리 총괄.
         playerHPManager.TakingDamage(damage, clientWhoAttacked);
-        playerClient.ShowDamagePopupClientRPC(damage);
+        // 각 Client UI 업데이트 지시 Damage Text Popup
+        playerClient.ShowDamageTextPopupClientRPC(damage);
     }
 }

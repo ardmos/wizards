@@ -408,6 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: 5577225032273852061}
+  playerAnimator: {fileID: 2441054021172676538}
 --- !u!114 &1344688005986462694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: 5577225032273852061}
+  playerAnimator: {fileID: 2441054021172676538}
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,6 +1024,7 @@ MonoBehaviour:
   k_IS_WALKING: 0
   k_IS_GAMEOVER: 0
   k_IS_VICTORY: 0
+  k_IS_HIT: 0
   k_IS_CASTING_ATTACK_MAGIC: 0
   k_IS_CASTING_DEFENSIVE_MAGIC: 0
   k_IS_ATTACK_VERTICAL_REAY: 0

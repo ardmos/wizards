@@ -6,7 +6,7 @@ using Unity.Netcode;
 public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializable
 {
     public ulong clientId;
-    public PlayerMoveAnimState playerMoveAnimState;
+    //public PlayerMoveAnimState playerMoveAnimState;
     //public PlayerAttackAnimState playerAttackAnimState;
     public PlayerGameState playerGameState;
     public FixedString64Bytes playerName;
@@ -24,7 +24,7 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
     {
         return
             clientId == other.clientId &&
-            playerMoveAnimState == other.playerMoveAnimState &&
+            //playerMoveAnimState == other.playerMoveAnimState &&
             //playerAttackAnimState == other.playerAttackAnimState &&
             playerGameState == other.playerGameState &&
             playerName == other.playerName &&
@@ -42,7 +42,7 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref clientId);
-        serializer.SerializeValue(ref playerMoveAnimState);
+        //serializer.SerializeValue(ref playerMoveAnimState);
         //serializer.SerializeValue(ref playerAttackAnimState);
         serializer.SerializeValue(ref playerGameState);
         serializer.SerializeValue(ref playerName);

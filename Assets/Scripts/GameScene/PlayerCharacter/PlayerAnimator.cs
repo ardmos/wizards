@@ -15,6 +15,7 @@ public class PlayerAnimator : NetworkBehaviour
     public int k_IS_WALKING;
     public int k_IS_GAMEOVER;
     public int k_IS_VICTORY;
+    public int k_IS_HIT;
 
     // Wizard_Male
     public int k_IS_CASTING_ATTACK_MAGIC;
@@ -28,6 +29,7 @@ public class PlayerAnimator : NetworkBehaviour
     public int k_IS_Dash;
 
 
+    public bool isAlreadyGameOver = false;
     private Animator animator;
 
     private void Awake()
@@ -37,6 +39,7 @@ public class PlayerAnimator : NetworkBehaviour
         k_IS_WALKING = GetAnimatorParameterID("IsWalking");
         k_IS_GAMEOVER = GetAnimatorParameterID("IsGameOver");
         k_IS_VICTORY = GetAnimatorParameterID("IsVictory");
+        k_IS_HIT = GetAnimatorParameterID("IsHit");
         k_IS_CASTING_ATTACK_MAGIC = GetAnimatorParameterID("IsCastingAttackMagic");
         k_IS_CASTING_DEFENSIVE_MAGIC = GetAnimatorParameterID("IsCastingDefensiveMagic");
         k_IS_ATTACK_VERTICAL_REAY = GetAnimatorParameterID("IsAttackVerticalReady");
@@ -49,13 +52,13 @@ public class PlayerAnimator : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         //GameMultiplayer.Instance.OnPlayerAttackAnimStateChanged += OnPlayerAttackAnimStateChanged;
-        GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged += OnPlayerMoveAnimStateChanged;
+        //GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged += OnPlayerMoveAnimStateChanged;
     }
 
     public override void OnNetworkDespawn()
     {
         //GameMultiplayer.Instance.OnPlayerAttackAnimStateChanged -= OnPlayerAttackAnimStateChanged;
-        GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged -= OnPlayerMoveAnimStateChanged;
+        //GameMultiplayer.Instance.OnPlayerMoveAnimStateChanged -= OnPlayerMoveAnimStateChanged;
     }
 
     private int GetAnimatorParameterID(string parameterName)
@@ -71,16 +74,17 @@ public class PlayerAnimator : NetworkBehaviour
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e">PlayerAnimState가 변경된 플레이어의 clientId와 PlayerMoveAnimState를 담고있습니다.</param>
-    private void OnPlayerMoveAnimStateChanged(object sender, System.EventArgs e)
+/*    private void OnPlayerMoveAnimStateChanged(object sender, System.EventArgs e)
     {
         PlayerMoveAnimStateEventData eventData = (PlayerMoveAnimStateEventData)e;
         NetworkClient networkClient = NetworkManager.ConnectedClients[eventData.clientId];
         networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdatePlayerMoveAnimationOnServer(eventData.playerMoveAnimState);
         //Debug.Log($"Player{eventData.clientId} MoveAnimation OnPlayerMoveAnimStateChanged: {eventData.playerMoveAnimState}");
-    }
-    private void UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState playerMoveAnimState)
+    }*/
+    public void UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState playerMoveAnimState)
     {
-        switch(playerMoveAnimState)
+        if (isAlreadyGameOver) return;
+        switch (playerMoveAnimState)
         {
             case PlayerMoveAnimState.Idle:
                 animator.SetBool(k_IS_WALKING, false);
@@ -89,9 +93,13 @@ public class PlayerAnimator : NetworkBehaviour
                 animator.SetBool(k_IS_WALKING, true);
                 break;
             case PlayerMoveAnimState.GameOver:
+                isAlreadyGameOver = true;
                 animator.SetBool(k_IS_WALKING, false);
                 animator.SetTrigger(k_IS_GAMEOVER);
-                break;               
+                break;
+            case PlayerMoveAnimState.Hit:
+                animator.SetTrigger(k_IS_HIT);
+                break;
         }
     }
 
