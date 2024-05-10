@@ -92,7 +92,6 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerClient.ActivateHitCameraShakeClientRPC();
 
         // 피격 사운드 효과 실행 ClientRPC
-
     }
 
 
