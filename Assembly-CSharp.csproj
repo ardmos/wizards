@@ -110,7 +110,6 @@
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Data\SpellSpecifications.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Manager\PlayerHPManagerServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\SFX\AudioSourceObject.cs" />
     <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
@@ -123,6 +122,7 @@
     <Compile Include="Assets\Scripts\GameScene\Item\Coin.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxSpellUpgrade.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Server\PlayerHPManagerServer.cs" />
     <Compile Include="Assets\Scripts\Data\UISFX_Type.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\PotionHP.cs" />

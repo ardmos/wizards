@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
+using System.Linq;
 #if UNITY_SERVER || UNITY_EDITOR
 using Unity.Services.Multiplay;
 #endif
@@ -337,6 +338,18 @@ public class GameManager : NetworkBehaviour
             gameOverPlayerCount++;
             UpdateCurrentAlivePlayerCount();
         }
+    }
+
+    /// <summary>
+    /// 게임씬 종료용 클린업 메서드. 
+    /// 서버에서 사용합니다. 
+    /// 마법 오브젝트같은것들을 정리해줍니다
+    /// </summary>
+    public void CleanUpObjects()
+    {
+        Debug.Log("GameManager CleanUpObjects called!");
+        // 현재 GameObject의 모든 자식 GameObject를 파괴
+        transform.Cast<Transform>().ToList().ForEach(child => Destroy(child.gameObject));
     }
 
     public bool IsLocalPlayerReady()
