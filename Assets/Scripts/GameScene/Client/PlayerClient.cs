@@ -29,6 +29,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
     public Material originalMaterial;
     public Material highlightMaterial;
+    public Material enemyMaterial;
     public Renderer[] ownRenderers;
 
     public CameraShake cameraShake;
@@ -48,12 +49,20 @@ public abstract class PlayerClient : NetworkBehaviour
         // 플레이어 닉네임 설정
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         userNameUIController?.Setup(playerData.playerName.ToString(), IsOwner);
-        //Debug.Log($"player Name :{playerData.playerName.ToString()}");
+
         // 오디오리스너 초기화
         audioListener.enabled = IsOwner;
 
 
-        if (!IsOwner) return;
+        if (!IsOwner) {
+            // enemy 플레이어 테두리 컬러 설정
+            foreach (Renderer renderer in ownRenderers)
+            {
+                renderer.material = enemyMaterial;
+            }
+            return;
+        }
+        
 
         Instance = this;
 

@@ -358,6 +358,7 @@ MonoBehaviour:
   gameInput: {fileID: -3331297196142442222}
   originalMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 8f5611d6ff98e58408979d37f88255c1, type: 2}
+  enemyMaterial: {fileID: 2100000, guid: 30b0263267936824f9198dad8a1d7980, type: 2}
   ownRenderers:
   - {fileID: 5741220342459673286}
   - {fileID: 5197971927643740928}
@@ -1772,6 +1773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 4487991525872706357}
+  cinemachineBasicMultiChannelPerlin: {fileID: 0}
 --- !u!1 &4876650605904619362
 GameObject:
   m_ObjectHideFlags: 0
