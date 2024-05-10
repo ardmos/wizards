@@ -123,14 +123,11 @@ public class PopupWinUIController : MonoBehaviour
         // 0. 기본 승리 소득
         AddRewardItems(ItemName.Item_Gold, 100);
 
-        // 1. 스코어 기반
+        // 1. 스코어 기반 보상 제공
         int playerScore = GameMultiplayer.Instance.GetPlayerScore(ownerClientId);
-
-        int playerGold = playerScore;
-
-        Debug.Log($"player{ownerClientId}'s Score:{playerScore}");
-        if (playerGold > 0)
-            AddRewardItems(ItemName.Item_Gold, (ushort)playerGold);
+        //Debug.Log($"player{ownerClientId}'s Score:{playerScore}");
+        if (playerScore > 0)
+            AddRewardItems(ItemName.Item_Gold, (ushort)playerScore);
     }
 
     private void AddRewardItems(ItemName itemName, ushort value)

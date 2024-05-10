@@ -22,12 +22,23 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
     }
 
+    /// <summary>
+    /// 서버에서 동작합니다
+    /// </summary>
+    /// <param name="healingValue"></param>
     public void ApplyHeal(sbyte healingValue)
     {
-        /// 힐 적용하는중
+        // 힐 적용하는중
         playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         sbyte newHP = (sbyte)(playerData.hp + healingValue);
-        if (newHP > playerData.maxHp) newHP = playerData.maxHp;   
+        if (newHP > playerData.maxHp) newHP = playerData.maxHp;
+
+        // 변경된 HP값 서버에 저장
+        playerData.hp = newHP;
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+
+        // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
+        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
     }
 
     /// <summary>
@@ -61,9 +72,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerData.hp = newPlayerHP;
         GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
 
-        // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC
-        /*NetworkClient networkClient = NetworkManager.ConnectedClients[OwnerClientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().SetHPClientRPC(playerData.hp, playerData.maxHp);*/
+        // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
         playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
 
         // 각 Client의 화면에서 쉐이더 피격 이펙트 실행 ClientRPC
