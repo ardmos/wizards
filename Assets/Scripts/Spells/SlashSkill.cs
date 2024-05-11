@@ -19,6 +19,7 @@ public class SlashSkill : NetworkBehaviour
     public virtual void InitSkillInfoDetail(SpellInfo spellInfoFromServer)
     {
         if (!IsServer) return;
+        //Debug.Log($"Slash Skill InitSkillInfoDetail ");
 
         skillInfo = new SpellInfo(spellInfoFromServer);
         LayerMask shooterLayer;

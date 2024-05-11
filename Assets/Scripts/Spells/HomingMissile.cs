@@ -63,6 +63,7 @@ public class HomingMissile : NetworkBehaviour
 
     public void SetOwner(ulong shooterClientID)
     {
+        
         _shooterClientID = shooterClientID;
      
         // 플레이어 Layer 설정
@@ -88,7 +89,7 @@ public class HomingMissile : NetworkBehaviour
                 shooterLayer = LayerMask.NameToLayer("Player");
                 break;
         }
-
+        //Debug.Log($"SetOwner HomingMissile shooterClientID{shooterClientID}, skillLayer:{gameObject.layer}, shooterLayer:{shooterLayer}");
         // 플레이어 본인 Layer는 충돌체크에서 제외합니다
         Physics.IgnoreLayerCollision(gameObject.layer, shooterLayer, true);
 /*        Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Floor"), true);
