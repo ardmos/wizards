@@ -9844,8 +9844,6 @@ MonoBehaviour:
     ownerPlayerClientId: 0
   hitVFXPrefab: {fileID: 9158866014028539438, guid: 3f5a483e59c33ab499278597fec73c7e, type: 3}
   particleSystemMain: {fileID: 8808559429368629810}
-  rb: {fileID: -6831102077331689942}
-  mCollider: {fileID: 2871868628434309456}
 --- !u!114 &7810927736608793267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9954,5 +9952,5 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 1, z: 6}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.6, y: 1, z: 3}
+  m_Center: {x: 0, y: 0, z: 0.89}

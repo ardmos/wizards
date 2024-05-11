@@ -257,6 +257,7 @@
     <None Include="Assets\RealToon\RealToon Shaders\Version 5\URP\Default\D_Default_URP.shader" />
     <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseHeightWater.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Shaders\DiffuseWaterOpaque(mine).shader" />
     <None Include="Assets\FREE CASUAL MUSIC PACK\WELCOME_CGMUSIC.txt" />
     <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseHeightWaterTwoSide.shader" />
     <None Include="Assets\Casual Puzzle World Sounds - Free Package\assetexplain.txt" />

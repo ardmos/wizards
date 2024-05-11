@@ -23,34 +23,34 @@ MonoBehaviour:
   icon_ScrollEffect_Deploy: {fileID: 21300000, guid: 542e7747006214d9480ef4dcf8d97026, type: 3}
   icon_RemoveAds: {fileID: 21300000, guid: 152333def7fb04fefaac91d426ff1535, type: 3}
   skillAssetsList:
-  - icon: {fileID: 21300000, guid: 6a708b7478cb0364b9e52e278c41fa44, type: 3}
+  - icon: {fileID: 21300000, guid: 5e82c79e89157b0498086add9ecd5e65, type: 3}
     prefab: {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
     name: FireBallLv1
-  - icon: {fileID: 21300000, guid: 5ec51d7467e669846aed6cbe4ad410ca, type: 3}
+  - icon: {fileID: 21300000, guid: aff69b164a3d00542b5daf5653188ec6, type: 3}
     prefab: {fileID: 1117804056975720, guid: 8fa6dba5ce7774349b2bee979e1b5f7d, type: 3}
     name: WaterBallLv1
-  - icon: {fileID: 21300000, guid: db141a9974c113044a9471f3e18c9b24, type: 3}
+  - icon: {fileID: 21300000, guid: 4d49b79a114ab0e4598fcaf28322f86a, type: 3}
     prefab: {fileID: 1979048356021752, guid: 1b4cdd72ad024f9498623f1be3de6dee, type: 3}
     name: IceBallLv1
-  - icon: {fileID: 21300000, guid: 15954d518ff504c88bae33048b3a26af, type: 3}
+  - icon: {fileID: 21300000, guid: bb24fc541434a604d8ede094a2ede553, type: 3}
     prefab: {fileID: 8017458754016935794, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
     name: StoneSlashAttack1_Lv1
-  - icon: {fileID: 21300000, guid: 377651a58f05df54fadbab3c35f7a702, type: 3}
+  - icon: {fileID: 21300000, guid: bb24fc541434a604d8ede094a2ede553, type: 3}
     prefab: {fileID: 8017458754016935794, guid: 9a31fb531db859447b061b42f528ba1b, type: 3}
     name: ElectricSlashAttackVertical_Lv1
-  - icon: {fileID: 21300000, guid: f1189c4b32ef221498670c54368510ca, type: 3}
+  - icon: {fileID: 21300000, guid: bee34cabe96173044bea44049f12ab02, type: 3}
     prefab: {fileID: 7647375919561907788, guid: 3ebd60e2dd154364bb905aabdf4363aa, type: 3}
     name: ElectricSlashAttackWhirlwind_Lv1
-  - icon: {fileID: 21300000, guid: 08d49f30221779549a5a2bcaab4e58b0, type: 3}
+  - icon: {fileID: 21300000, guid: 4925da1a288bf974fb7ced1ba8d0e9ac, type: 3}
     prefab: {fileID: 3367314013316085171, guid: b75a84abb1e32da4eb0abc47657ecc3c, type: 3}
     name: ElectricSlashAttackCharge_Lv1
-  - icon: {fileID: 21300000, guid: 08d49f30221779549a5a2bcaab4e58b0, type: 3}
+  - icon: {fileID: 21300000, guid: 4925da1a288bf974fb7ced1ba8d0e9ac, type: 3}
     prefab: {fileID: 7453253170470012855, guid: ed995d8b5186bfd4eb3ffdc8c40d0a7f, type: 3}
     name: ElectricSlashAttackChargeSlash_Lv1
-  - icon: {fileID: 21300000, guid: 64b54bd0434c4ed4db166708cc61867f, type: 3}
+  - icon: {fileID: 21300000, guid: 5cc43e752d94000488280ec6c21fcd31, type: 3}
     prefab: {fileID: 1289543790355709915, guid: c19006c81d1940440a99d48f64255125, type: 3}
     name: MagicShieldLv1
-  - icon: {fileID: 21300000, guid: 12c528d90e0ceb94181e3a423b9b9afd, type: 3}
+  - icon: {fileID: 21300000, guid: fc8b9e04a6ec10e4a9a6b08ee9f0dd40, type: 3}
     prefab: {fileID: 7131401307255788800, guid: 461773b960265f34ba34717eda37779e, type: 3}
     name: Dash_Lv1
   wizard_Male_ForLobby: {fileID: 7822752010955555959, guid: ed053f82f0a9cad41a1156a5d6c24080, type: 3}
