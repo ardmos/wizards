@@ -80,16 +80,16 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
 
         // 각 Client의 화면에서 쉐이더 피격 이펙트 실행 ClientRPC
-        playerClient.ActivateHitEffectClientRPC();
+        playerClient.ActivateHitByAttackEffectClientRPC();
 
         // 피격 애니메이션 실행 Server
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
 
         // 피격 카메라 효과 실행 ClientRPC
-        playerClient.ActivateHitCameraEffectClientRPC();
+        playerClient.ActivateHitByAttackCameraEffectClientRPC();
 
         // 피격 카메라 쉐이크 효과 실행 ClientRPC
-        playerClient.ActivateHitCameraShakeClientRPC();
+        playerClient.ActivateHitByAttackCameraShakeClientRPC();
 
         // 피격 사운드 효과 실행 ClientRPC
     }

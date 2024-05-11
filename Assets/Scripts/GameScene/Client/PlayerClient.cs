@@ -104,9 +104,17 @@ public abstract class PlayerClient : NetworkBehaviour
     protected abstract void GameInput_OnDefenceEnded(object sender, EventArgs e);
 
 
-    // 피격 이펙트 실행
+    // 적중 카메라 쉐이크 효과 실행
     [ClientRpc]
-    public void ActivateHitEffectClientRPC()
+    public void ActivateHitCameraShakeClientRPC()
+    {
+        if (!IsOwner) return;
+        cameraShake.ShakeCamera(3f, 0.2f);
+    }
+
+    // 피격 캐릭터 반짝 이펙트 실행
+    [ClientRpc]
+    public void ActivateHitByAttackEffectClientRPC()
     {
         foreach(Renderer renderer in ownRenderers)
         {
@@ -115,7 +123,7 @@ public abstract class PlayerClient : NetworkBehaviour
         
         StartCoroutine(ResetFlashEffect());
     }
-    // 피격 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
+    // 피격 캐릭터 반짝 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
     private IEnumerator ResetFlashEffect()
     {
         yield return new WaitForSeconds(0.1f);
@@ -128,9 +136,17 @@ public abstract class PlayerClient : NetworkBehaviour
 
     // 피격 사운드 실행
 
-    // 피격 카메라 효과 실행
+    // 피격 카메라 쉐이크 효과 실행
     [ClientRpc]
-    public void ActivateHitCameraEffectClientRPC()
+    public void ActivateHitByAttackCameraShakeClientRPC()
+    {
+        if (!IsOwner) return;
+        cameraShake.ShakeCamera(5f, 0.2f);
+    }
+
+    // 피격 카메라 테두리 효과 실행
+    [ClientRpc]
+    public void ActivateHitByAttackCameraEffectClientRPC()
     {
         // 피격당한 플레이어에만 실행될 효과
         if (!IsOwner) return;
@@ -139,15 +155,7 @@ public abstract class PlayerClient : NetworkBehaviour
         vignette.intensity.value = 0.25f;
         StartCoroutine(ResetCameraEffect(vignette));
     }
-    // 피격 카메라 쉐이크 효과 실행
-    [ClientRpc]
-    public void ActivateHitCameraShakeClientRPC()
-    {
-        if (!IsOwner) return;
-        cameraShake.ShakeCamera(5f, 0.2f);
-    }
-
-    // 피격 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
+    // 피격 테두리 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
     private IEnumerator ResetCameraEffect(Vignette vignette)
     {
         yield return new WaitForSeconds(0.1f);
