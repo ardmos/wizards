@@ -61,6 +61,7 @@ public class GameAssetsScriptableObject : ScriptableObject
     public SFX_Clip sfx_Fireball_Lv1;
     public SFX_Clip sfx_Waterball_Lv1;
     public SFX_Clip sfx_Iceball_Lv1;
+    public SFX_Clip sfx_Blizzard_Lv1;
     public SFX_Clip sfx_MagicShield_Lv1;
     public SFX_Clip sfx_ElectricSlashAttackVertical_Lv1;
     public SFX_Clip sfx_ElectricSlashAttackWhirlwind_Lv1;

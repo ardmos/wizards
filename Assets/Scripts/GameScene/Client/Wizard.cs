@@ -16,7 +16,7 @@ public class Wizard : PlayerClient, ICharacter
     public SkillName[] skills { get; set; } = new SkillName[]{
                 SkillName.FireBallLv1,
                 SkillName.WaterBallLv1,
-                SkillName.IceBallLv1,
+                SkillName.BlizzardLv1,
                 SkillName.MagicShieldLv1
                 };
 

@@ -30,6 +30,9 @@ MonoBehaviour:
     prefab: {fileID: 1117804056975720, guid: 8fa6dba5ce7774349b2bee979e1b5f7d, type: 3}
     name: WaterBallLv1
   - icon: {fileID: 21300000, guid: 4d49b79a114ab0e4598fcaf28322f86a, type: 3}
+    prefab: {fileID: 1979048356021752, guid: 1b4cdd72ad024f9498623f1be3de6dee, type: 3}
+    name: IceBallLv1
+  - icon: {fileID: 21300000, guid: 4d49b79a114ab0e4598fcaf28322f86a, type: 3}
     prefab: {fileID: 161766660727748596, guid: 6390592f6c214514a9cb25784a522633, type: 3}
     name: BlizzardLv1
   - icon: {fileID: 21300000, guid: bb24fc541434a604d8ede094a2ede553, type: 3}
@@ -84,6 +87,10 @@ MonoBehaviour:
     audioClipShooting: {fileID: 8300000, guid: 852faa6f204de434bb59b5e1e0e6011d, type: 3}
     audioClipHit: {fileID: 8300000, guid: 9bfec01df1bbf8745ac809ecd286068c, type: 3}
   sfx_Iceball_Lv1:
+    audioClipAiming: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+    audioClipShooting: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+    audioClipHit: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
+  sfx_Blizzard_Lv1:
     audioClipAiming: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
     audioClipShooting: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}
     audioClipHit: {fileID: 8300000, guid: 2d7ca83d48a787f40b9cf63a7fd8918d, type: 3}

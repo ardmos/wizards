@@ -142,6 +142,8 @@ public class GameAssetsManager : MonoBehaviour
                 return GetSFXAudioClip(gameAssets.sfx_Waterball_Lv1, sFX_Type);
             case SkillName.IceBallLv1:
                 return GetSFXAudioClip(gameAssets.sfx_Iceball_Lv1, sFX_Type);
+            case SkillName.BlizzardLv1:
+                return GetSFXAudioClip(gameAssets.sfx_Blizzard_Lv1, sFX_Type);
             case SkillName.MagicShieldLv1:
                 return GetSFXAudioClip(gameAssets.sfx_MagicShield_Lv1, sFX_Type);
             case SkillName.StoneSlashAttack1_Lv1:

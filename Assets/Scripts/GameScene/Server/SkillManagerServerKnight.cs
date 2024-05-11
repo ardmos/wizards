@@ -89,7 +89,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
 
     private void AttackWhirlwind()
     {
-        Debug.Log("2.AttackWhirlwind");
+        //Debug.Log("2.AttackWhirlwind");
         // 스킬 이펙트 생성
         SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)1));
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackWhirlwindMuzzle.position, Quaternion.identity);
