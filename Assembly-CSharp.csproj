@@ -160,6 +160,7 @@
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupEquipmentUIController.cs" />
+    <Compile Include="Assets\Scripts\Spells\BlizzardLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\PlayerMovementServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupUserInfoUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameOverUIController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupNewsUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SwitchUI.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupLookingForGameUIController.cs" />
+    <Compile Include="Assets\Scripts\Spells\AoESpell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PlayerDataManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverUIController.cs" />
     <Compile Include="Assets\Scriptable Objects\GameAssetsScriptableObject.cs" />

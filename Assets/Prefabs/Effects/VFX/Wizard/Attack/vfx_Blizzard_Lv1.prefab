@@ -4899,7 +4899,6 @@ GameObject:
   - component: {fileID: 1984875891814309306}
   - component: {fileID: 2045537341415019741}
   - component: {fileID: 1595732773164446760}
-  - component: {fileID: 6283930758528794112}
   - component: {fileID: -1106808181227733929}
   - component: {fileID: 6458100735084200001}
   - component: {fileID: 3172744077367999237}
@@ -9856,31 +9855,6 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &6283930758528794112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161766660727748596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91593162f6fc43d46be2e4b1218c3662, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellInfo:
-    spellType: 0
-    spellName: 0
-    spellState: 0
-    coolTime: 0
-    lifeTime: 0
-    moveSpeed: 0
-    price: 0
-    level: 0
-    ownerPlayerClientId: 0
-  muzzleVFXPrefab: {fileID: 0}
-  hitVFXPrefab: {fileID: 0}
-  trails: []
 --- !u!54 &-1106808181227733929
 Rigidbody:
   m_ObjectHideFlags: 0

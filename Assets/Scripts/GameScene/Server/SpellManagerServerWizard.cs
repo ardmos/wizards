@@ -78,6 +78,10 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
             ex.SetOwner(spellInfo.ownerPlayerClientId);
             ex.SetSpeed(spellInfo.moveSpeed);
         }
+        if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
+        {
+            aoESpell.SetOwner(spellInfo.ownerPlayerClientId);                 ///////<<<----------여기까지! 여기부터 하면 됩니다!
+        }
         spellObject.transform.SetParent(transform);
         // 포구에 발사체 위치시키기
         spellObject.transform.localPosition = muzzleTransform.localPosition;
@@ -118,13 +122,17 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         //Debug.Log($"{nameof(ShootSpellServerRPC)} ownerClientId {clientId}");
 
         spellObject.transform.SetParent(GameManager.Instance.transform);
+        float moveSpeed = spellObject.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
 
         // 호밍 마법이라면 호밍 시작 처리
         if (spellObject.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
+        // 설치 마법
+        else if (moveSpeed == 0) {
+            
+        }
         // 마법 발사 (기본 직선 비행 마법)
         else
-        {
-            float moveSpeed = spellObject.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
+        {           
             spellObject.GetComponent<AttackSpell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
         }
         // 포구 VFX
