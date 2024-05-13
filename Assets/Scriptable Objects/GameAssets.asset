@@ -33,6 +33,9 @@ MonoBehaviour:
     prefab: {fileID: 1979048356021752, guid: 1b4cdd72ad024f9498623f1be3de6dee, type: 3}
     name: IceBallLv1
   - icon: {fileID: 21300000, guid: 4d49b79a114ab0e4598fcaf28322f86a, type: 3}
+    prefab: {fileID: 3744133877081091469, guid: df9d3a87f4b0e974b8f039cc8332d141, type: 3}
+    name: BlizzardLv1_Ready
+  - icon: {fileID: 21300000, guid: 4d49b79a114ab0e4598fcaf28322f86a, type: 3}
     prefab: {fileID: 161766660727748596, guid: 6390592f6c214514a9cb25784a522633, type: 3}
     name: BlizzardLv1
   - icon: {fileID: 21300000, guid: bb24fc541434a604d8ede094a2ede553, type: 3}

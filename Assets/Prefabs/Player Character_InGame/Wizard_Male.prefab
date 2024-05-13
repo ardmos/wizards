@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 932501096560631534}
   - component: {fileID: 2505099717233208089}
   m_Layer: 3
-  m_Name: Muzzle
+  m_Name: Muzzle Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,12 +331,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932501096560631535}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 0.64, z: 1.8}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.15, y: 0.7, z: 1.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 932501098101691874}
+  m_Father: {fileID: 2206858287499206317}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2505099717233208089
 MonoBehaviour:
@@ -395,7 +395,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3074706332397935873}
-  - {fileID: 932501096560631534}
+  - {fileID: 2206858287499206317}
   - {fileID: 4581583772931097980}
   - {fileID: 2093146661360044936}
   - {fileID: 8909977629314831837}
@@ -504,6 +504,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSpellManagerClient: {fileID: 6631467521865965885}
   playerAnimator: {fileID: 2441054021172676538}
+  muzzlePos_Normal: {fileID: 932501096560631534}
+  muzzlePos_AoE: {fileID: 8291664480673073979}
 --- !u!114 &4579991518944106865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,6 +1051,7 @@ MonoBehaviour:
   k_IS_ATTACK_WHIRLWIND_REAY: 0
   k_IS_ATTACK_WHIRLWIND: 0
   k_IS_Dash: 0
+  isAlreadyGameOver: 0
 --- !u!114 &1844094944237122789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2019,6 +2022,39 @@ MonoBehaviour:
   m_AmplitudeGain: 0
   m_FrequencyGain: 5
   mNoiseOffsets: {x: -63.66504, y: 333.90637, z: 247.74991}
+--- !u!1 &4363402919356174613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2206858287499206317}
+  m_Layer: 3
+  m_Name: Muzzle Positions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2206858287499206317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363402919356174613}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 932501096560631534}
+  - {fileID: 8291664480673073979}
+  m_Father: {fileID: 932501098101691874}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4444680418094787280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,6 +2289,50 @@ Transform:
   - {fileID: 748043230139890548}
   m_Father: {fileID: 8597275353724057799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4944618224425930067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8291664480673073979}
+  - component: {fileID: 5589603236070350963}
+  m_Layer: 3
+  m_Name: Muzzle AoE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8291664480673073979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944618224425930067}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2206858287499206317}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5589603236070350963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944618224425930067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b684f6a58efe3fe4a9b55e5d3cacb393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5072313091138347711
 GameObject:
   m_ObjectHideFlags: 0

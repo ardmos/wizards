@@ -85,7 +85,7 @@ public abstract class AttackSpell : NetworkBehaviour
         }
 
         // 마법 충돌 사운드 재생
-        PlaySFX(SFX_Type.Hit);
+        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Hit, transform);
 
         // 적중 효과 VFX
         HitVFX(GetHitVFXPrefab(), collision);
@@ -180,8 +180,6 @@ public abstract class AttackSpell : NetworkBehaviour
         if (IsClient) return;
 
         GetComponent<Rigidbody>().AddForce(force, forceMode);
-        // 마법 발사 사운드 재생
-        PlaySFX(SFX_Type.Shooting);
     }
 
     public SpellInfo GetSpellInfo()
@@ -199,10 +197,5 @@ public abstract class AttackSpell : NetworkBehaviour
     public List<GameObject> GetTrails()
     {
         return trails;
-    }
-
-    public void PlaySFX(SFX_Type sFX_Type)
-    {
-        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, sFX_Type, transform);
     }
 }

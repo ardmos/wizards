@@ -3,6 +3,7 @@ public enum SkillName
     FireBallLv1,
     WaterBallLv1,
     IceBallLv1,
+    BlizzardLv1_Ready,
     BlizzardLv1,
     StoneSlashAttack1_Lv1,
     ElectricSlashAttackVertical_Lv1,

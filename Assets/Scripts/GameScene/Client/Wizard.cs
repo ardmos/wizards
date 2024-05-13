@@ -36,32 +36,32 @@ public class Wizard : PlayerClient, ICharacter
 
     protected override void GameInput_OnAttack1Started(object sender, EventArgs e)
     {
-        spellManagerClientWizard.CastingSpell(0);
+        spellManagerClientWizard.CastingNormalSpell(0);
     }
 
     protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-        spellManagerClientWizard.ShootSpell(0);
+        spellManagerClientWizard.ShootNormalSpell(0);
     }
 
     protected override void GameInput_OnAttack2Started(object sender, EventArgs e)
     {
-        spellManagerClientWizard.CastingSpell(1);
+        spellManagerClientWizard.CastingNormalSpell(1);
     }
 
     protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
     {
-        spellManagerClientWizard.ShootSpell(1);
+        spellManagerClientWizard.ShootNormalSpell(1);
     }
 
     protected override void GameInput_OnAttack3Started(object sender, EventArgs e)
     {
-        spellManagerClientWizard.CastingSpell(2);
+        spellManagerClientWizard.CastingBlizzard();
     }
 
     protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
     {
-        spellManagerClientWizard.ShootSpell(2);
+        spellManagerClientWizard.SetBlizzard();
     }
 
     protected override void GameInput_OnDefenceStarted(object sender, EventArgs e)

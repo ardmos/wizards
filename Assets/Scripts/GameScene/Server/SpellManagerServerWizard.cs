@@ -8,6 +8,9 @@ using UnityEngine;
 /// </summary>
 public class SpellManagerServerWizard : SkillSpellManagerServer
 {
+    public Transform muzzlePos_Normal;
+    public Transform muzzlePos_AoE;
+
     private GameObject playerCastingSpell;
 
     #region Defence Spell Cast
@@ -56,17 +59,65 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     #endregion
 
     #region Attack Spell Cast&Fire
+
+    /// <summary>
+    /// Blizzard 스킬 전용 캐스팅 메서드
+    /// </summary>
+    /// <param name="spellIndex"></param>
+    [ServerRpc (RequireOwnership = false)]
+    public void CastingBlizzardServerRPC()
+    {
+        // 범위 표시 오브젝트 생성
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
+        spellObject.GetComponent<NetworkObject>().Spawn();
+
+        if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
+        {
+            aoESpell.SetOwner(OwnerClientId);   
+        }
+
+        spellObject.transform.SetParent(transform);
+        // 포구에 발사체 위치시키기
+        spellObject.transform.localPosition = muzzlePos_AoE.localPosition;
+
+        // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
+        spellObject.transform.forward = transform.forward;
+
+        // 플레이어가 시전중인 마법에 저장하기
+        playerCastingSpell = spellObject;
+
+        // 해당 플레이어의 마법 SpellState 업데이트
+        UpdatePlayerSpellState(2, SpellState.Aiming);
+
+        // 캐스팅 애니메이션 실행
+        playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingAttackMagic);
+    }
+
+    [ServerRpc (RequireOwnership = false)]
+    public void SetBlizzardServerRPC()
+    {
+        // 1. 시전중인 범위표시 오브젝트 제거
+        Destroy(playerCastingSpell);
+        // 2. 블리자드 스킬 이펙트오브젝트 생성
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1), muzzlePos_AoE.position, Quaternion.identity);
+        spellObject.GetComponent<NetworkObject>().Spawn();
+        // 해당 SpellState 업데이트
+        UpdatePlayerSpellState(2, SpellState.Cooltime);
+        spellObject.transform.SetParent(GameManager.Instance.transform);
+
+        // 발사 애니메이션 실행
+        playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
+    }
+
+
     /// <summary>
     /// 공격 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
-    public void CastingSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
+    public void CastingSpellServerRPC(ushort spellIndex)
     {
-        // 포구 위치 찾기(Local posittion)
-        Transform muzzleTransform = GetComponentInChildren<MuzzlePos>().transform;
-
         // 발사체 오브젝트 생성
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzleTransform.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzlePos_Normal.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         // 발사체 스펙 초기화 해주기
@@ -75,19 +126,15 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         // 호밍 마법이라면 호밍 마법에 소유자 등록 & 속도 설정
         if (spellObject.TryGetComponent<HomingMissile>(out var ex))
         {
-            ex.SetOwner(spellInfo.ownerPlayerClientId);
+            ex.SetOwner(OwnerClientId);
             ex.SetSpeed(spellInfo.moveSpeed);
-        }
-        if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
-        {
-            aoESpell.SetOwner(spellInfo.ownerPlayerClientId);                 ///////<<<----------여기까지! 여기부터 하면 됩니다!
         }
         spellObject.transform.SetParent(transform);
         // 포구에 발사체 위치시키기
-        spellObject.transform.localPosition = muzzleTransform.localPosition;
+        spellObject.transform.localPosition = muzzlePos_Normal.localPosition;
 
-        // 마법 생성 사운드 재생
-        spellObject.GetComponent<AttackSpell>().PlaySFX(SFX_Type.Aiming);
+        // 마법 생성 SFX 실행
+        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Aiming, transform);
 
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = transform.forward;
@@ -135,6 +182,11 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         {           
             spellObject.GetComponent<AttackSpell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
         }
+
+        // 발사 SFX 실행 
+        SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
+        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Shooting, transform);
+
         // 포구 VFX
         MuzzleVFX(spellObject.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
 

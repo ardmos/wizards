@@ -13,12 +13,28 @@ using UnityEngine;
 /// </summary>
 public class SpellManagerClientWizard : SkillSpellManagerClient
 {
+    public void CastingBlizzard()
+    {
+        if (skillInfoListOnClient[2].spellState != SpellState.Ready) return;
+
+        // 서버에 마법 캐스팅 요청
+        skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().CastingBlizzardServerRPC();
+    }
+
+    public void SetBlizzard()
+    {
+        if (skillInfoListOnClient[2].spellState != SpellState.Aiming) return;
+
+        // 서버에 마법 발사 요청
+        skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().SetBlizzardServerRPC();
+    }
+
     #region 공격 마법 캐스팅&발사
     /// <summary>
     /// 마법 캐스팅 시작을 서버에 요청합니다. 클라이언트에서 동작하는 메소드입니다.
     /// </summary>
     /// <param name="spellIndex"></param>
-    public void CastingSpell(ushort spellIndex)
+    public void CastingNormalSpell(ushort spellIndex)
     {
         if (skillInfoListOnClient[spellIndex].spellState != SpellState.Ready) return;
 
@@ -29,7 +45,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
     /// <summary>
     /// 캐스팅중인 마법 발사. 클라이언트에서 동작하는 메소드
     /// </summary>
-    public void ShootSpell(ushort spellIndex)
+    public void ShootNormalSpell(ushort spellIndex)
     {
         if (skillInfoListOnClient[spellIndex].spellState != SpellState.Aiming) return;
 
