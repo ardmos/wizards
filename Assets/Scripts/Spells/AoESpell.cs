@@ -18,6 +18,12 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
         if (!IsServer) return;
         if (!other.CompareTag("Player")) return;
 
+        // 충돌한 플레이어 이동속도 저하.
+        if(other.TryGetComponent<PlayerMovementServer>(out PlayerMovementServer playerMovement)){
+            playerMovement.ReduceMoveSpeed(2f);
+            Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} ReduceMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+        }
+
         // 충돌한 플레이어를 리스트에 추가
         playersInArea.Add(other.gameObject);
 
@@ -32,6 +38,13 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
         if (!IsServer) return;
         if (!other.CompareTag("Player")) return;
 
+        // 충돌을 끝낸 플레이어 이동속도 복구
+        if (other.TryGetComponent<PlayerMovementServer>(out PlayerMovementServer playerMovement))
+        {
+            playerMovement.AddMoveSpeed(2f);
+            Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+        }
+
         // 충돌을 끝낸 플레이어를 리스트에서 제거
         playersInArea.Remove(other.gameObject);
 
@@ -39,6 +52,19 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
         if (playersInArea.Count == 0)
         {
             CancelInvoke(nameof(DealDamage));
+        }
+    }
+
+    public override void OnDestroy()
+    {
+        // 스킬이 사라질 때 아직 스킬의 영역에 남아있는 플레이어가 있는 경우 이동속도 복구시켜주고 스킬 제거
+        foreach (var player in playersInArea)
+        {
+            if (player.TryGetComponent<PlayerMovementServer>(out PlayerMovementServer playerMovement))
+            {
+                playerMovement.AddMoveSpeed(2f);
+                Debug.Log($"player{player.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+            }
         }
     }
 

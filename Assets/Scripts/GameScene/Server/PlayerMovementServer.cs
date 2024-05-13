@@ -58,4 +58,19 @@ public class PlayerMovementServer : NetworkBehaviour
     {
         ((ICharacter)playerClient).moveSpeed = moveSpeed;
     }
+
+    public void ReduceMoveSpeed(float reduceValue)
+    {
+        ((ICharacter)playerClient).moveSpeed -= reduceValue;
+    }
+
+    public void AddMoveSpeed(float addValue)
+    {
+        ((ICharacter)playerClient).moveSpeed += addValue; 
+    }
+
+    public float GetMoveSpeed()
+    {
+        return ((ICharacter)playerClient).moveSpeed;
+    }
 }
