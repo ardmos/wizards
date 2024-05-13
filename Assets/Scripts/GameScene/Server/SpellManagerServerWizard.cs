@@ -71,11 +71,6 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
-        if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
-        {
-            aoESpell.SetOwner(OwnerClientId);   
-        }
-
         spellObject.transform.SetParent(transform);
         // 포구에 발사체 위치시키기
         spellObject.transform.localPosition = muzzlePos_AoE.localPosition;
@@ -101,6 +96,12 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         // 2. 블리자드 스킬 이펙트오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1), muzzlePos_AoE.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
+        if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
+        {
+            aoESpell.SetOwner(OwnerClientId);
+        }
+
+        Destroy(spellObject, 4f);
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(2, SpellState.Cooltime);
         spellObject.transform.SetParent(GameManager.Instance.transform);

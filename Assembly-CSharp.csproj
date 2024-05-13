@@ -190,6 +190,7 @@
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\DailyGroupUI.cs" />
     <Compile Include="Assets\Scriptable Objects\CharacterCardInfo.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IOwnerSeter.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerClient.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
