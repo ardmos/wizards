@@ -6,9 +6,12 @@ using UnityEngine;
 public class SkillManagerServerKnight : SkillSpellManagerServer
 {
     // 대쉬 스킬 정보를 일단 하드코딩으로 넣어뒀습니다. 추후 구글시트와 JSON을 활용한 연결을 할 때 수정하면 됩니다.
-    public float dashDistance = 25f; // 대쉬 거리
-    public float dashDuration = 0.05f; // 대쉬 지속 시간
+    public float dashDistance = 50f; // 대쉬 거리
+    public float dashDuration = 0.1f; // 대쉬 지속 시간
 
+    public PlayerClient playerClient;
+
+    [Header("스킬 시전 위치")]
     // 스킬 시전 위치
     public Transform attackVerticalMuzzle;
     public Transform attackWhirlwindMuzzle;
@@ -190,8 +193,8 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
                 spellObject.transform.SetParent(transform);
                 spellObject.transform.localPosition = Vector3.zero;*/
 
-        // 스킬 이펙트 (캐릭터 트레일) 생성
-
+        // 스킬 이펙트 (캐릭터 트레일) 생성 ClientRPC
+        playerClient.ActivateDashTrailEffectClientRPC();      
     }
 
     private void Dash()
