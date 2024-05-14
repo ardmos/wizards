@@ -23,6 +23,12 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
             playerMovement.ReduceMoveSpeed(2f);
             //Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} ReduceMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
         }
+        // 프로즌 이펙트 실행
+        if (other.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        {
+            //Debug.Log($"is playerClient found: {playerClient}");
+            playerClient.ActivateFrozenEffectClientRPC();            
+        }
 
         // 충돌한 플레이어를 리스트에 추가
         playersInArea.Add(other.gameObject);
@@ -44,6 +50,12 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
             playerMovement.AddMoveSpeed(2f);
             //Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
         }
+        // 프로즌 이펙트 해제
+        if (other.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        {
+            //Debug.Log($"is playerClient found: {playerClient}");
+            playerClient.DeactivateFrozenEffectClientRPC();            
+        }
 
         // 충돌을 끝낸 플레이어를 리스트에서 제거
         playersInArea.Remove(other.gameObject);
@@ -64,6 +76,12 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
             {
                 playerMovement.AddMoveSpeed(2f);
                 //Debug.Log($"player{player.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+            }
+            // 프로즌 이펙트 해제
+            if (player.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+            {
+                //Debug.Log($"is playerClient found: {playerClient}");
+                playerClient.DeactivateFrozenEffectClientRPC();
             }
         }
     }

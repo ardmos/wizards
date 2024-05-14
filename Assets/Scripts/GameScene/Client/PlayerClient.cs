@@ -29,10 +29,13 @@ public abstract class PlayerClient : NetworkBehaviour
 
     public Material originalMaterial;
     public Material highlightMaterial;
+    public Material frozenMaterial;
     public Material enemyMaterial;
     public Renderer[] ownRenderers;
 
     public CameraShake cameraShake;
+
+    public bool isFrozen;
 
     // 플레이어가 보유한 장비 현황. 클라이언트 저장 버전. 서버측 저장버전과 동기화 시켜준다.
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
@@ -112,10 +115,33 @@ public abstract class PlayerClient : NetworkBehaviour
         cameraShake.ShakeCamera(3f, 0.2f);
     }
 
+    // 캐릭터 프로즌 이펙트 실행
+    [ClientRpc]
+    public void ActivateFrozenEffectClientRPC()
+    {
+        isFrozen = true;
+        foreach (Renderer renderer in ownRenderers)
+        {
+            renderer.material = frozenMaterial;
+        }
+    }
+    // 캐릭터 프로즌 이펙트 종료
+    [ClientRpc]
+    public void DeactivateFrozenEffectClientRPC()
+    {
+        isFrozen = false;
+        foreach (Renderer renderer in ownRenderers)
+        {
+            renderer.material = originalMaterial;
+        }
+    }
+
     // 피격 캐릭터 반짝 이펙트 실행
     [ClientRpc]
     public void ActivateHitByAttackEffectClientRPC()
     {
+        if(isFrozen) return;
+
         foreach(Renderer renderer in ownRenderers)
         {
             renderer.material = highlightMaterial;

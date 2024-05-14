@@ -20,12 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DefaultPBR
+  m_Name: Frozen Effect
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - N_F_EAL_ON
+  - N_F_GLO_ON
   - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
@@ -300,7 +301,7 @@ Material:
     - _FarDistanceMaxWidth: 10
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0
-    - _GlossColorPower: 0.2
+    - _GlossColorPower: 0.5
     - _GlossIntensity: 1
     - _GlossMapScale: 1
     - _GlossSoftness: 1
@@ -374,7 +375,7 @@ Material:
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 0
+    - _N_F_GLO: 1
     - _N_F_GLOT: 0
     - _N_F_HCS: 0
     - _N_F_HDLS: 0
