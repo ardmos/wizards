@@ -24,7 +24,10 @@ public class SkillManagerClientKnight : SkillSpellManagerClient
     // 2. 방어 스킬 시전 (대쉬)
     public void ActivateDefenceSkillOnClient()
     {
-        if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Aiming) return;
+        Debug.Log($"skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState: {skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState}");
+
+        //if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Aiming) return;
+        if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
 
         // 서버에 방어 스킬 시전 요청
         skillSpellManagerServer.GetComponent<SkillManagerServerKnight>().StartDefenceSkillServerRPC();
