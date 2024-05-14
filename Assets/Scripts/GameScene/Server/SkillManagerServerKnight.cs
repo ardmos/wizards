@@ -189,6 +189,9 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
                 // 위치 설정
                 spellObject.transform.SetParent(transform);
                 spellObject.transform.localPosition = Vector3.zero;*/
+
+        // 스킬 이펙트 (캐릭터 트레일) 생성
+
     }
 
     private void Dash()

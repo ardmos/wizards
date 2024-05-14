@@ -173,6 +173,7 @@
     <Compile Include="Assets\Scripts\Spells\AoESpell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PlayerDataManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverUIController.cs" />
+    <Compile Include="Assets\Scripts\MeshTrail.cs" />
     <Compile Include="Assets\Scriptable Objects\GameAssetsScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimState.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\Billboard.cs" />

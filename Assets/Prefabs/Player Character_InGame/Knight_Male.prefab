@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 2005663916033335820}
   - component: {fileID: -3331297196142442222}
   - component: {fileID: -589006806228386185}
+  - component: {fileID: 3743785008884993038}
   - component: {fileID: 3569301515384591240}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
@@ -367,6 +368,7 @@ MonoBehaviour:
   - {fileID: 9042863021568186041}
   - {fileID: 8870307728246101435}
   cameraShake: {fileID: 317230740408563296}
+  isFrozen: 0
   skillManagerClientKnight: {fileID: 1344688005986462694}
 --- !u!114 &5296506001102751864
 MonoBehaviour:
@@ -483,6 +485,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerClient: {fileID: 5577225032273852061}
   playerAnimator: {fileID: 2441054021172676538}
+--- !u!114 &3743785008884993038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87f21b02c24da64fba0df57c511177d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTime: 3
+  meshRefreshRate: 0.1
+  meshDestroyDelay: 3
+  positionToSpawn: {fileID: 7541386581860650261}
+  material: {fileID: 2100000, guid: 2d42899321e04934497903e0c1dc573e, type: 2}
+  shaderVarRef: _Alpha
+  shaderVarRate: 0.1
+  shaderVarRefreshRate: 0.05
+  isTrailActive: 0
+  skinnedMeshRenderers:
+  - {fileID: 5741220342459673286}
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,7 +1005,7 @@ Transform:
   m_GameObject: {fileID: 2441054021172676539}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.83, y: 0, z: -0.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
