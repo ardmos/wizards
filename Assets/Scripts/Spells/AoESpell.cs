@@ -21,7 +21,7 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
         // 충돌한 플레이어 이동속도 저하.
         if(other.TryGetComponent<PlayerMovementServer>(out PlayerMovementServer playerMovement)){
             playerMovement.ReduceMoveSpeed(2f);
-            Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} ReduceMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+            //Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} ReduceMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
         }
 
         // 충돌한 플레이어를 리스트에 추가
@@ -42,7 +42,7 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
         if (other.TryGetComponent<PlayerMovementServer>(out PlayerMovementServer playerMovement))
         {
             playerMovement.AddMoveSpeed(2f);
-            Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+            //Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
         }
 
         // 충돌을 끝낸 플레이어를 리스트에서 제거
@@ -63,7 +63,7 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
             if (player.TryGetComponent<PlayerMovementServer>(out PlayerMovementServer playerMovement))
             {
                 playerMovement.AddMoveSpeed(2f);
-                Debug.Log($"player{player.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+                //Debug.Log($"player{player.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
             }
         }
     }
