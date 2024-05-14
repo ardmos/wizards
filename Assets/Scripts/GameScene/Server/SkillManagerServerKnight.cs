@@ -114,6 +114,8 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
 
     private void AttackChargeReady()
     {
+        if(chargeEffectObject) Destroy(chargeEffectObject);
+
         // 스킬 이펙트 생성
         chargeEffectObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.ElectricSlashAttackCharge_Lv1), attackChargeReadyMuzzle.position, Quaternion.identity);
         chargeEffectObject.GetComponent<NetworkObject>().Spawn();
