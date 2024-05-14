@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: -3331297196142442222}
   - component: {fileID: -589006806228386185}
   - component: {fileID: 3743785008884993038}
+  - component: {fileID: 9133371675473809215}
   - component: {fileID: 3569301515384591240}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
@@ -357,6 +358,7 @@ MonoBehaviour:
   mRigidbody: {fileID: 4842463508567140202}
   userNameUIController: {fileID: 3360987132556806349}
   playerSpellScrollQueueManager: {fileID: 2005663916033335820}
+  meshTrail: {fileID: 3743785008884993038}
   gameInput: {fileID: -3331297196142442222}
   originalMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 8f5611d6ff98e58408979d37f88255c1, type: 2}
@@ -443,6 +445,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 2441054021172676538}
   dashDistance: 5
   dashDuration: 0.5
+  playerClient: {fileID: 5577225032273852061}
   attackVerticalMuzzle: {fileID: 7488439861874168249}
   attackWhirlwindMuzzle: {fileID: 2811791840965660635}
   attackChargeReadyMuzzle: {fileID: 5381637484461039134}
@@ -497,17 +500,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87f21b02c24da64fba0df57c511177d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTime: 3
-  meshRefreshRate: 0.1
-  meshDestroyDelay: 3
+  activeTime: 0.6
+  meshRefreshRate: 0.05
+  meshDestroyDelay: 0.6
   positionToSpawn: {fileID: 7541386581860650261}
   material: {fileID: 2100000, guid: 2d42899321e04934497903e0c1dc573e, type: 2}
   shaderVarRef: _Alpha
   shaderVarRate: 0.1
-  shaderVarRefreshRate: 0.05
+  shaderVarRefreshRate: 0.1
+  activateTrail: 0
   isTrailActive: 0
   skinnedMeshRenderers:
   - {fileID: 5741220342459673286}
+  objectPool: {fileID: 9133371675473809215}
+--- !u!114 &9133371675473809215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0789365800f8269419cd563897da4bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  poolSize: 20
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,7 +1024,7 @@ Transform:
   m_GameObject: {fileID: 2441054021172676539}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.83, y: 0, z: -0.28}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

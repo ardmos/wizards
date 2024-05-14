@@ -24,6 +24,7 @@ public abstract class PlayerClient : NetworkBehaviour
     public Rigidbody mRigidbody;
     public UserNameUIController userNameUIController;
     public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManager;
+    public MeshTrail meshTrail;
 
     public GameInput gameInput;
 
@@ -186,6 +187,12 @@ public abstract class PlayerClient : NetworkBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         vignette.intensity.value = 0f;
+    }
+
+    [ClientRpc]
+    public void ActivateDashTrailEffectClientRPC()
+    {
+        meshTrail.ActivateTrail();
     }
 
     [ClientRpc]
