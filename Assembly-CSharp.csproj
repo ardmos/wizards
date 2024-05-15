@@ -92,8 +92,8 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
-    <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerMovementClient.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\FPSUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
