@@ -56,6 +56,8 @@ public abstract class PlayerClient : NetworkBehaviour
         // 오디오리스너 초기화
         audioListener.enabled = IsOwner;
 
+        // 기본 메터리얼 초기화
+        currentMaterial = originalMaterial;
 
         if (!IsOwner) {
             // enemy 플레이어 테두리 컬러 설정
