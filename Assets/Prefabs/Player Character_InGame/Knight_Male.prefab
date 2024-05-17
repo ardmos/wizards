@@ -304,13 +304,16 @@ GameObject:
   - component: {fileID: -3331297196142442222}
   - component: {fileID: -589006806228386185}
   - component: {fileID: 3743785008884993038}
-  - component: {fileID: 9133371675473809215}
   - component: {fileID: 3569301515384591240}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
   - component: {fileID: 5033900459084263869}
   - component: {fileID: 1026839346395833499}
   - component: {fileID: 4781052245357589818}
+  - component: {fileID: 1457274930803976826}
+  - component: {fileID: 2169481987807726569}
+  - component: {fileID: 634110544893205114}
+  - component: {fileID: 3455484876619850248}
   m_Layer: 3
   m_Name: Knight_Male
   m_TagString: Player
@@ -370,7 +373,6 @@ MonoBehaviour:
   - {fileID: 9042863021568186041}
   - {fileID: 8870307728246101435}
   cameraShake: {fileID: 317230740408563296}
-  isFrozen: 0
   skillManagerClientKnight: {fileID: 1344688005986462694}
 --- !u!114 &5296506001102751864
 MonoBehaviour:
@@ -497,11 +499,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b87f21b02c24da64fba0df57c511177d, type: 3}
+  m_Script: {fileID: 11500000, guid: e38204ef2bfffab4a86dd8941f369d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 0.6
-  meshRefreshRate: 0.05
+  meshRefreshRate: 0.1
   meshDestroyDelay: 0.6
   positionToSpawn: {fileID: 7541386581860650261}
   material: {fileID: 2100000, guid: 2d42899321e04934497903e0c1dc573e, type: 2}
@@ -510,23 +512,15 @@ MonoBehaviour:
   shaderVarRefreshRate: 0.1
   activateTrail: 0
   isTrailActive: 0
-  skinnedMeshRenderers:
-  - {fileID: 5741220342459673286}
-  objectPool: {fileID: 9133371675473809215}
---- !u!114 &9133371675473809215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932501098101691884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0789365800f8269419cd563897da4bf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  poolSize: 20
+  skinnedMeshRenderer_Body: {fileID: 5741220342459673286}
+  meshFilters:
+  - {fileID: 8054143282067320778}
+  - {fileID: 6700615896992457073}
+  - {fileID: 6528604586931298931}
+  objectPool_Body: {fileID: 1457274930803976826}
+  objectPool_Helmet: {fileID: 2169481987807726569}
+  objectPool_Sword: {fileID: 634110544893205114}
+  objectPool_Shield: {fileID: 3455484876619850248}
 --- !u!114 &3569301515384591240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,6 +641,62 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 0
+--- !u!114 &1457274930803976826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1507f9e6f9fa3444809b6f6a4b50a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  poolSize: 7
+--- !u!114 &2169481987807726569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4425841f7a9d57345a6e3f3049505860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  poolSize: 7
+--- !u!114 &634110544893205114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9721b0cd3d234a42bbce5d8ac506f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  poolSize: 7
+--- !u!114 &3455484876619850248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96fd13c70c149b468555e8226f87b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  poolSize: 7
 --- !u!1 &1025514995993102176
 GameObject:
   m_ObjectHideFlags: 0

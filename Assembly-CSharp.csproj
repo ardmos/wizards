@@ -66,6 +66,7 @@
     <Compile Include="Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Manual.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\ScrollManagerServer.cs" />
+    <Compile Include="Assets\Scripts\ObjectPoolBuzzTrailShield.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupUserInfoUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameOverUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
+    <Compile Include="Assets\Scripts\ObjectPoolBuzzTrailSword.cs" />
     <Compile Include="Assets\Scripts\UGS Network\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\AnimationStarter.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupNewsUIController.cs" />
@@ -174,7 +176,6 @@
     <Compile Include="Assets\Scripts\Spells\AoESpell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PlayerDataManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverUIController.cs" />
-    <Compile Include="Assets\Scripts\MeshTrail.cs" />
     <Compile Include="Assets\Scriptable Objects\GameAssetsScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimState.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\Billboard.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Assets\Scripts\Data\AnimationStateEnums.cs" />
     <Compile Include="Assets\Scripts\Spells\StoneSlashLv1.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\ObjectPoolBuzzTrailHelmet.cs" />
     <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Test\TestNetworkUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PlayerCountUIController.cs" />
@@ -232,9 +234,11 @@
     <Compile Include="Assets\Scripts\Data\SkillName.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
+    <Compile Include="Assets\Scripts\ObjectPoolBuzzTrailBody.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillManagerServerKnight.cs" />
+    <Compile Include="Assets\Scripts\KnightBuzzMeshTrail.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\PopupSelectCharacterUIController.cs" />

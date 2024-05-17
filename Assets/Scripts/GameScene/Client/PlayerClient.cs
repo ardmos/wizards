@@ -24,7 +24,7 @@ public abstract class PlayerClient : NetworkBehaviour
     public Rigidbody mRigidbody;
     public UserNameUIController userNameUIController;
     public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManager;
-    public MeshTrail meshTrail;
+    public KnightBuzzMeshTrail meshTrail;
 
     public GameInput gameInput;
 
