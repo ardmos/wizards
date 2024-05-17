@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIManager.cs" />
     <Compile Include="Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\MiniPopupSkillInfoDetailController.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\CameraDepthSlider.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\CharacterCardController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\SelectSpellSlotUI.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\SkillGroupItemController.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Spells\IceSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverMessageTemplateUI.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\Knight.cs" />
+    <Compile Include="Assets\Scripts\Data\SkillInfoDetail.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\Coin.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxSpellUpgrade.cs" />
     <Compile Include="Assets\GPGSIds.cs" />

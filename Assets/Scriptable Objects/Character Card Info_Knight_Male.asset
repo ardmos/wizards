@@ -20,3 +20,19 @@ MonoBehaviour:
   characterDescription: Electric Knight
   characterLevel: 1
   characterSkillSet: 0600000007000000090000000b000000
+  skillInfoDetails:
+  - skillIcon: {fileID: 21300000, guid: bb24fc541434a604d8ede094a2ede553, type: 3}
+    skillName: Electric Slash
+    skillDescription: Swiftly swing an electrically charged sword to deal 1 [electric]
+      damage to enemies in front.
+  - skillIcon: {fileID: 21300000, guid: bee34cabe96173044bea44049f12ab02, type: 3}
+    skillName: Electric Whirlwind
+    skillDescription: Become a whirlwind of lightning itself, dealing 1 [electric]
+      damage to all nearby enemies.
+  - skillIcon: {fileID: 21300000, guid: 4925da1a288bf974fb7ced1ba8d0e9ac, type: 3}
+    skillName: Electric Charge Slash
+    skillDescription: Release a lightning-charged sword strike to hit distant enemies.
+      Inflicts 1 [electric] damage.
+  - skillIcon: {fileID: 21300000, guid: fc8b9e04a6ec10e4a9a6b08ee9f0dd40, type: 3}
+    skillName: Dash
+    skillDescription: Evasive skill. Quickly move forward.
