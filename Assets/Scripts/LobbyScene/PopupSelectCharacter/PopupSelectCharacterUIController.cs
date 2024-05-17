@@ -19,10 +19,10 @@ public class PopupSelectCharacterUIController : MonoBehaviour
     public Transform containerCharacterCards;
     public GameObject prefabCharacterCard;
 
-    // 화면에 보여줄 캐릭터 카드 정보들
+    [Header("화면에 보여줄 캐릭터 카드 정보들")]
     public CharacterCardInfo[] characterCardInfos;
 
-    // 선택된 캐릭터의 정보를 표시할 UI 컴포넌트들
+    [Header("선택된 캐릭터의 정보를 표시할 UI 컴포넌트들")]
     public Image imgIconRole;
     public TextMeshProUGUI txtCharacterName;
     public TextMeshProUGUI txtCharacterDescription;
@@ -31,10 +31,9 @@ public class PopupSelectCharacterUIController : MonoBehaviour
     public Image imgIconSkill3;
     public Image imgIconSkill4;
 
-
-    // 3D 캐릭터를 렌더링할 카메라
+    [Header("3D 캐릭터를 렌더링할 카메라")]
     public Camera popupSelectCharacterCamera;
-    // 기본 카메라
+    [Header("기본 카메라")]
     public Camera mainCamera;
 
     private CharacterCardController selectedCard;
@@ -47,9 +46,17 @@ public class PopupSelectCharacterUIController : MonoBehaviour
         currentClickedCard = null;
     }
 
+    public CharacterCardController GetCurrentClickedCard() 
+    {
+        return currentClickedCard;
+    }
+
     public void UpdateCurrentClickedCard(CharacterCardController characterCard)
     {
         currentClickedCard  = characterCard;
+        // 선택 카드 하이라이트 효과
+        UpdateCharacterCardsFocus();
+        // 선택 캐릭터 정보 노출
         ShowCharacterInfo(currentClickedCard.characterCardInfo);
         // 캐릭터 선택 애니메이션(승리포즈) 재생
         lobbySceneUIController.PlayAnimCharacterVictory();
@@ -57,7 +64,11 @@ public class PopupSelectCharacterUIController : MonoBehaviour
 
     private void SelectCharacter()
     {
-        if (currentClickedCard == null) return;
+        if (currentClickedCard == null) {
+            Hide();
+            return;
+        }
+
         //selectedCard?.SetFocus(false);
         selectedCard = currentClickedCard;
         //selectedCard.SetFocus(true);
@@ -114,5 +125,16 @@ public class PopupSelectCharacterUIController : MonoBehaviour
                 ShowCharacterInfo(cardInfo);
             }
         }
+    }
+
+    private void UpdateCharacterCardsFocus()
+    {
+        CharacterCardController[] formalData = containerCharacterCards.GetComponentsInChildren<CharacterCardController>();
+        foreach (CharacterCardController characterCard in formalData)
+        {
+            characterCard.SetFocus(false);
+        }
+
+        currentClickedCard.SetFocus(true);
     }
 }
