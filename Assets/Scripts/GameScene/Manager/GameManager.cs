@@ -37,11 +37,10 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
 
     [SerializeField] private ushort gameOverPlayerCount = 0;
-    [SerializeField] private float gamePlayingTimerMax = 1000000f;
+    [SerializeField] private float gamePlayingTimerMax;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
     [SerializeField] private bool isLocalPlayerReady;
     [SerializeField] private bool isBGMStarted;
-
 
     void Awake()
     {
@@ -167,60 +166,84 @@ public class GameManager : NetworkBehaviour
                 // 최후 생존
                 if (currentAlivePlayerCount.Value == 1)
                 {
+                    // Finished 스테이트로 넘겨주기
                     gameState.Value = GameState.GameFinished;
                 }
                 // 타임아웃.
                 else if (gamePlayingTimer.Value < 0f)
                 {
+                    // 스코어 기반으로 GameOver처리 판단하기. 
+                    DecideWinner();
+
+                    // Finished 스테이트로 넘겨주기
                     gameState.Value = GameState.GameFinished;
                 }
 
                 break;
             case GameState.GameFinished:
-                // 최후 생존이 타임아웃보다 우선됨.
-                // 최후 생존
-                if (currentAlivePlayerCount.Value == 1)
+
+                foreach (PlayerInGameData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
                 {
-                    // 최후 생존으로 끝난 경우. 생존자 Win 처리    <<<<<<<<----------------- 여기부터!
-                    // 생존자 PlayerData
-                    PlayerInGameData winPlayer = new PlayerInGameData();
-                    foreach (PlayerInGameData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+                    // Play중인 플레이어는 모두 승리 처리 합니다
+                    if (playerData.playerGameState == PlayerGameState.Playing)
                     {
-                        //Debug.Log($"playerData clientId:{playerData.clientId}, gameState:{playerData.playerGameState}");
-                        if (playerData.playerGameState == PlayerGameState.Playing)
-                        {
-                            winPlayer = playerData;
-                        }
+                        PlayerInGameData winPlayer = playerData;
+
+                        if (!NetworkManager.ConnectedClients.ContainsKey(winPlayer.clientId)) return;
+                        // 이미 한 번 처리된 경우는 재처리 안해줍니다 <<<-- 수정필요
+                        if (winPlayer.playerGameState == PlayerGameState.Win) return;
+
+                        // 생존자 State Win 으로 변경
+                        winPlayer.playerGameState = PlayerGameState.Win;
+                        GameMultiplayer.Instance.SetPlayerDataFromClientId(winPlayer.clientId, winPlayer);
+
+                        // 생존자 화면에 Win 팝업 실행
+                        NetworkClient networkClient = NetworkManager.ConnectedClients[winPlayer.clientId];
+                        networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameWinClientRPC();
                     }
-
-                    if (!NetworkManager.ConnectedClients.ContainsKey(winPlayer.clientId)) return;
-                    // 이미 한 번 처리된 경우는 재처리 안해줍니다 <<<-- 수정필요
-                    if (winPlayer.playerGameState == PlayerGameState.Win) return;
-
-                    // 생존자 State Win 으로 변경
-                    winPlayer.playerGameState = PlayerGameState.Win;
-                    GameMultiplayer.Instance.SetPlayerDataFromClientId(winPlayer.clientId, winPlayer);
-
-                    // 생존자 화면에 Win 팝업 실행
-                    NetworkClient networkClient = NetworkManager.ConnectedClients[winPlayer.clientId];
-                    networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameWinClientRPC();
+                    // GameOver 플레이어 게임오버 공지
+                    else if (playerData.playerGameState == PlayerGameState.GameOver)
+                    {
+                        NetworkClient networkClient = NetworkManager.ConnectedClients[playerData.clientId];
+                        networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameOverClientRPC();
+                    }
                 }
-                // 타임아웃.
-                else if (gamePlayingTimer.Value < 0f)
-                {
-                    // 타임아웃으로 끝난 경우. 생존자들 Draw. 처리
-                    // 생존자들 State Draw로 변경
-
-                    // 생존자들 화면에 Draw 팝업 실행
-
-                    // 아니면 Draw 대신에 스코어로 승패 결정
-                }
-
                 break;
             default:
                 break;
         }
         //Debug.Log(state);
+    }
+
+    /// <summary>
+    /// 스코어 기반으로 승패처리를 해주는 메서드 입니다. 
+    /// 타임아웃시 호출되어 작동합니다.
+    /// </summary>
+    private void DecideWinner()
+    {
+        // 1. 스코어 최상위 제외하면 다 게임오버 처리. 
+        // 2. 공동 1등인 경우, 2등부터 게임오버 처리.
+
+        // 게임 참가자들 스코어를 비교 정렬
+        List<PlayerInGameData> playersDataList = new List<PlayerInGameData>();
+        
+        foreach(PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+        {
+            playersDataList.Add(playerInGameData);
+        }
+
+        // 특정 int 변수인 Value를 기준으로 내림차순 정렬
+        List<PlayerInGameData> sortedList = playersDataList.OrderByDescending(data => data.score).ToList();
+
+        int topScore = sortedList[0].score;
+        foreach (PlayerInGameData playerInGameData in sortedList)
+        {
+            // 최상위 스코어자와 공동 1등이 아닌 경우 전부 게임오버 처리.
+            if(playerInGameData.score != topScore)
+            {
+                UpdatePlayerGameOverOnServer(playerInGameData.clientId);
+            }
+        }
     }
 
     // 레디상태 서버에 보고
@@ -310,34 +333,6 @@ public class GameManager : NetworkBehaviour
             UpdateCurrentAlivePlayerCount();
         }
     }
-/*    public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver)
-    {
-        // GamePlaying중이 아니면 전부 리턴
-        if (gameState.Value != GameState.GamePlaying) return;
-
-        if (NetworkManager.ConnectedClients.ContainsKey(clientWhoGameOver))
-        {
-            // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
-            PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoGameOver);
-
-            if (playerData.playerGameState == PlayerGameState.GameOver)
-            {
-                Debug.Log($"player{clientWhoGameOver}는 이미 게임오버처리된 플레이어입니다.");
-                return;
-            }
-
-            playerData.playerGameState = PlayerGameState.GameOver;
-            //Debug.Log($"UpdatePlayerGameOverOnServer. player.clientId:{clientId}. playerGameState:{playerData.playerGameState}");
-            GameMultiplayer.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
-
-            // 접속중인 모든 Client들의 NotifyUI에 현재 게임오버 된 플레이어의 닉네임을 브로드캐스트해줍니다.
-            GameSceneUIManager.Instance.notifyUIController.ShowGameOverPlayerClientRPC(playerData.playerName.ToString(), "\'Disconnect\'");
-
-            // 상단 UI를 위한 AlivePlayersCount 값 업데이트
-            gameOverPlayerCount++;
-            UpdateCurrentAlivePlayerCount();
-        }
-    }*/
 
     /// <summary>
     /// 게임씬 종료용 클린업 메서드. 

@@ -8396,7 +8396,7 @@ MonoBehaviour:
   gamePlayingTimer:
     m_InternalValue: 0
   gameOverPlayerCount: 0
-  gamePlayingTimerMax: 100
+  gamePlayingTimerMax: 10
   isLocalPlayerReady: 0
   isBGMStarted: 0
 --- !u!4 &2141758591
