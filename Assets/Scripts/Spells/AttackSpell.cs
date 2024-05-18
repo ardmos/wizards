@@ -124,7 +124,9 @@ public abstract class AttackSpell : NetworkBehaviour
     {
         ContactPoint contact = collision.contacts[0];
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        Vector3 pos = contact.point;
+        float positionYAdjustment = 1f;
+        float positionZAdjustment = -1f;
+        Vector3 pos = new Vector3(contact.point.x, contact.point.y + positionYAdjustment, contact.point.z + positionZAdjustment);
 
         if (hitVFXPrefab != null)
         {
