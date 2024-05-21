@@ -184,6 +184,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\Billboard.cs" />
     <Compile Include="Assets\Scripts\TitleScene\TitleSceneUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupWinUIController.cs" />
+    <Compile Include="Assets\Scripts\Custom UI\TouchEffectManager.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
