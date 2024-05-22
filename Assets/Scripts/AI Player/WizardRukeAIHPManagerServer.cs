@@ -1,26 +1,23 @@
 using System.Collections;
-using Unity.Collections.LowLevel.Unsafe;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-/// <summary>
-/// Player HP를  Server Auth 방식으로 관리할수 있도록 도와주는 스크립트 입니다.
-/// 서버에서 동작합니다.
-/// 각 플레이어블 캐릭터 오브젝트의 컴포넌트로 붙여서 사용합니다
-/// </summary>
-public class PlayerHPManagerServer : NetworkBehaviour
+
+public class WizardRukeAIHPManagerServer : NetworkBehaviour
 {
     PlayerInGameData playerData;
-    public PlayerClient playerClient;
+    public WizardRukeAIClient wizardRukeAIClient;
+    public WizardRukeAIServer wizardRukeAIServer;
     public PlayerAnimator playerAnimator;
 
     public void InitPlayerHP(ICharacter character)
     {
-        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        playerData.hp = character.hp; 
+        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(wizardRukeAIServer.AIClientId);
+        playerData.hp = character.hp;
         playerData.maxHp = character.maxHp;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(wizardRukeAIServer.AIClientId, playerData);
 
-        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
     }
 
     /// <summary>
@@ -30,16 +27,16 @@ public class PlayerHPManagerServer : NetworkBehaviour
     public void ApplyHeal(sbyte healingValue)
     {
         // 힐 적용하는중
-        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(wizardRukeAIServer.AIClientId);
         sbyte newHP = (sbyte)(playerData.hp + healingValue);
         if (newHP > playerData.maxHp) newHP = playerData.maxHp;
 
         // 변경된 HP값 서버에 저장
         playerData.hp = newHP;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(wizardRukeAIServer.AIClientId, playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
-        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
     }
 
     /// <summary>
@@ -51,7 +48,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         if (!GameManager.Instance.IsGamePlaying()) return;
 
         // 요청한 플레이어 현재 HP값 가져오기 
-        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(wizardRukeAIServer.AIClientId);
         sbyte newPlayerHP = playerData.hp;
 
         if (newPlayerHP == 0) return;
@@ -74,22 +71,16 @@ public class PlayerHPManagerServer : NetworkBehaviour
 
         // 변경된 HP값 서버에 저장
         playerData.hp = newPlayerHP;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(wizardRukeAIServer.AIClientId, playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
-        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
 
         // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
-        playerClient.ActivateHitByAttackEffectClientRPC();
+        wizardRukeAIClient.ActivateHitByAttackEffectClientRPC();
 
         // 피격 애니메이션 실행 Server
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
-
-        // 피격 카메라 효과 실행 ClientRPC
-        playerClient.ActivateHitByAttackCameraEffectClientRPC();
-
-        // 피격 카메라 쉐이크 효과 실행 ClientRPC
-        playerClient.ActivateHitByAttackCameraShakeClientRPC();
 
         // 피격 사운드 효과 실행 ClientRPC
     }
@@ -104,9 +95,10 @@ public class PlayerHPManagerServer : NetworkBehaviour
     {
         // 킬한 플레이어 스코어 업데이트. 킬한 플레이어가 본인일 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
         // 킬한 플레이어가 본인일 경우(ex, Water로 인한 사망)
-        if(clientWhoAttacked == OwnerClientId)
+        if (clientWhoAttacked == wizardRukeAIServer.AIClientId)
         {
-            foreach(PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList()){
+            foreach (PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+            {
                 GameMultiplayer.Instance.AddPlayerScore(playerInGameData.clientId, 300);
             }
         }
@@ -114,16 +106,8 @@ public class PlayerHPManagerServer : NetworkBehaviour
         {
             GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, 300);
         }
-        
 
         // 게임오버 플레이어 사실을 서버에 기록.
-        GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);
-
-        // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행.  애니메이션 실행은 PlayerMovementServer에서 해줍니다
-        //GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(OwnerClientId, PlayerMoveAnimState.GameOver);
-        //playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
-
-        // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
-        playerClient.SetPlayerGameOverClientRPC();
+        GameManager.Instance.UpdatePlayerGameOverOnServer(wizardRukeAIServer.AIClientId, clientWhoAttacked);
     }
 }

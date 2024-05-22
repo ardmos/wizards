@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Data\SpellSpecifications.cs" />
     <Compile Include="Assets\Scripts\GameScene\SFX\AudioSourceObject.cs" />
+    <Compile Include="Assets\Scripts\AI Player\WizardRukeAIClient.cs" />
     <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoDestructShuriken.cs" />
@@ -132,8 +133,8 @@
     <Compile Include="Assets\Scripts\Data\UISFX_Type.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\PotionHP.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupSupportUIController.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailBody.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupSupportUIController.cs" />
     <Compile Include="Assets\Scripts\Data\GraphicQualitySettingsData.cs" />
     <Compile Include="Assets\Scripts\Data\SFXType.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\TimerUIController.cs" />
@@ -163,7 +164,6 @@
     <Compile Include="Assets\Scripts\GameScene\Client\Wizard.cs" />
     <Compile Include="Assets\Scripts\Spells\SlashSkill.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
-    <Compile Include="Assets\Scripts\AI Player\SimpleAI.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
@@ -178,6 +178,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupNewsUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SwitchUI.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupLookingForGameUIController.cs" />
+    <Compile Include="Assets\Scripts\AI Player\WizardRukeAIServer.cs" />
     <Compile Include="Assets\Scripts\Spells\AoESpell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PlayerDataManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameOverUIController.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\KnightBuzzMeshTrail.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\DailyGroupUI.cs" />
+    <Compile Include="Assets\Scripts\AI Player\WizardRukeAIHPManagerServer.cs" />
     <Compile Include="Assets\Scriptable Objects\CharacterCardInfo.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IOwnerSeter.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
@@ -245,6 +247,7 @@
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillManagerServerKnight.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
+    <Compile Include="Assets\Scripts\AI Player\AIMovementServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\PopupSelectCharacterUIController.cs" />
@@ -1087,6 +1090,9 @@
     <Reference Include="Unity.2D.SpriteShape.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="NavMeshPlusEditor">
+      <HintPath>Library\ScriptAssemblies\NavMeshPlusEditor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.IK.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
     </Reference>
@@ -1155,6 +1161,9 @@
     </Reference>
     <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="NavMeshPlus">
+      <HintPath>Library\ScriptAssemblies\NavMeshPlus.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Profiling.Core">
       <HintPath>Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>

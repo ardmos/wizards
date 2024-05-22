@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class AIState
 {
-    protected SimpleAI ai;
+    protected WizardRukeAIServer ai;
 
-    public AIState(SimpleAI ai)
+    public AIState(WizardRukeAIServer ai)
     {
         this.ai = ai;
     }
@@ -18,7 +18,7 @@ public abstract class AIState
 
 public class IdleState : AIState
 {
-    public IdleState(SimpleAI ai) : base(ai) { }
+    public IdleState(WizardRukeAIServer ai) : base(ai) { }
 
     public override void Enter()
     {
@@ -52,7 +52,7 @@ public class IdleState : AIState
 
 public class MoveState : AIState
 {
-    public MoveState(SimpleAI ai) : base(ai) { }
+    public MoveState(WizardRukeAIServer ai) : base(ai) { }
 
     public override void Enter()
     {
@@ -84,7 +84,7 @@ public class MoveState : AIState
 
 public class AttackState : AIState
 {
-    public AttackState(SimpleAI ai) : base(ai) { }
+    public AttackState(WizardRukeAIServer ai) : base(ai) { }
 
     public override void Enter()
     {
