@@ -100,6 +100,7 @@
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
     <Compile Include="Assets\Scripts\AI Player\AIState.cs" />
+    <Compile Include="Assets\Scripts\AI Player\WizardRukeAISpellManagerServer.cs" />
     <Compile Include="Assets\Scripts\TitleScene\SoundManager.cs" />
     <Compile Include="Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
