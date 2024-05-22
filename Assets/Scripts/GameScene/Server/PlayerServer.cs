@@ -107,4 +107,9 @@ public class PlayerServer : NetworkBehaviour
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientWhoAttacked];
         networkClient.PlayerObject.GetComponent<PlayerClient>().ActivateHitCameraShakeClientRPC();
     }
+
+    public sbyte GetPlayerHP()
+    {
+        return playerHPManager.GetHP();
+    }
 }

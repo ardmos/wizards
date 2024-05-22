@@ -94,7 +94,10 @@ public class PlayerHPManagerServer : NetworkBehaviour
         // 피격 사운드 효과 실행 ClientRPC
     }
 
-
+    public sbyte GetHP()
+    {
+        return playerData.hp;
+    }
 
     // 게임오버 처리. 서버권한 방식.
     private void GameOver(ulong clientWhoAttacked)

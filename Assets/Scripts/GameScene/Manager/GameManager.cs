@@ -232,7 +232,7 @@ public class GameManager : NetworkBehaviour
             playersDataList.Add(playerInGameData);
         }
 
-        // 특정 int 변수인 Value를 기준으로 내림차순 정렬
+        // score를 기준으로 내림차순 정렬
         List<PlayerInGameData> sortedList = playersDataList.OrderByDescending(data => data.score).ToList();
 
         int topScore = sortedList[0].score;
