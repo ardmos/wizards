@@ -95,8 +95,8 @@ public class GameMultiplayer : NetworkBehaviour
             // 로비씬으로 이동
             LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         }
-
     }
+
     // 로비씬으로 돌아기 전 초기화
     private void CleanUp()
     {
@@ -213,21 +213,6 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     /// <summary>
-    /// 서버에서 호출해야하는 메소드. 플레이어의 이동 처리부분을 담당하는 스크립트를 따로 만드는게 좋아보인다!! 나중에 코드 정리할 때 참고해서 진행하자.
-    /// 특정 플레이어에게 이동 및 특정 자세(비 공격적) 애니메이션을 실행시켜줄 수 있는 메소드 입니다.
-    /// </summary>
-    /// <param name="clientId">플레이어 캐릭터 특정</param>
-    /// <param name="playerAnimState">실행시키고싶은 애니메이션 state</param>
-/*    public void UpdatePlayerMoveAnimStateOnServer(ulong clientId, PlayerMoveAnimState playerMoveAnimState)
-    {
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
-        playerData.playerMoveAnimState = playerMoveAnimState;
-        SetPlayerDataFromClientId(clientId, playerData);
-        // 변경내용을 서버 내의 Player들에 붙어있는 PlayerAnimator에게 알림.
-        OnPlayerMoveAnimStateChanged?.Invoke(this, new PlayerMoveAnimStateEventData(clientId, playerData.playerMoveAnimState));
-    }*/
-
-    /// <summary>
     /// 플레이어 보유 아이템 추가. 전부 서버에서 동작하는 메소드 입니다.
     /// </summary>
     [ServerRpc (RequireOwnership = false)]
@@ -292,6 +277,7 @@ public class GameMultiplayer : NetworkBehaviour
 
     public void StartClient()
     {
+        Debug.Log("StartClient()");
         NetworkManager.Singleton.OnClientConnectedCallback += Client_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartClient();

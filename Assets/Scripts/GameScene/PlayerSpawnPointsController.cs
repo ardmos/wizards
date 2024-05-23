@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerSpawnPointsController : MonoBehaviour
 {
     public Transform[] spawnPoints;
+
+    [SerializeField] private int spawnIndex = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -15,8 +17,15 @@ public class PlayerSpawnPointsController : MonoBehaviour
         }
     }
 
-    public Vector3 GetSpawnPoint(int index)
+    /*    public Vector3 GetSpawnPoint(int index)
+        {
+            return spawnPoints[index].position;
+        }*/
+
+    public Vector3 GetSpawnPoint()
     {
-        return spawnPoints[index].position;
+        Vector3 spawnPosition = spawnPoints[spawnIndex].position;
+        spawnIndex++; // 순환하도록 인덱스를 증가시킴
+        return spawnPosition;
     }
 }

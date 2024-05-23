@@ -27,7 +27,7 @@ public class PlayerServer : NetworkBehaviour
     /// </summary>
     public void InitializePlayerOnServer(ICharacter character)
     {
-        Debug.Log($"OwnerClientId{OwnerClientId} Player (class : {character.characterClass.ToString()}) InitializePlayerOnServer");
+        Debug.Log($"OwnerClientId{OwnerClientId} Player (class : {character.characterClass.ToString()}) InitializeAIPlayerOnServer");
 
         PlayerSpawnPointsController spawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
 
@@ -44,7 +44,8 @@ public class PlayerServer : NetworkBehaviour
         }
 
         // 스폰 위치 초기화   
-        transform.position = spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId));
+        //transform.position = spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId));
+        transform.position = spawnPointsController.GetSpawnPoint();
 
         // HP 초기화
         // 현재 HP 저장 및 설정

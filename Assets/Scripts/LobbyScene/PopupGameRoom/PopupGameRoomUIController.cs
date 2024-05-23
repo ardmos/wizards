@@ -38,6 +38,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 서버에선 실행해줄 필요 없는 내용입니다.
+        Debug.Log($"Start() Is Server? : {IsServer}");
+        if (IsServer) return;
         GameMultiplayer.Instance.OnSucceededToJoinMatch += OnSucceededToJoinMatch;
         GameMultiplayer.Instance.OnFailedToJoinMatch += OnFailedToJoinMatch;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged += OnPlayerListOnServerChanged;
@@ -49,8 +52,11 @@ public class PopupGameRoomUIController : NetworkBehaviour
         Hide();
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
+        // 서버에선 실행해줄 필요 없는 내용입니다.
+        Debug.Log($"OnDestroy() Is Server? : {IsServer}");
+        if (IsServer) return;
         GameMultiplayer.Instance.OnSucceededToJoinMatch -= OnSucceededToJoinMatch;
         GameMultiplayer.Instance.OnFailedToJoinMatch -= OnFailedToJoinMatch;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged -= OnPlayerListOnServerChanged;
@@ -60,6 +66,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
     private void RunStateMachine()
     {
+        // Unity Editor에서는 서버 확인이 안되기 때문에 이렇게 처리해줍니다.
+        if (!gameObject.activeSelf) return;
+
         // 1. 서버에 퇴장의사 보고 완료 됐으면 퇴장 단계 진행
         if (isCancellationRequested)
         {
@@ -71,44 +80,48 @@ public class PopupGameRoomUIController : NetworkBehaviour
             Hide();
         }
 
+        // 2. 상태에 따른 UI 설정
         switch (matchingState)
         {
+            // 아직 인원이 덜 모인 단계
             case MatchingState.WatingForPlayers:
-                // 아직 인원이 덜 모인 단계
-
-                // 1. 혹시 카운트다운이 실행중이었다면 중지.
+                // 카운트다운 UI 비활성화
                 if (isReadyCountdownUIAnimStarted)
                 {
                     StopAllCoroutines();
+                    imgReadyCountdown.fillAmount = 0f;
+                    isReadyCountdownUIAnimStarted = false;
                 }
-                imgReadyCountdown.fillAmount = 0;
-                isReadyCountdownUIAnimStarted = false;
-
-                // 2. 접속중인 인원 표시
-                byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
-                Debug.Log($"(클라이언트)현재 참여중인 총 플레이어 수 : {playerCount}");
-                txtPlayerCount.text = $"Wating For Players... ({playerCount.ToString()}/{ConnectionApprovalHandler.MaxPlayers})";
-
-                // UI에 숫자 반영 
-                ActivateToggleUI(playerCount);
-
+                // 레디 버튼 비활성화
+                btnReady.gameObject.SetActive(false);
                 break;
 
+            // 인원이 모두 모임! 레디를 기다리는 단계
             case MatchingState.WatingForReady:
-                // 인원이 모두 모여서 레디를 기다리는 단계
-
-                // 1. 카운트다운 UI 활성화
-                if(!isReadyCountdownUIAnimStarted)
+                // 카운트다운 UI 활성화
+                if (!isReadyCountdownUIAnimStarted)
+                {
                     ActivateReadyCountdownUI();
+                    isReadyCountdownUIAnimStarted = true;
+                }
+                // 레디 버튼 활성화
+                btnReady.gameObject.SetActive(true);
+                // 매칭 성공 SFX 재생
+                SoundManager.Instance?.PlayUISFX(UISFX_Type.Succeeded_Match);
                 break;
             default:
                 break;
         }
+
+        // 3. 접속중인 인원 숫자 표시
+        byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
+        Debug.Log($"(클라이언트)현재 참여중인 총 플레이어 수 : {playerCount}");
+        txtPlayerCount.text = $"Wating For Players... ({playerCount.ToString()}/{ConnectionApprovalHandler.MaxPlayers})";
+        ActivateToggleUI(playerCount);
     }
 
     private void ActivateReadyCountdownUI()
-    {
-        isReadyCountdownUIAnimStarted = true;
+    {        
         float countdownMaxTime = GameMatchReadyManager.readyCountdownMaxTime;
 
         StartCoroutine(StartCountdownAnim(countdownMaxTime));
@@ -119,10 +132,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
         float time = 0f;
         while (time <= countdownMaxTime) 
         {
+            imgReadyCountdown.fillAmount = time / countdownMaxTime;
             yield return new WaitForSeconds(Time.deltaTime);
             time += Time.deltaTime;
-
-            imgReadyCountdown.fillAmount = time / countdownMaxTime;
         }
 
         // 이때까지 레디버튼이 안눌려서 SetActive상태이면 현 플레이어를 퇴장조치 합니다
@@ -134,9 +146,6 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
     private void OnReadyChanged(object sender, System.EventArgs e)
     {
-        // 이 팝업 오브젝트가 활성화되지 않았단건 서버란 뜻. 서버에선 구치 실행해줄 필요 없는 내용입니다.
-        if (!gameObject.activeSelf) return;
-
         //Debug.Log("팝업 OnReadyChanged()");
         UpdateToggleUIState();
         RunStateMachine();
@@ -167,39 +176,28 @@ public class PopupGameRoomUIController : NetworkBehaviour
     /// </summary>
     private void OnPlayerListOnServerChanged(object sender, System.EventArgs e)     // 이름 수정 고려하기 
     {
-        // 이 팝업 오브젝트가 활성화되지 않았단건 서버란 뜻. 서버에선 구치 실행해줄 필요 없는 내용입니다.
+        // Unity Editor에서는 서버 확인이 안되기 때문에 이렇게 처리해줍니다.
         if (!gameObject.activeSelf) return;
 
         // 접속중인 플레이어 수
         byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
+        Debug.Log($"현재 참여중인 총 플레이어 수 : {playerCount}, matchingState:{matchingState}");
 
-        // 게임 인원 다 모였는지 여부에 따라 처리
-        if (playerCount == ConnectionApprovalHandler.MaxPlayers)
+        // 게임 인원 다 모이면 레디버튼 활성화
+        if (playerCount == ConnectionApprovalHandler.MaxPlayers) //테스트용 주석
+        //if(true)
         {
-            RunStateMachine();
-            // 레디 버튼 활성화
-            btnReady.gameObject.SetActive(true);
             // 레디 대기 상태로 변경
             matchingState = MatchingState.WatingForReady;
-
-            // 매칭 성공 SFX 재생
-            SoundManager.Instance?.PlayUISFX(UISFX_Type.Succeeded_Match);
         }
+        // 게임인원이 다 모이기 이전
         else
         {
-            // 레디 버튼 비활성화
-            btnReady.gameObject.SetActive(false);
             // 다시 플레이어 모집 상태로 변경
             matchingState = MatchingState.WatingForPlayers;
         }
 
-        Debug.Log($"현재 참여중인 총 플레이어 수 : {playerCount}, matchingState:{matchingState}");
         RunStateMachine();
-
-        /*        Debug.Log($"Client측 PlayerList 반영 완료. 현재 참여중인 총 플레이어 수 : {GameMultiplayer.Instance.GetPlayerCount()}");
-                matchingState = GameMatchReadyManager.Instance.GetMatchingStateOnClientSide();
-
-                RunStateMachine();*/
     }
 
 

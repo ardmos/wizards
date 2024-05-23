@@ -29,6 +29,7 @@ public class GameManager : NetworkBehaviour
     public event EventHandler OnAlivePlayerCountChanged;
 
     public AudioListener audioListenerServerOnly;
+    public PlayerSpawnPointsController spawnPointsController;
 
     [SerializeField] private NetworkVariable<GameState> gameState = new NetworkVariable<GameState>(GameState.WatingToStart);
     [SerializeField] private NetworkVariable<int> startedPlayerCount = new NetworkVariable<int>(0);
@@ -82,23 +83,53 @@ public class GameManager : NetworkBehaviour
 
     /// <summary>
     /// Game Scene 로드 완료시 실행됩니다.
-    /// 1. Player Character 로드
+    /// 1. Player Character 스폰
+    /// 2. MaxPlayers에서 모자란 숫자만큼 AI 스폰
     /// </summary>
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
+        // Player 스폰
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            // Player Character Client 저장 방식
-            //GameObject player = Instantiate(GetCurrentPlayerCharacterPrefab(GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).playerClass));
+            Debug.Log($"Player {clientId} 스폰");
             // Player Character Server 저장 방식
             Character playerClass = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).characterClass;
-            GameObject playerPrefab = GetCurrentPlayerCharacterPrefab(playerClass);
-            GameObject player = Instantiate(playerPrefab);
+            GameObject player = Instantiate(GetCurrentPlayerCharacterPrefab(playerClass));
             if (player != null)
                 player.transform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             else
                 Debug.Log($"SceneManager_OnLoadEventCompleted : player prefab load failed. prefab is null");
         }
+
+        // AI Client ID 재설정 작업부터 시작 <<<<<<<<<------
+        // AI 스폰
+        ulong availablePlayerSlots = (ulong)(ConnectionApprovalHandler.MaxPlayers - NetworkManager.Singleton.ConnectedClients.Count);
+        Debug.Log($"현재 접속한 플레이어 {NetworkManager.Singleton.ConnectedClients.Count}명. 최대 {ConnectionApprovalHandler.MaxPlayers}명에서 {availablePlayerSlots}명이 모자랍니다. 모자란만큼 AI 플레이어를 생성합니다.");
+        ulong lastClientId = NetworkManager.Singleton.ConnectedClientsIds[NetworkManager.Singleton.ConnectedClientsIds.Count-1];
+        Debug.Log($"마지막 플레이어의 ID: {lastClientId}");
+        for (ulong aiClientId = lastClientId+1; aiClientId <= lastClientId+availablePlayerSlots; aiClientId++)
+        {
+            Debug.Log($"AI Player {aiClientId} 스폰");
+
+            GameObject aiPlayer = Instantiate(GetAIPlayerCharacterPrefab());
+            if (aiPlayer == null) return;
+            
+            aiPlayer.transform.TryGetComponent<NetworkObject>(out NetworkObject aiPlayerNetworkObject);
+            if (aiPlayerNetworkObject != null)
+            {
+                aiPlayerNetworkObject.Spawn();
+                aiPlayer.transform.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer wizardRukeAIServer);
+                if(wizardRukeAIServer != null)
+                {
+                    wizardRukeAIServer.InitializeAIPlayerOnServer(aiClientId, spawnPointsController.GetSpawnPoint());
+                }
+            }   
+        }
+    }
+
+    private GameObject GetAIPlayerCharacterPrefab()
+    {
+        return GameAssetsManager.Instance.gameAssets.wizard_Male_AI;
     }
 
     private GameObject GetCurrentPlayerCharacterPrefab(Character playerClass)

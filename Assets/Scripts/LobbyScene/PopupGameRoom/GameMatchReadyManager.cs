@@ -81,6 +81,9 @@ public class GameMatchReadyManager : NetworkBehaviour
             //OnGameStarting?.Invoke(this, EventArgs.Empty); 지금은 안쓰고있습니다. BackFill 설정 다시 살릴 때 사용할것입니다.
             LoadSceneManager.LoadNetwork(LoadSceneManager.Scene.GameScene);
         }
+
+        // 테스트용 무조건 시작
+        LoadSceneManager.LoadNetwork(LoadSceneManager.Scene.GameScene);
     }
 
     // Client쪽 화면 레디 표시

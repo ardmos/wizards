@@ -49,7 +49,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         //Debug.Log($"Awake IsServer:{IsServer}");
         if (!IsServer) return;
         //Debug.Log($"Awake this is Server");
-        gameState = PlayerGameState.Playing;
+        //ulong dummyAIClientId = 3;
+        //InitializePlayerOnServer(dummyAIClientId);
+        
         SetState(new IdleState(this));
     }
 
@@ -70,26 +72,20 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     /// AI의 클라이언트 ID를 할당해줘야합니다.
     /// </summary>
     /// <param name="AIClientId"></param>
-    public void InitializePlayerOnServer(ulong AIClientId)
+    public void InitializeAIPlayerOnServer(ulong AIClientId, Vector3 spawnPos)
     {
-        Debug.Log($"WizardRukeAIServer Player{AIClientId} (class : {this.characterClass.ToString()}) InitializePlayerOnServer");
+        gameState = PlayerGameState.Playing;
 
-        PlayerSpawnPointsController spawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
+        Debug.Log($"WizardRukeAIServer Player{AIClientId} (class : {this.characterClass.ToString()}) InitializeAIPlayerOnServer");
 
         if (GameAssetsManager.Instance == null)
         {
-            Debug.Log($"{nameof(InitializePlayerOnServer)}, GameAssets를 찾지 못했습니다.");
-            return;
-        }
-
-        if (spawnPointsController == null)
-        {
-            Debug.LogError($"{nameof(InitializePlayerOnServer)}, 스폰위치를 특정하지 못했습니다.");
+            Debug.Log($"{nameof(InitializeAIPlayerOnServer)}, GameAssets를 찾지 못했습니다.");
             return;
         }
 
         // 스폰 위치 초기화   
-        transform.position = spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(AIClientId));
+        transform.position = spawnPos;// spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(AIClientId));
 
         // HP 초기화
         // 현재 HP 저장 및 설정
