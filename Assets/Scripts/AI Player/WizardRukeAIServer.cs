@@ -11,10 +11,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 {
     public PlayerServer target;
     public PlayerAnimator playerAnimator;
+    public Rigidbody rb;
     public ulong AIClientId;
 
-    [Header("Wizard Ruke의 클래스 정보들")]
-    public SpellManagerServerWizard spellManagerServerWizard;
     public Character characterClass { get; set; } = Character.Wizard;
     public sbyte hp { get; set; } = 5;
     public sbyte maxHp { get; set; } = 5;
@@ -40,19 +39,25 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     [SerializeField] private AIState currentState;
     [SerializeField] private NavMeshAgent agent;
 
+    [Header("Wizard Ruke AI용 컴포넌트들")]
+    public WizardRukeAISpellManagerServer wizardRukeAISpellManagerServer;
     public WizardRukeAIClient wizardRukeAIClient;
-    public PlayerHPManagerServer playerHPManager;
-    public SkillSpellManagerServer skillSpellManagerServer;
-    public Rigidbody rb;
+    public WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer;
 
-    void Awake()
+    public override void OnNetworkSpawn()
     {
+        //Debug.Log($"Awake IsServer:{IsServer}");
+        if (!IsServer) return;
+        //Debug.Log($"Awake this is Server");
         gameState = PlayerGameState.Playing;
         SetState(new IdleState(this));
     }
 
     private void Update()
     {
+        //Debug.Log($"IsServer:{IsServer}, IsOwnedByServer:{IsOwnedByServer}");
+        if (!IsServer) return;
+
         if (gameState == PlayerGameState.GameOver)
         {
             playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
@@ -88,10 +93,10 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
         // HP 초기화
         // 현재 HP 저장 및 설정
-        playerHPManager.InitPlayerHP(this);
+        wizardRukeAIHPManagerServer.InitPlayerHP(this);
 
         // 플레이어가 보유한 스킬 목록 저장
-        skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(this.skills);
+        wizardRukeAISpellManagerServer.InitPlayerSpellInfoArrayOnServer(this.skills);
 
         // 플레이어 Layer 설정
         switch (AIClientId)
@@ -120,7 +125,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         //transform.position += direction * moveSpeed * Time.deltaTime;
 
         //agent.isStopped = false;
-        agent.SetDestination(transform.position);
+        agent.SetDestination(target.transform.position);
+
+        //Debug.Log($"에이전트는 멈춰있는가? : {agent.isStopped}");
         // 이동 애니메이션 실행
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Walking);
     }
@@ -173,7 +180,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public void PlayerGotHitOnServer(sbyte damage, ulong clientWhoAttacked)
     {
         // 피격 처리 총괄.
-        playerHPManager.TakingDamage(damage, clientWhoAttacked);
+        wizardRukeAIHPManagerServer.TakingDamage(damage, clientWhoAttacked);
         // 각 Client UI 업데이트 지시 Damage Text Popup
         wizardRukeAIClient.ShowDamageTextPopupClientRPC(damage);
         // 맞춘 플레이어 카메라 쉐이크. AI라면 쉐이크 시킬 필요 없습니다.
@@ -186,7 +193,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
     public sbyte GetPlayerHP()
     {
-        return playerHPManager.GetHP();
+        return wizardRukeAIHPManagerServer.GetHP();
     }
 
     public ICharacter GetCharacterData()

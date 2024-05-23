@@ -27,6 +27,7 @@ public class IdleState : AIState
 
     public override void Update()
     {
+        //Debug.Log("IdleState Update");
         // »öÀû
         ai.DetectAndSetTarget();
         if(ai.target != null)
@@ -61,12 +62,13 @@ public class MoveState : AIState
 
     public override void Update()
     {
+        //Debug.Log("MoveState Update");
         ai.MoveTowardsTarget();
         float targetDistance = Vector3.Distance(ai.transform.position, ai.target.transform.position);
         if (targetDistance > ai.maxDistanceDetect)
         {
             ai.target = null;
-            Debug.Log($"target:{ai.target}");
+            Debug.Log($"Lost target!");
             ai.SetState(new IdleState(ai));
         }
 
@@ -93,6 +95,7 @@ public class AttackState : AIState
 
     public override void Update()
     {
+        //Debug.Log("AttackState Update");
         ai.AttackTarget();
         if (Vector3.Distance(ai.transform.position, ai.target.transform.position) > ai.attackRange)
         {
