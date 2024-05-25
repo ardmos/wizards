@@ -2,13 +2,13 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public class WizardRukeAIClient : MonoBehaviour
+public class WizardRukeAIClient : NetworkBehaviour
 {
-    [Header("UI 컨트롤러들")]
+    [Header("UI 컨트롤러들")]    
+    public UserNameUIController userNameUIController;
     public HPBarUIController hPBarUIController;
     public DamageTextUIController damageTextUIController;
     public Rigidbody mRigidbody;
-    public UserNameUIController userNameUIController;
     public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManager;
 
     [Header("VFX용 메터리얼들")]
@@ -20,18 +20,17 @@ public class WizardRukeAIClient : MonoBehaviour
     public Renderer[] ownRenderers;
 
     /// <summary>
-    /// 캐릭터 초기화
+    /// AI 캐릭터 이름 & 메터리얼 초기화
     /// </summary>
-    /// <param name="skills">보유 스킬</param>
     [ClientRpc]
-    public virtual void InitializeAIClientRPC(SkillName[] skills)
+    public virtual void InitializeAIClientRPC(string aiName)
     {
         Debug.Log($"WizardRuke AI Player InitializeAIClientRPC");
 
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         mRigidbody.isKinematic = false;
         // 플레이어 닉네임 설정    
-        userNameUIController?.Setup(":Wizard:", false);
+        userNameUIController?.Setup(aiName, false); 
 
         // 기본 메터리얼 초기화
         currentMaterial = originalMaterial;

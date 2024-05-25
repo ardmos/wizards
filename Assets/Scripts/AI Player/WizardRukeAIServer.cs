@@ -12,12 +12,15 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public PlayerServer target;
     public PlayerAnimator playerAnimator;
     public Rigidbody rb;
-    public ulong AIClientId;
 
-    public Character characterClass { get; set; } = Character.Wizard;
-    public sbyte hp { get; set; } = 5;
-    public sbyte maxHp { get; set; } = 5;
-    public float moveSpeed { get; set; } = 4f;
+   // PlayerInGameData하고 ICharacter하고, 플레이어 정보를 초기화할 때 혼선이 있다. 이걸 하나로 통일할 필요가 있음. 확인하기.
+    // InitializeAIPlayerOnServer 에서 전부 할당해줍니다.
+    public ulong AIClientId;
+    public Character characterClass { get; set; }
+    public sbyte hp { get; set; }
+    public sbyte maxHp { get; set; }
+    public float moveSpeed { get; set; }
+    // 이건 여기서 직접 해줍니다. 이것도 일관성이 없다.  수정 필요
     public SkillName[] skills { get; set; } = new SkillName[]{
                 SkillName.FireBallLv1,
                 SkillName.WaterBallLv1,
@@ -84,12 +87,18 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
             return;
         }
 
+        PlayerInGameData playerInGameData = GameMultiplayer.Instance.GetPlayerDataFromClientId(AIClientId);
+        SetCharacterData(playerInGameData);
+
         // 스폰 위치 초기화   
         transform.position = spawnPos;// spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(AIClientId));
 
         // HP 초기화
-        // 현재 HP 저장 및 설정
+        // 현재 HP 설정 및 UI에 반영
         wizardRukeAIHPManagerServer.InitPlayerHP(this);
+
+        // 플레이어 닉네임UI & 메터리얼 초기화
+        wizardRukeAIClient.InitializeAIClientRPC(playerInGameData.playerName.ToString());
 
         // 플레이어가 보유한 스킬 목록 저장
         wizardRukeAISpellManagerServer.InitPlayerSpellInfoArrayOnServer(this.skills);
@@ -132,7 +141,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     {
         if (Time.time > lastAttackTime + attackCooldown)
         {
-            Debug.Log("Attacking the target!");
+            //Debug.Log("Attacking the target!");
             lastAttackTime = Time.time;
         }
     }
@@ -192,11 +201,6 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         return wizardRukeAIHPManagerServer.GetHP();
     }
 
-    public ICharacter GetCharacterData()
-    {
-        throw new NotImplementedException();
-    }
-
     // 스크롤 활용. 스킬 강화 VFX 실행
     [ServerRpc(RequireOwnership = false)]
     public void StartApplyScrollVFXServerRPC()
@@ -205,6 +209,20 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         vfxHeal.GetComponent<NetworkObject>().Spawn();
         vfxHeal.transform.SetParent(transform);
         //vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
+    }
+
+    public ICharacter GetCharacterData()
+    {
+        return this;
+    }
+
+    public void SetCharacterData(PlayerInGameData characterData)
+    {
+        this.AIClientId = characterData.clientId;
+        this.characterClass = characterData.characterClass;
+        this.hp = characterData.hp;
+        this.maxHp = characterData.maxHp;
+        this.moveSpeed = characterData.moveSpeed;
     }
 }
 

@@ -24,6 +24,7 @@ public class PlayerSpawnPointsController : MonoBehaviour
 
     public Vector3 GetSpawnPoint()
     {
+        Debug.Log($"GetSpawnPoint() spawnIndex:{spawnIndex} requested!");
         Vector3 spawnPosition = spawnPoints[spawnIndex].position;
         spawnIndex++; // 순환하도록 인덱스를 증가시킴
         return spawnPosition;

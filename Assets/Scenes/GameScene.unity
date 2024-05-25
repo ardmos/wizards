@@ -3591,6 +3591,7 @@ MonoBehaviour:
   - {fileID: 1210522006}
   - {fileID: 1288332384}
   - {fileID: 1243915286}
+  spawnIndex: 0
 --- !u!1 &1061797591
 GameObject:
   m_ObjectHideFlags: 0
@@ -8759,7 +8760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioListenerServerOnly: {fileID: 2141758593}
-  spawnPointsController: {fileID: 0}
+  spawnPointsController: {fileID: 1059119763}
   gameState:
     m_InternalValue: 0
   startedPlayerCount:

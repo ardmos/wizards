@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
@@ -12,18 +13,22 @@ using UnityEngine;
 /// </summary>
 public class GameMultiplayer : NetworkBehaviour
 {
-    // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트 <<--- 여기있는 HP같은것들. 컴포넌츠 패턴으로 인터페이스를 추가하는 식으로 각자 캐릭터의 스크립트에 붙어있습니다.  이 PlayerInGameData가 필요가 없도록 하는게 깔끔해보입니다.
-    private NetworkList<PlayerInGameData> playerDataNetworkList;
-    // 플레이어들이 보유한 장비 현황
-    [SerializeField] private Dictionary<ulong, Dictionary<ItemName, ushort>> playerItemDictionaryOnServer;    
-
     public static GameMultiplayer Instance { get; private set; }
+
+    // 서버에 접속중인 플레이어들의 데이터가 담긴 리스트 <<--- 여기있는 HP같은것들. 컴포넌츠 패턴으로 인터페이스를 추가하는 식으로 각자 캐릭터의 스크립트에 붙어있습니다.  이 PlayerInGameData가 필요가 없도록 하는게 깔끔해보입니다.
+    [Header("서버에 접속중인 플레이어들의 데이터가 담긴 리스트")]
+    private NetworkList<PlayerInGameData> playerDataNetworkList;
+    [Header("플레이어들이 보유한 장비 현황")]
+    [SerializeField] private Dictionary<ulong, Dictionary<ItemName, ushort>> playerItemDictionaryOnServer;    
 
     public event EventHandler OnSucceededToJoinMatch;
     public event EventHandler OnFailedToJoinMatch;
     public event EventHandler OnPlayerListOnServerChanged;
     public event EventHandler OnPlayerMoveAnimStateChanged;
     //public event EventHandler OnPlayerAttackAnimStateChanged;
+
+    [SerializeField]private bool isTimeoutStart;
+    private ulong lastClientId;
 
     private void Awake()
     {
@@ -32,6 +37,58 @@ public class GameMultiplayer : NetworkBehaviour
         playerDataNetworkList = new NetworkList<PlayerInGameData>();
 
         playerItemDictionaryOnServer = new Dictionary<ulong, Dictionary<ItemName, ushort>>();
+
+        isTimeoutStart = false;
+    }
+
+    private void Update()
+    {
+        if (!IsServer) return;
+        // 가장 먼저 접속한 클라이언트의 접속 시간 확인
+        CheckFirstPlayerConnectionTime();
+    }
+
+    private void CheckFirstPlayerConnectionTime()
+    {
+        if (playerDataNetworkList.Count > 0 && !isTimeoutStart)
+        {
+            PlayerInGameData firstPlayer = playerDataNetworkList[0];
+            // 지정 시간( 테스트에서는 10초.) 이후 자동 시작. 빈자리는 AI로 채워준다
+            if (DateTime.Now - firstPlayer.connectionTime > TimeSpan.FromSeconds(10))
+            {
+                Debug.Log($"The first connected player{firstPlayer.clientId} has been connected for more than 10 seconds.");
+                isTimeoutStart = true;
+
+                // AI 유저 채우고 (지금은 전부 Wizard Ruke, wizard ruke ai 의 스펙 지금 여기서 설정해주고있음. 테스트 후 수정 필요)
+                ulong availablePlayerSlots = (ulong)(ConnectionApprovalHandler.MaxPlayers - NetworkManager.Singleton.ConnectedClients.Count);
+                Debug.Log($"현재 접속한 플레이어 {NetworkManager.Singleton.ConnectedClients.Count}명. 최대 {ConnectionApprovalHandler.MaxPlayers}명에서 {availablePlayerSlots}명이 모자랍니다. 모자란만큼 AI 플레이어를 생성합니다.");
+                lastClientId = NetworkManager.Singleton.ConnectedClientsIds[NetworkManager.Singleton.ConnectedClientsIds.Count - 1];
+                Debug.Log($"마지막 플레이어의 ID: {lastClientId}");
+                for (ulong aiClientId = lastClientId + 1; aiClientId <= lastClientId + availablePlayerSlots; aiClientId++)
+                {
+                    PlayerInGameData aiPlayerInGameData_WizardRuke = new PlayerInGameData()
+                    {
+                        clientId = aiClientId,
+                        playerGameState = PlayerGameState.Playing,
+                        playerName = ":Wizard Master:",
+                        characterClass = Character.Wizard,
+                        hp = 5,
+                        maxHp = 5,
+                        moveSpeed = 4
+                    };
+
+                    AddAIPlayer(aiPlayerInGameData_WizardRuke);
+                    // 추가한 AI 플레이어들 레디한걸로 등록 시키기
+                    //GameMatchReadyManager.Instance.SetAIPlayerReady(aiClientId);
+                }
+
+            }
+        }
+    }
+
+    public ulong GetLastClientId()
+    {
+        return lastClientId;
     }
 
     public override void OnNetworkSpawn()
@@ -45,12 +102,14 @@ public class GameMultiplayer : NetworkBehaviour
         Debug.Log("OnNetworkDespawn()");
         playerDataNetworkList.OnListChanged -= OnServerListChanged;
 
-        if (IsServer)   NetworkManager.Singleton.OnClientDisconnectCallback -= Server_OnClientDisconnectCallback;
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback -= Server_OnClientDisconnectCallback;
+        }
     }
 
     private void OnServerListChanged(NetworkListEvent<PlayerInGameData> changeEvent)
     {
-        //Debug.Log($"OnServerListChanged changed index: ");
         OnPlayerListOnServerChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -65,28 +124,25 @@ public class GameMultiplayer : NetworkBehaviour
     /// <summary>
     /// 게임도중 플레이어가 나갔을 경우에대한 처리입니다.
     /// </summary>
-    /// <param name="clientId"></param>
     private void Server_OnClientDisconnectCallback(ulong clientId)
     {
-        // 게임중인지 확인.
-        if (GameManager.Instance == null) { 
-            Debug.Log("유저가 나갔지만 게임씬이 아닙니다.");
-            if(GetPlayerDataIndexFromClientId(clientId) != -1) 
-                playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
-            return; 
-        }
-
-        // Game중이라면 GameManager에서 죽은걸로 처리. 어차피 재접속 안되게끔 구현할거니까 재접속시 처리는 안해도 된다. 해당 리스트 아이템을 삭제할 필요도 없다.
-        if (GetPlayerDataIndexFromClientId(clientId) != -1)
-            GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
-
-
         // 플레이어 이탈 처리
         if (GetPlayerDataIndexFromClientId(clientId) != -1)
             playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
 
+        // 게임씬이 아닌지 확인.
+        if (GameManager.Instance == null) { 
+            Debug.Log("유저가 나갔지만 게임씬이 아닙니다.");
+            return; 
+        }
+
+        // 게임 씬이라면
+        // 나간 clientId GameOver 처리
+        if (GetPlayerDataIndexFromClientId(clientId) != -1)
+            GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
 
         Debug.Log($"Server_OnClientDisconnectCallback, Player Count :{playerDataNetworkList.Count}");
+        
         // 혹시 모든 플레이어가 나갔으면, 서버도 다시 로비씬으로 돌아간다
         if (playerDataNetworkList.Count == 0)
         {
@@ -128,8 +184,7 @@ public class GameMultiplayer : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void UpdatePlayerInGameDataServerRPC(PlayerInGameData playerData, ServerRpcParams serverRpcParams = default)
     {
-        // 새로운 유저
-        // 이미 추가된 유저인지 한 번 필터링
+        // 새로운 유저인지 이미 추가된 유저인지 한 번 필터링
         if(GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).hp != 0)
         {
             Debug.Log($"플레이어{serverRpcParams.Receive.SenderClientId}는 이미 추가된 유저입니다!");
@@ -139,29 +194,43 @@ public class GameMultiplayer : NetworkBehaviour
         playerDataNetworkList.Add(new PlayerInGameData
         {
             clientId = serverRpcParams.Receive.SenderClientId,
+            // 접속시간 기록
+            connectionTime = DateTime.Now,
             characterClass = playerData.characterClass,
-            //playerMoveAnimState = PlayerMoveAnimState.Idle,
             playerGameState = PlayerGameState.Playing,
             playerName = playerData.playerName
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
         });
-        Debug.Log($"ChangePlayerClassServerRPC PlayerDataList Add complete. " +
+        Debug.Log($"GameMultiplayer.PlayerDataList Add complete. " +
             $"player{serverRpcParams.Receive.SenderClientId} Name: {playerData.playerName} Class: {playerData.characterClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
+    }
+
+    /// <summary>
+    /// AI 플레이어 추가 전용 메서드
+    /// </summary>
+    /// <param name="playerData"></param>
+    private void AddAIPlayer(PlayerInGameData playerData)
+    {
+        playerDataNetworkList.Add(playerData);
+        Debug.Log($"AI Player Add complete. " +
+            $"AI{playerData.clientId} Name: {playerData.playerName} Class: {playerData.characterClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
     }
 
     // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
     public bool IsPlayerIndexConnected(int playerIndex)
     {
-        //Debug.Log($"IsPlayerIndexConnected playerIndex: {playerIndex}, playerDataNetworkList.Count: {playerDataNetworkList.Count}");
+        Debug.Log($"IsPlayerIndexConnected playerIndex: {playerIndex}, playerDataNetworkList.Count: {playerDataNetworkList.Count}");
         return playerIndex < playerDataNetworkList.Count;
     }
 
     // 플레이어 clientID를 단서로 player Index를 찾는 메소드
     public int GetPlayerDataIndexFromClientId(ulong clientId)
     {
-        //Debug.Log("GetPlayerDataIndexFromClientId");
+        //Debug.Log($"GetPlayerDataIndexFromClientId, requested {clientId}");
         for (int i = 0; i < playerDataNetworkList.Count; i++)
         {
+            //Debug.Log($"playerDataNetworkList[{i}].playerName : {playerDataNetworkList[i].playerName}");
+            //Debug.Log($"playerDataNetworkList[{i}].clientId : {playerDataNetworkList[i].clientId}");
             if (playerDataNetworkList[i].clientId == clientId)
             {
                 return i;
@@ -230,6 +299,7 @@ public class GameMultiplayer : NetworkBehaviour
         else
             playerItemDictionaryOnServer.Add(serverRpcParams.Receive.SenderClientId, playerItemDictionary);
     }
+
     [ServerRpc(RequireOwnership = false)]
     public void DeletePlayerItemServerRPC(ItemName itemName, ServerRpcParams serverRpcParams = default)
     {
@@ -240,6 +310,7 @@ public class GameMultiplayer : NetworkBehaviour
         else 
             playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId][itemName] = 0;
     }
+
     [ServerRpc(RequireOwnership = false)]
     public void GetPlayerItemDictionaryServerRPC(ServerRpcParams serverRpcParams = default)
     {
@@ -305,9 +376,9 @@ public class GameMultiplayer : NetworkBehaviour
         //ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
         SavePlayerInGameDataOnServer(PlayerDataManager.Instance.GetPlayerInGameData());
     }
-    private void Client_OnClientDisconnectCallback(ulong obj)
+    private void Client_OnClientDisconnectCallback(ulong clientId)
     {
-        Debug.Log($"OnClientDisconnectCallback : {obj}");
+        Debug.Log($"OnClientDisconnectCallback : {clientId}");
         // 매칭 UI 숨김을 위한 이벤트 핸들러 호출. 
         OnFailedToJoinMatch?.Invoke(this, EventArgs.Empty);
     }

@@ -71,11 +71,11 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     // 현재 사용 안하는 메소드. 세이브기능 동작 확인 후 삭제하자
-    public void UpdatePlayerData(PlayerData playerData) // 이 메소드 필요 없이 아래에서 Set이름, 클래스 할 때 SavePlayerData() 호출하는방식이면 어떨까? 더 깔끔한걸로 선택하자.
+/*    public void UpdatePlayerData(PlayerData playerData) // 이 메소드 필요 없이 아래에서 Set이름, 클래스 할 때 SavePlayerData() 호출하는방식이면 어떨까? 더 깔끔한걸로 선택하자.
     {
         this.playerData = playerData;
         SavePlayerData();
-    }
+    }*/
 
     // 2. Player정보 불러오기
     /// <summary>
@@ -136,7 +136,6 @@ public class PlayerDataManager : MonoBehaviour
         return playerData.playerInGameData.characterClass; 
     }
 
-    // 필요한 메소드인지 확인.
     public PlayerInGameData GetPlayerInGameData()
     {
         return playerData.playerInGameData;

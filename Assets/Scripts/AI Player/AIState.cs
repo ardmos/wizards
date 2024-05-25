@@ -22,7 +22,7 @@ public class IdleState : AIState
 
     public override void Enter()
     {
-        Debug.Log("Entering Idle State");
+        //Debug.Log("Entering Idle State");
     }
 
     public override void Update()
@@ -47,7 +47,7 @@ public class IdleState : AIState
 
     public override void Exit()
     {
-        Debug.Log("Exiting Idle State");
+        //Debug.Log("Exiting Idle State");
     }
 }
 
@@ -57,7 +57,7 @@ public class MoveState : AIState
 
     public override void Enter()
     {
-        Debug.Log("Entering Move State");
+        //Debug.Log("Entering Move State");
     }
 
     public override void Update()
@@ -68,7 +68,7 @@ public class MoveState : AIState
         if (targetDistance > ai.maxDistanceDetect)
         {
             ai.target = null;
-            Debug.Log($"Lost target!");
+            //Debug.Log($"Lost target!");
             ai.SetState(new IdleState(ai));
         }
 
@@ -80,7 +80,7 @@ public class MoveState : AIState
 
     public override void Exit()
     {
-        Debug.Log("Exiting Move State");
+        //Debug.Log("Exiting Move State");
     }
 }
 
@@ -90,7 +90,7 @@ public class AttackState : AIState
 
     public override void Enter()
     {
-        Debug.Log("Entering Attack State");
+        //Debug.Log("Entering Attack State");
     }
 
     public override void Update()
@@ -105,7 +105,7 @@ public class AttackState : AIState
 
     public override void Exit()
     {
-        Debug.Log("Exiting Attack State");
+        //Debug.Log("Exiting Attack State");
     }
 }
 

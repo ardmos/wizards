@@ -16,13 +16,14 @@ public abstract class PlayerClient : NetworkBehaviour
     public event EventHandler OnPlayerGameOver;
     //public event EventHandler OnPlayerWin;
 
-    public AudioListener audioListener;
-
+    [Header("캐릭터용 UI 컨트롤러들")]
+    public UserNameUIController userNameUIController;
     public HPBarUIController hPBarUIController;
     public DamageTextUIController damageTextUIController;
+
     public CinemachineVirtualCamera VirtualCamera;
     public Rigidbody mRigidbody;
-    public UserNameUIController userNameUIController;
+    public AudioListener audioListener;
     public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManager;
     public KnightBuzzMeshTrail meshTrail;
 

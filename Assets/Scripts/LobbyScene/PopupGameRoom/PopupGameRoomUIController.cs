@@ -39,12 +39,12 @@ public class PopupGameRoomUIController : NetworkBehaviour
     void Start()
     {
         // 서버에선 실행해줄 필요 없는 내용입니다.
-        Debug.Log($"Start() Is Server? : {IsServer}");
+        //Debug.Log($"Start() Is Server? : {IsServer}");
         if (IsServer) return;
         GameMultiplayer.Instance.OnSucceededToJoinMatch += OnSucceededToJoinMatch;
         GameMultiplayer.Instance.OnFailedToJoinMatch += OnFailedToJoinMatch;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged += OnPlayerListOnServerChanged;
-        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyChanged;
+        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyPlayerListChanged;
 
         btnCancel.AddClickListener(CancelMatch);
         btnReady.AddClickListener(ReadyMatch);
@@ -55,14 +55,13 @@ public class PopupGameRoomUIController : NetworkBehaviour
     public override void OnDestroy()
     {
         // 서버에선 실행해줄 필요 없는 내용입니다.
-        Debug.Log($"OnDestroy() Is Server? : {IsServer}");
+        //Debug.Log($"OnDestroy() Is Server? : {IsServer}");
         if (IsServer) return;
         GameMultiplayer.Instance.OnSucceededToJoinMatch -= OnSucceededToJoinMatch;
         GameMultiplayer.Instance.OnFailedToJoinMatch -= OnFailedToJoinMatch;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged -= OnPlayerListOnServerChanged;
-        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyChanged;
+        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyPlayerListChanged;
     }
-
 
     private void RunStateMachine()
     {
@@ -114,10 +113,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         }
 
         // 3. 접속중인 인원 숫자 표시
-        byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
-        Debug.Log($"(클라이언트)현재 참여중인 총 플레이어 수 : {playerCount}");
-        txtPlayerCount.text = $"Wating For Players... ({playerCount.ToString()}/{ConnectionApprovalHandler.MaxPlayers})";
-        ActivateToggleUI(playerCount);
+        SetUIs(GameMultiplayer.Instance.GetPlayerCount());
     }
 
     private void ActivateReadyCountdownUI()
@@ -144,9 +140,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
         }
     }
 
-    private void OnReadyChanged(object sender, System.EventArgs e)
+    private void OnReadyPlayerListChanged(object sender, System.EventArgs e)
     {
-        //Debug.Log("팝업 OnReadyChanged()");
+        Debug.Log("팝업 OnReadyChanged()");
         UpdateToggleUIState();
         RunStateMachine();
     }
@@ -181,7 +177,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
         // 접속중인 플레이어 수
         byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
-        Debug.Log($"현재 참여중인 총 플레이어 수 : {playerCount}, matchingState:{matchingState}");
+        //Debug.Log($"현재 참여중인 총 플레이어 수 : {playerCount}, matchingState:{matchingState}");
 
         // 게임 인원 다 모이면 레디버튼 활성화
         if (playerCount == ConnectionApprovalHandler.MaxPlayers) //테스트용 주석
@@ -212,6 +208,13 @@ public class PopupGameRoomUIController : NetworkBehaviour
         btnReady.gameObject.SetActive(false);   
     }
 
+    public void SetUIs(byte playerCount)
+    {
+        Debug.Log($"RunStateMachine(). SetUIs(). 현재 참여중인 총 플레이어 수 : {playerCount}");
+        txtPlayerCount.text = $"Wating For Players... ({playerCount.ToString()}/{ConnectionApprovalHandler.MaxPlayers})";
+        ActivateToggleUI(playerCount);
+    }
+
     /// <summary>
     /// 매개변수로 전달된 숫자만큼 토글 오브젝트를 활성화시켜줍니다. 
     /// </summary>
@@ -233,11 +236,13 @@ public class PopupGameRoomUIController : NetworkBehaviour
     /// </summary>
     private void UpdateToggleUIState()
     {
+        Debug.Log($"UpdateToggleUIState()");
         for (int playerIndex = 0; playerIndex < toggleArrayPlayerJoined.Length; playerIndex++)
         {
             if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
             {
                 PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
+                Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManager.Instance.IsPlayerReady(playerData.clientId)}");
                 toggleArrayPlayerJoined[playerIndex].isOn = GameMatchReadyManager.Instance.IsPlayerReady(playerData.clientId);
             }
             else

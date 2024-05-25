@@ -21,7 +21,15 @@ public class GameMatchReadyManager : NetworkBehaviour
 
     public event EventHandler OnGameStarting; // 게임 입장시 더 이상의 중간 진입을 막고싶을 때 사용함. Backfill 차단.
 
-    private Dictionary<ulong, bool> playerReadyDictionary;
+    private Dictionary<ulong, bool> playerReadyDictionaryOnClient;
+    private Dictionary<ulong, bool> playerReadyDictionaryOnServer;
+
+
+    ///  여기부터!!!!!! playerReadyDictionary를 클라 서버로 나누는것부터 해주고, AI 추가 이후 레디처리부터 진행하면 됩니다 <summary>
+    ///  여기부터!!!!!! playerReadyDictionary를 클라 서버로 나누는것부터 해주고, AI 추가 이후 레디처리부터 진행하면 됩니다
+    ///  지금 AI 레디가 클라 UI에 반영이 안됩니다. 클라 누군가 레디상태를 바꿔야 보입니다
+    ///  이거 이후 누구 나갔을 때 처리 잘되도록 변경.
+    /// </summary>
 
 
     private void Awake()
@@ -77,13 +85,24 @@ public class GameMatchReadyManager : NetworkBehaviour
         if (allClientsReady)
         {
             // 1. 게임 시작 
+            LoadSceneManager.LoadNetwork(LoadSceneManager.Scene.GameScene);
+
             // Game 시작을 알림
             //OnGameStarting?.Invoke(this, EventArgs.Empty); 지금은 안쓰고있습니다. BackFill 설정 다시 살릴 때 사용할것입니다.
-            LoadSceneManager.LoadNetwork(LoadSceneManager.Scene.GameScene);
         }
+    }
 
-        // 테스트용 무조건 시작
-        LoadSceneManager.LoadNetwork(LoadSceneManager.Scene.GameScene);
+    /// <summary>
+    /// 서버AI용 레디 메서드.
+    /// </summary>
+    /// <param name="컴퓨터용클라이언트아이디"></param>
+    public void SetAIPlayerReady(ulong 컴퓨터용클라이언트아이디)
+    {
+        Debug.Log($"AI 레디 보고가 들어왔습니다. 보고자: AIClientId:{컴퓨터용클라이언트아이디}, AIplayerIndex:{GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(컴퓨터용클라이언트아이디)}");
+        // Client쪽에도 레디한 ClientId 브로드캐스트 해줌. 각자 화면에서 레디 표시 띄워줘야하기 때문
+        SetPlayerReadyClientRpc(컴퓨터용클라이언트아이디);
+        // 이 과정은 서버쪽에서만 저장하고 처리하는 거라 윗줄이 필요함.
+        playerReadyDictionary[컴퓨터용클라이언트아이디] = true;
     }
 
     // Client쪽 화면 레디 표시

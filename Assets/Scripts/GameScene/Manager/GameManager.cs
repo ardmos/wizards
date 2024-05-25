@@ -88,6 +88,8 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
+        Debug.Log("GameManager.SceneManager_OnLoadEventCompleted() Called");
+
         // Player 스폰
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
@@ -101,30 +103,30 @@ public class GameManager : NetworkBehaviour
                 Debug.Log($"SceneManager_OnLoadEventCompleted : player prefab load failed. prefab is null");
         }
 
-        // AI Client ID 재설정 작업부터 시작 <<<<<<<<<------
         // AI 스폰
-        ulong availablePlayerSlots = (ulong)(ConnectionApprovalHandler.MaxPlayers - NetworkManager.Singleton.ConnectedClients.Count);
-        Debug.Log($"현재 접속한 플레이어 {NetworkManager.Singleton.ConnectedClients.Count}명. 최대 {ConnectionApprovalHandler.MaxPlayers}명에서 {availablePlayerSlots}명이 모자랍니다. 모자란만큼 AI 플레이어를 생성합니다.");
-        ulong lastClientId = NetworkManager.Singleton.ConnectedClientsIds[NetworkManager.Singleton.ConnectedClientsIds.Count-1];
-        Debug.Log($"마지막 플레이어의 ID: {lastClientId}");
-        for (ulong aiClientId = lastClientId+1; aiClientId <= lastClientId+availablePlayerSlots; aiClientId++)
+        ulong lastClientId = GameMultiplayer.Instance.GetLastClientId();
+        ulong lastAIClientId = GameMultiplayer.Instance.GetPlayerDataNetworkList()[GameMultiplayer.Instance.GetPlayerCount()-1].clientId;
+        for (ulong aiClientId = lastClientId + 1; aiClientId <= lastAIClientId; aiClientId++)
         {
             Debug.Log($"AI Player {aiClientId} 스폰");
 
+            // 추후 직업 추가시 여기서 AI 클래스 읽어와서 프리팹 검색 후 사용해야합니다. 지금은 위저드 하나이기 때문에 이렇게 합니다. GameMultiplayer와의 연동 결속력이 너무 약함. 지금. 
             GameObject aiPlayer = Instantiate(GetAIPlayerCharacterPrefab());
             if (aiPlayer == null) return;
-            
+
             aiPlayer.transform.TryGetComponent<NetworkObject>(out NetworkObject aiPlayerNetworkObject);
             if (aiPlayerNetworkObject != null)
             {
                 aiPlayerNetworkObject.Spawn();
                 aiPlayer.transform.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer wizardRukeAIServer);
-                if(wizardRukeAIServer != null)
+                if (wizardRukeAIServer != null)
                 {
+                    //Debug.Log($"spawnPoints : {spawnPointsController.GetSpawnPoint()}");
                     wizardRukeAIServer.InitializeAIPlayerOnServer(aiClientId, spawnPointsController.GetSpawnPoint());
                 }
-            }   
+            }
         }
+        //GetLastClientId()
     }
 
     private GameObject GetAIPlayerCharacterPrefab()

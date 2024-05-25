@@ -6,8 +6,8 @@ using UnityEngine;
 public class SkillManagerServerKnight : SkillSpellManagerServer
 {
     // 대쉬 스킬 정보를 일단 하드코딩으로 넣어뒀습니다. 추후 구글시트와 JSON을 활용한 연결을 할 때 수정하면 됩니다.
-    public float dashDistance = 50f; // 대쉬 거리
-    public float dashDuration = 0.1f; // 대쉬 지속 시간
+    private float dashDistance = 50f; // 대쉬 거리
+    private float dashDuration = 0.05f; // 대쉬 지속 시간
 
     public PlayerClient playerClient;
 
@@ -46,8 +46,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
     [ServerRpc(RequireOwnership = false)]
     public void StartAttackSkillServerRPC(ushort skillIndex)
     {
-        Debug.Log("1.StartAttackSkillServerRPC");
-        // Knight_male의 세 번째 스킬은 첫 번째 스킬과 동일합니다. (전기베기1)
+        //Debug.Log("1.StartAttackSkillServerRPC");
         // 마법 시전
         switch (skillIndex)
         {
