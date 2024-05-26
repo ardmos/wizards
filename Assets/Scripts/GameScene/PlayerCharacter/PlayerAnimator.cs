@@ -100,6 +100,7 @@ public class PlayerAnimator : NetworkBehaviour
                 break;
             case PlayerMoveAnimState.Hit:
                 animator.SetTrigger(k_IS_HIT);
+                Debug.Log($"UpdatePlayerMoveAnimationOnServer playerMoveAnimState:{playerMoveAnimState}");
                 break;
         }
 
