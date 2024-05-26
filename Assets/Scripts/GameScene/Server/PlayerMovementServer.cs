@@ -16,7 +16,6 @@ public class PlayerMovementServer : NetworkBehaviour
         // GameOver상태가 아닐 때에만!)
         if (GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId).playerGameState == PlayerGameState.GameOver)
         {
-            playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
             return;
         }
 

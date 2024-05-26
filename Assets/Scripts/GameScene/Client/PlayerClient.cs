@@ -220,6 +220,7 @@ public abstract class PlayerClient : NetworkBehaviour
         // 이 게임오버 캐릭터의 소유자가 아니면 리턴. RPC라 소유자 체크 한 번 해줘야 함. 
         if (!IsOwner) return;
 
+        // GameInput에서 조작 불가하도록 설정
         OnPlayerGameOver.Invoke(this, EventArgs.Empty);
         // Popup 보여주기
         GameSceneUIManager.Instance.popupGameOverUIController.Show();

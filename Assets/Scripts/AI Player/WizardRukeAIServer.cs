@@ -65,10 +65,17 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
         if (gameState == PlayerGameState.GameOver)
         {
-            playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
             return;
         }
         currentState?.Update();
+    }
+
+    public void GameOver()
+    {
+        if (gameState != PlayerGameState.Playing) return;
+        Debug.Log($"AI Player{AIClientId} is GameOver");
+        gameState = PlayerGameState.GameOver;
+        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
     }
 
     /// <summary>
@@ -186,8 +193,8 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     {
         // 피격 처리 총괄.
         wizardRukeAIHPManagerServer.TakingDamage(damage, clientWhoAttacked);
-        // 각 Client UI 업데이트 지시 Damage Text Popup
-        wizardRukeAIClient.ShowDamageTextPopupClientRPC(damage);
+        // 각 Client UI 업데이트 지시 Damage Text Popup.  이젠 HPManager.TakingDamage에서 해줍니다.
+        //wizardRukeAIClient.ShowDamageTextPopupClientRPC(damage);
         // 맞춘 플레이어 카메라 쉐이크. AI라면 쉐이크 시킬 필요 없습니다.
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientWhoAttacked];
         if(networkClient.PlayerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
@@ -223,6 +230,16 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         this.hp = characterData.hp;
         this.maxHp = characterData.maxHp;
         this.moveSpeed = characterData.moveSpeed;
+    }
+
+    public void ReduceMoveSpeed(float value)
+    {
+        agent.speed -= value;
+    }
+
+    public void AddMoveSpeed(float value)
+    {
+        agent.speed += value;
     }
 }
 

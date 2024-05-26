@@ -65,23 +65,15 @@ public abstract class AttackSpell : NetworkBehaviour
         // AI플레이어일 경우 처리
         else if (collider.CompareTag("AI"))
         {
-            if (GetSpellInfo() == null)
-            {
-                //Debug.Log("AttackSpell Info is null");
-                return;
-            }
+            if (GetSpellInfo() == null) return;
 
-            // WizardRukeAI 확인.  추후 다른 AI추가 후 수정. 
-            collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer);
-            if (aiPlayer == null)
+            // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
+            if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
             {
-                //Debug.LogError("Player is null!");
-                return;
+                sbyte damage = (sbyte)GetSpellInfo().level;
+                // 플레이어 피격을 서버에서 처리
+                aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId);
             }
-
-            sbyte damage = (sbyte)GetSpellInfo().level;
-            // 플레이어 피격을 서버에서 처리
-            aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId);
         }
         // 기타 오브젝트 충돌
         else

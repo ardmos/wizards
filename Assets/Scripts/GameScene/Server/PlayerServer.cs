@@ -102,8 +102,8 @@ public class PlayerServer : NetworkBehaviour
     {
         // 피격 처리 총괄.
         playerHPManager.TakingDamage(damage, clientWhoAttacked);
-        // 각 Client UI 업데이트 지시 Damage Text Popup
-        playerClient.ShowDamageTextPopupClientRPC(damage);
+        // 각 Client UI 업데이트 지시 Damage Text Popup. 이젠 HPManager.TakingDamage에서 해줍니다.
+        //playerClient.ShowDamageTextPopupClientRPC(damage);
         // 맞춘 플레이어 카메라 쉐이크
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientWhoAttacked];
         networkClient.PlayerObject.GetComponent<PlayerClient>().ActivateHitCameraShakeClientRPC();

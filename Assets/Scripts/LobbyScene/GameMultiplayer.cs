@@ -54,7 +54,7 @@ public class GameMultiplayer : NetworkBehaviour
         {
             PlayerInGameData firstPlayer = playerDataNetworkList[0];
             var passedTime = DateTime.Now - firstPlayer.connectionTime;
-            Debug.Log($"최초 접속자player{firstPlayer.clientId}는 접속한지 {passedTime} 지났습니다.");
+            //Debug.Log($"최초 접속자player{firstPlayer.clientId}는 접속한지 {passedTime} 지났습니다.");
             // 지정 시간( 테스트에서는 10초.) 이후 자동 시작. 빈자리는 AI로 채워준다
             if (passedTime > TimeSpan.FromSeconds(10))
             {

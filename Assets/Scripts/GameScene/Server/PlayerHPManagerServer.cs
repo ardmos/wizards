@@ -30,7 +30,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
     public void ApplyHeal(sbyte healingValue)
     {
         // 힐 적용하는중
-        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        //playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         sbyte newHP = (sbyte)(playerData.hp + healingValue);
         if (newHP > playerData.maxHp) newHP = playerData.maxHp;
 
@@ -49,12 +49,28 @@ public class PlayerHPManagerServer : NetworkBehaviour
     {
         // GamePlaying중이 아니면 전부 리턴. 게임이 끝나면 무적처리 되도록.
         if (!GameManager.Instance.IsGamePlaying()) return;
+        //playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        if (playerData.playerGameState != PlayerGameState.Playing) return;
+
+        // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
+        playerClient.ActivateHitByAttackEffectClientRPC();
+
+        // 피격 애니메이션 실행 Server
+        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
+
+        // 피격 카메라 효과 실행 ClientRPC
+        playerClient.ActivateHitByAttackCameraEffectClientRPC();
+
+        // 피격 카메라 쉐이크 효과 실행 ClientRPC
+        playerClient.ActivateHitByAttackCameraShakeClientRPC();
+
+        // 피격 사운드 효과 실행 ClientRPC
+
+        // 피격 대미지 숫자 표시 실행. 각 Client Damage Text Popup UI 업데이트 지시 
+        playerClient.ShowDamageTextPopupClientRPC(damage);
 
         // 요청한 플레이어 현재 HP값 가져오기 
-        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         sbyte newPlayerHP = playerData.hp;
-
-        if (newPlayerHP == 0) return;
 
         // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
         if (newPlayerHP <= damage)
@@ -78,20 +94,6 @@ public class PlayerHPManagerServer : NetworkBehaviour
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
         playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
-
-        // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
-        playerClient.ActivateHitByAttackEffectClientRPC();
-
-        // 피격 애니메이션 실행 Server
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
-
-        // 피격 카메라 효과 실행 ClientRPC
-        playerClient.ActivateHitByAttackCameraEffectClientRPC();
-
-        // 피격 카메라 쉐이크 효과 실행 ClientRPC
-        playerClient.ActivateHitByAttackCameraShakeClientRPC();
-
-        // 피격 사운드 효과 실행 ClientRPC
     }
 
     public sbyte GetHP()
@@ -102,26 +104,24 @@ public class PlayerHPManagerServer : NetworkBehaviour
     // 게임오버 처리. 서버권한 방식.
     private void GameOver(ulong clientWhoAttacked)
     {
-        // 킬한 플레이어 스코어 업데이트. 킬한 플레이어가 본인일 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
-        // 킬한 플레이어가 본인일 경우(ex, Water로 인한 사망)
-        if(clientWhoAttacked == OwnerClientId)
+        // 스스로 게임오버 당한 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
+        if (clientWhoAttacked == OwnerClientId)
         {
             foreach(PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList()){
                 GameMultiplayer.Instance.AddPlayerScore(playerInGameData.clientId, 300);
             }
         }
+        // 일반적인 경우 상대 플레이어 300스코어 획득
         else
         {
             GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, 300);
         }
-        
 
         // 게임오버 플레이어 사실을 서버에 기록.
         GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);
 
-        // GameOver 플레이어 AnimState GameOver 상태로 서버에 등록. 게임오버 애니메이션 실행.  애니메이션 실행은 PlayerMovementServer에서 해줍니다
-        //GameMultiplayer.Instance.UpdatePlayerMoveAnimStateOnServer(OwnerClientId, PlayerMoveAnimState.GameOver);
-        //playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        // 플레이어 게임오버 애니메이션 실행
+        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
 
         // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
         playerClient.SetPlayerGameOverClientRPC();

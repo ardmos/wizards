@@ -94,6 +94,19 @@ public class SlashSkill : NetworkBehaviour
             // 플레이어 피격을 서버에서 처리
             player.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId);
         }
+        // AI플레이어일 경우 처리
+        else if (collider.CompareTag("AI"))
+        {
+            if (skillInfo == null) return;
+
+            // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.           
+            if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+            {
+                sbyte damage = (sbyte)skillInfo.level;
+                // 플레이어 피격을 서버에서 처리
+                aiPlayer.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId);
+            }
+        }
         // 기타 오브젝트 충돌
         else
         {
