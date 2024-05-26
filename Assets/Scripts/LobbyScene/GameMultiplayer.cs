@@ -27,7 +27,7 @@ public class GameMultiplayer : NetworkBehaviour
     public event EventHandler OnPlayerMoveAnimStateChanged;
     //public event EventHandler OnPlayerAttackAnimStateChanged;
 
-    [SerializeField]private bool isTimeoutStart;
+    [SerializeField]private bool isAIPlayerAdded;
     private ulong lastClientId;
 
     private void Awake()
@@ -38,7 +38,7 @@ public class GameMultiplayer : NetworkBehaviour
 
         playerItemDictionaryOnServer = new Dictionary<ulong, Dictionary<ItemName, ushort>>();
 
-        isTimeoutStart = false;
+        isAIPlayerAdded = false;
     }
 
     private void Update()
@@ -50,14 +50,16 @@ public class GameMultiplayer : NetworkBehaviour
 
     private void CheckFirstPlayerConnectionTime()
     {
-        if (playerDataNetworkList.Count > 0 && !isTimeoutStart)
+        if (playerDataNetworkList.Count > 0 && !isAIPlayerAdded)
         {
             PlayerInGameData firstPlayer = playerDataNetworkList[0];
+            var passedTime = DateTime.Now - firstPlayer.connectionTime;
+            Debug.Log($"최초 접속자player{firstPlayer.clientId}는 접속한지 {passedTime} 지났습니다.");
             // 지정 시간( 테스트에서는 10초.) 이후 자동 시작. 빈자리는 AI로 채워준다
-            if (DateTime.Now - firstPlayer.connectionTime > TimeSpan.FromSeconds(10))
+            if (passedTime > TimeSpan.FromSeconds(10))
             {
                 Debug.Log($"The first connected player{firstPlayer.clientId} has been connected for more than 10 seconds.");
-                isTimeoutStart = true;
+                isAIPlayerAdded = true;
 
                 // AI 유저 채우고 (지금은 전부 Wizard Ruke, wizard ruke ai 의 스펙 지금 여기서 설정해주고있음. 테스트 후 수정 필요)
                 ulong availablePlayerSlots = (ulong)(ConnectionApprovalHandler.MaxPlayers - NetworkManager.Singleton.ConnectedClients.Count);
@@ -74,12 +76,13 @@ public class GameMultiplayer : NetworkBehaviour
                         characterClass = Character.Wizard,
                         hp = 5,
                         maxHp = 5,
-                        moveSpeed = 4
+                        moveSpeed = 4,
+                        isAI = true,
                     };
 
                     AddAIPlayer(aiPlayerInGameData_WizardRuke);
                     // 추가한 AI 플레이어들 레디한걸로 등록 시키기
-                    //GameMatchReadyManager.Instance.SetAIPlayerReady(aiClientId);
+                    GameMatchReadyManagerServer.Instance.SetAIPlayerReady(aiClientId);
                 }
 
             }
@@ -93,13 +96,13 @@ public class GameMultiplayer : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log("OnNetworkSpawn()");
+        //Debug.Log("OnNetworkSpawn()");
         playerDataNetworkList.OnListChanged += OnServerListChanged;
     }
 
     public override void OnNetworkDespawn()
     {
-        Debug.Log("OnNetworkDespawn()");
+        //Debug.Log("OnNetworkDespawn()");
         playerDataNetworkList.OnListChanged -= OnServerListChanged;
 
         if (IsServer)
@@ -122,13 +125,29 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     /// <summary>
-    /// 게임도중 플레이어가 나갔을 경우에대한 처리입니다.
+    /// 플레이어가 나갔을 경우에대한 처리입니다.
     /// </summary>
     private void Server_OnClientDisconnectCallback(ulong clientId)
     {
         // 플레이어 이탈 처리
         if (GetPlayerDataIndexFromClientId(clientId) != -1)
             playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
+
+        // 남은 플레이어들이 전부 AI일 경우, 전부 강퇴 처리
+        bool isEveryPlayerisAI = true;
+        foreach (PlayerInGameData player in playerDataNetworkList)
+        {
+            if(!player.isAI)
+            {
+                isEveryPlayerisAI = false;
+            }
+        }
+        if (isEveryPlayerisAI)
+        {
+            Debug.Log("AI만 남았습니다. 모든 AI를 퇴장시킵니다.");
+            playerDataNetworkList.Clear();
+            isAIPlayerAdded = false;
+        }
 
         // 게임씬이 아닌지 확인.
         if (GameManager.Instance == null) { 
@@ -198,7 +217,8 @@ public class GameMultiplayer : NetworkBehaviour
             connectionTime = DateTime.Now,
             characterClass = playerData.characterClass,
             playerGameState = PlayerGameState.Playing,
-            playerName = playerData.playerName
+            playerName = playerData.playerName,
+            isAI = false
             // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
         });
         Debug.Log($"GameMultiplayer.PlayerDataList Add complete. " +
@@ -212,14 +232,14 @@ public class GameMultiplayer : NetworkBehaviour
     private void AddAIPlayer(PlayerInGameData playerData)
     {
         playerDataNetworkList.Add(playerData);
-        Debug.Log($"AI Player Add complete. " +
+        Debug.Log($"AI 추가를 완료했습니다. " +
             $"AI{playerData.clientId} Name: {playerData.playerName} Class: {playerData.characterClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
     }
 
     // GameRoomPlayerCharacter에서 해당 인덱스의 플레이어가 접속 되었나 확인할 때 사용
     public bool IsPlayerIndexConnected(int playerIndex)
     {
-        Debug.Log($"IsPlayerIndexConnected playerIndex: {playerIndex}, playerDataNetworkList.Count: {playerDataNetworkList.Count}");
+        //Debug.Log($"IsPlayerIndexConnected?:{playerIndex < playerDataNetworkList.Count} playerIndex: {playerIndex}, playerDataNetworkList.Count: {playerDataNetworkList.Count}");
         return playerIndex < playerDataNetworkList.Count;
     }
 

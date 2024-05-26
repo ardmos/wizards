@@ -20,6 +20,7 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
     public SkillName skillAttack2;
     public SkillName skillAttack3;
     public SkillName skillDefence;
+    public bool isAI;
 
     public bool Equals(PlayerInGameData other)
     {
@@ -38,7 +39,8 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
             skillAttack1 == other.skillAttack1 &&
             skillAttack2 == other.skillAttack2 &&
             skillAttack3 == other.skillAttack3 &&
-            skillDefence == other.skillDefence;
+            skillDefence == other.skillDefence &&
+            isAI == other.isAI;
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -58,5 +60,6 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
         serializer.SerializeValue(ref skillAttack2);
         serializer.SerializeValue(ref skillAttack3);
         serializer.SerializeValue(ref skillDefence);
+        serializer.SerializeValue(ref  isAI);
     }
 }

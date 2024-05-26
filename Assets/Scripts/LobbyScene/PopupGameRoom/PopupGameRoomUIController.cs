@@ -44,7 +44,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         GameMultiplayer.Instance.OnSucceededToJoinMatch += OnSucceededToJoinMatch;
         GameMultiplayer.Instance.OnFailedToJoinMatch += OnFailedToJoinMatch;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged += OnPlayerListOnServerChanged;
-        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged += OnReadyPlayerListChanged;
+        GameMatchReadyManagerClient.Instance.OnPlayerReadyDictionaryClientChanged += OnReadyPlayerListClientChanged;
 
         btnCancel.AddClickListener(CancelMatch);
         btnReady.AddClickListener(ReadyMatch);
@@ -60,7 +60,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         GameMultiplayer.Instance.OnSucceededToJoinMatch -= OnSucceededToJoinMatch;
         GameMultiplayer.Instance.OnFailedToJoinMatch -= OnFailedToJoinMatch;
         GameMultiplayer.Instance.OnPlayerListOnServerChanged -= OnPlayerListOnServerChanged;
-        GameMatchReadyManager.Instance.OnClintPlayerReadyDictionaryChanged -= OnReadyPlayerListChanged;
+        GameMatchReadyManagerClient.Instance.OnPlayerReadyDictionaryClientChanged -= OnReadyPlayerListClientChanged;
     }
 
     private void RunStateMachine()
@@ -118,7 +118,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
     private void ActivateReadyCountdownUI()
     {        
-        float countdownMaxTime = GameMatchReadyManager.readyCountdownMaxTime;
+        float countdownMaxTime = GameMatchReadyManagerClient.readyCountdownMaxTime;
 
         StartCoroutine(StartCountdownAnim(countdownMaxTime));
     }
@@ -140,10 +140,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
         }
     }
 
-    private void OnReadyPlayerListChanged(object sender, System.EventArgs e)
+    private void OnReadyPlayerListClientChanged(object sender, System.EventArgs e)
     {
         Debug.Log("팝업 OnReadyChanged()");
-        UpdateToggleUIState();
         RunStateMachine();
     }
 
@@ -204,15 +203,16 @@ public class PopupGameRoomUIController : NetworkBehaviour
     /// </summary>
     private void ReadyMatch()
     {
-        GameMatchReadyManager.Instance.SetPlayerReadyServerRpc();
+        GameMatchReadyManagerServer.Instance.SetPlayerReadyServerRpc();
         btnReady.gameObject.SetActive(false);   
     }
 
     public void SetUIs(byte playerCount)
     {
-        Debug.Log($"RunStateMachine(). SetUIs(). 현재 참여중인 총 플레이어 수 : {playerCount}");
+        //Debug.Log($"RunStateMachine(). SetUIs(). 현재 참여중인 총 플레이어 수 : {playerCount}");
         txtPlayerCount.text = $"Wating For Players... ({playerCount.ToString()}/{ConnectionApprovalHandler.MaxPlayers})";
         ActivateToggleUI(playerCount);
+        UpdateToggleUIState();
     }
 
     /// <summary>
@@ -232,18 +232,18 @@ public class PopupGameRoomUIController : NetworkBehaviour
     }
 
     /// <summary>
-    /// Ready UI(토글) on/off 상태 업데이트 
+    /// Ready UI(토글) 점등 상태 업데이트 
     /// </summary>
     private void UpdateToggleUIState()
     {
-        Debug.Log($"UpdateToggleUIState()");
+        //Debug.Log($"UpdateToggleUIState(), 클라이언트측에서 확인되는 currentConnectedPlayer:{GameMultiplayer.Instance.GetPlayerCount()} ");
         for (int playerIndex = 0; playerIndex < toggleArrayPlayerJoined.Length; playerIndex++)
         {
             if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
             {
                 PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-                Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManager.Instance.IsPlayerReady(playerData.clientId)}");
-                toggleArrayPlayerJoined[playerIndex].isOn = GameMatchReadyManager.Instance.IsPlayerReady(playerData.clientId);
+                //Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId)}");
+                toggleArrayPlayerJoined[playerIndex].isOn = GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId);
             }
             else
             {
@@ -259,7 +259,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
     private void CancelMatch()
     {
         isCancellationRequested = true;
-        GameMatchReadyManager.Instance.SetPlayerUnReadyServerRPC();
+        GameMatchReadyManagerServer.Instance.SetPlayerUnReadyServerRPC();
     }
 
     private void Show()
@@ -271,7 +271,6 @@ public class PopupGameRoomUIController : NetworkBehaviour
         matchingState = MatchingState.WatingForPlayers;
         imgReadyCountdown.fillAmount = 0;
         ActivateToggleUI(0);
-        UpdateToggleUIState();
         btnReady.gameObject.SetActive(false);
     }
 

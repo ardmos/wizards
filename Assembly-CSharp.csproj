@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupClanUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\HPBarUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\MusicGroupUI.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerSpellScrollQueueManagerClient.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManagerServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SkillSpellManagerClient.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
@@ -210,7 +212,6 @@
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupNameChangeUIController.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadSceneManager.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterArea.cs" />
     <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
