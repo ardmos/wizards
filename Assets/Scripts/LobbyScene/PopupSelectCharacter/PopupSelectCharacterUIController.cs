@@ -122,6 +122,7 @@ public class PopupSelectCharacterUIController : MonoBehaviour
             {
                 selectedCard = characterCardObject.GetComponent<CharacterCardController>();
                 selectedCard.SetFocus(true);
+                currentClickedCard = selectedCard;
                 ShowCharacterInfo(cardInfo);
             }
         }
