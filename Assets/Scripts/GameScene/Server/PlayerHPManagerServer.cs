@@ -52,12 +52,6 @@ public class PlayerHPManagerServer : NetworkBehaviour
         //playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         if (playerData.playerGameState != PlayerGameState.Playing) return;
 
-        // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
-        playerClient.ActivateHitByAttackEffectClientRPC();
-
-        // 피격 애니메이션 실행 Server
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
-
         // 피격 카메라 효과 실행 ClientRPC
         playerClient.ActivateHitByAttackCameraEffectClientRPC();
 
@@ -79,13 +73,16 @@ public class PlayerHPManagerServer : NetworkBehaviour
             newPlayerHP = 0;
             playerData.playerGameState = PlayerGameState.GameOver; // 아래에서 HP값을 저장할 때 새로 SetPlayerData를 하기 때문에...! 일단 여기서 한 번더 게임오버 스테이트를 저장해주고 있는데, GameOver()에서 이미 게임오버처리를 해주고 있다. 일단은 동작하지만 수정 필요.
 
-            // 게임오버 처리
+            // 게임오버 처리, GameOver 애니메이션 실행
             GameOver(clientWhoAttacked);
         }
         else
         {
             // HP 감소 계산
             newPlayerHP -= (sbyte)damage;
+
+            // 피격 애니메이션 실행 Server
+            playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
         }
 
         // 변경된 HP값 서버에 저장
@@ -94,6 +91,9 @@ public class PlayerHPManagerServer : NetworkBehaviour
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
         playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+
+        // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
+        playerClient.ActivateHitByAttackEffectClientRPC();
     }
 
     public sbyte GetHP()
