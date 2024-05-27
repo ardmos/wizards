@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\CharacterCardController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\SelectSpellSlotUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SkillManagerClientKnight.cs" />
+    <Compile Include="Assets\Scripts\Data\AIPlayerName.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\StoreTriggerAreaCollider.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />

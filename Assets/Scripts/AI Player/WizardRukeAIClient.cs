@@ -98,6 +98,13 @@ public class WizardRukeAIClient : NetworkBehaviour
         damageTextUIController?.CreateTextObject(damageAmount);
     }
 
+    [ClientRpc]
+    public void OffPlayerUIClientRPC()
+    {
+        hPBarUIController.gameObject.SetActive(false);
+        userNameUIController.gameObject?.SetActive(false);
+    }
+
     public ICharacter GetCharacterData()
     {
         throw new System.NotImplementedException();

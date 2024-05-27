@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = System.Random;
 
 /// <summary>
 /// 이거 서버/클라 나눠야함./
@@ -72,7 +74,7 @@ public class GameMultiplayer : NetworkBehaviour
                     {
                         clientId = aiClientId,
                         playerGameState = PlayerGameState.Playing,
-                        playerName = ":Wizard Master:",
+                        playerName = GenerateRandomAIPlayerName(),
                         characterClass = Character.Wizard,
                         hp = 5,
                         maxHp = 5,
@@ -87,6 +89,22 @@ public class GameMultiplayer : NetworkBehaviour
 
             }
         }
+    }
+
+
+    public static string GenerateRandomAIPlayerName()
+    {
+        AIPlayerName randomName = GetRandomEnumValue<AIPlayerName>();
+        AIPlayerTitle randomTitle = GetRandomEnumValue<AIPlayerTitle>();
+
+        return $"{randomTitle} {randomName}";
+    }
+
+    private static T GetRandomEnumValue<T>()
+    {
+        Array values = Enum.GetValues(typeof(T));
+        Random random = new Random();
+        return (T)values.GetValue(random.Next(values.Length));
     }
 
     public ulong GetLastClientId()

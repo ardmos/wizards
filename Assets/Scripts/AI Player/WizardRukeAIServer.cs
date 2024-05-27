@@ -12,6 +12,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public PlayerServer target;
     public PlayerAnimator playerAnimator;
     public Rigidbody rb;
+    public Collider _collider;
 
    // PlayerInGameData하고 ICharacter하고, 플레이어 정보를 초기화할 때 혼선이 있다. 이걸 하나로 통일할 필요가 있음. 확인하기.
     // InitializeAIPlayerOnServer 에서 전부 할당해줍니다.
@@ -76,6 +77,12 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         Debug.Log($"AI Player{AIClientId} is GameOver");
         gameState = PlayerGameState.GameOver;
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        agent.isStopped = true; // 추적 멈추기
+        // 물리충돌 해제
+        rb.isKinematic = true;
+        _collider.enabled = false;
+        // 플레이어 이름 & HP UI off
+        wizardRukeAIClient.OffPlayerUIClientRPC();
     }
 
     /// <summary>
@@ -96,6 +103,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
         PlayerInGameData playerInGameData = GameMultiplayer.Instance.GetPlayerDataFromClientId(AIClientId);
         SetCharacterData(playerInGameData);
+
+        // NavMesh를 사용하기 대문에 속도 설정을 따로 챙겨줍니다
+        agent.speed = playerInGameData.moveSpeed;
 
         // 스폰 위치 초기화   
         transform.position = spawnPos;// spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(AIClientId));
