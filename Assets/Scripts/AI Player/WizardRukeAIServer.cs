@@ -48,6 +48,11 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public WizardRukeAIClient wizardRukeAIClient;
     public WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer;
 
+    [Header("순찰을 위한 변수들")]
+    [SerializeField] private PlayerSpawnPointsController playerSpawnPointsController;
+    [SerializeField] private int randomIndex;
+    [SerializeField] private Transform patrolDestination;
+
     public override void OnNetworkSpawn()
     {
         //Debug.Log($"Awake IsServer:{IsServer}");
@@ -55,8 +60,23 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         //Debug.Log($"Awake this is Server");
         //ulong dummyAIClientId = 3;
         //InitializePlayerOnServer(dummyAIClientId);
-        
+
+        playerSpawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
+
         SetState(new IdleState(this));
+
+        GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
+
+
+    }
+
+    private void GameManager_OnGameStateChanged(object sender, EventArgs e)
+    {
+        if (GameManager.Instance.IsGamePlaying())
+        {
+            // 이제 카운트다운은 끝! 게임 시작!
+            SetState(new PatrolState(this));
+        }
     }
 
     private void Update()
@@ -71,18 +91,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         currentState?.Update();
     }
 
-    public void GameOver()
+    public override void OnDestroy()
     {
-        if (gameState != PlayerGameState.Playing) return;
-        Debug.Log($"AI Player{AIClientId} is GameOver");
-        gameState = PlayerGameState.GameOver;
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
-        agent.isStopped = true; // 추적 멈추기
-        // 물리충돌 해제
-        rb.isKinematic = true;
-        _collider.enabled = false;
-        // 플레이어 이름 & HP UI off
-        wizardRukeAIClient.OffPlayerUIClientRPC();
+        GameManager.Instance.OnGameStateChanged -= GameManager_OnGameStateChanged;
     }
 
     /// <summary>
@@ -172,9 +183,10 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
     public void DetectAndSetTarget()
     {
-        // Idle 애니메이션 실행
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Idle);
+        // 이제 패트롤 모드 실행. 애니메이션도 Walk 애니메이션. 자동으로 실행. 
+        Patrol();
 
+        // 근처 범위 검색
         Collider[] colliders = Physics.OverlapSphere(transform.position, maxDistanceDetect);
         List<PlayerServer> players = new List<PlayerServer>();
 
@@ -195,6 +207,26 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         {
             List<PlayerServer> sortedPlayers = players.OrderByDescending(player => player.GetPlayerHP()).ToList();
             target = sortedPlayers[0];
+        }
+    }
+
+    /// <summary>
+    /// Spawn 포인트들을 랜덤으로 돌아보며 순찰합니다.
+    /// </summary>
+    private void Patrol()
+    {
+        if (playerSpawnPointsController == null) return;
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+            {
+                randomIndex = UnityEngine.Random.Range(0, playerSpawnPointsController.spawnPoints.Length);
+                patrolDestination = playerSpawnPointsController.spawnPoints[randomIndex];
+
+                agent.SetDestination(patrolDestination.position);
+                playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Walking);
+            }
         }
     }
 
@@ -250,6 +282,20 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public void AddMoveSpeed(float value)
     {
         agent.speed += value;
+    }
+
+    public void GameOver()
+    {
+        if (gameState != PlayerGameState.Playing) return;
+        Debug.Log($"AI Player{AIClientId} is GameOver");
+        gameState = PlayerGameState.GameOver;
+        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        agent.isStopped = true; // 추적 멈추기
+        // 물리충돌 해제
+        rb.isKinematic = true;
+        _collider.enabled = false;
+        // 플레이어 이름 & HP UI off
+        wizardRukeAIClient.OffPlayerUIClientRPC();
     }
 }
 

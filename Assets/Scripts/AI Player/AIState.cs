@@ -28,6 +28,26 @@ public class IdleState : AIState
     public override void Update()
     {
         //Debug.Log("IdleState Update");
+    }
+
+    public override void Exit()
+    {
+        //Debug.Log("Exiting Idle State");
+    }
+}
+
+public class PatrolState : AIState
+{
+    public PatrolState(WizardRukeAIServer ai) : base(ai) { }
+
+    public override void Enter()
+    {
+        //Debug.Log("Entering Patrol State");
+    }
+
+    public override void Update()
+    {
+        //Debug.Log("PatrolState Update");
         // »öÀû
         ai.DetectAndSetTarget();
         if(ai.target != null)
@@ -36,7 +56,7 @@ public class IdleState : AIState
 
             if ( targetDistance <= ai.maxDistanceDetect) 
             {
-                ai.SetState(new MoveState(ai));
+                ai.SetState(new ChaseState(ai));
             }    
             if(targetDistance < ai.attackRange)
             {
@@ -47,13 +67,13 @@ public class IdleState : AIState
 
     public override void Exit()
     {
-        //Debug.Log("Exiting Idle State");
+        //Debug.Log("Exiting Patrol State");
     }
 }
 
-public class MoveState : AIState
+public class ChaseState : AIState
 {
-    public MoveState(WizardRukeAIServer ai) : base(ai) { }
+    public ChaseState(WizardRukeAIServer ai) : base(ai) { }
 
     public override void Enter()
     {
@@ -69,7 +89,7 @@ public class MoveState : AIState
         {
             ai.target = null;
             //Debug.Log($"Lost target!");
-            ai.SetState(new IdleState(ai));
+            ai.SetState(new PatrolState(ai));
         }
 
         if (targetDistance <= ai.attackRange)
@@ -99,7 +119,7 @@ public class AttackState : AIState
         ai.AttackTarget();
         if (Vector3.Distance(ai.transform.position, ai.target.transform.position) > ai.attackRange)
         {
-            ai.SetState(new MoveState(ai));
+            ai.SetState(new ChaseState(ai));
         }
     }
 
