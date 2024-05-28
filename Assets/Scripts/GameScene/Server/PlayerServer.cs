@@ -102,11 +102,19 @@ public class PlayerServer : NetworkBehaviour
     {
         // 피격 처리 총괄.
         playerHPManager.TakingDamage(damage, clientWhoAttacked);
-        // 각 Client UI 업데이트 지시 Damage Text Popup. 이젠 HPManager.TakingDamage에서 해줍니다.
-        //playerClient.ShowDamageTextPopupClientRPC(damage);
-        // 맞춘 플레이어 카메라 쉐이크
+
+        // 공격자가 Player인가? AI인가? 
+        if (GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoAttacked).isAI)
+        {
+            // AI라면 카메라 쉐이크는 하지 않는다.
+            return;
+        }
+
+        // 공격자가 Player라면 카메라 쉐이크 
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientWhoAttacked];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().ActivateHitCameraShakeClientRPC();
+        if(networkClient.PlayerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient)){
+            playerClient.ActivateHitCameraShakeClientRPC();
+        }
     }
 
     public sbyte GetPlayerHP()

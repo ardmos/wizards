@@ -96,11 +96,11 @@ public class PlayerAnimator : NetworkBehaviour
                 isAlreadyGameOver = true;
                 animator.SetBool(k_IS_WALKING, false);
                 animator.SetTrigger(k_IS_GAMEOVER);
-                Debug.Log($"UpdatePlayerMoveAnimationOnServer playerMoveAnimState:{playerMoveAnimState}");
+                //Debug.Log($"UpdatePlayerMoveAnimationOnServer playerMoveAnimState:{playerMoveAnimState}");
                 break;
             case PlayerMoveAnimState.Hit:
                 animator.SetTrigger(k_IS_HIT);
-                Debug.Log($"UpdatePlayerMoveAnimationOnServer playerMoveAnimState:{playerMoveAnimState}");
+                //Debug.Log($"UpdatePlayerMoveAnimationOnServer playerMoveAnimState:{playerMoveAnimState}");
                 break;
         }
 

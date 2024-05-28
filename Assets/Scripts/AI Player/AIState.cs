@@ -116,6 +116,7 @@ public class AttackState : AIState
     public override void Update()
     {
         //Debug.Log("AttackState Update");
+        ai.MoveTowardsTarget();
         ai.AttackTarget();
         if (Vector3.Distance(ai.transform.position, ai.target.transform.position) > ai.attackRange)
         {

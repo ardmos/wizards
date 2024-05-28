@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailShield.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
     <Compile Include="Assets\Scripts\Spells\HomingMissile.cs" />
+    <Compile Include="Assets\Scripts\AI Player\WizardRukeAIMovementServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SpellManagerClientWizard.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIManager.cs" />
+    <Compile Include="Assets\Scripts\AI Player\WizardRukeAIBattleSystemServer.cs" />
     <Compile Include="Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\MiniPopupSkillInfoDetailController.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\CameraDepthSlider.cs" />

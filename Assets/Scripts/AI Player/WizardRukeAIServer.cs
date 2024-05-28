@@ -9,8 +9,10 @@ using UnityEngine.AI;
 
 public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 {
-    public PlayerServer target;
+    public GameObject target;
     public PlayerAnimator playerAnimator;
+
+    [Header("물리 관련")]
     public Rigidbody rb;
     public Collider _collider;
 
@@ -33,48 +35,37 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public PlayerGameState gameState;
 
     [Header("색적 관련")]
-    public float maxDistanceDetect = 8;
+    public float maxDistanceDetect;
 
     [Header("공격 관련")]
-    public float attackRange = 2f;
-    public float attackCooldown = 1f;
+    public float attackRange;
+    public float attackCooldown;
     [SerializeField]private float lastAttackTime;
 
     [SerializeField] private AIState currentState;
-    [SerializeField] private NavMeshAgent agent;
 
     [Header("Wizard Ruke AI용 컴포넌트들")]
     public WizardRukeAISpellManagerServer wizardRukeAISpellManagerServer;
     public WizardRukeAIClient wizardRukeAIClient;
     public WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer;
-
-    [Header("순찰을 위한 변수들")]
-    [SerializeField] private PlayerSpawnPointsController playerSpawnPointsController;
-    [SerializeField] private int randomIndex;
-    [SerializeField] private Transform patrolDestination;
+    public WizardRukeAIMovementServer wizardRukeAIMovementServer;
+    public WizardRukeAIBattleSystemServer wizardRukeAIBattleSystemServer;
 
     public override void OnNetworkSpawn()
     {
-        //Debug.Log($"Awake IsServer:{IsServer}");
         if (!IsServer) return;
-        //Debug.Log($"Awake this is Server");
-        //ulong dummyAIClientId = 3;
-        //InitializePlayerOnServer(dummyAIClientId);
 
-        playerSpawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
-
+        // 게임 시작 전 대기!
         SetState(new IdleState(this));
 
         GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
-
-
     }
 
     private void GameManager_OnGameStateChanged(object sender, EventArgs e)
     {
         if (GameManager.Instance.IsGamePlaying())
         {
-            // 이제 카운트다운은 끝! 게임 시작!
+            // 이제 카운트다운은 끝! 게임 시작! 순찰을 시작합니다!
             SetState(new PatrolState(this));
         }
     }
@@ -116,7 +107,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         SetCharacterData(playerInGameData);
 
         // NavMesh를 사용하기 대문에 속도 설정을 따로 챙겨줍니다
-        agent.speed = playerInGameData.moveSpeed;
+        wizardRukeAIMovementServer.SetMoveSpeed(playerInGameData.moveSpeed);
 
         // 스폰 위치 초기화   
         transform.position = spawnPos;// spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(AIClientId));
@@ -129,7 +120,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIClient.InitializeAIClientRPC(playerInGameData.playerName.ToString());
 
         // 플레이어가 보유한 스킬 목록 저장
-        wizardRukeAISpellManagerServer.InitPlayerSpellInfoArrayOnServer(this.skills);
+        wizardRukeAISpellManagerServer.InitAIPlayerSpellInfoArrayOnServer(this.skills);
 
         // 플레이어 Layer 설정
         switch (AIClientId)
@@ -151,16 +142,10 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         }
     }
 
-    // 테스트 후 Navmesh로 변경할것. 
     public void MoveTowardsTarget()
     {
-        //Vector3 direction = (target.transform.position - transform.position).normalized;
-        //transform.position += direction * moveSpeed * Time.deltaTime;
+        wizardRukeAIMovementServer.MoveToTarget(target.transform);
 
-        //agent.isStopped = false;
-        agent.SetDestination(target.transform.position);
-
-        //Debug.Log($"에이전트는 멈춰있는가? : {agent.isStopped}");
         // 이동 애니메이션 실행
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Walking);
     }
@@ -170,6 +155,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if (Time.time > lastAttackTime + attackCooldown)
         {
             //Debug.Log("Attacking the target!");
+            wizardRukeAIBattleSystemServer.Attack();
             lastAttackTime = Time.time;
         }
     }
@@ -184,20 +170,27 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public void DetectAndSetTarget()
     {
         // 이제 패트롤 모드 실행. 애니메이션도 Walk 애니메이션. 자동으로 실행. 
-        Patrol();
+        wizardRukeAIMovementServer.Patrol();
 
         // 근처 범위 검색
         Collider[] colliders = Physics.OverlapSphere(transform.position, maxDistanceDetect);
         List<PlayerServer> players = new List<PlayerServer>();
+        List<WizardRukeAIServer> aiPlayers = new List<WizardRukeAIServer>();
 
         foreach (var collider in colliders)
         {
             if (collider.CompareTag("Player"))
             {
-                collider.TryGetComponent<PlayerServer>(out PlayerServer player);
-                if (player != null)
+                if (collider.TryGetComponent<PlayerServer>(out PlayerServer player))
                 {
                     players.Add(player);
+                }
+            }
+            else if (collider.CompareTag("AI"))
+            {
+                if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+                {
+                    aiPlayers.Add(aiPlayer);
                 }
             }
         }
@@ -206,27 +199,12 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if (players.Count > 0)
         {
             List<PlayerServer> sortedPlayers = players.OrderByDescending(player => player.GetPlayerHP()).ToList();
-            target = sortedPlayers[0];
+            target = sortedPlayers[0].gameObject;
         }
-    }
-
-    /// <summary>
-    /// Spawn 포인트들을 랜덤으로 돌아보며 순찰합니다.
-    /// </summary>
-    private void Patrol()
-    {
-        if (playerSpawnPointsController == null) return;
-
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        if ( aiPlayers.Count > 0 )
         {
-            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-            {
-                randomIndex = UnityEngine.Random.Range(0, playerSpawnPointsController.spawnPoints.Length);
-                patrolDestination = playerSpawnPointsController.spawnPoints[randomIndex];
-
-                agent.SetDestination(patrolDestination.position);
-                playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Walking);
-            }
+            List<WizardRukeAIServer> sortedAIPlayer = aiPlayers.OrderByDescending(aiPlayer => aiPlayer.GetPlayerHP()).ToList();
+            target = sortedAIPlayer[0].gameObject;
         }
     }
 
@@ -274,15 +252,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         this.moveSpeed = characterData.moveSpeed;
     }
 
-    public void ReduceMoveSpeed(float value)
-    {
-        agent.speed -= value;
-    }
 
-    public void AddMoveSpeed(float value)
-    {
-        agent.speed += value;
-    }
 
     public void GameOver()
     {
@@ -290,7 +260,8 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         Debug.Log($"AI Player{AIClientId} is GameOver");
         gameState = PlayerGameState.GameOver;
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
-        agent.isStopped = true; // 추적 멈추기
+        // 추적 멈추기
+        wizardRukeAIMovementServer.StopMove();
         // 물리충돌 해제
         rb.isKinematic = true;
         _collider.enabled = false;

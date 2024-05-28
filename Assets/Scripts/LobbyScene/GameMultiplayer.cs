@@ -364,11 +364,11 @@ public class GameMultiplayer : NetworkBehaviour
     public void AddPlayerScore(ulong clientID , int score)
     {
         PlayerInGameData playerData = GetPlayerDataFromClientId(clientID);
-        Debug.Log($"1.player:{playerData.clientId}'s score:{playerData.score}");
+        //Debug.Log($"1.player:{playerData.clientId}'s score:{playerData.score}");
         playerData.score += score;
 
         SetPlayerDataFromClientId(clientID, playerData);
-        Debug.Log($"2.player:{playerData.clientId}'s score:{playerData.score}, getScore:{GetPlayerScore(clientID)}");
+        //Debug.Log($"2.player:{playerData.clientId}'s score:{playerData.score}, getScore:{GetPlayerScore(clientID)}");
     }
 
     /// <summary>
@@ -378,7 +378,7 @@ public class GameMultiplayer : NetworkBehaviour
     /// <returns></returns>
     public int GetPlayerScore(ulong clientID)
     {
-        Debug.Log($"GetPlayerScore player{clientID} requested.");
+        //Debug.Log($"GetPlayerScore player{clientID} requested.");
         return GetPlayerDataFromClientId(clientID).score;
     }
 

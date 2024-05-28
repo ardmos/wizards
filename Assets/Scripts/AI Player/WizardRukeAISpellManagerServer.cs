@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class WizardRukeAISpellManagerServer : NetworkBehaviour
+public class WizardRukeAISpellManagerServer : MonoBehaviour
 {
     // SpellInfoList의 인덱스 0~2까지는 공격마법, 3은 방어마법 입니다.
     public const byte DEFENCE_SPELL_INDEX_DEFAULT = 3;
+
+    public WizardRukeAIServer wizardRukeAIServer;
 
     public PlayerAnimator playerAnimator;
 
@@ -14,16 +16,49 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
     public Transform muzzlePos_Normal;
     public Transform muzzlePos_AoE;
 
+    [Header("보유 스킬 관리")]
     private List<SpellInfo> playerOwnedSpellInfoListOnServer = new List<SpellInfo>();
+    private float[] restTimeCurrentSpellArrayOnClient = new float[4];
     private GameObject playerCastingSpell;
+
+    #region 쿨타임 
+    private void Update()
+    {
+        // 쿨타임 관리
+        for (ushort i = 0; i < playerOwnedSpellInfoListOnServer.Count; i++)
+        {
+            Cooltime(i);
+        }
+    }
+
+    private void Cooltime(ushort spellIndex)
+    {
+        //Debug.Log($"spellNumber : {spellIndex}, currentSpellPrefabArray.Length : {currentSpellPrefabArray.Length}");
+        if (playerOwnedSpellInfoListOnServer[spellIndex] == null) return;
+        // 쿨타임 관리
+        if (playerOwnedSpellInfoListOnServer[spellIndex].spellState == SpellState.Cooltime)
+        {
+            restTimeCurrentSpellArrayOnClient[spellIndex] += Time.deltaTime;
+            if (restTimeCurrentSpellArrayOnClient[spellIndex] >= playerOwnedSpellInfoListOnServer[spellIndex].coolTime)
+            {
+                restTimeCurrentSpellArrayOnClient[spellIndex] = 0f;
+                // 여기서 서버에 Ready로 바뀐 State를 보고 하면 서버에서 다시 콜백해서 현 클라이언트 오브젝트의 State가 Ready로 바뀌긴 하는데, 그 사이에 딜레이가 있어서
+                // 여기서 한 번 클라이언트의 State를 바꿔주고 서버에 보고 해준다.
+                playerOwnedSpellInfoListOnServer[spellIndex].spellState = SpellState.Ready;
+                UpdatePlayerSpellState(spellIndex, SpellState.Ready);
+            }
+            //Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
+        }
+    }
+    #endregion
+
 
     #region Defence Spell Cast
     /// <summary>
     /// 방어 마법 시전
     /// </summary>
     /// <param name="player"></param>
-    [ServerRpc(RequireOwnership = false)]
-    public void StartActivateDefenceSpellServerRPC()
+    public void StartActivateDefenceSpell()
     {
         // 마법 시전
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT).spellName), transform.position, Quaternion.identity);
@@ -68,9 +103,10 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
     /// Blizzard 스킬 전용 캐스팅 메서드
     /// </summary>
     /// <param name="spellIndex"></param>
-    [ServerRpc(RequireOwnership = false)]
-    public void CastingBlizzardServerRPC()
+    public void CastBlizzard()
     {
+        if (playerOwnedSpellInfoListOnServer[2].spellState != SpellState.Ready) return;
+
         // 범위 표시 오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
@@ -92,9 +128,11 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingAttackMagic);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void SetBlizzardServerRPC()
+
+    public void FireBlizzard()
     {
+        if (playerOwnedSpellInfoListOnServer[2].spellState != SpellState.Aiming) return;
+
         // 1. 시전중인 범위표시 오브젝트 제거
         Destroy(playerCastingSpell);
         // 2. 블리자드 스킬 이펙트오브젝트 생성
@@ -102,7 +140,7 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
         spellObject.GetComponent<NetworkObject>().Spawn();
         if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
         {
-            aoESpell.SetOwner(OwnerClientId);
+            aoESpell.SetOwner(wizardRukeAIServer.AIClientId);
         }
 
         Destroy(spellObject, 4f);
@@ -118,9 +156,11 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
     /// <summary>
     /// 공격 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
     /// </summary>
-    [ServerRpc(RequireOwnership = false)]
-    public void CastingSpellServerRPC(ushort spellIndex)
+    public void CastSpell(ushort spellIndex)
     {
+        Debug.Log($"playerOwnedSpellInfoListOnServer.count {playerOwnedSpellInfoListOnServer.Count}");
+        if (playerOwnedSpellInfoListOnServer[spellIndex].spellState != SpellState.Ready) return;
+
         // 발사체 오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzlePos_Normal.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
@@ -131,7 +171,7 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
         // 호밍 마법이라면 호밍 마법에 소유자 등록 & 속도 설정
         if (spellObject.TryGetComponent<HomingMissile>(out var ex))
         {
-            ex.SetOwner(OwnerClientId);
+            ex.SetOwner(wizardRukeAIServer.AIClientId);
             ex.SetSpeed(spellInfo.moveSpeed);
         }
         spellObject.transform.SetParent(transform);
@@ -157,27 +197,23 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
     /// <summary>
     /// 플레이어의 요청으로 현재 캐스팅중인 마법을 발사하는 메소드 입니다.
     /// </summary>
-    /// <param name="serverRpcParams"></param>
-    [ServerRpc(RequireOwnership = false)]
-    public void ShootSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
+    public void FireSpell(ushort spellIndex)
     {
-        GameObject spellObject = playerCastingSpell;
-        if (spellObject == null)
+        if (playerOwnedSpellInfoListOnServer[spellIndex].spellState != SpellState.Aiming) return;
+
+        if (playerCastingSpell == null)
         {
-            //Debug.Log($"ShootSpellServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
             return;
         }
 
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(spellIndex, SpellState.Cooltime);
 
-        //Debug.Log($"{nameof(ShootSpellServerRPC)} ownerClientId {clientId}");
-
-        spellObject.transform.SetParent(GameManager.Instance.transform);
-        float moveSpeed = spellObject.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
+        playerCastingSpell.transform.SetParent(GameManager.Instance.transform);
+        float moveSpeed = playerCastingSpell.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
 
         // 호밍 마법이라면 호밍 시작 처리
-        if (spellObject.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
+        if (playerCastingSpell.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
         // 설치 마법
         else if (moveSpeed == 0)
         {
@@ -186,7 +222,7 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
         // 마법 발사 (기본 직선 비행 마법)
         else
         {
-            spellObject.GetComponent<AttackSpell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
+            playerCastingSpell.GetComponent<AttackSpell>().Shoot(playerCastingSpell.transform.forward * moveSpeed, ForceMode.Impulse);
         }
 
         // 발사 SFX 실행 
@@ -194,7 +230,7 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
         SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Shooting, transform);
 
         // 포구 VFX
-        MuzzleVFX(spellObject.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
+        MuzzleVFX(playerCastingSpell.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
 
         // 발사 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
@@ -229,12 +265,6 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
     #endregion
 
     #region SpellInfo
-    [ServerRpc(RequireOwnership = false)]
-    public void UpdatePlayerSpellStateServerRPC(ushort spellIndex, SpellState spellState, ServerRpcParams serverRpcParams = default)
-    {
-        playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
-    }
-
     public void UpdatePlayerSpellState(ushort spellIndex, SpellState spellState)
     {
         playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;    
@@ -244,17 +274,18 @@ public class WizardRukeAISpellManagerServer : NetworkBehaviour
     /// Server측에서 보유한 SpellInfo 리스트 초기화 메소드 입니다.
     /// 플레이어 최초 생성시 호출됩니다.
     /// </summary>
-    public void InitPlayerSpellInfoArrayOnServer(SkillName[] skillNames)
+    public void InitAIPlayerSpellInfoArrayOnServer(SkillName[] skillNames)
     {
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
         foreach (SkillName spellName in skillNames)
         {
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
-            spellInfo.ownerPlayerClientId = OwnerClientId;
+            spellInfo.ownerPlayerClientId = wizardRukeAIServer.AIClientId;
             playerSpellInfoList.Add(spellInfo);
         }
 
         playerOwnedSpellInfoListOnServer = playerSpellInfoList;
+        Debug.Log($"InitAI Spell List. {playerOwnedSpellInfoListOnServer.Count}");
     }
 
     public List<SpellInfo> GetSpellInfoList()

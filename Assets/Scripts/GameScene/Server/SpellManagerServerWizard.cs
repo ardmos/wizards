@@ -157,8 +157,8 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     [ServerRpc(RequireOwnership = false)]
     public void ShootSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
     {
-        GameObject spellObject = playerCastingSpell;
-        if (spellObject == null)
+        //GameObject spellObject = playerCastingSpell;
+        if (!playerCastingSpell)
         {
             //Debug.Log($"ShootSpellServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
             return;
@@ -169,19 +169,19 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
 
         //Debug.Log($"{nameof(ShootSpellServerRPC)} ownerClientId {clientId}");
 
-        spellObject.transform.SetParent(GameManager.Instance.transform);
-        float moveSpeed = spellObject.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
+        playerCastingSpell.transform.SetParent(GameManager.Instance.transform);
+        float moveSpeed = playerCastingSpell.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
 
         // 호밍 마법이라면 호밍 시작 처리
-        if (spellObject.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
+        if (playerCastingSpell.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
         // 설치 마법
         else if (moveSpeed == 0) {
             
         }
         // 마법 발사 (기본 직선 비행 마법)
         else
-        {           
-            spellObject.GetComponent<AttackSpell>().Shoot(spellObject.transform.forward * moveSpeed, ForceMode.Impulse);
+        {
+            playerCastingSpell.GetComponent<AttackSpell>().Shoot(playerCastingSpell.transform.forward * moveSpeed, ForceMode.Impulse);
         }
 
         // 발사 SFX 실행 
@@ -189,7 +189,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Shooting, transform);
 
         // 포구 VFX
-        MuzzleVFX(spellObject.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
+        MuzzleVFX(playerCastingSpell.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
 
         // 발사 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
