@@ -8,6 +8,9 @@ public class SlashSkill : NetworkBehaviour
     [SerializeField] private ParticleSystem particleSystemMain;
     //[SerializeField] private Collider mCollider;
 
+    [Header("AI가 피격됐을 시 타겟으로 설정될 마법을 소유한 플레이어 오브젝트")]
+    public GameObject skillOwnerObject;
+
     // 스킬 자동파괴 설정
     public void SetSelfDestroy()
     {
@@ -16,15 +19,16 @@ public class SlashSkill : NetworkBehaviour
     }
 
     // 스킬 상세값 설정
-    public virtual void InitSkillInfoDetail(SpellInfo spellInfoFromServer)
+    public virtual void InitSkillInfoDetail(SpellInfo spellInfoFromServer, GameObject skillOwnerObject)
     {
         if (!IsServer) return;
         //Debug.Log($"Slash Skill InitSkillInfoDetail ");
 
         skillInfo = new SpellInfo(spellInfoFromServer);
-        LayerMask shooterLayer;
+        this.skillOwnerObject = skillOwnerObject;
 
         // 플레이어 Layer 설정
+        LayerMask shooterLayer;
         switch (skillInfo.ownerPlayerClientId)
         {
             case 0:
@@ -104,7 +108,7 @@ public class SlashSkill : NetworkBehaviour
             {
                 sbyte damage = (sbyte)skillInfo.level;
                 // 플레이어 피격을 서버에서 처리
-                aiPlayer.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId);
+                aiPlayer.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId, skillOwnerObject);
             }
         }
         // 기타 오브젝트 충돌

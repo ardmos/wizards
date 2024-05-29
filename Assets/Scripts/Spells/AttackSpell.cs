@@ -13,6 +13,9 @@ public abstract class AttackSpell : NetworkBehaviour
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
 
+    [Header("AI가 피격됐을 시 타겟으로 설정될 마법을 소유한 플레이어 오브젝트")]
+    public GameObject spellOwnerObject;
+
     // 마법 충돌시 속성 계산
     public abstract SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell);
 
@@ -72,7 +75,7 @@ public abstract class AttackSpell : NetworkBehaviour
             {
                 sbyte damage = (sbyte)GetSpellInfo().level;
                 // 플레이어 피격을 서버에서 처리
-                aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId);
+                aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId, spellOwnerObject);
             }
         }
         // 기타 오브젝트 충돌
@@ -169,7 +172,7 @@ public abstract class AttackSpell : NetworkBehaviour
         // 포구에 마법 발사체 위치시키기
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(spellInfo.spellName), spawnPosition.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
-        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
+        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo, gameObject);
         //Debug.Log($"SpawnSpellObjectOnServer!! skillInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");
 
         spellObject.transform.SetParent(GameManager.Instance.transform);
@@ -183,11 +186,12 @@ public abstract class AttackSpell : NetworkBehaviour
     }
 
     // 마법 상세값 설정
-    public virtual void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
+    public virtual void InitSpellInfoDetail(SpellInfo spellInfoFromServer, GameObject spellOwnerObject)
     {
         if (IsClient) return;
 
         spellInfo = new SpellInfo(spellInfoFromServer);
+        this.spellOwnerObject = spellOwnerObject;
     }
 
     public virtual void Shoot(Vector3 force, ForceMode forceMode)

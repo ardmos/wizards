@@ -155,7 +155,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if (Time.time > lastAttackTime + attackCooldown)
         {
             //Debug.Log("Attacking the target!");
-            wizardRukeAIBattleSystemServer.Attack();
+            //wizardRukeAIBattleSystemServer.Attack();
             lastAttackTime = Time.time;
         }
     }
@@ -186,7 +186,8 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
                     players.Add(player);
                 }
             }
-            else if (collider.CompareTag("AI"))
+            // 자신을 제외한 AI를 검색
+            else if (collider.gameObject != gameObject && collider.CompareTag("AI"))
             {
                 if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
                 {
@@ -208,19 +209,29 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         }
     }
 
-    // 피격처리 
-    public void PlayerGotHitOnServer(sbyte damage, ulong clientWhoAttacked)
+    // 피격처리.
+    public void PlayerGotHitOnServer(sbyte damage, ulong clientIDWhoAttacked, GameObject clientObjectWhoAttacked)
     {
         // 피격 처리 총괄.
-        wizardRukeAIHPManagerServer.TakingDamage(damage, clientWhoAttacked);
-        // 각 Client UI 업데이트 지시 Damage Text Popup.  이젠 HPManager.TakingDamage에서 해줍니다.
-        //wizardRukeAIClient.ShowDamageTextPopupClientRPC(damage);
-        // 맞춘 플레이어 카메라 쉐이크. AI라면 쉐이크 시킬 필요 없습니다.
-        NetworkClient networkClient = NetworkManager.ConnectedClients[clientWhoAttacked];
-        if(networkClient.PlayerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        wizardRukeAIHPManagerServer.TakingDamage(damage, clientIDWhoAttacked);
+        
+        // 공격자가 인식범위 안에 있으면 타겟으로 설정. 
+        if(Vector3.Distance(transform.position, target.transform.position) <= maxDistanceDetect)
+            target = clientObjectWhoAttacked;
+
+        // 공격자가 Player인가? AI인가? 
+        if (GameMultiplayer.Instance.GetPlayerDataFromClientId(clientIDWhoAttacked).isAI)
+        {
+            // AI라면 카메라 쉐이크는 하지 않는다.
+            return;
+        }
+
+        // 공격자가 Player라면 카메라 쉐이크 
+        NetworkClient networkClient = NetworkManager.ConnectedClients[clientIDWhoAttacked];
+        if (networkClient.PlayerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
         {
             playerClient.ActivateHitCameraShakeClientRPC();
-        }     
+        }
     }
 
     public sbyte GetPlayerHP()

@@ -167,7 +167,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
 
         // 발사체 스펙 초기화 해주기
         SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
-        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo);
+        spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo, gameObject);
         // 호밍 마법이라면 호밍 마법에 소유자 등록 & 속도 설정
         if (spellObject.TryGetComponent<HomingMissile>(out var ex))
         {

@@ -71,7 +71,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackVerticalMuzzle.position, attackVerticalMuzzle.localRotation);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
-        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
+        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo, gameObject);
         spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
 
         // 위치 설정
@@ -97,7 +97,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackWhirlwindMuzzle.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
-        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
+        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo, gameObject);
         spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
 
         // 위치 설정
@@ -142,7 +142,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(skillInfo.spellName), attackChargeShootMuzzle.position, attackChargeShootMuzzle.rotation);
         spellObject.GetComponent<NetworkObject>().Spawn();
         skillInfo.ownerPlayerClientId = OwnerClientId;
-        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo);
+        spellObject.GetComponent<SlashSkill>().InitSkillInfoDetail(skillInfo, gameObject);
         spellObject.GetComponent<SlashSkill>().SetSelfDestroy();
         // 위치 설정
         spellObject.transform.SetParent(GameManager.Instance.transform);

@@ -11,7 +11,7 @@ public class StoneSlashLv1 : AttackSpell  // 임시로 사용. Knight용 스킬 클래스를
     /// <summary>
     /// 1. 상세 능력치 설정(마법 사용시에 Server에서 부여해주는 능력치 입니다.)
     /// </summary>
-    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
+/*    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
         Debug.Log($"InitSpellInfoDetail() {nameof(StoneSlashLv1)}");
         base.InitSpellInfoDetail( spellInfoFromServer );
@@ -25,7 +25,7 @@ public class StoneSlashLv1 : AttackSpell  // 임시로 사용. Knight용 스킬 클래스를
             Debug.Log("StoneSlashLv1 AttackSpell Info is not null");
             Debug.Log($"StoneSlashLv1 spell Type : {spellInfo.spellType}, level : {spellInfo.level}");
         }
-    }
+    }*/
 
     // 속성별 충돌 결과를 계산해주는 메소드 <--- Slash 계열 스크립트를 따로 만들어서 빼야할지도 모르겠다. 다른 fire,water,ice 처럼
     public override SpellInfo CollisionHandling(SpellInfo thisSpell, SpellInfo opponentsSpell)

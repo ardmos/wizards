@@ -10,9 +10,9 @@ public class FireBallLv3 : FireSpell
     /// <summary>
     /// 1. 상세 능력치 설정(마법 사용시에 Server에서 부여해주는 능력치 입니다.)
     /// </summary>
-    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
+/*    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer)
     {
-/*        spellInfo = new SpellInfo()
+*//*        spellInfo = new SpellInfo()
         {
             spellType = SpellType.Fire,
             coolTime = 5.0f,
@@ -24,6 +24,6 @@ public class FireBallLv3 : FireSpell
             level = 3,
             spellName = SpellName.FireBallLv1,
             spellState = SpellState.Ready
-        };*/
-    }
+        };*//*
+    }*/
 }
