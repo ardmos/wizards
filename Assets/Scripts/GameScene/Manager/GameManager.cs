@@ -344,21 +344,22 @@ public class GameManager : NetworkBehaviour
     /// <param name="serverRpcParams"></param>
     public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver, ulong clientWhoAttacked = 100)
     {
+        // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoGameOver);
+        if (playerData.playerGameState == PlayerGameState.GameOver)
+        {
+            Debug.Log($"player{clientWhoGameOver}는 이미 게임오버처리된 플레이어입니다.");
+            return;
+        }
+        playerData.playerGameState = PlayerGameState.GameOver;
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
+
+        // 접속중인 모든 Client들에게 게임오버 소식을 브로드캐스트해줍니다. AI들은 새로운 타겟을 찾아나설것이고, 플레이어들은 UI에 정보를 노출시킬것입니다.
+        OnPlayerGameOver?.Invoke(this, new PlayerGameOverEventArgs { clientIDWhoGameOver = clientWhoGameOver, clientIDWhoAttacked = clientWhoAttacked });
+
+
         if (NetworkManager.ConnectedClients.ContainsKey(clientWhoGameOver))
         {
-            // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
-            PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoGameOver);
-            if (playerData.playerGameState == PlayerGameState.GameOver)
-            {
-                Debug.Log($"player{clientWhoGameOver}는 이미 게임오버처리된 플레이어입니다.");
-                return;
-            }
-            playerData.playerGameState = PlayerGameState.GameOver;
-            GameMultiplayer.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
-
-            // 접속중인 모든 Client들에게 게임오버 소식을 브로드캐스트해줍니다. AI들은 새로운 타겟을 찾아나설것이고, 플레이어들은 UI에 정보를 노출시킬것입니다.
-            OnPlayerGameOver?.Invoke(this, new PlayerGameOverEventArgs { clientIDWhoGameOver = clientWhoGameOver, clientIDWhoAttacked = clientWhoAttacked });
-
             // 상단 UI를 위한 AlivePlayersCount 값 업데이트
             gameOverPlayerCount++;
             UpdateCurrentAlivePlayerCount();
