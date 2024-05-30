@@ -59,6 +59,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         SetState(new IdleState(this));
 
         GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
+        GameMultiplayer.Instance.
     }
 
     private void GameManager_OnGameStateChanged(object sender, EventArgs e)
@@ -262,8 +263,6 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         this.maxHp = characterData.maxHp;
         this.moveSpeed = characterData.moveSpeed;
     }
-
-
 
     public void GameOver()
     {

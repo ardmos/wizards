@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -8,6 +9,24 @@ public class GameOverUIController : NetworkBehaviour
 {
     public GameObject gameOverMessageContainer;
     public GameObject gameOverMessagePrefab;
+
+    public override void OnNetworkSpawn()
+    {
+        GameManager.Instance.OnPlayerGameOver += GameManager_OnPlayerGameOver;
+    }
+
+    private void GameManager_OnPlayerGameOver(object sender, PlayerGameOverEventArgs e)
+    {
+        string playerWhoAttacked = "";
+        if (e.clientIDWhoAttacked == 100) playerWhoAttacked = "\'Disconnect\'";
+        else playerWhoAttacked = GameMultiplayer.Instance.GetPlayerDataFromClientId(e.clientIDWhoAttacked).playerName.ToString();
+        ShowGameOverPlayerClientRPC(GameMultiplayer.Instance.GetPlayerDataFromClientId(e.clientIDWhoGameOver).playerName.ToString(), playerWhoAttacked);
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        GameManager.Instance.OnPlayerGameOver -= GameManager_OnPlayerGameOver;
+    }
 
     // 게임오버가 발생했을 때, 가장 최근에 게임오버된 플레이어를 띄워줍니다. 지금은 ClientID를 띄워줍니다. playerName기능이 구현되면 playerName으로 변경할것입니다.
     [ClientRpc]

@@ -27,6 +27,7 @@ public class GameManager : NetworkBehaviour
 
     public event EventHandler OnGameStateChanged;
     public event EventHandler OnAlivePlayerCountChanged;
+    public event EventHandler<PlayerGameOverEventArgs> OnPlayerGameOver;
 
     public AudioListener audioListenerServerOnly;
     public PlayerSpawnPointsController spawnPointsController;
@@ -355,11 +356,8 @@ public class GameManager : NetworkBehaviour
             playerData.playerGameState = PlayerGameState.GameOver;
             GameMultiplayer.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
 
-            // 접속중인 모든 Client들의 NotifyUI에 게임오버 소식을 브로드캐스트해줍니다.
-            string playerWhoAttacked = "";
-            if (clientWhoAttacked == 100) playerWhoAttacked = "\'Disconnect\'";
-            else playerWhoAttacked = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoAttacked).playerName.ToString();
-            GameSceneUIManager.Instance.notifyUIController.ShowGameOverPlayerClientRPC(playerData.playerName.ToString(), playerWhoAttacked);
+            // 접속중인 모든 Client들에게 게임오버 소식을 브로드캐스트해줍니다. AI들은 새로운 타겟을 찾아나설것이고, 플레이어들은 UI에 정보를 노출시킬것입니다.
+            OnPlayerGameOver?.Invoke(this, new PlayerGameOverEventArgs { clientIDWhoGameOver = clientWhoGameOver, clientIDWhoAttacked = clientWhoAttacked });
 
             // 상단 UI를 위한 AlivePlayersCount 값 업데이트
             gameOverPlayerCount++;

@@ -230,6 +230,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\ItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupHostHasDisconnectedUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\GraphicGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerGameOverEventArgs.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerInGameData.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ButtonReadSpellScrollUIController.cs" />
