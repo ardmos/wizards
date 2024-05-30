@@ -51,15 +51,44 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public WizardRukeAIMovementServer wizardRukeAIMovementServer;
     public WizardRukeAIBattleSystemServer wizardRukeAIBattleSystemServer;
 
+    // GC 작업의 최소화를 위한 캐싱
+    private IdleState aiIdleState;
+    private PatrolState aiPatrolState;
+
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
+        aiIdleState = new IdleState(this);
+        aiPatrolState = new PatrolState(this);
 
         // 게임 시작 전 대기!
-        SetState(new IdleState(this));
+        SetState(aiIdleState);
 
         GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
-        GameMultiplayer.Instance.
+        GameManager.Instance.OnPlayerGameOver += GameManager_OnPlayerGameOver;
+    }
+
+    private void GameManager_OnPlayerGameOver(object sender, PlayerGameOverEventArgs e)
+    {
+        // 게임오버된 플레이어가 현재 target인지 확인합니다.
+        ulong targetClientID = 0;
+        // AI인 경우
+        if (target.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer wizardRukeAIServer)) {
+            targetClientID = wizardRukeAIServer.AIClientId;
+        }
+        // Player인 경우
+        else if(target.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
+        {
+            targetClientID = playerServer.OwnerClientId;
+        }
+
+        // 게임오버된 플레이어가 현재 타겟이었으면 타겟 초기화, 다시 검색 시작. 
+        if(targetClientID == GameMultiplayer.Instance.GetPlayerDataFromClientId(e.clientIDWhoGameOver).clientId)
+        {
+            Debug.Log("Target 게임오버! 새로운 타겟을 검색합니다");
+            target = null;
+            SetState(aiPatrolState);
+        }
     }
 
     private void GameManager_OnGameStateChanged(object sender, EventArgs e)
@@ -67,7 +96,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if (GameManager.Instance.IsGamePlaying())
         {
             // 이제 카운트다운은 끝! 게임 시작! 순찰을 시작합니다!
-            SetState(new PatrolState(this));
+            SetState(aiPatrolState);
         }
     }
 
@@ -86,6 +115,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public override void OnDestroy()
     {
         GameManager.Instance.OnGameStateChanged -= GameManager_OnGameStateChanged;
+        GameManager.Instance.OnPlayerGameOver -= GameManager_OnPlayerGameOver;
     }
 
     /// <summary>
