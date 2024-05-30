@@ -179,6 +179,8 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
     public void MoveTowardsTarget()
     {
+        if (!target) return;
+
         wizardRukeAIMovementServer.MoveToTarget(target.transform);
 
         // 이동 애니메이션 실행
