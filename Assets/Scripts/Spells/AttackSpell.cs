@@ -192,6 +192,25 @@ public abstract class AttackSpell : NetworkBehaviour
 
         spellInfo = new SpellInfo(spellInfoFromServer);
         this.spellOwnerObject = spellOwnerObject;
+
+        // Layer ¼³Á¤
+        switch (spellInfo.ownerPlayerClientId)
+        {
+            case 0:
+                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player0");
+                break;
+            case 1:
+                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player1");
+                break;
+            case 2:
+                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player2");
+                break;
+            case 3:
+                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player3");
+                break;
+            default:
+                break;
+        }
     }
 
     public virtual void Shoot(Vector3 force, ForceMode forceMode)

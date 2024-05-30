@@ -62,11 +62,10 @@ public class HomingMissile : NetworkBehaviour
     }
 
     public void SetOwner(ulong shooterClientID)
-    {
-        
+    {       
         _shooterClientID = shooterClientID;
      
-        // 플레이어 Layer 설정
+        // Layer 설정
         switch (_shooterClientID)
         {
             case 0:

@@ -27,7 +27,7 @@ public class SlashSkill : NetworkBehaviour
         skillInfo = new SpellInfo(spellInfoFromServer);
         this.skillOwnerObject = skillOwnerObject;
 
-        // 플레이어 Layer 설정
+        // Layer 설정
         LayerMask shooterLayer;
         switch (skillInfo.ownerPlayerClientId)
         {
