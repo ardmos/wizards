@@ -5,13 +5,13 @@ public class HomingMissile : NetworkBehaviour
 {
     [Header("REFERENCES")]
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private PlayerServer _target;
+    [SerializeField] private GameObject _target;
     [SerializeField] private ulong _shooterClientID;
     /*    [SerializeField] private GameObject _explosionPrefab;
         [SerializeField] private GameObject _muzzlePrefab;
         [SerializeField] private sbyte damage = 1;*/
     [SerializeField] private bool _startHoming = false;
-    LayerMask shooterLayer;
+    [SerializeField] private LayerMask shooterLayer;
 
     [Header("MOVEMENT")]
     [SerializeField] private float _speed = 0;
@@ -110,7 +110,7 @@ public class HomingMissile : NetworkBehaviour
     {
         var predictionTime = Mathf.Lerp(0, _maxTimePrediction, leadTimePercentage);
 
-        _standardPrediction = _target.rb.position + _target.rb.velocity * predictionTime;
+        _standardPrediction = _target.GetComponent<Rigidbody>().position + _target.GetComponent<Rigidbody>().velocity * predictionTime;
     }
 
 /*    private void AddDeviation(float leadTimePercentage)
@@ -128,11 +128,13 @@ public class HomingMissile : NetworkBehaviour
         foreach (var collider in colliders)
         {
             //Debug.Log($"호밍 디텍티드! 호밍미사일:{gameObject.layer}, 디텍티드:{collider.gameObject.layer}");
-            // _target으로 설정할 오브젝트의 조건을 여기에 추가합니다.
-            // 예를 들어, 태그가 "Player"이고, 네트워크 상에서 유효한 오브젝트인 경우에만 _target으로 설정할 수 있습니다.
-            if (collider.CompareTag("Player") && collider.gameObject.layer != shooterLayer)
+
+            // 자신을 제외한 Player나 AI를 타겟으로 삼습니다.
+            if (collider.gameObject.layer == shooterLayer) continue;
+
+            if (collider.CompareTag("Player") || collider.CompareTag("AI"))
             {
-                _target = collider.GetComponent<PlayerServer>();
+                _target = collider.gameObject;
                 break; // 첫 번째로 발견된 오브젝트만 타겟으로 설정합니다.
             }
         }

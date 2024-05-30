@@ -13,7 +13,7 @@ public abstract class AttackSpell : NetworkBehaviour
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
 
-    [Header("AI가 피격됐을 시 타겟으로 설정될 마법을 소유한 플레이어 오브젝트")]
+    [Header("AI가 피격됐을 시 타겟으로 설정될 마법을 소유한 플레이어 오브젝트.")]
     public GameObject spellOwnerObject;
 
     // 마법 충돌시 속성 계산
