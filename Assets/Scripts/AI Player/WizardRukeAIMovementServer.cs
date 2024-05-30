@@ -83,8 +83,17 @@ public class WizardRukeAIMovementServer : MonoBehaviour
         {
             if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
             {
-                Vector3 direction = (transform.position - target.position).normalized;
-                Vector3 desiredPosition = target.position + direction * Random.Range(minDesiredDistance, maxDesiredDistance);
+                // 범위 무빙
+                // 목표를 기준으로 원주상의 임의의 지점을 선택
+                float randomAngle = Random.Range(0f, 360f);
+                float randomDistance = Random.Range(minDesiredDistance, maxDesiredDistance);
+
+                Vector3 direction = new Vector3(Mathf.Cos(randomAngle), 0, Mathf.Sin(randomAngle));
+                Vector3 desiredPosition = target.position + direction * randomDistance;
+
+                //기존 앞뒤 무빙
+/*                Vector3 direction = (transform.position - target.position).normalized;
+                Vector3 desiredPosition = target.position + direction * Random.Range(minDesiredDistance, maxDesiredDistance);*/
 
                 // NavMesh 상의 유효한 위치인지 확인. desiredPosition과 근접한 가장 가까운 NavMesh 포인트를 반환해줍니다.
                 NavMeshHit hit;
