@@ -218,14 +218,16 @@ public class GameManager : NetworkBehaviour
 
                 foreach (PlayerInGameData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
                 {
+                    if (playerData.isAI) continue;
+
                     // Play중인 플레이어는 모두 승리 처리 합니다
                     if (playerData.playerGameState == PlayerGameState.Playing)
                     {
                         PlayerInGameData winPlayer = playerData;
 
-                        if (!NetworkManager.ConnectedClients.ContainsKey(winPlayer.clientId)) return;
+                        if (!NetworkManager.ConnectedClients.ContainsKey(winPlayer.clientId)) continue;
                         // 이미 한 번 처리된 경우는 재처리 안해줍니다 <<<-- 수정필요
-                        if (winPlayer.playerGameState == PlayerGameState.Win) return;
+                        if (winPlayer.playerGameState == PlayerGameState.Win) continue;
 
                         // 생존자 State Win 으로 변경
                         winPlayer.playerGameState = PlayerGameState.Win;

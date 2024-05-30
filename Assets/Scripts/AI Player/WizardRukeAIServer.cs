@@ -70,7 +70,11 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
     private void GameManager_OnPlayerGameOver(object sender, PlayerGameOverEventArgs e)
     {
-        // 게임오버된 플레이어가 현재 target인지 확인합니다.
+        // 게임오버된 플레이어가 현재 target라면 target을 초기화하고 재검색합니다.
+
+        // 현재 target이 설정되어있지 않은 상태라면 작업을 해줄 필요 없습니다.
+        if(!target) return;
+
         ulong targetClientID = 0;
         // AI인 경우
         if (target.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer wizardRukeAIServer)) {
@@ -126,7 +130,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     {
         gameState = PlayerGameState.Playing;
 
-        Debug.Log($"WizardRukeAIServer Player{AIClientId} (class : {this.characterClass.ToString()}) InitializeAIPlayerOnServer");
+        //Debug.Log($"WizardRukeAIServer Player{AIClientId} (class : {this.characterClass.ToString()}) InitializeAIPlayerOnServer");
 
         if (GameAssetsManager.Instance == null)
         {
