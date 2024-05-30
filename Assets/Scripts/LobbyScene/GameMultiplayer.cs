@@ -91,7 +91,6 @@ public class GameMultiplayer : NetworkBehaviour
         }
     }
 
-
     public static string GenerateRandomAIPlayerName()
     {
         AIPlayerName randomName = GetRandomEnumValue<AIPlayerName>();

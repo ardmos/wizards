@@ -285,7 +285,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         }
 
         playerOwnedSpellInfoListOnServer = playerSpellInfoList;
-        Debug.Log($"InitAI Spell List. {playerOwnedSpellInfoListOnServer.Count}");
+        //Debug.Log($"InitAI Spell List. {playerOwnedSpellInfoListOnServer.Count}");
     }
 
     public List<SpellInfo> GetSpellInfoList()

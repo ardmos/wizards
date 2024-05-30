@@ -3,7 +3,11 @@ public enum AIPlayerName
     Jake,
     Hannibal,
     Gandalf,
-    Jane
+    Jane,
+    Athena,
+    Maximus,
+    Aurora,
+    Loki
 }
 
 public enum AIPlayerTitle
@@ -11,5 +15,9 @@ public enum AIPlayerTitle
     Kind,
     Smart,
     Handsome,
-    Cute
+    Cute,
+    Brave,
+    Wise,
+    Elegant,
+    Mischievous
 }
