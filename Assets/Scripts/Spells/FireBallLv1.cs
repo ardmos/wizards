@@ -62,6 +62,9 @@ public class FireBallLv1 : FireSpell
             // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
             else if (hit.CompareTag("Player"))
             {
+                // 시전자는 피해 안받도록 설정
+                if (hit.gameObject.layer == shooterLayer) continue;
+
                 if (GetSpellInfo() == null)
                 {
                     //Debug.Log("AttackSpell Info is null");

@@ -13,6 +13,8 @@ public abstract class AttackSpell : NetworkBehaviour
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
 
+    [SerializeField] protected LayerMask shooterLayer;
+
     [Header("AI가 피격됐을 시 타겟으로 설정될 마법을 소유한 플레이어 오브젝트.")]
     public GameObject spellOwnerObject;
 
@@ -108,17 +110,22 @@ public abstract class AttackSpell : NetworkBehaviour
         {
             case 0:
                 gameObject.layer = LayerMask.NameToLayer("Attack Magic Player0");
+                shooterLayer = LayerMask.NameToLayer("Player0");
                 break;
             case 1:
                 gameObject.layer = LayerMask.NameToLayer("Attack Magic Player1");
+                shooterLayer = LayerMask.NameToLayer("Player1");
                 break;
             case 2:
                 gameObject.layer = LayerMask.NameToLayer("Attack Magic Player2");
+                shooterLayer = LayerMask.NameToLayer("Player2");
                 break;
             case 3:
                 gameObject.layer = LayerMask.NameToLayer("Attack Magic Player3");
+                shooterLayer = LayerMask.NameToLayer("Player3");
                 break;
             default:
+                shooterLayer = LayerMask.NameToLayer("Player");
                 break;
         }
     }
