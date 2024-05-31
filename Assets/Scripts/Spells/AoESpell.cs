@@ -161,6 +161,8 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
 
     private void 플레이어블리자드효과적용(GameObject other)
     {
+        if (!other) return;
+
         // 충돌한 플레이어 이동속도 저하.
         if (other.TryGetComponent<PlayerMovementServer>(out PlayerMovementServer playerMovement))
         {
@@ -176,6 +178,8 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
     }
     private void 플레이어블리자드효과복구(GameObject other)
     {
+        if(!other) return;
+
         if (other.TryGetComponent<PlayerMovementServer>(out PlayerMovementServer playerMovement))
         {
             playerMovement.AddMoveSpeed(2f);
@@ -191,6 +195,8 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
 
     private void AI블리자드효과적용(GameObject other)
     {
+        if (!other) return;
+
         // 충돌한 플레이어 이동속도 저하.
         if (other.TryGetComponent<WizardRukeAIMovementServer>(out WizardRukeAIMovementServer aiPlayerMovement))
         {
@@ -206,6 +212,8 @@ public class AoESpell : NetworkBehaviour, IOwnerSeter
     }
     private void AI블리자드효과복구(GameObject other)
     {
+        if (!other) return;
+
         if (other.TryGetComponent<WizardRukeAIMovementServer>(out WizardRukeAIMovementServer aiPlayerMovement))
         {
             aiPlayerMovement.AddMoveSpeed(2f);
