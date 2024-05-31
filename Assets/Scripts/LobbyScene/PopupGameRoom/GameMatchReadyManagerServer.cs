@@ -14,7 +14,7 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
     private void Awake()
     {
         Instance = this;
-        playerReadyDictionaryOnServer = new Dictionary<ulong, bool>(); 
+        playerReadyDictionaryOnServer = new Dictionary<ulong, bool>();
     }
 
     /// <summary>
@@ -27,7 +27,15 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
     {
         playerReadyDictionaryOnServer.Keys.ToList().ForEach(clientId =>
         {
-            playerReadyDictionaryOnServer[clientId] = false;
+            // AI는 레디 풀지 않기. (서버 내부적으로는)
+            if(clientId>= 10000)
+            {
+
+            }
+            else
+            {
+                playerReadyDictionaryOnServer[clientId] = false;
+            }
         });
 
         // 클라이언트측 딕셔너리와도 내용 동기화
@@ -55,6 +63,16 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
                 // 이 clientId 플레이어는 레디 안한 플레이어입니다
                 allClientsReady = false;
                 break;
+            }
+        }
+
+        // 클라이언트UI 아무나 레디했을 시, 서버 내부적으로 레디되어있는 AI들도 클라이언트에게 알립니다
+        foreach (var playerReadyDataOnServer in playerReadyDictionaryOnServer)
+        {
+            //Debug.Log($"AI플레이어가 혹시 레디처리 되어있지만... 서버에있는레디리스트. clientID{playerReadyDataOnServer.Key}, isReady{playerReadyDataOnServer.Value}");
+            if (playerReadyDataOnServer.Key >= 10000 && playerReadyDataOnServer.Value == true) // ClientID가 10000보다 크면 AI입니다.
+            {
+                GameMatchReadyManagerClient.Instance.SetPlayerReadyClientRpc(playerReadyDataOnServer.Key);
             }
         }
 

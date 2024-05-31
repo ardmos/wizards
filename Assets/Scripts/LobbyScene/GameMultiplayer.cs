@@ -66,7 +66,8 @@ public class GameMultiplayer : NetworkBehaviour
                 // AI 유저 채우고 (지금은 전부 Wizard Ruke, wizard ruke ai 의 스펙 지금 여기서 설정해주고있음. 테스트 후 수정 필요)
                 ulong availablePlayerSlots = (ulong)(ConnectionApprovalHandler.MaxPlayers - NetworkManager.Singleton.ConnectedClients.Count);
                 Debug.Log($"현재 접속한 플레이어 {NetworkManager.Singleton.ConnectedClients.Count}명. 최대 {ConnectionApprovalHandler.MaxPlayers}명에서 {availablePlayerSlots}명이 모자랍니다. 모자란만큼 AI 플레이어를 생성합니다.");
-                lastClientId = NetworkManager.Singleton.ConnectedClientsIds[NetworkManager.Singleton.ConnectedClientsIds.Count - 1];
+                //lastClientId = NetworkManager.Singleton.ConnectedClientsIds[NetworkManager.Singleton.ConnectedClientsIds.Count - 1];
+                lastClientId = 10000;
                 Debug.Log($"마지막 플레이어의 ID: {lastClientId}");
                 for (ulong aiClientId = lastClientId + 1; aiClientId <= lastClientId + availablePlayerSlots; aiClientId++)
                 {
@@ -150,11 +151,21 @@ public class GameMultiplayer : NetworkBehaviour
         if (GetPlayerDataIndexFromClientId(clientId) != -1)
             playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
 
+        // AI들 전부 퇴장 처리
+        /*        foreach (PlayerInGameData player in playerDataNetworkList)
+                {
+                    if (player.isAI)
+                    {
+                        playerDataNetworkList.Remove(player);
+                    }
+                }
+                isAIPlayerAdded = false;*/
+
         // 남은 플레이어들이 전부 AI일 경우, 전부 강퇴 처리
         bool isEveryPlayerisAI = true;
         foreach (PlayerInGameData player in playerDataNetworkList)
         {
-            if(!player.isAI)
+            if (!player.isAI)
             {
                 isEveryPlayerisAI = false;
             }
@@ -165,6 +176,8 @@ public class GameMultiplayer : NetworkBehaviour
             playerDataNetworkList.Clear();
             isAIPlayerAdded = false;
         }
+
+        Debug.Log($"플레이어 {clientId}이탈. 남은 플레이어 {playerDataNetworkList.Count}명");
 
         // 게임씬이 아닌지 확인.
         if (GameManager.Instance == null) { 
@@ -220,13 +233,14 @@ public class GameMultiplayer : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void UpdatePlayerInGameDataServerRPC(PlayerInGameData playerData, ServerRpcParams serverRpcParams = default)
     {
-        // 새로운 유저인지 이미 추가된 유저인지 한 번 필터링
+/*        // 접속을 시도하는 인원의 ClientID가 이미 존재합니다. 
         if(GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).hp != 0)
         {
-            Debug.Log($"플레이어{serverRpcParams.Receive.SenderClientId}는 이미 추가된 유저입니다!");
-            return;
+            Debug.Log($"플레이어{serverRpcParams.Receive.SenderClientId}는 이미 추가된 유저입니다! 하지만 상관없습니다 ");
+            //playerDataNetworkList.Remove(GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId));
+            //return;
         }
-
+*/
         playerDataNetworkList.Add(new PlayerInGameData
         {
             clientId = serverRpcParams.Receive.SenderClientId,

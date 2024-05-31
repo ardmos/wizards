@@ -27,7 +27,7 @@ public class GameMatchReadyManagerClient : NetworkBehaviour
     [ClientRpc]
     public void SetPlayerReadyClientRpc(ulong clientId)
     {
-        Debug.Log($"GameMatchReadyManagerClient.SetPlayerReadyClientRpc Called. clientId{clientId}");
+        //Debug.Log($"GameMatchReadyManagerClient.SetPlayerReadyClientRpc Called. clientId{clientId}");
         playerReadyDictionaryOnClient[clientId] = true;
 
         OnPlayerReadyDictionaryClientChanged?.Invoke(this, EventArgs.Empty);
@@ -44,6 +44,7 @@ public class GameMatchReadyManagerClient : NetworkBehaviour
 
     public bool IsPlayerReady(ulong clientId)
     {
+        Debug.Log($"player clientID: {clientId} is ready? {playerReadyDictionaryOnClient.ContainsKey(clientId) && playerReadyDictionaryOnClient[clientId]}");
         return playerReadyDictionaryOnClient.ContainsKey(clientId) && playerReadyDictionaryOnClient[clientId];
     }
 }
