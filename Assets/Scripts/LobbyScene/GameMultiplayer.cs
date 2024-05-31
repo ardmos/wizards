@@ -50,67 +50,6 @@ public class GameMultiplayer : NetworkBehaviour
         CheckFirstPlayerConnectionTime();
     }
 
-    private void CheckFirstPlayerConnectionTime()
-    {
-        if (playerDataNetworkList.Count > 0 && !isAIPlayerAdded)
-        {
-            PlayerInGameData firstPlayer = playerDataNetworkList[0];
-            var passedTime = DateTime.Now - firstPlayer.connectionTime;
-            //Debug.Log($"최초 접속자player{firstPlayer.clientId}는 접속한지 {passedTime} 지났습니다.");
-            // 지정 시간( 테스트에서는 10초.) 이후 자동 시작. 빈자리는 AI로 채워준다
-            if (passedTime > TimeSpan.FromSeconds(10))
-            {
-                Debug.Log($"The first connected player{firstPlayer.clientId} has been connected for more than 10 seconds.");
-                isAIPlayerAdded = true;
-
-                // AI 유저 채우고 (지금은 전부 Wizard Ruke, wizard ruke ai 의 스펙 지금 여기서 설정해주고있음. 테스트 후 수정 필요)
-                ulong availablePlayerSlots = (ulong)(ConnectionApprovalHandler.MaxPlayers - NetworkManager.Singleton.ConnectedClients.Count);
-                Debug.Log($"현재 접속한 플레이어 {NetworkManager.Singleton.ConnectedClients.Count}명. 최대 {ConnectionApprovalHandler.MaxPlayers}명에서 {availablePlayerSlots}명이 모자랍니다. 모자란만큼 AI 플레이어를 생성합니다.");
-                //lastClientId = NetworkManager.Singleton.ConnectedClientsIds[NetworkManager.Singleton.ConnectedClientsIds.Count - 1];
-                lastClientId = 10000;
-                Debug.Log($"마지막 플레이어의 ID: {lastClientId}");
-                for (ulong aiClientId = lastClientId + 1; aiClientId <= lastClientId + availablePlayerSlots; aiClientId++)
-                {
-                    PlayerInGameData aiPlayerInGameData_WizardRuke = new PlayerInGameData()
-                    {
-                        clientId = aiClientId,
-                        playerGameState = PlayerGameState.Playing,
-                        playerName = GenerateRandomAIPlayerName(),
-                        characterClass = Character.Wizard,
-                        hp = 5,
-                        maxHp = 5,
-                        moveSpeed = 4,
-                        isAI = true,
-                    };
-
-                    AddAIPlayer(aiPlayerInGameData_WizardRuke);
-                    // 추가한 AI 플레이어들 레디한걸로 등록 시키기
-                    GameMatchReadyManagerServer.Instance.SetAIPlayerReady(aiClientId);
-                }
-
-            }
-        }
-    }
-
-    public static string GenerateRandomAIPlayerName()
-    {
-        AIPlayerName randomName = GetRandomEnumValue<AIPlayerName>();
-        AIPlayerTitle randomTitle = GetRandomEnumValue<AIPlayerTitle>();
-
-        return $"{randomTitle} {randomName}";
-    }
-
-    private static T GetRandomEnumValue<T>()
-    {
-        Array values = Enum.GetValues(typeof(T));
-        Random random = new Random();
-        return (T)values.GetValue(random.Next(values.Length));
-    }
-
-    public ulong GetLastClientId()
-    {
-        return lastClientId;
-    }
 
     public override void OnNetworkSpawn()
     {
@@ -125,6 +64,7 @@ public class GameMultiplayer : NetworkBehaviour
 
         if (IsServer)
         {
+            NetworkManager.Singleton.OnClientConnectedCallback -= Server_OnClientConnectedCallback;
             NetworkManager.Singleton.OnClientDisconnectCallback -= Server_OnClientDisconnectCallback;
         }
     }
@@ -138,8 +78,18 @@ public class GameMultiplayer : NetworkBehaviour
     // UGS Dedicated Server
     public void StartServer()
     {
+        NetworkManager.Singleton.OnClientConnectedCallback += Server_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartServer();
+    }
+
+    private void Server_OnClientConnectedCallback(ulong obj)
+    {
+        // 클라 접속시 AI유저들이 존재한다면, 모두 레디 시킵니다. 
+        foreach (var player in playerDataNetworkList)
+        {
+            if(player.isAI) GameMatchReadyManagerServer.Instance.SetAIPlayerReady(player.clientId);
+        }
     }
 
     /// <summary>
@@ -151,15 +101,9 @@ public class GameMultiplayer : NetworkBehaviour
         if (GetPlayerDataIndexFromClientId(clientId) != -1)
             playerDataNetworkList.RemoveAt(GetPlayerDataIndexFromClientId(clientId));
 
-        // AI들 전부 퇴장 처리
-        /*        foreach (PlayerInGameData player in playerDataNetworkList)
-                {
-                    if (player.isAI)
-                    {
-                        playerDataNetworkList.Remove(player);
-                    }
-                }
-                isAIPlayerAdded = false;*/
+        // 모든 플레이어 레디상태 초기화
+        if(GameMatchReadyManagerServer.Instance)
+            GameMatchReadyManagerServer.Instance.SetEveryPlayerUnReady();
 
         // 남은 플레이어들이 전부 AI일 경우, 전부 강퇴 처리
         bool isEveryPlayerisAI = true;
@@ -233,14 +177,13 @@ public class GameMultiplayer : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void UpdatePlayerInGameDataServerRPC(PlayerInGameData playerData, ServerRpcParams serverRpcParams = default)
     {
-/*        // 접속을 시도하는 인원의 ClientID가 이미 존재합니다. 
-        if(GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).hp != 0)
+        // 접속을 시도하는 인원의 ClientID가 이미 존재합니다. 
+        if (GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId).hp != 0)
         {
-            Debug.Log($"플레이어{serverRpcParams.Receive.SenderClientId}는 이미 추가된 유저입니다! 하지만 상관없습니다 ");
-            //playerDataNetworkList.Remove(GetPlayerDataFromClientId(serverRpcParams.Receive.SenderClientId));
-            //return;
+            Debug.Log($"플레이어{serverRpcParams.Receive.SenderClientId}는 이미 추가된 유저입니다!");
+            return;
         }
-*/
+
         playerDataNetworkList.Add(new PlayerInGameData
         {
             clientId = serverRpcParams.Receive.SenderClientId,
@@ -395,6 +338,69 @@ public class GameMultiplayer : NetworkBehaviour
         return GetPlayerDataFromClientId(clientID).score;
     }
 
+    private void CheckFirstPlayerConnectionTime()
+    {
+        if (playerDataNetworkList.Count > 0 && !isAIPlayerAdded)
+        {
+            PlayerInGameData firstPlayer = playerDataNetworkList[0];
+            var passedTime = DateTime.Now - firstPlayer.connectionTime;
+            //Debug.Log($"최초 접속자player{firstPlayer.clientId}는 접속한지 {passedTime} 지났습니다.");
+            // 지정 시간( 테스트에서는 10초.) 이후 자동 시작. 빈자리는 AI로 채워준다
+            if (passedTime > TimeSpan.FromSeconds(10))
+            {
+                Debug.Log($"The first connected player{firstPlayer.clientId} has been connected for more than 10 seconds.");
+                isAIPlayerAdded = true;
+
+                // AI 유저 채우고 (지금은 전부 Wizard Ruke, wizard ruke ai 의 스펙 지금 여기서 설정해주고있음. 테스트 후 수정 필요)
+                ulong availablePlayerSlots = (ulong)(ConnectionApprovalHandler.MaxPlayers - NetworkManager.Singleton.ConnectedClients.Count);
+                Debug.Log($"현재 접속한 플레이어 {NetworkManager.Singleton.ConnectedClients.Count}명. 최대 {ConnectionApprovalHandler.MaxPlayers}명에서 {availablePlayerSlots}명이 모자랍니다. 모자란만큼 AI 플레이어를 생성합니다.");
+                //lastClientId = NetworkManager.Singleton.ConnectedClientsIds[NetworkManager.Singleton.ConnectedClientsIds.Count - 1];
+                lastClientId = 10000;
+                Debug.Log($"마지막 플레이어의 ID: {lastClientId}");
+                for (ulong aiClientId = lastClientId + 1; aiClientId <= lastClientId + availablePlayerSlots; aiClientId++)
+                {
+                    PlayerInGameData aiPlayerInGameData_WizardRuke = new PlayerInGameData()
+                    {
+                        clientId = aiClientId,
+                        playerGameState = PlayerGameState.Playing,
+                        playerName = GenerateRandomAIPlayerName(),
+                        characterClass = Character.Wizard,
+                        hp = 5,
+                        maxHp = 5,
+                        moveSpeed = 4,
+                        isAI = true,
+                    };
+
+                    AddAIPlayer(aiPlayerInGameData_WizardRuke);
+                    // 추가한 AI 플레이어들 레디한걸로 등록 시키기
+                    GameMatchReadyManagerServer.Instance.SetAIPlayerReady(aiClientId);
+                }
+
+            }
+        }
+    }
+
+    public static string GenerateRandomAIPlayerName()
+    {
+        AIPlayerName randomName = GetRandomEnumValue<AIPlayerName>();
+        AIPlayerTitle randomTitle = GetRandomEnumValue<AIPlayerTitle>();
+
+        return $"{randomTitle} {randomName}";
+    }
+
+    private static T GetRandomEnumValue<T>()
+    {
+        Array values = Enum.GetValues(typeof(T));
+        Random random = new Random();
+        return (T)values.GetValue(random.Next(values.Length));
+    }
+
+    public ulong GetLastClientId()
+    {
+        return lastClientId;
+    }
+
+
     // 클라이언트 ---
 
     public void StartClient()
@@ -425,21 +431,13 @@ public class GameMultiplayer : NetworkBehaviour
         // 서버RPC를 통해 서버에 저장
         Debug.Log($"Client_OnClientConnectedCallback. clientId: {clientId}, class: {PlayerDataManager.Instance.GetCurrentPlayerClass()}");
         //ChangePlayerClass(PlayerProfileData.Instance.GetCurrentSelectedClass());
-        SavePlayerInGameDataOnServer(PlayerDataManager.Instance.GetPlayerInGameData());
+        // 로컬에 저장되어있는 Player 정보를 생성된 서버에 저장. 
+        UpdatePlayerInGameDataServerRPC(PlayerDataManager.Instance.GetPlayerInGameData());
     }
     private void Client_OnClientDisconnectCallback(ulong clientId)
     {
         Debug.Log($"OnClientDisconnectCallback : {clientId}");
         // 매칭 UI 숨김을 위한 이벤트 핸들러 호출. 
         OnFailedToJoinMatch?.Invoke(this, EventArgs.Empty);
-    }
-
-    /// <summary>
-    /// 로컬에 저장되어있는 Player 정보를 생성된 서버에 저장하는 스크립트 입니다.
-    /// </summary>
-    /// <param name="playerData"></param>
-    private void SavePlayerInGameDataOnServer(PlayerInGameData playerData)
-    {
-        UpdatePlayerInGameDataServerRPC(playerData);
     }
 }

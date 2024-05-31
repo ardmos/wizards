@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
@@ -21,25 +19,15 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
     /// 모든 플레이어의 레디상태를 취소해주는 메소드 입니다.
     /// 클라이언트가 매칭에서 나갔을 경우에 사용됩니다.
     /// </summary>
-    /// <param name="serverRpcParams"></param>
-    [ServerRpc(RequireOwnership = false)]
-    public void SetPlayerUnReadyServerRPC(ServerRpcParams serverRpcParams = default)
+    public void SetEveryPlayerUnReady()
     {
+        // 모든 플레이어 레디상태 false로 변경
         playerReadyDictionaryOnServer.Keys.ToList().ForEach(clientId =>
         {
-            // AI는 레디 풀지 않기. (서버 내부적으로는)
-            if(clientId>= 10000)
-            {
-
-            }
-            else
-            {
-                playerReadyDictionaryOnServer[clientId] = false;
-            }
+            playerReadyDictionaryOnServer[clientId] = false;
         });
-
         // 클라이언트측 딕셔너리와도 내용 동기화
-        GameMatchReadyManagerClient.Instance.SetPlayerUnReadyClientRpc();
+        GameMatchReadyManagerClient.Instance.SetEveryPlayerUnReadyClientRpc();
     }
 
     /// <summary>
@@ -93,6 +81,8 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
     /// <param name="컴퓨터용클라이언트아이디"></param>
     public void SetAIPlayerReady(ulong 컴퓨터용클라이언트아이디)
     {
+        if (playerReadyDictionaryOnServer.ContainsKey(컴퓨터용클라이언트아이디) && playerReadyDictionaryOnServer[컴퓨터용클라이언트아이디]) return;
+
         Debug.Log($"AI 레디 보고가 들어왔습니다. 보고자: AIClientId:{컴퓨터용클라이언트아이디}, AIplayerIndex:{GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(컴퓨터용클라이언트아이디)}");
         // 이 과정은 서버쪽에서만 저장하고 처리하는 거라 윗줄이 필요함.
         playerReadyDictionaryOnServer[컴퓨터용클라이언트아이디] = true;

@@ -32,7 +32,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
     public Image imgReadyCountdown;
     public TextMeshProUGUI txtPlayerCount;
     public Toggle[] toggleArrayPlayerJoined;
-    public bool isCancellationRequested;
+    //public bool isCancellationRequested;
     public bool isReadyCountdownUIAnimStarted;
 
     // Start is called before the first frame update
@@ -68,17 +68,6 @@ public class PopupGameRoomUIController : NetworkBehaviour
         // Unity Editor에서는 서버 확인이 안되기 때문에 이렇게 처리해줍니다.
         if (!gameObject.activeSelf) return;
 
-        // 1. 서버에 퇴장의사 보고 완료 됐으면 퇴장 단계 진행
-        if (isCancellationRequested)
-        {
-            // 현 플레이어가 매칭 티켓에서 퇴장하려는 단계
-            // 1. 퇴장 실행
-            GameMultiplayer.Instance.StopClient();
-            // 매칭 실패 SFX 재생
-            SoundManager.Instance?.PlayUISFX(UISFX_Type.Failed_Match);
-            Hide();
-        }
-
         // 2. 상태에 따른 UI 설정
         switch (matchingState)
         {
@@ -104,6 +93,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
                     isReadyCountdownUIAnimStarted = true;
                 }
                 // 레디 버튼 활성화
+                Debug.Log($"레디버튼 활성화"); 
                 btnReady.gameObject.SetActive(true);
                 // 매칭 성공 SFX 재생
                 SoundManager.Instance?.PlayUISFX(UISFX_Type.Succeeded_Match);
@@ -142,8 +132,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
     private void OnReadyPlayerListClientChanged(object sender, System.EventArgs e)
     {
-        Debug.Log("팝업 OnReadyChanged()");
-        RunStateMachine();
+        //Debug.Log("팝업 OnReadyChanged()");
+        //RunStateMachine();
+        SetUIs(GameMultiplayer.Instance.GetPlayerCount());
     }
 
     /// <summary>
@@ -174,13 +165,11 @@ public class PopupGameRoomUIController : NetworkBehaviour
         // Unity Editor에서는 서버 확인이 안되기 때문에 이렇게 처리해줍니다.
         if (!gameObject.activeSelf) return;
 
-        // 접속중인 플레이어 수
-        byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
         //Debug.Log($"현재 참여중인 총 플레이어 수 : {playerCount}, matchingState:{matchingState}");
 
-        // 게임 인원 다 모이면 레디버튼 활성화
+        // 게임 인원 다 모이면 매칭상태 변경
+        byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
         if (playerCount == ConnectionApprovalHandler.MaxPlayers) //테스트용 주석
-        //if(true)
         {
             // 레디 대기 상태로 변경
             matchingState = MatchingState.WatingForReady;
@@ -193,18 +182,6 @@ public class PopupGameRoomUIController : NetworkBehaviour
         }
 
         RunStateMachine();
-    }
-
-
-    /// <summary>
-    /// 플레이어 레디버튼 클릭시 동작하는 메소드 입니다.
-    /// 1. 서버에 레디상태 보고
-    /// 2. 레디버튼 비활성화
-    /// </summary>
-    private void ReadyMatch()
-    {
-        GameMatchReadyManagerServer.Instance.SetPlayerReadyServerRpc();
-        btnReady.gameObject.SetActive(false);   
     }
 
     public void SetUIs(byte playerCount)
@@ -242,7 +219,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
             if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
             {
                 PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-                //Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId)}");
+                Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId)}");
                 toggleArrayPlayerJoined[playerIndex].isOn = GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId);
             }
             else
@@ -253,20 +230,37 @@ public class PopupGameRoomUIController : NetworkBehaviour
     }
 
     /// <summary>
+    /// 플레이어 레디버튼 클릭시 동작하는 메소드 입니다.
+    /// 1. 서버에 레디상태 보고
+    /// 2. 레디버튼 비활성화
+    /// </summary>
+    private void ReadyMatch()
+    {
+        GameMatchReadyManagerServer.Instance.SetPlayerReadyServerRpc();
+        btnReady.gameObject.SetActive(false);
+    }
+
+    /// <summary>
     /// 현재 매칭중인 티켓에서 나갑니다. 
-    /// SetPlayerUnReadyServerRPC()-> OnReadyChanged() -> RunStateMachine() 순서로 실행돼서 퇴장이 완료됩니다.
     /// </summary>
     private void CancelMatch()
     {
-        isCancellationRequested = true;
-        GameMatchReadyManagerServer.Instance.SetPlayerUnReadyServerRPC();
+        // Client GameMatchReadyManager 리스트 초기화
+        GameMatchReadyManagerClient.Instance.ClearPlayerReadyList();
+
+        // 현 플레이어가 매칭 티켓에서 퇴장하려는 단계
+        // 1. 퇴장 실행
+        GameMultiplayer.Instance.StopClient();
+        // 매칭 실패 SFX 재생
+        SoundManager.Instance?.PlayUISFX(UISFX_Type.Failed_Match);
+        Hide();
     }
 
     private void Show()
     {
         gameObject.SetActive(true);
 
-        isCancellationRequested = false;
+        //isCancellationRequested = false;
         isReadyCountdownUIAnimStarted = false;
         matchingState = MatchingState.WatingForPlayers;
         imgReadyCountdown.fillAmount = 0;
