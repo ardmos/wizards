@@ -253,7 +253,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIHPManagerServer.TakingDamage(damage, clientIDWhoAttacked);
         
         // 공격자가 인식범위 안에 있으면 타겟으로 설정. 
-        if(Vector3.Distance(transform.position, target.transform.position) <= maxDistanceDetect)
+        if(Vector3.Distance(transform.position, clientObjectWhoAttacked.transform.position) <= maxDistanceDetect)
             target = clientObjectWhoAttacked;
 
         // 방어스킬 발동
