@@ -192,7 +192,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if (Time.time > lastAttackTime + attackCooldown)
         {
             //Debug.Log("Attacking the target!");
-            //wizardRukeAIBattleSystemServer.Attack();
+            wizardRukeAIBattleSystemServer.Attack();
             lastAttackTime = Time.time;
         }
     }
@@ -308,7 +308,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if (gameState != PlayerGameState.Playing) return;
         Debug.Log($"AI Player{AIClientId} is GameOver");
         gameState = PlayerGameState.GameOver;
-        //playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        
         // 추적 멈추기
         wizardRukeAIMovementServer.StopMove();
         // 물리충돌 해제

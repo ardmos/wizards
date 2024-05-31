@@ -219,7 +219,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
             if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
             {
                 PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-                Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId)}");
+                //Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId)}");
                 toggleArrayPlayerJoined[playerIndex].isOn = GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId);
             }
             else

@@ -87,10 +87,17 @@ public class PlayerAnimator : NetworkBehaviour
         switch (playerMoveAnimState)
         {
             case PlayerMoveAnimState.Idle:
-                animator.SetBool(k_IS_WALKING, false);
+                if (animator.GetBool(k_IS_WALKING))
+                {
+                    animator.SetBool(k_IS_WALKING, false);
+                }
+                //Debug.Log($"UpdatePlayerMoveAnimationOnServer playerMoveAnimState:{playerMoveAnimState}");
                 break;
             case PlayerMoveAnimState.Walking:
-                animator.SetBool(k_IS_WALKING, true);
+                if (!animator.GetBool(k_IS_WALKING))
+                {
+                    animator.SetBool(k_IS_WALKING, true);
+                }
                 break;
             case PlayerMoveAnimState.GameOver:
                 isAlreadyGameOver = true;

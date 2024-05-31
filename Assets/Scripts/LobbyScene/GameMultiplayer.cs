@@ -135,7 +135,7 @@ public class GameMultiplayer : NetworkBehaviour
             GameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
 
         Debug.Log($"Server_OnClientDisconnectCallback, Player Count :{playerDataNetworkList.Count}");
-        
+
         // 혹시 모든 플레이어가 나갔으면, 서버도 다시 로비씬으로 돌아간다
         if (playerDataNetworkList.Count == 0)
         {

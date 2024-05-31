@@ -359,7 +359,6 @@ public class GameManager : NetworkBehaviour
         // 접속중인 모든 Client들에게 게임오버 소식을 브로드캐스트해줍니다. AI들은 새로운 타겟을 찾아나설것이고, 플레이어들은 UI에 정보를 노출시킬것입니다.
         OnPlayerGameOver?.Invoke(this, new PlayerGameOverEventArgs { clientIDWhoGameOver = clientWhoGameOver, clientIDWhoAttacked = clientWhoAttacked });
 
-
         if (NetworkManager.ConnectedClients.ContainsKey(clientWhoGameOver))
         {
             // 상단 UI를 위한 AlivePlayersCount 값 업데이트

@@ -111,6 +111,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
         // GameOver 애니메이션 실행
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        Debug.Log($"AI 게임오버! ");
         // 동작 정지
         wizardRukeAIServer.GameOver();
 

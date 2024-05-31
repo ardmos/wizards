@@ -23,22 +23,112 @@ public class SpellSpecifications : MonoBehaviour
     {
         // Wizard_Male
         // 공격 마법
-        SetSpellDefaultSpec(SpellType.Fire, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.FireBallLv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Water, 2.0f, 10.0f, 5.0f, 30, 1, SkillName.WaterBallLv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Ice, 2.0f, 10.0f, 10.0f, 30, 1, SkillName.IceBallLv1, SpellState.Ready);
+        SetSpellDefaultSpec(
+            spellType: SpellType.Fire,
+            coolTime: 5.0f,
+            lifeTime: 10.0f,
+            moveSpeed: 10.0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.FireBallLv1,
+            spellState: SpellState.Ready
+        );
+        SetSpellDefaultSpec(
+            spellType: SpellType.Water,
+            coolTime: 5.0f,
+            lifeTime: 10.0f,
+            moveSpeed: 5.0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.WaterBallLv1,
+            spellState: SpellState.Ready
+        );
+        SetSpellDefaultSpec(
+            spellType: SpellType.Ice,
+            coolTime: 5.0f,
+            lifeTime: 10.0f,
+            moveSpeed: 10.0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.IceBallLv1,
+            spellState: SpellState.Ready
+        );
 
-        SetSpellDefaultSpec(SpellType.Ice, 2.0f, 10.0f, 0f, 30, 1, SkillName.BlizzardLv1, SpellState.Ready);
+        SetSpellDefaultSpec(
+            spellType: SpellType.Ice,
+            coolTime: 10.0f,
+            lifeTime: 10.0f,
+            moveSpeed: 0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.BlizzardLv1,
+            spellState: SpellState.Ready
+        );
         // 방어 마법
-        SetSpellDefaultSpec(SpellType.Arcane, 10.0f, 2.2f, 0f, 30, 1, SkillName.MagicShieldLv1, SpellState.Ready);
+        SetSpellDefaultSpec(
+            spellType: SpellType.Arcane,
+            coolTime: 10.0f,
+            lifeTime: 2.2f,
+            moveSpeed: 0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.MagicShieldLv1,
+            spellState: SpellState.Ready
+        );
 
         // Knight_Male
         // 공격 스킬
-        SetSpellDefaultSpec(SpellType.Stone, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.StoneSlashAttack1_Lv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttackVertical_Lv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 0f, 30, 1, SkillName.ElectricSlashAttackWhirlwind_Lv1, SpellState.Ready);
-        SetSpellDefaultSpec(SpellType.Electric, 2.0f, 1.0f, 10.0f, 30, 1, SkillName.ElectricSlashAttackChargeSlash_Lv1, SpellState.Ready);
-        //방어
-        SetSpellDefaultSpec(SpellType.Normal, 2.0f, 0f, 0f, 30, 1, SkillName.Dash_Lv1, SpellState.Ready);
+        SetSpellDefaultSpec(
+            spellType: SpellType.Stone,
+            coolTime: 5.0f,
+            lifeTime: 1.0f,
+            moveSpeed: 10.0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.StoneSlashAttack1_Lv1,
+            spellState: SpellState.Ready
+        );
+        SetSpellDefaultSpec(
+            spellType: SpellType.Electric,
+            coolTime: 5.0f,
+            lifeTime: 1.0f,
+            moveSpeed: 10.0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.ElectricSlashAttackVertical_Lv1,
+            spellState: SpellState.Ready
+        );
+        SetSpellDefaultSpec(
+            spellType: SpellType.Electric,
+            coolTime: 5.0f,
+            lifeTime: 1.0f,
+            moveSpeed: 0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.ElectricSlashAttackWhirlwind_Lv1,
+            spellState: SpellState.Ready
+        );
+        SetSpellDefaultSpec(
+            spellType: SpellType.Electric,
+            coolTime: 10.0f,
+            lifeTime: 1.0f,
+            moveSpeed: 10.0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.ElectricSlashAttackChargeSlash_Lv1,
+            spellState: SpellState.Ready
+        );
+        // 방어
+        SetSpellDefaultSpec(
+            spellType: SpellType.Normal,
+            coolTime: 5.0f,
+            lifeTime: 0f,
+            moveSpeed: 0f,
+            price: 30,
+            level: 1,
+            spellName: SkillName.Dash_Lv1,
+            spellState: SpellState.Ready
+        );
     }
 
     public SpellInfo GetSpellDefaultSpec(SkillName spellName)
