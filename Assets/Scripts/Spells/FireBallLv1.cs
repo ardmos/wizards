@@ -65,26 +65,21 @@ public class FireBallLv1 : FireSpell
                 // 시전자는 피해 안받도록 설정
                 if (hit.gameObject.layer == shooterLayer) continue;
 
-                if (GetSpellInfo() == null)
-                {
-                    //Debug.Log("AttackSpell Info is null");
-                    return;
-                }
+                if (GetSpellInfo() == null) return;
 
-                PlayerServer player = hit.GetComponent<PlayerServer>();
-                if (player == null)
+                if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
                 {
-                    //Debug.LogError("Player is null!");
-                    return;
+                    sbyte damage = (sbyte)GetSpellInfo().level;
+                    // 플레이어 피격을 서버에서 처리
+                    playerServer.PlayerGotHitOnServer(damage, spellOwnerClientId);
                 }
-
-                sbyte damage = (sbyte)GetSpellInfo().level;
-                // 플레이어 피격을 서버에서 처리
-                player.PlayerGotHitOnServer(damage, spellOwnerClientId);
             }
             // AI플레이어일 경우 처리
             else if (hit.CompareTag("AI"))
             {
+                // 시전자는 피해 안받도록 설정
+                if (hit.gameObject.layer == shooterLayer) continue;
+
                 if (GetSpellInfo() == null) return;
 
                 // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
