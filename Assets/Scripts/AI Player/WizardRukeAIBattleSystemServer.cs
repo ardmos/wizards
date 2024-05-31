@@ -61,6 +61,20 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
     }
 
 
-    // 적대스킬 감지 및 방어스킬 발동
+    // 피격시 방어스킬 발동. 
+    public void Defence()
+    {
+        ActivateMagicShield();
+    }
 
+    // 적대스킬 감지 기능은 추후에 추가. 현재는 피격시 발동
+/*    private void DetectEnemySkill()
+    {
+
+    }*/
+
+    private void ActivateMagicShield()
+    {
+        wizardRukeAISpellManager.StartActivateDefenceSpell();
+    }
 }

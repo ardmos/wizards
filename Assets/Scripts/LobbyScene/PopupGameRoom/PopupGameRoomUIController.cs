@@ -245,7 +245,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
     /// </summary>
     private void CancelMatch()
     {
-        // Client GameMatchReadyManager 리스트 초기화
+        // Client GameMatchReadyManager 리스트 초기화. 이전에 참가했던 방의 정보를 남겨두지 않기 위함입니다.
         GameMatchReadyManagerClient.Instance.ClearPlayerReadyList();
 
         // 현 플레이어가 매칭 티켓에서 퇴장하려는 단계

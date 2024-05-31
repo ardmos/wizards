@@ -256,6 +256,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if(Vector3.Distance(transform.position, target.transform.position) <= maxDistanceDetect)
             target = clientObjectWhoAttacked;
 
+        // 방어스킬 발동
+        wizardRukeAIBattleSystemServer.Defence();
+
         // 공격자가 Player인가? AI인가? 
         if (GameMultiplayer.Instance.GetPlayerDataFromClientId(clientIDWhoAttacked).isAI)
         {
@@ -305,7 +308,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if (gameState != PlayerGameState.Playing) return;
         Debug.Log($"AI Player{AIClientId} is GameOver");
         gameState = PlayerGameState.GameOver;
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        //playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
         // 추적 멈추기
         wizardRukeAIMovementServer.StopMove();
         // 물리충돌 해제

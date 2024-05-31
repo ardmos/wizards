@@ -52,51 +52,6 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     }
     #endregion
 
-
-    #region Defence Spell Cast
-    /// <summary>
-    /// 방어 마법 시전
-    /// </summary>
-    /// <param name="player"></param>
-    public void StartActivateDefenceSpell()
-    {
-        // 마법 시전
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT).spellName), transform.position, Quaternion.identity);
-        spellObject.GetComponent<NetworkObject>().Spawn();
-        spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT));
-        spellObject.transform.SetParent(transform);
-        spellObject.transform.localPosition = Vector3.zero;
-        spellObject.GetComponent<DefenceSpell>().Activate();
-
-        // 마법 생성 사운드 재생
-        spellObject.GetComponent<DefenceSpell>().PlaySFX(SFX_Type.Aiming);
-
-        // 해당 SpellState 업데이트
-        UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
-
-        // 애니메이션 실행
-        StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifeTime));
-
-        // 잠시 무적 처리
-        tag = "Invincible";
-    }
-
-    IEnumerator StartAndResetAnimState(float lifeTime)
-    {
-        playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingDefensiveMagic);
-        yield return new WaitForSeconds(lifeTime);
-
-        // 무적 해제
-        tag = "Player";
-
-        // 플레이어 캐릭터가 Casting 애니메이션중이 아닐 경우에만 Idle로 변경
-        if (!playerAnimator.playerAttackAnimState.Equals(WizardMaleAnimState.CastingAttackMagic))
-        {
-            playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.Idle);
-        }
-    }
-    #endregion
-
     #region Attack Spell Cast&Fire
 
     /// <summary>
@@ -234,6 +189,52 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
 
         // 발사 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
+    }
+    #endregion
+
+    #region Defence Spell Cast
+    /// <summary>
+    /// 방어 마법 시전
+    /// </summary>
+    /// <param name="player"></param>
+    public void StartActivateDefenceSpell()
+    {
+        if (playerOwnedSpellInfoListOnServer[DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
+
+        // 마법 시전
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT).spellName), transform.position, Quaternion.identity);
+        spellObject.GetComponent<NetworkObject>().Spawn();
+        spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT));
+        spellObject.transform.SetParent(transform);
+        spellObject.transform.localPosition = Vector3.zero;
+        spellObject.GetComponent<DefenceSpell>().Activate();
+
+        // 마법 생성 사운드 재생
+        spellObject.GetComponent<DefenceSpell>().PlaySFX(SFX_Type.Aiming);
+
+        // 해당 SpellState 업데이트
+        UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
+
+        // 애니메이션 실행
+        StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifeTime));
+
+        // 잠시 무적 처리
+        tag = "Invincible";
+    }
+
+    IEnumerator StartAndResetAnimState(float lifeTime)
+    {
+        playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingDefensiveMagic);
+        yield return new WaitForSeconds(lifeTime);
+
+        // 무적 해제
+        tag = "AI";
+
+        // 플레이어 캐릭터가 Casting 애니메이션중이 아닐 경우에만 Idle로 변경
+        if (!playerAnimator.playerAttackAnimState.Equals(WizardMaleAnimState.CastingAttackMagic))
+        {
+            playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.Idle);
+        }
     }
     #endregion
 

@@ -109,7 +109,9 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
             GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, 300);
         }
 
-        // GameOver 애니메이션 실행 및 동작 정지
+        // GameOver 애니메이션 실행
+        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        // 동작 정지
         wizardRukeAIServer.GameOver();
 
         // 게임오버 플레이어 사실을 서버에 기록.
