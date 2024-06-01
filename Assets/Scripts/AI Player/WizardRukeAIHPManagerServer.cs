@@ -117,5 +117,8 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
         // 게임오버 플레이어 사실을 서버에 기록.
         GameManager.Instance.UpdatePlayerGameOverOnServer(wizardRukeAIServer.AIClientId, clientWhoAttacked);
+
+        // 스크롤 아이템 드랍
+
     }
 }

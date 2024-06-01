@@ -125,5 +125,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
 
         // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
         playerClient.SetPlayerGameOverClientRPC();
+
+        // 스크롤 아이템 드랍
     }
 }
