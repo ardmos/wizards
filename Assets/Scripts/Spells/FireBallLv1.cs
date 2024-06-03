@@ -40,60 +40,62 @@ public class FireBallLv1 : FireSpell
 
         // 범위딜로 만들기 위한 처리
         // 충돌한 객체가 Player 또는 AI 태그를 가지고 있는지 확인
-        if (!collision.collider.CompareTag("Player") && !collision.collider.CompareTag("AI")) return;
-        // 충돌 지점
-        Vector3 explosionPosition = collision.contacts[0].point;
-        // 범위 3 내의 모든 객체 찾기
-        Collider[] colliders = Physics.OverlapSphere(explosionPosition, 3f);
-
-        foreach (Collider hit in colliders)
+        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("AI"))
         {
-            // 데미지 입히기
+            // 충돌 지점
+            Vector3 explosionPosition = collision.contacts[0].point;
+            // 범위 3 내의 모든 객체 찾기
+            Collider[] colliders = Physics.OverlapSphere(explosionPosition, 3f);
 
-            // 충돌한게 공격마법이면서 파이어볼 본체와 충돌한 경우, 어떤 마법이 살아남을지 계산에 들어감
-            if (hit.gameObject == collision.gameObject && hit.CompareTag("AttackSpell"))
+            foreach (Collider hit in colliders)
             {
-                SpellHitHandlerOnServer(hit);
-            }
-            else if (hit.CompareTag("AttackSkill"))
-            {
+                // 데미지 입히기
 
-            }
-            // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
-            else if (hit.CompareTag("Player"))
-            {
-                // 시전자는 피해 안받도록 설정
-                if (hit.gameObject.layer == shooterLayer) continue;
-
-                if (GetSpellInfo() == null) return;
-
-                if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
+                // 충돌한게 공격마법이면서 파이어볼 본체와 충돌한 경우, 어떤 마법이 살아남을지 계산에 들어감
+                if (hit.gameObject == collision.gameObject && hit.CompareTag("AttackSpell"))
                 {
-                    sbyte damage = (sbyte)GetSpellInfo().level;
-                    // 플레이어 피격을 서버에서 처리
-                    playerServer.PlayerGotHitOnServer(damage, spellOwnerClientId);
+                    SpellHitHandlerOnServer(hit);
                 }
-            }
-            // AI플레이어일 경우 처리
-            else if (hit.CompareTag("AI"))
-            {
-                // 시전자는 피해 안받도록 설정
-                if (hit.gameObject.layer == shooterLayer) continue;
-
-                if (GetSpellInfo() == null) return;
-
-                // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
-                if (hit.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+                else if (hit.CompareTag("AttackSkill"))
                 {
-                    sbyte damage = (sbyte)GetSpellInfo().level;
-                    // 플레이어 피격을 서버에서 처리
-                    aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId, spellOwnerObject);
+
                 }
-            }
-            // 기타 오브젝트 충돌
-            else
-            {
-                //Debug.Log($"{collider.name} Hit!");
+                // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
+                else if (hit.CompareTag("Player"))
+                {
+                    // 시전자는 피해 안받도록 설정
+                    if (hit.gameObject.layer == shooterLayer) continue;
+
+                    if (GetSpellInfo() == null) return;
+
+                    if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
+                    {
+                        sbyte damage = (sbyte)GetSpellInfo().level;
+                        // 플레이어 피격을 서버에서 처리
+                        playerServer.PlayerGotHitOnServer(damage, spellOwnerClientId);
+                    }
+                }
+                // AI플레이어일 경우 처리
+                else if (hit.CompareTag("AI"))
+                {
+                    // 시전자는 피해 안받도록 설정
+                    if (hit.gameObject.layer == shooterLayer) continue;
+
+                    if (GetSpellInfo() == null) return;
+
+                    // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
+                    if (hit.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+                    {
+                        sbyte damage = (sbyte)GetSpellInfo().level;
+                        // 플레이어 피격을 서버에서 처리
+                        aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId, spellOwnerObject);
+                    }
+                }
+                // 기타 오브젝트 충돌
+                else
+                {
+                    //Debug.Log($"{collider.name} Hit!");
+                }
             }
         }
 
