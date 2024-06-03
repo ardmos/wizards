@@ -28,7 +28,7 @@ public class Scroll : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        // 충돌한 플레이어의 Scroll Queue에 추가.
+        // 충돌한 플레이어의 Scroll Queue에 추가.  <--- 이 부분 확인. 습듭처리 잘 되고있는지. 습득 후 사용할 때 에러가 발생한다. 하는김에 능력들도 세분화.
         ulong collisionedClientId = collision.gameObject.GetComponent<NetworkObject>().OwnerClientId;
         ScrollManagerServer.Instance?.EnqueuePlayerScrollSpellSlotQueueOnServer(collisionedClientId, spellSlotIndex);
 
