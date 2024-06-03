@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameAssetsScriptableObject : ScriptableObject
 {
     #region Icons
+    [Header("Icons")]
     public Sprite icon_WizardClass;
     public Sprite icon_KnightClass;
     public Sprite icon_Gold;
@@ -25,6 +26,7 @@ public class GameAssetsScriptableObject : ScriptableObject
         public string name;
     }
     // 스펠 아이콘과 프리팹
+    [Header("Spells")]
     public SkillAssets[] skillAssetsList;
     #endregion
 
@@ -44,7 +46,13 @@ public class GameAssetsScriptableObject : ScriptableObject
     public GameObject vfx_txtDamageValue;
     #endregion
 
-    #region Music
+    #region Items
+    [Header("Items")]
+    public GameObject item_Scroll;
+    #endregion
+
+    #region Musics
+    [Header("Musics")]
     public AudioClip[] music_Title;
     public AudioClip[] music_Lobby;
     public AudioClip[] music_Game;
@@ -59,8 +67,8 @@ public class GameAssetsScriptableObject : ScriptableObject
         public AudioClip audioClipHit;
     }
 
+    [Header("SFXs")]
     public AudioClip sfx_btnClick;
-    [Header("0:Casting, 1:Shooting, 2:Hit")]
     public SFX_Clip sfx_Fireball_Lv1;
     public SFX_Clip sfx_Waterball_Lv1;
     public SFX_Clip sfx_Iceball_Lv1;
@@ -88,6 +96,7 @@ public class GameAssetsScriptableObject : ScriptableObject
     #endregion
 
     #region Colors
+    [Header("Colors")]
     public Color color_Owner;
     public Color color_Ally; // 동맹시스템 추가시 사용
     public Color color_Enemy;

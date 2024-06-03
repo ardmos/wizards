@@ -67,6 +67,7 @@ MonoBehaviour:
   vfx_Heal: {fileID: 6331275906715107345, guid: e27164d836110ff4da364dd5d38a9118, type: 3}
   vfx_SpellUpgrade: {fileID: 8846737274113074935, guid: 95bd805e8c353104da0c42b81e07d12c, type: 3}
   vfx_txtDamageValue: {fileID: 1676340583034777097, guid: a26e79037cfb19548b21f69ad08df263, type: 3}
+  item_Scroll: {fileID: 3142795043376685252, guid: a965af31a19f4034ca11a7ca3348725d, type: 3}
   music_Title:
   - {fileID: 8300000, guid: bf17d3a88e3294185953a4c2aa69b03d, type: 3}
   - {fileID: 8300000, guid: 1afd1ae47c6af48c08a65b91f3a4adb4, type: 3}

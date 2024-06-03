@@ -213,4 +213,9 @@ public class GameAssetsManager : MonoBehaviour
     {
         return gameAssets.sfx_Lose;
     }
+
+    public GameObject GetItemScrollObject()
+    {
+        return gameAssets.item_Scroll;
+    }
 }

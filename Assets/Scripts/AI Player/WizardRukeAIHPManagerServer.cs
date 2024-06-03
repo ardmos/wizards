@@ -119,6 +119,24 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
         GameManager.Instance.UpdatePlayerGameOverOnServer(wizardRukeAIServer.AIClientId, clientWhoAttacked);
 
         // 스크롤 아이템 드랍
+        DropScrollItem();
+    }
 
+    private void DropScrollItem()
+    {
+        // 제너레이트 아이템
+        GameObject scrollObject = Instantiate(GameAssetsManager.Instance.GetItemScrollObject());
+
+        if (!scrollObject) return;
+        
+        if(scrollObject.TryGetComponent<NetworkObject>(out NetworkObject networkObject))
+        {
+            networkObject.Spawn();
+            if (GameManager.Instance)
+            {
+                scrollObject.transform.parent = GameManager.Instance.transform;
+                scrollObject.transform.position = transform.position;
+            }
+        }
     }
 }
