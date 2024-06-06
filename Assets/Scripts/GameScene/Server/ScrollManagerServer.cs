@@ -69,42 +69,86 @@ public class ScrollManagerServer : NetworkBehaviour
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        SpellManagerServerWizard spellManagerServerWizard = networkClient.PlayerObject.GetComponent<SpellManagerServerWizard>();
-        SpellInfo newSpellInfo = new SpellInfo(spellManagerServerWizard.GetSpellInfo(spellIndex));
-
-        // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
-        switch (scrollName)
+        // Wizard Ruke Player
+        if (networkClient.PlayerObject.TryGetComponent<SpellManagerServerWizard>(out SpellManagerServerWizard spellManagerServerWizard))
         {
-            case ItemName.Scroll_LevelUp:
-                newSpellInfo.level += 1;
-                break;
-            case ItemName.Scroll_FireRateUp:
-                if (newSpellInfo.coolTime > 0.2f) newSpellInfo.coolTime -= 0.4f;
-                else newSpellInfo.coolTime = 0f;
-                break;
-            case ItemName.Scroll_FlySpeedUp:
-                newSpellInfo.moveSpeed += 10f;
-                break;
-            case ItemName.Scroll_Deploy:
-                newSpellInfo.moveSpeed = 0f;
-                break;
-            // 유도 마법 미구현
-            //case ItemName.Scroll_Guide:
-            // break;
-            default:
-                Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
-                break;
+            SpellInfo newSpellInfo = new SpellInfo(spellManagerServerWizard.GetSpellInfo(spellIndex));
+
+            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
+            switch (scrollName)
+            {
+                case ItemName.Scroll_LevelUp:
+                    newSpellInfo.level += 1;
+                    break;
+                case ItemName.Scroll_FireRateUp:
+                    if (newSpellInfo.coolTime > 0.2f) newSpellInfo.coolTime -= 0.4f;
+                    else newSpellInfo.coolTime = 0f;
+                    break;
+                case ItemName.Scroll_FlySpeedUp:
+                    newSpellInfo.moveSpeed += 10f;
+                    break;
+                case ItemName.Scroll_Deploy:
+                    newSpellInfo.moveSpeed = 0f;
+                    break;
+                // 유도 마법 미구현
+                //case ItemName.Scroll_Guide:
+                // break;
+                default:
+                    Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
+                    break;
+            }
+
+            // 변경내용 서버에 저장
+            spellManagerServerWizard.SetSpellInfo(spellIndex, newSpellInfo);
+
+            // 변경내용을 요청한 클라이언트와도 동기화
+            networkClient.PlayerObject.GetComponent<SkillSpellManagerClient>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
+
+            // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
+            DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
+            networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
         }
 
-        // 변경내용 서버에 저장
-        spellManagerServerWizard.SetSpellInfo(spellIndex, newSpellInfo);
+        // Knight Buzz Player
+        else if (networkClient.PlayerObject.TryGetComponent<SkillManagerServerKnight>(out SkillManagerServerKnight skillManagerServerKnight))
+        {
+            SpellInfo newSpellInfo = new SpellInfo(skillManagerServerKnight.GetSpellInfo(spellIndex));
 
-        // 변경내용을 요청한 클라이언트와도 동기화
-        networkClient.PlayerObject.GetComponent<SkillSpellManagerClient>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
+            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
+            switch (scrollName)
+            {
+                case ItemName.Scroll_LevelUp:
+                    newSpellInfo.level += 1;
+                    break;
+                case ItemName.Scroll_FireRateUp:
+                    if (newSpellInfo.coolTime > 0.2f) newSpellInfo.coolTime -= 0.4f;
+                    else newSpellInfo.coolTime = 0f;
+                    break;
+                case ItemName.Scroll_FlySpeedUp:
+                    newSpellInfo.moveSpeed += 10f;
+                    break;
+                case ItemName.Scroll_Deploy:
+                    newSpellInfo.moveSpeed = 0f;
+                    break;
+                // 유도 마법 미구현
+                //case ItemName.Scroll_Guide:
+                // break;
+                default:
+                    Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
+                    break;
+            }
 
-        // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
-        DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
-        networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
+            // 변경내용 서버에 저장
+            skillManagerServerKnight.SetSpellInfo(spellIndex, newSpellInfo);
+
+            // 변경내용을 요청한 클라이언트와도 동기화
+            networkClient.PlayerObject.GetComponent<SkillSpellManagerClient>().UpdatePlayerSpellInfoArrayClientRPC(skillManagerServerKnight.GetSpellInfoList().ToArray());
+
+            // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
+            DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
+            networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
+        }
+
     }
 
     private List<int> GenerateUniqueRandomNumbers()
