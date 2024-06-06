@@ -27,10 +27,14 @@ public class ButtonReadSpellScrollUIController : MonoBehaviour
         DeactivateUI();
     }
 
-    public void ActivateAndUpdateUI()
+    public void ActivateUI()
     {
         gameObject.SetActive(true);
-        txtSpellScrollCount.text = PlayerClient.Instance.GetComponent<PlayerSpellScrollQueueManagerClient>().GetPlayerScrollSpellSlotCount().ToString();
+    }
+    public void UpdateUI(int scrollCount)
+    {
+        gameObject.SetActive(true);
+        txtSpellScrollCount.text = scrollCount.ToString();     
     }
     public void DeactivateUI()
     {

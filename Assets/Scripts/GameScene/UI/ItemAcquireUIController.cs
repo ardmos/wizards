@@ -3,11 +3,11 @@ using UnityEngine;
 public class ItemAcquireUIController : MonoBehaviour
 {
     public GameObject ItemAcquiredMessageContainer;
-    public GameObject ItemAcquiredMessagePrefab;
+    public GameObject ItemScrollAcquiredMessagePrefab;
 
-    public void ShowItemAcquireUI()
+    public void ShowScrollAcquiredUI()
     {
-        GameObject messageObject = Instantiate(ItemAcquiredMessagePrefab);
+        GameObject messageObject = Instantiate(ItemScrollAcquiredMessagePrefab);
         messageObject.transform.SetParent(ItemAcquiredMessageContainer.transform, false);
     }
 }

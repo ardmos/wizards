@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class PlayerSpellScrollQueueManagerClient : MonoBehaviour
 {
-    public Queue<byte> playerScrollSpellSlotQueueOnClient = new Queue<byte>();
+    //public Queue<byte> playerScrollSpellSlotQueueOnClient = new Queue<byte>();
 
     // On Client
-    public void UpdatePlayerScrollSpellSlotQueueOnClient(Queue<byte> scrollQueue)
+    public void UpdatePlayerScrollSpellSlotUI(int scrollCount)
     {
-        // Update Queue
-        playerScrollSpellSlotQueueOnClient = new Queue<byte>(scrollQueue);
-
-        Debug.Log($"UpdatePlayerScrollSpellSlotQueueOnClient. count:{playerScrollSpellSlotQueueOnClient.Count}");
+        Debug.Log($"UpdatePlayerScrollSpellSlotUI. count:{scrollCount}");
 
         // Update UI
-        if (playerScrollSpellSlotQueueOnClient.Count == 0)
+        if (scrollCount == 0)
             // Spell Scroll Count UI 비활성화
             GameSceneUIManager.Instance.buttonReadSpellScrollUIController.DeactivateUI();
         else
+        {
             // Spell Scroll Count UI 활성화 
-            GameSceneUIManager.Instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
+            GameSceneUIManager.Instance.buttonReadSpellScrollUIController.ActivateUI();
+            // Spell Scroll Count UI 업데이트
+            GameSceneUIManager.Instance.buttonReadSpellScrollUIController.UpdateUI(scrollCount);
+        }       
     }
 
-    public byte PeekPlayerScrollSpellSlotQueueOnClient()
+/*    public byte PeekPlayerScrollSpellSlotQueueOnClient()
     {
         return playerScrollSpellSlotQueueOnClient.Peek();
     }
@@ -31,9 +32,9 @@ public class PlayerSpellScrollQueueManagerClient : MonoBehaviour
     public int GetPlayerScrollSpellSlotCount()
     {
         return playerScrollSpellSlotQueueOnClient.Count;
-    }
+    }*/
 
-    public void DequeuePlayerScrollSpellSlotQueueOnClient()
+/*    public void DequeuePlayerScrollSpellSlotQueueOnClient()
     {
         // Dequeue
         playerScrollSpellSlotQueueOnClient.Dequeue();
@@ -47,5 +48,5 @@ public class PlayerSpellScrollQueueManagerClient : MonoBehaviour
         else
             // Spell Scroll Count UI 활성화 
             GameSceneUIManager.Instance.buttonReadSpellScrollUIController.ActivateAndUpdateUI();
-    }
+    }*/
 }

@@ -24,7 +24,7 @@ public abstract class PlayerClient : NetworkBehaviour
     public CinemachineVirtualCamera VirtualCamera;
     public Rigidbody mRigidbody;
     public AudioListener audioListener;
-    public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManager;
+    public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManagerClient;
     public KnightBuzzMeshTrail meshTrail;
 
     public GameInput gameInput;
@@ -246,26 +246,25 @@ public abstract class PlayerClient : NetworkBehaviour
         return GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId).score;
     }
 
+    /// <summary>
+    /// 스크롤 획득시 호출되는 메서드. 
+    /// 1. 우측 UI 업데이트
+    /// 2. 중앙 팝업 UI 노출
+    /// </summary>
+    /// <param name="scrollSpellSlotArray"></param>
     [ClientRpc]
-    public void UpdateScrollQueueClientRPC(byte[] scrollSpellSlotArray)
+    public void UpdateScrollGetUIClientRPC(int scrollCount)
     {
         if (!IsOwner) return;
 
-        Queue<byte> scrollSpellSlotQueue = new Queue<byte>(scrollSpellSlotArray);
-
-        // Queue 업데이트
-        playerSpellScrollQueueManager.UpdatePlayerScrollSpellSlotQueueOnClient(scrollSpellSlotQueue);
+        // 1. 우측 UI 업데이트
+        playerSpellScrollQueueManagerClient.UpdatePlayerScrollSpellSlotUI(scrollCount);
 
         // SFX 재생
         SoundManager.Instance.PlayItemSFXServerRPC(ItemName.PickupScroll, PlayerClient.Instance.transform.position);
-    }
 
-    [ClientRpc]
-    public void ShowItemAcquiredUIClientRPC()
-    {
-        if (!IsOwner) return;
-        // 알림 UI 실행
-        GameSceneUIManager.Instance.itemAcquireUIController.ShowItemAcquireUI();
+        // 2. 중앙 팝업 UI 노출
+        GameSceneUIManager.Instance.itemAcquireUIController.ShowScrollAcquiredUI();
     }
 
     /// <summary>
@@ -273,10 +272,10 @@ public abstract class PlayerClient : NetworkBehaviour
     /// </summary>
     /// <param name="scrollNames"></param>
     [ClientRpc]
-    public void SetScrollEffectsToPopupUIClientRPC(ItemName[] scrollNames)
+    public void InitSelectScrollEffectsPopupUIClientRPC(ItemName[] scrollNames, byte spellIndexToApplyEffect)
     {
         if (!IsOwner) return;
-        GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(scrollNames);
+        GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(scrollNames, spellIndexToApplyEffect);
     }
 
     public void SetPlayerItemsDictionaryOnClient(ItemName[] itemNameArray, ushort[] itemCountArray)

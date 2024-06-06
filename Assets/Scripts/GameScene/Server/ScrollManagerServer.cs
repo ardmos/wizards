@@ -22,6 +22,7 @@ public class ScrollManagerServer : NetworkBehaviour
     // On Server
     public void EnqueuePlayerScrollSpellSlotQueueOnServer(ulong clientId, byte queueElement)
     {
+        // 서버측에 스크롤 획득 정보를 저장
         if (playerScrollSpellSlotQueueMapOnServer.ContainsKey(clientId))
         {
             playerScrollSpellSlotQueueMapOnServer[clientId].Enqueue(queueElement);
@@ -29,10 +30,9 @@ public class ScrollManagerServer : NetworkBehaviour
         else
             playerScrollSpellSlotQueueMapOnServer.Add(clientId, new Queue<byte>(new byte[] { queueElement }));
 
-
+        // 클라이언트측UI 업데이트
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().UpdateScrollQueueClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].ToArray());
-        networkClient.PlayerObject.GetComponent<PlayerClient>().ShowItemAcquiredUIClientRPC();
+        networkClient.PlayerObject.GetComponent<PlayerClient>().UpdateScrollGetUIClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].Count);
     }
 
     private void DequeuePlayerScrollSpellSlotQueueOnServer(ulong clientId)
@@ -51,12 +51,13 @@ public class ScrollManagerServer : NetworkBehaviour
               ItemName.ScrollStart+1+randomNumbers[0],
               ItemName.ScrollStart+1+randomNumbers[1],
               ItemName.ScrollStart+1+randomNumbers[2]
-        };
+        };// 이 부분 로직도 수정해줘야함다.  ItemNames 이넘이 바뀌었기 때문. 
 
         // 랜덤으로 생성된 스크롤 효과 목록을 요청해온 플레이어에게 공유
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().SetScrollEffectsToPopupUIClientRPC(scrollNames);
+        // 위 랜덤으로 생성된 능력을 몇 번 인덱스의 스킬에 적용시킬지 정해줘야 합니다./ 이 부분 로직 정리가 다시 필요할듯. 여기서부터 하면 된다!!
+        // networkClient.PlayerObject.GetComponent<PlayerClient>().InitSelectScrollEffectsPopupUIClientRPC(scrollNames, );
     }
 
     /// <summary>
@@ -106,7 +107,8 @@ public class ScrollManagerServer : NetworkBehaviour
 
             // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
             DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
-            networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
+            // Client측에도 동기화
+            //networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
         }
 
         // Knight Buzz Player
@@ -146,7 +148,7 @@ public class ScrollManagerServer : NetworkBehaviour
 
             // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
             DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
-            networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
+            //networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
         }
 
     }

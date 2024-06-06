@@ -26,6 +26,7 @@ public class Scroll : NetworkBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
+        //  현재 AI는 획득하지 않고 있습니다. 
         if (!IsServer) return;
 
         // 충돌한 플레이어의 Scroll Queue에 추가.

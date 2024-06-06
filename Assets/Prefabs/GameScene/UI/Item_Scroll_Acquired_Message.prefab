@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2821513600648931759}
   - component: {fileID: -1672665323737026653}
   m_Layer: 0
-  m_Name: Item_Acquired_Message
+  m_Name: Item_Scroll_Acquired_Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
