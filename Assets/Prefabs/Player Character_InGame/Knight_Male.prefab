@@ -354,13 +354,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de669b7434fd13146b2422a01d6de14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioListener: {fileID: 4781052245357589818}
+  userNameUIController: {fileID: 3360987132556806349}
   hPBarUIController: {fileID: 1342484061549834625}
   damageTextUIController: {fileID: 3187083585176564578}
   VirtualCamera: {fileID: 4487991525872706357}
   mRigidbody: {fileID: 4842463508567140202}
-  userNameUIController: {fileID: 3360987132556806349}
-  playerSpellScrollQueueManager: {fileID: 2005663916033335820}
+  audioListener: {fileID: 4781052245357589818}
+  playerSpellScrollQueueManagerClient: {fileID: 2005663916033335820}
   meshTrail: {fileID: 3743785008884993038}
   gameInput: {fileID: -3331297196142442222}
   originalMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
@@ -445,8 +445,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSpellManagerClient: {fileID: 1344688005986462694}
   playerAnimator: {fileID: 2441054021172676538}
-  dashDistance: 5
-  dashDuration: 0.5
   playerClient: {fileID: 5577225032273852061}
   attackVerticalMuzzle: {fileID: 7488439861874168249}
   attackWhirlwindMuzzle: {fileID: 2811791840965660635}

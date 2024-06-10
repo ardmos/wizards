@@ -415,13 +415,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0b2ec62b4a5747b4059f0f3fd4bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioListener: {fileID: 819323531288302397}
+  userNameUIController: {fileID: 4649931589576448986}
   hPBarUIController: {fileID: 2648681988919741548}
   damageTextUIController: {fileID: 191790276371271504}
   VirtualCamera: {fileID: 4487991525872706357}
   mRigidbody: {fileID: 4842463508567140202}
-  userNameUIController: {fileID: 4649931589576448986}
-  playerSpellScrollQueueManager: {fileID: 4579991518944106865}
+  audioListener: {fileID: 819323531288302397}
+  playerSpellScrollQueueManagerClient: {fileID: 4579991518944106865}
+  meshTrail: {fileID: 0}
   gameInput: {fileID: -3331297196142442222}
   originalMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 8f5611d6ff98e58408979d37f88255c1, type: 2}

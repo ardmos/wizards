@@ -5733,7 +5733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemAcquiredMessageContainer: {fileID: 1833389773}
-  ItemAcquiredMessagePrefab: {fileID: 2821513600648931757, guid: c610a5429731e45f3941c3738a28aa89, type: 3}
+  ItemScrollAcquiredMessagePrefab: {fileID: 2821513600648931757, guid: c610a5429731e45f3941c3738a28aa89, type: 3}
 --- !u!1 &1488944256
 GameObject:
   m_ObjectHideFlags: 0
@@ -6549,7 +6549,6 @@ MonoBehaviour:
   scrollEffectSlot0: {fileID: 540233190}
   scrollEffectSlot1: {fileID: 1574980642}
   scrollEffectSlot2: {fileID: 443856250}
-  spellIndexToApply: 0
 --- !u!114 &1667906403
 MonoBehaviour:
   m_ObjectHideFlags: 0

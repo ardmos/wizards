@@ -29,7 +29,7 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
 
     private void FireBlizzard()
     {
-        Debug.Log("FireBlizzard");
+        //Debug.Log("FireBlizzard");
         // 타겟쪽 바라보기
         transform.LookAt(wizardRukeAIServer.target.transform);
         // 스킬 준비
@@ -40,7 +40,7 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
 
     private void FireFireBall()
     {
-        Debug.Log("FireFireBall");
+        //Debug.Log("FireFireBall");
         // 타겟쪽 바라보기
         transform.LookAt(wizardRukeAIServer.target.transform);
         // 스킬 준비
@@ -51,7 +51,7 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
 
     private void FireWaterBall()
     {
-        Debug.Log("FireWaterBall");
+        //Debug.Log("FireWaterBall");
         // 타겟쪽 바라보기
         transform.LookAt(wizardRukeAIServer.target.transform);
         // 스킬 준비
