@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -44,8 +45,14 @@ public class ScrollManagerServer : NetworkBehaviour
     /// 랜덤스크롤 생성기 입니다. 플레이어가 PopupSelectScrollEffectUI를 실행할 때 마다 요청해오면 랜덤한 스크롤 효과 3 개를 뽑아줍니다.
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
-    public void GetUniqueRandomScrollsServerRPC(ServerRpcParams serverRpcParams = default)
+    public void GetUniqueRandomAblilitiesServerRPC(ServerRpcParams serverRpcParams = default)
     {
+        // 능력을 세 개 뽑아서 ClientRPC를 통해 리턴해줘야한다. 
+
+        // 능력 뽑기
+        
+
+
         List<int> randomNumbers = GenerateUniqueRandomNumbers();
         ItemName[] scrollNames = new ItemName[3] {
               ItemName.ScrollStart+1+randomNumbers[0],
@@ -59,6 +66,7 @@ public class ScrollManagerServer : NetworkBehaviour
         // 위 랜덤으로 생성된 능력을 몇 번 인덱스의 스킬에 적용시킬지 정해줘야 합니다./ 이 부분 로직 정리가 다시 필요할듯. 여기서부터 하면 된다!!
         // networkClient.PlayerObject.GetComponent<PlayerClient>().InitSelectScrollEffectsPopupUIClientRPC(scrollNames, );
     }
+
 
     /// <summary>
     /// 특정 스펠의 스펠인포를 업데이트해주는 메소드 입니다.
@@ -167,5 +175,44 @@ public class ScrollManagerServer : NetworkBehaviour
         }
 
         return numbers;
+    }
+
+    // 능력 뽑기 <<----- 여기부터.. 구현중
+    public static string GetDescription(this FireballUpgradeOption option)
+    {
+        switch (option)
+        {
+            case FireballUpgradeOption.IncreaseSize:
+                return "파이어볼의 크기가 50% 증가합니다.";
+            case FireballUpgradeOption.AddDotDamage:
+                return "파이어볼에 맞은 적이 5초 동안 초당 10의 화염 피해를 입습니다.";
+            case FireballUpgradeOption.ReduceCastTime:
+                return "파이어볼의 시전 시간이 25% 감소합니다.";
+            case FireballUpgradeOption.IncreaseExplosionRadius:
+                return "파이어볼 적중 시 폭발하여 주변 3미터 범위에 추가 피해를 입힙니다.";
+            case FireballUpgradeOption.AddPiercing:
+                return "파이어볼이 2명의 적을 관통합니다.";
+            default:
+                throw new ArgumentOutOfRangeException(nameof(option), option, null);
+        }
+    }
+
+    public static string GetDescription(this WaterballUpgradeOption option)
+    {
+        switch (option)
+        {
+            case WaterballUpgradeOption.IncreaseSpeed:
+                return "워터볼의 속도가 30% 증가합니다.";
+            case WaterballUpgradeOption.IncreaseHomingRange:
+                return "워터볼의 유도 타겟 인식 범위가 25% 증가합니다.";
+            case WaterballUpgradeOption.AddSplashDamage:
+                return "워터볼이 적중 시 주변에 물 튀김 피해를 입힙니다.";
+            case WaterballUpgradeOption.ReduceCooldown:
+                return "워터볼의 재사용 대기 시간이 20% 감소합니다.";
+            case WaterballUpgradeOption.IncreaseRange:
+                return "워터볼의 사거리가 40% 증가합니다.";
+            default:
+                throw new ArgumentOutOfRangeException(nameof(option), option, null);
+        }
     }
 }

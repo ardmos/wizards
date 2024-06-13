@@ -81,6 +81,7 @@ public class GameAssetsScriptableObject : ScriptableObject
     public AudioClip sfx_PotionHP;
     public AudioClip sfx_PickupScroll;
     public AudioClip sfx_OpenScroll;
+    public AudioClip sfx_UseScroll;
     public AudioClip sfx_ScrollLvUp;
     public AudioClip sfx_ScrollFireRateUp;
     public AudioClip sfx_ScrollFlySpeedUp;

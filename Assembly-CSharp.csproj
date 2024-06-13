@@ -252,6 +252,7 @@
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillManagerServerKnight.cs" />
+    <Compile Include="Assets\Scripts\Data\ScrollUpgradeOptions.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPool.cs" />

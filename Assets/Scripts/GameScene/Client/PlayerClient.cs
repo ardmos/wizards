@@ -261,7 +261,7 @@ public abstract class PlayerClient : NetworkBehaviour
         playerSpellScrollQueueManagerClient.UpdatePlayerScrollSpellSlotUI(scrollCount);
 
         // SFX Àç»ý
-        SoundManager.Instance.PlayItemSFXServerRPC(ItemName.PickupScroll, PlayerClient.Instance.transform.position);
+        SoundManager.Instance.PlayItemSFXServerRPC(ItemName.ScrollPickup, PlayerClient.Instance.transform.position);
 
         // 2. Áß¾Ó ÆË¾÷ UI ³ëÃâ
         GameSceneUIManager.Instance.itemAcquireUIController.ShowScrollAcquiredUI();

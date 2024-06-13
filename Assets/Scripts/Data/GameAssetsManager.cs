@@ -168,20 +168,12 @@ public class GameAssetsManager : MonoBehaviour
         {
             case ItemName.Potion_HP:
                 return gameAssets.sfx_PotionHP;
-            case ItemName.Scroll_LevelUp:
-                return gameAssets.sfx_ScrollLvUp;
-            case ItemName.Scroll_FireRateUp:
-                return gameAssets.sfx_ScrollFireRateUp;
-            case ItemName.Scroll_FlySpeedUp:
-                return gameAssets.sfx_ScrollFlySpeedUp;
-            case ItemName.Scroll_Deploy:
-                return gameAssets.sfx_ScrollAttach;
-            case ItemName.ScrollStart:
-                return gameAssets.sfx_PickupScroll;
-            case ItemName.OpenScroll:
+            case ItemName.ScrollOpen:
                 return gameAssets.sfx_OpenScroll;
-            case ItemName.PickupScroll:
+            case ItemName.ScrollPickup:
                 return gameAssets.sfx_PickupScroll;
+            case ItemName.ScrollUse:
+                return gameAssets.sfx_UseScroll;
             default:
                 Debug.LogError($"적절하지 않은 itemName 정보입니다. itemName: {itemName}");
                 return null;
