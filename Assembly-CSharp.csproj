@@ -241,6 +241,7 @@
     <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Test\TestNetworkUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PlayerCountUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\RandomSkillOptionProviderSystem.cs" />
     <Compile Include="Assets\Scripts\GameScene\FloorGenerator.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupMenuUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SoundFXGroupUI.cs" />
@@ -252,7 +253,6 @@
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillManagerServerKnight.cs" />
-    <Compile Include="Assets\Scripts\Data\ScrollUpgradeOptions.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPool.cs" />
