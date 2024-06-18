@@ -19,15 +19,11 @@ public class PopupSelectScrollEffectUIController : MonoBehaviour
         Hide();
     }
 
-    public void InitPopup(ItemName[] scrollNames, byte spellIndexToApplyEffect)
+    public void InitPopup(List<ISkillUpgradeOption> skillUpgradeOptions)
     {
-        // 슬롯 UI 정보 초기화. Scroll 효과가 적용될 Spell Slot은 서버로부터 공유받은 큐에 저장된 첫번째 값.
-        //PlayerClient.Instance.GetComponent<PlayerSpellScrollQueueManagerClient>().PeekPlayerScrollSpellSlotQueueOnClient();
-        //Debug.Log($"InitPopup. spellIndexToApply:{spellIndexToApply}, scrollNames[0]:{scrollNames[0]}, [1]:{scrollNames[1]}, [2]:{scrollNames[2]}");
-
-        scrollEffectSlot0.InitUI(scrollNames[0], spellIndexToApplyEffect);
-        scrollEffectSlot1.InitUI(scrollNames[1], spellIndexToApplyEffect);
-        scrollEffectSlot2.InitUI(scrollNames[2], spellIndexToApplyEffect);
+        scrollEffectSlot0.InitUI(skillUpgradeOptions[0]);
+        scrollEffectSlot1.InitUI(skillUpgradeOptions[1]);
+        scrollEffectSlot2.InitUI(skillUpgradeOptions[2]);
     }
 
     public void Show()

@@ -10,11 +10,9 @@ public class GameAssetsScriptableObject : ScriptableObject
     public Sprite icon_Gold;
     public Sprite icon_BonusGold;
     public Sprite icon_Exp;
-    public Sprite icon_ScrollEffect_LevelUp;
-    public Sprite icon_ScrollEffect_FireRateUp;
-    public Sprite icon_ScrollEffect_FlySpeedUp;
-    public Sprite icon_ScrollEffect_Deploy;
     public Sprite icon_RemoveAds;
+    [Header("Icons InGame")]
+    public Sprite icon_Scroll;
     #endregion
 
     #region Spells
@@ -82,11 +80,6 @@ public class GameAssetsScriptableObject : ScriptableObject
     public AudioClip sfx_PickupScroll;
     public AudioClip sfx_OpenScroll;
     public AudioClip sfx_UseScroll;
-    public AudioClip sfx_ScrollLvUp;
-    public AudioClip sfx_ScrollFireRateUp;
-    public AudioClip sfx_ScrollFlySpeedUp;
-    public AudioClip sfx_ScrollAttach;
-    public AudioClip sfx_ScrollGuide;
 
     public AudioClip[] sfx_Win;
     public AudioClip[] sfx_Lose;

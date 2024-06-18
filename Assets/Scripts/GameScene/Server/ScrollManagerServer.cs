@@ -50,21 +50,18 @@ public class ScrollManagerServer : NetworkBehaviour
         // 능력을 세 개 뽑아서 ClientRPC를 통해 리턴해줘야한다. 
 
         // 능력 뽑기
-        
+        List<SkillUpgradeOptionDTO> randomSkillUpgradesDTO = RandomSkillOptionProviderSystem.GetRandomSkillUpgrades();
 
-
-        List<int> randomNumbers = GenerateUniqueRandomNumbers();
-        ItemName[] scrollNames = new ItemName[3] {
-              ItemName.ScrollStart+1+randomNumbers[0],
-              ItemName.ScrollStart+1+randomNumbers[1],
-              ItemName.ScrollStart+1+randomNumbers[2]
-        };// 이 부분 로직도 수정해줘야함다.  ItemNames 이넘이 바뀌었기 때문. 
+/*        Debug.Log("랜덤 스킬 업그레이드 옵션:");
+        foreach (var upgrade in randomSkillUpgrades)
+        {
+            Debug.Log(upgrade.GetDescription());
+        }*/
 
         // 랜덤으로 생성된 스크롤 효과 목록을 요청해온 플레이어에게 공유
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        // 위 랜덤으로 생성된 능력을 몇 번 인덱스의 스킬에 적용시킬지 정해줘야 합니다./ 이 부분 로직 정리가 다시 필요할듯. 여기서부터 하면 된다!!
-        // networkClient.PlayerObject.GetComponent<PlayerClient>().InitSelectScrollEffectsPopupUIClientRPC(scrollNames, );
+        networkClient.PlayerObject.GetComponent<PlayerClient>().InitSelectScrollEffectsPopupUIClientRPC(randomSkillUpgradesDTO);
     }
 
 
@@ -83,7 +80,7 @@ public class ScrollManagerServer : NetworkBehaviour
         {
             SpellInfo newSpellInfo = new SpellInfo(spellManagerServerWizard.GetSpellInfo(spellIndex));
 
-            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
+/*            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
             switch (scrollName)
             {
                 case ItemName.Scroll_LevelUp:
@@ -105,7 +102,7 @@ public class ScrollManagerServer : NetworkBehaviour
                 default:
                     Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
                     break;
-            }
+            }*/
 
             // 변경내용 서버에 저장
             spellManagerServerWizard.SetSpellInfo(spellIndex, newSpellInfo);
@@ -124,7 +121,7 @@ public class ScrollManagerServer : NetworkBehaviour
         {
             SpellInfo newSpellInfo = new SpellInfo(skillManagerServerKnight.GetSpellInfo(spellIndex));
 
-            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
+/*            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
             switch (scrollName)
             {
                 case ItemName.Scroll_LevelUp:
@@ -146,7 +143,7 @@ public class ScrollManagerServer : NetworkBehaviour
                 default:
                     Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
                     break;
-            }
+            }*/
 
             // 변경내용 서버에 저장
             skillManagerServerKnight.SetSpellInfo(spellIndex, newSpellInfo);
@@ -161,7 +158,7 @@ public class ScrollManagerServer : NetworkBehaviour
 
     }
 
-    private List<int> GenerateUniqueRandomNumbers()
+/*    private List<int> GenerateUniqueRandomNumbers()
     {
         List<int> numbers = new List<int>();
         int scrollItemMaxIndex = ItemName.ScrollEnd - (ItemName.ScrollStart + 1);
@@ -175,44 +172,5 @@ public class ScrollManagerServer : NetworkBehaviour
         }
 
         return numbers;
-    }
-
-    // 능력 뽑기 <<----- 여기부터.. 구현중
-    public static string GetDescription(this FireballUpgradeOption option)
-    {
-        switch (option)
-        {
-            case FireballUpgradeOption.IncreaseSize:
-                return "파이어볼의 크기가 50% 증가합니다.";
-            case FireballUpgradeOption.AddDotDamage:
-                return "파이어볼에 맞은 적이 5초 동안 초당 10의 화염 피해를 입습니다.";
-            case FireballUpgradeOption.ReduceCastTime:
-                return "파이어볼의 시전 시간이 25% 감소합니다.";
-            case FireballUpgradeOption.IncreaseExplosionRadius:
-                return "파이어볼 적중 시 폭발하여 주변 3미터 범위에 추가 피해를 입힙니다.";
-            case FireballUpgradeOption.AddPiercing:
-                return "파이어볼이 2명의 적을 관통합니다.";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(option), option, null);
-        }
-    }
-
-    public static string GetDescription(this WaterballUpgradeOption option)
-    {
-        switch (option)
-        {
-            case WaterballUpgradeOption.IncreaseSpeed:
-                return "워터볼의 속도가 30% 증가합니다.";
-            case WaterballUpgradeOption.IncreaseHomingRange:
-                return "워터볼의 유도 타겟 인식 범위가 25% 증가합니다.";
-            case WaterballUpgradeOption.AddSplashDamage:
-                return "워터볼이 적중 시 주변에 물 튀김 피해를 입힙니다.";
-            case WaterballUpgradeOption.ReduceCooldown:
-                return "워터볼의 재사용 대기 시간이 20% 감소합니다.";
-            case WaterballUpgradeOption.IncreaseRange:
-                return "워터볼의 사거리가 40% 증가합니다.";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(option), option, null);
-        }
-    }
+    }*/
 }

@@ -36,7 +36,7 @@ public class Scroll : NetworkBehaviour
         }
 
         // È¹µæ SFX Àç»ý
-        SoundManager.Instance?.PlayItemSFX(ItemName.ScrollStart, transform);
+        SoundManager.Instance?.PlayItemSFX(ItemName.ScrollPickup, transform);
 
         // ¿ÀºêÁ§Æ® ÆÄ±«
         GetComponent<NetworkObject>().Despawn();

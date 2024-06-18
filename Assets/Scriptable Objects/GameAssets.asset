@@ -17,11 +17,8 @@ MonoBehaviour:
   icon_Gold: {fileID: 21300000, guid: 0ab3866be8f8a45779a0c383ae5b519a, type: 3}
   icon_BonusGold: {fileID: 21300000, guid: 5af79eb3a18364553b0025f22115dbce, type: 3}
   icon_Exp: {fileID: 21300000, guid: 05eabfa686c634d5680ef198ee66da87, type: 3}
-  icon_ScrollEffect_LevelUp: {fileID: 21300000, guid: 9f3f7d123cc954635b5636683ab82d68, type: 3}
-  icon_ScrollEffect_FireRateUp: {fileID: 21300000, guid: 76da2992532344709b10b3a83488f9db, type: 3}
-  icon_ScrollEffect_FlySpeedUp: {fileID: 21300000, guid: 169f3498b443c44609e90428d271636a, type: 3}
-  icon_ScrollEffect_Deploy: {fileID: 21300000, guid: 542e7747006214d9480ef4dcf8d97026, type: 3}
   icon_RemoveAds: {fileID: 21300000, guid: 152333def7fb04fefaac91d426ff1535, type: 3}
+  icon_Scroll: {fileID: 21300000, guid: 4299873fb16164686b36885194b39f16, type: 3}
   skillAssetsList:
   - icon: {fileID: 21300000, guid: 5e82c79e89157b0498086add9ecd5e65, type: 3}
     prefab: {fileID: 1439816204641800, guid: 6b97556a80361154881125290d19e3d9, type: 3}
@@ -122,6 +119,7 @@ MonoBehaviour:
   sfx_PotionHP: {fileID: 8300000, guid: 2ef55505c696278429561b7b43b591ac, type: 3}
   sfx_PickupScroll: {fileID: 8300000, guid: aefff84a12c287b4a8012f4034d9f224, type: 3}
   sfx_OpenScroll: {fileID: 8300000, guid: 72cf99bf9fd5a6a4bbcf5d2226c04df8, type: 3}
+  sfx_UseScroll: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollLvUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollFireRateUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_ScrollFlySpeedUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}

@@ -13,37 +13,58 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
     public CustomClickSoundButton btnApply;
 
     public TextMeshProUGUI txtScrollName;
-    public TextMeshProUGUI txtSpellName;
+    public TextMeshProUGUI txtSpellDescription;
     public Image imgSpellIcon;
-    public Image imgScrollEffectIcon;
+    //public Image imgScrollEffectIcon;
 
     /// <summary>
     ///  scroll정보에 맞춰 UI의 정보를 초기화 해주는 메소드 입니다.
     /// </summary>
-    public void InitUI(ItemName scrollName, byte spellIndexToApply)
+    public void InitUI(ISkillUpgradeOption skillUpgradeOption)
     {
         //Debug.Log($"InitUI. scrollName:{scrollName}, spellIndexToApply:{spellIndexToApply}");
 
-        // scroll 이름
-        txtScrollName.text = $"{Item.GetName(scrollName)}!!";
-        // spell 이름
-        SkillName spellName = PlayerClient.Instance.GetComponent<SkillSpellManagerClient>().GetSpellInfoList()[spellIndexToApply].spellName;
-        txtSpellName.text = spellName.ToString();
-        // spell 아이콘 이미지
-        imgSpellIcon.sprite = GameAssetsManager.Instance.GetSpellIconImage(spellName);
-        // scroll effect 아이콘 이미지
-        imgScrollEffectIcon.sprite = GameAssetsManager.Instance.GetScrollEffectIconImage(scrollName);
+        // upgradeOption 이름
+        txtScrollName.text = $"{skillUpgradeOption.GetName()}!!";
+        // upgradeOption 설명  
+        txtSpellDescription.text = skillUpgradeOption.GetDescription();
+        // upgradeOption 아이콘 이미지
+        imgSpellIcon.sprite = skillUpgradeOption.GetIcon();
 
         // 버튼 기능 설정   
         btnApply.onClick.RemoveAllListeners();
         btnApply.AddClickListener(() => {
-            if (PlayerClient.Instance == null) return;
-            if(GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
+/*            if (PlayerClient.Instance == null) return;
+            if (GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
 
-            RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);
+            RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);*/
             GetComponentInParent<PopupSelectScrollEffectUIController>().Hide();
         });
     }
+    /*    public void InitUI(ItemName scrollName, byte spellIndexToApply)
+        {
+            //Debug.Log($"InitUI. scrollName:{scrollName}, spellIndexToApply:{spellIndexToApply}");
+
+            // scroll 이름
+            txtScrollName.text = $"{Item.GetName(scrollName)}!!";
+            // spell 이름
+            SkillName spellName = PlayerClient.Instance.GetComponent<SkillSpellManagerClient>().GetSpellInfoList()[spellIndexToApply].spellName;
+            txtSpellName.text = spellName.ToString();
+            // spell 아이콘 이미지
+            imgSpellIcon.sprite = GameAssetsManager.Instance.GetSpellIconImage(spellName);
+            // scroll effect 아이콘 이미지
+            imgScrollEffectIcon.sprite = GameAssetsManager.Instance.GetScrollEffectIconImage(scrollName);
+
+            // 버튼 기능 설정   
+            btnApply.onClick.RemoveAllListeners();
+            btnApply.AddClickListener(() => {
+                if (PlayerClient.Instance == null) return;
+                if(GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
+
+                RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);
+                GetComponentInParent<PopupSelectScrollEffectUIController>().Hide();
+            });
+        }*/
 
     // 슬롯 선택시 동작. 클라이언트에서 돌아가는 메소드 입니다.
     public void RequestApplyScrollEffectToServer(ItemName scrollName, byte spellIndex)

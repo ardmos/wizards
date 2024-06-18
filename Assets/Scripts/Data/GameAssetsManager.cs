@@ -33,19 +33,7 @@ public class GameAssetsManager : MonoBehaviour
 
     public Sprite GetScrollEffectIconImage(ItemName itemName)
     {
-        switch (itemName)
-        {
-            case ItemName.Scroll_LevelUp:
-                return gameAssets.icon_ScrollEffect_LevelUp;
-            case ItemName.Scroll_FireRateUp:
-                return gameAssets.icon_ScrollEffect_FireRateUp;
-            case ItemName.Scroll_FlySpeedUp:
-                return gameAssets.icon_ScrollEffect_FlySpeedUp;
-            case ItemName.Scroll_Deploy:
-                return gameAssets.icon_ScrollEffect_Deploy;
-            default:
-                return null;
-        }
+        return gameAssets.icon_Scroll;
     }
 
     /// <summary>

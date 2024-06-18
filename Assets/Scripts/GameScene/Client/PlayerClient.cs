@@ -270,13 +270,19 @@ public abstract class PlayerClient : NetworkBehaviour
     /// <summary>
     /// 서버에서 제공해준 스크롤 효과 목록을 PopupSelectScrollEffectUIController에 적용.
     /// </summary>
-    /// <param name="scrollNames"></param>
     [ClientRpc]
-    public void InitSelectScrollEffectsPopupUIClientRPC(ItemName[] scrollNames, byte spellIndexToApplyEffect)
+    public void InitSelectScrollEffectsPopupUIClientRPC(List<SkillUpgradeOptionDTO> skillUpgradeOptionsDTO)
     {
         if (!IsOwner) return;
-        GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(scrollNames, spellIndexToApplyEffect);
+        List<ISkillUpgradeOption> skillUpgradeOptions = SkillUpgradeFactory.FromDTOList(skillUpgradeOptionsDTO);
+        GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(skillUpgradeOptions);
     }
+    /*    [ClientRpc]
+        public void InitSelectScrollEffectsPopupUIClientRPC(ItemName[] scrollNames, byte spellIndexToApplyEffect)
+        {
+            if (!IsOwner) return;
+            GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(scrollNames, spellIndexToApplyEffect);
+        }*/
 
     public void SetPlayerItemsDictionaryOnClient(ItemName[] itemNameArray, ushort[] itemCountArray)
     {
