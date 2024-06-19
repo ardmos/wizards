@@ -20,7 +20,7 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
     /// <summary>
     ///  scroll정보에 맞춰 UI의 정보를 초기화 해주는 메소드 입니다.
     /// </summary>
-    public void InitUI(ISkillUpgradeOption skillUpgradeOption)
+    public void InitUI(ISkillUpgradeOption skillUpgradeOption, PopupSelectScrollEffectUIController popupSelectScrollEffectUIController)
     {
         //Debug.Log($"InitUI. scrollName:{scrollName}, spellIndexToApply:{spellIndexToApply}");
 
@@ -34,50 +34,21 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         // 버튼 기능 설정   
         btnApply.onClick.RemoveAllListeners();
         btnApply.AddClickListener(() => {
-/*            if (PlayerClient.Instance == null) return;
-            if (GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
+            /*            if (PlayerClient.Instance == null) return;
+                        if (GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
 
-            RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);*/
-            GetComponentInParent<PopupSelectScrollEffectUIController>().Hide();
+                        RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);*/
+
+/*            // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
+            ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
+
+            // SFX 재생
+            SoundManager.Instance.PlayItemSFXServerRPC(scrollName, transform.position);
+
+            // VFX 재생
+            PlayerClient.Instance.GetComponent<PlayerServer>().StartApplyScrollVFXServerRPC();
+*/
+            popupSelectScrollEffectUIController.Hide();
         });
-    }
-    /*    public void InitUI(ItemName scrollName, byte spellIndexToApply)
-        {
-            //Debug.Log($"InitUI. scrollName:{scrollName}, spellIndexToApply:{spellIndexToApply}");
-
-            // scroll 이름
-            txtScrollName.text = $"{Item.GetName(scrollName)}!!";
-            // spell 이름
-            SkillName spellName = PlayerClient.Instance.GetComponent<SkillSpellManagerClient>().GetSpellInfoList()[spellIndexToApply].spellName;
-            txtSpellName.text = spellName.ToString();
-            // spell 아이콘 이미지
-            imgSpellIcon.sprite = GameAssetsManager.Instance.GetSpellIconImage(spellName);
-            // scroll effect 아이콘 이미지
-            imgScrollEffectIcon.sprite = GameAssetsManager.Instance.GetScrollEffectIconImage(scrollName);
-
-            // 버튼 기능 설정   
-            btnApply.onClick.RemoveAllListeners();
-            btnApply.AddClickListener(() => {
-                if (PlayerClient.Instance == null) return;
-                if(GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
-
-                RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);
-                GetComponentInParent<PopupSelectScrollEffectUIController>().Hide();
-            });
-        }*/
-
-    // 슬롯 선택시 동작. 클라이언트에서 돌아가는 메소드 입니다.
-    public void RequestApplyScrollEffectToServer(ItemName scrollName, byte spellIndex)
-    {
-        //Debug.Log($"RequestApplyScrollEffectToServer. scrollNames:{scrollName}, spellIndexToApply:{spellIndex}");
-
-        // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
-        ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
-
-        // SFX 재생
-        SoundManager.Instance.PlayItemSFXServerRPC(scrollName, transform.position);
-
-        // VFX 재생
-        PlayerClient.Instance.GetComponent<PlayerServer>().StartApplyScrollVFXServerRPC();
     }
 }

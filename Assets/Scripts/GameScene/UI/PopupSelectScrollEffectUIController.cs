@@ -21,9 +21,9 @@ public class PopupSelectScrollEffectUIController : MonoBehaviour
 
     public void InitPopup(List<ISkillUpgradeOption> skillUpgradeOptions)
     {
-        scrollEffectSlot0.InitUI(skillUpgradeOptions[0]);
-        scrollEffectSlot1.InitUI(skillUpgradeOptions[1]);
-        scrollEffectSlot2.InitUI(skillUpgradeOptions[2]);
+        scrollEffectSlot0.InitUI(skillUpgradeOptions[0], this);
+        scrollEffectSlot1.InitUI(skillUpgradeOptions[1], this);
+        scrollEffectSlot2.InitUI(skillUpgradeOptions[2], this);
     }
 
     public void Show()
