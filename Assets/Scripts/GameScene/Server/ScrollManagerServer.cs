@@ -61,7 +61,7 @@ public class ScrollManagerServer : NetworkBehaviour
         // 랜덤으로 생성된 스크롤 효과 목록을 요청해온 플레이어에게 공유
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().InitSelectScrollEffectsPopupUIClientRPC(randomSkillUpgradesDTO);
+        networkClient.PlayerObject.GetComponent<PlayerClient>().InitSelectScrollEffectsPopupUIClientRPC(randomSkillUpgradesDTO.ToArray());
     }
 
 

@@ -30,25 +30,28 @@ public enum BlizzardUpgradeOption
     IncreaseDuration
 }
 
-[System.Serializable]
-public class SkillUpgradeOptionDTO : INetworkSerializable
+[Serializable]
+public class SkillUpgradeOptionDTO : IEquatable<SkillUpgradeOptionDTO>, INetworkSerializable
 {
-    public string SkillType; // Fireball, Waterball, Blizzard 등
-    public string UpgradeType; // IncreaseSize, AddDotDamage 등
+    public string skillType; // Fireball, Waterball, Blizzard 등
+    public string upgradeType; // IncreaseSize, AddDotDamage 등
 
     public bool Equals(SkillUpgradeOptionDTO other)
     {
         return
-        SkillType == other.SkillType &&
-        UpgradeType == other.UpgradeType;
+        skillType == other.skillType &&
+        upgradeType == other.upgradeType;
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
-        /// 여기서부터!  ISkillUpgradeOption 상속하는 방식으로 변경중
+        serializer.SerializeValue(ref skillType);
+        serializer.SerializeValue(ref upgradeType);
     }
+}
 
-    public static class SkillUpgradeOptionExtensions
+
+public static class SkillUpgradeOptionExtensions
 {
     public static SkillUpgradeOptionDTO ToDTO(this ISkillUpgradeOption upgradeOption)
     {
@@ -125,8 +128,8 @@ public class FireballUpgrade : ISkillUpgradeOption
     {
         return new SkillUpgradeOptionDTO
         {
-            SkillType = "Fireball",
-            UpgradeType = _option.ToString()
+            skillType = "Fireball",
+            upgradeType = _option.ToString()
         };
     }
 }
@@ -148,7 +151,7 @@ public class WaterballUpgrade : ISkillUpgradeOption
             WaterballUpgradeOption.IncreaseHomingRange => "Increase homing range",
             WaterballUpgradeOption.AddSplashDamage => "Add splash damage",
             WaterballUpgradeOption.ReduceCooldown => "Reduce cooldown",
-            WaterballUpgradeOption.IncreaseRange => "Increase range", 
+            WaterballUpgradeOption.IncreaseRange => "Increase range",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -181,8 +184,8 @@ public class WaterballUpgrade : ISkillUpgradeOption
     {
         return new SkillUpgradeOptionDTO
         {
-            SkillType = "Waterball",
-            UpgradeType = _option.ToString()
+            skillType = "Waterball",
+            upgradeType = _option.ToString()
         };
     }
 }
@@ -231,8 +234,8 @@ public class BlizzardUpgrade : ISkillUpgradeOption
     {
         return new SkillUpgradeOptionDTO
         {
-            SkillType = "Blizzard",
-            UpgradeType = _option.ToString()
+            skillType = "Blizzard",
+            upgradeType = _option.ToString()
         };
     }
 }
@@ -306,11 +309,11 @@ public static class SkillUpgradeFactory
 {
     public static ISkillUpgradeOption FromDTO(SkillUpgradeOptionDTO dto)
     {
-        return dto.SkillType switch
+        return dto.skillType switch
         {
-            "Fireball" => new FireballUpgrade(Enum.Parse<FireballUpgradeOption>(dto.UpgradeType)),
-            "Waterball" => new WaterballUpgrade(Enum.Parse<WaterballUpgradeOption>(dto.UpgradeType)),
-            "Blizzard" => new BlizzardUpgrade(Enum.Parse<BlizzardUpgradeOption>(dto.UpgradeType)),
+            "Fireball" => new FireballUpgrade(Enum.Parse<FireballUpgradeOption>(dto.upgradeType)),
+            "Waterball" => new WaterballUpgrade(Enum.Parse<WaterballUpgradeOption>(dto.upgradeType)),
+            "Blizzard" => new BlizzardUpgrade(Enum.Parse<BlizzardUpgradeOption>(dto.upgradeType)),
             _ => throw new ArgumentOutOfRangeException()
         };
     }

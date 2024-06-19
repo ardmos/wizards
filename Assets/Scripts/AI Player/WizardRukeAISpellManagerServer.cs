@@ -113,7 +113,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     /// </summary>
     public void CastSpell(ushort spellIndex)
     {
-        Debug.Log($"playerOwnedSpellInfoListOnServer.count {playerOwnedSpellInfoListOnServer.Count}");
+        //Debug.Log($"playerOwnedSpellInfoListOnServer.count {playerOwnedSpellInfoListOnServer.Count}");
         if (playerOwnedSpellInfoListOnServer[spellIndex].spellState != SpellState.Ready) return;
 
         // 발사체 오브젝트 생성

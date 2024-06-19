@@ -32,7 +32,7 @@ public class FireBallLv1 : FireSpell
         // 서버에서만 처리.
         if (IsClient) return;
 
-        Debug.Log($"마법 충돌! 마법:{gameObject.name}, 충돌체:{collision.gameObject.name}");
+        //Debug.Log($"마법 충돌! 마법:{gameObject.name}, 충돌체:{collision.gameObject.name}");
 
         // 충돌을 중복 처리하는것을 방지하기 위한 처리
         GetComponent<Collider>().enabled = false;

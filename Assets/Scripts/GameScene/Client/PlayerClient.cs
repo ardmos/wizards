@@ -271,10 +271,10 @@ public abstract class PlayerClient : NetworkBehaviour
     /// 서버에서 제공해준 스크롤 효과 목록을 PopupSelectScrollEffectUIController에 적용.
     /// </summary>
     [ClientRpc]
-    public void InitSelectScrollEffectsPopupUIClientRPC(List<SkillUpgradeOptionDTO> skillUpgradeOptionsDTO)
+    public void InitSelectScrollEffectsPopupUIClientRPC(SkillUpgradeOptionDTO[] skillUpgradeOptionsDTO)
     {
         if (!IsOwner) return;
-        List<ISkillUpgradeOption> skillUpgradeOptions = SkillUpgradeFactory.FromDTOList(skillUpgradeOptionsDTO);
+        List<ISkillUpgradeOption> skillUpgradeOptions = SkillUpgradeFactory.FromDTOList(skillUpgradeOptionsDTO.ToList());
         GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(skillUpgradeOptions);
     }
     /*    [ClientRpc]

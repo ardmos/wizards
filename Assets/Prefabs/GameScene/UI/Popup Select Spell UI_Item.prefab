@@ -2242,9 +2242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnApply: {fileID: 3809121228717184918}
   txtScrollName: {fileID: 2838149397680858326}
-  txtSpellName: {fileID: 1881087389641259299}
+  txtSpellDescription: {fileID: 1881087389641259299}
   imgSpellIcon: {fileID: 8414450740761117833}
-  imgScrollEffectIcon: {fileID: 734983708184602121}
 --- !u!114 &6206094104279522437
 MonoBehaviour:
   m_ObjectHideFlags: 0
