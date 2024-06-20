@@ -70,8 +70,70 @@ public class ScrollManagerServer : NetworkBehaviour
     /// 주로 스크롤 획득으로 인한 스펠 강화에 사용됩니다.
     /// 업데이트 후에 자동으로 클라이언트측과 동기화를 합니다.
     /// </summary>
-    [ServerRpc(RequireOwnership = false)]
-    public void UpdateScrollEffectServerRPC(ItemName scrollName, byte spellIndex, ServerRpcParams serverRpcParams = default)
+[ServerRpc(RequireOwnership = false)]
+    public void UpdateScrollEffectServerRPC(ISkillUpgradeOption skillUpgradeOption, ServerRpcParams serverRpcParams = default)
+    {
+        ulong clientId = serverRpcParams.Receive.SenderClientId;
+        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
+        // Wizard Ruke Player
+        if (networkClient.PlayerObject.TryGetComponent<SpellManagerServerWizard>(out SpellManagerServerWizard spellManagerServerWizard))
+        {
+            switch (skillUpgradeOption)
+            {
+                case FireballUpgrade fireballUpgrade:
+                    fireballUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SkillName.FireBallLv1));
+                    break;
+                case WaterballUpgrade waterballUpgrade:
+                    waterballUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SkillName.WaterBallLv1));
+                    break;
+                case BlizzardUpgrade blizzardUpgrade:
+                    blizzardUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SkillName.BlizzardLv1));
+                    break;
+                default:
+                    throw new ArgumentException("Unknown skill upgrade option type");
+            }
+            //// 여기 까지 수정!!!!!  업그레이드 스킬 배열 값이 잘 바뀌는기 확인 후, 바뀐 값에 따라 스킬이 변화되도록 해주면 된다
+
+            //SpellInfo newSpellInfo = new SpellInfo(spellManagerServerWizard.GetSpellInfo(spellIndex));
+
+            /*            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
+                        switch (scrollName)
+                        {
+                            case ItemName.Scroll_LevelUp:
+                                newSpellInfo.level += 1;
+                                break;
+                            case ItemName.Scroll_FireRateUp:
+                                if (newSpellInfo.coolTime > 0.2f) newSpellInfo.coolTime -= 0.4f;
+                                else newSpellInfo.coolTime = 0f;
+                                break;
+                            case ItemName.Scroll_FlySpeedUp:
+                                newSpellInfo.moveSpeed += 10f;
+                                break;
+                            case ItemName.Scroll_Deploy:
+                                newSpellInfo.moveSpeed = 0f;
+                                break;
+                            // 유도 마법 미구현
+                            //case ItemName.Scroll_Guide:
+                            // break;
+                            default:
+                                Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
+                                break;
+                        }*/
+
+            // 변경내용 서버에 저장
+            //spellManagerServerWizard.SetSpellInfo(spellIndex, newSpellInfo);
+
+            // 변경내용을 요청한 클라이언트와도 동기화
+            networkClient.PlayerObject.GetComponent<SkillSpellManagerClient>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
+
+            // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
+            DequeuePlayerScrollSpellSlotQueueOnServer(clientId);
+        }
+
+        // Knight Buzz Player
+    }
+    /*[ServerRpc(RequireOwnership = false)]
+    public void UpdateScrollEffectServerRPC(ItemName scrollName, byte spellIndex, ServerRpcParams serverRpcParams = default)    
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
@@ -80,7 +142,7 @@ public class ScrollManagerServer : NetworkBehaviour
         {
             SpellInfo newSpellInfo = new SpellInfo(spellManagerServerWizard.GetSpellInfo(spellIndex));
 
-/*            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
+*//*            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
             switch (scrollName)
             {
                 case ItemName.Scroll_LevelUp:
@@ -102,7 +164,7 @@ public class ScrollManagerServer : NetworkBehaviour
                 default:
                     Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
                     break;
-            }*/
+            }*//*
 
             // 변경내용 서버에 저장
             spellManagerServerWizard.SetSpellInfo(spellIndex, newSpellInfo);
@@ -121,7 +183,7 @@ public class ScrollManagerServer : NetworkBehaviour
         {
             SpellInfo newSpellInfo = new SpellInfo(skillManagerServerKnight.GetSpellInfo(spellIndex));
 
-/*            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
+*//*            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
             switch (scrollName)
             {
                 case ItemName.Scroll_LevelUp:
@@ -143,7 +205,7 @@ public class ScrollManagerServer : NetworkBehaviour
                 default:
                     Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
                     break;
-            }*/
+            }*//*
 
             // 변경내용 서버에 저장
             skillManagerServerKnight.SetSpellInfo(spellIndex, newSpellInfo);
@@ -156,21 +218,21 @@ public class ScrollManagerServer : NetworkBehaviour
             //networkClient.PlayerObject.GetComponent<PlayerClient>().GetComponent<PlayerSpellScrollQueueManagerClient>().DequeuePlayerScrollSpellSlotQueueOnClient();
         }
 
-    }
-
-/*    private List<int> GenerateUniqueRandomNumbers()
-    {
-        List<int> numbers = new List<int>();
-        int scrollItemMaxIndex = ItemName.ScrollEnd - (ItemName.ScrollStart + 1);
-        while (numbers.Count < 3)
-        {
-            int randomNumber = UnityEngine.Random.Range(0, scrollItemMaxIndex);
-            if (!numbers.Contains(randomNumber))
-            {
-                numbers.Add(randomNumber);
-            }
-        }
-
-        return numbers;
     }*/
+
+    /*    private List<int> GenerateUniqueRandomNumbers()
+        {
+            List<int> numbers = new List<int>();
+            int scrollItemMaxIndex = ItemName.ScrollEnd - (ItemName.ScrollStart + 1);
+            while (numbers.Count < 3)
+            {
+                int randomNumber = UnityEngine.Random.Range(0, scrollItemMaxIndex);
+                if (!numbers.Contains(randomNumber))
+                {
+                    numbers.Add(randomNumber);
+                }
+            }
+
+            return numbers;
+        }*/
 }

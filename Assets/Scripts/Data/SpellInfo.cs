@@ -14,6 +14,9 @@ public class SpellInfo : INetworkSerializable
     public byte level;
     public ulong ownerPlayerClientId;
 
+    // for 업그레이드. UpgradeOption을 인덱스로 하는 옵션 배열입니다.
+    public byte[] upgradeOptions;
+
     public SpellInfo() { }
 
     public SpellInfo(SpellInfo spellInfo) 

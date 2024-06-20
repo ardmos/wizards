@@ -79,6 +79,7 @@ public interface ISkillUpgradeOption
     public string GetName();
     public string GetDescription();
     public Sprite GetIcon();
+    public SpellInfo UpgradeSkill(SpellInfo spellInfo);
 }
 
 public class FireballUpgrade : ISkillUpgradeOption
@@ -89,6 +90,19 @@ public class FireballUpgrade : ISkillUpgradeOption
     {
         _option = option;
     }
+
+    public FireballUpgradeOption GetUpgradeOption()
+    {
+        return _option;
+    }
+
+    public SpellInfo UpgradeSkill(SpellInfo spellInfo)
+    {
+        spellInfo.upgradeOptions[(int)_option] += 1;
+
+        return spellInfo;
+    }
+
     public string GetName()
     {
         return _option switch
@@ -141,6 +155,18 @@ public class WaterballUpgrade : ISkillUpgradeOption
     public WaterballUpgrade(WaterballUpgradeOption option)
     {
         _option = option;
+    }
+
+    public WaterballUpgradeOption GetUpgradeOption()
+    {
+        return _option;
+    }
+
+    public SpellInfo UpgradeSkill(SpellInfo spellInfo)
+    {
+        spellInfo.upgradeOptions[(int)_option] += 1;
+
+        return spellInfo;
     }
 
     public string GetName()
@@ -197,6 +223,18 @@ public class BlizzardUpgrade : ISkillUpgradeOption
     public BlizzardUpgrade(BlizzardUpgradeOption option)
     {
         _option = option;
+    }
+
+    public BlizzardUpgradeOption GetUpgradeOption()
+    {
+        return _option;
+    }
+
+    public SpellInfo UpgradeSkill(SpellInfo spellInfo)
+    {
+        spellInfo.upgradeOptions[(int)_option] += 1;
+
+        return spellInfo;
     }
 
     public string GetName()

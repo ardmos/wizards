@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,7 +24,7 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
     public void InitUI(ISkillUpgradeOption skillUpgradeOption, PopupSelectScrollEffectUIController popupSelectScrollEffectUIController)
     {
         //Debug.Log($"InitUI. scrollName:{scrollName}, spellIndexToApply:{spellIndexToApply}");
-
+        skillUpgradeOption.ToDTO();
         // upgradeOption 이름
         txtScrollName.text = $"{skillUpgradeOption.GetName()}!!";
         // upgradeOption 설명  
@@ -34,20 +35,16 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         // 버튼 기능 설정   
         btnApply.onClick.RemoveAllListeners();
         btnApply.AddClickListener(() => {
-            /*            if (PlayerClient.Instance == null) return;
-                        if (GetComponentInParent<PopupSelectScrollEffectUIController>() == null) return;
-
-                        RequestApplyScrollEffectToServer(scrollName, spellIndexToApply);*/
-
-/*            // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
-            ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
+            // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
+            //ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
+            ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(skillUpgradeOption);
 
             // SFX 재생
-            SoundManager.Instance.PlayItemSFXServerRPC(scrollName, transform.position);
+            SoundManager.Instance.PlayItemSFXServerRPC(ItemName.ScrollUse, transform.position);
 
             // VFX 재생
             PlayerClient.Instance.GetComponent<PlayerServer>().StartApplyScrollVFXServerRPC();
-*/
+
             popupSelectScrollEffectUIController.Hide();
         });
     }
