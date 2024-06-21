@@ -98,6 +98,11 @@ public class FireballUpgrade : ISkillUpgradeOption
 
     public SpellInfo UpgradeSkill(SpellInfo spellInfo)
     {
+        if (spellInfo == null) Debug.Log("spellInfo가 null입니다.");
+        /*        Debug.Log($"spell name:{spellInfo.spellName}");
+                Debug.Log($"upgradeOptions.Length:{spellInfo.upgradeOptions.Length}");
+                Debug.Log($"option:{_option}, {(int)_option}");*/
+        Debug.Log($"UpgradeSkill. 요청 클라이언트:{spellInfo.ownerPlayerClientId}");
         spellInfo.upgradeOptions[(int)_option] += 1;
 
         return spellInfo;

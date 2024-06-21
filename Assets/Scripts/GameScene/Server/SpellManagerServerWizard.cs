@@ -122,7 +122,8 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         // 발사체 스펙 초기화 해주기
-        SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
+        //SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
+        SpellInfo spellInfo = GetSpellInfo(spellIndex);
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo, gameObject);
         // 호밍 마법이라면 호밍 마법에 소유자 등록 & 속도 설정
         if (spellObject.TryGetComponent<HomingMissile>(out var ex))
@@ -185,7 +186,8 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         }
 
         // 발사 SFX 실행 
-        SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
+        //SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
+        SpellInfo spellInfo = GetSpellInfo(spellIndex);
         SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Shooting, transform);
 
         // 포구 VFX

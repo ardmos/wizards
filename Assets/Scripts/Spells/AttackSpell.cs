@@ -102,7 +102,9 @@ public abstract class AttackSpell : NetworkBehaviour
     {
         if (IsClient) return;
 
-        spellInfo = new SpellInfo(spellInfoFromServer);
+        //spellInfo = new SpellInfo(spellInfoFromServer);
+        spellInfo = spellInfoFromServer;
+        Debug.Log($"spellInfo:{spellInfo.upgradeOptions.Length}, spellInfoFromServer:{spellInfoFromServer}");
         this.spellOwnerObject = spellOwnerObject;
 
         // Layer ¼³Á¤

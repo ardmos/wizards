@@ -30,9 +30,10 @@ public class SpellInfo : INetworkSerializable
         this.price = spellInfo.price;
         this.level = spellInfo.level;
         this.ownerPlayerClientId = spellInfo.ownerPlayerClientId;
+        this.upgradeOptions = new byte[spellInfo.upgradeOptions.Length];
     }
 
-    public SpellInfo(SpellType spellType, SkillName spellName, SpellState spellState, float coolTime, float lifeTime, float moveSpeed, int price, byte level)
+    public SpellInfo(SpellType spellType, SkillName spellName, SpellState spellState, float coolTime, float lifeTime, float moveSpeed, int price, byte level, int upgradeOptionsCount)
     {
         this.spellType = spellType;
         this.spellName = spellName; 
@@ -42,6 +43,8 @@ public class SpellInfo : INetworkSerializable
         this.moveSpeed = moveSpeed;
         this.price = price;
         this.level = level;
+        this.upgradeOptions = new byte[upgradeOptionsCount];
+        //Debug.Log($"SpellInfo {spellName} √ ±‚»≠. upgradeOptionsCount:{this.upgradeOptions.Length}");
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter

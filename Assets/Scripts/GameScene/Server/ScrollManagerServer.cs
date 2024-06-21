@@ -71,16 +71,19 @@ public class ScrollManagerServer : NetworkBehaviour
     /// 업데이트 후에 자동으로 클라이언트측과 동기화를 합니다.
     /// </summary>
 [ServerRpc(RequireOwnership = false)]
-    public void UpdateScrollEffectServerRPC(ISkillUpgradeOption skillUpgradeOption, ServerRpcParams serverRpcParams = default)
+    public void UpdateScrollEffectServerRPC(SkillUpgradeOptionDTO skillUpgradeOptionDTO, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
         // Wizard Ruke Player
         if (networkClient.PlayerObject.TryGetComponent<SpellManagerServerWizard>(out SpellManagerServerWizard spellManagerServerWizard))
         {
+            Debug.Log($"스크롤 효과 적용 요청 클라이언트: {clientId}, 효과 적용되는 클라이언트 : {spellManagerServerWizard.OwnerClientId}");
+            ISkillUpgradeOption skillUpgradeOption = SkillUpgradeFactory.FromDTO(skillUpgradeOptionDTO);
             switch (skillUpgradeOption)
             {
                 case FireballUpgrade fireballUpgrade:
+                    //Debug.Log($"업그레이드 옵션이 선택되었습니다! 해당 파이어볼 마법의 업그레이드 현황 검색입니다.{spellManagerServerWizard.GetSpellInfo(SkillName.FireBallLv1).upgradeOptions.Length}");
                     fireballUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SkillName.FireBallLv1));
                     break;
                 case WaterballUpgrade waterballUpgrade:

@@ -5,6 +5,16 @@ using UnityEngine;
 /// </summary>
 public class WaterBallLv1 : WaterSpell
 {
+    public override void OnNetworkSpawn()
+    {
+        // 업그레이드 현황 확인
+        if (spellInfo.upgradeOptions.Length != System.Enum.GetValues(typeof(WaterballUpgradeOption)).Length) return;
+        foreach (WaterballUpgradeOption upgradeOption in System.Enum.GetValues(typeof(WaterballUpgradeOption)))
+        {
+            Debug.Log($"{upgradeOption} : {spellInfo.upgradeOptions[(int)upgradeOption]}");
+        }
+    }
+
     /// <summary>
     /// 2. CollisionEnter 충돌 처리 (서버 권한 방식)
     /// </summary>

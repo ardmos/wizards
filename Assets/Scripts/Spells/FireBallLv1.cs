@@ -9,9 +9,9 @@ using UnityEngine;
 /// </summary>
 public class FireBallLv1 : FireSpell
 {
-    // 현재 사용하는 파이어볼 VFX를 자연스럽게 하기위한 부분
     public override void OnNetworkSpawn()
     {
+        // 현재 사용하는 파이어볼 VFX를 자연스럽게 하기위한 부분
         trails[0].SetActive(false);
     }
 
@@ -21,6 +21,20 @@ public class FireBallLv1 : FireSpell
 
         // 꼬리연기 효과 활성화
         trails[0].SetActive(true);
+    }
+
+    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer, GameObject spellOwnerObject)
+    {
+        base.InitSpellInfoDetail(spellInfoFromServer, spellOwnerObject);
+
+        // 업그레이드 현황 확인
+        //Debug.Log($"{spellInfo.upgradeOptions.Length}, {System.Enum.GetValues(typeof(FireballUpgradeOption)).Length}");
+        if (spellInfo.upgradeOptions.Length != System.Enum.GetValues(typeof(FireballUpgradeOption)).Length) return;
+        Debug.Log($"ownerClientId:{spellInfo.ownerPlayerClientId}");
+        foreach (FireballUpgradeOption upgradeOption in System.Enum.GetValues(typeof(FireballUpgradeOption)))
+        {
+            Debug.Log($"{upgradeOption} : {spellInfo.upgradeOptions[(int)upgradeOption]}");
+        }
     }
 
     /// <summary>
