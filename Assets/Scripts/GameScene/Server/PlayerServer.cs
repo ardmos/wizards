@@ -27,7 +27,7 @@ public class PlayerServer : NetworkBehaviour
     /// </summary>
     public void InitializePlayerOnServer(ICharacter character)
     {
-        Debug.Log($"OwnerClientId{OwnerClientId} Player (class : {character.characterClass.ToString()}) InitializeAIPlayerOnServer");
+        //Debug.Log($"OwnerClientId{OwnerClientId} Player (class : {character.characterClass.ToString()}) InitializeAIPlayerOnServer");
 
         PlayerSpawnPointsController spawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
 
@@ -114,6 +114,21 @@ public class PlayerServer : NetworkBehaviour
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientWhoAttacked];
         if(networkClient.PlayerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient)){
             playerClient.ActivateHitCameraShakeClientRPC();
+        }
+    }
+
+    // 파이어볼 도트 대미지를 받는 Coroutine
+    public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong clientWhoAttacked)
+    {
+        float elapsed = 0;
+        while (elapsed < duration)
+        {
+            // 1초 대기
+            yield return new WaitForSeconds(1);
+
+            playerHPManager.TakingDamage(damagePerSecond, clientWhoAttacked);
+
+            elapsed += 1;
         }
     }
 

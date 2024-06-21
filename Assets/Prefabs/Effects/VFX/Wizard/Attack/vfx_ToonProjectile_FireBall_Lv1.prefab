@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4228151991404822}
   - component: {fileID: 198944655328091226}
   - component: {fileID: 199766846022176942}
+  - component: {fileID: 5053360771826254650}
   m_Layer: 9
   m_Name: Beam
   m_TagString: Untagged
@@ -4862,6 +4863,36 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5053360771826254650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211684930841812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &1431853286345472
 GameObject:
   m_ObjectHideFlags: 0
@@ -4873,6 +4904,7 @@ GameObject:
   - component: {fileID: 4332494140402732}
   - component: {fileID: 198183296655698058}
   - component: {fileID: 199894311326385758}
+  - component: {fileID: 5760839250546223659}
   m_Layer: 9
   m_Name: Ball
   m_TagString: Untagged
@@ -9724,6 +9756,36 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5760839250546223659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431853286345472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &1439816204641800
 GameObject:
   m_ObjectHideFlags: 0
@@ -9788,11 +9850,24 @@ MonoBehaviour:
     price: 0
     level: 0
     ownerPlayerClientId: 0
+    upgradeOptions: 
   muzzleVFXPrefab: {fileID: 1696487207369030, guid: fe1b959f2d0c6db42bcff4ac8f20c812, type: 3}
   hitVFXPrefab: {fileID: 1312591640859010, guid: ecf7e409a310ee243a23cc83dfb0963f, type: 3}
   trails:
   - {fileID: 1588689682261560}
   - {fileID: 1514313384593206}
+  shooterLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  spellOwnerObject: {fileID: 0}
+  sphereCollider: {fileID: 135237550928776104}
+  explosionRadius: 0
+  piercingStack: 0
+  damagePerSecond: 0
+  duration: 0
+  beam: {fileID: 4228151991404822}
+  ball: {fileID: 4332494140402732}
+  smoke: {fileID: 4298948506556188}
 --- !u!54 &54419324461462068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9942,6 +10017,7 @@ GameObject:
   - component: {fileID: 4298948506556188}
   - component: {fileID: 198610357605626892}
   - component: {fileID: 199933852693015996}
+  - component: {fileID: 9198486803771939614}
   m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
@@ -14793,6 +14869,36 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &9198486803771939614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514313384593206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &1588689682261560
 GameObject:
   m_ObjectHideFlags: 0

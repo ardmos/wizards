@@ -17,7 +17,7 @@ public class ScrollManagerServer : NetworkBehaviour
 
     private void Awake()
     {
-        Instance = this; 
+        Instance = this;
     }
 
     // On Server
@@ -52,11 +52,11 @@ public class ScrollManagerServer : NetworkBehaviour
         // 능력 뽑기
         List<SkillUpgradeOptionDTO> randomSkillUpgradesDTO = RandomSkillOptionProviderSystem.GetRandomSkillUpgrades();
 
-/*        Debug.Log("랜덤 스킬 업그레이드 옵션:");
-        foreach (var upgrade in randomSkillUpgrades)
-        {
-            Debug.Log(upgrade.GetDescription());
-        }*/
+        /*        Debug.Log("랜덤 스킬 업그레이드 옵션:");
+                foreach (var upgrade in randomSkillUpgrades)
+                {
+                    Debug.Log(upgrade.GetDescription());
+                }*/
 
         // 랜덤으로 생성된 스크롤 효과 목록을 요청해온 플레이어에게 공유
         ulong clientId = serverRpcParams.Receive.SenderClientId;
@@ -70,7 +70,7 @@ public class ScrollManagerServer : NetworkBehaviour
     /// 주로 스크롤 획득으로 인한 스펠 강화에 사용됩니다.
     /// 업데이트 후에 자동으로 클라이언트측과 동기화를 합니다.
     /// </summary>
-[ServerRpc(RequireOwnership = false)]
+    [ServerRpc(RequireOwnership = false)]
     public void UpdateScrollEffectServerRPC(SkillUpgradeOptionDTO skillUpgradeOptionDTO, ServerRpcParams serverRpcParams = default)
     {
         ulong clientId = serverRpcParams.Receive.SenderClientId;

@@ -132,6 +132,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
             ex.SetSpeed(spellInfo.moveSpeed);
         }
         spellObject.transform.SetParent(transform);
+
         // 포구에 발사체 위치시키기
         spellObject.transform.localPosition = muzzlePos_Normal.localPosition;
 

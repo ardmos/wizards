@@ -274,6 +274,21 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         }
     }
 
+    // 파이어볼 도트 대미지를 받는 Coroutine
+    public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong clientWhoAttacked)
+    {
+        float elapsed = 0;
+        while (elapsed < duration)
+        {         
+            // 1초 대기
+            yield return new WaitForSeconds(1);
+
+            wizardRukeAIHPManagerServer.TakingDamage(damagePerSecond, clientWhoAttacked);
+
+            elapsed += 1;
+        }
+    }
+
     public sbyte GetPlayerHP()
     {
         return wizardRukeAIHPManagerServer.GetHP();
