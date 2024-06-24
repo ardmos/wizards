@@ -75,8 +75,10 @@ public class FireBallLv1 : FireSpell
                         break;
                     case FireballUpgradeOption.ReduceCooldown:
                         // "파이어볼의 재사용 대기 시간이 20% 감소합니다."
-                        spellInfo.coolTime = SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime - 0.2f * (float)spellInfo.upgradeOptions[(int)upgradeOption];
-                        Debug.Log($"{SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime} - 0.2f * {spellInfo.upgradeOptions[(int)upgradeOption]}. 파이어볼 쿨타임:{spellInfo.coolTime}");
+                        float defaultCooltime = SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime;
+                        float reductionPercentage = 0.2f * (float)spellInfo.upgradeOptions[(int)upgradeOption];
+                        spellInfo.coolTime = defaultCooltime * (1 - reductionPercentage);
+                        //Debug.Log($"{SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime} - 0.2f * {spellInfo.upgradeOptions[(int)upgradeOption]}. 파이어볼 쿨타임:{spellInfo.coolTime}");
                         break;
                     case FireballUpgradeOption.AddPiercing:
                         // "파이어볼이 적을 관통합니다."

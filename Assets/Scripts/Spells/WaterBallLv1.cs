@@ -1,10 +1,14 @@
 using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 /// <summary>
 /// 1레벨 워터볼 스크립트입니다.
 /// </summary>
 public class WaterBallLv1 : WaterSpell
 {
+    [Header("워터볼용 변수들")]
+    public 
+
     public override void OnNetworkSpawn()
     {
         // 업그레이드 현황 확인
@@ -12,6 +16,58 @@ public class WaterBallLv1 : WaterSpell
         foreach (WaterballUpgradeOption upgradeOption in System.Enum.GetValues(typeof(WaterballUpgradeOption)))
         {
             Debug.Log($"{upgradeOption} : {spellInfo.upgradeOptions[(int)upgradeOption]}");
+        }
+    }
+
+    public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer, GameObject spellOwnerObject)
+    {
+        base.InitSpellInfoDetail(spellInfoFromServer, spellOwnerObject);
+
+        explosionRadius = 3f;
+        piercingStack = 0f;
+        damagePerSecond = 0;
+        duration = 2f;
+        // 업그레이드 현황 적용
+        업그레이드현황적용();
+    }
+
+    /// <summary>
+    /// 업그레이드 현황을 적용합니다
+    /// </summary>
+    private void 업그레이드현황적용()
+    {
+        foreach (WaterballUpgradeOption upgradeOption in System.Enum.GetValues(typeof(WaterballUpgradeOption)))
+        {
+            if (spellInfo.upgradeOptions[(int)upgradeOption] != 0)
+            {
+                switch (upgradeOption)
+                {
+                    case WaterballUpgradeOption.IncreaseSpeed:
+                        // "워터볼의 속도가 30% 증가합니다."
+                        spellInfo.moveSpeed = SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.WaterBallLv1).moveSpeed - 0.2f * (float)spellInfo.upgradeOptions[(int)upgradeOption];
+                        break;
+                    case WaterballUpgradeOption.IncreaseHomingRange:
+                        // "워터볼의 유도 타겟 인식 범위가 20% 증가합니다."
+                        damagePerSecond += (sbyte)spellInfo.upgradeOptions[(int)upgradeOption];
+                        break;
+                    case WaterballUpgradeOption.AddSplashDamage:
+                        // "워터볼이 적중 시 주변에 범위 피해를 입힙니다."
+                        explosionRadius += spellInfo.upgradeOptions[(int)upgradeOption];
+                        break;
+                    case WaterballUpgradeOption.ReduceCooldown:
+                        // "워터볼의 재사용 대기 시간이 20% 감소합니다."
+                        float defaultCooltime = SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime;
+                        float reductionPercentage = 0.2f * (float)spellInfo.upgradeOptions[(int)upgradeOption];
+                        spellInfo.coolTime = defaultCooltime * (1 - reductionPercentage);
+                        //Debug.Log($"{SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime} - 0.2f * {spellInfo.upgradeOptions[(int)upgradeOption]}. 파이어볼 쿨타임:{spellInfo.coolTime}");
+                        break;
+                    case WaterballUpgradeOption.IncreaseRange:
+                        // "워터볼의 사거리가 50% 증가합니다."
+                        piercingStack += spellInfo.upgradeOptions[(int)upgradeOption];
+                        break;
+                }
+
+            }
         }
     }
 
