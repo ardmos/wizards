@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using Unity.Services.Matchmaker.Models;
 using UnityEngine;
@@ -7,26 +8,16 @@ using UnityEngine;
 public class WaterBallLv1 : WaterSpell
 {
     [Header("워터볼용 변수들")]
-    public 
-
-    public override void OnNetworkSpawn()
-    {
-        // 업그레이드 현황 확인
-        if (spellInfo.upgradeOptions.Length != System.Enum.GetValues(typeof(WaterballUpgradeOption)).Length) return;
-        foreach (WaterballUpgradeOption upgradeOption in System.Enum.GetValues(typeof(WaterballUpgradeOption)))
-        {
-            Debug.Log($"{upgradeOption} : {spellInfo.upgradeOptions[(int)upgradeOption]}");
-        }
-    }
+    public HomingMissile homingMissile;
+    public bool isSplashON;
+    public float explosionRadius = 3f;
 
     public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer, GameObject spellOwnerObject)
     {
         base.InitSpellInfoDetail(spellInfoFromServer, spellOwnerObject);
 
-        explosionRadius = 3f;
-        piercingStack = 0f;
-        damagePerSecond = 0;
-        duration = 2f;
+        isSplashON = false;
+
         // 업그레이드 현황 적용
         업그레이드현황적용();
     }
@@ -48,11 +39,14 @@ public class WaterBallLv1 : WaterSpell
                         break;
                     case WaterballUpgradeOption.IncreaseHomingRange:
                         // "워터볼의 유도 타겟 인식 범위가 20% 증가합니다."
-                        damagePerSecond += (sbyte)spellInfo.upgradeOptions[(int)upgradeOption];
+                        float defaultRange = homingMissile.GetMaxHomingRange();
+                        float increasePercentage = 0.2f * (float)spellInfo.upgradeOptions[(int)upgradeOption];
+                        homingMissile.SetMaxHomingRange(defaultRange * (1 + increasePercentage));
+                        //damagePerSecond += (sbyte)spellInfo.upgradeOptions[(int)upgradeOption];
                         break;
                     case WaterballUpgradeOption.AddSplashDamage:
                         // "워터볼이 적중 시 주변에 범위 피해를 입힙니다."
-                        explosionRadius += spellInfo.upgradeOptions[(int)upgradeOption];
+                        isSplashON = true;
                         break;
                     case WaterballUpgradeOption.ReduceCooldown:
                         // "워터볼의 재사용 대기 시간이 20% 감소합니다."
@@ -63,10 +57,11 @@ public class WaterBallLv1 : WaterSpell
                         break;
                     case WaterballUpgradeOption.IncreaseRange:
                         // "워터볼의 사거리가 50% 증가합니다."
-                        piercingStack += spellInfo.upgradeOptions[(int)upgradeOption];
+                        float defaultLifetime = spellInfo.lifeTime;
+                        float increaseLifetime = defaultLifetime * 0.5f * spellInfo.upgradeOptions[(int)upgradeOption];
+                        DestroyAfterDelay(defaultLifetime + increaseLifetime); 
                         break;
                 }
-
             }
         }
     }
@@ -85,20 +80,84 @@ public class WaterBallLv1 : WaterSpell
         // 충돌을 중복 처리하는것을 방지하기 위한 처리
         GetComponent<Collider>().enabled = false;
 
+        if (isSplashON)
+        {
+            범위딜처리(collision);
+        }
+        else
+        {
+            단일딜처리(collision);
+        }
+
+        // 혹시 시전자가 Casting 상태였으면 Cooltime 상태로 넘겨주기 
+        현스킬이캐스팅상태였을경우();
+
+        // 마법 충돌 사운드 재생
+        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Hit, transform);
+
+        // 적중 효과 VFX
+        HitVFX(GetHitVFXPrefab(), collision);
+
+        공격마법과충돌한경우(collision);
+
+        Destroy(gameObject, 0.2f);
+    }
+
+    private void 범위딜처리(Collision collision)
+    {
+        ulong spellOwnerClientId = GetSpellInfo().ownerPlayerClientId;
+        // 충돌 지점
+        Vector3 explosionPosition = collision.contacts[0].point;
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);
+        // 범위 내 충돌체 인식
+        foreach (Collider hit in colliders)
+        {
+            // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
+            if (hit.CompareTag("Player"))
+            {
+                // 시전자는 피해 안받도록 설정
+                if (hit.gameObject.layer == shooterLayer) continue;
+
+                if (GetSpellInfo() == null) return;
+
+                if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
+                {
+                    sbyte damage = (sbyte)GetSpellInfo().level;
+                    // 플레이어 피격을 서버에서 처리
+                    playerServer.PlayerGotHitOnServer(damage, spellOwnerClientId);
+                }
+            }
+            // AI플레이어일 경우 처리
+            else if (hit.CompareTag("AI"))
+            {
+                // 시전자는 피해 안받도록 설정
+                if (hit.gameObject.layer == shooterLayer) continue;
+
+                if (GetSpellInfo() == null) return;
+
+                // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
+                if (hit.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+                {
+                    sbyte damage = (sbyte)GetSpellInfo().level;
+                    // 플레이어 피격을 서버에서 처리
+                    aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId, spellOwnerObject);
+                }
+            }
+            // 기타 오브젝트 충돌
+            else
+            {
+                //Debug.Log($"{collider.name} Hit!");
+            }
+        }
+    }
+
+    private void 단일딜처리(Collision collision)
+    {
         Collider collider = collision.collider;
         ulong spellOwnerClientId = GetSpellInfo().ownerPlayerClientId;
 
-        // 충돌한게 공격마법일 경우, 어떤 마법이 살아남을지 계산에 들어감
-        if (collider.CompareTag("AttackSpell"))
-        {
-            SpellHitHandlerOnServer(collider);
-        }
-        else if (collider.CompareTag("AttackSkill"))
-        {
-
-        }
         // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
-        else if (collider.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             if (GetSpellInfo() == null)
             {
@@ -135,8 +194,10 @@ public class WaterBallLv1 : WaterSpell
         {
             //Debug.Log($"{collider.name} Hit!");
         }
+    }
 
-        // 혹시 시전자가 Casting 상태였으면 Cooltime 상태로 넘겨주기 
+    private void 현스킬이캐스팅상태였을경우()
+    {
         // 시전자가 AI일 경우
         if (spellOwnerObject.TryGetComponent<WizardRukeAISpellManagerServer>(out WizardRukeAISpellManagerServer wizardRukeAISpellManagerServer))
         {
@@ -170,12 +231,33 @@ public class WaterBallLv1 : WaterSpell
             }
         }
 
+    }
+
+    private void 공격마법과충돌한경우(Collision collision)
+    {
+        // 충돌한게 공격마법일 경우, 어떤 마법이 살아남을지 계산에 들어감
+        if (collision.collider.CompareTag("AttackSpell"))
+        {
+            SpellHitHandlerOnServer(collision.collider);
+        }
+        else if (collision.collider.CompareTag("AttackSkill"))
+        {
+
+        }
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         // 마법 충돌 사운드 재생
         SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Hit, transform);
 
-        // 적중 효과 VFX
-        HitVFX(GetHitVFXPrefab(), collision);
+        if(TryGetComponent<Collision>(out Collision collision)){
+            // 적중 효과 VFX
+            HitVFX(GetHitVFXPrefab(), collision);
+        }
 
-        Destroy(gameObject, 0.2f);
+        Destroy(gameObject);
     }
 }

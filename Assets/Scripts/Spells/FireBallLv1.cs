@@ -108,38 +108,7 @@ public class FireBallLv1 : FireSpell
         범위딜처리(collision);
 
         // 혹시 시전자가 Casting 상태였으면 Cooltime 상태로 넘겨주기 
-        // 시전자가 AI일 경우
-        if (spellOwnerObject.TryGetComponent<WizardRukeAISpellManagerServer>(out WizardRukeAISpellManagerServer wizardRukeAISpellManagerServer))
-        {
-            if (wizardRukeAISpellManagerServer.GetSpellInfo(GetSpellInfo().spellName).spellState == SpellState.Aiming)
-            {
-                //Debug.Log($"캐스팅 상태에서 폭발했습니다!!! 스킬 상태를 종료합니다. spellState:{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState} -> ");
-                int spellIndex = wizardRukeAISpellManagerServer.GetSpellIndexBySpellName(GetSpellInfo().spellName);
-                if (spellIndex != -1)
-                {
-                    wizardRukeAISpellManagerServer.UpdatePlayerSpellState((ushort)spellIndex, SpellState.Cooltime);
-                    wizardRukeAISpellManagerServer.playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
-                    //Debug.Log($"{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState}.");
-                }
-                else Debug.Log($"스펠 인덱스를 찾지 못했습니다.");
-            }
-        }
-        // 시전자가 플레이어일 경우
-        else if(spellOwnerObject.TryGetComponent<SpellManagerServerWizard>(out SpellManagerServerWizard spellManagerServerWizard))
-        {
-            if (spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState == SpellState.Aiming)
-            {
-                //Debug.Log($"캐스팅 상태에서 폭발했습니다!!! 스킬 상태를 종료합니다. spellState:{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState} -> ");
-                int spellIndex = spellManagerServerWizard.GetSpellIndexBySpellName(GetSpellInfo().spellName);
-                if (spellIndex != -1)
-                {
-                    spellManagerServerWizard.UpdatePlayerSpellState((ushort)spellIndex, SpellState.Cooltime);
-                    spellManagerServerWizard.playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
-                    //Debug.Log($"{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState}.");
-                }
-                else Debug.Log($"스펠 인덱스를 찾지 못했습니다.");
-            }
-        }
+        현스킬이캐스팅상태였을경우();
 
         // 마법 충돌 사운드 재생
         SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Hit, transform);
@@ -147,24 +116,9 @@ public class FireBallLv1 : FireSpell
         // 적중 효과 VFX
         HitVFX(GetHitVFXPrefab(), collision);
 
-        // 피어싱 스택이 남아있으면 스펠파괴 로직 실행 대신, 피어싱 스택을 감소시킵니다
-        if (--piercingStack >= 0)
-        {
-            //Debug.Log($"피어싱 스택 감소!{piercingStack}");
-            return;
-        }
+        피어싱효과구현();
 
-        //Debug.Log($"폭발 시작!");
-
-        // 충돌한게 공격마법이면서 파이어볼 본체와 충돌한 경우, 어떤 마법이 살아남을지 계산에 들어감
-        if (collision.collider.CompareTag("AttackSpell"))
-        {
-            SpellHitHandlerOnServer(collision.collider);
-        }
-        else if (collision.collider.CompareTag("AttackSkill"))
-        {
-
-        }
+        공격마법과충돌한경우(collision);
 
         Destroy(gameObject, 0.2f);
     }
@@ -222,6 +176,66 @@ public class FireBallLv1 : FireSpell
             {
                 //Debug.Log($"{collider.name} Hit!");
             }
+        }
+    }
+
+    private void 현스킬이캐스팅상태였을경우()
+    {
+        // 시전자가 AI일 경우
+        if (spellOwnerObject.TryGetComponent<WizardRukeAISpellManagerServer>(out WizardRukeAISpellManagerServer wizardRukeAISpellManagerServer))
+        {
+            if (wizardRukeAISpellManagerServer.GetSpellInfo(GetSpellInfo().spellName).spellState == SpellState.Aiming)
+            {
+                //Debug.Log($"캐스팅 상태에서 폭발했습니다!!! 스킬 상태를 종료합니다. spellState:{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState} -> ");
+                int spellIndex = wizardRukeAISpellManagerServer.GetSpellIndexBySpellName(GetSpellInfo().spellName);
+                if (spellIndex != -1)
+                {
+                    wizardRukeAISpellManagerServer.UpdatePlayerSpellState((ushort)spellIndex, SpellState.Cooltime);
+                    wizardRukeAISpellManagerServer.playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
+                    //Debug.Log($"{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState}.");
+                }
+                else Debug.Log($"스펠 인덱스를 찾지 못했습니다.");
+            }
+        }
+        // 시전자가 플레이어일 경우
+        else if (spellOwnerObject.TryGetComponent<SpellManagerServerWizard>(out SpellManagerServerWizard spellManagerServerWizard))
+        {
+            if (spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState == SpellState.Aiming)
+            {
+                //Debug.Log($"캐스팅 상태에서 폭발했습니다!!! 스킬 상태를 종료합니다. spellState:{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState} -> ");
+                int spellIndex = spellManagerServerWizard.GetSpellIndexBySpellName(GetSpellInfo().spellName);
+                if (spellIndex != -1)
+                {
+                    spellManagerServerWizard.UpdatePlayerSpellState((ushort)spellIndex, SpellState.Cooltime);
+                    spellManagerServerWizard.playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
+                    //Debug.Log($"{spellManagerServerWizard.GetSpellInfo(GetSpellInfo().spellName).spellState}.");
+                }
+                else Debug.Log($"스펠 인덱스를 찾지 못했습니다.");
+            }
+        }
+
+    }
+
+    private void 피어싱효과구현()
+    {
+        // 피어싱 스택이 남아있으면 스펠파괴 로직 실행 대신, 피어싱 스택을 감소시킵니다
+        if (--piercingStack >= 0)
+        {
+            //Debug.Log($"피어싱 스택 감소!{piercingStack}");
+            return;
+        }
+    }
+
+    private void 공격마법과충돌한경우(Collision collision)
+    {
+        // 충돌한게 공격마법이면서 파이어볼 본체와 충돌한 경우, 어떤 마법이 살아남을지 계산에 들어감
+        if (collision.collider.CompareTag("AttackSpell"))
+        {
+            SpellHitHandlerOnServer(collision.collider);
+        }
+        else if (collision.collider.CompareTag("AttackSkill"))
+        {
+
         }
     }
 }

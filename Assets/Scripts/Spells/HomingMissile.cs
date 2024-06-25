@@ -91,8 +91,6 @@ public class HomingMissile : NetworkBehaviour
         //Debug.Log($"SetOwner HomingMissile shooterClientID{shooterClientID}, skillLayer:{gameObject.layer}, shooterLayer:{shooterLayer}");
         // 플레이어 본인 Layer는 충돌체크에서 제외합니다
         Physics.IgnoreLayerCollision(gameObject.layer, shooterLayer, true);
-/*        Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Floor"), true);
-        Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Item"), true);*/
     }
 
     public void SetSpeed(float speed)
@@ -100,10 +98,15 @@ public class HomingMissile : NetworkBehaviour
         _speed = speed;
     }
 
-    /*    public GameObject GetMuzzleVFXPrefab()
-        {
-            return _muzzlePrefab;
-        }*/
+    public void SetMaxHomingRange(float newValue)
+    {
+        _maxDistancePredict = newValue;
+    }
+
+    public float GetMaxHomingRange()
+    {
+        return _maxDistancePredict;
+    }
 
     private void PredictMovement(float leadTimePercentage)
     {
@@ -111,15 +114,6 @@ public class HomingMissile : NetworkBehaviour
 
         _standardPrediction = _target.GetComponent<Rigidbody>().position + _target.GetComponent<Rigidbody>().velocity * predictionTime;
     }
-
-/*    private void AddDeviation(float leadTimePercentage)
-    {
-        var deviation = new Vector3(Mathf.Cos(Time.time * _deviationSpeed), 0, 0);
-
-        var predictionOffset = transform.TransformDirection(deviation) * _deviationAmount * leadTimePercentage;
-
-        _deviatedPrediction = _standardPrediction + predictionOffset;
-    }*/
 
     private void DetectAndSetTarget()
     {
@@ -149,18 +143,6 @@ public class HomingMissile : NetworkBehaviour
 
         _rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, rotation, _rotateSpeed * Time.deltaTime));
     }
-
-/*    private void OnCollisionEnter(Collision collision)
-    {
-*//*        if (_explosionPrefab)
-        {
-            GameObject explosionVFX = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            explosionVFX.GetComponent<NetworkObject>().Spawn();
-        }
-        if (collision.transform.TryGetComponent<PlayerHPManagerServer>(out var ex)) ex.TakingDamage(damage, _shooter.OwnerClientId);
-
-        Destroy(gameObject);*//*
-    }*/
 
     private void OnDrawGizmos()
     {
