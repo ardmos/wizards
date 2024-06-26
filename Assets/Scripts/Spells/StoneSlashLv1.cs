@@ -33,8 +33,8 @@ public class StoneSlashLv1 : AttackSpell  // 임시로 사용. Knight용 스킬 클래스를
         SpellInfo result = new SpellInfo();
 
         // Lvl 비교
-        byte resultLevel = (byte)(thisSpell.level - opponentsSpell.level);
-        result.level = resultLevel;
+        byte resultLevel = (byte)(thisSpell.damage - opponentsSpell.damage);
+        result.damage = resultLevel;
         // resultLevel 값이 0보다 같거나 작으면 더 계산할 필요 없음. 
         //      0이면 비긴거니까 만들 필요 없고
         //      마이너스면 진거니까 만들 필요 없음.
@@ -45,7 +45,7 @@ public class StoneSlashLv1 : AttackSpell  // 임시로 사용. Knight용 스킬 클래스를
         }
         // resultLevel값이 0보다 큰 경우는 내가 이긴 경우. 노말타입은 노말을 반환한다.
         result.spellType = SpellType.Stone;
-        result.spellName = Spell.GetSpellName(result.level, result.spellType);
+        result.spellName = Spell.GetSpellName(result.damage, result.spellType);
         return result;
     }
 }

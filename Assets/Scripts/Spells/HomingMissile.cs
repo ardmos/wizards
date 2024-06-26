@@ -7,11 +7,7 @@ public class HomingMissile : NetworkBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private GameObject _target;
     [SerializeField] private ulong _shooterClientID;
-    /*    [SerializeField] private GameObject _explosionPrefab;
-        [SerializeField] private GameObject _muzzlePrefab;
-        [SerializeField] private sbyte damage = 1;*/
     [SerializeField] private bool _startHoming = false;
-    [SerializeField] private LayerMask shooterLayer;
 
     [Header("MOVEMENT")]
     [SerializeField] private float _speed = 0;
@@ -26,6 +22,9 @@ public class HomingMissile : NetworkBehaviour
     [Header("DEVIATION")]
     [SerializeField] private float _deviationAmount = 50;
     [SerializeField] private float _deviationSpeed = 2;
+
+    [Header("AI가 피격됐을 시 타겟으로 설정될 마법을 소유한 플레이어 오브젝트.")]
+    public GameObject spellOwnerObject;
 
     private void Awake()
     {
@@ -61,36 +60,11 @@ public class HomingMissile : NetworkBehaviour
         _startHoming = true;
     }
 
-    public void SetOwner(ulong shooterClientID)
-    {       
+    public void SetOwner(ulong shooterClientID, GameObject spellOwnerObject)
+    {
+        if (!IsServer) return;
         _shooterClientID = shooterClientID;
-     
-        // Layer 설정
-        switch (_shooterClientID)
-        {
-            case 0:
-                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player0");
-                shooterLayer = LayerMask.NameToLayer("Player0");
-                break;
-            case 1:
-                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player1");
-                shooterLayer = LayerMask.NameToLayer("Player1");
-                break;
-            case 2:
-                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player2");
-                shooterLayer = LayerMask.NameToLayer("Player2");
-                break;
-            case 3:
-                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player3");
-                shooterLayer = LayerMask.NameToLayer("Player3");
-                break;
-            default:
-                shooterLayer = LayerMask.NameToLayer("Player");
-                break;
-        }
-        //Debug.Log($"SetOwner HomingMissile shooterClientID{shooterClientID}, skillLayer:{gameObject.layer}, shooterLayer:{shooterLayer}");
-        // 플레이어 본인 Layer는 충돌체크에서 제외합니다
-        Physics.IgnoreLayerCollision(gameObject.layer, shooterLayer, true);
+        this.spellOwnerObject = spellOwnerObject;
     }
 
     public void SetSpeed(float speed)
@@ -123,7 +97,7 @@ public class HomingMissile : NetworkBehaviour
             //Debug.Log($"호밍 디텍티드! 호밍미사일:{gameObject.layer}, 디텍티드:{collider.gameObject.layer}");
 
             // 자신을 제외한 Player나 AI를 타겟으로 삼습니다.
-            if (collider.gameObject.layer == shooterLayer) continue;
+            if (collider.gameObject == spellOwnerObject) continue;
 
             if (collider.CompareTag("Player") || collider.CompareTag("AI"))
             {

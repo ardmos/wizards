@@ -158,19 +158,20 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAISpellManagerServer.InitAIPlayerSpellInfoArrayOnServer(this.skills);
 
         // 플레이어 Layer 설정
+        Debug.Log($"{AIClientId}AI 클라이언트 ID! 레이어를 설정합니다");
         switch (AIClientId)
         {
             case 0:
-                gameObject.layer = LayerMask.NameToLayer("AI Player0");
+                gameObject.layer = LayerMask.NameToLayer("Player0");
                 break;
             case 1:
-                gameObject.layer = LayerMask.NameToLayer("AI Player1");
+                gameObject.layer = LayerMask.NameToLayer("Player1");
                 break;
             case 2:
-                gameObject.layer = LayerMask.NameToLayer("AI Player2");
+                gameObject.layer = LayerMask.NameToLayer("Player2");
                 break;
             case 3:
-                gameObject.layer = LayerMask.NameToLayer("AI Player3");
+                gameObject.layer = LayerMask.NameToLayer("Player3");
                 break;
             default:
                 break;

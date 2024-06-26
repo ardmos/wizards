@@ -13,8 +13,6 @@ public abstract class AttackSpell : NetworkBehaviour
     [SerializeField] protected GameObject hitVFXPrefab;
     [SerializeField] protected List<GameObject> trails;
 
-    [SerializeField] protected LayerMask shooterLayer;
-
     [Header("AI가 피격됐을 시 타겟으로 설정될 마법을 소유한 플레이어 오브젝트.")]
     public GameObject spellOwnerObject;
 
@@ -40,7 +38,7 @@ public abstract class AttackSpell : NetworkBehaviour
             //$"opponentsSpell : name{opponentsSpell.spellName}, lvl{opponentsSpell.level}, owner{opponentsSpell.ownerPlayerClientId}");
 
         // 스펠끼리 충돌해서 우리 스펠이 이겼을 때 계산 결과에 따라 충돌 위치에 새로운 마법 생성. 
-        if (collisionHandlingResult.level > 0)
+        if (collisionHandlingResult.damage > 0)
         {
             //Debug.Log($"our spell is win! generate spell.name:{collisionHandlingResult.spellName}, spell.level :{collisionHandlingResult.level}, spell.owner: {collisionHandlingResult.ownerPlayerClientId} ");
             SpawnSpellObjectOnServer(collisionHandlingResult, transform);
@@ -55,6 +53,28 @@ public abstract class AttackSpell : NetworkBehaviour
         float positionYAdjustment = 1f;
         float positionZAdjustment = -1f;
         Vector3 pos = new Vector3(contact.point.x, contact.point.y + positionYAdjustment, contact.point.z + positionZAdjustment);
+
+        if (hitVFXPrefab != null)
+        {
+            //Debug.Log($"hitVFXPrefab is Not null");
+            var hitVFX = Instantiate(hitVFXPrefab, pos, rot) as GameObject;
+            hitVFX.GetComponent<NetworkObject>().Spawn();
+            var particleSystem = hitVFX.GetComponent<ParticleSystem>();
+            if (particleSystem == null)
+            {
+                particleSystem = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+            }
+            Destroy(hitVFX, particleSystem.main.duration);
+        }
+        else Debug.Log($"hitVFXPrefab is null");
+    }
+
+    public void HitVFX(GameObject hitVFXPrefab)
+    {
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
+        float positionYAdjustment = 1f;
+        float positionZAdjustment = -1f;
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y + positionYAdjustment, transform.position.z + positionZAdjustment);
 
         if (hitVFXPrefab != null)
         {
@@ -106,30 +126,6 @@ public abstract class AttackSpell : NetworkBehaviour
         spellInfo = spellInfoFromServer;
         //Debug.Log($"spellInfo:{spellInfo.upgradeOptions.Length}, spellInfoFromServer:{spellInfoFromServer}");
         this.spellOwnerObject = spellOwnerObject;
-
-        // Layer 설정
-        switch (spellInfo.ownerPlayerClientId)
-        {
-            case 0:
-                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player0");
-                shooterLayer = LayerMask.NameToLayer("Player0");
-                break;
-            case 1:
-                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player1");
-                shooterLayer = LayerMask.NameToLayer("Player1");
-                break;
-            case 2:
-                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player2");
-                shooterLayer = LayerMask.NameToLayer("Player2");
-                break;
-            case 3:
-                gameObject.layer = LayerMask.NameToLayer("Attack Magic Player3");
-                shooterLayer = LayerMask.NameToLayer("Player3");
-                break;
-            default:
-                shooterLayer = LayerMask.NameToLayer("Player");
-                break;
-        }
     }
 
     public virtual void Shoot(Vector3 force, ForceMode forceMode)

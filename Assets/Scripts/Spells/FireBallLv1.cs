@@ -116,7 +116,7 @@ public class FireBallLv1 : FireSpell
         // 적중 효과 VFX
         HitVFX(GetHitVFXPrefab(), collision);
 
-        피어싱효과구현();
+        if (!피어싱효과구현()) return;
 
         공격마법과충돌한경우(collision);
 
@@ -132,17 +132,17 @@ public class FireBallLv1 : FireSpell
         // 범위 내 충돌체 인식
         foreach (Collider hit in colliders)
         {
+            // 시전자는 피해 안받도록 설정
+            if (hit.gameObject == spellOwnerObject) continue;
+
             // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
             if (hit.CompareTag("Player"))
             {
-                // 시전자는 피해 안받도록 설정
-                if (hit.gameObject.layer == shooterLayer) continue;
-
                 if (GetSpellInfo() == null) return;
 
                 if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
                 {
-                    sbyte damage = (sbyte)GetSpellInfo().level;
+                    sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
                     playerServer.PlayerGotHitOnServer(damage, spellOwnerClientId);
 
@@ -154,15 +154,12 @@ public class FireBallLv1 : FireSpell
             // AI플레이어일 경우 처리
             else if (hit.CompareTag("AI"))
             {
-                // 시전자는 피해 안받도록 설정
-                if (hit.gameObject.layer == shooterLayer) continue;
-
                 if (GetSpellInfo() == null) return;
 
                 // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
                 if (hit.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
                 {
-                    sbyte damage = (sbyte)GetSpellInfo().level;
+                    sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
                     aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId, spellOwnerObject);
 
@@ -216,14 +213,15 @@ public class FireBallLv1 : FireSpell
 
     }
 
-    private void 피어싱효과구현()
+    private bool 피어싱효과구현()
     {
         // 피어싱 스택이 남아있으면 스펠파괴 로직 실행 대신, 피어싱 스택을 감소시킵니다
         if (--piercingStack >= 0)
         {
-            //Debug.Log($"피어싱 스택 감소!{piercingStack}");
-            return;
+            Debug.Log($"피어싱 스택 감소!{piercingStack}");
+            return true;
         }
+        return false;
     }
 
     private void 공격마법과충돌한경우(Collision collision)

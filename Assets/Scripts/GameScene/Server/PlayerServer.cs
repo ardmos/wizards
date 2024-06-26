@@ -56,25 +56,6 @@ public class PlayerServer : NetworkBehaviour
 
         // 플레이어 InitializePlayer 시작, 스킬 목록을 클라이언트측(SpellController)에 저장 ( 수정해야함
         playerClient.InitializePlayerClientRPC(character.skills);
-
-        // 플레이어 Layer 설정
-        switch (OwnerClientId)
-        {
-            case 0:
-                gameObject.layer = LayerMask.NameToLayer("Player0");
-                break;
-            case 1:
-                gameObject.layer = LayerMask.NameToLayer("Player1");
-                break;
-            case 2:
-                gameObject.layer = LayerMask.NameToLayer("Player2");
-                break;
-            case 3:
-                gameObject.layer = LayerMask.NameToLayer("Player3");
-                break;
-            default: 
-                break;
-        }
     }
 
     // 스크롤 활용. 스킬 강화 VFX 실행

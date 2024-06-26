@@ -14,7 +14,7 @@ public abstract class IceSpell : AttackSpell
         SpellInfo result = new SpellInfo(thisSpell);
 
         // Lvl 비교
-        int resultLevel = thisSpell.level - opponentsSpell.level;
+        int resultLevel = thisSpell.damage - opponentsSpell.damage;
 
         // resultLevel 값이 0보다 같거나 작으면 더 계산할 필요 없음. 
         //      0이면 비긴거니까 만들 필요 없고
@@ -22,12 +22,12 @@ public abstract class IceSpell : AttackSpell
         //      현 메소드를 호출하는 각 마법 스크립트에서는 resultLevel값에 따라 후속 마법 오브젝트 생성여부를 판단하면 됨. 
         if (resultLevel <= 0)
         {
-            result.level = 0;
+            result.damage = 0;
             return result;
         }
 
         // resultLevel값이 0보다 큰 경우는 내가 이긴 경우. 상대 마법 속성별 경우의 수 만을 따져서 결과값을 반환한다.
-        result.level = (byte)resultLevel;
+        result.damage = (byte)resultLevel;
 
         switch (opponentsSpell.spellType)
         {
@@ -43,7 +43,7 @@ public abstract class IceSpell : AttackSpell
                 break;
         }
 
-        result.spellName = Spell.GetSpellName(result.level, result.spellType);
+        result.spellName = Spell.GetSpellName(result.damage, result.spellType);
         return result;
     }
 }

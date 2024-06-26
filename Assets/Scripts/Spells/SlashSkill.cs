@@ -94,7 +94,7 @@ public class SlashSkill : NetworkBehaviour
                 return;
             }
 
-            sbyte damage = (sbyte)skillInfo.level;
+            sbyte damage = (sbyte)skillInfo.damage;
             // 플레이어 피격을 서버에서 처리
             player.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId);
         }
@@ -106,7 +106,7 @@ public class SlashSkill : NetworkBehaviour
             // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.           
             if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
             {
-                sbyte damage = (sbyte)skillInfo.level;
+                sbyte damage = (sbyte)skillInfo.damage;
                 // 플레이어 피격을 서버에서 처리
                 aiPlayer.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId, skillOwnerObject);
             }

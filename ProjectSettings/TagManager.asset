@@ -25,10 +25,10 @@ TagManager:
   - Item
   - Magic Shield
   - Attack Magic
-  - Player0
-  - Player1
-  - Player2
-  - Player3
+  - 
+  - 
+  - 
+  - 
   - Floor
   - Attack Skill
   - Wall
@@ -41,10 +41,10 @@ TagManager:
   - Attack Skill Player2
   - Attack Skill Player3
   - AI
-  - AI Player0
-  - AI Player1
-  - AI Player2
-  - AI Player3
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   m_SortingLayers:

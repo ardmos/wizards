@@ -29,7 +29,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 10.0f,
             moveSpeed: 10.0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.FireBallLv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: System.Enum.GetValues(typeof(FireballUpgradeOption)).Length
@@ -40,7 +40,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 10.0f,
             moveSpeed: 5.0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.WaterBallLv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: System.Enum.GetValues(typeof(WaterballUpgradeOption)).Length
@@ -51,7 +51,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 10.0f,
             moveSpeed: 10.0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.IceBallLv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: 0
@@ -60,10 +60,10 @@ public class SpellSpecifications : MonoBehaviour
         SetSpellDefaultSpec(
             spellType: SpellType.Ice,
             coolTime: 10.0f,
-            lifeTime: 10.0f,
+            lifeTime: 4.0f,
             moveSpeed: 0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.BlizzardLv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: System.Enum.GetValues( typeof( BlizzardUpgradeOption ) ).Length
@@ -75,7 +75,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 2.2f,
             moveSpeed: 0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.MagicShieldLv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: 0
@@ -89,7 +89,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 1.0f,
             moveSpeed: 10.0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.StoneSlashAttack1_Lv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: 0
@@ -100,7 +100,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 1.0f,
             moveSpeed: 10.0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.ElectricSlashAttackVertical_Lv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: 0
@@ -111,7 +111,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 1.0f,
             moveSpeed: 0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.ElectricSlashAttackWhirlwind_Lv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: 0
@@ -122,7 +122,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 1.0f,
             moveSpeed: 10.0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.ElectricSlashAttackChargeSlash_Lv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount: 0
@@ -134,7 +134,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime: 0f,
             moveSpeed: 0f,
             price: 30,
-            level: 1,
+            damage: 1,
             spellName: SkillName.Dash_Lv1,
             spellState: SpellState.Ready,
             upgradeOptionsCount : 0
@@ -152,7 +152,7 @@ public class SpellSpecifications : MonoBehaviour
     /// Spell의 기본 스펙을 설정해주는 메소드 입니다.
     /// </summary>
     /// <returns></returns>
-    private void SetSpellDefaultSpec(SpellType spellType, float coolTime, float lifeTime, float moveSpeed, int price, byte level, SkillName spellName, SpellState spellState, int upgradeOptionsCount)
+    private void SetSpellDefaultSpec(SpellType spellType, float coolTime, float lifeTime, float moveSpeed, int price, byte damage, SkillName spellName, SpellState spellState, int upgradeOptionsCount)
     {
         SpellInfo spellInfo;
         spellInfo = new SpellInfo(
@@ -163,7 +163,7 @@ public class SpellSpecifications : MonoBehaviour
             lifeTime,
             moveSpeed,
             price,
-            level,
+            damage,
             upgradeOptionsCount);
 
         spellDefaultSpec[(int)spellName] = spellInfo;

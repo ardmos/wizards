@@ -12,14 +12,20 @@ public class WaterBallLv1 : WaterSpell
     public bool isSplashON;
     public float explosionRadius = 3f;
 
+    float defaultLifetime;
+    float increaseLifetime;
+
     public override void InitSpellInfoDetail(SpellInfo spellInfoFromServer, GameObject spellOwnerObject)
     {
         base.InitSpellInfoDetail(spellInfoFromServer, spellOwnerObject);
 
         isSplashON = false;
+        defaultLifetime = spellInfo.lifeTime;
 
         // 업그레이드 현황 적용
         업그레이드현황적용();
+
+        StartCoroutine(DestroyAfterDelay(defaultLifetime + increaseLifetime));
     }
 
     /// <summary>
@@ -57,9 +63,8 @@ public class WaterBallLv1 : WaterSpell
                         break;
                     case WaterballUpgradeOption.IncreaseRange:
                         // "워터볼의 사거리가 50% 증가합니다."
-                        float defaultLifetime = spellInfo.lifeTime;
-                        float increaseLifetime = defaultLifetime * 0.5f * spellInfo.upgradeOptions[(int)upgradeOption];
-                        DestroyAfterDelay(defaultLifetime + increaseLifetime); 
+                        defaultLifetime = spellInfo.lifeTime;
+                        increaseLifetime = defaultLifetime * 0.5f * spellInfo.upgradeOptions[(int)upgradeOption];
                         break;
                 }
             }
@@ -116,13 +121,13 @@ public class WaterBallLv1 : WaterSpell
             if (hit.CompareTag("Player"))
             {
                 // 시전자는 피해 안받도록 설정
-                if (hit.gameObject.layer == shooterLayer) continue;
+                if (hit.gameObject == spellOwnerObject) continue;
 
                 if (GetSpellInfo() == null) return;
 
                 if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
                 {
-                    sbyte damage = (sbyte)GetSpellInfo().level;
+                    sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
                     playerServer.PlayerGotHitOnServer(damage, spellOwnerClientId);
                 }
@@ -131,14 +136,14 @@ public class WaterBallLv1 : WaterSpell
             else if (hit.CompareTag("AI"))
             {
                 // 시전자는 피해 안받도록 설정
-                if (hit.gameObject.layer == shooterLayer) continue;
+                if (hit.gameObject == spellOwnerObject) continue;
 
                 if (GetSpellInfo() == null) return;
 
                 // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
                 if (hit.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
                 {
-                    sbyte damage = (sbyte)GetSpellInfo().level;
+                    sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
                     aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId, spellOwnerObject);
                 }
@@ -156,6 +161,9 @@ public class WaterBallLv1 : WaterSpell
         Collider collider = collision.collider;
         ulong spellOwnerClientId = GetSpellInfo().ownerPlayerClientId;
 
+        // 시전자는 피해 안받도록 설정
+        if (collision.gameObject == spellOwnerObject) return;
+
         // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
         if (collider.CompareTag("Player"))
         {
@@ -172,7 +180,7 @@ public class WaterBallLv1 : WaterSpell
                 return;
             }
 
-            sbyte damage = (sbyte)GetSpellInfo().level;
+            sbyte damage = (sbyte)GetSpellInfo().damage;
             // 플레이어 피격을 서버에서 처리
             player.PlayerGotHitOnServer(damage, spellOwnerClientId);
         }
@@ -184,7 +192,7 @@ public class WaterBallLv1 : WaterSpell
             // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
             if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
             {
-                sbyte damage = (sbyte)GetSpellInfo().level;
+                sbyte damage = (sbyte)GetSpellInfo().damage;
                 // 플레이어 피격을 서버에서 처리
                 aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId, spellOwnerObject);
             }
@@ -253,10 +261,8 @@ public class WaterBallLv1 : WaterSpell
         // 마법 충돌 사운드 재생
         SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Hit, transform);
 
-        if(TryGetComponent<Collision>(out Collision collision)){
-            // 적중 효과 VFX
-            HitVFX(GetHitVFXPrefab(), collision);
-        }
+        // 적중 효과 VFX
+        HitVFX(GetHitVFXPrefab());
 
         Destroy(gameObject);
     }

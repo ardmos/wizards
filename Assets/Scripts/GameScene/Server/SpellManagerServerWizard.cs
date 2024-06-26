@@ -98,10 +98,11 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         spellObject.GetComponent<NetworkObject>().Spawn();
         if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
         {
-            aoESpell.SetOwner(OwnerClientId);
+            aoESpell.SetOwner(OwnerClientId, gameObject);
+            aoESpell.InitAoESpell(GetSpellInfo(2));
         }
 
-        Destroy(spellObject, 4f);
+        //Destroy(spellObject, 4f);
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(2, SpellState.Cooltime);
         spellObject.transform.SetParent(GameManager.Instance.transform);
@@ -128,7 +129,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         // 호밍 마법이라면 호밍 마법에 소유자 등록 & 속도 설정
         if (spellObject.TryGetComponent<HomingMissile>(out var ex))
         {
-            ex.SetOwner(OwnerClientId);
+            ex.SetOwner(OwnerClientId, gameObject);
             ex.SetSpeed(spellInfo.moveSpeed);
         }
         spellObject.transform.SetParent(transform);

@@ -75,11 +75,11 @@ public class SkillSpellManagerServer : NetworkBehaviour
         return playerOwnedSpellInfoListOnServer[spellIndex];
     }
 
-    public void SetSpellInfo(ushort spellIndex, SpellInfo newSpellInfo)
+/*    public void SetSpellInfo(ushort spellIndex, SpellInfo newSpellInfo)
     {
         if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return;
         playerOwnedSpellInfoListOnServer[spellIndex] = newSpellInfo;
-    }
+    }*/
 
     /// <summary>
     /// -1을 반환하면 못찾았다는 뜻
