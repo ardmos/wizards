@@ -8,7 +8,7 @@ public class SpellInfo : INetworkSerializable
     public SkillName spellName;
     public SpellState spellState;
     public float coolTime;
-    public float lifeTime;
+    public float lifetime;
     public float moveSpeed;
     public int price;
     public byte damage;
@@ -25,7 +25,7 @@ public class SpellInfo : INetworkSerializable
         this.spellName = spellInfo.spellName;
         this.spellState = spellInfo.spellState;
         this.coolTime = spellInfo.coolTime;
-        this.lifeTime = spellInfo.lifeTime;
+        this.lifetime = spellInfo.lifetime;
         this.moveSpeed = spellInfo.moveSpeed;
         this.price = spellInfo.price;
         this.damage = spellInfo.damage;
@@ -39,7 +39,7 @@ public class SpellInfo : INetworkSerializable
         this.spellName = spellName; 
         this.spellState = spellState;
         this.coolTime = coolTime;
-        this.lifeTime = lifeTime;
+        this.lifetime = lifeTime;
         this.moveSpeed = moveSpeed;
         this.price = price;
         this.damage = damage;
@@ -51,7 +51,7 @@ public class SpellInfo : INetworkSerializable
     {
         serializer.SerializeValue(ref spellType);
         serializer.SerializeValue(ref coolTime);
-        serializer.SerializeValue(ref lifeTime);
+        serializer.SerializeValue(ref lifetime);
         serializer.SerializeValue(ref moveSpeed);
         serializer.SerializeValue(ref price);
         serializer.SerializeValue(ref damage);

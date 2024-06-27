@@ -27,7 +27,7 @@ public class GameMatchReadyManagerClient : NetworkBehaviour
     [ClientRpc]
     public void SetPlayerReadyClientRpc(ulong clientId)
     {
-        Debug.Log($"GameMatchReadyManagerClient.SetPlayerReadyClientRpc Called. clientId{clientId}");
+        //Debug.Log($"GameMatchReadyManagerClient.SetPlayerReadyClientRpc Called. clientId{clientId}");
         playerReadyDictionaryOnClient[clientId] = true;
 
         OnPlayerReadyDictionaryClientChanged?.Invoke(this, EventArgs.Empty);

@@ -23,7 +23,7 @@ public abstract class DefenceSpell : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        Destroy(gameObject, spellInfo.lifeTime);
+        Destroy(gameObject, spellInfo.lifetime);
         //StartCoroutine(StartCountdown(spellInfo.lifeTime));
     }
 

@@ -20,7 +20,7 @@ public class WaterBallLv1 : WaterSpell
         base.InitSpellInfoDetail(spellInfoFromServer, spellOwnerObject);
 
         isSplashON = false;
-        defaultLifetime = spellInfo.lifeTime;
+        defaultLifetime = spellInfo.lifetime;
 
         // 업그레이드 현황 적용
         업그레이드현황적용();
@@ -63,7 +63,7 @@ public class WaterBallLv1 : WaterSpell
                         break;
                     case WaterballUpgradeOption.IncreaseRange:
                         // "워터볼의 사거리가 50% 증가합니다."
-                        defaultLifetime = spellInfo.lifeTime;
+                        defaultLifetime = spellInfo.lifetime;
                         increaseLifetime = defaultLifetime * 0.5f * spellInfo.upgradeOptions[(int)upgradeOption];
                         break;
                 }

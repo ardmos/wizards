@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9783306273693948}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4895,6 +4895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6928458153528979022}
+  - component: {fileID: 5268870150649382847}
   - component: {fileID: 2100541099862133063}
   - component: {fileID: 1984875891814309306}
   - component: {fileID: 2045537341415019741}
@@ -4902,7 +4903,6 @@ GameObject:
   - component: {fileID: -1106808181227733929}
   - component: {fileID: 6458100735084200001}
   - component: {fileID: 3172744077367999237}
-  - component: {fileID: 5268870150649382847}
   m_Layer: 0
   m_Name: vfx_Blizzard_Lv1
   m_TagString: AttackSpell
@@ -4933,6 +4933,47 @@ Transform:
   - {fileID: 2068369987035884412}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5268870150649382847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161766660727748596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1683895eb6c6444a9bc0bc74d8f073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellInfo:
+    spellType: 0
+    spellName: 0
+    spellState: 0
+    coolTime: 0
+    lifetime: 0
+    moveSpeed: 0
+    price: 0
+    damage: 0
+    ownerPlayerClientId: 0
+    upgradeOptions: 
+  slowValue: 0
+  _shooterClientID: 0
+  intervalTime: 2
+  playersInArea: []
+  spellOwnerObject: {fileID: 161766660727748596}
+  vfx_Blizzard_Lv1: {fileID: 2100541099862133063}
+  msmoke: {fileID: 7870232523374136238}
+  mflash: {fileID: 6273677078826306336}
+  msparks: {fileID: 6716276626152888754}
+  mglow: {fileID: 1495062412500337703}
+  msnowflakes: {fileID: 3081162857619714281}
+  mcircle: {fileID: 140423252894775985}
+  mlight: {fileID: 4285771878599676360}
+  mfreezeCircle: {fileID: 2670550291854252264}
+  mmsides: {fileID: 4559679813628118115}
+  mmlight: {fileID: 2271872163130405777}
+  mmsparks: {fileID: 7340710858216986933}
+  mmsnowflakes: {fileID: 8393107196163982375}
 --- !u!198 &2100541099862133063
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4941,7 +4982,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161766660727748596}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4956,7 +4997,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0.5
+    scalar: 0
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -5930,7 +5971,7 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 20
+      cycleCount: 0
       repeatInterval: 0.15
       probability: 1
   SizeModule:
@@ -9917,24 +9958,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 1, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5268870150649382847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161766660727748596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb1683895eb6c6444a9bc0bc74d8f073, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shooterClientID: 0
-  _shooterLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  damageValue: 1
-  intervalTime: 2
 --- !u!1 &2155019085913651913
 GameObject:
   m_ObjectHideFlags: 0
@@ -19833,7 +19856,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: NaN, y: 0, z: 0.22460938, w: 21}
+  m_BoundingSphereOverride: {x: 6.33e-43, y: 7.1e-44, z: 0, w: 1.7473052e+30}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -19902,7 +19925,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3340405831355010171}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -24797,7 +24820,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3755427329330461547}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -29692,7 +29715,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4076722735597955491}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -34587,7 +34610,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4113329159867422864}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -39475,7 +39498,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4285771878599676364}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -44440,7 +44463,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 1.8e-44, z: 1.5253e-41, w: 1.3224311e-38}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 3.8e-44, z: 3.123e-42, w: 1.521458e+33}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -59185,7 +59208,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7351305826099865803}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 4
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0

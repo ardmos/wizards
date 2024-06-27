@@ -217,7 +217,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
 
         // 局聪皋捞记 角青
-        StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifeTime));
+        StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifetime));
 
         // 泪矫 公利 贸府
         tag = "Invincible";

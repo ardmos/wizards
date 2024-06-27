@@ -61,7 +61,7 @@ public class PlayerMovementServer : NetworkBehaviour
     public void ReduceMoveSpeed(float reduceValue)
     {
         ((ICharacter)playerClient).moveSpeed -= reduceValue;
-        Debug.Log($"플레이어 감속!: {((ICharacter)playerClient).moveSpeed}");
+        //Debug.Log($"플레이어 감속!: {((ICharacter)playerClient).moveSpeed}");
     }
 
     public void AddMoveSpeed(float addValue)

@@ -36,7 +36,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
 
         // 애니메이션 실행
-        StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifeTime));
+        StartCoroutine(StartAndResetAnimState(spellObject.GetComponent<DefenceSpell>().GetSpellInfo().lifetime));
 
         // 잠시 무적 처리
         tag = "Invincible";
@@ -95,12 +95,12 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         Destroy(playerCastingSpell);
         // 2. 블리자드 스킬 이펙트오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1), muzzlePos_AoE.position, Quaternion.identity);
-        spellObject.GetComponent<NetworkObject>().Spawn();
         if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
         {
             aoESpell.SetOwner(OwnerClientId, gameObject);
             aoESpell.InitAoESpell(GetSpellInfo(2));
         }
+        spellObject.GetComponent<NetworkObject>().Spawn();
 
         //Destroy(spellObject, 4f);
         // 해당 SpellState 업데이트

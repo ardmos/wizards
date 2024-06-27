@@ -156,26 +156,6 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
         // 플레이어가 보유한 스킬 목록 저장
         wizardRukeAISpellManagerServer.InitAIPlayerSpellInfoArrayOnServer(this.skills);
-
-        // 플레이어 Layer 설정
-        Debug.Log($"{AIClientId}AI 클라이언트 ID! 레이어를 설정합니다");
-        switch (AIClientId)
-        {
-            case 0:
-                gameObject.layer = LayerMask.NameToLayer("Player0");
-                break;
-            case 1:
-                gameObject.layer = LayerMask.NameToLayer("Player1");
-                break;
-            case 2:
-                gameObject.layer = LayerMask.NameToLayer("Player2");
-                break;
-            case 3:
-                gameObject.layer = LayerMask.NameToLayer("Player3");
-                break;
-            default:
-                break;
-        }
     }
 
     public void MoveTowardsTarget()

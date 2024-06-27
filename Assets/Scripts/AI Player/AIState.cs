@@ -82,6 +82,7 @@ public class ChaseState : AIState
 
     public override void Update()
     {
+        if (ai.target == null) return;
         //Debug.Log("MoveState Update");
         ai.MoveTowardsTarget();
         float targetDistance = Vector3.Distance(ai.transform.position, ai.target.transform.position);
@@ -115,6 +116,7 @@ public class AttackState : AIState
 
     public override void Update()
     {
+        if (ai.target == null) return;
         //Debug.Log("AttackState Update");
         ai.MoveTowardsTarget();
         ai.AttackTarget();
