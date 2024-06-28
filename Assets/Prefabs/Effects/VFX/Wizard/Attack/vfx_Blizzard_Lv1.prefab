@@ -4956,11 +4956,10 @@ MonoBehaviour:
     damage: 0
     ownerPlayerClientId: 0
     upgradeOptions: 
-  slowValue: 0
   _shooterClientID: 0
-  intervalTime: 2
   playersInArea: []
   spellOwnerObject: {fileID: 161766660727748596}
+  slowValue: 0
   vfx_Blizzard_Lv1: {fileID: 2100541099862133063}
   msmoke: {fileID: 7870232523374136238}
   mflash: {fileID: 6273677078826306336}

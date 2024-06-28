@@ -99,7 +99,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
             aoESpell.InitAoESpell(GetSpellInfo(2));
         }
 
-        Destroy(spellObject, 4f);
+        //Destroy(spellObject, 4f);
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(2, SpellState.Cooltime);
         spellObject.transform.SetParent(GameManager.Instance.transform);

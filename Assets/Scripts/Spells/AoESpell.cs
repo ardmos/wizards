@@ -15,13 +15,13 @@ public abstract class AoESpell : NetworkBehaviour, IOwnerSeter
     [SerializeField] protected List<GameObject> playersInArea = new List<GameObject>();
 
     [Header("AI가 피격됐을 시 타겟으로 설정될 마법을 소유한 플레이어 오브젝트.")]
-    public GameObject spellOwnerObject;
+    public GameObject spellOwnerObject = null;
 
     private void OnTriggerEnter(Collider other)
     {
         if (!IsServer) return;
         // 시전자는 영향 안받도록 설정
-        if (other.gameObject == spellOwnerObject) return;
+        if (other.gameObject == spellOwnerObject || spellOwnerObject == null) return;
 
         if (other.CompareTag("Player"))
         {
@@ -37,7 +37,7 @@ public abstract class AoESpell : NetworkBehaviour, IOwnerSeter
     {
         if (!IsServer) return;
         // 시전자는 영향 안받도록 설정
-        if (other.gameObject == spellOwnerObject) return;
+        if (other.gameObject == spellOwnerObject || spellOwnerObject == null) return;
 
         if (other.CompareTag("Player"))
         {
@@ -51,11 +51,12 @@ public abstract class AoESpell : NetworkBehaviour, IOwnerSeter
 
     public void SetOwner(ulong shooterClientID, GameObject spellOwnerObject)
     {
+        //Debug.Log($"AoESpell.SetOwner메서드. 요청자:{shooterClientID}, {spellOwnerObject} // 서버인가?:{IsServer}");
         if (!IsServer) return;
         _shooterClientID = shooterClientID;
         this.spellOwnerObject = spellOwnerObject;
 
-        Debug.Log($"AI 플레이어{shooterClientID}");
+        //Debug.Log($"AI 플레이어{shooterClientID}");
     }
 
     public virtual void InitAoESpell(SpellInfo spellInfoFromServer)

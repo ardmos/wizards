@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.Netcode;
 using UnityEngine;
 
 public class BlizzardLv1 : AoESpell
@@ -28,8 +30,8 @@ public class BlizzardLv1 : AoESpell
         base.InitAoESpell(spellInfoFromServer);
 
         업그레이드효과적용();
-        블리자드지속시간설정(spellInfo.lifetime);
-        블리자드파편설정(spellInfo.damage);
+        블리자드이펙트지속시간설정(spellInfo.lifetime);
+        블리자드파편이펙트세기설정(spellInfo.damage);
 
         StartCoroutine(DestroyAfterDelay(spellInfo.lifetime));
     }
@@ -60,7 +62,7 @@ public class BlizzardLv1 : AoESpell
         }
     }
 
-    private void 블리자드지속시간설정(float lifetime)
+    private void 블리자드이펙트지속시간설정(float lifetime)
     {
         ParticleSystem[] particleSystems = {
             vfx_Blizzard_Lv1, msmoke, mflash, msparks, mglow, msnowflakes
@@ -99,9 +101,29 @@ public class BlizzardLv1 : AoESpell
         {
             ps.Play();
         }
+
+        // 클라이언트측에도 동기화
+        블리자드이펙트지속시간설정ClientRPC(NetworkObject, lifetime);
     }
 
-    private void 블리자드파편설정(float count)
+    [ClientRpc]
+    private void 블리자드이펙트지속시간설정ClientRPC(NetworkObjectReference targetObject, float lifetime)
+    {
+        if (!targetObject.TryGet(out NetworkObject netObj))
+        {
+            return; // NetworkObject를 가져오는 데 실패하면 early return
+        }
+
+        if (netObj != NetworkObject)
+        {
+            return; // 현재 객체의 NetworkObject와 일치하지 않으면 early return
+        }
+
+        Debug.Log($"블리자드이펙트지속시간설정ClientRPC 호출! {spellInfo.ownerPlayerClientId}");
+        블리자드이펙트지속시간설정(lifetime);        
+    }
+
+    private void 블리자드파편이펙트세기설정(float count)
     {
         // Emission 모듈을 가져옵니다.
         var emission = vfx_Blizzard_Lv1.emission;
@@ -118,6 +140,26 @@ public class BlizzardLv1 : AoESpell
 
         // Bursts 배열을 다시 설정합니다.
         emission.SetBursts(bursts);
+
+        // Client측에도 동기화
+        블리자드파편이펙트세기설정ClientRPC(NetworkObject,count);
+    }
+
+    [ClientRpc]
+    private void 블리자드파편이펙트세기설정ClientRPC(NetworkObjectReference targetObject, float count)
+    {
+        if (!targetObject.TryGet(out NetworkObject netObj))
+        {
+            return; // NetworkObject를 가져오는 데 실패하면 early return
+        }
+
+        if (netObj != NetworkObject)
+        {
+            return; // 현재 객체의 NetworkObject와 일치하지 않으면 early return
+        }
+
+        Debug.Log($"블리자드파편이펙트세기설정ClientRPC 호출! {spellInfo.ownerPlayerClientId}");
+        블리자드파편이펙트세기설정(count);
     }
 
     private void SetParticleSystemDuration(ParticleSystem ps, float duration, bool setStartLifetime = false)
@@ -280,19 +322,26 @@ public class BlizzardLv1 : AoESpell
 
     public override void OnDestroy()
     {
-        // 스킬이 사라질 때 아직 스킬의 영역에 남아있는 플레이어가 있는 경우 이동속도 복구시켜주고 스킬 제거
+        // 스킬이 사라질 때 아직 스킬의 영역에 남아있는 플레이어가 있는 경우 이동속도 복구시켜주기
+
+        // 이동속도 복구
         foreach (var player in playersInArea)
         {
             if (player.CompareTag("Player"))
             {
                 // 플레이어의 경우
-                플레이어전용트리거엑싯(player);
+                플레이어블리자드슬로우효과복구(player);
             }
             else if (player.CompareTag("AI"))
             {
                 // AI의 경우
-                AI전용트리거엑싯(player);
+                AI블리자드슬로우효과복구(player);
             }
         }
+
+        // 리스트 비우기
+        playersInArea.Clear();
+        // Invoke 중지
+        CancelInvoke(nameof(DealDamage));
     }
 }

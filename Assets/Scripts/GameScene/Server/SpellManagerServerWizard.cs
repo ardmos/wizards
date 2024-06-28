@@ -3,8 +3,6 @@ using Unity.Netcode;
 using UnityEngine;
 /// <summary>
 /// 마법을 Server Auth 방식으로 시전할 수 있도록 도와주는 스크립트 입니다.
-/// Scroll의 획득과 적용의 과정도 관리합니다.
-/// 서버에서 동작하는 스크립트들이 모여있어야 합니다. 추후 코드 정리하면서 확인 필요.
 /// </summary>
 public class SpellManagerServerWizard : SkillSpellManagerServer
 {
@@ -89,18 +87,19 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     }
 
     [ServerRpc (RequireOwnership = false)]
-    public void SetBlizzardServerRPC()
+    public void SetBlizzardServerRPC(ServerRpcParams serverRpcParams = default)
     {
         // 1. 시전중인 범위표시 오브젝트 제거
         Destroy(playerCastingSpell);
         // 2. 블리자드 스킬 이펙트오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1), muzzlePos_AoE.position, Quaternion.identity);
+        spellObject.GetComponent<NetworkObject>().Spawn();
         if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
         {
+            //Debug.Log($"플레이어 블리자드 발사 메서드 gameObject:{gameObject}. IsServer:{IsServer}, 요청 플레이어:{serverRpcParams.Receive.SenderClientId}");
             aoESpell.SetOwner(OwnerClientId, gameObject);
             aoESpell.InitAoESpell(GetSpellInfo(2));
         }
-        spellObject.GetComponent<NetworkObject>().Spawn();
 
         //Destroy(spellObject, 4f);
         // 해당 SpellState 업데이트
