@@ -11,6 +11,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
 {
     PlayerInGameData playerData;
     public PlayerClient playerClient;
+    public PlayerServer playerServer;
     public PlayerAnimator playerAnimator;
 
     public void InitPlayerHP(ICharacter character)
@@ -123,8 +124,12 @@ public class PlayerHPManagerServer : NetworkBehaviour
         // 플레이어 게임오버 애니메이션 실행
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
 
+        // 플레이어 물리 충돌 해제
+        playerServer.GameOver();
         // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
         playerClient.SetPlayerGameOverClientRPC();
+        // 플레이어 이름 & HP UI off
+        playerClient.OffPlayerUIClientRPC();
 
         // 스크롤 아이템 드랍
         DropScrollItem();

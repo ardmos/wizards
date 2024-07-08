@@ -451,6 +451,7 @@ MonoBehaviour:
   playerHPManager: {fileID: 3749893879625615818}
   skillSpellManagerServer: {fileID: 1543831547272748415}
   rb: {fileID: 4842463508567140202}
+  _collider: {fileID: 7039472144025679976}
 --- !u!114 &854047434301573314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: -2686748507231774534}
+  playerServer: {fileID: 294066641757979093}
   playerAnimator: {fileID: 2441054021172676538}
 --- !u!54 &4842463508567140202
 Rigidbody:

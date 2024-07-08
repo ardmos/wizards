@@ -295,4 +295,11 @@ public abstract class PlayerClient : NetworkBehaviour
 
         playerItemDictionaryOnClient = playerItemDictionary;
     }
+
+    [ClientRpc]
+    public void OffPlayerUIClientRPC()
+    {
+        hPBarUIController.gameObject.SetActive(false);
+        userNameUIController.gameObject?.SetActive(false);
+    }
 }

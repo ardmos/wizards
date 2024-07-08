@@ -9,7 +9,9 @@ public class PlayerServer : NetworkBehaviour
     public PlayerClient playerClient;
     public PlayerHPManagerServer playerHPManager;
     public SkillSpellManagerServer skillSpellManagerServer;
+    [Header("拱府 包访")]
     public Rigidbody rb;
+    public Collider _collider;
 
     public override void OnNetworkSpawn()
     {
@@ -116,5 +118,18 @@ public class PlayerServer : NetworkBehaviour
     public sbyte GetPlayerHP()
     {
         return playerHPManager.GetHP();
+    }
+
+    public void GameOver()
+    {
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+
+        if (playerData.playerGameState != PlayerGameState.Playing) return;
+        Debug.Log($"Player{OwnerClientId} is GameOver");
+        playerData.playerGameState = PlayerGameState.GameOver;
+
+        // 拱府面倒 秦力
+        rb.isKinematic = true;
+        _collider.enabled = false;
     }
 }

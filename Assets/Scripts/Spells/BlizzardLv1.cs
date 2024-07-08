@@ -30,8 +30,18 @@ public class BlizzardLv1 : AoESpell
         base.InitAoESpell(spellInfoFromServer);
 
         업그레이드효과적용();
+
+        /// 보여지는 ParticleSystem을 업그레이드 현황에 맞게 수정하는 부분
         블리자드이펙트지속시간설정(spellInfo.lifetime);
+        // 서버인 경우 변경 내용을 클라이언트측에 동기화
+        if (IsServer)
+            블리자드이펙트지속시간설정ClientRPC(NetworkObject, spellInfo.lifetime);
+
         블리자드파편이펙트세기설정(spellInfo.damage);
+        // 서버인 경우 변경 내용을 클라이언트측에 동기화
+        if (IsServer)
+            블리자드파편이펙트세기설정ClientRPC(NetworkObject, spellInfo.damage);
+        ///
 
         StartCoroutine(DestroyAfterDelay(spellInfo.lifetime));
     }
@@ -101,9 +111,6 @@ public class BlizzardLv1 : AoESpell
         {
             ps.Play();
         }
-
-        // 클라이언트측에도 동기화
-        블리자드이펙트지속시간설정ClientRPC(NetworkObject, lifetime);
     }
 
     [ClientRpc]
@@ -140,9 +147,6 @@ public class BlizzardLv1 : AoESpell
 
         // Bursts 배열을 다시 설정합니다.
         emission.SetBursts(bursts);
-
-        // Client측에도 동기화
-        블리자드파편이펙트세기설정ClientRPC(NetworkObject,count);
     }
 
     [ClientRpc]
