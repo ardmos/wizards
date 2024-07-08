@@ -118,9 +118,6 @@ public class PlayerHPManagerServer : NetworkBehaviour
             GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, 300);
         }
 
-        // 게임오버 플레이어 사실을 서버에 기록.
-        GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);
-
         // 플레이어 게임오버 애니메이션 실행
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
 
@@ -130,6 +127,8 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerClient.SetPlayerGameOverClientRPC();
         // 플레이어 이름 & HP UI off
         playerClient.OffPlayerUIClientRPC();
+        // 게임오버 플레이어 사실을 서버에 기록.
+        GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);
 
         // 스크롤 아이템 드랍
         DropScrollItem();

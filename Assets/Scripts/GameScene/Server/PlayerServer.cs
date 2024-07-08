@@ -126,10 +126,12 @@ public class PlayerServer : NetworkBehaviour
 
         if (playerData.playerGameState != PlayerGameState.Playing) return;
         Debug.Log($"Player{OwnerClientId} is GameOver");
-        playerData.playerGameState = PlayerGameState.GameOver;
+        //playerData.playerGameState = PlayerGameState.GameOver;
 
         // 물리충돌 해제
         rb.isKinematic = true;
         _collider.enabled = false;
+        // 유도당하지 않도록 Tag 변경
+        tag = "GameOver";
     }
 }

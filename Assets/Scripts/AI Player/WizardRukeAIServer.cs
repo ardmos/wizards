@@ -312,6 +312,8 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         _collider.enabled = false;
         // 플레이어 이름 & HP UI off
         wizardRukeAIClient.OffPlayerUIClientRPC();
+        // 유도당하지 않도록 Tag 변경
+        tag = "GameOver";
     }
 }
 
