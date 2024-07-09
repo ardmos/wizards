@@ -86,8 +86,10 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
             targetClientID = playerServer.OwnerClientId;
         }
 
+        //Debug.Log($"게임 내 플레이어 게임오버를 인식! targetClientID: {targetClientID}, clientIDWhoGameOver: {e.clientIDWhoGameOver}, // {GameMultiplayer.Instance.GetPlayerDataFromClientId(e.clientIDWhoGameOver).clientId}");
+
         // 게임오버된 플레이어가 현재 타겟이었으면 타겟 초기화, 다시 검색 시작. 
-        if(targetClientID == GameMultiplayer.Instance.GetPlayerDataFromClientId(e.clientIDWhoGameOver).clientId)
+        if (targetClientID == e.clientIDWhoGameOver)
         {
             Debug.Log("Target 게임오버! 새로운 타겟을 검색합니다");
             target = null;

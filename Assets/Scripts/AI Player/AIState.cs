@@ -50,7 +50,8 @@ public class PatrolState : AIState
         //Debug.Log("PatrolState Update");
         // »öÀû
         ai.DetectAndSetTarget();
-        if(ai.target != null)
+
+        if (ai.target)
         {
             float targetDistance = Vector3.Distance(ai.transform.position, ai.target.transform.position);
 
