@@ -11,7 +11,7 @@ public enum FireballUpgradeOption
     AddDotDamage,
     IncreaseExplosionRadius,
     ReduceCooldown,
-    AddPiercing
+    //AddPiercing
 }
 
 public enum WaterballUpgradeOption
@@ -116,7 +116,7 @@ public class FireballUpgrade : ISkillUpgradeOption
             FireballUpgradeOption.AddDotDamage => "Add dot damage",
             FireballUpgradeOption.IncreaseExplosionRadius => "Increase Explosion Radius",
             FireballUpgradeOption.ReduceCooldown => "Reduce cooldown",
-            FireballUpgradeOption.AddPiercing => "Add piercing",
+            //FireballUpgradeOption.AddPiercing => "Add piercing",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -128,7 +128,7 @@ public class FireballUpgrade : ISkillUpgradeOption
             FireballUpgradeOption.AddDotDamage => "Enemies hit by the fireball take 1 fire damage per second for 5 seconds.",
             FireballUpgradeOption.IncreaseExplosionRadius => "Increases the fireball's explosion radius by 1.",
             FireballUpgradeOption.ReduceCooldown => "Reduces the fireball's cooldown by 20%.",
-            FireballUpgradeOption.AddPiercing => "The fireball pierces through enemies.",
+            //FireballUpgradeOption.AddPiercing => "The fireball pierces through enemies.",
             /*            FireballUpgradeOption.IncreaseSize => "파이어볼의 크기가 10% 증가합니다.",
                         FireballUpgradeOption.AddDotDamage => "파이어볼에 맞은 적이 5초 동안 초당 1의 화염 피해를 입습니다.",
                         FireballUpgradeOption.IncreaseExplosionRadius => "파이어볼의 폭발 범위를 1 증가시킵니다.",

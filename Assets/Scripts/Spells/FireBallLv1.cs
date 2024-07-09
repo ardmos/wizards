@@ -14,7 +14,7 @@ public class FireBallLv1 : FireSpell
     [Header("파이어볼용 변수들")]
     public SphereCollider sphereCollider;
     public float explosionRadius;
-    public float piercingStack;
+    //public float piercingStack;
     public sbyte damagePerSecond;
     public float duration;
     public Transform beam;
@@ -40,7 +40,7 @@ public class FireBallLv1 : FireSpell
         base.InitSpellInfoDetail(spellInfoFromServer, spellOwnerObject);
 
         explosionRadius = 3f;
-        piercingStack = 0f;
+        //piercingStack = 0f;
         damagePerSecond = 0;
         duration = 2f;
         // 업그레이드 현황 적용
@@ -80,10 +80,10 @@ public class FireBallLv1 : FireSpell
                         spellInfo.coolTime = defaultCooltime * (1 - reductionPercentage);
                         //Debug.Log($"{SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime} - 0.2f * {spellInfo.upgradeOptions[(int)upgradeOption]}. 파이어볼 쿨타임:{spellInfo.coolTime}");
                         break;
-                    case FireballUpgradeOption.AddPiercing:
+/*                    case FireballUpgradeOption.AddPiercing:
                         // "파이어볼이 적을 관통합니다."
                         piercingStack += spellInfo.upgradeOptions[(int)upgradeOption];
-                        break;
+                        break;*/
                 }
 
             }
@@ -116,7 +116,7 @@ public class FireBallLv1 : FireSpell
         // 적중 효과 VFX
         HitVFX(GetHitVFXPrefab(), collision);
 
-        if (!피어싱효과구현()) return;
+        //if (피어싱효과구현()) return;
 
         공격마법과충돌한경우(collision);
 
@@ -213,7 +213,7 @@ public class FireBallLv1 : FireSpell
 
     }
 
-    private bool 피어싱효과구현()
+/*    private bool 피어싱효과구현()
     {
         // 피어싱 스택이 남아있으면 스펠파괴 로직 실행 대신, 피어싱 스택을 감소시킵니다
         if (--piercingStack >= 0)
@@ -222,7 +222,7 @@ public class FireBallLv1 : FireSpell
             return true;
         }
         return false;
-    }
+    }*/
 
     private void 공격마법과충돌한경우(Collision collision)
     {
