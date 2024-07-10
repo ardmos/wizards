@@ -13,7 +13,7 @@ public class WizardRukeAIMovementServer : MonoBehaviour
     [SerializeField] private Transform patrolDestination;
     [SerializeField] private bool isChasing;
     [SerializeField] private Transform target; // 상대 오브젝트
-    [SerializeField] private float minDesiredDistance = 4f; // 유지하고 싶은 최소 거리
+    [SerializeField] private float minDesiredDistance = 3f; // 유지하고 싶은 최소 거리
     [SerializeField] private float maxDesiredDistance = 7f; // 유지하고 싶은 최대 거리
 
     public PlayerAnimator playerAnimator;
