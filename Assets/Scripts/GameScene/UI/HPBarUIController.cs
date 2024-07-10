@@ -11,12 +11,15 @@ public class HPBarUIController : MonoBehaviour
 
     [SerializeField] private Color[] hpColors;
 
-    public void SetHP(sbyte currentHP, sbyte maxHP, bool isOwner)
+    public void SetHP(sbyte currentHP, sbyte maxHP)
     {
         slider.maxValue = maxHP;
         slider.value = currentHP;
         UpdateHPBarColorAndTextValue(currentHP, maxHP);
+    }
 
+    public void SetBGColor(bool isOwner)
+    {
         if (!isOwner)
             imgBG.color = GameAssetsManager.Instance.gameAssets.color_Enemy;
     }

@@ -17,6 +17,7 @@ public abstract class PlayerClient : NetworkBehaviour
     //public event EventHandler OnPlayerWin;
 
     [Header("캐릭터용 UI 컨트롤러들")]
+    public TeamColorController teamColorController;
     public UserNameUIController userNameUIController;
     public HPBarUIController hPBarUIController;
     public DamageTextUIController damageTextUIController;
@@ -52,7 +53,7 @@ public abstract class PlayerClient : NetworkBehaviour
         mRigidbody.isKinematic = false;
         // 플레이어 닉네임 설정
         PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        userNameUIController?.Setup(playerData.playerName.ToString(), IsOwner);
+        userNameUIController?.SetName(playerData.playerName.ToString());
 
         // 오디오리스너 초기화
         audioListener.enabled = IsOwner;
@@ -60,12 +61,16 @@ public abstract class PlayerClient : NetworkBehaviour
         // 기본 메터리얼 초기화
         currentMaterial = originalMaterial;
 
+        // 플레이어 UI 컬러 설정
+        teamColorController?.Setup(IsOwner);
+
         if (!IsOwner) {
             // enemy 플레이어 테두리 컬러 설정
             foreach (Renderer renderer in ownRenderers)
             {
                 renderer.material = enemyMaterial;
-            }
+            }        
+            // 추후 동맹시스템 추가시 여기서 동맹컬러 설정 분기 나눠줘야합니다. 
             return;
         }
         
@@ -198,7 +203,7 @@ public abstract class PlayerClient : NetworkBehaviour
     [ClientRpc]
     public void SetHPClientRPC(sbyte hp, sbyte maxHP)
     {
-        hPBarUIController?.SetHP(hp, maxHP, IsOwner);
+        hPBarUIController?.SetHP(hp, maxHP);
     }
 
     [ClientRpc]

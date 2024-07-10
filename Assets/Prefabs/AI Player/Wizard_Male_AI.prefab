@@ -2443,8 +2443,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0eabab3d6e1d1444c8210c04cbfa18dc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b27bcf37600cca24196520251965a496, type: 3}
+  m_Color: {r: 1, g: 0.3581782, b: 0.1745283, a: 0.64705884}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3244,8 +3244,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8440498391368338033}
+  - component: {fileID: 720912155962747011}
   m_Layer: 25
-  m_Name: TeamColor
+  m_Name: Team Color Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3267,6 +3268,21 @@ Transform:
   - {fileID: 1921789817744317186}
   m_Father: {fileID: 8276412789014832737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &720912155962747011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8734410849413312288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ab93b4b5b26e4479a573c21e2ee087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 415207588207410260}
+  userNameUIController: {fileID: 8271621998954905660}
+  hPBarUIController: {fileID: 4304191059183160955}
 --- !u!1 &8786750851800417571
 GameObject:
   m_ObjectHideFlags: 0
@@ -3472,6 +3488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67da7f75dae8f642afdbacd15167064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamColorController: {fileID: 720912155962747011}
   userNameUIController: {fileID: 8271621998954905660}
   hPBarUIController: {fileID: 4304191059183160955}
   damageTextUIController: {fileID: 1854042178333039586}
@@ -3603,7 +3620,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 1.55
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &7455147559764763398
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,10 +7,13 @@ public class UserNameUIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtUserName;
 
-    public void Setup(string userName, bool isOwner)
+    public void SetName(string userName)
     {
         txtUserName.text = userName;
+    }
 
+    public void SetColor(bool isOwner)
+    {
         if (isOwner)
             txtUserName.color = GameAssetsManager.Instance.gameAssets.color_Owner;
         else
