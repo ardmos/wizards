@@ -237,6 +237,7 @@
     <Compile Include="Assets\Scripts\GameScene\UI\ButtonReadSpellScrollUIController.cs" />
     <Compile Include="Assets\Scripts\Data\AnimationStateEnums.cs" />
     <Compile Include="Assets\Scripts\Spells\StoneSlashLv1.cs" />
+    <Compile Include="Assets\Scripts\GameScene\TileGenerator.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailHelmet.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
