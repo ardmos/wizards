@@ -168,6 +168,23 @@ public class FireBallLv1 : FireSpell
                         aiPlayer.StartCoroutine(aiPlayer.TakeDamageOverTime(damagePerSecond, duration, spellOwnerClientId));
                 }
             }
+            // AI플레이어일 경우 처리
+            else if (hit.CompareTag("Monster"))
+            {
+                if (GetSpellInfo() == null) return;
+
+                // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
+                if (hit.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
+                {
+                    sbyte damage = (sbyte)GetSpellInfo().damage;
+                    // 플레이어 피격을 서버에서 처리
+                    ///// 태그 추가. 여기 메서드 작성. 카메라쉐이킹. chickenAIHPManagerServer.TakingDamage(damage);
+
+                    // 도트 데미지 실행
+                    if (damagePerSecond > 0)
+                        chickenAIHPManagerServer.StartCoroutine(chickenAIHPManagerServer.TakeDamageOverTime(damagePerSecond, duration));
+                }
+            }
             // 기타 오브젝트 충돌
             else
             {

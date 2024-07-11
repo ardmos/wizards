@@ -40,7 +40,6 @@ public class Water : NetworkBehaviour
         }
     }
 
-    // 1초 주기로 실행될 메서드
     private void DealDamage()
     {
         // 각 플레이어에게 대미지 주기. 공격자는 플레이어 자신으로 처리
@@ -55,6 +54,10 @@ public class Water : NetworkBehaviour
             if (player.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer))
             {
                 wizardRukeAIHPManagerServer.TakingDamage(damageValue, player.GetComponent<WizardRukeAIServer>().AIClientId);
+            }
+            if (player.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
+            {
+                chickenAIHPManagerServer.TakingDamage(damageValue);
             }
         }
     }

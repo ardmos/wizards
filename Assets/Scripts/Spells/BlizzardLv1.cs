@@ -192,6 +192,10 @@ public class BlizzardLv1 : AoESpell
             {
                 wizardRukeAIHPManagerServer.TakingDamage((sbyte)spellInfo.damage, player.GetComponent<WizardRukeAIServer>().AIClientId);
             }
+            if (player.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
+            {
+                chickenAIHPManagerServer.TakingDamage((sbyte)spellInfo.damage);
+            }
         }
     }
 

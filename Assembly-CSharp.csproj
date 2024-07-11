@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
     <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
+    <Compile Include="Assets\Scripts\Monster\ChickenAIServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerMovementClient.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\FPSUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
@@ -128,8 +129,10 @@
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailSword.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\ItemAcquireUIController.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
+    <Compile Include="Assets\Scripts\Monster\ChickenAIAnimationServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
+    <Compile Include="Assets\Scripts\Monster\ChickenAIClient.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\Knight.cs" />
     <Compile Include="Assets\Scripts\Data\SkillInfoDetail.cs" />
     <Compile Include="Assets\Scripts\GameScene\Item\Coin.cs" />
@@ -170,6 +173,7 @@
     <Compile Include="Assets\Scripts\GameScene\Client\Wizard.cs" />
     <Compile Include="Assets\Scripts\Spells\SlashSkill.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
+    <Compile Include="Assets\Scripts\Monster\ChickenAIHPManagerServer.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
     <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
@@ -250,6 +254,7 @@
     <Compile Include="Assets\Scripts\GameScene\Store\MagicStoreItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SkillName.cs" />
+    <Compile Include="Assets\Scripts\Monster\ChickenAIMovementServer.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
@@ -272,6 +277,7 @@
     <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\CartoonFX Free.txt" />
     <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />
     <None Include="Assets\RealToon\For VRoid-VRM users.txt" />
+    <None Include="Assets\Shaders\ChickenToonShader_URP.shader" />
     <None Include="Assets\RealToon\RealToon Shader Packages\SRP (LWRP - URP - HDRP)\URP\Please read before you unpack or import.txt" />
     <None Include="Assets\RealToon\What&apos;s New.txt" />
     <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseColorDepthWaterTwoSide.shader" />
