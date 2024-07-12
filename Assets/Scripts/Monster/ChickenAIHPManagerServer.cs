@@ -21,6 +21,7 @@ public class ChickenAIHPManagerServer : NetworkBehaviour
     {
         hp = 3;
         maxHp = 3;
+        chickenAIHPManagerClient.SetHP(hp, maxHp);
     }
 
     public void TakingDamage(sbyte damage)
