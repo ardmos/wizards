@@ -12,7 +12,8 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public abstract class PlayerClient : NetworkBehaviour
 {
-    public static PlayerClient Instance {  get; private set; }
+    public static PlayerClient Instance { get; private set; }
+    public PlayerServer playerServer;
     public event EventHandler OnPlayerGameOver;
     //public event EventHandler OnPlayerWin;
 
@@ -258,7 +259,7 @@ public abstract class PlayerClient : NetworkBehaviour
     /// </summary>
     /// <param name="scrollSpellSlotArray"></param>
     [ClientRpc]
-    public void UpdateScrollGetUIClientRPC(int scrollCount)
+    public void AddScrollClientRPC(int scrollCount)
     {
         if (!IsOwner) return;
 
@@ -266,10 +267,25 @@ public abstract class PlayerClient : NetworkBehaviour
         playerSpellScrollQueueManagerClient.UpdatePlayerScrollSpellSlotUI(scrollCount);
 
         // SFX 재생
-        SoundManager.Instance.PlayItemSFXServerRPC(ItemName.ScrollPickup, PlayerClient.Instance.transform.position);
+        SoundManager.Instance.PlayItemSFXServerRPC(ItemName.ScrollPickup, transform.position);
 
         // 2. 중앙 팝업 UI 노출
         GameSceneUIManager.Instance.itemAcquireUIController.ShowScrollAcquiredUI();
+    }
+
+    [ClientRpc]
+    public void UpdateScrollClientRPC(int scrollCount)
+    {
+        if (!IsOwner) return;
+
+        // 1. 우측 UI 업데이트
+        playerSpellScrollQueueManagerClient.UpdatePlayerScrollSpellSlotUI(scrollCount);
+
+        // SFX 재생
+        SoundManager.Instance.PlayItemSFXServerRPC(ItemName.ScrollUse, transform.position);
+
+        // VFX 재생
+        playerServer.StartApplyScrollVFXServerRPC();
     }
 
     /// <summary>

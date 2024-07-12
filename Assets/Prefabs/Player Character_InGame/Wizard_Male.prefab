@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0b2ec62b4a5747b4059f0f3fd4bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerServer: {fileID: 294066641757979093}
   teamColorController: {fileID: 5186039184898530501}
   userNameUIController: {fileID: 4649931589576448986}
   hPBarUIController: {fileID: 2648681988919741548}
@@ -2285,7 +2286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4859955840248925076}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.33504933, y: 0.0000000109025775, z: -0.0000000038769894, w: 0.9422006}
+  m_LocalRotation: {x: 0.33504936, y: 0.000000039293678, z: -0.000000013972951, w: 0.9422006}
   m_LocalPosition: {x: 0, y: 9.2, z: -11.299999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

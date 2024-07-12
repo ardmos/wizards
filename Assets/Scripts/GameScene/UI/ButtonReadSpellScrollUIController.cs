@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class ButtonReadSpellScrollUIController : MonoBehaviour
 {
     public TextMeshProUGUI txtSpellScrollCount;
+    private int _scrollCount;
 
     private void Start()
     {
@@ -34,7 +35,17 @@ public class ButtonReadSpellScrollUIController : MonoBehaviour
     public void UpdateUI(int scrollCount)
     {
         gameObject.SetActive(true);
-        txtSpellScrollCount.text = scrollCount.ToString();     
+        _scrollCount = scrollCount;
+        txtSpellScrollCount.text = _scrollCount.ToString();     
+    }
+    public void MinusScrollCount()
+    {
+        --_scrollCount;
+        txtSpellScrollCount.text = _scrollCount.ToString();
+    }
+    public int GetScrollCount()
+    {
+        return _scrollCount;
     }
     public void DeactivateUI()
     {

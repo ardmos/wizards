@@ -33,12 +33,16 @@ public class ScrollManagerServer : NetworkBehaviour
 
         // 클라이언트측UI 업데이트
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().UpdateScrollGetUIClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].Count);
+        networkClient.PlayerObject.GetComponent<PlayerClient>().AddScrollClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].Count);
     }
 
     private void DequeuePlayerScrollSpellSlotQueueOnServer(ulong clientId)
     {
         playerScrollSpellSlotQueueMapOnServer[clientId].Dequeue();
+
+        // 클라이언트측UI 업데이트
+        NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
+        networkClient.PlayerObject.GetComponent<PlayerClient>().UpdateScrollClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].Count);
     }
 
     /// <summary>
@@ -95,38 +99,8 @@ public class ScrollManagerServer : NetworkBehaviour
                 default:
                     throw new ArgumentException("Unknown skill upgrade option type");
             }
-            //// 여기 까지 수정!!!!!  업그레이드 스킬 배열 값이 잘 바뀌는기 확인 후, 바뀐 값에 따라 스킬이 변화되도록 해주면 된다
 
-            //SpellInfo newSpellInfo = new SpellInfo(spellManagerServerWizard.GetSpellInfo(spellIndex));
-
-            /*            // 기본 스펠의 defautl info값에 scrollName별로 다른 값을 추가해서 아래 UpdatePlayerSpellInfo에 넘겨줍니다.
-                        switch (scrollName)
-                        {
-                            case ItemName.Scroll_LevelUp:
-                                newSpellInfo.level += 1;
-                                break;
-                            case ItemName.Scroll_FireRateUp:
-                                if (newSpellInfo.coolTime > 0.2f) newSpellInfo.coolTime -= 0.4f;
-                                else newSpellInfo.coolTime = 0f;
-                                break;
-                            case ItemName.Scroll_FlySpeedUp:
-                                newSpellInfo.moveSpeed += 10f;
-                                break;
-                            case ItemName.Scroll_Deploy:
-                                newSpellInfo.moveSpeed = 0f;
-                                break;
-                            // 유도 마법 미구현
-                            //case ItemName.Scroll_Guide:
-                            // break;
-                            default:
-                                Debug.Log("UpdateScrollEffectServerRPC. 스크롤 이름을 찾을 수 없습니다.");
-                                break;
-                        }*/
-
-            // 변경내용 서버에 저장
-            //spellManagerServerWizard.SetSpellInfo(spellIndex, newSpellInfo);
-
-            // 변경내용을 요청한 클라이언트와도 동기화
+            // 스킬 업그레이드 내용을 요청한 클라이언트와 동기화
             networkClient.PlayerObject.GetComponent<SkillSpellManagerClient>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
 
             // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.

@@ -36,14 +36,7 @@ public class SelectScrollEffectPopupItemTemplateUI : MonoBehaviour
         btnApply.onClick.RemoveAllListeners();
         btnApply.AddClickListener(() => {
             // 전달받은 스크롤 이름과 스펠인덱스를 사용해서 효과 적용을 진행한다.
-            //ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(scrollName, spellIndex);
             ScrollManagerServer.Instance.UpdateScrollEffectServerRPC(skillUpgradeOption.ToDTO());
-
-            // SFX 재생
-            SoundManager.Instance.PlayItemSFXServerRPC(ItemName.ScrollUse, transform.position);
-
-            // VFX 재생
-            PlayerClient.Instance.GetComponent<PlayerServer>().StartApplyScrollVFXServerRPC();
 
             popupSelectScrollEffectUIController.Hide();
         });

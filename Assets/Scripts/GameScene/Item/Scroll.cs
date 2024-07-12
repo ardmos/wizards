@@ -10,16 +10,6 @@ using UnityEngine;
 
 public class Scroll : NetworkBehaviour
 {
-    public byte spellSlotIndex;
-
-    public override void OnNetworkSpawn()
-    {
-        if (!IsServer) return;
-        // spell slot 랜덤 설정
-        spellSlotIndex = (byte) Random.Range(0, 3);
-        //Debug.Log($"spellSlotIndex: {spellSlotIndex}");
-    }
-
     /// <summary>
     /// 서버에서 처리되는 메소드 입니다.
     /// </summary>
@@ -32,7 +22,8 @@ public class Scroll : NetworkBehaviour
         // 충돌한 플레이어의 Scroll Queue에 추가.
         if(collision.gameObject.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
         {
-            ScrollManagerServer.Instance?.EnqueuePlayerScrollSpellSlotQueueOnServer(playerServer.OwnerClientId, spellSlotIndex); 
+            // 의미 없는 숫자 0
+            ScrollManagerServer.Instance?.EnqueuePlayerScrollSpellSlotQueueOnServer(playerServer.OwnerClientId, 0); 
         }
 
         // 획득 SFX 재생
