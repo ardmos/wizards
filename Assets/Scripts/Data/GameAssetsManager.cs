@@ -194,6 +194,11 @@ public class GameAssetsManager : MonoBehaviour
         return gameAssets.sfx_Lose;
     }
 
+    public GameObject GetItemHPPotionObject()
+    {
+        return gameAssets.item_HPPotion;
+    }
+
     public GameObject GetItemScrollObject()
     {
         return gameAssets.item_Scroll;

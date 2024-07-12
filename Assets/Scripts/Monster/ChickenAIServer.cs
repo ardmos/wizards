@@ -22,18 +22,29 @@ public class ChickenAIServer : NetworkBehaviour
 
     private void DropScrollItem()
     {
-        // 제너레이트 아이템
-        GameObject scrollObject = Instantiate(GameAssetsManager.Instance.GetItemScrollObject(), transform.position, transform.rotation);
+        // 제너레이트 아이템 (몬스터는 랜덤으로 드랍)
+        GameObject randomPrefab = null;
 
-        if (!scrollObject) return;
+        if(Random.Range(0, 2) == 0)
+        {
+            randomPrefab = GameAssetsManager.Instance.GetItemHPPotionObject();
+        }
+        else
+        {
+            randomPrefab = GameAssetsManager.Instance.GetItemScrollObject();
+        }
 
-        if (scrollObject.TryGetComponent<NetworkObject>(out NetworkObject networkObject))
+        GameObject dropItemObject = Instantiate(randomPrefab, transform.position, transform.rotation);
+
+        if (!dropItemObject) return;
+
+        if (dropItemObject.TryGetComponent<NetworkObject>(out NetworkObject networkObject))
         {
             networkObject.Spawn();
             if (GameManager.Instance)
             {
-                scrollObject.transform.parent = GameManager.Instance.transform;
-                scrollObject.transform.position = transform.position;
+                dropItemObject.transform.parent = GameManager.Instance.transform;
+                dropItemObject.transform.position = transform.position;
             }
         }
     }

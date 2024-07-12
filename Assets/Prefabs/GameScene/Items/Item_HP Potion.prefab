@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 8870572212964590234}
   - component: {fileID: 6044865659981219841}
   m_Layer: 7
-  m_Name: Potion HP
+  m_Name: Item_HP Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7cfe2c91c195447b7803e176314eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healingValue: 2
+  healingValue: 1
 --- !u!135 &8870572212964590234
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -64,6 +64,7 @@ MonoBehaviour:
   vfx_Heal: {fileID: 6331275906715107345, guid: e27164d836110ff4da364dd5d38a9118, type: 3}
   vfx_SpellUpgrade: {fileID: 8846737274113074935, guid: 95bd805e8c353104da0c42b81e07d12c, type: 3}
   vfx_txtDamageValue: {fileID: 1676340583034777097, guid: a26e79037cfb19548b21f69ad08df263, type: 3}
+  item_HPPotion: {fileID: 741601533384771168, guid: 5e5802d2e4ca03740a78506928c71cbb, type: 3}
   item_Scroll: {fileID: 3142795043376685252, guid: a965af31a19f4034ca11a7ca3348725d, type: 3}
   music_Title:
   - {fileID: 8300000, guid: bf17d3a88e3294185953a4c2aa69b03d, type: 3}
@@ -120,11 +121,6 @@ MonoBehaviour:
   sfx_PickupScroll: {fileID: 8300000, guid: aefff84a12c287b4a8012f4034d9f224, type: 3}
   sfx_OpenScroll: {fileID: 8300000, guid: 72cf99bf9fd5a6a4bbcf5d2226c04df8, type: 3}
   sfx_UseScroll: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
-  sfx_ScrollLvUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
-  sfx_ScrollFireRateUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
-  sfx_ScrollFlySpeedUp: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
-  sfx_ScrollAttach: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
-  sfx_ScrollGuide: {fileID: 8300000, guid: 1a05b489b1fdf654a921cbc29da2869d, type: 3}
   sfx_Win:
   - {fileID: 8300000, guid: 63354c465446f964d822e667fe255f02, type: 3}
   - {fileID: 8300000, guid: 552a060d2cec76245a36b15805d9671f, type: 3}

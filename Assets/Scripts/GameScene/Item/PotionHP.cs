@@ -10,7 +10,7 @@ using UnityEngine.Experimental.Playables;
 /// </summary>
 public class PotionHP : NetworkBehaviour
 {
-    [SerializeField] private sbyte healingValue = 2;
+    [SerializeField] private sbyte healingValue = 1;
 
     private void OnCollisionEnter(Collision collision)
     {

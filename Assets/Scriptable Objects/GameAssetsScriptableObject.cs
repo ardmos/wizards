@@ -46,6 +46,7 @@ public class GameAssetsScriptableObject : ScriptableObject
 
     #region Items
     [Header("Items")]
+    public GameObject item_HPPotion;
     public GameObject item_Scroll;
     #endregion
 
