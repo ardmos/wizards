@@ -15,6 +15,7 @@ TagManager:
   - FxTemporaire
   - AI
   - GameOver
+  - Monster
   layers:
   - Default
   - TransparentFX

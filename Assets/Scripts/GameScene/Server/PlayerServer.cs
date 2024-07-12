@@ -81,7 +81,7 @@ public class PlayerServer : NetworkBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="clientId"></param>
-    public void PlayerGotHitOnServer(sbyte damage, ulong clientWhoAttacked)
+    public void TakingDamageWithCameraShake(sbyte damage, ulong clientWhoAttacked)
     {
         // ÇÇ°Ý Ã³¸® ÃÑ°ý.
         playerHPManager.TakingDamage(damage, clientWhoAttacked);

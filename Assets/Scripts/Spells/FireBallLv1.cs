@@ -135,16 +135,16 @@ public class FireBallLv1 : FireSpell
             // 시전자는 피해 안받도록 설정
             if (hit.gameObject == spellOwnerObject) continue;
 
+            if (GetSpellInfo() == null) return;
+
             // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
             if (hit.CompareTag("Player"))
             {
-                if (GetSpellInfo() == null) return;
-
                 if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
-                    playerServer.PlayerGotHitOnServer(damage, spellOwnerClientId);
+                    playerServer.TakingDamageWithCameraShake(damage, spellOwnerClientId);
 
                     // 도트 데미지 실행
                     if (damagePerSecond > 0)
@@ -154,32 +154,28 @@ public class FireBallLv1 : FireSpell
             // AI플레이어일 경우 처리
             else if (hit.CompareTag("AI"))
             {
-                if (GetSpellInfo() == null) return;
-
                 // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
                 if (hit.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
-                    aiPlayer.PlayerGotHitOnServer(damage, spellOwnerClientId, spellOwnerObject);
+                    aiPlayer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
 
                     // 도트 데미지 실행
                     if (damagePerSecond > 0)
                         aiPlayer.StartCoroutine(aiPlayer.TakeDamageOverTime(damagePerSecond, duration, spellOwnerClientId));
                 }
             }
-            // AI플레이어일 경우 처리
+            // Monster일 경우 처리
             else if (hit.CompareTag("Monster"))
             {
-                if (GetSpellInfo() == null) return;
-
                 // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
                 if (hit.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
                     ///// 태그 추가. 여기 메서드 작성. 카메라쉐이킹. chickenAIHPManagerServer.TakingDamage(damage);
-
+                    chickenAIHPManagerServer.TakingDamageWithCameraShake(damage, spellOwnerObject);
                     // 도트 데미지 실행
                     if (damagePerSecond > 0)
                         chickenAIHPManagerServer.StartCoroutine(chickenAIHPManagerServer.TakeDamageOverTime(damagePerSecond, duration));

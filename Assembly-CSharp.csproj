@@ -61,23 +61,23 @@
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailShield.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
     <Compile Include="Assets\Scripts\Spells\HomingMissile.cs" />
+    <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
     <Compile Include="Assets\Scripts\AI Player\WizardRukeAIMovementServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SpellManagerClientWizard.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
-    <Compile Include="Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Manual.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\ScrollManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIManager.cs" />
     <Compile Include="Assets\Scripts\AI Player\WizardRukeAIBattleSystemServer.cs" />
-    <Compile Include="Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\MiniPopupSkillInfoDetailController.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\CameraDepthSlider.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\CharacterCardController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Store\SelectSpellSlotUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\Data\AIPlayerName.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUIController.cs" />
@@ -85,15 +85,14 @@
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssetsManager.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupSelectScrollEffectUIController.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterPropertyBlockSetter.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\PlayerServer.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\TouchRotator.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupClanUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\HPBarUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\MusicGroupUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterPropertyBlockSetter.cs" />
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
@@ -101,13 +100,11 @@
     <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerMovementClient.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\FPSUI.cs" />
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
     <Compile Include="Assets\Scripts\AI Player\AIState.cs" />
     <Compile Include="Assets\Scripts\AI Player\WizardRukeAISpellManagerServer.cs" />
     <Compile Include="Assets\Scripts\TitleScene\SoundManager.cs" />
-    <Compile Include="Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\SkillGroupItemController.cs" />
@@ -145,12 +142,13 @@
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailBody.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSupportUIController.cs" />
     <Compile Include="Assets\Scripts\Data\GraphicQualitySettingsData.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSUI.cs" />
     <Compile Include="Assets\Scripts\Data\SFXType.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\TimerUIController.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillSpellManagerServer.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerSpawnPointsController.cs" />
@@ -160,7 +158,6 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
-    <Compile Include="Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Default.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\WinPopupItemTemplateUI.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
@@ -176,15 +173,16 @@
     <Compile Include="Assets\Scripts\Monster\ChickenAIHPManagerServer.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupEquipmentUIController.cs" />
+    <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Manual.cs" />
     <Compile Include="Assets\Scripts\Spells\BlizzardLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\PlayerMovementServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupUserInfoUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameOverUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\AnimationStarter.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraDepthSlider.cs" />
     <Compile Include="Assets\Scripts\UGS Network\OwnerNetworkAnimator.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\AnimationStarter.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupNewsUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SwitchUI.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupLookingForGameUIController.cs" />
@@ -206,7 +204,6 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManagerServer.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\SkillSpellManagerClient.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupGameStartCountdownUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\KnightBuzzMeshTrail.cs" />
@@ -217,11 +214,11 @@
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\PlayerClient.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupNameChangeUIController.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadSceneManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
-    <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterArea.cs" />
     <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
@@ -248,6 +245,7 @@
     <Compile Include="Assets\Scripts\Test\TestNetworkUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PlayerCountUIController.cs" />
     <Compile Include="Assets\Scripts\Data\RandomSkillOptionProviderSystem.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterArea.cs" />
     <Compile Include="Assets\Scripts\GameScene\FloorGenerator.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\PopupMenuUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SoundFXGroupUI.cs" />
@@ -255,11 +253,13 @@
     <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SkillName.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIMovementServer.cs" />
+    <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Default.cs" />
     <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\GameScene\Server\SkillManagerServerKnight.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\TouchRotator.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPool.cs" />
@@ -270,33 +270,33 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFX3 Multiply Color.shader" />
     <None Include="Assets\GooglePlayGames\com.google.play.games\Proguard\games.txt" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseColorHeightWaterTwoSide.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseColorHeightWaterTwoSide.shader" />
     <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_SETTINGS.cginc" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\DiffuseWaterOpaque.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\DiffuseWaterOpaque.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\CartoonFX Free.txt" />
-    <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />
-    <None Include="Assets\RealToon\For VRoid-VRM users.txt" />
+    <None Include="Assets\Downloaded Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />
+    <None Include="Assets\Downloaded Assets\RealToon\For VRoid-VRM users.txt" />
     <None Include="Assets\Shaders\ChickenToonShader_URP.shader" />
-    <None Include="Assets\RealToon\RealToon Shader Packages\SRP (LWRP - URP - HDRP)\URP\Please read before you unpack or import.txt" />
-    <None Include="Assets\RealToon\What&apos;s New.txt" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseColorDepthWaterTwoSide.shader" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseDepthWaterTwoSide.shader" />
-    <None Include="Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_Core.hlsl" />
+    <None Include="Assets\Downloaded Assets\RealToon\RealToon Shader Packages\SRP (LWRP - URP - HDRP)\URP\Please read before you unpack or import.txt" />
+    <None Include="Assets\Downloaded Assets\RealToon\What&apos;s New.txt" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseColorDepthWaterTwoSide.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseDepthWaterTwoSide.shader" />
+    <None Include="Assets\Downloaded Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_Core.hlsl" />
     <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\RealToon\RealToon Shaders\Version 5\URP\Default\D_Default_URP.shader" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseHeightWater.shader" />
+    <None Include="Assets\Downloaded Assets\RealToon\RealToon Shaders\Version 5\URP\Default\D_Default_URP.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseHeightWater.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Shaders\DiffuseWaterOpaque(mine).shader" />
-    <None Include="Assets\FREE CASUAL MUSIC PACK\WELCOME_CGMUSIC.txt" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseHeightWaterTwoSide.shader" />
-    <None Include="Assets\Casual Puzzle World Sounds - Free Package\assetexplain.txt" />
-    <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Blend.shader" />
+    <None Include="Assets\Audios\FREE CASUAL MUSIC PACK\WELCOME_CGMUSIC.txt" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseHeightWaterTwoSide.shader" />
+    <None Include="Assets\Audios\Casual Puzzle World Sounds - Free Package\assetexplain.txt" />
+    <None Include="Assets\Downloaded Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Blend.shader" />
     <None Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Shaders\Legacy\AdditiveMobile_Scroll01.shader" />
     <None Include="Assets\Downloaded Assets\Lana Studio\Hyper Casual FX\Demo\Readme.txt" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Depth\DiffuseDepthWater.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\Depth\DiffuseDepthWater.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -308,15 +308,15 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Prefabs\Texts\_Make your own text effect.txt" />
     <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_PASSES.cginc" />
-    <None Include="Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_PROP.hlsl" />
-    <None Include="Assets\RealToon\ReadMe - Important - Guide.txt" />
+    <None Include="Assets\Downloaded Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_PROP.hlsl" />
+    <None Include="Assets\Downloaded Assets\RealToon\ReadMe - Important - Guide.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseColorHeightWater.shader" />
-    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Depth\DiffuseColorDepthWater.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseColorHeightWater.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\Depth\DiffuseColorDepthWater.shader" />
     <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\RealToon\Change - Fix Log.txt" />
-    <None Include="Assets\RPGTinyHeroWavePBR\HowToTestHDRP_URP.txt" />
+    <None Include="Assets\Downloaded Assets\RealToon\Change - Fix Log.txt" />
+    <None Include="Assets\Downloaded Assets\RPGTinyHeroWavePBR\HowToTestHDRP_URP.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Shaders\MyLavaShader(개선 필요).shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -1298,9 +1298,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Boxophobic.Utils.Scripts.csproj">
-      <Project>{54A184D2-2958-83C7-9B8B-777EAC1F5882}</Project>
-      <Name>Boxophobic.Utils.Scripts</Name>
+    <ProjectReference Include="Boxophobic.SkyboxCubemapExtended.Editor.csproj">
+      <Project>{3F43D61B-1492-BBA9-7C8D-E37BAD1DA0DD}</Project>
+      <Name>Boxophobic.SkyboxCubemapExtended.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="CFXRRuntime.csproj">
       <Project>{AD2C6BDC-23DE-231A-6117-5CCEC16F8AE6}</Project>
@@ -1310,6 +1310,10 @@
       <Project>{156B902B-846C-0EDB-0B00-010B4A9DAAB3}</Project>
       <Name>CFXREditor</Name>
     </ProjectReference>
+    <ProjectReference Include="Boxophobic.Utils.Editor.csproj">
+      <Project>{42CA4FC4-9BD1-47BD-D6B0-A4FB831930D5}</Project>
+      <Name>Boxophobic.Utils.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="IngameDebugConsole.Editor.csproj">
       <Project>{0822653F-8344-E92C-D91D-F180CC00FB96}</Project>
       <Name>IngameDebugConsole.Editor</Name>
@@ -1318,17 +1322,13 @@
       <Project>{C61914C6-33EB-95F8-6511-87A3B9F4E906}</Project>
       <Name>KinoBloom.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="Boxophobic.Utils.Scripts.csproj">
+      <Project>{54A184D2-2958-83C7-9B8B-777EAC1F5882}</Project>
+      <Name>Boxophobic.Utils.Scripts</Name>
+    </ProjectReference>
     <ProjectReference Include="Google.Play.Games.csproj">
       <Project>{C2C88881-030D-60CE-C6A0-8054BC730F91}</Project>
       <Name>Google.Play.Games</Name>
-    </ProjectReference>
-    <ProjectReference Include="Boxophobic.Utils.Editor.csproj">
-      <Project>{42CA4FC4-9BD1-47BD-D6B0-A4FB831930D5}</Project>
-      <Name>Boxophobic.Utils.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Boxophobic.SkyboxCubemapExtended.Editor.csproj">
-      <Project>{3F43D61B-1492-BBA9-7C8D-E37BAD1DA0DD}</Project>
-      <Name>Boxophobic.SkyboxCubemapExtended.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="ParrelSync.csproj">
       <Project>{1D9DC370-218D-A565-2A33-96DCB44A9A78}</Project>

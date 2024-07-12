@@ -278,7 +278,7 @@ Blend[_BleModSour][_BleModDest]
         #pragma fragment LitPassFragment
 
 		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-		#include "Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
+		#include "Assets/Downloaded Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
 
 		#if defined(LOD_FADE_CROSSFADE)
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
@@ -666,7 +666,7 @@ DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS
         #pragma fragment LitPassFragment
 
 		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-		#include "Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
+		#include "Assets/Downloaded Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
 
 		#if defined(LOD_FADE_CROSSFADE)
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
@@ -1310,7 +1310,7 @@ float3 Init_FO=RTD_CA*RTD_SON_CHE_1;
         #pragma vertex ShadowPassVertex
         #pragma fragment ShadowPassFragment
 
-		#include "Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
+		#include "Assets/Downloaded Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
 
 		#if defined(LOD_FADE_CROSSFADE)
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
@@ -1535,7 +1535,7 @@ DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS
 
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/UnityGBuffer.hlsl"
 		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-		#include "Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
+		#include "Assets/Downloaded Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
 
 		#if defined(LOD_FADE_CROSSFADE)
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
@@ -2189,7 +2189,7 @@ float3 Init_FO=RTD_CA*RTD_SON_CHE_1;
 		#pragma shader_feature_local_vertex N_F_DDMD_ON
 		#pragma shader_feature_local_fragment N_F_NFD_ON
 
-		#include "Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
+		#include "Assets/Downloaded Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
 
 		#if defined(LOD_FADE_CROSSFADE)
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
@@ -2312,7 +2312,7 @@ DOTS_LiBleSki(input.indices, input.weights, input.position.xyz, input.normalOS.x
 
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
-		#include "Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
+		#include "Assets/Downloaded Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
 
 		#if defined(LOD_FADE_CROSSFADE)
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
@@ -2477,7 +2477,7 @@ DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normal.x
 
 		#pragma shader_feature_local_fragment N_F_SL_ON
 
-		#include "Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
+		#include "Assets/Downloaded Assets/RealToon/RealToon Shaders/RealToon Core/URP/RT_URP_Core.hlsl"
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/MetaInput.hlsl"
 
 		struct Attributes

@@ -31,6 +31,22 @@ public class ChickenAIHPManagerServer : MonoBehaviour
         hp = newPlayerHP;
     }
 
+    /// <summary>
+    /// 공격한 플레이어의 화면 쉐이크 기능이 추가된 메서드.
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="clientObjectWhoAttacked"></param>
+    public void TakingDamageWithCameraShake(sbyte damage, GameObject clientObjectWhoAttacked)
+    {
+        TakingDamage(damage);
+
+        // 공격자가 Player라면 카메라 쉐이크 
+        if (clientObjectWhoAttacked.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        {
+            playerClient.ActivateHitCameraShakeClientRPC();
+        }
+    }
+
     // 파이어볼 도트 대미지를 받는 Coroutine
     public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration)
     {

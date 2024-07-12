@@ -230,7 +230,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     }
 
     // 피격처리.
-    public void PlayerGotHitOnServer(sbyte damage, ulong clientIDWhoAttacked, GameObject clientObjectWhoAttacked)
+    public void TakingDamageWithCameraShake(sbyte damage, ulong clientIDWhoAttacked, GameObject clientObjectWhoAttacked)
     {
         // 피격 처리 총괄.
         wizardRukeAIHPManagerServer.TakingDamage(damage, clientIDWhoAttacked);
@@ -242,16 +242,8 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         // 방어스킬 발동
         wizardRukeAIBattleSystemServer.Defence();
 
-        // 공격자가 Player인가? AI인가? 
-        if (GameMultiplayer.Instance.GetPlayerDataFromClientId(clientIDWhoAttacked).isAI)
-        {
-            // AI라면 카메라 쉐이크는 하지 않는다.
-            return;
-        }
-
         // 공격자가 Player라면 카메라 쉐이크 
-        NetworkClient networkClient = NetworkManager.ConnectedClients[clientIDWhoAttacked];
-        if (networkClient.PlayerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        if (clientObjectWhoAttacked.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
         {
             playerClient.ActivateHitCameraShakeClientRPC();
         }

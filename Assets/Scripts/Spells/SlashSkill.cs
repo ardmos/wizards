@@ -96,7 +96,7 @@ public class SlashSkill : NetworkBehaviour
 
             sbyte damage = (sbyte)skillInfo.damage;
             // 플레이어 피격을 서버에서 처리
-            player.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId);
+            player.TakingDamageWithCameraShake(damage, GetSkillInfo().ownerPlayerClientId);
         }
         // AI플레이어일 경우 처리
         else if (collider.CompareTag("AI"))
@@ -108,7 +108,7 @@ public class SlashSkill : NetworkBehaviour
             {
                 sbyte damage = (sbyte)skillInfo.damage;
                 // 플레이어 피격을 서버에서 처리
-                aiPlayer.PlayerGotHitOnServer(damage, GetSkillInfo().ownerPlayerClientId, skillOwnerObject);
+                aiPlayer.TakingDamageWithCameraShake(damage, GetSkillInfo().ownerPlayerClientId, skillOwnerObject);
             }
         }
         // 기타 오브젝트 충돌
