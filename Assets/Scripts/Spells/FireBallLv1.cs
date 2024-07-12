@@ -15,8 +15,7 @@ public class FireBallLv1 : FireSpell
     public SphereCollider sphereCollider;
     public float explosionRadius;
     //public float piercingStack;
-    public sbyte damagePerSecond;
-    public float duration;
+    public float dotDamageLifetime;
     public Transform beam;
     public Transform ball;
     public Transform smoke;
@@ -41,8 +40,7 @@ public class FireBallLv1 : FireSpell
 
         explosionRadius = 3f;
         //piercingStack = 0f;
-        damagePerSecond = 0;
-        duration = 2f;
+        dotDamageLifetime = 0;
         // 업그레이드 현황 적용
         업그레이드현황적용();       
     }
@@ -66,8 +64,8 @@ public class FireBallLv1 : FireSpell
                         sphereCollider.radius *= 1f + spellInfo.upgradeOptions[(int)upgradeOption] * 0.1f;
                         break;
                     case FireballUpgradeOption.AddDotDamage:
-                        // "파이어볼에 맞은 적이 5초 동안 초당 1의 화염 피해를 입습니다."
-                        damagePerSecond += (sbyte)spellInfo.upgradeOptions[(int)upgradeOption];
+                        // "파이어볼에 맞은 적이 n초 동안 초당 1의 화염 피해를 입습니다."
+                        dotDamageLifetime += (float)spellInfo.upgradeOptions[(int)upgradeOption];
                         break;
                     case FireballUpgradeOption.IncreaseExplosionRadius:
                         // "파이어볼의 폭발 범위를 1 증가시킵니다."
@@ -147,8 +145,8 @@ public class FireBallLv1 : FireSpell
                     playerServer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
 
                     // 도트 데미지 실행
-                    if (damagePerSecond > 0)
-                        playerServer.StartCoroutine(playerServer.TakeDamageOverTime(damagePerSecond, duration, spellOwnerClientId));
+                    if (dotDamageLifetime > 0)
+                        playerServer.StartCoroutine(playerServer.TakeDamageOverTime(1, dotDamageLifetime, spellOwnerClientId));
                 }
             }
             // AI플레이어일 경우 처리
@@ -162,8 +160,8 @@ public class FireBallLv1 : FireSpell
                     aiPlayer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
 
                     // 도트 데미지 실행
-                    if (damagePerSecond > 0)
-                        aiPlayer.StartCoroutine(aiPlayer.TakeDamageOverTime(damagePerSecond, duration, spellOwnerClientId));
+                    if (dotDamageLifetime > 0)
+                        aiPlayer.StartCoroutine(aiPlayer.TakeDamageOverTime(1, dotDamageLifetime, spellOwnerClientId));
                 }
             }
             // Monster일 경우 처리
@@ -177,8 +175,8 @@ public class FireBallLv1 : FireSpell
                     ///// 태그 추가. 여기 메서드 작성. 카메라쉐이킹. chickenAIHPManagerServer.TakingDamage(damage);
                     chickenAIHPManagerServer.TakingDamageWithCameraShake(damage, spellOwnerObject);
                     // 도트 데미지 실행
-                    if (damagePerSecond > 0)
-                        chickenAIHPManagerServer.StartCoroutine(chickenAIHPManagerServer.TakeDamageOverTime(damagePerSecond, duration));
+                    if (dotDamageLifetime > 0)
+                        chickenAIHPManagerServer.StartCoroutine(chickenAIHPManagerServer.TakeDamageOverTime(1, dotDamageLifetime));
                 }
             }
             // 기타 오브젝트 충돌

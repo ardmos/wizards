@@ -23,7 +23,7 @@ public class Scroll : NetworkBehaviour
         if(collision.gameObject.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
         {
             // 의미 없는 숫자 0
-            ScrollManagerServer.Instance?.EnqueuePlayerScrollSpellSlotQueueOnServer(playerServer.OwnerClientId, 0); 
+            ScrollManagerServer.Instance?.EnqueuePlayerScrollSpellSlotQueueOnServer(playerServer.OwnerClientId, 0);
         }
 
         // 획득 SFX 재생
