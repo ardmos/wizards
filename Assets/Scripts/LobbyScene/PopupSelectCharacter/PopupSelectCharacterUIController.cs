@@ -9,12 +9,14 @@ using UnityEngine.UI;
 /// 2. Select(최종 선택) 카드만 포커스 효과 실행
 /// 3. 현재 클릭(미리보기 선택)된 카드 캐릭터 정보 중앙에 표시 ( 일단은 캐릭터 정보를 캐릭터 카드가 가지고 있다. )
 /// 4. 돌아가기 버튼
+/// 5. 미구현 캐릭터 카드가 선택됐을경우 Select버튼 잠금
 /// </summary>
 public class PopupSelectCharacterUIController : MonoBehaviour
 {
     public LobbySceneUIController lobbySceneUIController;
     public CustomClickSoundButton btnBack;
     public CustomClickSoundButton btnSelectCharacter;
+    public GameObject selectBtnLockObject;
 
     public Transform containerCharacterCards;
     public GameObject prefabCharacterCard;
@@ -53,6 +55,17 @@ public class PopupSelectCharacterUIController : MonoBehaviour
 
     public void UpdateCurrentClickedCard(CharacterCardController characterCard)
     {
+        Debug.Log($"characterCard:{characterCard.characterCardInfo}, characterCardInfos[1]:{characterCardInfos[1]}, characterCardInfos[0]:{characterCardInfos[0]}");
+        // Knight 선택될 경우, Select버튼 잠금. 아직 미구현이기 때문에. 
+        if(characterCard.characterCardInfo == characterCardInfos[1])
+        {
+            selectBtnLockObject.SetActive(true);
+        }
+        else
+        {
+            selectBtnLockObject.SetActive(false);
+        }
+
         currentClickedCard  = characterCard;
         // 선택 카드 하이라이트 효과
         UpdateCharacterCardsFocus();
@@ -121,9 +134,10 @@ public class PopupSelectCharacterUIController : MonoBehaviour
             if(cardInfo.character == PlayerDataManager.Instance.GetCurrentPlayerClass())
             {
                 selectedCard = characterCardObject.GetComponent<CharacterCardController>();
-                selectedCard.SetFocus(true);
-                currentClickedCard = selectedCard;
-                ShowCharacterInfo(cardInfo);
+                /*                selectedCard.SetFocus(true);
+                                currentClickedCard = selectedCard;
+                                ShowCharacterInfo(cardInfo);*/
+                UpdateCurrentClickedCard(selectedCard);
             }
         }
     }
