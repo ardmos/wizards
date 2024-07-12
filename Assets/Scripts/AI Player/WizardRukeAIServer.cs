@@ -229,41 +229,6 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         }
     }
 
-    // 피격처리.
-    public void TakingDamageWithCameraShake(sbyte damage, ulong clientIDWhoAttacked, GameObject clientObjectWhoAttacked)
-    {
-        // 피격 처리 총괄.
-        wizardRukeAIHPManagerServer.TakingDamage(damage, clientIDWhoAttacked);
-        
-        // 공격자가 인식범위 안에 있으면 타겟으로 설정. 
-        if(Vector3.Distance(transform.position, clientObjectWhoAttacked.transform.position) <= maxDistanceDetect)
-            target = clientObjectWhoAttacked;
-
-        // 방어스킬 발동
-        wizardRukeAIBattleSystemServer.Defence();
-
-        // 공격자가 Player라면 카메라 쉐이크 
-        if (clientObjectWhoAttacked.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
-        {
-            playerClient.ActivateHitCameraShakeClientRPC();
-        }
-    }
-
-    // 파이어볼 도트 대미지를 받는 Coroutine
-    public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong clientWhoAttacked)
-    {
-        float elapsed = 0;
-        while (elapsed < duration)
-        {         
-            // 1초 대기
-            yield return new WaitForSeconds(1);
-
-            wizardRukeAIHPManagerServer.TakingDamage(damagePerSecond, clientWhoAttacked);
-
-            elapsed += 1;
-        }
-    }
-
     public sbyte GetPlayerHP()
     {
         return wizardRukeAIHPManagerServer.GetHP();

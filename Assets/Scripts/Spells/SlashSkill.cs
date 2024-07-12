@@ -87,7 +87,7 @@ public class SlashSkill : NetworkBehaviour
                 return;
             }
 
-            PlayerServer player = collider.GetComponent<PlayerServer>();
+            PlayerHPManagerServer player = collider.GetComponent<PlayerHPManagerServer>();
             if (player == null)
             {
                 Debug.LogError("Player is null!");
@@ -96,7 +96,7 @@ public class SlashSkill : NetworkBehaviour
 
             sbyte damage = (sbyte)skillInfo.damage;
             // 플레이어 피격을 서버에서 처리
-            player.TakingDamageWithCameraShake(damage, GetSkillInfo().ownerPlayerClientId);
+            player.TakingDamageWithCameraShake(damage, GetSkillInfo().ownerPlayerClientId, skillOwnerObject);
         }
         // AI플레이어일 경우 처리
         else if (collider.CompareTag("AI"))
@@ -104,7 +104,7 @@ public class SlashSkill : NetworkBehaviour
             if (skillInfo == null) return;
 
             // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.           
-            if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+            if (collider.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer aiPlayer))
             {
                 sbyte damage = (sbyte)skillInfo.damage;
                 // 플레이어 피격을 서버에서 처리

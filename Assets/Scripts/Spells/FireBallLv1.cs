@@ -140,11 +140,11 @@ public class FireBallLv1 : FireSpell
             // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
             if (hit.CompareTag("Player"))
             {
-                if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
+                if (hit.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerServer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
-                    playerServer.TakingDamageWithCameraShake(damage, spellOwnerClientId);
+                    playerServer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
 
                     // 도트 데미지 실행
                     if (damagePerSecond > 0)
@@ -155,7 +155,7 @@ public class FireBallLv1 : FireSpell
             else if (hit.CompareTag("AI"))
             {
                 // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
-                if (hit.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+                if (hit.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer aiPlayer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리

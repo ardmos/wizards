@@ -126,18 +126,18 @@ public class WaterBallLv1 : WaterSpell
             // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
             if (hit.CompareTag("Player"))
             {
-                if (hit.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
+                if (hit.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerServer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
-                    playerServer.TakingDamageWithCameraShake(damage, spellOwnerClientId);
+                    playerServer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
                 }
             }
             // AI플레이어일 경우 처리
             else if (hit.CompareTag("AI"))
             {
                 // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
-                if (hit.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+                if (hit.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer aiPlayer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
@@ -171,38 +171,39 @@ public class WaterBallLv1 : WaterSpell
 
         // 시전자는 피해 안받도록 설정
         if (collision.gameObject == spellOwnerObject) return;
+        if (GetSpellInfo() == null) return;
 
         // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
         if (collider.CompareTag("Player"))
         {
-            if (GetSpellInfo() == null)
+            if(collider.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer player))
             {
-                //Debug.Log("AttackSpell Info is null");
-                return;
+                sbyte damage = (sbyte)GetSpellInfo().damage;
+                // 플레이어 피격을 서버에서 처리
+                player.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
             }
-
-            PlayerServer player = collider.GetComponent<PlayerServer>();
-            if (player == null)
-            {
-                //Debug.LogError("Player is null!");
-                return;
-            }
-
-            sbyte damage = (sbyte)GetSpellInfo().damage;
-            // 플레이어 피격을 서버에서 처리
-            player.TakingDamageWithCameraShake(damage, spellOwnerClientId);
         }
         // AI플레이어일 경우 처리
         else if (collider.CompareTag("AI"))
         {
-            if (GetSpellInfo() == null) return;
-
             // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
-            if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
+            if (collider.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer aiPlayer))
             {
                 sbyte damage = (sbyte)GetSpellInfo().damage;
                 // 플레이어 피격을 서버에서 처리
                 aiPlayer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
+            }
+        }
+        // Monster일 경우 처리
+        else if (collider.CompareTag("Monster"))
+        {
+            // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
+            if (collider.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
+            {
+                sbyte damage = (sbyte)GetSpellInfo().damage;
+                // 플레이어 피격을 서버에서 처리
+                ///// 태그 추가. 여기 메서드 작성. 카메라쉐이킹. chickenAIHPManagerServer.TakingDamage(damage);
+                chickenAIHPManagerServer.TakingDamageWithCameraShake(damage, spellOwnerObject);
             }
         }
         // 기타 오브젝트 충돌

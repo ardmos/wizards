@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
     PlayerInGameData playerData;
     public WizardRukeAIClient wizardRukeAIClient;
     public WizardRukeAIServer wizardRukeAIServer;
+    public WizardRukeAIBattleSystemServer wizardRukeAIBattleSystemServer;
     public PlayerAnimator playerAnimator;
 
     public void InitPlayerHP(ICharacter character)
@@ -83,6 +85,41 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
         // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
         wizardRukeAIClient.ActivateHitByAttackEffectClientRPC();
+    }
+
+    // 피격처리.
+    public void TakingDamageWithCameraShake(sbyte damage, ulong clientIDWhoAttacked, GameObject clientObjectWhoAttacked)
+    {
+        // 피격 처리 총괄.
+        TakingDamage(damage, clientIDWhoAttacked);
+
+        // 공격자가 인식범위 안에 있으면 타겟으로 설정. 
+        if (Vector3.Distance(transform.position, clientObjectWhoAttacked.transform.position) <= wizardRukeAIServer.maxDistanceDetect)
+            wizardRukeAIServer.target = clientObjectWhoAttacked;
+
+        // 방어스킬 발동
+        wizardRukeAIBattleSystemServer.Defence();
+
+        // 공격자가 Player라면 카메라 쉐이크 
+        if (clientObjectWhoAttacked.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        {
+            playerClient.ActivateHitCameraShakeClientRPC();
+        }
+    }
+
+    // 파이어볼 도트 대미지를 받는 Coroutine
+    public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong clientWhoAttacked)
+    {
+        float elapsed = 0;
+        while (elapsed < duration)
+        {
+            // 1초 대기
+            yield return new WaitForSeconds(1);
+
+            TakingDamage(damagePerSecond, clientWhoAttacked);
+
+            elapsed += 1;
+        }
     }
 
     public sbyte GetHP()

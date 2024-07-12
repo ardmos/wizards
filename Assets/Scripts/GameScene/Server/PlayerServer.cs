@@ -70,51 +70,6 @@ public class PlayerServer : NetworkBehaviour
         //vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
     }
 
-    /// <summary>
-    /// 스킬 충돌 처리(서버에서 동작)
-    /// 플레이어 적중시 ( 다른 마법이나 구조물과의 충돌 처리는 Spell.cs에 있다. 코드 정리 필요)
-    /// clientID와 HP 연계해서 처리. 
-    /// 충돌 녀석이 플레이어일 경우 실행. 
-    /// ClientID로 리스트 검색 후 HP 수정시키고 업데이트된 내용 브로드캐스팅.
-    /// 수신측은 ClientID의 플레이어 HP 업데이트. 
-    /// 서버에서 구동되는 스크립트.
-    /// </summary>
-    /// <param name="damage"></param>
-    /// <param name="clientId"></param>
-    public void TakingDamageWithCameraShake(sbyte damage, ulong clientWhoAttacked)
-    {
-        // 피격 처리 총괄.
-        playerHPManager.TakingDamage(damage, clientWhoAttacked);
-
-        // 공격자가 Player인가? AI인가? 
-        if (GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoAttacked).isAI)
-        {
-            // AI라면 카메라 쉐이크는 하지 않는다.
-            return;
-        }
-
-        // 공격자가 Player라면 카메라 쉐이크 
-        NetworkClient networkClient = NetworkManager.ConnectedClients[clientWhoAttacked];
-        if(networkClient.PlayerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient)){
-            playerClient.ActivateHitCameraShakeClientRPC();
-        }
-    }
-
-    // 파이어볼 도트 대미지를 받는 Coroutine
-    public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong clientWhoAttacked)
-    {
-        float elapsed = 0;
-        while (elapsed < duration)
-        {
-            // 1초 대기
-            yield return new WaitForSeconds(1);
-
-            playerHPManager.TakingDamage(damagePerSecond, clientWhoAttacked);
-
-            elapsed += 1;
-        }
-    }
-
     public sbyte GetPlayerHP()
     {
         return playerHPManager.GetHP();

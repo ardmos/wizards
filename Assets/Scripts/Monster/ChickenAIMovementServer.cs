@@ -1,7 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ChickenAIMovementServer : MonoBehaviour
+public class ChickenAIMovementServer : NetworkBehaviour
 {
     public NavMeshAgent agent;
     public float wanderRadius = 3f;
@@ -43,5 +44,15 @@ public class ChickenAIMovementServer : MonoBehaviour
     public void StopMove()
     {
         agent.isStopped = true;
+    }
+
+    public void ReduceMoveSpeed(float value)
+    {
+        agent.speed -= value;
+    }
+
+    public void AddMoveSpeed(float value)
+    {
+        agent.speed += value;
     }
 }

@@ -186,15 +186,15 @@ public class BlizzardLv1 : AoESpell
 
             if (player.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerHPManagerServer))
             {
-                playerHPManagerServer.TakingDamage((sbyte)spellInfo.damage, player.GetComponent<PlayerClient>().OwnerClientId);
+                playerHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, player.GetComponent<PlayerClient>().OwnerClientId, spellOwnerObject);
             }
             if (player.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer))
             {
-                wizardRukeAIHPManagerServer.TakingDamage((sbyte)spellInfo.damage, player.GetComponent<WizardRukeAIServer>().AIClientId);
+                wizardRukeAIHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, player.GetComponent<WizardRukeAIServer>().AIClientId, spellOwnerObject);
             }
             if (player.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
             {
-                chickenAIHPManagerServer.TakingDamage((sbyte)spellInfo.damage);
+                chickenAIHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, spellOwnerObject);
             }
         }
     }
@@ -225,6 +225,19 @@ public class BlizzardLv1 : AoESpell
             InvokeRepeating(nameof(DealDamage), 0f, DefaultIntervalTime);
         }
     }
+    protected override void Monster전용트리거엔터(GameObject gameObject)
+    {
+        Monster블리자드슬로우효과적용(gameObject);
+
+        // 충돌한 플레이어를 리스트에 추가
+        playersInArea.Add(gameObject);
+
+        // 최초로 충돌한 플레이어인 경우에만 InvokeRepeating 메서드 호출
+        if (playersInArea.Count == 1)
+        {
+            InvokeRepeating(nameof(DealDamage), 0f, DefaultIntervalTime);
+        }
+    }
 
     protected override void 플레이어전용트리거엑싯(GameObject gameObject)
     {
@@ -242,6 +255,19 @@ public class BlizzardLv1 : AoESpell
     protected override void AI전용트리거엑싯(GameObject gameObject)
     {
         AI블리자드슬로우효과복구(gameObject);
+
+        // 충돌을 끝낸 플레이어를 리스트에서 제거
+        playersInArea.Remove(gameObject);
+
+        // 더 이상 플레이어가 충돌 중이지 않다면 InvokeRepeating 메서드 중지
+        if (playersInArea.Count == 0)
+        {
+            CancelInvoke(nameof(DealDamage));
+        }
+    }
+    protected override void Monster전용트리거엑싯(GameObject gameObject)
+    {
+        Monster블리자드슬로우효과복구(gameObject);
 
         // 충돌을 끝낸 플레이어를 리스트에서 제거
         playersInArea.Remove(gameObject);
@@ -321,6 +347,40 @@ public class BlizzardLv1 : AoESpell
         }
     }
 
+    private void Monster블리자드슬로우효과적용(GameObject other)
+    {
+        if (!other) return;
+
+        // 충돌한 플레이어 이동속도 저하.
+        if (other.TryGetComponent<ChickenAIMovementServer>(out ChickenAIMovementServer chickenAIMovement))
+        {
+            chickenAIMovement.ReduceMoveSpeed(slowValue);
+            //Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} ReduceMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+        }
+        // 프로즌 이펙트 실행
+        if (other.TryGetComponent<ChickenAIClient>(out ChickenAIClient chickenAIClient))
+        {
+            //Debug.Log($"is playerClient found: {playerClient}");
+            chickenAIClient.ActivateFrozenEffectClientRPC();
+        }
+    }
+    private void Monster블리자드슬로우효과복구(GameObject other)
+    {
+        if (!other) return;
+
+        if (other.TryGetComponent<ChickenAIMovementServer>(out ChickenAIMovementServer chickenAIMovement))
+        {
+            chickenAIMovement.AddMoveSpeed(slowValue);
+            //Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
+        }
+        // 프로즌 이펙트 해제
+        if (other.TryGetComponent<ChickenAIClient>(out ChickenAIClient chickenAIClient))
+        {
+            //Debug.Log($"is playerClient found: {playerClient}");
+            chickenAIClient.DeactivateFrozenEffectClientRPC();
+        }
+    }
+
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -335,6 +395,8 @@ public class BlizzardLv1 : AoESpell
         // 이동속도 복구
         foreach (var player in playersInArea)
         {
+            if (player == null) continue;
+
             if (player.CompareTag("Player"))
             {
                 // 플레이어의 경우
@@ -344,6 +406,10 @@ public class BlizzardLv1 : AoESpell
             {
                 // AI의 경우
                 AI블리자드슬로우효과복구(player);
+            }
+            else if (player.CompareTag("Monster"))
+            {
+                Monster블리자드슬로우효과복구(player);
             }
         }
 

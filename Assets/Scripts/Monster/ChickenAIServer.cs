@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class ChickenAIServer : MonoBehaviour
+public class ChickenAIServer : NetworkBehaviour
 {
     public ChickenAIMovementServer chickenAIMovementServer;
 
@@ -13,14 +13,17 @@ public class ChickenAIServer : MonoBehaviour
         DropScrollItem();
         // 추적 멈추기
         chickenAIMovementServer.StopMove();
+
+        Debug.Log($"{gameObject} 몬스터 파괴합니다!");
+
         // 오브젝트 파괴
-        Destroy(gameObject);
+        NetworkObject.Despawn(gameObject);
     }
 
     private void DropScrollItem()
     {
         // 제너레이트 아이템
-        GameObject scrollObject = Instantiate(GameAssetsManager.Instance.GetItemScrollObject());
+        GameObject scrollObject = Instantiate(GameAssetsManager.Instance.GetItemScrollObject(), transform.position, transform.rotation);
 
         if (!scrollObject) return;
 

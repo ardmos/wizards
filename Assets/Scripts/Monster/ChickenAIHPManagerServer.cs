@@ -1,12 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class ChickenAIHPManagerServer : MonoBehaviour
+public class ChickenAIHPManagerServer : NetworkBehaviour
 {
     public ChickenAIServer chickenAIServer;
+    public ChickenAIClient chickenAIClient;
+    public ChickenAIHPManagerClient chickenAIHPManagerClient;
 
-    public sbyte hp = 3;
+    public sbyte hp;
+    private sbyte maxHp;
+
+    public void Start()
+    {
+        InitHP();
+    }
+
+    private void InitHP()
+    {
+        hp = 3;
+        maxHp = 3;
+    }
 
     public void TakingDamage(sbyte damage)
     {
@@ -29,6 +44,13 @@ public class ChickenAIHPManagerServer : MonoBehaviour
 
         // 변경된 HP값 서버에 저장
         hp = newPlayerHP;
+
+        // 피격 대미지 숫자 표시 실행. ClientRPC
+        chickenAIClient.ShowDamageTextPopupClientRPC(damage);
+        // HP바 UI 업데이트 ClientRPC       
+        chickenAIHPManagerClient.SetHPClientRPC(hp, maxHp);
+        // 쉐이더 피격 이펙트 실행 ClientRPC
+        chickenAIClient.ActivateHitByAttackEffectClientRPC();
     }
 
     /// <summary>
@@ -38,6 +60,8 @@ public class ChickenAIHPManagerServer : MonoBehaviour
     /// <param name="clientObjectWhoAttacked"></param>
     public void TakingDamageWithCameraShake(sbyte damage, GameObject clientObjectWhoAttacked)
     {
+        Debug.Log($"{gameObject}.TakingDamageWithCameraShake! damage:{damage}, clientWhoAttacked:{clientObjectWhoAttacked}");
+
         TakingDamage(damage);
 
         // 공격자가 Player라면 카메라 쉐이크 

@@ -31,6 +31,10 @@ public abstract class AoESpell : NetworkBehaviour, IOwnerSeter
         {
             AI전용트리거엔터(other.gameObject);
         }
+        else if (other.CompareTag("Monster"))
+        {
+            Monster전용트리거엔터(other.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -46,6 +50,10 @@ public abstract class AoESpell : NetworkBehaviour, IOwnerSeter
         else if (other.CompareTag("AI"))
         {
             AI전용트리거엑싯(other.gameObject);
+        }
+        else if (other.CompareTag("Monster"))
+        {
+            Monster전용트리거엑싯(other.gameObject);
         }
     }
 
@@ -68,7 +76,9 @@ public abstract class AoESpell : NetworkBehaviour, IOwnerSeter
 
     protected abstract void 플레이어전용트리거엔터(GameObject gameObject);
     protected abstract void AI전용트리거엔터(GameObject gameObject);
+    protected abstract void Monster전용트리거엔터(GameObject gameObject);
 
     protected abstract void 플레이어전용트리거엑싯(GameObject gameObject);
     protected abstract void AI전용트리거엑싯(GameObject gameObject);
+    protected abstract void Monster전용트리거엑싯(GameObject gameObject);
 }
