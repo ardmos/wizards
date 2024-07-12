@@ -15,33 +15,33 @@ public class PotionHP : NetworkBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (!IsServer) return;
-        if(!collision.collider.CompareTag("Player")) return;
-
-        //ulong collisionedClientId = collision.gameObject.GetComponent<NetworkObject>().OwnerClientId;
 
         // Player Èú¸µ Àû¿ë
-        ApplyHealing(collision.gameObject.GetComponent<PlayerHPManagerServer>());
+        if (collision.collider.CompareTag("Player")) 
+        {
+            if(collision.gameObject.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerHPManagerServer)){
+                playerHPManagerServer.ApplyHeal(healingValue);
+            }
+        }
+        // AI Èú¸µ Àû¿ë
+        else if (collision.collider.CompareTag("AI"))
+        {
+            if (collision.gameObject.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer))
+            {
+                wizardRukeAIHPManagerServer.ApplyHeal(healingValue);
+            }
+        }
 
-        // Player Èú¸µ VFX ½ÇÇà
+        // Èú¸µ VFX ½ÇÇà
         GameObject vfxHeal = Instantiate(GameAssetsManager.Instance.gameAssets.vfx_Heal, collision.gameObject.transform);
         vfxHeal.GetComponent<NetworkObject>().Spawn();
         vfxHeal.transform.SetParent(collision.transform);
         vfxHeal.transform.localPosition = new Vector3(0f, 0.1f, 0f);
 
-        // SFX ½ÇÇà
+        // Èú¸µ SFX ½ÇÇà
         SoundManager.Instance?.PlayItemSFX(ItemName.Potion_HP, transform);
 
         // ÆÄ±«
         GetComponent<NetworkObject>().Despawn();
-    }
-
-    private void ApplyHealing(PlayerHPManagerServer collidedPlayerHPManager) {
-/*        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(collisionedClientId);
-        sbyte newHP = (sbyte)(playerData.hp + healingValue);
-        if(newHP > playerData.maxHp) newHP = playerData.maxHp;*/
-
-        //PlayerHPManager.Instance.UpdatePlayerHP(collisionedClientId, newHP, playerData.maxHp);
-
-        collidedPlayerHPManager.ApplyHeal(healingValue);
     }
 }
