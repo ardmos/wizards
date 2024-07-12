@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Services.Matchmaker.Models;
@@ -42,7 +43,9 @@ public class FireBallLv1 : FireSpell
         //piercingStack = 0f;
         dotDamageLifetime = 0;
         // 업그레이드 현황 적용
-        업그레이드현황적용();       
+        업그레이드현황적용();
+
+        StartCoroutine(DestroyAfterDelay(spellInfo.lifetime));
     }
 
     /// <summary>
@@ -246,5 +249,18 @@ public class FireBallLv1 : FireSpell
         {
 
         }
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // 마법 충돌 사운드 재생
+        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Hit, transform);
+
+        // 적중 효과 VFX
+        HitVFX(GetHitVFXPrefab());
+
+        Destroy(gameObject);
     }
 }
