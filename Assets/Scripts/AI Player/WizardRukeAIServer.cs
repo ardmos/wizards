@@ -229,6 +229,12 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
             List<WizardRukeAIServer> sortedAIPlayer = aiPlayers.OrderByDescending(aiPlayer => aiPlayer.GetPlayerHP()).ToList();
             target = sortedAIPlayer[0].gameObject;
         }
+
+        // 검색된 타겟이 없는 경우. 
+        if (players.Count == 0 && aiPlayers.Count == 0)
+        {
+            target = null;
+        }
     }
 
     public sbyte GetPlayerHP()
@@ -263,7 +269,6 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public void GameOver(ulong clientWhoAttacked)
     {
         if (gameState != PlayerGameState.Playing) return;
-        Debug.Log($"AI Player{AIClientId} is GameOver");
         gameState = PlayerGameState.GameOver;
         
         // 추적 멈추기
@@ -275,6 +280,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIClient.OffPlayerUIClientRPC();
         // 유도당하지 않도록 Tag 변경
         tag = "GameOver";
+        Debug.Log($"AI Player{AIClientId} is GameOver, new tag : {tag}");
 
         // 점수 계산
         CalcScore(clientWhoAttacked);
