@@ -20,16 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Monster Frozen Effect
+  m_Name: Cow Hit Effect
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - N_F_EAL_ON
-  - N_F_GLO_ON
   - N_F_O_ON
   - N_F_RDC_ON
-  - N_F_RELGI_ON
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   m_InvalidKeywords:
@@ -155,7 +153,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e0bead0a910d983479d37ad9d07afdf1, type: 3}
+        m_Texture: {fileID: 2800000, guid: e833615d6d1718d46b97b08c1a2f255a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask03:
@@ -301,10 +299,10 @@ Material:
     - _FarDistanceMaxWidth: 10
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0
-    - _GlossColorPower: 0.5
+    - _GlossColorPower: 10
     - _GlossIntensity: 1
     - _GlossMapScale: 1
-    - _GlossSoftness: 1
+    - _GlossSoftness: 0
     - _GlossTextureFollowLight: 0
     - _GlossTextureFollowObjectRotation: 0
     - _GlossTextureRotate: 0
@@ -331,7 +329,7 @@ Material:
     - _HatchingEnabled: 0
     - _HatchingRotation: 0
     - _HatchingSmoothness: 0.1
-    - _HighlightColorPower: 1
+    - _HighlightColorPower: 100
     - _L_F_CLD: 0
     - _L_F_FR: 0
     - _L_F_GLO: 0
@@ -375,7 +373,7 @@ Material:
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 1
+    - _N_F_GLO: 0
     - _N_F_GLOT: 0
     - _N_F_HCS: 0
     - _N_F_HDLS: 0
@@ -419,7 +417,7 @@ Material:
     - _PointSpotlightIntensity: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RELG: 1
+    - _RELG: 0
     - _ReceiveShadows: 1
     - _ReduSha: 0.5
     - _ReduceOutlineBackFace: 0
@@ -523,7 +521,7 @@ Material:
     - _EmissionColor: {r: 14.807843, g: 14.807843, b: 14.807843, a: 1}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
-    - _GlossColor: {r: 0, g: 0.6496899, b: 1, a: 1}
+    - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _HalfToneColor: {r: 0, g: 0, b: 0, a: 1}

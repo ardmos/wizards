@@ -147,8 +147,8 @@
     <Compile Include="Assets\Scripts\GameScene\UI\TimerUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Server\SkillSpellManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
+    <Compile Include="Assets\Scripts\GameScene\Server\SkillSpellManagerServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\GameScene\PlayerSpawnPointsController.cs" />
@@ -1319,13 +1319,13 @@
       <Project>{0822653F-8344-E92C-D91D-F180CC00FB96}</Project>
       <Name>IngameDebugConsole.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="KinoBloom.Runtime.csproj">
-      <Project>{C61914C6-33EB-95F8-6511-87A3B9F4E906}</Project>
-      <Name>KinoBloom.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="Boxophobic.Utils.Scripts.csproj">
       <Project>{54A184D2-2958-83C7-9B8B-777EAC1F5882}</Project>
       <Name>Boxophobic.Utils.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="KinoBloom.Runtime.csproj">
+      <Project>{C61914C6-33EB-95F8-6511-87A3B9F4E906}</Project>
+      <Name>KinoBloom.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Google.Play.Games.csproj">
       <Project>{C2C88881-030D-60CE-C6A0-8054BC730F91}</Project>
