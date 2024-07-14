@@ -26,7 +26,6 @@ public class MatchmakerClient : MonoBehaviour
         return AuthenticationService.Instance.PlayerId;
     }
     
-    // 진짜 매칭 시작 메서드. (매치메이킹 부분 코드 정리중. 02/22)
     // 매치메이킹 시작 메서드. (매치메이킹 버튼 UI가 클릭됐을 때 호출된다.)
     public void StartMatchmaking()
     {
