@@ -157,6 +157,7 @@
     <Compile Include="Assets\Scripts\GameScene\Server\SpellManagerServerWizard.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
+    <Compile Include="Assets\Scripts\TitleScene\TextAppVersion.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\GameScene\UI\WinPopupItemTemplateUI.cs" />
