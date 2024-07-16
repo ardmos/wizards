@@ -186,11 +186,12 @@ public class BlizzardLv1 : AoESpell
 
             if (player.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerHPManagerServer))
             {
-                playerHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, player.GetComponent<PlayerClient>().OwnerClientId, spellOwnerObject);
+                //playerHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, player.GetComponent<PlayerClient>().OwnerClientId, spellOwnerObject);
+                playerHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, _shooterClientID, spellOwnerObject);
             }
             if (player.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer))
             {
-                wizardRukeAIHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, player.GetComponent<WizardRukeAIServer>().AIClientId, spellOwnerObject);
+                wizardRukeAIHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, _shooterClientID, spellOwnerObject);
             }
             if (player.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
             {

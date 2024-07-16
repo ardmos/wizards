@@ -241,7 +241,7 @@ public class GameManager : NetworkBehaviour
                     else if (playerData.playerGameState == PlayerGameState.GameOver)
                     {
                         NetworkClient networkClient = NetworkManager.ConnectedClients[playerData.clientId];
-                        networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameOverClientRPC();
+                        networkClient?.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameOverClientRPC();
                     }
                 }
                 break;

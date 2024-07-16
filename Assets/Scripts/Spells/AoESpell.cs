@@ -9,7 +9,7 @@ public abstract class AoESpell : NetworkBehaviour, IOwnerSeter
 {
     [SerializeField] protected SpellInfo spellInfo;
 
-    [SerializeField] private ulong _shooterClientID;
+    [SerializeField] protected ulong _shooterClientID;
 
     [Header("스킬의 영향을 받는 플레이어 목록")]
     [SerializeField] protected List<GameObject> playersInArea = new List<GameObject>();

@@ -230,8 +230,30 @@ public abstract class PlayerClient : NetworkBehaviour
         OnPlayerGameOver.Invoke(this, EventArgs.Empty);
         // Popup 보여주기
         GameSceneUIManager.Instance.popupGameOverUIController.Show();
+
+        // 게임 결과 저장. 게임 오버! ( 기기에 저장중입니다. )
+        SaveGameOverResult();
+
         // BGM 재생
         SoundManager.Instance.PlayLosePopupSound();
+    }
+
+    private void SaveGameOverResult()
+    {
+        PlayerOutGameData playerOutGameData = PlayerDataManager.Instance.GetPlayerOutGameData();
+
+        if (playerOutGameData == null) return;
+
+        float score = GameMultiplayer.Instance.GetPlayerScore(OwnerClientId);
+
+        if (playerOutGameData.hightestKOinOneMatch < score)
+        {
+            playerOutGameData.hightestKOinOneMatch = (byte)score;
+        }
+        playerOutGameData.knockOuts += (uint)score;
+        playerOutGameData.totalScore = playerOutGameData.knockOuts * 2;
+
+        PlayerDataManager.Instance.UpdatePlayerData(playerOutGameData);
     }
 
     [ClientRpc]
@@ -243,8 +265,34 @@ public abstract class PlayerClient : NetworkBehaviour
         //OnPlayerWin.Invoke(this, EventArgs.Empty);
         // Popup 보여주기
         GameSceneUIManager.Instance.popupWinUIController.Show(OwnerClientId);
+
+        // 게임 결과 저장. 승리! (기기에 저장중입니다)
+        SaveWinResult();
+
         // BGM 재생
         SoundManager.Instance.PlayWinPopupSound();
+    }
+
+    private void SaveWinResult()
+    {
+        PlayerOutGameData playerOutGameData = PlayerDataManager.Instance.GetPlayerOutGameData();
+
+        if (playerOutGameData == null) return;
+
+        float score = GameMultiplayer.Instance.GetPlayerScore(OwnerClientId);
+
+        if (playerOutGameData.hightestKOinOneMatch < score)
+        {
+            playerOutGameData.hightestKOinOneMatch = (byte)score;
+        }
+        playerOutGameData.mostWins++;
+        playerOutGameData.soloVictories++;
+        playerOutGameData.knockOuts += (uint)score;
+        playerOutGameData.totalScore = playerOutGameData.knockOuts * 2;
+
+        //Debug.Log($"player{OwnerClientId} score : {GameMultiplayer.Instance.GetPlayerScore(OwnerClientId)}, (uint) : {(uint)GameMultiplayer.Instance.GetPlayerScore(OwnerClientId)}");
+
+        PlayerDataManager.Instance.UpdatePlayerData(playerOutGameData);
     }
 
     public int GetPlayerScore()
