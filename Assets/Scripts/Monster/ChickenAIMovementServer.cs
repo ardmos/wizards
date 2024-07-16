@@ -14,12 +14,16 @@ public class ChickenAIMovementServer : NetworkBehaviour
 
     void Start()
     {
+        if (!IsServer) return;
+
         startPosition = transform.position;
         SetNewDestination();
     }
 
     void Update()
     {
+        if (!IsServer) return;
+
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
@@ -34,9 +38,10 @@ public class ChickenAIMovementServer : NetworkBehaviour
         randomDirection += startPosition;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, wanderRadius, NavMesh.AllAreas);
-
-        agent.SetDestination(hit.position);
+        if (NavMesh.SamplePosition(randomDirection, out hit, wanderRadius, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+        }
 
         timer = Random.Range(minWanderTime, maxWanderTime);
     }

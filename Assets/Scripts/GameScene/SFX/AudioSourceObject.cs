@@ -37,7 +37,16 @@ public class AudioSourceObject : NetworkBehaviour
 
         transform.position = position;
 
-        audioSource.volume = SoundManager.Instance.GetVolumeSFX();
+        // Scroll픽업 사운드가 특히 큰 문제 수정을 위한 코드
+        if(itemName == ItemName.ScrollPickup)
+        {
+            audioSource.volume = SoundManager.Instance.GetVolumeSFX() / 3;
+        }
+        else
+        {
+            audioSource.volume = SoundManager.Instance.GetVolumeSFX();
+        }
+
         audioSource.clip = audioClip;
         audioSource.Play();
 
