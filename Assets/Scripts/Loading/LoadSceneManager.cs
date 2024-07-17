@@ -19,7 +19,8 @@ public static class LoadSceneManager
         TitleScene,
         LoadingScene,
         LobbyScene,
-        GameScene,
+        GameScene_MultiPlayer,
+        GameScene_SinglePlayer
     }
 
     private static Action onLoaderCallback;

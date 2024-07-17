@@ -92,7 +92,11 @@ public class GameAssetsManager : MonoBehaviour
         {
             return gameAssets.music_Lobby[UnityEngine.Random.Range(0, gameAssets.music_Lobby.Length)];
         }
-        else if (sceneName == LoadSceneManager.Scene.GameScene.ToString())
+        else if (sceneName == LoadSceneManager.Scene.GameScene_MultiPlayer.ToString())
+        {
+            return gameAssets.music_Game[UnityEngine.Random.Range(0, gameAssets.music_Game.Length)];
+        }
+        else if (sceneName == LoadSceneManager.Scene.GameScene_SinglePlayer.ToString())
         {
             return gameAssets.music_Game[UnityEngine.Random.Range(0, gameAssets.music_Game.Length)];
         }

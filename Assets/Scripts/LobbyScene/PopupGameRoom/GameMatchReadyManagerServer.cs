@@ -68,7 +68,7 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
         if (allClientsReady)
         {
             // 1. 게임 시작 
-            LoadSceneManager.LoadNetwork(LoadSceneManager.Scene.GameScene);
+            LoadSceneManager.LoadNetwork(LoadSceneManager.Scene.GameScene_MultiPlayer);
 
             // Game 시작을 알림
             //OnGameStarting?.Invoke(this, EventArgs.Empty); 지금은 안쓰고있습니다. BackFill 설정 다시 살릴 때 사용할것입니다.

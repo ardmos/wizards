@@ -55,7 +55,7 @@ public class SoundManager : NetworkBehaviour
         string sceneName = next.name;
 
         // Game씬의 경우 씬이 시작되었을때 자동으로 BGM을 실행시키지 않고, GameState.GamePlaying 상태일 때 BGM을 실행시킵니다. GameManager에서 요청해올겁니다.
-        if (sceneName == LoadSceneManager.Scene.GameScene.ToString())
+        if (sceneName == LoadSceneManager.Scene.GameScene_MultiPlayer.ToString())
         {
             audioSourceBGM.Stop();
             if (bgmCoroutine != null)

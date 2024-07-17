@@ -170,7 +170,7 @@ public class GameManager : NetworkBehaviour
         if (GetGamePlayingTimer() > 2f && !isBGMStarted)
         {
             isBGMStarted = true;
-            SoundManager.Instance?.PlayMusic(LoadSceneManager.Scene.GameScene.ToString());
+            SoundManager.Instance?.PlayMusic(LoadSceneManager.Scene.GameScene_MultiPlayer.ToString());
         }
 
         // Update 대신에 State 바뀔때마다 호출되는 Eventhandler 사용하기  <--- 여기부터. 시간 계산기랑 EventListener랑 분리해서 구현하면 됨.

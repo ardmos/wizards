@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 /// <summary>
 /// 캐릭터 위치 배치같은거는 Lobby Manager를 만들어서 처리하는게 더 어울려보인다. 
@@ -20,8 +18,8 @@ public class LobbySceneUIController : MonoBehaviour
     [SerializeField] private CustomClickSoundButton btnEquipment;
     [SerializeField] private CustomClickSoundButton btnSkill;
     [SerializeField] private CustomClickSoundButton btnClan;
-    [SerializeField] private CustomClickSoundButton btnMod;
-    [SerializeField] private CustomClickSoundButton btnStartPlay;
+    [SerializeField] private CustomClickSoundButton btnSinglePlayer;
+    [SerializeField] private CustomClickSoundButton btnMultiPlayer;
 
     [SerializeField] private CustomClickSoundButton btnInbox;
     [SerializeField] private CustomClickSoundButton btnNews;
@@ -50,9 +48,9 @@ public class LobbySceneUIController : MonoBehaviour
     {
         // 상점기능 잠시 구현중. 주석처리.
         //btnShop.onClick.AddListener(() => { popupShop.Show(); });        
-        btnMod.AddClickListener(popupMod.Show);
+        btnSinglePlayer.AddClickListener(() => { LoadSceneManager.Load(LoadSceneManager.Scene.GameScene_SinglePlayer); });
         // 클라이언트 매칭 시작 (매치메이킹 부분 코드 정리중. 02/22)
-        btnStartPlay.AddClickListener(matchmakerClient.StartMatchmaking);
+        btnMultiPlayer.AddClickListener(matchmakerClient.StartMatchmaking);
         btnUserInfo.AddClickListener(popupUserInfoUI.Show);
         btnSettings.AddClickListener(popupSettingsUI.Show);
         btnChangeCharacter.AddClickListener(popupSelectCharacterUI.Show);

@@ -5428,8 +5428,8 @@ MonoBehaviour:
   btnEquipment: {fileID: 8783605404082852270}
   btnSkill: {fileID: 8783605403292200982}
   btnClan: {fileID: 8783605404180663528}
-  btnMod: {fileID: 8783605403819591688}
-  btnStartPlay: {fileID: 3360385355629862654}
+  btnSinglePlayer: {fileID: 8783605403819591688}
+  btnMultiPlayer: {fileID: 3360385355629862654}
   btnInbox: {fileID: 8783605404544575056}
   btnNews: {fileID: 8783605403801761502}
   popupUserInfoUI: {fileID: 705557883}
@@ -5737,7 +5737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &978351397
 Transform:
   m_ObjectHideFlags: 0
@@ -11013,7 +11013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2040986845
 Transform:
   m_ObjectHideFlags: 0
@@ -26945,7 +26945,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1740.0449, y: -433.47168}
+  m_SizeDelta: {x: -2140.045, y: -433.47168}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &310684256790556166
 MonoBehaviour:
@@ -67419,7 +67419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BATTLE
+  m_text: MULTI
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0962d31f1f084fa3ba7147d76f5b6e8, type: 2}
   m_sharedMaterial: {fileID: 1653631458307283989, guid: e0962d31f1f084fa3ba7147d76f5b6e8, type: 2}
@@ -67519,7 +67519,7 @@ GameObject:
   - component: {fileID: 3360385354996710356}
   - component: {fileID: 3360385354996710357}
   m_Layer: 0
-  m_Name: Text
+  m_Name: Text_MULTI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67614,7 +67614,7 @@ GameObject:
   - component: {fileID: 3360385355629862642}
   - component: {fileID: 3360385355629862654}
   m_Layer: 0
-  m_Name: Button_Battle
+  m_Name: Button_MultiPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103748,7 +103748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MOD
+  m_text: SINGLE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0962d31f1f084fa3ba7147d76f5b6e8, type: 2}
   m_sharedMaterial: {fileID: 1653631458307283989, guid: e0962d31f1f084fa3ba7147d76f5b6e8, type: 2}
@@ -103829,7 +103829,7 @@ GameObject:
   - component: {fileID: 8783605402928292946}
   - component: {fileID: 8783605402928292957}
   m_Layer: 0
-  m_Name: Text_Mod
+  m_Name: Text_SINGLE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108125,12 +108125,12 @@ GameObject:
   - component: {fileID: 8783605403819591684}
   - component: {fileID: 8783605403819591688}
   m_Layer: 0
-  m_Name: Button_Mod
+  m_Name: Button_SinglePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8783605403819591684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110255,7 +110255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f9b599c249feb4a2cb2efcd166c4a46c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a3c4594dc52c43fd88132d2a3d16a60, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
