@@ -169,6 +169,7 @@
     <Compile Include="Assets\Scripts\GameScene\Water.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\GameScene\Client\Wizard.cs" />
+    <Compile Include="Assets\Scripts\GameScene_SinglePlayer\SinglePlayerGameManager.cs" />
     <Compile Include="Assets\Scripts\Spells\SlashSkill.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIHPManagerServer.cs" />

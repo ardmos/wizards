@@ -97,7 +97,7 @@ public class GameManager : NetworkBehaviour
             Debug.Log($"Player {clientId} 스폰");
             // Player Character Server 저장 방식
             Character playerClass = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).characterClass;
-            GameObject player = Instantiate(GetCurrentPlayerCharacterPrefab(playerClass));
+            GameObject player = Instantiate(GameAssetsManager.Instance.GetCharacterPrefab_MultiPlayerInGame(playerClass));
             if (player != null)
                 player.transform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             else
@@ -112,7 +112,7 @@ public class GameManager : NetworkBehaviour
             Debug.Log($"AI Player {aiClientId} 스폰");
 
             // 추후 직업 추가시 여기서 AI 클래스 읽어와서 프리팹 검색 후 사용해야합니다. 지금은 위저드 하나이기 때문에 이렇게 합니다. GameMultiplayer와의 연동 결속력이 너무 약함. 지금. 
-            GameObject aiPlayer = Instantiate(GetAIPlayerCharacterPrefab());
+            GameObject aiPlayer = Instantiate(GameAssetsManager.Instance.GetAIPlayerCharacterPrefab());
             if (aiPlayer == null) return;
 
             aiPlayer.transform.TryGetComponent<NetworkObject>(out NetworkObject aiPlayerNetworkObject);
@@ -128,28 +128,6 @@ public class GameManager : NetworkBehaviour
             }
         }
         //GetLastClientId()
-    }
-
-    private GameObject GetAIPlayerCharacterPrefab()
-    {
-        return GameAssetsManager.Instance.gameAssets.wizard_Male_AI;
-    }
-
-    private GameObject GetCurrentPlayerCharacterPrefab(Character playerClass)
-    {
-        GameObject playerPrefab = null;
-        switch (playerClass)
-        {
-            case Character.Wizard:
-                playerPrefab = GameAssetsManager.Instance.gameAssets.wizard_Male;
-                break;
-            case Character.Knight:
-                playerPrefab = GameAssetsManager.Instance.gameAssets.knight_Male;
-                break;
-            default:
-                break;
-        }
-        return playerPrefab;
     }
 
     private void State_OnValueChanged(GameState previousValue, GameState newValue)
@@ -375,6 +353,11 @@ public class GameManager : NetworkBehaviour
         Debug.Log("GameManager CleanUpObjects called!");
         // 현재 GameObject의 모든 자식 GameObject를 파괴
         transform.Cast<Transform>().ToList().ForEach(child => Destroy(child.gameObject));
+    }
+
+    public void SetGameStateStart()
+    {
+        gameState.Value = GameState.CountdownToStart;
     }
 
     public bool IsLocalPlayerReady()

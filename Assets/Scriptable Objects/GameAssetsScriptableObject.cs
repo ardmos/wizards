@@ -31,12 +31,15 @@ public class GameAssetsScriptableObject : ScriptableObject
     #region etc
     [Header("AI플레이어 프리팹")]
     public GameObject wizard_Male_AI;
+    public GameObject wizard_Male_AI_SingleMode;
 
     [Header("플레이어 캐릭터 프리팹")]
     public GameObject wizard_Male_ForLobby;
     public GameObject knight_Male_ForLobby;
     public GameObject wizard_Male;
     public GameObject knight_Male;
+    public GameObject wizard_Male_SinglePlayer;
+    public GameObject knight_Male_SinglePlayer;
 
     [Header("VFX 프리팹")]
     public GameObject vfx_Heal;

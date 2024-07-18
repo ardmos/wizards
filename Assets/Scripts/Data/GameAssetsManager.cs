@@ -58,9 +58,9 @@ public class GameAssetsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 인게임용 캐릭터 프리팹을 리턴해주는 메소드 입니다
+    /// MultiPlayer 인게임용 캐릭터 프리팹을 리턴해주는 메소드 입니다
     /// </summary>
-    public GameObject GetCharacterPrefab_InGame(Character characterClass)
+    public GameObject GetCharacterPrefab_MultiPlayerInGame(Character characterClass)
     {
         GameObject resultObejct = null;
         switch (characterClass)
@@ -76,6 +76,34 @@ public class GameAssetsManager : MonoBehaviour
                 break;
         }
         return resultObejct;
+    }
+
+    public GameObject GetCharacterPrefab_SinglePlayerInGame(Character characterClass)
+    {
+        GameObject resultObejct = null;
+        switch (characterClass)
+        {
+            case Character.Wizard:
+                resultObejct = gameAssets.wizard_Male_SinglePlayer;
+                break;
+            case Character.Knight:
+                resultObejct = gameAssets.knight_Male_SinglePlayer;
+                break;
+            default:
+                Debug.LogError($"적절하지 않은 characterClass 정보입니다. characterClass: {characterClass}");
+                break;
+        }
+        return resultObejct;
+    }
+
+    public GameObject GetAIPlayerCharacterPrefab()
+    {
+        return GameAssetsManager.Instance.gameAssets.wizard_Male_AI;
+    }
+
+    public GameObject GetSingleModeAIPlayerCharacterPrefab()
+    {
+        return GameAssetsManager.Instance.gameAssets.wizard_Male_AI_SingleMode;
     }
 
     public AudioClip GetMusic(string sceneName)
