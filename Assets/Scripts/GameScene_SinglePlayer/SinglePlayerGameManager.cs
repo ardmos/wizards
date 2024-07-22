@@ -18,10 +18,13 @@ public class SinglePlayerGameManager : NetworkBehaviour
     public List<Transform> spawnPoints; // Inspector에서 6개의 스폰 포인트를 할당합니다.
     public List<Transform> selectedSpawnPoints; // 선택된 4개의 스폰 포인트를 저장할 리스트
 
-    // Start is called before the first frame update
     void Start()
     {
-        NetworkManager.Singleton.StartHost();
+        GameMultiplayer.Instance.StartHost();
+    }
+
+    public void StartSinglePlayerGameManager()
+    {
         SelectRandomSpawnPoints();
         SpawnPlayer();
         SpawnAIPlayer();

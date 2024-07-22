@@ -48,7 +48,10 @@ public class LobbySceneUIController : MonoBehaviour
     {
         // 상점기능 잠시 구현중. 주석처리.
         //btnShop.onClick.AddListener(() => { popupShop.Show(); });        
-        btnSinglePlayer.AddClickListener(() => { LoadSceneManager.Load(LoadSceneManager.Scene.GameScene_SinglePlayer); });
+        btnSinglePlayer.AddClickListener(() => {
+            // 싱글모드 맵 로드!
+            LoadSceneManager.Load(LoadSceneManager.Scene.GameScene_SinglePlayer);
+        });
         // 클라이언트 매칭 시작 (매치메이킹 부분 코드 정리중. 02/22)
         btnMultiPlayer.AddClickListener(matchmakerClient.StartMatchmaking);
         btnUserInfo.AddClickListener(popupUserInfoUI.Show);

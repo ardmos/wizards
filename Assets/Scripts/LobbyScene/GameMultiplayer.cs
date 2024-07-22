@@ -67,6 +67,11 @@ public class GameMultiplayer : NetworkBehaviour
             NetworkManager.Singleton.OnClientConnectedCallback -= Server_OnClientConnectedCallback;
             NetworkManager.Singleton.OnClientDisconnectCallback -= Server_OnClientDisconnectCallback;
         }
+
+        if(IsHost)
+        {
+            NetworkManager.Singleton.OnServerStarted -= OnServerStarted;
+        }
     }
 
     private void OnServerListChanged(NetworkListEvent<PlayerInGameData> changeEvent)
@@ -88,7 +93,7 @@ public class GameMultiplayer : NetworkBehaviour
         // 클라 접속시 AI유저들이 존재한다면, 모두 레디 시킵니다. 
         foreach (var player in playerDataNetworkList)
         {
-            if(player.isAI) GameMatchReadyManagerServer.Instance.SetAIPlayerReady(player.clientId);
+            if (player.isAI) GameMatchReadyManagerServer.Instance.SetAIPlayerReady(player.clientId);
         }
     }
 
@@ -416,7 +421,6 @@ public class GameMultiplayer : NetworkBehaviour
     public void StopClient()
     {
         Debug.Log("StopClient()");
-
         NetworkManager.Singleton.OnClientConnectedCallback -= Client_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback -= Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.Shutdown();
@@ -441,5 +445,32 @@ public class GameMultiplayer : NetworkBehaviour
         Debug.Log($"OnClientDisconnectCallback : {clientId}");
         // 매칭 UI 숨김을 위한 이벤트 핸들러 호출. 
         OnFailedToJoinMatch?.Invoke(this, EventArgs.Empty);
+    }
+
+
+
+
+    // ----------------  싱글 모드 ( Host )
+
+    public void StartHost()
+    {
+        NetworkManager.Singleton.StartHost();
+        Debug.Log("StartHost()");
+        NetworkManager.Singleton.OnServerStarted += OnServerStarted;
+    }
+
+    private void OnServerStarted()
+    {
+        Debug.Log("OnServerStarted()");
+
+        // 싱글모드 전용 처리
+        if (IsHost)
+        {
+            Debug.Log("Server_OnClientConnectedCallback. Host모드 서버가 실행되었습니다.");
+            // Host 플레이어의 Player 정보를 생성된 서버에 저장. 
+            UpdatePlayerInGameDataServerRPC(PlayerDataManager.Instance.GetPlayerInGameData());
+            // 싱글모드용 게임 매니저 시작
+            FindObjectOfType<SinglePlayerGameManager>()?.StartSinglePlayerGameManager();
+        }
     }
 }
