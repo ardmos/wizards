@@ -37,6 +37,7 @@ public class GameMultiplayer : NetworkBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         playerDataNetworkList = new NetworkList<PlayerInGameData>();
+        Debug.Log("GameMultiplayer Awake()");
 
         playerItemDictionaryOnServer = new Dictionary<ulong, Dictionary<ItemName, ushort>>();
 
@@ -66,11 +67,6 @@ public class GameMultiplayer : NetworkBehaviour
         {
             NetworkManager.Singleton.OnClientConnectedCallback -= Server_OnClientConnectedCallback;
             NetworkManager.Singleton.OnClientDisconnectCallback -= Server_OnClientDisconnectCallback;
-        }
-
-        if(IsHost)
-        {
-            NetworkManager.Singleton.OnServerStarted -= OnServerStarted;
         }
     }
 
@@ -205,6 +201,37 @@ public class GameMultiplayer : NetworkBehaviour
     }
 
     /// <summary>
+    ///  여기 이거 추가를 어떻게 할지부터. 없앨지 수정할지. 
+    /// </summary>
+    /// <param name="playerData"></param>
+    private void UpdatePlayerInGameData(PlayerInGameData playerData)
+    {
+        Debug.Log($"UpdatePlayerInGameData 싱글모드용. playerData:{playerData}, playerName:{playerData.playerName}, playerClientId:{playerData.clientId}, playerDataList.Count:{playerDataNetworkList.Count}");
+
+
+        // 접속을 시도하는 인원의 ClientID가 이미 존재합니다. 
+        if (GetPlayerDataFromClientId(playerData.clientId).hp != 0)
+        {
+            Debug.Log($"플레이어{playerData.clientId}는 이미 추가된 유저입니다!");
+            return;
+        }
+
+        playerDataNetworkList.Add(new PlayerInGameData
+        {
+            clientId = playerData.clientId,
+            // 접속시간 기록
+            connectionTime = DateTime.Now,
+            characterClass = playerData.characterClass,
+            playerGameState = PlayerGameState.Playing,
+            playerName = playerData.playerName,
+            isAI = false
+            // HP는 게임 시작되면 OnNetworkSpawn때 각자가 SetPlayerHP로 보고함.
+        });
+        Debug.Log($"GameMultiplayer.PlayerDataList Add complete. " +
+            $"player{playerData.clientId} Name: {playerData.playerName} Class: {playerData.characterClass} PlayerDataList.Count:{playerDataNetworkList.Count}");
+    }
+
+    /// <summary>
     /// AI 플레이어 추가 전용 메서드
     /// </summary>
     /// <param name="playerData"></param>
@@ -276,6 +303,8 @@ public class GameMultiplayer : NetworkBehaviour
     /// </summary>
     public void SetPlayerDataFromClientId(ulong clientId, PlayerInGameData newPlayerData)
     {
+        Debug.Log($"SetPlayerDataFromClientId. player.clientId: {clientId}.");
+        Debug.Log($"SetPlayerDataFromClientId. playerDataNetworkList.Count: {playerDataNetworkList.Count}");
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
         //Debug.Log($"SetPlayerDataFromClientId. player.clientId:{clientId}. playerGameState:{playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)].playerGameState}");
     }
@@ -454,23 +483,13 @@ public class GameMultiplayer : NetworkBehaviour
 
     public void StartHost()
     {
+        // Host 플레이어의 Player 정보를 생성된 서버에 저장. 
+        UpdatePlayerInGameData(PlayerDataManager.Instance.GetPlayerInGameData());
+
         NetworkManager.Singleton.StartHost();
-        Debug.Log("StartHost()");
-        NetworkManager.Singleton.OnServerStarted += OnServerStarted;
-    }
+        Debug.Log("StartHost() Host모드 서버가 실행되었습니다.");
 
-    private void OnServerStarted()
-    {
-        Debug.Log("OnServerStarted()");
-
-        // 싱글모드 전용 처리
-        if (IsHost)
-        {
-            Debug.Log("Server_OnClientConnectedCallback. Host모드 서버가 실행되었습니다.");
-            // Host 플레이어의 Player 정보를 생성된 서버에 저장. 
-            UpdatePlayerInGameDataServerRPC(PlayerDataManager.Instance.GetPlayerInGameData());
-            // 싱글모드용 게임 매니저 시작
-            FindObjectOfType<SinglePlayerGameManager>()?.StartSinglePlayerGameManager();
-        }
+        // 싱글모드용 게임 매니저 시작
+        FindObjectOfType<SinglePlayerGameManager>()?.StartSinglePlayerGameManager();
     }
 }
