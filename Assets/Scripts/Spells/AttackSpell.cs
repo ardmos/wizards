@@ -107,7 +107,7 @@ public abstract class AttackSpell : NetworkBehaviour
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo, gameObject);
         //Debug.Log($"SpawnSpellObjectOnServer!! skillInfo.ownerClientId : {spellInfo.ownerPlayerClientId}, name:{spellInfo.spellName}, lvl:{spellInfo.level}");
 
-        spellObject.transform.SetParent(GameManager.Instance.transform);
+        spellObject.transform.SetParent(MultiplayerGameManager.Instance.transform);
 
         // 마법 발사체 방향 조정하기
         spellObject.transform.forward = spawnPosition.forward;

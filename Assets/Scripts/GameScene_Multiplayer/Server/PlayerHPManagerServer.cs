@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -16,12 +15,24 @@ public class PlayerHPManagerServer : NetworkBehaviour
 
     public void InitPlayerHP(ICharacter character)
     {
-        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        playerData.hp = character.hp; 
-        playerData.maxHp = character.maxHp;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        if (IsHost)
+        {
+            playerData = GameSingleplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+            playerData.hp = character.hp;
+            playerData.maxHp = character.maxHp;
+            GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
 
-        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+            playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        }
+        else
+        {
+            playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+            playerData.hp = character.hp;
+            playerData.maxHp = character.maxHp;
+            GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+
+            playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        }
     }
 
     /// <summary>
@@ -37,7 +48,14 @@ public class PlayerHPManagerServer : NetworkBehaviour
 
         // 변경된 HP값 서버에 저장
         playerData.hp = newHP;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        if (IsHost)
+        {
+            GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        }
+        else
+        {
+            GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        }
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
         playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
@@ -49,7 +67,15 @@ public class PlayerHPManagerServer : NetworkBehaviour
     public void TakingDamage(sbyte damage, ulong clientWhoAttacked)
     {
         // GamePlaying중이 아니면 전부 리턴. 게임이 끝나면 무적처리 되도록.
-        if (!GameManager.Instance.IsGamePlaying()) return;
+        if(IsHost)
+        {
+            if (!SingleplayerGameManager.Instance.IsGamePlaying()) return;
+        }
+        else
+        {
+            if (!MultiplayerGameManager.Instance.IsGamePlaying()) return;
+        }
+        
         //playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         if (playerData.playerGameState != PlayerGameState.Playing) return;
 
@@ -77,7 +103,15 @@ public class PlayerHPManagerServer : NetworkBehaviour
 
         // 변경된 HP값 서버에 저장
         playerData.hp = newPlayerHP;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+
+        if (IsHost)
+        {
+            GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        }
+        else
+        {
+            GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        }
 
         // 피격 카메라 효과 실행 ClientRPC
         playerClient.ActivateHitByAttackCameraEffectClientRPC();

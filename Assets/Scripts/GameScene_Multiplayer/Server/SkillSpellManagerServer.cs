@@ -38,6 +38,7 @@ public class SkillSpellManagerServer : NetworkBehaviour
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
         foreach (SkillName spellName in skillNames)
         {
+            Debug.Log($"spellName({spellName}): {SpellSpecifications.Instance.GetSpellDefaultSpec(spellName)}");
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
             spellInfo.ownerPlayerClientId = OwnerClientId;
             playerSpellInfoList.Add(spellInfo);

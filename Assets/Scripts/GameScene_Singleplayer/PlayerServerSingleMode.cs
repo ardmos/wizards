@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
-public class PlayerServer : NetworkBehaviour
+
+public class PlayerServerSingleMode : NetworkBehaviour
 {
     private const int DEFAULT_SCORE = 300;
 
@@ -49,7 +50,6 @@ public class PlayerServer : NetworkBehaviour
         }
 
         // 스폰 위치 초기화   
-        //transform.position = spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId));
         transform.position = spawnPointsController.GetSpawnPoint();
 
         // HP 초기화
@@ -81,7 +81,7 @@ public class PlayerServer : NetworkBehaviour
     // 게임오버 처리. 서버권한 방식.
     public void GameOver(ulong clientWhoAttacked)
     {
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        PlayerInGameData playerData = GameSingleplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
 
         if (playerData.playerGameState != PlayerGameState.Playing) return;
         Debug.Log($"Player{OwnerClientId} is GameOver");
@@ -102,7 +102,7 @@ public class PlayerServer : NetworkBehaviour
         // 플레이어 이름 & HP UI off
         playerClient.OffPlayerUIClientRPC();
         // 게임오버 플레이어 사실을 서버에 기록.
-        GameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);
+        SingleplayerGameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, clientWhoAttacked);
 
         // 아이템 드랍
         DropItem();
@@ -113,15 +113,15 @@ public class PlayerServer : NetworkBehaviour
         // 스스로 게임오버 당한 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
         if (clientWhoAttacked == OwnerClientId)
         {
-            foreach (PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+            foreach (PlayerInGameData playerInGameData in GameSingleplayer.Instance.GetPlayerDataNetworkList())
             {
-                GameMultiplayer.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
+                GameSingleplayer.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
             }
         }
         // 일반적인 경우 상대 플레이어 300스코어 획득
         else
         {
-            GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, DEFAULT_SCORE);
+            GameSingleplayer.Instance.AddPlayerScore(clientWhoAttacked, DEFAULT_SCORE);
         }
     }
 
@@ -129,32 +129,32 @@ public class PlayerServer : NetworkBehaviour
     {
         // 제너레이트 아이템 포션
         Vector3 newItemHPPotionPos = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-        GameObject hpPotionObject = Instantiate(GameAssetsManager.Instance.GetItemHPPotionObject(), newItemHPPotionPos, transform.rotation, GameManager.Instance.transform);
+        GameObject hpPotionObject = Instantiate(GameAssetsManager.Instance.GetItemHPPotionObject(), newItemHPPotionPos, transform.rotation, SingleplayerGameManager.Instance.transform);
 
         if (!hpPotionObject) return;
 
         if (hpPotionObject.TryGetComponent<NetworkObject>(out NetworkObject hpPotionObjectNetworkObject))
         {
             hpPotionObjectNetworkObject.Spawn();
-            if (GameManager.Instance)
+            if (SingleplayerGameManager.Instance)
             {
-                hpPotionObject.transform.parent = GameManager.Instance.transform;
+                hpPotionObject.transform.parent = SingleplayerGameManager.Instance.transform;
                 hpPotionObject.transform.position = newItemHPPotionPos;
             }
         }
 
         // 제너레이트 아이템 스크롤
         Vector3 newItemScrollPos = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
-        GameObject scrollObject = Instantiate(GameAssetsManager.Instance.GetItemScrollObject(), newItemScrollPos, transform.rotation, GameManager.Instance.transform);
+        GameObject scrollObject = Instantiate(GameAssetsManager.Instance.GetItemScrollObject(), newItemScrollPos, transform.rotation, SingleplayerGameManager.Instance.transform);
 
         if (!scrollObject) return;
 
         if (scrollObject.TryGetComponent<NetworkObject>(out NetworkObject scrollObjectNetworkObject))
         {
             scrollObjectNetworkObject.Spawn();
-            if (GameManager.Instance)
+            if (SingleplayerGameManager.Instance)
             {
-                scrollObject.transform.parent = GameManager.Instance.transform;
+                scrollObject.transform.parent = SingleplayerGameManager.Instance.transform;
                 scrollObject.transform.position = newItemScrollPos;
             }
         }

@@ -41,9 +41,9 @@ public class ChickenAIServer : NetworkBehaviour
         if (dropItemObject.TryGetComponent<NetworkObject>(out NetworkObject networkObject))
         {
             networkObject.Spawn();
-            if (GameManager.Instance)
+            if (MultiplayerGameManager.Instance)
             {
-                dropItemObject.transform.parent = GameManager.Instance.transform;
+                dropItemObject.transform.parent = MultiplayerGameManager.Instance.transform;
                 dropItemObject.transform.position = transform.position;
             }
         }

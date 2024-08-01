@@ -143,7 +143,11 @@ public class SpellSpecifications : MonoBehaviour
 
     public SpellInfo GetSpellDefaultSpec(SkillName spellName)
     {
-        if (spellDefaultSpec.Length <= (int)spellName) return null;
+        if (spellDefaultSpec.Length <= (int)spellName)
+        {
+            Debug.LogError("해당 이름의 스펠 스펙을 찾을 수 없습니다.");
+            return null;
+        }
 
         return spellDefaultSpec[(int)spellName];
     }

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class TimerUIController : MonoBehaviour
+public class TimerUIController : NetworkBehaviour
 {
     [SerializeField] private bool isTimerOn = false;
     [SerializeField] private TextMeshProUGUI txtTimer;
@@ -21,7 +22,16 @@ public class TimerUIController : MonoBehaviour
     {
         if (isTimerOn)
         {
-            totalPassedTime = GameManager.Instance.GetGamePlayingTimer();
+            // Singleplay모드 Multiplay모드 구분 처리
+            if (IsHost)
+            {
+                totalPassedTime = SingleplayerGameManager.Instance.GetGamePlayingTimer();
+            }
+            else
+            {
+                totalPassedTime = MultiplayerGameManager.Instance.GetGamePlayingTimer();
+            }
+      
             //h = ((int)totalPassedTime / 3600);
             m = ((int)totalPassedTime / 60 % 60);
             s = ((int)totalPassedTime % 60);

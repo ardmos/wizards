@@ -104,7 +104,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         //Destroy(spellObject, 4f);
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(2, SpellState.Cooltime);
-        spellObject.transform.SetParent(GameManager.Instance.transform);
+        spellObject.transform.SetParent(MultiplayerGameManager.Instance.transform);
 
         // 발사 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
@@ -171,7 +171,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
 
         //Debug.Log($"{nameof(ShootSpellServerRPC)} ownerClientId {clientId}");
 
-        playerCastingSpell.transform.SetParent(GameManager.Instance.transform);
+        playerCastingSpell.transform.SetParent(MultiplayerGameManager.Instance.transform);
         float moveSpeed = playerCastingSpell.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
 
         // 호밍 마법이라면 호밍 시작 처리

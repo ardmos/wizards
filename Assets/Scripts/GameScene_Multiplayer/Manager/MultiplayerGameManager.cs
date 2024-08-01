@@ -21,9 +21,9 @@ using Unity.Services.Multiplay;
 /// ownerPlayerObject
 /// </summary>
 
-public class GameManager : NetworkBehaviour
+public class MultiplayerGameManager : NetworkBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static MultiplayerGameManager Instance { get; private set; }
 
     public event EventHandler OnGameStateChanged;
     public event EventHandler OnAlivePlayerCountChanged;
@@ -89,7 +89,7 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        Debug.Log("GameManager.SceneManager_OnLoadEventCompleted() Called");
+        Debug.Log("MultiplayerGameManager.SceneManager_OnLoadEventCompleted() Called");
 
         // Player 스폰
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
@@ -111,8 +111,10 @@ public class GameManager : NetworkBehaviour
         {
             Debug.Log($"AI Player {aiClientId} 스폰");
 
+            Vector3 spawnPoint = spawnPointsController.GetSpawnPoint();
+
             // 추후 직업 추가시 여기서 AI 클래스 읽어와서 프리팹 검색 후 사용해야합니다. 지금은 위저드 하나이기 때문에 이렇게 합니다. GameMultiplayer와의 연동 결속력이 너무 약함. 지금. 
-            GameObject aiPlayer = Instantiate(GameAssetsManager.Instance.GetAIPlayerCharacterPrefab());
+            GameObject aiPlayer = Instantiate(GameAssetsManager.Instance.GetAIPlayerCharacterPrefab(), spawnPoint, Quaternion.identity);
             if (aiPlayer == null) return;
 
             aiPlayer.transform.TryGetComponent<NetworkObject>(out NetworkObject aiPlayerNetworkObject);
@@ -123,7 +125,7 @@ public class GameManager : NetworkBehaviour
                 if (wizardRukeAIServer != null)
                 {
                     //Debug.Log($"spawnPoints : {spawnPointsController.GetSpawnPoint()}");
-                    wizardRukeAIServer.InitializeAIPlayerOnServer(aiClientId, spawnPointsController.GetSpawnPoint());
+                    wizardRukeAIServer.InitializeAIPlayerOnServer(aiClientId, spawnPoint);
                 }
             }
         }
@@ -350,7 +352,7 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void CleanUpObjects()
     {
-        Debug.Log("GameManager CleanUpObjects called!");
+        Debug.Log("MultiplayerGameManager CleanUpObjects called!");
         // 현재 GameObject의 모든 자식 GameObject를 파괴
         transform.Cast<Transform>().ToList().ForEach(child => Destroy(child.gameObject));
     }

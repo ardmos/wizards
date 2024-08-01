@@ -66,8 +66,8 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         // 게임 시작 전 대기!
         SetState(aiIdleState);
 
-        GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
-        GameManager.Instance.OnPlayerGameOver += GameManager_OnPlayerGameOver;
+        MultiplayerGameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
+        MultiplayerGameManager.Instance.OnPlayerGameOver += GameManager_OnPlayerGameOver;
     }
 
     private void GameManager_OnPlayerGameOver(object sender, PlayerGameOverEventArgs e)
@@ -101,7 +101,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
     private void GameManager_OnGameStateChanged(object sender, EventArgs e)
     {
-        if (GameManager.Instance.IsGamePlaying())
+        if (MultiplayerGameManager.Instance.IsGamePlaying())
         {
             // 이제 카운트다운은 끝! 게임 시작! 순찰을 시작합니다!
             SetState(aiPatrolState);
@@ -122,8 +122,8 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
     public override void OnDestroy()
     {
-        GameManager.Instance.OnGameStateChanged -= GameManager_OnGameStateChanged;
-        GameManager.Instance.OnPlayerGameOver -= GameManager_OnPlayerGameOver;
+        MultiplayerGameManager.Instance.OnGameStateChanged -= GameManager_OnGameStateChanged;
+        MultiplayerGameManager.Instance.OnPlayerGameOver -= GameManager_OnPlayerGameOver;
     }
 
     /// <summary>
@@ -149,7 +149,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIMovementServer.SetMoveSpeed(playerInGameData.moveSpeed);
 
         // 스폰 위치 초기화   
-        transform.position = spawnPos;// spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(AIClientId));
+        //transform.position = spawnPos;// spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(AIClientId));
 
         // HP 초기화
         // 현재 HP 설정 및 UI에 반영
@@ -287,7 +287,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         // GameOver 애니메이션 실행
         playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
         // 게임오버 플레이어 사실을 서버에 기록.
-        GameManager.Instance.UpdatePlayerGameOverOnServer(AIClientId, clientWhoAttacked);
+        MultiplayerGameManager.Instance.UpdatePlayerGameOverOnServer(AIClientId, clientWhoAttacked);
 
         // 스크롤 아이템 드랍
         DropItem();
@@ -314,32 +314,32 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     {
         // 제너레이트 아이템 포션
         Vector3 newItemHPPotionPos = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-        GameObject hpPotionObject = Instantiate(GameAssetsManager.Instance.GetItemHPPotionObject(), newItemHPPotionPos, transform.rotation, GameManager.Instance.transform);
+        GameObject hpPotionObject = Instantiate(GameAssetsManager.Instance.GetItemHPPotionObject(), newItemHPPotionPos, transform.rotation, MultiplayerGameManager.Instance.transform);
 
         if (!hpPotionObject) return;
 
         if (hpPotionObject.TryGetComponent<NetworkObject>(out NetworkObject hpPotionObjectNetworkObject))
         {
             hpPotionObjectNetworkObject.Spawn();
-            if (GameManager.Instance)
+            if (MultiplayerGameManager.Instance)
             {
-                hpPotionObject.transform.parent = GameManager.Instance.transform;
+                hpPotionObject.transform.parent = MultiplayerGameManager.Instance.transform;
                 hpPotionObject.transform.position = newItemHPPotionPos;
             }
         }
 
         // 제너레이트 아이템 스크롤
         Vector3 newItemScrollPos = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
-        GameObject scrollObject = Instantiate(GameAssetsManager.Instance.GetItemScrollObject(), newItemScrollPos, transform.rotation, GameManager.Instance.transform);
+        GameObject scrollObject = Instantiate(GameAssetsManager.Instance.GetItemScrollObject(), newItemScrollPos, transform.rotation, MultiplayerGameManager.Instance.transform);
 
         if (!scrollObject) return;
 
         if (scrollObject.TryGetComponent<NetworkObject>(out NetworkObject scrollObjectNetworkObject))
         {
             scrollObjectNetworkObject.Spawn();
-            if (GameManager.Instance)
+            if (MultiplayerGameManager.Instance)
             {
-                scrollObject.transform.parent = GameManager.Instance.transform;
+                scrollObject.transform.parent = MultiplayerGameManager.Instance.transform;
                 scrollObject.transform.position = newItemScrollPos;
             }
         }

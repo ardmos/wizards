@@ -45,7 +45,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
     public void TakingDamage(sbyte damage, ulong clientWhoAttacked)
     {
         // GamePlaying중이 아니면 전부 리턴. 게임이 끝나면 무적처리 되도록.
-        if (!GameManager.Instance.IsGamePlaying()) return;
+        if (!MultiplayerGameManager.Instance.IsGamePlaying()) return;
         if (wizardRukeAIServer.gameState != PlayerGameState.Playing) return;
 
         // 피격 사운드 효과 실행 ClientRPC

@@ -65,7 +65,7 @@ public class PopupGameOverUIController : MonoBehaviour
     {
         // 1. 얻은 트로피 개수 보여주기(킬수 + 등수점수(10-등수))
         yield return waitForSeconds;
-        txtScoreCount.text = $"+ {PlayerClient.Instance.GetComponent<PlayerClient>().GetPlayerScore() + (10 - (GameManager.Instance.GetCurrentAlivePlayerCount()))}";
+        txtScoreCount.text = $"+ {PlayerClient.Instance.GetComponent<PlayerClient>().GetPlayerScore() + (10 - (MultiplayerGameManager.Instance.GetCurrentAlivePlayerCount()))}";
         // 2. 버튼들 등장
         yield return waitForSeconds;
         btnClaim.gameObject.SetActive(true);
