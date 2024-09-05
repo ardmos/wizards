@@ -1,5 +1,7 @@
 # 실시간 멀티플레이어 대전 게임 프로젝트
 
+![image](https://github.com/user-attachments/assets/08233f94-d136-4ed6-82df-a3a3d4b60e11)
+
 ## 프로젝트 개요
 이 프로젝트는 Unity 엔진을 사용하여 개발한 멀티플레이어 게임입니다. Unity Gaming Services (UGS)를 활용하여 서버-클라이언트 구조를 구현하였습니다.
 
