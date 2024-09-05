@@ -1,4 +1,4 @@
-# 실시간 멀티플레이어 대전 게임 프로젝트
+# 실시간 멀티플레이어 대전 게임 프로젝트 - Wizards and Knights
 
 ![image](https://github.com/user-attachments/assets/08233f94-d136-4ed6-82df-a3a3d4b60e11)
 
