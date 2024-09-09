@@ -360,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 932501098101691874}
   - component: {fileID: -2686748507231774534}
-  - component: {fileID: 294066641757979093}
+  - component: {fileID: 2154500333481279507}
   - component: {fileID: 854047434301573314}
   - component: {fileID: 532842309490800541}
   - component: {fileID: 6631467521865965885}
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0b2ec62b4a5747b4059f0f3fd4bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerServer: {fileID: 294066641757979093}
+  playerServer: {fileID: 0}
   teamColorController: {fileID: 5186039184898530501}
   userNameUIController: {fileID: 4649931589576448986}
   hPBarUIController: {fileID: 2648681988919741548}
@@ -438,7 +438,7 @@ MonoBehaviour:
   - {fileID: 8653536894580035756}
   cameraShake: {fileID: 4764148587749578273}
   spellManagerClientWizard: {fileID: 6631467521865965885}
---- !u!114 &294066641757979093
+--- !u!114 &2154500333481279507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cebec3ae8547de4cae4a684d6416cb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dffe434a75835143b52f7c71b1be9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: -2686748507231774534}
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: -2686748507231774534}
-  playerServer: {fileID: 294066641757979093}
+  playerServer: {fileID: 0}
   playerAnimator: {fileID: 2441054021172676538}
 --- !u!54 &4842463508567140202
 Rigidbody:

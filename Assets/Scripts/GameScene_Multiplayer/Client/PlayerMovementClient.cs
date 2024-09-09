@@ -1,50 +1,41 @@
 using Unity.Netcode;
 using UnityEngine;
 
+/// <summary>
+/// 클라이언트 측에서 플레이어의 이동을 처리하는 컴포넌트입니다.
+/// 서버 권한 방식으로 이동을 처리합니다.
+/// </summary>
 public class PlayerMovementClient : NetworkBehaviour
 {
-    private GameInput gameInput;
-    private PlayerMovementServer playerMovementServer;
-
-    private void Awake()
-    {
-        gameInput = GetComponent<GameInput>();
-        playerMovementServer = GetComponent<PlayerMovementServer>();
-        //GetComponent<PlayerClient>().OnPlayerGameOver += OnPlayerGameOver;
-    }
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private PlayerMovementServer playerMovementServer;
 
     private void Update()
     {
+        // NetworkBehaviour.IsOwner값을 검증해 현 컴포넌트의 소유자만 입력을 처리하도록 합니다.
         if (!IsOwner) return;
 
         HandleMovementServerAuth();
     }
 
-    private void OnDisable()
-    {
-        //GetComponent<PlayerClient>().OnPlayerGameOver -= OnPlayerGameOver;
-    }
-
     /// <summary>
-    /// GamePad UI 스킬버튼 드래그에서 호출하여 플레이어를 회전시키는 메소드.
+    /// GamePad UI 스킬버튼 드래그에서 호출하여 플레이어를 회전시키는 메서드입니다.
     /// </summary>
+    /// <param name="dir">회전 방향</param>
     public void RotateByDragSpellButton(Vector3 dir)
     {
-        //Debug.Log($"RotateByDragSpellBtn dir:{dir}");
         playerMovementServer.RotateByDragSpellButtonServerRPC(dir);
     }
 
-    // Server Auth 방식의 이동 처리 (현 오브젝트에 Network Transform이 필요)
+    /// <summary>
+    /// 입력을 받아 서버 RPC를 호출하는 메서드입니다.
+    /// 서버 권한 방식으로 플레이어의 이동을 처리합니다.
+    /// </summary>
     public void HandleMovementServerAuth()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         playerMovementServer.HandleMovementServerRPC(inputVector, gameInput.GetIsAttackButtonClicked());
     }
-
-/*    private void OnPlayerGameOver(object sender, System.EventArgs e)
-    {
-        playerMovementServer.HandleMovementServerRPC(Vector2.zero, gameInput.GetIsAttackButtonClicked());
-    }*/
 }
 
 

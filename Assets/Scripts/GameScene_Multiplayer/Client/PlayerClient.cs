@@ -44,7 +44,7 @@ public abstract class PlayerClient : NetworkBehaviour
     [SerializeField] private Dictionary<ItemName, ushort> playerItemDictionaryOnClient;
 
     [ClientRpc]
-    public virtual void InitializePlayerClientRPC(SkillName[] skills)
+    public virtual void InitializePlayerClientRPC()
     {
         Debug.Log($"OwnerClientId {OwnerClientId} Player InitializePlayerClientRPC");
 
@@ -77,10 +77,6 @@ public abstract class PlayerClient : NetworkBehaviour
         
 
         Instance = this;
-
-        // 보유 skill 정보를 GamePad UI에 반영          
-        Debug.Log($"PlayerClient.InitializePlayerClientRPC() skills.Length : {skills.Length}");
-        GameSceneUIManager.Instance.gamePadUIController.UpdateSpellUI(skills);
 
         // Input Action 이벤트 구독
         gameInput.OnAttack1Started += GameInput_OnAttack1Started;

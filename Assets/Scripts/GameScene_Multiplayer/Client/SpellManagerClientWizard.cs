@@ -36,6 +36,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
     /// <param name="spellIndex"></param>
     public void CastingNormalSpell(ushort spellIndex)
     {
+        Debug.Log($"3. skillInfoListOnClient.Count:{skillInfoListOnClient.Count}, spellIndex:{spellIndex}");
         if (skillInfoListOnClient[spellIndex].spellState != SpellState.Ready) return;
 
         // 서버에 마법 캐스팅 요청

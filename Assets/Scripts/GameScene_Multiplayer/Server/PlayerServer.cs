@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class PlayerServer : NetworkBehaviour
 {
@@ -59,8 +56,8 @@ public class PlayerServer : NetworkBehaviour
         // 플레이어가 보유한 스킬 목록 저장
         skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
 
-        // 플레이어 InitializePlayer 시작, 스킬 목록을 클라이언트측(SpellController)에 저장 ( 수정해야함
-        playerClient.InitializePlayerClientRPC(character.skills);
+        // 플레이어 InitializePlayer
+        playerClient.InitializePlayerClientRPC();
     }
 
     // 스크롤 활용. 스킬 강화 VFX 실행

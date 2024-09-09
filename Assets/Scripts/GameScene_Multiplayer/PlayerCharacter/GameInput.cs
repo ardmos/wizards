@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 /// <summary>
-/// 플레이어 프리팹에 붙어있는 Input 관리 스크립트
+/// 플레이어의 입력을 관리하는 컴포넌트입니다.
+/// New Input System을 사용하여 다양한 입력 이벤트를 처리합니다.
 /// </summary>
 public class GameInput : MonoBehaviour
 {
@@ -20,8 +20,6 @@ public class GameInput : MonoBehaviour
     private bool isAttackButtonClicked;
 
     private PlayerInputActions playerInputActions;
-
-
 
     private void Awake()
     {
@@ -58,6 +56,10 @@ public class GameInput : MonoBehaviour
         playerInputActions.Dispose();
     }
 
+    /// <summary>
+    /// 플레이어의 이동 입력을 정규화된 벡터로 반환합니다.
+    /// </summary>
+    /// <returns>정규화된 이동 벡터</returns>
     public Vector2 GetMovementVectorNormalized()
     {
         if (!isPlayerControllable) return Vector2.zero;
@@ -69,29 +71,45 @@ public class GameInput : MonoBehaviour
         return inputVector;
     }
 
+    /// <summary>
+    /// 공격 버튼이 클릭되었는지 여부를 반환합니다.
+    /// </summary>
+    /// <returns>공격 버튼 클릭 상태</returns>
     public bool GetIsAttackButtonClicked()
     {
         return isAttackButtonClicked;
     }
 
+    /// <summary>
+    /// Attack1 버튼이 눌렸을 때 호출되는 메서드입니다.
+    /// </summary>
     private void Attack1_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
         isAttackButtonClicked = true;
         OnAttack1Started?.Invoke(this, EventArgs.Empty);
     }
+    /// <summary>
+    /// Attack2 버튼이 눌렸을 때 호출되는 메서드입니다.
+    /// </summary>
     private void Attack2_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
         isAttackButtonClicked = true;
         OnAttack2Started?.Invoke(this, EventArgs.Empty);
     }
+    /// <summary>
+    /// Attack3 버튼이 눌렸을 때 호출되는 메서드입니다.
+    /// </summary>
     private void Attack3_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
         isAttackButtonClicked = true;
         OnAttack3Started?.Invoke(this, EventArgs.Empty);
     }
+    /// <summary>
+    /// Defence 버튼이 눌렸을 때 호출되는 메서드입니다.
+    /// </summary>
     private void Defence_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
@@ -99,6 +117,9 @@ public class GameInput : MonoBehaviour
         OnDefenceStarted?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Attack1 버튼이 떼졌을 때 호출되는 메서드입니다.
+    /// </summary>
     private void Attack1_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
@@ -106,6 +127,9 @@ public class GameInput : MonoBehaviour
         isAttackButtonClicked = false;
         OnAttack1Ended?.Invoke(this, EventArgs.Empty);
     }
+    /// <summary>
+    /// Attack2 버튼이 떼졌을 때 호출되는 메서드입니다.
+    /// </summary>
     private void Attack2_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
@@ -113,6 +137,9 @@ public class GameInput : MonoBehaviour
         isAttackButtonClicked = false;
         OnAttack2Ended?.Invoke(this, EventArgs.Empty);
     }
+    /// <summary>
+    /// Attack3 버튼이 떼졌을 때 호출되는 메서드입니다.
+    /// </summary>
     private void Attack3_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
@@ -120,6 +147,9 @@ public class GameInput : MonoBehaviour
         isAttackButtonClicked = false;
         OnAttack3Ended?.Invoke(this, EventArgs.Empty);
     }
+    /// <summary>
+    /// Defence 버튼이 떼졌을 때 호출되는 메서드입니다.
+    /// </summary>
     private void Defence_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (!isPlayerControllable) return;
@@ -128,6 +158,9 @@ public class GameInput : MonoBehaviour
         OnDefenceEnded?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// 플레이어 게임 오버 시 호출되는 메서드입니다.
+    /// </summary>
     private void OnPlayerGameOver(object sender, EventArgs e)
     {
         isPlayerControllable = false;

@@ -15,8 +15,9 @@ public class SkillSpellManagerClient : NetworkBehaviour
     [SerializeField] protected List<SpellInfo> skillInfoListOnClient;
     [SerializeField] protected float[] restTimeCurrentSpellArrayOnClient;
 
-    public override void OnNetworkSpawn()
+    private void Awake()
     {
+        Debug.Log("?");
         skillInfoListOnClient = new List<SpellInfo>();
         restTimeCurrentSpellArrayOnClient = new float[totalSpellCount];
     }
@@ -79,16 +80,18 @@ public class SkillSpellManagerClient : NetworkBehaviour
     /// <param name="skills"></param>
     public void InitPlayerSpellInfoListClient(SkillName[] skills)
     {
+        Debug.Log($"2");
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
         foreach (SkillName skill in skills)
         {
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(skill));
             spellInfo.ownerPlayerClientId = OwnerClientId;
             playerSpellInfoList.Add(spellInfo);
+            Debug.Log($"2_1. spellInfo.spellName:{spellInfo.spellName}");
         }
 
         skillInfoListOnClient = playerSpellInfoList;
-        //Debug.Log("2. SkillSpellManagerClient.InitPlayerSpellInfoListClient");
+        Debug.Log($"2_2. skillInfoListOnClient.Count:{skillInfoListOnClient.Count}");
     }
 
     /// <summary>
