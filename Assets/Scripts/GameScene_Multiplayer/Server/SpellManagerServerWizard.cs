@@ -96,12 +96,10 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         spellObject.GetComponent<NetworkObject>().Spawn();
         if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
         {
-            //Debug.Log($"플레이어 블리자드 발사 메서드 gameObject:{gameObject}. IsServer:{IsServer}, 요청 플레이어:{serverRpcParams.Receive.SenderClientId}");
             aoESpell.SetOwner(OwnerClientId, gameObject);
             aoESpell.InitAoESpell(GetSpellInfo(2));
         }
 
-        //Destroy(spellObject, 4f);
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(2, SpellState.Cooltime);
         spellObject.transform.SetParent(MultiplayerGameManager.Instance.transform);
@@ -159,17 +157,10 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     [ServerRpc(RequireOwnership = false)]
     public void ShootSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
     {
-        //GameObject spellObject = playerCastingSpell;
-        if (!playerCastingSpell)
-        {
-            //Debug.Log($"ShootSpellServerRPC : Wrong Request. Player{clientId} has no casting spell object.");
-            return;
-        }
+        if (!playerCastingSpell) return;
 
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(spellIndex, SpellState.Cooltime);
-
-        //Debug.Log($"{nameof(ShootSpellServerRPC)} ownerClientId {clientId}");
 
         playerCastingSpell.transform.SetParent(MultiplayerGameManager.Instance.transform);
         float moveSpeed = playerCastingSpell.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
@@ -187,7 +178,6 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         }
 
         // 발사 SFX 실행 
-        //SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
         SpellInfo spellInfo = GetSpellInfo(spellIndex);
         SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Shooting, transform);
 
@@ -203,16 +193,10 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     // 포구 VFX 
     public void MuzzleVFX(GameObject muzzleVFXPrefab, Transform muzzleTransform)
     {
-        if (muzzleVFXPrefab == null)
-        {
-            //Debug.Log($"MuzzleVFX muzzleVFXPrefab is null");
-            return;
-        }
+        if (muzzleVFXPrefab == null) return;
 
-        //Debug.Log($"MuzzleVFX muzzlePos:{muzzleTransform.position}, muzzleLocalPos:{muzzleTransform.localPosition}");
         GameObject muzzleVFX = Instantiate(muzzleVFXPrefab, muzzleTransform.position, Quaternion.identity);
         muzzleVFX.GetComponent<NetworkObject>().Spawn();
-        //muzzleVFX.transform.SetParent(transform);
         muzzleVFX.transform.position = muzzleTransform.position;
         muzzleVFX.transform.forward = muzzleTransform.forward;
         var particleSystem = muzzleVFX.GetComponent<ParticleSystem>();

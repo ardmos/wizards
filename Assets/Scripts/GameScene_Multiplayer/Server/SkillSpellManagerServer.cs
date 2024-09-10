@@ -1,18 +1,28 @@
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+/// <summary>
+/// 서버 측에서 스킬과 스펠을 관리하는 클래스입니다.
+/// </summary>
 public class SkillSpellManagerServer : NetworkBehaviour
 {
+    #region Constants
     // SpellInfoList의 인덱스 0~2까지는 공격마법, 3은 방어마법 입니다.
     public const byte DEFENCE_SPELL_INDEX_DEFAULT = 3;
+    #endregion
+
+    #region Fields
     public SkillSpellManagerClient skillSpellManagerClient;
     public PlayerAnimator playerAnimator;
     private List<SpellInfo> playerOwnedSpellInfoListOnServer = new List<SpellInfo>();
+    #endregion
 
-    #region SpellInfo
-    [ServerRpc (RequireOwnership = false)]
+    #region SpellInfo Management
+    /// <summary>
+    /// 플레이어의 스펠 상태를 업데이트하는 ServerRpc 메서드입니다.
+    /// </summary>
+    [ServerRpc(RequireOwnership = false)]
     public void UpdatePlayerSpellStateServerRPC(ushort spellIndex, SpellState spellState, ServerRpcParams serverRpcParams = default)
     {
         playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
@@ -21,6 +31,9 @@ public class SkillSpellManagerServer : NetworkBehaviour
         skillSpellManagerClient.UpdatePlayerSpellInfoArrayClientRPC(playerOwnedSpellInfoListOnServer.ToArray());
     }
 
+    /// <summary>
+    /// 플레이어의 스펠 상태를 업데이트하는 메서드입니다.
+    /// </summary>
     public void UpdatePlayerSpellState(ushort spellIndex, SpellState spellState)
     {
         playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
@@ -47,16 +60,19 @@ public class SkillSpellManagerServer : NetworkBehaviour
         playerOwnedSpellInfoListOnServer = playerSpellInfoList;
     }
 
+    /// <summary>
+    /// 현재 서버가 보유중인 SpellInfo 리스트를 반환합니다.
+    /// </summary>
     public List<SpellInfo> GetSpellInfoList()
     {
         return playerOwnedSpellInfoListOnServer;
     }
 
     /// <summary>
-    /// 현재 client가 보유중인 특정 마법의 정보를 알려주는 메소드 입니다.  
+    /// 현재 서버가 보유중인 특정 마법의 정보를 알려주는 메서드 입니다.  
     /// </summary>
     /// <param name="spellName">알고싶은 마법의 이름</param>
-    /// <returns></returns>
+    /// <returns>SpellInfo 객체, 없으면 null</returns>
     public SpellInfo GetSpellInfo(SkillName spellName)
     {
         foreach (SpellInfo spellInfo in playerOwnedSpellInfoListOnServer)
@@ -70,37 +86,35 @@ public class SkillSpellManagerServer : NetworkBehaviour
         return null;
     }
 
+    /// <summary>
+    /// 인덱스로 SpellInfo를 가져오는 메서드입니다.
+    /// </summary>
+    /// <param name="spellIndex">스펠의 인덱스</param>
+    /// <returns>SpellInfo 객체, 없으면 null</returns>
     public SpellInfo GetSpellInfo(ushort spellIndex)
     {
         if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return null;
         return playerOwnedSpellInfoListOnServer[spellIndex];
     }
 
-/*    public void SetSpellInfo(ushort spellIndex, SpellInfo newSpellInfo)
-    {
-        if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return;
-        playerOwnedSpellInfoListOnServer[spellIndex] = newSpellInfo;
-    }*/
-
     /// <summary>
-    /// -1을 반환하면 못찾았다는 뜻
+    /// 스킬 이름으로 스펠 인덱스를 찾는 메서드입니다.
     /// </summary>
-    /// <param name="skillName"></param>
-    /// <returns></returns>
+    /// <param name="skillName">찾고자 하는 스킬 이름</param>
+    /// <returns>스펠 인덱스, 못찾으면 -1</returns>
     public int GetSpellIndexBySpellName(SkillName skillName)
     {
         int index = -1;
 
-        for (int i = 0; i<playerOwnedSpellInfoListOnServer.Count; i++)
+        for (int i = 0; i < playerOwnedSpellInfoListOnServer.Count; i++)
         {
             if (playerOwnedSpellInfoListOnServer[i].spellName.Equals(skillName))
             {
-                index = i; 
-                break;   
+                index = i;
+                break;
             }
         }
         return index;
     }
     #endregion
-
 }

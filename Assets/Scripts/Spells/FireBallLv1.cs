@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Netcode;
-using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 /// <summary>
 /// 
@@ -81,10 +78,6 @@ public class FireBallLv1 : FireSpell
                         spellInfo.coolTime = defaultCooltime * (1 - reductionPercentage);
                         //Debug.Log($"{SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime} - 0.2f * {spellInfo.upgradeOptions[(int)upgradeOption]}. 파이어볼 쿨타임:{spellInfo.coolTime}");
                         break;
-/*                    case FireballUpgradeOption.AddPiercing:
-                        // "파이어볼이 적을 관통합니다."
-                        piercingStack += spellInfo.upgradeOptions[(int)upgradeOption];
-                        break;*/
                 }
 
             }
@@ -226,17 +219,6 @@ public class FireBallLv1 : FireSpell
         }
 
     }
-
-/*    private bool 피어싱효과구현()
-    {
-        // 피어싱 스택이 남아있으면 스펠파괴 로직 실행 대신, 피어싱 스택을 감소시킵니다
-        if (--piercingStack >= 0)
-        {
-            Debug.Log($"피어싱 스택 감소!{piercingStack}");
-            return true;
-        }
-        return false;
-    }*/
 
     private void 공격마법과충돌한경우(Collision collision)
     {
