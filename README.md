@@ -7,7 +7,7 @@
 
 ## 주요 기능 및 기술
 - **네트워크 통신**: Unity Gaming Services 프레임워크를 활용하여 원격 프로시저 호출(Remote Procedure Calls, RPC) 방식으로 클라이언트와 서버 간의 통신을 구현하였습니다.
-- **서버 인프라**: Unity의 Game Server Hosting 서비스를 통해 서버 인프라를 개발 및 관리하고 있습니다.
+- **서버 인프라**: Unity의 Multiplay Hosting 서비스를 통해 서버 인프라를 개발 및 관리하고 있습니다.
 - **매칭 시스템**: Unity의 Matchmaker 서비스를 사용하여 플레이어 매칭 기능을 구현하였습니다.
 
 ## 사용 기술
