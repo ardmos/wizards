@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class GameInput : MonoBehaviour
 {
+    #region Events
     public event EventHandler OnAttack1Started;
     public event EventHandler OnAttack2Started;
     public event EventHandler OnAttack3Started;
@@ -15,12 +16,15 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnAttack3Ended;
     public event EventHandler OnDefenceStarted;
     public event EventHandler OnDefenceEnded;
+    #endregion
 
+    #region Fields
     private bool isPlayerControllable;
     private bool isAttackButtonClicked;
-
     private PlayerInputActions playerInputActions;
+    #endregion
 
+    #region Unity Lifecycle
     private void Awake()
     {
         isPlayerControllable = true;
@@ -55,7 +59,9 @@ public class GameInput : MonoBehaviour
 
         playerInputActions.Dispose();
     }
+    #endregion
 
+    #region Input Handling
     /// <summary>
     /// 플레이어의 이동 입력을 정규화된 벡터로 반환합니다.
     /// </summary>
@@ -157,7 +163,9 @@ public class GameInput : MonoBehaviour
         isAttackButtonClicked = false;
         OnDefenceEnded?.Invoke(this, EventArgs.Empty);
     }
+    #endregion
 
+    #region Player Controllable Handling
     /// <summary>
     /// 플레이어 게임 오버 시 호출되는 메서드입니다.
     /// </summary>
@@ -165,4 +173,5 @@ public class GameInput : MonoBehaviour
     {
         isPlayerControllable = false;
     }
+    #endregion
 }

@@ -19,13 +19,13 @@ public class Knight : PlayerClient, ICharacter
                 SkillName.Dash_Lv1
                 };
 
-    [ClientRpc]
+/*    [ClientRpc]
     public override void InitializePlayerClientRPC(SkillName[] skills)
     {
         base.InitializePlayerClientRPC(skills);
         // 보유 skill 정보를 클라이언트측 캐릭터의 스킬 컨트롤러에 전달.
         skillManagerClientKnight.InitPlayerSpellInfoListClient(skills);
-    }
+    }*/
 
     public ICharacter GetCharacterData()
     {

@@ -61,7 +61,7 @@ public class PlayerServerSingleMode : NetworkBehaviour
 
         Debug.Log("0");
         // 플레이어 InitializePlayer 시작, 스킬 목록을 클라이언트측(SpellController)에 저장 ( 수정해야함
-        playerClient.InitializePlayerClientRPC(character.skills);
+        playerClient.InitializePlayerClientRPC();
     }
 
     // 스크롤 활용. 스킬 강화 VFX 실행

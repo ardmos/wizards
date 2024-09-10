@@ -7,14 +7,19 @@ using UnityEngine;
 /// </summary>
 public class PlayerMovementServer : NetworkBehaviour
 {
+    #region Constants
     /// <summary>
     /// 플레이어의 회전 속도를 정의하는 상수입니다.
     /// </summary>
     private const float ROTATE_SPEED = 30f;
+    #endregion
 
+    #region Fields
     [SerializeField] private PlayerClient playerClient;
     [SerializeField] private PlayerAnimator playerAnimator;
+    #endregion
 
+    #region Movement Handling
     /// <summary>
     /// 서버에서 플레이어의 이동을 처리합니다.
     /// </summary>
@@ -61,7 +66,9 @@ public class PlayerMovementServer : NetworkBehaviour
         Vector3 slerpResult = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * ROTATE_SPEED);
         transform.forward = slerpResult;
     }
+    #endregion
 
+    #region Speed Management
     /// <summary>
     /// 플레이어의 이동 속도를 감소시킵니다.
     /// </summary>
@@ -79,4 +86,5 @@ public class PlayerMovementServer : NetworkBehaviour
     {
         ((ICharacter)playerClient).moveSpeed += addValue; 
     }
+    #endregion
 }

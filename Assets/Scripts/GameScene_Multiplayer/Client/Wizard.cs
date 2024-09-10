@@ -7,6 +7,7 @@ using Unity.Netcode;
 /// </summary>
 public class Wizard : PlayerClient, ICharacter
 {
+    #region Fields and Properties
     /// <summary>
     /// Wizard 캐릭터의 스펠 매니저 컴포넌트입니다.
     /// </summary>
@@ -37,7 +38,9 @@ public class Wizard : PlayerClient, ICharacter
                 SkillName.BlizzardLv1,
                 SkillName.MagicShieldLv1
                 };
+    #endregion
 
+    #region Initialization
     /// <summary>
     /// 플레이어를 초기화하는 ClientRpc 메서드입니다.
     /// </summary>
@@ -50,7 +53,9 @@ public class Wizard : PlayerClient, ICharacter
         // 보유 skill 정보를 바탕으로 스킬 매니저를 초기화
         spellManagerClientWizard.InitPlayerSpellInfoListClient(skills);
     }
+    #endregion
 
+    #region Character Data
     /// <summary>
     /// 캐릭터 데이터를 반환하는 메서드입니다.
     /// </summary>
@@ -59,7 +64,9 @@ public class Wizard : PlayerClient, ICharacter
     {
         return this;
     }
+    #endregion
 
+    #region Input Handling
     /// <summary>
     /// Attack1 버튼이 눌렸을 때 호출되는 메서드입니다. 스킬을 캐스팅하기 시작합니다.
     /// </summary>
@@ -118,4 +125,5 @@ public class Wizard : PlayerClient, ICharacter
     /// Wizard의 Defence스킬은 즉시 발동되기 때문에 별다른 작업을 하지 않습니다.
     /// </summary>
     protected override void GameInput_OnDefenceEnded(object sender, EventArgs e) { }
+    #endregion
 }
