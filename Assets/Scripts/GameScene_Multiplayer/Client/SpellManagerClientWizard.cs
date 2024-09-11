@@ -11,14 +11,14 @@ using UnityEngine;
 ///   4. 현재 캐스팅중인 마법 오브젝트 관리
 ///   
 /// </summary>
-public class SpellManagerClientWizard : SkillSpellManagerClient
+public class SpellManagerClientWizard : SpellManagerClient
 {
     public void CastingBlizzard()
     {
         if (skillInfoListOnClient[2].spellState != SpellState.Ready) return;
 
         // 서버에 마법 캐스팅 요청
-        skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().CastingBlizzardServerRPC();
+        spellManagerServer.GetComponent<SpellManagerServerWizard>().CastingBlizzardServerRPC();
     }
 
     public void SetBlizzard()
@@ -26,7 +26,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
         if (skillInfoListOnClient[2].spellState != SpellState.Aiming) return;
 
         // 서버에 마법 발사 요청
-        skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().SetBlizzardServerRPC();
+        spellManagerServer.GetComponent<SpellManagerServerWizard>().SetBlizzardServerRPC();
     }
 
     #region 공격 마법 캐스팅&발사
@@ -40,7 +40,7 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
         if (skillInfoListOnClient[spellIndex].spellState != SpellState.Ready) return;
 
         // 서버에 마법 캐스팅 요청
-        skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().CastingSpellServerRPC(spellIndex);
+        spellManagerServer.GetComponent<SpellManagerServerWizard>().CastingSpellServerRPC(spellIndex);
     }
 
     /// <summary>
@@ -51,17 +51,17 @@ public class SpellManagerClientWizard : SkillSpellManagerClient
         if (skillInfoListOnClient[spellIndex].spellState != SpellState.Aiming) return;
 
         // 서버에 마법 발사 요청
-        skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().ShootSpellServerRPC(spellIndex) ;
+        spellManagerServer.GetComponent<SpellManagerServerWizard>().ShootSpellServerRPC(spellIndex) ;
     }
     #endregion
 
     #region 방어 마법 시전
     public void ActivateDefenceSpellOnClient()
     {
-        if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
+        if (skillInfoListOnClient[SpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
 
         // 서버에 마법 시전 요청
-        skillSpellManagerServer.GetComponent<SpellManagerServerWizard>().StartActivateDefenceSpellServerRPC();
+        spellManagerServer.GetComponent<SpellManagerServerWizard>().StartActivateDefenceSpellServerRPC();
     }
     #endregion
 }

@@ -140,7 +140,7 @@ public class FireballUpgrade : ISkillUpgradeOption
 
     public Sprite GetIcon()
     {
-        return GameAssetsManager.Instance.GetSpellIconImage(SkillName.FireBallLv1);
+        return GameAssetsManager.Instance.GetSpellIconImage(SpellName.FireBallLv1);
     }
 
     public SkillUpgradeOptionDTO ToDTO()
@@ -208,7 +208,7 @@ public class WaterballUpgrade : ISkillUpgradeOption
 
     public Sprite GetIcon()
     {
-        return GameAssetsManager.Instance.GetSpellIconImage(SkillName.WaterBallLv1);
+        return GameAssetsManager.Instance.GetSpellIconImage(SpellName.WaterBallLv1);
     }
 
     public SkillUpgradeOptionDTO ToDTO()
@@ -270,7 +270,7 @@ public class BlizzardUpgrade : ISkillUpgradeOption
 
     public Sprite GetIcon()
     {
-        return GameAssetsManager.Instance.GetSpellIconImage(SkillName.BlizzardLv1);
+        return GameAssetsManager.Instance.GetSpellIconImage(SpellName.BlizzardLv1);
     }
 
     public SkillUpgradeOptionDTO ToDTO()

@@ -8,26 +8,26 @@ public class Spell
     /// </summary>
     /// <param name="level"></param>
     /// <param name="spellType"></param>
-    public static SkillName GetSpellName(byte level, SpellType spellType)
+    public static SpellName GetSpellName(byte level, SpellType spellType)
     {
-        SkillName spellName = SkillName.FireBallLv1;
+        SpellName spellName = SpellName.FireBallLv1;
 
         switch (spellType)
         {
             case SpellType.Normal:
                 // 기사 마법은 추후 수정 예정. 일단 테스트용.
-                spellName = SkillName.FireBallLv1 + level - 1;
+                spellName = SpellName.FireBallLv1 + level - 1;
                 break;
             case SpellType.Fire:
-                spellName = SkillName.FireBallLv1 + level - 1;
+                spellName = SpellName.FireBallLv1 + level - 1;
                 break;
 
             case SpellType.Water:
-                spellName = SkillName.WaterBallLv1 + level - 1;
+                spellName = SpellName.WaterBallLv1 + level - 1;
                 break;
 
             case SpellType.Ice:
-                spellName = SkillName.IceBallLv1 + level - 1;
+                spellName = SpellName.IceBallLv1 + level - 1;
                 break;
 
             default: break;

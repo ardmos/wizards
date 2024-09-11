@@ -56,11 +56,11 @@ public class BlizzardLv1 : AoESpell
                 {
                     case BlizzardUpgradeOption.IncreaseDuration:
                         // 블리자드의 지속시간이 1초 증가합니다
-                        spellInfo.lifetime = SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.BlizzardLv1).lifetime + spellInfo.upgradeOptions[(int)upgradeOption];
+                        spellInfo.lifetime = SpellSpecifications.Instance.GetSpellDefaultSpec(SpellName.BlizzardLv1).lifetime + spellInfo.upgradeOptions[(int)upgradeOption];
                         break;
                     case BlizzardUpgradeOption.IncreaseDamage:
                         // "블리자드의 초당 공격력이 1만큼 증가합니다"
-                        spellInfo.damage = (byte)(SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.BlizzardLv1).damage + spellInfo.upgradeOptions[(int)upgradeOption]);
+                        spellInfo.damage = (byte)(SpellSpecifications.Instance.GetSpellDefaultSpec(SpellName.BlizzardLv1).damage + spellInfo.upgradeOptions[(int)upgradeOption]);
                         break;
                     case BlizzardUpgradeOption.IncreaseSlowSpeed:
                         // "블리자드의 감속효과가 20%만큼 증가합니다"

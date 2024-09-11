@@ -33,7 +33,7 @@ public class ScrollManagerServer : NetworkBehaviour
 
         // 클라이언트측UI 업데이트
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().AddScrollClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].Count);
+        networkClient.PlayerObject.GetComponent<PlayerClient>().PickUpScrollClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].Count);
     }
 
     private void DequeuePlayerScrollSpellSlotQueueOnServer(ulong clientId)
@@ -42,7 +42,7 @@ public class ScrollManagerServer : NetworkBehaviour
 
         // 클라이언트측UI 업데이트
         NetworkClient networkClient = NetworkManager.ConnectedClients[clientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().UpdateScrollClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].Count);
+        networkClient.PlayerObject.GetComponent<PlayerClient>().UseScrollClientRPC(playerScrollSpellSlotQueueMapOnServer[clientId].Count);
     }
 
     /// <summary>
@@ -88,20 +88,20 @@ public class ScrollManagerServer : NetworkBehaviour
             {
                 case FireballUpgrade fireballUpgrade:
                     //Debug.Log($"업그레이드 옵션이 선택되었습니다! 해당 파이어볼 마법의 업그레이드 현황 검색입니다.{spellManagerServerWizard.GetSpellInfo(SkillName.FireBallLv1).upgradeOptions.Length}");
-                    fireballUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SkillName.FireBallLv1));
+                    fireballUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SpellName.FireBallLv1));
                     break;
                 case WaterballUpgrade waterballUpgrade:
-                    waterballUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SkillName.WaterBallLv1));
+                    waterballUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SpellName.WaterBallLv1));
                     break;
                 case BlizzardUpgrade blizzardUpgrade:
-                    blizzardUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SkillName.BlizzardLv1));
+                    blizzardUpgrade.UpgradeSkill(spellManagerServerWizard.GetSpellInfo(SpellName.BlizzardLv1));
                     break;
                 default:
                     throw new ArgumentException("Unknown skill upgrade option type");
             }
 
             // 스킬 업그레이드 내용을 요청한 클라이언트와 동기화
-            networkClient.PlayerObject.GetComponent<SkillSpellManagerClient>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
+            networkClient.PlayerObject.GetComponent<SpellManagerClient>().UpdatePlayerSpellInfoArrayClientRPC(spellManagerServerWizard.GetSpellInfoList().ToArray());
 
             // 적용 완료된 Scroll 정보가 담긴 Spell Slot Queue를 Dequeue.
             DequeuePlayerScrollSpellSlotQueueOnServer(clientId);

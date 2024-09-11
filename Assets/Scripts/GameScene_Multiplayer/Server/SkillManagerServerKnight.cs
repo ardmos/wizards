@@ -3,13 +3,13 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SkillManagerServerKnight : SkillSpellManagerServer
+public class SkillManagerServerKnight : SpellManagerServer
 {
     // 대쉬 스킬 정보를 일단 하드코딩으로 넣어뒀습니다. 추후 구글시트와 JSON을 활용한 연결을 할 때 수정하면 됩니다.
     private float dashDistance = 50f; // 대쉬 거리
     private float dashDuration = 0.05f; // 대쉬 지속 시간
 
-    public PlayerClient playerClient;
+    public SkillManagerClientKnight skillManagerClientKnight;
 
     [Header("스킬 시전 위치")]
     // 스킬 시전 위치
@@ -86,7 +86,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVertical);
 
         // SFX 실행
-        SoundManager.Instance?.PlayKnightSkillSFX(SkillName.ElectricSlashAttackVertical_Lv1, SFX_Type.Shooting, transform);
+        SoundManager.Instance?.PlayKnightSkillSFX(SpellName.ElectricSlashAttackVertical_Lv1, SFX_Type.Shooting, transform);
     }
 
     private void AttackWhirlwind()
@@ -111,7 +111,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackWhirlwind);
 
         // SFX 실행
-        SoundManager.Instance?.PlayKnightSkillSFX(SkillName.ElectricSlashAttackWhirlwind_Lv1, SFX_Type.Shooting, transform);
+        SoundManager.Instance?.PlayKnightSkillSFX(SpellName.ElectricSlashAttackWhirlwind_Lv1, SFX_Type.Shooting, transform);
     }
 
     private void AttackChargeReady()
@@ -119,7 +119,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         if(chargeEffectObject) Destroy(chargeEffectObject);
 
         // 스킬 이펙트 생성
-        chargeEffectObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.ElectricSlashAttackCharge_Lv1), attackChargeReadyMuzzle.position, Quaternion.identity);
+        chargeEffectObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SpellName.ElectricSlashAttackCharge_Lv1), attackChargeReadyMuzzle.position, Quaternion.identity);
         chargeEffectObject.GetComponent<NetworkObject>().Spawn();
         // 위치 설정
         chargeEffectObject.transform.SetParent(transform);
@@ -129,7 +129,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVerticalReady);
 
         // SFX 실행
-        SoundManager.Instance?.PlayKnightSkillSFX(SkillName.ElectricSlashAttackChargeSlash_Lv1, SFX_Type.Aiming, transform);
+        SoundManager.Instance?.PlayKnightSkillSFX(SpellName.ElectricSlashAttackChargeSlash_Lv1, SFX_Type.Aiming, transform);
     }
 
     private void AttackChargeShoot()
@@ -160,7 +160,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.AttackVertical);
 
         // SFX 실행
-        SoundManager.Instance?.PlayKnightSkillSFX(SkillName.ElectricSlashAttackChargeSlash_Lv1, SFX_Type.Shooting, transform);
+        SoundManager.Instance?.PlayKnightSkillSFX(SpellName.ElectricSlashAttackChargeSlash_Lv1, SFX_Type.Shooting, transform);
     }
 
     /// <summary>
@@ -180,7 +180,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
         playerAnimator.UpdateKnightMaleAnimationOnServer(KnightMaleAnimState.Dash);
 
         // SFX 실행
-        SoundManager.Instance?.PlayKnightSkillSFX(SkillName.Dash_Lv1, SFX_Type.Shooting, transform);
+        SoundManager.Instance?.PlayKnightSkillSFX(SpellName.Dash_Lv1, SFX_Type.Shooting, transform);
 
         // 스킬 이펙트 생성
         /*        SpellInfo skillInfo = new SpellInfo(GetSpellInfo((ushort)3));
@@ -193,7 +193,7 @@ public class SkillManagerServerKnight : SkillSpellManagerServer
                 spellObject.transform.localPosition = Vector3.zero;*/
 
         // 스킬 이펙트 (캐릭터 트레일) 생성 ClientRPC
-        playerClient.ActivateDashTrailEffectClientRPC();      
+        skillManagerClientKnight.ActivateDashTrailEffectClientRPC();      
     }
 
     private void Dash()

@@ -11,6 +11,6 @@ public class CharacterCardInfo : ScriptableObject
     public string characterName;
     public string characterDescription;
     public int characterLevel;
-    public List<SkillName> characterSkillSet = new List<SkillName>();
+    public List<SpellName> characterSkillSet = new List<SpellName>();
     public List<SkillInfoDetail> skillInfoDetails = new List<SkillInfoDetail>();
 }

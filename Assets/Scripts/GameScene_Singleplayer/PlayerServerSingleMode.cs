@@ -12,7 +12,7 @@ public class PlayerServerSingleMode : NetworkBehaviour
     public PlayerClient playerClient;
     public PlayerHPManagerServer playerHPManager;
     public PlayerAnimator playerAnimator;
-    public SkillSpellManagerServer skillSpellManagerServer;
+    public SpellManagerServer skillSpellManagerServer;
     [Header("물리 관련")]
     public Rigidbody rb;
     public Collider _collider;

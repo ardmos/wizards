@@ -147,7 +147,7 @@ public class SoundManager : NetworkBehaviour
         audioSourceSFX.Play();
     }
 
-    public void PlayWizardSpellSFX(SkillName spellName, SFX_Type sFX_Type, Transform position)
+    public void PlayWizardSpellSFX(SpellName spellName, SFX_Type sFX_Type, Transform position)
     {
         if (audioSourceObjectPrefab == null) return;
 
@@ -163,7 +163,7 @@ public class SoundManager : NetworkBehaviour
     /// <param name="spellName"></param>
     /// <param name="sFX_Type"></param>
     /// <param name="position">사운드 재생 위치</param>
-    public void PlayKnightSkillSFX(SkillName spellName, SFX_Type sFX_Type, Transform position)
+    public void PlayKnightSkillSFX(SpellName spellName, SFX_Type sFX_Type, Transform position)
     {
         if (audioSourceObjectPrefab == null) return;
 

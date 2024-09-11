@@ -6,10 +6,11 @@ using UnityEngine;
 
 /// <summary>
 /// 마법 쿨타임 관리. 쿨타임 관리는 클라이언트에서 해주고있습니다.
+/// NOTE : 쿨타임 관리 부분을 분리해서 별개의 컴포넌트로 만들어줄 필요가 있습니다.
 /// </summary>
-public class SkillSpellManagerClient : NetworkBehaviour
+public class SpellManagerClient : NetworkBehaviour
 {
-    public SkillSpellManagerServer skillSpellManagerServer;
+    public SpellManagerServer spellManagerServer;
 
     protected const byte totalSpellCount = 4;
     [SerializeField] protected List<SpellInfo> skillInfoListOnClient;
@@ -48,7 +49,7 @@ public class SkillSpellManagerClient : NetworkBehaviour
                 // 여기서 서버에 Ready로 바뀐 State를 보고 하면 서버에서 다시 콜백해서 현 클라이언트 오브젝트의 State가 Ready로 바뀌긴 하는데, 그 사이에 딜레이가 있어서
                 // 여기서 한 번 클라이언트의 State를 바꿔주고 서버에 보고 해준다.
                 skillInfoListOnClient[spellIndex].spellState = SpellState.Ready;
-                skillSpellManagerServer.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
+                spellManagerServer.UpdatePlayerSpellStateServerRPC(spellIndex, SpellState.Ready);
             }
             //Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
         }
@@ -78,11 +79,11 @@ public class SkillSpellManagerClient : NetworkBehaviour
     /// 플레이어의 스킬 리스트 정보를 저장합니다
     /// </summary>
     /// <param name="skills"></param>
-    public void InitPlayerSpellInfoListClient(SkillName[] skills)
+    public void InitPlayerSpellInfoListClient(SpellName[] skills)
     {
         Debug.Log($"2");
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
-        foreach (SkillName skill in skills)
+        foreach (SpellName skill in skills)
         {
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(skill));
             spellInfo.ownerPlayerClientId = OwnerClientId;

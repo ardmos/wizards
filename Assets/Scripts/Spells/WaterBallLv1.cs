@@ -41,7 +41,7 @@ public class WaterBallLv1 : WaterSpell
                 {
                     case WaterballUpgradeOption.IncreaseSpeed:
                         // "워터볼의 속도가 30% 증가합니다."
-                        spellInfo.moveSpeed = SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.WaterBallLv1).moveSpeed - 0.2f * (float)spellInfo.upgradeOptions[(int)upgradeOption];
+                        spellInfo.moveSpeed = SpellSpecifications.Instance.GetSpellDefaultSpec(SpellName.WaterBallLv1).moveSpeed - 0.2f * (float)spellInfo.upgradeOptions[(int)upgradeOption];
                         break;
                     case WaterballUpgradeOption.IncreaseHomingRange:
                         // "워터볼의 유도 타겟 인식 범위가 20% 증가합니다."
@@ -56,7 +56,7 @@ public class WaterBallLv1 : WaterSpell
                         break;
                     case WaterballUpgradeOption.ReduceCooldown:
                         // "워터볼의 재사용 대기 시간이 20% 감소합니다."
-                        float defaultCooltime = SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime;
+                        float defaultCooltime = SpellSpecifications.Instance.GetSpellDefaultSpec(SpellName.FireBallLv1).coolTime;
                         float reductionPercentage = 0.2f * (float)spellInfo.upgradeOptions[(int)upgradeOption];
                         spellInfo.coolTime = defaultCooltime * (1 - reductionPercentage);
                         //Debug.Log($"{SpellSpecifications.Instance.GetSpellDefaultSpec(SkillName.FireBallLv1).coolTime} - 0.2f * {spellInfo.upgradeOptions[(int)upgradeOption]}. 파이어볼 쿨타임:{spellInfo.coolTime}");

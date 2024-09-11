@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 오브젝트 풀링!!!!!!
+/// </summary>
 public class KnightBuzzMeshTrail : MonoBehaviour
 {
     [Header("Mesh Related")]

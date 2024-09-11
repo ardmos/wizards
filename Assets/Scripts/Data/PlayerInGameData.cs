@@ -16,10 +16,10 @@ public struct PlayerInGameData : IEquatable<PlayerInGameData>, INetworkSerializa
     public sbyte hp;
     public sbyte maxHp;
     public float moveSpeed;
-    public SkillName skillAttack1;
-    public SkillName skillAttack2;
-    public SkillName skillAttack3;
-    public SkillName skillDefence;
+    public SpellName skillAttack1;
+    public SpellName skillAttack2;
+    public SpellName skillAttack3;
+    public SpellName skillDefence;
     public bool isAI;
 
     public bool Equals(PlayerInGameData other)

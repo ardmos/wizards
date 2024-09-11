@@ -22,7 +22,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
             playerData.maxHp = character.maxHp;
             GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
 
-            playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+            playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
         }
         else
         {
@@ -31,7 +31,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
             playerData.maxHp = character.maxHp;
             GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
 
-            playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+            playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
         }
     }
 
@@ -58,7 +58,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         }
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
-        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
     }
 
     /// <summary>
@@ -125,7 +125,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         playerClient.ShowDamageTextPopupClientRPC(damage);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
-        playerClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
 
         // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
         playerClient.ActivateHitByAttackEffectClientRPC();

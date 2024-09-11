@@ -8,7 +8,7 @@ public class PlayerServer : NetworkBehaviour
     public PlayerClient playerClient;
     public PlayerHPManagerServer playerHPManager;
     public PlayerAnimator playerAnimator;
-    public SkillSpellManagerServer skillSpellManagerServer;
+    public SpellManagerServer spellManagerServer;
     [Header("물리 관련")]
     public Rigidbody rb;
     public Collider _collider;
@@ -54,7 +54,7 @@ public class PlayerServer : NetworkBehaviour
         playerHPManager.InitPlayerHP(character);
 
         // 플레이어가 보유한 스킬 목록 저장
-        skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
+        spellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
 
         // 플레이어 InitializePlayer
         playerClient.InitializePlayerClientRPC();

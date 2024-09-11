@@ -23,7 +23,7 @@ public class GamePadUIController : MonoBehaviour
     /// <summary>
     /// 게임패드 스킬 아이콘을 업데이트 해주는 메소드
     /// </summary>
-    public void UpdateSpellUI(SkillName[] skills)
+    public void UpdateSpellUI(SpellName[] skills)
     {
         if (PlayerClient.Instance == null) return;
 
@@ -47,7 +47,7 @@ public class GamePadUIController : MonoBehaviour
         for (byte i = 0;i < spellCooltimeImages.Length; i++)
         {
             //Debug.Log($"{Player.LocalInstance.OwnerClientId}");
-            float coolTimeRatio = PlayerClient.Instance.GetComponent<SkillSpellManagerClient>().GetCurrentSpellCoolTimeRatio(i);
+            float coolTimeRatio = PlayerClient.Instance.GetComponent<SpellManagerClient>().GetCurrentSpellCoolTimeRatio(i);
             if (coolTimeRatio > 0) 
             {
                 spellCooltimeImages[i].fillAmount = 1 - coolTimeRatio;

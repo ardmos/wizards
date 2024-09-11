@@ -10,7 +10,6 @@ public class WizardRukeAIClient : NetworkBehaviour
     public HPBarUIController hPBarUIController;
     public DamageTextUIController damageTextUIController;
     public Rigidbody mRigidbody;
-    public PlayerSpellScrollQueueManagerClient playerSpellScrollQueueManager;
 
     [Header("VFX용 메터리얼들")]
     [SerializeField] private Material currentMaterial;

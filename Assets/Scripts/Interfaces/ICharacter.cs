@@ -26,7 +26,7 @@ public interface ICharacter
     /// <summary>
     /// 캐릭터가 사용할 수 있는 스킬 목록입니다.
     /// </summary>
-    SkillName[] skills { get; set; }
+    SpellName[] skills { get; set; }
 
     /// <summary>
     /// 캐릭터 데이터를 반환하는 메서드입니다.

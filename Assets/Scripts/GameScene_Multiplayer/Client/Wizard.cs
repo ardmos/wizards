@@ -32,11 +32,11 @@ public class Wizard : PlayerClient, ICharacter
     /// <summary>
     /// Wizard가 사용할 수 있는 스킬 목록입니다.
     /// </summary>
-    public SkillName[] skills { get; set; } = new SkillName[]{
-                SkillName.FireBallLv1,
-                SkillName.WaterBallLv1,
-                SkillName.BlizzardLv1,
-                SkillName.MagicShieldLv1
+    public SpellName[] skills { get; set; } = new SpellName[]{
+                SpellName.FireBallLv1,
+                SpellName.WaterBallLv1,
+                SpellName.BlizzardLv1,
+                SpellName.MagicShieldLv1
                 };
     #endregion
 

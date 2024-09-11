@@ -79,7 +79,6 @@
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
-    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Server\SkillSpellManagerServer.cs" />
     <Compile Include="Assets\Scripts\Data\AIPlayerName.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Server\SkillManagerServerKnight.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
@@ -102,7 +101,6 @@
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
     <Compile Include="Assets\Scripts\AI Player\AIState.cs" />
-    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\PlayerSpellScrollQueueManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\Wizard.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\GameOverMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\GameScene_Singleplayer\GameSingleplayer.cs" />
@@ -124,6 +122,8 @@
     <Compile Include="Assets\Scripts\AI Player\WizardRukeAIClient.cs" />
     <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\SpellManagerClient.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Server\SpellManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\GameScene_Singleplayer\PlayerServerSingleMode.cs" />
@@ -152,6 +152,7 @@
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\GameMultiplayer.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\PlayerScrollCounter.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\PopupShopUIController.cs" />
@@ -211,7 +212,6 @@
     <Compile Include="Assets\Scripts\AI Player\WizardRukeAIHPManagerServer.cs" />
     <Compile Include="Assets\Scriptable Objects\CharacterCardInfo.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IOwnerSeter.cs" />
-    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\SkillSpellManagerClient.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSCounter.cs" />
@@ -252,7 +252,6 @@
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\JoystickDirectionUI.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SoundFXGroupUI.cs" />
     <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
-    <Compile Include="Assets\Scripts\Data\SkillName.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIMovementServer.cs" />
     <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Default.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\HPBarUIController.cs" />
@@ -260,6 +259,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\Knight.cs" />
+    <Compile Include="Assets\Scripts\Data\SpellName.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\TouchRotator.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\PlayerMovementClient.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Item\PotionHP.cs" />

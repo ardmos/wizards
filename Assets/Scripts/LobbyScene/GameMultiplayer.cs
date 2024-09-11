@@ -314,13 +314,6 @@ public class GameMultiplayer : NetworkBehaviour
             playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId][itemName] = 0;
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void GetPlayerItemDictionaryServerRPC(ServerRpcParams serverRpcParams = default)
-    {
-        NetworkClient networkClient = NetworkManager.ConnectedClients[serverRpcParams.Receive.SenderClientId];
-        networkClient.PlayerObject.GetComponent<PlayerClient>().SetPlayerItemsDictionaryOnClient(playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId].Keys.ToArray(), playerItemDictionaryOnServer[serverRpcParams.Receive.SenderClientId].Values.ToArray());      
-    }
-
     /// <summary>
     /// 플레이어 스코어 추가.
     /// </summary>

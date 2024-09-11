@@ -10,7 +10,7 @@ public class AudioSourceObject : NetworkBehaviour
 
 
     [ClientRpc]
-    public void SetupClientRPC(SkillName spellName, SFX_Type sFX_Type, Vector3 position)
+    public void SetupClientRPC(SpellName spellName, SFX_Type sFX_Type, Vector3 position)
     {
         AudioClip audioClip = GameAssetsManager.Instance.GetSkillSFXSound(spellName, sFX_Type);
 

@@ -1,4 +1,4 @@
-public enum SkillName
+public enum SpellName
 {
     FireBallLv1,
     WaterBallLv1,

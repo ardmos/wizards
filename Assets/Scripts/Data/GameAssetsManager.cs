@@ -17,14 +17,14 @@ public class GameAssetsManager : MonoBehaviour
         }
     }
 
-    public GameObject GetSpellPrefab(SkillName skillName)
+    public GameObject GetSpellPrefab(SpellName skillName)
     {
         //int index = SearchSpellNameIndex(spellName);
         int index = (int)skillName;
         return gameAssets.skillAssetsList[index].prefab;
     }
 
-    public Sprite GetSpellIconImage(SkillName skillName)
+    public Sprite GetSpellIconImage(SpellName skillName)
     {
         //int index = SearchSpellNameIndex(spellName);
         int index = (int)skillName;
@@ -152,29 +152,29 @@ public class GameAssetsManager : MonoBehaviour
         }
     }
 
-    public AudioClip GetSkillSFXSound(SkillName skillName, SFX_Type sFX_Type)
+    public AudioClip GetSkillSFXSound(SpellName skillName, SFX_Type sFX_Type)
     {
         switch (skillName)
         {
-            case SkillName.FireBallLv1:
+            case SpellName.FireBallLv1:
                 return GetSFXAudioClip(gameAssets.sfx_Fireball_Lv1, sFX_Type);
-            case SkillName.WaterBallLv1:
+            case SpellName.WaterBallLv1:
                 return GetSFXAudioClip(gameAssets.sfx_Waterball_Lv1, sFX_Type);
-            case SkillName.IceBallLv1:
+            case SpellName.IceBallLv1:
                 return GetSFXAudioClip(gameAssets.sfx_Iceball_Lv1, sFX_Type);
-            case SkillName.BlizzardLv1:
+            case SpellName.BlizzardLv1:
                 return GetSFXAudioClip(gameAssets.sfx_Blizzard_Lv1, sFX_Type);
-            case SkillName.MagicShieldLv1:
+            case SpellName.MagicShieldLv1:
                 return GetSFXAudioClip(gameAssets.sfx_MagicShield_Lv1, sFX_Type);
-            case SkillName.StoneSlashAttack1_Lv1:
+            case SpellName.StoneSlashAttack1_Lv1:
                 return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackVertical_Lv1, sFX_Type);
-            case SkillName.ElectricSlashAttackVertical_Lv1:
+            case SpellName.ElectricSlashAttackVertical_Lv1:
                 return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackVertical_Lv1, sFX_Type);
-            case SkillName.ElectricSlashAttackWhirlwind_Lv1:
+            case SpellName.ElectricSlashAttackWhirlwind_Lv1:
                 return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackWhirlwind_Lv1, sFX_Type);
-            case SkillName.ElectricSlashAttackChargeSlash_Lv1:
+            case SpellName.ElectricSlashAttackChargeSlash_Lv1:
                 return GetSFXAudioClip(gameAssets.sfx_ElectricSlashAttackChargeSlash_Lv1, sFX_Type);
-            case SkillName.Dash_Lv1:
+            case SpellName.Dash_Lv1:
                 return GetSFXAudioClip(gameAssets.sfx_Dash_Lv1, sFX_Type);
             default:
                 Debug.LogError($"{nameof(GetSkillSFXSound)}. {skillName}은 알맞은 skillName이 아닙니다.");

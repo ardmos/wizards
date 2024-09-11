@@ -63,7 +63,7 @@ public class CustomOnScreenButton : OnScreenControl, IPointerDownHandler, IPoint
             throw new System.ArgumentNullException(nameof(eventData));
 
         // 혹시나. 예외 체크. Spell State 체크. Casting이 아닌 경우는 무시
-        if (PlayerClient.Instance.GetComponent<SkillSpellManagerClient>().GetSpellStateFromSpellIndexOnClient(spellIndex) != SpellState.Aiming)
+        if (PlayerClient.Instance.GetComponent<SpellManagerClient>().GetSpellStateFromSpellIndexOnClient(spellIndex) != SpellState.Aiming)
         {
             return;
         }

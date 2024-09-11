@@ -26,11 +26,11 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public sbyte maxHp { get; set; }
     public float moveSpeed { get; set; }
     // 이건 여기서 직접 해줍니다. 이것도 일관성이 없다.  수정 필요
-    public SkillName[] skills { get; set; } = new SkillName[]{
-                SkillName.FireBallLv1,
-                SkillName.WaterBallLv1,
-                SkillName.BlizzardLv1,
-                SkillName.MagicShieldLv1
+    public SpellName[] skills { get; set; } = new SpellName[]{
+                SpellName.FireBallLv1,
+                SpellName.WaterBallLv1,
+                SpellName.BlizzardLv1,
+                SpellName.MagicShieldLv1
                 };
 
     [Header("상태 관련")]

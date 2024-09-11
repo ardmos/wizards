@@ -63,7 +63,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         if (playerOwnedSpellInfoListOnServer[2].spellState != SpellState.Ready) return;
 
         // 범위 표시 오브젝트 생성
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SpellName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         spellObject.transform.SetParent(transform);
@@ -91,7 +91,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         // 1. 시전중인 범위표시 오브젝트 제거
         Destroy(playerCastingSpell);
         // 2. 블리자드 스킬 이펙트오브젝트 생성
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1), muzzlePos_AoE.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SpellName.BlizzardLv1), muzzlePos_AoE.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
         {
@@ -276,10 +276,10 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     /// Server측에서 보유한 SpellInfo 리스트 초기화 메소드 입니다.
     /// 플레이어 최초 생성시 호출됩니다.
     /// </summary>
-    public void InitAIPlayerSpellInfoArrayOnServer(SkillName[] skillNames)
+    public void InitAIPlayerSpellInfoArrayOnServer(SpellName[] skillNames)
     {
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
-        foreach (SkillName spellName in skillNames)
+        foreach (SpellName spellName in skillNames)
         {
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
             spellInfo.ownerPlayerClientId = wizardRukeAIServer.AIClientId;
@@ -300,7 +300,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     /// </summary>
     /// <param name="spellName">알고싶은 마법의 이름</param>
     /// <returns></returns>
-    public SpellInfo GetSpellInfo(SkillName spellName)
+    public SpellInfo GetSpellInfo(SpellName spellName)
     {
         foreach (SpellInfo spellInfo in playerOwnedSpellInfoListOnServer)
         {
@@ -330,7 +330,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     /// </summary>
     /// <param name="skillName"></param>
     /// <returns></returns>
-    public int GetSpellIndexBySpellName(SkillName skillName)
+    public int GetSpellIndexBySpellName(SpellName skillName)
     {
         int index = -1;
 

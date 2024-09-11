@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 마법을 Server Auth 방식으로 시전할 수 있도록 도와주는 스크립트 입니다.
 /// </summary>
-public class SpellManagerServerWizard : SkillSpellManagerServer
+public class SpellManagerServerWizard : SpellManagerServer
 {
     public Transform muzzlePos_Normal;
     public Transform muzzlePos_AoE;
@@ -66,7 +66,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
     public void CastingBlizzardServerRPC()
     {
         // 범위 표시 오브젝트 생성
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SpellName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         spellObject.transform.SetParent(transform);
@@ -92,7 +92,7 @@ public class SpellManagerServerWizard : SkillSpellManagerServer
         // 1. 시전중인 범위표시 오브젝트 제거
         Destroy(playerCastingSpell);
         // 2. 블리자드 스킬 이펙트오브젝트 생성
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SkillName.BlizzardLv1), muzzlePos_AoE.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SpellName.BlizzardLv1), muzzlePos_AoE.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
         if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
         {

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class SkillManagerClientKnight : SkillSpellManagerClient
+public class SkillManagerClientKnight : SpellManagerClient
 {
+    public KnightBuzzMeshTrail meshTrail;
+
     // 0. 스킬 조준
     public void AimingSkill(ushort skillIndex)
     {
         if (skillInfoListOnClient[skillIndex].spellState != SpellState.Ready) return;
-        skillSpellManagerServer.GetComponent<SkillManagerServerKnight>().ReadyAttackSkillServerRPC(skillIndex);
+        spellManagerServer.GetComponent<SkillManagerServerKnight>().ReadyAttackSkillServerRPC(skillIndex);
     }
 
     // 1.  공격 스킬 시전
@@ -18,18 +20,27 @@ public class SkillManagerClientKnight : SkillSpellManagerClient
         //Debug.Log($"0.ActivateAttackSkillOnClient skillIndex:{skillIndex}, skillstate:{skillInfoListOnClient[skillIndex].spellState}");
         if (skillInfoListOnClient[skillIndex].spellState != SpellState.Aiming) return;
         // 서버에 공격 스킬 시전 요청
-        skillSpellManagerServer.GetComponent<SkillManagerServerKnight>().StartAttackSkillServerRPC(skillIndex);
+        spellManagerServer.GetComponent<SkillManagerServerKnight>().StartAttackSkillServerRPC(skillIndex);
     }
 
     // 2. 방어 스킬 시전 (대쉬)
     public void ActivateDefenceSkillOnClient()
     {
-        Debug.Log($"skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState: {skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState}");
+        Debug.Log($"skillInfoListOnClient[spellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState: {skillInfoListOnClient[SpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState}");
 
         //if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Aiming) return;
-        if (skillInfoListOnClient[SkillSpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
+        if (skillInfoListOnClient[SpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
 
         // 서버에 방어 스킬 시전 요청
-        skillSpellManagerServer.GetComponent<SkillManagerServerKnight>().StartDefenceSkillServerRPC();
+        spellManagerServer.GetComponent<SkillManagerServerKnight>().StartDefenceSkillServerRPC();
+    }
+
+    /// <summary>
+    /// 대시 트레일 효과를 활성화합니다.
+    /// </summary>
+    [ClientRpc]
+    public void ActivateDashTrailEffectClientRPC()
+    {
+        meshTrail.ActivateTrail();
     }
 }
