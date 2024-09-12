@@ -64,7 +64,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <summary>
     /// 서버에서 호출해야하는 메서드. 서버에서 동작합니다.
     /// </summary>
-    public void TakingDamage(sbyte damage, ulong clientWhoAttacked)
+    public void TakingDamage(sbyte damage, ulong attackerClientId)
     {
         // GamePlaying중이 아니면 전부 리턴. 게임이 끝나면 무적처리 되도록.
         if(IsHost)
@@ -90,7 +90,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
             playerData.playerGameState = PlayerGameState.GameOver; // 아래에서 HP값을 저장할 때 새로 SetPlayerData를 하기 때문에...! 일단 여기서 한 번더 게임오버 스테이트를 저장해주고 있는데, GameOver()에서 이미 게임오버처리를 해주고 있다. 일단은 동작하지만 수정 필요.
 
             // 게임오버 처리
-            playerServer.GameOver(clientWhoAttacked);
+            playerServer.GameOver(attackerClientId);
         }
         else
         {
@@ -142,10 +142,10 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="clientId"></param>
-    public void TakingDamageWithCameraShake(sbyte damage, ulong clientWhoAttacked, GameObject clientObjectWhoAttacked)
+    public void TakingDamageWithCameraShake(sbyte damage, ulong attackerClientId, GameObject clientObjectWhoAttacked)
     {
         // 피격 처리 총괄.
-        TakingDamage(damage, clientWhoAttacked);
+        TakingDamage(damage, attackerClientId);
 
         // 공격자가 Player라면 카메라 쉐이크 
         if (clientObjectWhoAttacked.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
@@ -155,7 +155,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
     }
 
     // 파이어볼 도트 대미지를 받는 Coroutine
-    public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong clientWhoAttacked)
+    public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong attackerClientId)
     {
         float elapsed = 0;
         while (elapsed < duration)
@@ -163,7 +163,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
             // 1초 대기
             yield return new WaitForSeconds(1);
 
-            TakingDamage(damagePerSecond, clientWhoAttacked);
+            TakingDamage(damagePerSecond, attackerClientId);
 
             elapsed += 1;
         }

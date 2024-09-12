@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 /// <summary>
+/// 클라이언트 측 플레이어 관리 클래스입니다.
 /// 플레이어의 직업에 상관없이 클라이언트라면 기본적으로 갖는 동작들을 관리하는 추상 클래스입니다.
 /// </summary>
 public abstract class PlayerClient : NetworkBehaviour
@@ -260,7 +261,7 @@ public abstract class PlayerClient : NetworkBehaviour
     }
     #endregion
 
-    #region Game State Management
+    #region Game Over Handling
     /// <summary>
     /// 게임 오버 시 동작하는 메서드입니다.
     /// </summary>
@@ -295,7 +296,9 @@ public abstract class PlayerClient : NetworkBehaviour
 
         PlayerDataManager.Instance.UpdatePlayerData(playerOutGameData);
     }
+    #endregion
 
+    #region Game Win Handling
     /// <summary>
     /// 게임 승리 시 동작하는 메서드입니다.
     /// </summary>
@@ -310,7 +313,7 @@ public abstract class PlayerClient : NetworkBehaviour
     }
 
     /// <summary>
-    /// 승리 결과를 저장합니다.
+    /// 플레이어의 전적에 승리 결과를 추가합니다.
     /// </summary>
     private void SaveWinResult()
     {
@@ -357,7 +360,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
         playerScrollCounter.UpdateScrollCount(scrollCount);
         SoundManager.Instance.PlayItemSFXServerRPC(ItemName.ScrollUse, transform.position);
-        playerServer.StartApplyScrollVFXServerRPC();
+        playerServer.ActivateScrollUseVFXServerRPC();
     }
 
     /// <summary>

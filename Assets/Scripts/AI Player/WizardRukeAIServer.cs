@@ -46,7 +46,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
     [SerializeField] private AIState currentState;
 
-    [Header("Wizard Ruke AI용 컴포넌트들")]
+    [Header("WizardClient Ruke AI용 컴포넌트들")]
     public WizardRukeAISpellManagerServer wizardRukeAISpellManagerServer;
     public WizardRukeAIClient wizardRukeAIClient;
     public WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer;

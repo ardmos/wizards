@@ -101,7 +101,6 @@
     <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
     <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
     <Compile Include="Assets\Scripts\AI Player\AIState.cs" />
-    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\Wizard.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\GameOverMessageTemplateUI.cs" />
     <Compile Include="Assets\Scripts\GameScene_Singleplayer\GameSingleplayer.cs" />
     <Compile Include="Assets\Scripts\AI Player\WizardRukeAISpellManagerServer.cs" />
@@ -213,6 +212,7 @@
     <Compile Include="Assets\Scriptable Objects\CharacterCardInfo.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IOwnerSeter.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\WizardClient.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />

@@ -24,7 +24,7 @@ public class SkillManagerServerKnight : SpellManagerServer
     public void ReadyAttackSkillServerRPC(ushort skillIndex)
     {
         // 게임패트UI 스킬 버튼 드래그도중 조준이 가능하도록 하기 위한 처리
-        UpdatePlayerSpellState(skillIndex, SpellState.Aiming);
+        UpdatePlayerSpellState(skillIndex, SpellState.Casting);
 
         // 준비자세 애니메이션 실행
         switch (skillIndex)

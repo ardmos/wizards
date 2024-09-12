@@ -1,8 +1,10 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+
 /// <summary>
-/// 마법을 Server Auth 방식으로 시전할 수 있도록 도와주는 스크립트 입니다.
+/// Wizard 캐릭터의 서버측 스펠 매니저 스크립트 입니다.
+/// Server Auth 방식으로 마법 발동을 관리합니다. 
 /// </summary>
 public class SpellManagerServerWizard : SpellManagerServer
 {
@@ -17,7 +19,7 @@ public class SpellManagerServerWizard : SpellManagerServer
     /// </summary>
     /// <param name="player"></param>
     [ServerRpc(RequireOwnership = false)]
-    public void StartActivateDefenceSpellServerRPC()
+    public void ActivateShieldServerRPC()
     {
         // 마법 시전
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT).spellName), transform.position, Quaternion.identity);
@@ -80,14 +82,14 @@ public class SpellManagerServerWizard : SpellManagerServer
         playerCastingSpell = spellObject;
 
         // 해당 플레이어의 마법 SpellState 업데이트
-        UpdatePlayerSpellState(2, SpellState.Aiming);
+        UpdatePlayerSpellState(2, SpellState.Casting);
 
         // 캐스팅 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingAttackMagic);
     }
 
     [ServerRpc (RequireOwnership = false)]
-    public void SetBlizzardServerRPC(ServerRpcParams serverRpcParams = default)
+    public void ReleaseBlizzardServerRPC(ServerRpcParams serverRpcParams = default)
     {
         // 1. 시전중인 범위표시 오브젝트 제거
         Destroy(playerCastingSpell);
@@ -113,7 +115,7 @@ public class SpellManagerServerWizard : SpellManagerServer
     /// 공격 마법 생성해주기. 캐스팅 시작 ( NetworkObject는 Server에서만 생성 가능합니다 )
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
-    public void CastingSpellServerRPC(ushort spellIndex)
+    public void CastingNormalSpellServerRPC(ushort spellIndex)
     {
         // 발사체 오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzlePos_Normal.position, Quaternion.identity);
@@ -144,18 +146,18 @@ public class SpellManagerServerWizard : SpellManagerServer
         playerCastingSpell = spellObject;
 
         // 해당 플레이어의 마법 SpellState 업데이트
-        UpdatePlayerSpellState(spellIndex, SpellState.Aiming);
+        UpdatePlayerSpellState(spellIndex, SpellState.Casting);
 
         // 캐스팅 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingAttackMagic);
     }
 
     /// <summary>
-    /// 플레이어의 요청으로 현재 캐스팅중인 마법을 발사하는 메소드 입니다.
+    /// 플레이어의 요청으로 현재 캐스팅중인 노멀 타입 마법을 발사하는 메소드 입니다.
     /// </summary>
     /// <param name="serverRpcParams"></param>
     [ServerRpc(RequireOwnership = false)]
-    public void ShootSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
+    public void ReleaseNormalSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
     {
         if (!playerCastingSpell) return;
 

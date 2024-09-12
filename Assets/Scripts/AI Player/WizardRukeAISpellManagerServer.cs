@@ -77,7 +77,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         playerCastingSpell = spellObject;
 
         // 해당 플레이어의 마법 SpellState 업데이트
-        UpdatePlayerSpellState(2, SpellState.Aiming);
+        UpdatePlayerSpellState(2, SpellState.Casting);
 
         // 캐스팅 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingAttackMagic);
@@ -86,7 +86,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
 
     public void FireBlizzard()
     {
-        if (playerOwnedSpellInfoListOnServer[2].spellState != SpellState.Aiming) return;
+        if (playerOwnedSpellInfoListOnServer[2].spellState != SpellState.Casting) return;
 
         // 1. 시전중인 범위표시 오브젝트 제거
         Destroy(playerCastingSpell);
@@ -144,7 +144,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         playerCastingSpell = spellObject;
 
         // 해당 플레이어의 마법 SpellState 업데이트
-        UpdatePlayerSpellState(spellIndex, SpellState.Aiming);
+        UpdatePlayerSpellState(spellIndex, SpellState.Casting);
 
         // 캐스팅 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingAttackMagic);
@@ -155,7 +155,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     /// </summary>
     public void FireSpell(ushort spellIndex)
     {
-        if (playerOwnedSpellInfoListOnServer[spellIndex].spellState != SpellState.Aiming) return;
+        if (playerOwnedSpellInfoListOnServer[spellIndex].spellState != SpellState.Casting) return;
 
         if (playerCastingSpell == null)
         {

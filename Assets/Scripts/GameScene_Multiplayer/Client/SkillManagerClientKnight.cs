@@ -18,7 +18,7 @@ public class SkillManagerClientKnight : SpellManagerClient
     public void ActivateAttackSkillOnClient(ushort skillIndex)
     {
         //Debug.Log($"0.ActivateAttackSkillOnClient skillIndex:{skillIndex}, skillstate:{skillInfoListOnClient[skillIndex].spellState}");
-        if (skillInfoListOnClient[skillIndex].spellState != SpellState.Aiming) return;
+        if (skillInfoListOnClient[skillIndex].spellState != SpellState.Casting) return;
         // 서버에 공격 스킬 시전 요청
         spellManagerServer.GetComponent<SkillManagerServerKnight>().StartAttackSkillServerRPC(skillIndex);
     }

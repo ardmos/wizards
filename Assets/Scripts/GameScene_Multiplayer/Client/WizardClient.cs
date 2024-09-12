@@ -2,10 +2,10 @@ using System;
 using Unity.Netcode;
 
 /// <summary>
-/// Wizard 캐릭터의 특성과 행동을 관리하는 클래스입니다.
+/// 클라이언트 측에서 Wizard 캐릭터의 특성과 행동을 관리하는 클래스입니다.
 /// PlayerClient를 상속받고 ICharacter 인터페이스를 구현합니다.
 /// </summary>
-public class Wizard : PlayerClient, ICharacter
+public class WizardClient : PlayerClient, ICharacter
 {
     #region Fields and Properties
     /// <summary>
@@ -79,7 +79,7 @@ public class Wizard : PlayerClient, ICharacter
     /// </summary>
     protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
     {
-        spellManagerClientWizard.ShootNormalSpell(0);
+        spellManagerClientWizard.ReleaseNormalSpell(0);
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class Wizard : PlayerClient, ICharacter
     /// </summary>
     protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
     {
-        spellManagerClientWizard.ShootNormalSpell(1);
+        spellManagerClientWizard.ReleaseNormalSpell(1);
     }
 
     /// <summary>
@@ -109,7 +109,7 @@ public class Wizard : PlayerClient, ICharacter
     /// </summary>
     protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
     {
-        spellManagerClientWizard.SetBlizzard();
+        spellManagerClientWizard.ReleaseBlizzard();
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ public class Wizard : PlayerClient, ICharacter
     /// </summary>
     protected override void GameInput_OnDefenceStarted(object sender, EventArgs e)
     {
-        spellManagerClientWizard.ActivateDefenceSpellOnClient();
+        spellManagerClientWizard.ActivateShield();
     }
     /// <summary>
     /// Defence 버튼이 떼졌을 때 호출되는 메서드입니다.
