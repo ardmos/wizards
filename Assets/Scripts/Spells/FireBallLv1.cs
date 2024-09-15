@@ -134,30 +134,30 @@ public class FireBallLv1 : FireSpell
             // 충돌한게 플레이어일 경우, 플레이어의 피격 사실을 해당 플레이어의 SpellManager 알립니다. 
             if (hit.CompareTag("Player"))
             {
-                if (hit.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerServer))
+                if (hit.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerHPManagerServer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
-                    // 플레이어 피격을 서버에서 처리
-                    playerServer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
-
-                    // 도트 데미지 실행
-                    if (dotDamageLifetime > 0)
-                        playerServer.StartCoroutine(playerServer.TakeDamageOverTime(1, dotDamageLifetime, spellOwnerClientId));
+                    // 플레이어 대미지 처리
+                    playerHPManagerServer.TakeDamage(damage, spellOwnerClientId);
+                    // 스펠 소유자의 화면 흔들림 효과 실행
+                    SpellOwnersCameraShakeEffect();
+                    // 도트 대미지 실행
+                    ActivateDotDamage(playerHPManagerServer, spellOwnerClientId);
                 }
             }
             // AI플레이어일 경우 처리
             else if (hit.CompareTag("AI"))
             {
                 // WizardRukeAI 확인.  추후 다른 AI추가 후 수정.         
-                if (hit.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer aiPlayer))
+                if (hit.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
-                    aiPlayer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
-
+                    wizardRukeAIHPManagerServer.TakingDamage(damage, spellOwnerClientId);
+                    // 스펠 소유자의 화면 흔들림 효과 실행
+                    SpellOwnersCameraShakeEffect();
                     // 도트 데미지 실행
-                    if (dotDamageLifetime > 0)
-                        aiPlayer.StartCoroutine(aiPlayer.TakeDamageOverTime(1, dotDamageLifetime, spellOwnerClientId));
+                    ActivateDotDamage(wizardRukeAIHPManagerServer, spellOwnerClientId);               
                 }
             }
             // Monster일 경우 처리
@@ -167,12 +167,12 @@ public class FireBallLv1 : FireSpell
                 if (hit.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
-                    // 플레이어 피격을 서버에서 처리
-                    ///// 태그 추가. 여기 메서드 작성. 카메라쉐이킹. chickenAIHPManagerServer.TakingDamage(damage);
-                    chickenAIHPManagerServer.TakingDamageWithCameraShake(damage, spellOwnerObject);
+                    // 플레이어 피격을 서버에서 처리              
+                    chickenAIHPManagerServer.TakingDamage(damage);
+                    // 스펠 소유자의 화면 흔들림 효과 실행.
+                    SpellOwnersCameraShakeEffect();
                     // 도트 데미지 실행
-                    if (dotDamageLifetime > 0)
-                        chickenAIHPManagerServer.StartCoroutine(chickenAIHPManagerServer.TakeDamageOverTime(1, dotDamageLifetime));
+                    ActivateDotDamage(chickenAIHPManagerServer, spellOwnerClientId);
                 }
             }
             // 기타 오브젝트 충돌
@@ -181,6 +181,33 @@ public class FireBallLv1 : FireSpell
                 //Debug.Log($"{collider.name} Hit!");
             }
         }
+    }
+
+    private void SpellOwnersCameraShakeEffect()
+    {
+        // 스펠 소유자가 Player인지 확인 후 카메라 쉐이크 
+        if (spellOwnerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        {
+            playerClient.ActivateHitCameraShakeClientRPC();
+        }
+    }
+
+    private void ActivateDotDamage<T>(T hpManager, ulong spellOwnerClientId) where  T : class
+    {
+        if (dotDamageLifetime <= 0) return;
+
+        if (hpManager is PlayerHPManagerServer playerHPManagerServer)
+        {
+            playerHPManagerServer.StartToTakeDotDamage(1, dotDamageLifetime, spellOwnerClientId);
+        }
+        else if(hpManager is WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer)
+        {
+            wizardRukeAIHPManagerServer.StartToTakeDotDamage(1, dotDamageLifetime, spellOwnerClientId);
+        }
+        else if(hpManager is ChickenAIHPManagerServer chickenAIHPManagerServer)
+        {
+            chickenAIHPManagerServer.StartToTakeDotDamage(1, dotDamageLifetime);
+        } 
     }
 
     private void 현스킬이캐스팅상태였을경우()

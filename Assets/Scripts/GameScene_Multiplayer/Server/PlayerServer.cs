@@ -76,7 +76,17 @@ public class PlayerServer : NetworkBehaviour
     }
     #endregion
 
-    #region Game State Management
+    #region Player Data
+    /// <summary>
+    /// 플레이어의 현재 HP를 반환합니다.
+    /// </summary>
+    public sbyte GetPlayerHP()
+    {
+        return playerHPManager.GetHP();
+    }
+    #endregion
+
+    #region Game Over Handling
     /// <summary>
     /// 게임오버 처리를 수행합니다.
     /// </summary>
@@ -91,9 +101,9 @@ public class PlayerServer : NetworkBehaviour
         tag = "GameOver";
 
         // 현 플레이어를 처치한 플레이어들에게 점수를 부여
-        GiveScoreToAttacker(attackerClientId);
+        GiveScoreToAttackerWhenGameOver(attackerClientId);
         // 현 플레이어 게임오버 애니메이션 실행
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.GameOver);
         // 현 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
         playerClient.SetPlayerGameOverClientRPC();
         // 현 플레이어의 '이름 & HP' UI off
@@ -103,24 +113,12 @@ public class PlayerServer : NetworkBehaviour
         // 아이템 드랍 로직 실행
         GenerateAndDropItemWhenGameOver();
     }
-    #endregion
 
-    #region Player Data
-    /// <summary>
-    /// 플레이어의 현재 HP를 반환합니다.
-    /// </summary>
-    public sbyte GetPlayerHP()
-    {
-        return playerHPManager.GetHP();
-    }
-    #endregion
-
-    #region Game Over Handling
     /// <summary>
     /// 현 플레이어를 처치한 플레이어들에게 점수를 부여하는 메서드입니다.
     /// </summary>
     /// <param name="attackerClientId"></param>
-    private void GiveScoreToAttacker(ulong attackerClientId)
+    private void GiveScoreToAttackerWhenGameOver(ulong attackerClientId)
     {
         // 환경 요소등으로 인해 게임오버 당한 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
         if (attackerClientId == OwnerClientId)
@@ -146,9 +144,11 @@ public class PlayerServer : NetworkBehaviour
         DropItem(GameAssetsManager.Instance.GetItemHPPotionObject(), ITEM_OFFSET_X);
         DropItem(GameAssetsManager.Instance.GetItemScrollObject(), -ITEM_OFFSET_X);
     }
+    #endregion
 
+    #region Generate Drop Item Handling
     /// <summary>
-    /// 매개변수로 전달받은 아이템 드랍을 실행하는 메서드 입니다.
+    /// 매개변수로 전달받은 아이템 프리팹을 현 캐릭터의 드랍아이템으로써 게임 세상에 소환해주는 메서드 입니다.
     /// </summary>
     /// <param name="itemPrefab">생성할 아이템의 프리팹</param>
     /// <param name="offsetX">아이템 스폰 위치 보정값</param>

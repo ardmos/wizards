@@ -81,7 +81,7 @@ public class PlayerAnimator : NetworkBehaviour
         networkClient.PlayerObject.GetComponentInChildren<PlayerAnimator>().UpdatePlayerMoveAnimationOnServer(eventData.playerMoveAnimState);
         //Debug.Log($"Player{eventData.clientId} MoveAnimation OnPlayerMoveAnimStateChanged: {eventData.playerMoveAnimState}");
     }*/
-    public void UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState playerMoveAnimState)
+    public void UpdatePlayerAnimationOnServer(PlayerMoveAnimState playerMoveAnimState)
     {
         if (isAlreadyGameOver) return;
         switch (playerMoveAnimState)

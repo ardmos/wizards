@@ -97,7 +97,7 @@ public class PlayerServerSingleMode : NetworkBehaviour
         // 점수 계산
         CalcScore(clientWhoAttacked);
         // 플레이어 게임오버 애니메이션 실행
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.GameOver);
         // 해당 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
         playerClient.SetPlayerGameOverClientRPC();
         // 플레이어 이름 & HP UI off

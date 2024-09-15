@@ -130,7 +130,7 @@ public class WaterBallLv1 : WaterSpell
                 {
                     sbyte damage = (sbyte)GetSpellInfo().damage;
                     // 플레이어 피격을 서버에서 처리
-                    playerServer.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
+                    playerServer.TakeDamage(damage, spellOwnerClientId);
                 }
             }
             // AI플레이어일 경우 처리
@@ -180,7 +180,9 @@ public class WaterBallLv1 : WaterSpell
             {
                 sbyte damage = (sbyte)GetSpellInfo().damage;
                 // 플레이어 피격을 서버에서 처리
-                player.TakingDamageWithCameraShake(damage, spellOwnerClientId, spellOwnerObject);
+                player.TakeDamage(damage, spellOwnerClientId);
+                // 스펠 소유자의 화면 흔들림 효과 실행
+                SpellOwnersCameraShakeEffect();
             }
         }
         // AI플레이어일 경우 처리
@@ -274,5 +276,14 @@ public class WaterBallLv1 : WaterSpell
         HitVFX(GetHitVFXPrefab());
 
         Destroy(gameObject);
+    }
+
+    private void SpellOwnersCameraShakeEffect()
+    {
+        // 스펠 소유자가 Player인지 확인 후 카메라 쉐이크 
+        if (spellOwnerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        {
+            playerClient.ActivateHitCameraShakeClientRPC();
+        }
     }
 }

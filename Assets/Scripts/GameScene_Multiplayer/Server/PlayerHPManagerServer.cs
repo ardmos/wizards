@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+
 /// <summary>
 /// Player HP를  Server Auth 방식으로 관리할수 있도록 도와주는 스크립트 입니다.
 /// 서버에서 동작합니다.
@@ -8,153 +9,115 @@ using UnityEngine;
 /// </summary>
 public class PlayerHPManagerServer : NetworkBehaviour
 {
-    PlayerInGameData playerData;
+    #region Constants
+    private const float DOT_DAMAGE_INTERVAL = 1f;
+    #endregion
+
+    #region Fields
+    private PlayerInGameData playerData;
     public PlayerClient playerClient;
     public PlayerServer playerServer;
     public PlayerAnimator playerAnimator;
+    #endregion
 
+    #region Initialization
+    /// <summary>
+    /// 플레이어의 HP를 초기화합니다.
+    /// </summary>
+    /// <param name="character">캐릭터 정보</param>
     public void InitPlayerHP(ICharacter character)
     {
+        if (character == null)
+        {
+            Debug.LogError("Character information is null");
+            return;
+        }
+
         if (IsHost)
         {
-            playerData = GameSingleplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-            playerData.hp = character.hp;
-            playerData.maxHp = character.maxHp;
-            GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
-
-            playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
+            InitializeForSingleplayer(character);
         }
         else
         {
-            playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-            playerData.hp = character.hp;
-            playerData.maxHp = character.maxHp;
-            GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
-
-            playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
+            InitializeForMultiplayer(character);
         }
+
+        playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
     }
 
     /// <summary>
-    /// 서버에서 동작합니다
+    /// 싱글플레이어 모드를 위한 초기화 메서드 입니다.
     /// </summary>
-    /// <param name="healingValue"></param>
+    /// <param name="character"></param>
+    private void InitializeForSingleplayer(ICharacter character)
+    {
+        playerData = GameSingleplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerData.hp = character.hp;
+        playerData.maxHp = character.maxHp;
+        GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+    }
+
+    /// <summary>
+    /// 멀티 플레이어 모드를 위한 초기화 메서드 입니다.
+    /// </summary>
+    /// <param name="character"></param>
+    private void InitializeForMultiplayer(ICharacter character)
+    {
+        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerData.hp = character.hp;
+        playerData.maxHp = character.maxHp;
+        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+    }
+    #endregion
+
+    #region HP Management
+    /// <summary>
+    /// 힐을 적용해주는 메서드입니다.
+    /// </summary>
+    /// <param name="healingValue">회복량</param>
     public void ApplyHeal(sbyte healingValue)
     {
-        // 힐 적용하는중
-        //playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        sbyte newHP = (sbyte)(playerData.hp + healingValue);
-        if (newHP > playerData.maxHp) newHP = playerData.maxHp;
+        sbyte newHP = (sbyte)Mathf.Min(playerData.hp + healingValue, playerData.maxHp);
 
-        // 변경된 HP값 서버에 저장
-        playerData.hp = newHP;
-        if (IsHost)
-        {
-            GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
-        }
-        else
-        {
-            GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
-        }
-
-        // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
-        playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
+        UpdatePlayerHP(newHP);
     }
 
     /// <summary>
-    /// 서버에서 호출해야하는 메서드. 서버에서 동작합니다.
+    /// 대미지를 적용해주는 메서드입니다.
     /// </summary>
-    public void TakingDamage(sbyte damage, ulong attackerClientId)
+    /// <param name="damage">데미지량</param>
+    /// <param name="attackerClientId">공격자의 클라이언트 ID</param>
+    public void TakeDamage(sbyte damage, ulong attackerClientId)
     {
-        // GamePlaying중이 아니면 전부 리턴. 게임이 끝나면 무적처리 되도록.
-        if(IsHost)
-        {
-            if (!SingleplayerGameManager.Instance.IsGamePlaying()) return;
-        }
-        else
-        {
-            if (!MultiplayerGameManager.Instance.IsGamePlaying()) return;
-        }
-        
-        //playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        if (!IsGamePlaying()) return;
         if (playerData.playerGameState != PlayerGameState.Playing) return;
 
-        // 요청한 플레이어 현재 HP값 가져오기 
-        sbyte newPlayerHP = playerData.hp;
+        sbyte newPlayerHP = (sbyte)Mathf.Max(playerData.hp - damage, 0);
 
-        // HP보다 Damage가 클 경우(게임오버 처리는 Player에서 HP잔량 파악해서 알아서 한다.)
-        if (newPlayerHP <= damage)
+        if (newPlayerHP == 0)
         {
-            // HP 0
-            newPlayerHP = 0;
-            playerData.playerGameState = PlayerGameState.GameOver; // 아래에서 HP값을 저장할 때 새로 SetPlayerData를 하기 때문에...! 일단 여기서 한 번더 게임오버 스테이트를 저장해주고 있는데, GameOver()에서 이미 게임오버처리를 해주고 있다. 일단은 동작하지만 수정 필요.
-
-            // 게임오버 처리
-            playerServer.GameOver(attackerClientId);
+            HandlePlayerGameOver(attackerClientId);
         }
         else
         {
-            // HP 감소 계산
-            newPlayerHP -= (sbyte)damage;
-
-            // 피격 애니메이션 실행 Server
-            playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
+            PlayPlayerHitAnimation();
         }
 
-        // 변경된 HP값 서버에 저장
-        playerData.hp = newPlayerHP;
-
-        if (IsHost)
-        {
-            GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
-        }
-        else
-        {
-            GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
-        }
-
-        // 피격 카메라 효과 실행 ClientRPC
-        playerClient.ActivateHitByAttackCameraEffectClientRPC();
-
-        // 피격 카메라 쉐이크 효과 실행 ClientRPC
-        playerClient.ActivateHitByAttackCameraShakeClientRPC();
-
-        // 피격 사운드 효과 실행 ClientRPC
-
-        // 피격 대미지 숫자 표시 실행. 각 Client Damage Text Popup UI 업데이트 지시 
-        playerClient.ShowDamageTextPopupClientRPC(damage);
-
-        // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
-        playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
-
-        // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
-        playerClient.ActivateHitByAttackEffectClientRPC();
+        UpdatePlayerHP(newPlayerHP);
+        HandlePlayerHitEffects(damage);
     }
 
     /// <summary>
-    /// 스킬 충돌 처리(서버에서 동작)
-    /// 플레이어 적중시 ( 다른 마법이나 구조물과의 충돌 처리는 Spell.cs에 있다. 코드 정리 필요)
-    /// clientID와 HP 연계해서 처리. 
-    /// 충돌 녀석이 플레이어일 경우 실행. 
-    /// ClientID로 리스트 검색 후 HP 수정시키고 업데이트된 내용 브로드캐스팅.
-    /// 수신측은 ClientID의 플레이어 HP 업데이트. 
-    /// 서버에서 구동되는 스크립트.
+    /// 도트 대미지를 적용해주는 메서드입니다.
     /// </summary>
-    /// <param name="damage"></param>
-    /// <param name="clientId"></param>
-    public void TakingDamageWithCameraShake(sbyte damage, ulong attackerClientId, GameObject clientObjectWhoAttacked)
+    /// <param name="damagePerSecond">초 당 대미지값</param>
+    /// <param name="duration">총 지속 시간</param>
+    /// <param name="attackerClientId">공격자 ID</param>
+    public void StartToTakeDotDamage(sbyte damagePerSecond, float duration, ulong attackerClientId)
     {
-        // 피격 처리 총괄.
-        TakingDamage(damage, attackerClientId);
-
-        // 공격자가 Player라면 카메라 쉐이크 
-        if (clientObjectWhoAttacked.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
-        {
-            playerClient.ActivateHitCameraShakeClientRPC();
-        }
+        StartCoroutine(TakeDamageOverTime(damagePerSecond, duration, attackerClientId));
     }
 
-    // 파이어볼 도트 대미지를 받는 Coroutine
     public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong attackerClientId)
     {
         float elapsed = 0;
@@ -163,14 +126,89 @@ public class PlayerHPManagerServer : NetworkBehaviour
             // 1초 대기
             yield return new WaitForSeconds(1);
 
-            TakingDamage(damagePerSecond, attackerClientId);
+            TakeDamage(damagePerSecond, attackerClientId);
 
             elapsed += 1;
         }
     }
 
+    /// <summary>
+    /// 플레이어의 HP값을 업데이트해주는 메서드입니다.
+    /// </summary>
+    /// <param name="newHP">새로운 HP값</param>
+    private void UpdatePlayerHP(sbyte newHP)
+    {
+        playerData.hp = newHP;
+
+        if (IsHost)
+        {
+            GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        }
+        else
+        {
+            GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        }
+        
+        playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
+    }
+    #endregion
+
+    #region Visual Effects
+    /// <summary>
+    /// 플레이어의 피격 이펙트를 실행해주는 메서드입니다.
+    /// </summary>
+    /// <param name="damage">플레이어 캐릭터의 머리 위에 띄워줄 대미지값 입니다.</param>
+    private void HandlePlayerHitEffects(sbyte damage)
+    {
+        // 피격 카메라 테두리 효과 실행
+        playerClient.ActivateHitByAttackCameraEffectClientRPC();
+        // 피격 카메라 쉐이크 효과 실행
+        playerClient.ActivateHitByAttackCameraShakeClientRPC();
+        // 피격 대미지 숫자 표시 실행
+        playerClient.ShowDamageTextPopupClientRPC(damage);
+        // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
+        playerClient.ActivateHitByAttackEffectClientRPC();
+    }
+
+    /// <summary>
+    /// 플레이어의 피격 애니메이션을 실행해주는 메서드입니다.
+    /// </summary>
+    private void PlayPlayerHitAnimation()
+    {
+        playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Hit);
+    }
+    #endregion
+
+    #region Game Over Handling
+    /// <summary>
+    /// 플레이어의 게임오버 처리를 담당하는 메서드입니다.
+    /// </summary>
+    /// <param name="attackerClientId">공격자의 clientId</param>
+    private void HandlePlayerGameOver(ulong attackerClientId)
+    {
+        playerData.playerGameState = PlayerGameState.GameOver;
+        playerServer.GameOver(attackerClientId);
+    }
+    #endregion
+
+    #region Player Data
+    /// <summary>
+    /// 게임의 플레이 여부를 반환해주는 메서드입니다.
+    /// </summary>
+    /// <returns>GameState가 Playing인지 정보가 담긴 bool값</returns>
+    private bool IsGamePlaying()
+    {
+        return IsHost ? SingleplayerGameManager.Instance.IsGamePlaying()
+                      : MultiplayerGameManager.Instance.IsGamePlaying();
+    }
+
+    /// <summary>
+    /// 플레이어의 현재 HP값을 반환해주는 메서드입니다.
+    /// </summary>
+    /// <returns>현재 HP값</returns>
     public sbyte GetHP()
     {
         return playerData.hp;
     }
+    #endregion
 }

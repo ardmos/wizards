@@ -72,7 +72,12 @@ public class ChickenAIHPManagerServer : NetworkBehaviour
         }
     }
 
-    // 파이어볼 도트 대미지를 받는 Coroutine
+    public void StartToTakeDotDamage(sbyte damagePerSecond, float duration)
+    {
+        StartCoroutine(TakeDamageOverTime(damagePerSecond, duration));
+    }
+
+    // 도트 대미지를 받는 Coroutine (ex. Fire Type 마법의 점화)
     public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration)
     {
         float elapsed = 0;

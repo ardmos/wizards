@@ -73,7 +73,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
             newPlayerHP -= (sbyte)damage;
 
             // 피격 애니메이션 실행 Server
-            playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Hit);
+            playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Hit);
         }
 
         // 변경된 HP값 서버에 저장
@@ -107,7 +107,12 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
         }
     }
 
-    // 파이어볼 도트 대미지를 받는 Coroutine
+    public void StartToTakeDotDamage(sbyte damagePerSecond, float duration, ulong attackerClientId)
+    {
+        StartCoroutine(TakeDamageOverTime(damagePerSecond, duration, attackerClientId));
+    }
+
+    // 도트 대미지를 받는 Coroutine (ex. Fire Type 마법의 점화)
     public IEnumerator TakeDamageOverTime(sbyte damagePerSecond, float duration, ulong clientWhoAttacked)
     {
         float elapsed = 0;

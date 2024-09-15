@@ -72,7 +72,7 @@ public class WizardRukeAIMovementServer : MonoBehaviour
                 patrolDestination = playerSpawnPointsController.spawnPoints[randomIndex];
 
                 agent.SetDestination(patrolDestination.position);
-                playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Walking);
+                playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Walking);
             }
         }
     }

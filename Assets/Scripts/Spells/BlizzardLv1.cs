@@ -186,8 +186,9 @@ public class BlizzardLv1 : AoESpell
 
             if (player.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerHPManagerServer))
             {
-                //playerHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, player.GetComponent<PlayerClient>().OwnerClientId, spellOwnerObject);
-                playerHPManagerServer.TakingDamageWithCameraShake((sbyte)spellInfo.damage, _shooterClientID, spellOwnerObject);
+                playerHPManagerServer.TakeDamage((sbyte)spellInfo.damage, _shooterClientID);
+                // 스펠 소유자의 화면 흔들림 효과 실행
+                SpellOwnersCameraShakeEffect();
             }
             if (player.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer))
             {
@@ -418,5 +419,14 @@ public class BlizzardLv1 : AoESpell
         playersInArea.Clear();
         // Invoke 중지
         CancelInvoke(nameof(DealDamage));
+    }
+
+    private void SpellOwnersCameraShakeEffect()
+    {
+        // 스펠 소유자가 Player인지 확인 후 카메라 쉐이크 
+        if (spellOwnerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        {
+            playerClient.ActivateHitCameraShakeClientRPC();
+        }
     }
 }

@@ -169,7 +169,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIMovementServer.MoveToTarget(target.transform);
 
         // 이동 애니메이션 실행
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Walking);
+        playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Walking);
     }
 
     public void AttackTarget()
@@ -285,7 +285,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         // 점수 계산
         CalcScore(clientWhoAttacked);
         // GameOver 애니메이션 실행
-        playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.GameOver);
+        playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.GameOver);
         // 게임오버 플레이어 사실을 서버에 기록.
         MultiplayerGameManager.Instance.UpdatePlayerGameOverOnServer(AIClientId, clientWhoAttacked);
 

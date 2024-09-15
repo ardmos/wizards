@@ -37,9 +37,9 @@ public class PlayerMovementServer : NetworkBehaviour
 
         // 이동값에 따라 애니메이션을 실행시켜줍니다.
         if (moveDir != Vector3.zero)
-            playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Walking);
+            playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Walking);
         else
-            playerAnimator.UpdatePlayerMoveAnimationOnServer(PlayerMoveAnimState.Idle);
+            playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Idle);
 
         // 이동처리가 끝났으면 회전처리를 해줍니다. 공격중이 아닐 때에만 진행방향으로 캐릭터를 회전시킵니다.
         if (isAttackButtonClicked) return;

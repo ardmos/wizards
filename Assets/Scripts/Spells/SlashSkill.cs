@@ -96,7 +96,9 @@ public class SlashSkill : NetworkBehaviour
 
             sbyte damage = (sbyte)skillInfo.damage;
             // 플레이어 피격을 서버에서 처리
-            player.TakingDamageWithCameraShake(damage, GetSkillInfo().ownerPlayerClientId, skillOwnerObject);
+            player.TakeDamage(damage, GetSkillInfo().ownerPlayerClientId);
+            // 스펠 소유자의 화면 흔들림 효과 실행
+            SpellOwnersCameraShakeEffect();
         }
         // AI플레이어일 경우 처리
         else if (collider.CompareTag("AI"))
@@ -160,5 +162,14 @@ public class SlashSkill : NetworkBehaviour
     public SpellInfo GetSkillInfo()
     {
         return skillInfo;
+    }
+
+    private void SpellOwnersCameraShakeEffect()
+    {
+        // 스펠 소유자가 Player인지 확인 후 카메라 쉐이크 
+        if (skillOwnerObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        {
+            playerClient.ActivateHitCameraShakeClientRPC();
+        }
     }
 }

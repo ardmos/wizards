@@ -49,7 +49,7 @@ public class Water : NetworkBehaviour
 
             if (player.TryGetComponent<PlayerHPManagerServer>(out PlayerHPManagerServer playerHPManagerServer))
             {
-                playerHPManagerServer.TakingDamage(damageValue, player.GetComponent<PlayerClient>().OwnerClientId);
+                playerHPManagerServer.TakeDamage(damageValue, player.GetComponent<PlayerClient>().OwnerClientId);
             }
             if (player.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer))
             {
