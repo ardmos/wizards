@@ -163,8 +163,7 @@ public abstract class PlayerClient : NetworkBehaviour
     /// <summary>
     /// 캐릭터의 피격 이펙트를 실행합니다.
     /// </summary>
-    [ClientRpc]
-    public void ActivateHitByAttackEffectClientRPC()
+    public void ActivateHitByAttackEffect()
     {
         foreach(Renderer renderer in ownRenderers)
         {
@@ -200,20 +199,18 @@ public abstract class PlayerClient : NetworkBehaviour
     }
 
     /// <summary>
-    /// 피격 시 카메라 쉐이크 효과를 실행합니다.
+    /// 피격 카메라 쉐이크 효과를 실행합니다.
     /// </summary>
-    [ClientRpc]
-    public void ActivateHitByAttackCameraShakeClientRPC()
+    public void ActivateHitByAttackCameraShake()
     {
         if (!IsOwner) return;
         cameraShake.ShakeCamera(5f, 0.2f);
     }
 
     /// <summary>
-    /// 피격 시 카메라 테두리 효과를 실행합니다.
+    /// 피격 카메라 테두리 효과를 실행합니다.
     /// </summary>
-    [ClientRpc]
-    public void ActivateHitByAttackCameraEffectClientRPC()
+    public void ActivateHitByAttackCameraEffect()
     {
         if (!IsOwner) return;
 
@@ -233,21 +230,13 @@ public abstract class PlayerClient : NetworkBehaviour
 
     #region UI Management
     /// <summary>
-    /// 플레이어의 HP바 UI를 업데이트합니다.
-    /// </summary>
-    [ClientRpc]
-    public void UpdateHPBarClientRPC(sbyte hp, sbyte maxHP)
-    {
-        hPBarUIController?.SetHP(hp, maxHP);
-    }
-
-    /// <summary>
     /// 데미지 텍스트 팝업을 표시합니다.
     /// </summary>
-    [ClientRpc]
-    public void ShowDamageTextPopupClientRPC(sbyte damageAmount)
+    public void ShowDamageTextPopup(sbyte damageAmount)
     {
-        damageTextUIController?.CreateTextObject(damageAmount);
+        if(damageTextUIController == null) return;
+
+        damageTextUIController.CreateTextObject(damageAmount);
     }
 
     /// <summary>
@@ -256,8 +245,10 @@ public abstract class PlayerClient : NetworkBehaviour
     [ClientRpc]
     public void OffPlayerUIClientRPC()
     {
+        if (hPBarUIController == null || userNameUIController == null) return;
+
         hPBarUIController.gameObject.SetActive(false);
-        userNameUIController.gameObject?.SetActive(false);
+        userNameUIController.gameObject.SetActive(false);
     }
     #endregion
 

@@ -13,11 +13,12 @@ public class PlayerHPManagerServer : NetworkBehaviour
     private const float DOT_DAMAGE_INTERVAL = 1f;
     #endregion
 
-    #region Fields
+    #region Fields & Components
     private PlayerInGameData playerData;
     public PlayerClient playerClient;
     public PlayerServer playerServer;
     public PlayerAnimator playerAnimator;
+    public PlayerHPManagerClient playerHPManagerClient;
     #endregion
 
     #region Initialization
@@ -42,7 +43,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
             InitializeForMultiplayer(character);
         }
 
-        playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
+        playerHPManagerClient.UpdatePlayerHPClientRPC(playerData.hp, playerData.maxHp);
     }
 
     /// <summary>
@@ -149,7 +150,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
             GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
         }
         
-        playerClient.UpdateHPBarClientRPC(playerData.hp, playerData.maxHp);
+        playerHPManagerClient.UpdatePlayerHPClientRPC(playerData.hp, playerData.maxHp);
     }
     #endregion
 
@@ -160,14 +161,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <param name="damage">플레이어 캐릭터의 머리 위에 띄워줄 대미지값 입니다.</param>
     private void HandlePlayerHitEffects(sbyte damage)
     {
-        // 피격 카메라 테두리 효과 실행
-        playerClient.ActivateHitByAttackCameraEffectClientRPC();
-        // 피격 카메라 쉐이크 효과 실행
-        playerClient.ActivateHitByAttackCameraShakeClientRPC();
-        // 피격 대미지 숫자 표시 실행
-        playerClient.ShowDamageTextPopupClientRPC(damage);
-        // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
-        playerClient.ActivateHitByAttackEffectClientRPC();
+        playerHPManagerClient.HandlePlayerHitEffectsClientRPC(damage);
     }
 
     /// <summary>

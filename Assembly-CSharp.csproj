@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
     <Compile Include="Assets\Scripts\Data\AIPlayerName.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\PlayerHPManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Server\SkillManagerServerKnight.cs" />
     <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\Data\GameAssetsManager.cs" />
