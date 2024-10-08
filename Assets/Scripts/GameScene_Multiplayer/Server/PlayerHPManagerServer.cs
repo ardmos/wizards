@@ -14,11 +14,11 @@ public class PlayerHPManagerServer : NetworkBehaviour
     #endregion
 
     #region Fields & Components
-    private PlayerInGameData playerData;
     public PlayerClient playerClient;
     public PlayerServer playerServer;
     public PlayerAnimator playerAnimator;
     public PlayerHPManagerClient playerHPManagerClient;
+    private PlayerInGameData playerData;
     #endregion
 
     #region Initialization
@@ -28,11 +28,8 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <param name="character">캐릭터 정보</param>
     public void InitPlayerHP(ICharacter character)
     {
-        if (character == null)
-        {
-            Debug.LogError("Character information is null");
-            return;
-        }
+        if (character == null) return;
+        if (playerHPManagerClient == null) return;
 
         if (IsHost)
         {
@@ -52,6 +49,9 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <param name="character"></param>
     private void InitializeForSingleplayer(ICharacter character)
     {
+        if (character == null) return;
+        if (GameSingleplayer.Instance == null) return;
+
         playerData = GameSingleplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         playerData.hp = character.hp;
         playerData.maxHp = character.maxHp;
@@ -64,6 +64,9 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <param name="character"></param>
     private void InitializeForMultiplayer(ICharacter character)
     {
+        if (character == null) return;
+        if (GameMultiplayer.Instance == null) return;
+
         playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
         playerData.hp = character.hp;
         playerData.maxHp = character.maxHp;
@@ -94,7 +97,6 @@ public class PlayerHPManagerServer : NetworkBehaviour
         if (playerData.playerGameState != PlayerGameState.Playing) return;
 
         sbyte newPlayerHP = (sbyte)Mathf.Max(playerData.hp - damage, 0);
-
         if (newPlayerHP == 0)
         {
             HandlePlayerGameOver(attackerClientId);
@@ -139,8 +141,11 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <param name="newHP">새로운 HP값</param>
     private void UpdatePlayerHP(sbyte newHP)
     {
-        playerData.hp = newHP;
+        if (playerHPManagerClient == null) return;
+        if (IsHost && GameSingleplayer.Instance == null) return;
+        if (!IsHost && GameMultiplayer.Instance == null) return;
 
+        playerData.hp = newHP;
         if (IsHost)
         {
             GameSingleplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
@@ -149,7 +154,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         {
             GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
         }
-        
+
         playerHPManagerClient.UpdatePlayerHPClientRPC(playerData.hp, playerData.maxHp);
     }
     #endregion
@@ -161,6 +166,8 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <param name="damage">플레이어 캐릭터의 머리 위에 띄워줄 대미지값 입니다.</param>
     private void HandlePlayerHitEffects(sbyte damage)
     {
+        if (playerHPManagerClient == null) return;
+
         playerHPManagerClient.HandlePlayerHitEffectsClientRPC(damage);
     }
 
@@ -169,6 +176,8 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// </summary>
     private void PlayPlayerHitAnimation()
     {
+        if(playerAnimator ==  null) return;
+
         playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Hit);
     }
     #endregion
@@ -180,6 +189,8 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <param name="attackerClientId">공격자의 clientId</param>
     private void HandlePlayerGameOver(ulong attackerClientId)
     {
+        if (playerServer == null) return;
+
         playerData.playerGameState = PlayerGameState.GameOver;
         playerServer.GameOver(attackerClientId);
     }
@@ -192,6 +203,9 @@ public class PlayerHPManagerServer : NetworkBehaviour
     /// <returns>GameState가 Playing인지 정보가 담긴 bool값</returns>
     private bool IsGamePlaying()
     {
+        if (IsHost && SingleplayerGameManager.Instance == null) return false;
+        if (!IsHost && MultiplayerGameManager.Instance == null) return false;
+
         return IsHost ? SingleplayerGameManager.Instance.IsGamePlaying()
                       : MultiplayerGameManager.Instance.IsGamePlaying();
     }
