@@ -12,7 +12,7 @@ public class SpellManagerServer : NetworkBehaviour
     public const byte DEFENCE_SPELL_INDEX_DEFAULT = 3;
     #endregion
 
-    #region Fields
+    #region Fields & Components
     public SpellManagerClient spellManagerClient;
     public PlayerAnimator playerAnimator;
     private List<SpellInfo> playerOwnedSpellInfoListOnServer = new List<SpellInfo>();
@@ -21,11 +21,13 @@ public class SpellManagerServer : NetworkBehaviour
     #region SpellInfo Management
     /// <summary>
     /// 플레이어의 스펠 상태를 업데이트하는 ServerRpc 메서드입니다.
-    /// 아래 UpdatePlayerSpellState메서드와 동일한 작업을 하지만 서버 내부에서만 호출되는것이 아니라 Client측에서도 스펠 상태를 업데이트시킬 수 있도록 만들어둔 메서드 입니다. 
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
     public void UpdatePlayerSpellStateServerRPC(ushort spellIndex, SpellState spellState, ServerRpcParams serverRpcParams = default)
     {
+        if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return;
+        if (spellManagerClient == null) return;
+
         playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
 
         // 업데이트된 플레이어 스펠 상태 정보를 요청한 클라이언트와 동기화
@@ -37,6 +39,9 @@ public class SpellManagerServer : NetworkBehaviour
     /// </summary>
     public void UpdatePlayerSpellState(ushort spellIndex, SpellState spellState)
     {
+        if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return;
+        if (spellManagerClient == null) return;
+
         playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
 
         // 업데이트된 플레이어 스펠 상태 정보를 요청한 클라이언트와 동기화
@@ -44,13 +49,12 @@ public class SpellManagerServer : NetworkBehaviour
     }
 
     /// <summary>
-    /// Server측에서 보유한 SpellInfo 리스트 초기화 메소드 입니다.
-    /// 플레이어 최초 생성시 호출됩니다.
+    /// 게임 시작시 생성된 플레이어의 보유 마법 리스트(SpellInfoList)를 초기화하는 메서드입니다.
     /// </summary>
-    public void InitPlayerSpellInfoArrayOnServer(SpellName[] skillNames)
+    public void InitPlayerSpellInfoArrayOnServer(SpellName[] spellNames)
     {
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
-        foreach (SpellName spellName in skillNames)
+        foreach (SpellName spellName in spellNames)
         {
             Debug.Log($"spellName({spellName}): {SpellSpecifications.Instance.GetSpellDefaultSpec(spellName)}");
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
@@ -62,7 +66,7 @@ public class SpellManagerServer : NetworkBehaviour
     }
 
     /// <summary>
-    /// 현재 서버가 보유중인 SpellInfo 리스트를 반환합니다.
+    /// 현재 서버가 보유중인 SpellInfoList를 반환합니다.
     /// </summary>
     public List<SpellInfo> GetSpellInfoList()
     {
@@ -70,7 +74,7 @@ public class SpellManagerServer : NetworkBehaviour
     }
 
     /// <summary>
-    /// 마법 이름으로 SpellInfo를 가져오는 메서드입니다.
+    /// spellName으로 SpellInfo를 찾는 메서드입니다.
     /// </summary>
     /// <param name="spellName">알고싶은 마법의 이름</param>
     /// <returns>SpellInfo 객체, 없으면 null</returns>
@@ -88,7 +92,7 @@ public class SpellManagerServer : NetworkBehaviour
     }
 
     /// <summary>
-    /// 인덱스로 SpellInfo를 가져오는 메서드입니다.
+    /// 인덱스로 SpellInfo를 찾는 메서드입니다.
     /// </summary>
     /// <param name="spellIndex">스펠의 인덱스</param>
     /// <returns>SpellInfo 객체, 없으면 null</returns>
@@ -99,7 +103,7 @@ public class SpellManagerServer : NetworkBehaviour
     }
 
     /// <summary>
-    /// SpellName으로 스펠 인덱스를 찾는 메서드입니다.
+    /// spellName으로 스펠 인덱스를 찾는 메서드입니다.
     /// </summary>
     /// <param name="spellName">찾고자 하는 마법 이름</param>
     /// <returns>스펠 인덱스, 못찾으면 -1</returns>

@@ -70,6 +70,7 @@ public abstract class AoESpell : NetworkBehaviour, IOwnerSeter
     public virtual void InitAoESpell(SpellInfo spellInfoFromServer)
     {
         if (IsClient) return;
+        if (spellInfoFromServer == null) return;
 
         spellInfo = spellInfoFromServer;
     }

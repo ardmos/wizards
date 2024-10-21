@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEngine;
 
 public class PlayerHPManagerClient : NetworkBehaviour
 {
@@ -9,16 +6,11 @@ public class PlayerHPManagerClient : NetworkBehaviour
     public PlayerClient playerClient;
     #endregion
 
-    [ClientRpc]
-    public void UpdatePlayerHPClientRPC(sbyte hp, sbyte maxHP)
-    {
-        UpdateHPBarUI(hp, maxHP);
-    }
-
     /// <summary>
     /// 플레이어의 HP바 UI를 업데이트합니다.
     /// </summary>
-    private void UpdateHPBarUI(sbyte hp, sbyte maxHP)
+    [ClientRpc]
+    public void UpdatePlayerHPClientRPC(sbyte hp, sbyte maxHP)
     {
         if (playerClient.hPBarUIController == null) return;
 

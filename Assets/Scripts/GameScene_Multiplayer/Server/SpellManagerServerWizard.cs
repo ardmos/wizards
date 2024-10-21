@@ -44,6 +44,8 @@ public class SpellManagerServerWizard : SpellManagerServer
 
     IEnumerator StartAndResetAnimState(float lifeTime)
     {
+        if (playerAnimator == null) yield break;
+
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.CastingDefensiveMagic);
         yield return new WaitForSeconds(lifeTime);
 
@@ -67,6 +69,8 @@ public class SpellManagerServerWizard : SpellManagerServer
     [ServerRpc (RequireOwnership = false)]
     public void CastingBlizzardServerRPC()
     {
+        if (playerAnimator == null) return;
+
         // 범위 표시 오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SpellName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
@@ -91,6 +95,9 @@ public class SpellManagerServerWizard : SpellManagerServer
     [ServerRpc (RequireOwnership = false)]
     public void ReleaseBlizzardServerRPC(ServerRpcParams serverRpcParams = default)
     {
+        if (playerAnimator == null) return;
+        if (GetSpellInfo(2) == null) return; // 임시로 블리자드 스킬을 스펠인덱스2번으로 고정합니다.
+
         // 1. 시전중인 범위표시 오브젝트 제거
         Destroy(playerCastingSpell);
         // 2. 블리자드 스킬 이펙트오브젝트 생성
@@ -117,13 +124,15 @@ public class SpellManagerServerWizard : SpellManagerServer
     [ServerRpc(RequireOwnership = false)]
     public void CastingNormalSpellServerRPC(ushort spellIndex)
     {
+        if (playerAnimator == null) return;
+        SpellInfo spellInfo = GetSpellInfo(spellIndex);
+        if (spellInfo == null) return;  
+
         // 발사체 오브젝트 생성
-        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzlePos_Normal.position, Quaternion.identity);
+        GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(spellInfo.spellName), muzzlePos_Normal.position, Quaternion.identity);
         spellObject.GetComponent<NetworkObject>().Spawn();
 
         // 발사체 스펙 초기화 해주기
-        //SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
-        SpellInfo spellInfo = GetSpellInfo(spellIndex);
         spellObject.GetComponent<AttackSpell>().InitSpellInfoDetail(spellInfo, gameObject);
         // 호밍 마법이라면 호밍 마법에 소유자 등록 & 속도 설정
         if (spellObject.TryGetComponent<HomingMissile>(out var ex))
@@ -159,7 +168,8 @@ public class SpellManagerServerWizard : SpellManagerServer
     [ServerRpc(RequireOwnership = false)]
     public void ReleaseNormalSpellServerRPC(ushort spellIndex, ServerRpcParams serverRpcParams = default)
     {
-        if (!playerCastingSpell) return;
+        if (playerCastingSpell==null) return;
+        if (playerAnimator==null) return;
 
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(spellIndex, SpellState.Cooltime);
