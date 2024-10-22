@@ -12,6 +12,7 @@ public class SpellManagerClientWizard : SpellManagerClient
     /// <param name="spellIndex">스펠 인덱스</param>
     public void CastingNormalSpell(ushort spellIndex)
     {
+        if (spellManagerServer == null) return;
         if (skillInfoListOnClient[spellIndex].spellState != SpellState.Ready) return;
 
         // 서버에 마법 캐스팅 요청
@@ -24,6 +25,7 @@ public class SpellManagerClientWizard : SpellManagerClient
     /// <param name="spellIndex">스펠 인덱스</param>
     public void ReleaseNormalSpell(ushort spellIndex)
     {
+        if (spellManagerServer == null) return;
         if (skillInfoListOnClient[spellIndex].spellState != SpellState.Casting) return;
 
         // 서버에 마법 발사 요청
@@ -37,6 +39,7 @@ public class SpellManagerClientWizard : SpellManagerClient
     /// </summary>
     public void CastingBlizzard()
     {
+        if (spellManagerServer == null) return;
         if (skillInfoListOnClient[2].spellState != SpellState.Ready) return;
 
         // 서버에 마법 캐스팅 요청
@@ -48,6 +51,7 @@ public class SpellManagerClientWizard : SpellManagerClient
     /// </summary>
     public void ReleaseBlizzard()
     {
+        if (spellManagerServer == null) return;
         if (skillInfoListOnClient[2].spellState != SpellState.Casting) return;
 
         // 서버에 마법 발사 요청
@@ -61,6 +65,7 @@ public class SpellManagerClientWizard : SpellManagerClient
     /// </summary>
     public void ActivateShield()
     {
+        if (spellManagerServer == null) return;
         if (skillInfoListOnClient[SpellManagerServer.DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
 
         // 서버에 마법 시전 요청

@@ -20,18 +20,12 @@ public class SpellManagerServer : NetworkBehaviour
 
     #region SpellInfo Management
     /// <summary>
-    /// 플레이어의 스펠 상태를 업데이트하는 ServerRpc 메서드입니다.
+    /// 클라이언트측에서 서버측에 저장중인 플레이어의 스펠 상태를 업데이트할 수 있도록하는 ServerRpc 메서드입니다.
     /// </summary>
     [ServerRpc(RequireOwnership = false)]
     public void UpdatePlayerSpellStateServerRPC(ushort spellIndex, SpellState spellState, ServerRpcParams serverRpcParams = default)
     {
-        if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return;
-        if (spellManagerClient == null) return;
-
-        playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
-
-        // 업데이트된 플레이어 스펠 상태 정보를 요청한 클라이언트와 동기화
-        spellManagerClient.UpdatePlayerSpellInfoArrayClientRPC(playerOwnedSpellInfoListOnServer.ToArray());
+        UpdatePlayerSpellState(spellIndex, spellState);
     }
 
     /// <summary>
@@ -39,9 +33,10 @@ public class SpellManagerServer : NetworkBehaviour
     /// </summary>
     public void UpdatePlayerSpellState(ushort spellIndex, SpellState spellState)
     {
-        if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return;
-        if (spellManagerClient == null) return;
+        // 메서드 실행 조건 확인
+        if (!ValidateUpdateSpellStateConditions(spellIndex)) return;
 
+        // 스펠 상태 업데이트
         playerOwnedSpellInfoListOnServer[spellIndex].spellState = spellState;
 
         // 업데이트된 플레이어 스펠 상태 정보를 요청한 클라이언트와 동기화
@@ -58,6 +53,7 @@ public class SpellManagerServer : NetworkBehaviour
         {
             Debug.Log($"spellName({spellName}): {SpellSpecifications.Instance.GetSpellDefaultSpec(spellName)}");
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
+            if (spellInfo == null) continue;
             spellInfo.ownerPlayerClientId = OwnerClientId;
             playerSpellInfoList.Add(spellInfo);
         }
@@ -120,6 +116,15 @@ public class SpellManagerServer : NetworkBehaviour
             }
         }
         return index;
+    }
+    #endregion
+
+    #region ValiateConditions
+    private bool ValidateUpdateSpellStateConditions(ushort spellIndex)
+    {
+        if (playerOwnedSpellInfoListOnServer.Count <= spellIndex) return false;
+        if (spellManagerClient == null) return false;
+        return true;
     }
     #endregion
 }

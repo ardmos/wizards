@@ -8,10 +8,12 @@ using UnityEngine;
 /// </summary>
 public class SpellManagerServerWizard : SpellManagerServer
 {
+    #region Fields & Components
     public Transform muzzlePos_Normal;
     public Transform muzzlePos_AoE;
 
     private GameObject playerCastingSpell;
+    #endregion
 
     #region Defence Spell Cast
     /// <summary>
@@ -174,30 +176,51 @@ public class SpellManagerServerWizard : SpellManagerServer
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(spellIndex, SpellState.Cooltime);
 
+        // 부모 오브젝트 설정
         playerCastingSpell.transform.SetParent(MultiplayerGameManager.Instance.transform);
-        float moveSpeed = playerCastingSpell.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
 
-        // 호밍 마법이라면 호밍 시작 처리
-        if (playerCastingSpell.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
-        // 설치 마법
-        else if (moveSpeed == 0) {
-            
-        }
-        // 마법 발사 (기본 직선 비행 마법)
-        else
-        {
-            playerCastingSpell.GetComponent<AttackSpell>().Shoot(playerCastingSpell.transform.forward * moveSpeed, ForceMode.Impulse);
-        }
-
+        // 마법 타입별 발사과정 처리
+        HandleNormalSpellBehavior();
+        
         // 발사 SFX 실행 
         SpellInfo spellInfo = GetSpellInfo(spellIndex);
         SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Shooting, transform);
 
-        // 포구 VFX
+        // 포구 VFX 실행
         MuzzleVFX(playerCastingSpell.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
 
         // 발사 애니메이션 실행
         playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
+    }
+
+    /// <summary>
+    /// 일반 마법의 타입별 발사과정을 처리하는 메서드 입니다.
+    /// </summary>
+    private void HandleNormalSpellBehavior()
+    {
+        float moveSpeed = playerCastingSpell.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
+
+        // 설치 마법
+        if (moveSpeed == 0)
+        {
+            // 설치 마법은 발사나 호밍 작업을 하지 않습니다.
+        }
+        // 유도 마법
+        else if (playerCastingSpell.TryGetComponent<HomingMissile>(out HomingMissile homingMissile))
+        {
+            // 호밍 시작
+            homingMissile.StartHoming();
+        }
+        // 직선 비행 마법
+        else if (playerCastingSpell.TryGetComponent<AttackSpell>(out AttackSpell attackSpell))
+        {
+            // 발사
+            attackSpell.Shoot(playerCastingSpell.transform.forward * moveSpeed, ForceMode.Impulse);
+        }
+        else
+        {
+            Debug.LogError("Normal Spell Handling Error");
+        }
     }
     #endregion
 

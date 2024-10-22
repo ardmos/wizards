@@ -2,7 +2,7 @@ using Unity.Netcode;
 
 public class PlayerHPManagerClient : NetworkBehaviour
 {
-    #region Components
+    #region Fields & Components
     public PlayerClient playerClient;
     #endregion
 

@@ -11,7 +11,7 @@ public class PlayerServer : NetworkBehaviour
     private const float ITEM_OFFSET_X = 0.5f;
     #endregion
 
-    #region Fields
+    #region Fields & Components
     public PlayerClient playerClient;
     public PlayerHPManagerServer playerHPManager;
     public PlayerAnimator playerAnimator;
@@ -19,7 +19,7 @@ public class PlayerServer : NetworkBehaviour
 
     [Header("물리 관련")]
     public Rigidbody rb;
-    public Collider _collider;
+    public Collider mCollider;
     #endregion
 
     #region Network Lifecycle
@@ -70,7 +70,10 @@ public class PlayerServer : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ActivateScrollUseVFXServerRPC()
     {
-        GameObject vfxHeal = Instantiate(GameAssetsManager.Instance.gameAssets.vfx_SpellUpgrade, transform);
+        GameObject vfxPrefab = GameAssetsManager.Instance.gameAssets.vfx_SpellUpgrade;
+        if (vfxPrefab == null) return;
+
+        GameObject vfxHeal = Instantiate(vfxPrefab, transform);
         vfxHeal.GetComponent<NetworkObject>().Spawn();
         vfxHeal.transform.SetParent(transform);
     }
@@ -82,6 +85,8 @@ public class PlayerServer : NetworkBehaviour
     /// </summary>
     public sbyte GetPlayerHP()
     {
+        if (playerHPManager == null) return 0;
+
         return playerHPManager.GetHP();
     }
     #endregion
@@ -93,23 +98,25 @@ public class PlayerServer : NetworkBehaviour
     /// <param name="attackerClientId">공격한 클라이언트의 ID</param>
     public void GameOver(ulong attackerClientId)
     {
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        if (playerData.playerGameState != PlayerGameState.Playing) return;
+        if (!ValidateGameOverConditions()) return;
 
-        rb.isKinematic = true;
-        _collider.enabled = false;
+        DisablePhysicsAndCollisions();
         tag = "GameOver";
 
         // 현 플레이어를 처치한 플레이어들에게 점수를 부여
         GiveScoreToAttackerWhenGameOver(attackerClientId);
+
         // 현 플레이어 게임오버 애니메이션 실행
         playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.GameOver);
+
         // 현 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
         playerClient.SetPlayerGameOverClientRPC();
         // 현 플레이어의 '이름 & HP' UI off
         playerClient.OffPlayerUIClientRPC();
+
         // 현 플레이어의 게임오버 사실을 서버에 기록.
         MultiplayerGameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, attackerClientId);
+        
         // 아이템 드랍 로직 실행
         GenerateAndDropItemWhenGameOver();
     }
@@ -136,6 +143,17 @@ public class PlayerServer : NetworkBehaviour
     }
 
     /// <summary>
+    /// 물리 및 충돌 비활성화 로직을 담은 메서드입니다.
+    /// </summary>
+    private void DisablePhysicsAndCollisions()
+    {
+        rb.isKinematic = true;
+        mCollider.enabled = false;
+    }
+    #endregion
+
+    #region Generate Drop Item Handling
+    /// <summary>
     /// 게임오버시 아이템을 드랍해주는 메서드입니다.
     /// HP포션과 Scroll아이템을 드랍합니다. 
     /// </summary>
@@ -144,9 +162,7 @@ public class PlayerServer : NetworkBehaviour
         DropItem(GameAssetsManager.Instance.GetItemHPPotionObject(), ITEM_OFFSET_X);
         DropItem(GameAssetsManager.Instance.GetItemScrollObject(), -ITEM_OFFSET_X);
     }
-    #endregion
 
-    #region Generate Drop Item Handling
     /// <summary>
     /// 매개변수로 전달받은 아이템 프리팹을 현 캐릭터의 드랍아이템으로써 게임 세상에 소환해주는 메서드 입니다.
     /// </summary>
@@ -186,6 +202,24 @@ public class PlayerServer : NetworkBehaviour
         {
             Debug.LogWarning($"NetworkObject component not found on {obj.name}");
         }
+    }
+    #endregion
+
+    #region ValiateConditions
+    /// <summary>
+    /// GameOver 메서드를 수행하기 전에 필요 조건들을 검증하는 메서드 입니다.
+    /// </summary>
+    /// <returns>검증 결과를 bool 형태로 반환합니다</returns>
+    private bool ValidateGameOverConditions()
+    {
+        if (GameMultiplayer.Instance == null) return false;
+        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        if (playerData.playerGameState != PlayerGameState.Playing) return false;
+        if (playerAnimator == null) return false;
+        if (playerClient == null) return false;
+        if (rb == null || mCollider == null) return false;
+
+        return true;
     }
     #endregion
 }
