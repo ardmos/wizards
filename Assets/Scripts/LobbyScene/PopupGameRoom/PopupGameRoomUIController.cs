@@ -41,9 +41,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
         // 서버에선 실행해줄 필요 없는 내용입니다.
         //Debug.Log($"Start() Is Server? : {IsServer}");
         if (IsServer) return;
-        GameMultiplayer.Instance.OnSucceededToJoinMatch += OnSucceededToJoinMatch;
-        GameMultiplayer.Instance.OnFailedToJoinMatch += OnFailedToJoinMatch;
-        GameMultiplayer.Instance.OnPlayerListOnServerChanged += OnPlayerListOnServerChanged;
+        ClientNetworkManager.Instance.OnMatchJoined += OnMatchJoined;
+        ClientNetworkManager.Instance.OnMatchExited += OnMatchExited;
+        ServerNetworkManager.Instance.OnCurrentPlayerListOnServerChanged += OnPlayerListOnServerChanged;
         GameMatchReadyManagerClient.Instance.OnPlayerReadyDictionaryClientChanged += OnReadyPlayerListClientChanged;
 
         btnCancel.AddClickListener(CancelMatch);
@@ -57,9 +57,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
         // 서버에선 실행해줄 필요 없는 내용입니다.
         //Debug.Log($"OnDestroy() Is Server? : {IsServer}");
         if (IsServer) return;
-        GameMultiplayer.Instance.OnSucceededToJoinMatch -= OnSucceededToJoinMatch;
-        GameMultiplayer.Instance.OnFailedToJoinMatch -= OnFailedToJoinMatch;
-        GameMultiplayer.Instance.OnPlayerListOnServerChanged -= OnPlayerListOnServerChanged;
+        ClientNetworkManager.Instance.OnMatchJoined -= OnMatchJoined;
+        ClientNetworkManager.Instance.OnMatchExited -= OnMatchExited;
+        ServerNetworkManager.Instance.OnCurrentPlayerListOnServerChanged -= OnPlayerListOnServerChanged;
         GameMatchReadyManagerClient.Instance.OnPlayerReadyDictionaryClientChanged -= OnReadyPlayerListClientChanged;
     }
 
@@ -103,7 +103,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         }
 
         // 3. 접속중인 인원 숫자 표시
-        SetUIs(GameMultiplayer.Instance.GetPlayerCount());
+        SetUIs(ServerNetworkManager.Instance.GetPlayerCount());
     }
 
     private void ActivateReadyCountdownUI()
@@ -132,28 +132,25 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
     private void OnReadyPlayerListClientChanged(object sender, System.EventArgs e)
     {
-        //Debug.Log("팝업 OnReadyChanged()");
-        //RunStateMachine();
-        SetUIs(GameMultiplayer.Instance.GetPlayerCount());
+        SetUIs(ServerNetworkManager.Instance.GetPlayerCount());
     }
 
     /// <summary>
-    /// 현재 플레이어가 매칭 티켓 참여에 실패하면 호출되 메소드 입니다. 
-    /// 현 UI를 닫아줍니다. 실패 문구 출력은 PopupConnectionResponseUI에서 해줍니다.
-    /// </summary>
-    private void OnFailedToJoinMatch(object sender, System.EventArgs e)
-    {
-        Hide();
-    }
-
-    /// <summary>
-    /// 현재 플레이어가 매칭 티켓 참여에 성공하면 호출되는 메소드 입니다.
+    /// 현재 플레이어가 매칭 티켓(현재 GameRoom) 참여에 성공하면 호출되는 메소드 입니다.
     /// 현 UI를 보여줍니다.
     /// </summary>
-    private void OnSucceededToJoinMatch(object sender, System.EventArgs e)
+    private void OnMatchJoined(object sender, System.EventArgs e)
     {
         Show();
-        //Debug.Log($"(OnSucceededToJoinMatch)현재 참여중인 총 플레이어 수 : {GameMultiplayer.Instance.GetPlayerCount()}");
+    }
+
+    /// <summary>
+    /// 현재 플레이어가 매칭 티켓(현재 GameRoom)에서 이탈시 호출되는 메서드 입니다. 
+    /// 현 UI를 닫아줍니다. 실패 문구 출력은 PopupConnectionResponseUI에서 해줍니다.
+    /// </summary>
+    private void OnMatchExited(object sender, System.EventArgs e)
+    {
+        Hide();
     }
 
     /// <summary>
@@ -168,7 +165,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         //Debug.Log($"현재 참여중인 총 플레이어 수 : {playerCount}, matchingState:{matchingState}");
 
         // 게임 인원 다 모이면 매칭상태 변경
-        byte playerCount = GameMultiplayer.Instance.GetPlayerCount();
+        byte playerCount = ServerNetworkManager.Instance.GetPlayerCount();
         if (playerCount == ConnectionApprovalHandler.MaxPlayers) //테스트용 주석
         {
             // 레디 대기 상태로 변경
@@ -216,9 +213,9 @@ public class PopupGameRoomUIController : NetworkBehaviour
         //Debug.Log($"UpdateToggleUIState(), 클라이언트측에서 확인되는 currentConnectedPlayer:{GameMultiplayer.Instance.GetPlayerCount()} ");
         for (int playerIndex = 0; playerIndex < toggleArrayPlayerJoined.Length; playerIndex++)
         {
-            if (GameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex))
+            if (ServerNetworkManager.Instance.IsPlayerIndexConnected(playerIndex))
             {
-                PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
+                PlayerInGameData playerData = ServerNetworkManager.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
                 //Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId)}");
                 toggleArrayPlayerJoined[playerIndex].isOn = GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId);
             }
@@ -250,7 +247,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
         // 현 플레이어가 매칭 티켓에서 퇴장하려는 단계
         // 1. 퇴장 실행
-        GameMultiplayer.Instance.StopClient();
+        ClientNetworkManager.Instance.StopClient();
         // 매칭 실패 SFX 재생
         SoundManager.Instance?.PlayUISFX(UISFX_Type.Failed_Match);
         Hide();

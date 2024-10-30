@@ -130,15 +130,15 @@ public class PlayerServer : NetworkBehaviour
         // 환경 요소등으로 인해 게임오버 당한 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
         if (attackerClientId == OwnerClientId)
         {
-            foreach (PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+            foreach (PlayerInGameData playerInGameData in ServerNetworkManager.Instance.GetPlayerDataNetworkList())
             {
-                GameMultiplayer.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
+                ServerNetworkManager.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
             }
         }
         // 일반적인 경우 상대 플레이어 300스코어 획득
         else
         {
-            GameMultiplayer.Instance.AddPlayerScore(attackerClientId, DEFAULT_SCORE);
+            ServerNetworkManager.Instance.AddPlayerScore(attackerClientId, DEFAULT_SCORE);
         }
     }
 
@@ -212,8 +212,8 @@ public class PlayerServer : NetworkBehaviour
     /// <returns>검증 결과를 bool 형태로 반환합니다</returns>
     private bool ValidateGameOverConditions()
     {
-        if (GameMultiplayer.Instance == null) return false;
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        if (ServerNetworkManager.Instance == null) return false;
+        PlayerInGameData playerData = ServerNetworkManager.Instance.GetPlayerDataFromClientId(OwnerClientId);
         if (playerData.playerGameState != PlayerGameState.Playing) return false;
         if (playerAnimator == null) return false;
         if (playerClient == null) return false;

@@ -142,7 +142,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
             return;
         }
 
-        PlayerInGameData playerInGameData = GameMultiplayer.Instance.GetPlayerDataFromClientId(AIClientId);
+        PlayerInGameData playerInGameData = ServerNetworkManager.Instance.GetPlayerDataFromClientId(AIClientId);
         SetCharacterData(playerInGameData);
 
         // NavMesh를 사용하기 대문에 속도 설정을 따로 챙겨줍니다
@@ -298,15 +298,15 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         // 스스로 게임오버 당한 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
         if (clientWhoAttacked == OwnerClientId)
         {
-            foreach (PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+            foreach (PlayerInGameData playerInGameData in ServerNetworkManager.Instance.GetPlayerDataNetworkList())
             {
-                GameMultiplayer.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
+                ServerNetworkManager.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
             }
         }
         // 일반적인 경우 상대 플레이어 300스코어 획득
         else
         {
-            GameMultiplayer.Instance.AddPlayerScore(clientWhoAttacked, DEFAULT_SCORE);
+            ServerNetworkManager.Instance.AddPlayerScore(clientWhoAttacked, DEFAULT_SCORE);
         }
     }
 

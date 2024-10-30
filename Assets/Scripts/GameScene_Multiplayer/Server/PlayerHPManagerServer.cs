@@ -65,12 +65,12 @@ public class PlayerHPManagerServer : NetworkBehaviour
     private void InitializeForMultiplayer(ICharacter character)
     {
         if (character == null) return;
-        if (GameMultiplayer.Instance == null) return;
+        if (ServerNetworkManager.Instance == null) return;
 
-        playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerData = ServerNetworkManager.Instance.GetPlayerDataFromClientId(OwnerClientId);
         playerData.hp = character.hp;
         playerData.maxHp = character.maxHp;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+        ServerNetworkManager.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
     }
     #endregion
 
@@ -143,7 +143,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
     {
         if (playerHPManagerClient == null) return;
         if (IsHost && GameSingleplayer.Instance == null) return;
-        if (!IsHost && GameMultiplayer.Instance == null) return;
+        if (!IsHost && ServerNetworkManager.Instance == null) return;
 
         playerData.hp = newHP;
         if (IsHost)
@@ -152,7 +152,7 @@ public class PlayerHPManagerServer : NetworkBehaviour
         }
         else
         {
-            GameMultiplayer.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
+            ServerNetworkManager.Instance.SetPlayerDataFromClientId(OwnerClientId, playerData);
         }
 
         playerHPManagerClient.UpdatePlayerHPClientRPC(playerData.hp, playerData.maxHp);

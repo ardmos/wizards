@@ -100,8 +100,7 @@ public class MatchmakerClient : MonoBehaviour
     {
         Debug.Log($"Ticket Assigned: {assignment.Ip}:{assignment.Port}");
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(assignment.Ip, (ushort)assignment.Port);
-        //NetworkManager.Singleton.StartClient();
-        GameMultiplayer.Instance.StartClient();
+        ClientNetworkManager.Instance.StartClient();
     }
 
     [Serializable]

@@ -59,8 +59,8 @@ public abstract class PlayerClient : NetworkBehaviour
         VirtualCamera?.gameObject.SetActive(IsOwner);
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         mRigidbody.isKinematic = false;
-        // 플레이어 닉네임 설정
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        // 플레이어 닉네임 표시
+        PlayerInGameData playerData = ClientNetworkManager.Instance.GetPlayerData();
         userNameUIController?.SetName(playerData.playerName.ToString());
 
         // 오디오리스너 초기화
@@ -276,7 +276,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
         if (playerOutGameData == null) return;
 
-        float score = GameMultiplayer.Instance.GetPlayerScore(OwnerClientId);
+        float score = ClientNetworkManager.Instance.GetPlayerScore();
 
         if (playerOutGameData.hightestKOinOneMatch < score)
         {
@@ -298,7 +298,7 @@ public abstract class PlayerClient : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        GameSceneUIManager.Instance.popupWinUIController.Show(OwnerClientId);
+        GameSceneUIManager.Instance.popupWinUIController.Show();
         SoundManager.Instance.PlayWinPopupSound();
         SaveWinResult();
     }
@@ -312,7 +312,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
         if (playerOutGameData == null) return;
 
-        float score = GameMultiplayer.Instance.GetPlayerScore(OwnerClientId);
+        float score = ClientNetworkManager.Instance.GetPlayerScore();
 
         if (playerOutGameData.hightestKOinOneMatch < score)
         {

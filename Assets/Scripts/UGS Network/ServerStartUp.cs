@@ -91,7 +91,7 @@ public class ServerStartUp : MonoBehaviour
     private void StartServer()
     {
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(InternalServerIp, serverPort);
-        GameMultiplayer.Instance.StartServer();
+        ServerNetworkManager.Instance.StartServer();
 
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }

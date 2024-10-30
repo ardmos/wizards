@@ -54,9 +54,13 @@ public class PopupHostHasDisconnectedUIController : MonoBehaviour
             NetworkManager.Singleton.Shutdown();
             Destroy(NetworkManager.Singleton.gameObject);
         }
-        if (GameMultiplayer.Instance != null)
+        if (ServerNetworkManager.Instance != null)
         {
-            Destroy(GameMultiplayer.Instance.gameObject);
+            Destroy(ServerNetworkManager.Instance.gameObject);
+        }
+        if (ClientNetworkManager.Instance != null)
+        {
+            Destroy(ClientNetworkManager.Instance.gameObject);
         }
     }
 }

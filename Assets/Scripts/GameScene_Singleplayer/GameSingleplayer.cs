@@ -45,9 +45,9 @@ public class GameSingleplayer : NetworkBehaviour
 
     private void InitGameMultiplayer()
     {
-        Debug.Log($"1. GameSingleplayer Awake() playerDataNetworkList : {playerDataNetworkList}");
+        Debug.Log($"1. GameSingleplayer Awake() currentPlayers : {playerDataNetworkList}");
         playerDataNetworkList = new NetworkList<PlayerInGameData>();
-        Debug.Log($"2. GameSingleplayer Awake() playerDataNetworkList : {playerDataNetworkList}");
+        Debug.Log($"2. GameSingleplayer Awake() currentPlayers : {playerDataNetworkList}");
 
         playerItemDictionaryOnServer = new Dictionary<ulong, Dictionary<ItemName, ushort>>();
 
@@ -261,7 +261,7 @@ public class GameSingleplayer : NetworkBehaviour
     public void SetPlayerDataFromClientId(ulong clientId, PlayerInGameData newPlayerData)
     {
         Debug.Log($"SetPlayerDataFromClientId. player.clientId: {clientId}.");
-        Debug.Log($"SetPlayerDataFromClientId. playerDataNetworkList.Count: {playerDataNetworkList.Count}");
+        Debug.Log($"SetPlayerDataFromClientId. currentPlayers.Count: {playerDataNetworkList.Count}");
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
         //Debug.Log($"SetPlayerDataFromClientId. player.clientId:{clientId}. playerGameState:{playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)].playerGameState}");
     }

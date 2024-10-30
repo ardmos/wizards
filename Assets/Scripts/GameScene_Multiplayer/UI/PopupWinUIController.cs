@@ -20,16 +20,8 @@ using UnityEngine.UI;
 /// </summary>
 public class PopupWinUIController : MonoBehaviour
 {
-    public ulong ownerClientId;
-
-    // 테스트용 보상 아이템 리스트 목록 하드코딩. 따로 구현할 필요 있음. << 몹 1킬 10골드, 플레이어 1킬 300골드
+    // 테스트용 보상 아이템 리스트 목록 하드코딩중. 따로 구현할 필요 있음. << 몹 1킬 10골드, 플레이어 1킬 300골드
     [SerializeField] private Dictionary<ItemName, ushort> rewardItems = new Dictionary<ItemName, ushort>();
-    /*= new Dictionary<ItemName, ushort>() {
-        { ItemName.Item_BonusGold, 7 },
-        { ItemName.Item_Exp, 25 },
-        { ItemName.Item_Wizard, 2 },
-        { ItemName.Item_Knight, 1 }
-    };*/
 
     [SerializeField] private Animator animator;
     [SerializeField] private Slider sliderBattlePath;
@@ -38,7 +30,7 @@ public class PopupWinUIController : MonoBehaviour
     [SerializeField] private GameObject btnClaim2x;
     [SerializeField] private GameObject imgEffect;
    
-    // 아래 itemTemplate들 GameAssets에 저장 안해도 되는지?
+    // 아래 itemTemplate들 GameAssets에 저장 안해도 되는지? 수정 필요
     [SerializeField] private GameObject itemTemplateGray;
     [SerializeField] private GameObject itemTemplateBlue;
     [SerializeField] private GameObject itemTemplateYellow;
@@ -57,10 +49,7 @@ public class PopupWinUIController : MonoBehaviour
         // 모든 상품 수령 & 로비씬 이동
         btnClaim.GetComponent<CustomClickSoundButton>().AddClickListener(() =>
         {
-            // 보상 수령. 수령 단계! 수령버튼 클릭 사실 서버에 보고.
-            // 1. 클라이언트가 현 btnClaim 클릭 & 서버측에 clientId와 itemName 전송.
-            // 2. ServerRPC 통해 전달받음. playerItemDictionary에 저장.
-            GameMultiplayer.Instance.AddPlayerItemServerRPC(rewardItems.Keys.ToArray<ItemName>(), rewardItems.Values.ToArray<ushort>());
+            // 보상 수령 로직은 추후 업데이트 예정 (미구현)
 
             // NetworkManager 정리
             CleanUp();
@@ -78,10 +67,8 @@ public class PopupWinUIController : MonoBehaviour
         Hide();
     }
 
-    public void Show(ulong ownerClientId)
+    public void Show()
     {
-        Debug.Log($"Win Popup Show() ownerClientId:{ownerClientId}");
-        this.ownerClientId = ownerClientId;
         gameObject.SetActive(true);
     }
 
@@ -121,16 +108,15 @@ public class PopupWinUIController : MonoBehaviour
     private void GenerateRewardItems()
     {
         // 0. 기본 승리 소득
-        AddRewardItems(ItemName.Item_Gold, 100);
+        UpdateRewardItemQuantity(ItemName.Item_Gold, 100);
 
         // 1. 스코어 기반 보상 제공
-        int playerScore = GameMultiplayer.Instance.GetPlayerScore(ownerClientId);
-        //Debug.Log($"player{ownerClientId}'s Score:{playerScore}");
+        int playerScore = ClientNetworkManager.Instance.GetPlayerScore();
         if (playerScore > 0)
-            AddRewardItems(ItemName.Item_Gold, (ushort)playerScore);
+            UpdateRewardItemQuantity(ItemName.Item_Gold, (ushort)playerScore);
     }
 
-    private void AddRewardItems(ItemName itemName, ushort value)
+    private void UpdateRewardItemQuantity(ItemName itemName, ushort value)
     {
         if(rewardItems.ContainsKey(itemName))
         {
@@ -195,9 +181,13 @@ public class PopupWinUIController : MonoBehaviour
             NetworkManager.Singleton.Shutdown();
             Destroy(NetworkManager.Singleton.gameObject);
         }
-        if (GameMultiplayer.Instance != null)
+        if (ServerNetworkManager.Instance != null)
         {
-            Destroy(GameMultiplayer.Instance.gameObject);
+            Destroy(ServerNetworkManager.Instance.gameObject);
+        }
+        if (ClientNetworkManager.Instance != null)
+        {
+            Destroy(ClientNetworkManager.Instance.gameObject);
         }
     }
 }

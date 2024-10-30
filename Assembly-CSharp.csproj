@@ -151,7 +151,6 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\GameMultiplayer.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\PlayerScrollCounter.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
     <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
@@ -167,6 +166,8 @@
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupWatingForPlayersUIController.cs" />
+    <Compile Include="Assets\Scripts\UGS Network\ServerNetworkManager.cs" />
+    <Compile Include="Assets\Scripts\UGS Network\ClientNetworkManager.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\PopupGameRoomUIController.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\Spells\SlashSkill.cs" />

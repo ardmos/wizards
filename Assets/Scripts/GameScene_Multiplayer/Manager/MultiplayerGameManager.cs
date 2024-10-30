@@ -96,7 +96,7 @@ public class MultiplayerGameManager : NetworkBehaviour
         {
             Debug.Log($"Player {clientId} 스폰");
             // Player Character Server 저장 방식
-            Character playerClass = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientId).characterClass;
+            Character playerClass = ServerNetworkManager.Instance.GetPlayerDataFromClientId(clientId).characterClass;
             GameObject player = Instantiate(GameAssetsManager.Instance.GetCharacterPrefab_MultiPlayerInGame(playerClass));
             if (player != null)
                 player.transform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
@@ -105,8 +105,8 @@ public class MultiplayerGameManager : NetworkBehaviour
         }
 
         // AI 스폰
-        ulong lastClientId = GameMultiplayer.Instance.GetLastClientId();
-        ulong lastAIClientId = GameMultiplayer.Instance.GetPlayerDataNetworkList()[GameMultiplayer.Instance.GetPlayerCount()-1].clientId;
+        ulong lastClientId = ServerNetworkManager.Instance.GetLastClientId();
+        ulong lastAIClientId = ServerNetworkManager.Instance.GetPlayerDataNetworkList()[ServerNetworkManager.Instance.GetPlayerCount()-1].clientId;
         for (ulong aiClientId = lastClientId + 1; aiClientId <= lastAIClientId; aiClientId++)
         {
             Debug.Log($"AI Player {aiClientId} 스폰");
@@ -196,7 +196,7 @@ public class MultiplayerGameManager : NetworkBehaviour
                 break;
             case GameState.GameFinished:
 
-                foreach (PlayerInGameData playerData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+                foreach (PlayerInGameData playerData in ServerNetworkManager.Instance.GetPlayerDataNetworkList())
                 {
                     if (playerData.isAI) continue;
 
@@ -211,7 +211,7 @@ public class MultiplayerGameManager : NetworkBehaviour
 
                         // 생존자 State Win 으로 변경
                         winPlayer.playerGameState = PlayerGameState.Win;
-                        GameMultiplayer.Instance.SetPlayerDataFromClientId(winPlayer.clientId, winPlayer);
+                        ServerNetworkManager.Instance.SetPlayerDataFromClientId(winPlayer.clientId, winPlayer);
 
                         // 생존자 화면에 Win 팝업 실행
                         NetworkClient networkClient = NetworkManager.ConnectedClients[winPlayer.clientId];
@@ -243,7 +243,7 @@ public class MultiplayerGameManager : NetworkBehaviour
         // 게임 참가자들 스코어를 비교 정렬
         List<PlayerInGameData> playersDataList = new List<PlayerInGameData>();
         
-        foreach(PlayerInGameData playerInGameData in GameMultiplayer.Instance.GetPlayerDataNetworkList())
+        foreach(PlayerInGameData playerInGameData in ServerNetworkManager.Instance.GetPlayerDataNetworkList())
         {
             playersDataList.Add(playerInGameData);
         }
@@ -284,7 +284,7 @@ public class MultiplayerGameManager : NetworkBehaviour
         {
             // 플레이어 카운트 집계 업데이트(이 순간 접속중인 인원.)
             //startedPlayerCount.Value = NetworkManager.ConnectedClients.Count;
-            startedPlayerCount.Value = GameMultiplayer.Instance.GetPlayerDataNetworkList().Count;
+            startedPlayerCount.Value = ServerNetworkManager.Instance.GetPlayerDataNetworkList().Count;
             UpdateCurrentAlivePlayerCount();
             //Debug.Log($"allClientsReady state.Value:{state.Value}");
             gameState.Value = GameState.CountdownToStart;
@@ -328,14 +328,14 @@ public class MultiplayerGameManager : NetworkBehaviour
     public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver, ulong clientWhoAttacked = 100)
     {
         // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
-        PlayerInGameData playerData = GameMultiplayer.Instance.GetPlayerDataFromClientId(clientWhoGameOver);
+        PlayerInGameData playerData = ServerNetworkManager.Instance.GetPlayerDataFromClientId(clientWhoGameOver);
         if (playerData.playerGameState == PlayerGameState.GameOver)
         {
             Debug.Log($"player{clientWhoGameOver}는 이미 게임오버처리된 플레이어입니다.");
             return;
         }
         playerData.playerGameState = PlayerGameState.GameOver;
-        GameMultiplayer.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
+        ServerNetworkManager.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
 
         // 접속중인 모든 Client들에게 게임오버 소식을 브로드캐스트해줍니다. AI들은 새로운 타겟을 찾아나설것이고, 플레이어들은 UI에 정보를 노출시킬것입니다.
         OnPlayerGameOver?.Invoke(this, new PlayerGameOverEventArgs { clientIDWhoGameOver = clientWhoGameOver, clientIDWhoAttacked = clientWhoAttacked });
