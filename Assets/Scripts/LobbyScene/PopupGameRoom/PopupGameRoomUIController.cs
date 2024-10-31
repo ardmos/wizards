@@ -41,8 +41,8 @@ public class PopupGameRoomUIController : NetworkBehaviour
         // 서버에선 실행해줄 필요 없는 내용입니다.
         //Debug.Log($"Start() Is Server? : {IsServer}");
         if (IsServer) return;
-        ClientNetworkManager.Instance.OnMatchJoined += OnMatchJoined;
-        ClientNetworkManager.Instance.OnMatchExited += OnMatchExited;
+        ClientNetworkConnectionManager.Instance.OnMatchJoined += OnMatchJoined;
+        ClientNetworkConnectionManager.Instance.OnMatchExited += OnMatchExited;
         CurrentPlayerDataManager.Instance.OnCurrentPlayerListOnServerChanged += OnCurrentPlayerListChanged;
         GameMatchReadyManagerClient.Instance.OnPlayerReadyDictionaryClientChanged += OnReadyPlayerListClientChanged;
 
@@ -57,8 +57,8 @@ public class PopupGameRoomUIController : NetworkBehaviour
         // 서버에선 실행해줄 필요 없는 내용입니다.
         //Debug.Log($"OnDestroy() Is Server? : {IsServer}");
         if (IsServer) return;
-        ClientNetworkManager.Instance.OnMatchJoined -= OnMatchJoined;
-        ClientNetworkManager.Instance.OnMatchExited -= OnMatchExited;
+        ClientNetworkConnectionManager.Instance.OnMatchJoined -= OnMatchJoined;
+        ClientNetworkConnectionManager.Instance.OnMatchExited -= OnMatchExited;
         CurrentPlayerDataManager.Instance.OnCurrentPlayerListOnServerChanged -= OnCurrentPlayerListChanged;
         GameMatchReadyManagerClient.Instance.OnPlayerReadyDictionaryClientChanged -= OnReadyPlayerListClientChanged;
     }
@@ -249,7 +249,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
         // 현 플레이어가 매칭 티켓에서 퇴장하려는 단계
         // 1. 퇴장 실행
-        ClientNetworkManager.Instance.StopClient();
+        ClientNetworkConnectionManager.Instance.StopClient();
         // 매칭 실패 SFX 재생
         SoundManager.Instance?.PlayUISFX(UISFX_Type.Failed_Match);
         Hide();

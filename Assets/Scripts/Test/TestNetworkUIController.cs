@@ -16,7 +16,7 @@ public class TestNetworkUIController : MonoBehaviour
             //LoadingSceneManager.LoadNetwork(LoadingSceneManager.Scene.GameRoomScene);
         });
         btnStartClient.AddClickListener(()=> {
-            ClientNetworkManager.Instance.StartClient();
+            ClientNetworkConnectionManager.Instance.StartClient();
         });
     }
 }

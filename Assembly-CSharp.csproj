@@ -96,10 +96,10 @@
     <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
-    <Compile Include="Assets\Scripts\Client\ClientNetworkManager.cs" />
     <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
     <Compile Include="Assets\Scripts\Client\UnityAuthenticationManager.cs" />
+    <Compile Include="Assets\Scripts\Client\ClientNetworkConnectionManager.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Server\ScrollManagerServer.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIServer.cs" />
     <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />

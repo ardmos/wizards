@@ -43,9 +43,9 @@ public class PopupMenuUIController : MonoBehaviour
         {
             Destroy(ServerNetworkConnectionManager.Instance.gameObject);
         }
-        if (ClientNetworkManager.Instance != null)
+        if (ClientNetworkConnectionManager.Instance != null)
         {
-            Destroy(ClientNetworkManager.Instance.gameObject);
+            Destroy(ClientNetworkConnectionManager.Instance.gameObject);
         }
     }
 }

@@ -75,6 +75,13 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
         }
     }
 
+    public void SetEveryAIPlayersReady()
+    {
+        foreach (var player in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
+        {
+            if (player.isAI) SetAIPlayerReady(player.clientId);
+        }
+    }
     /// <summary>
     /// 서버AI용 레디 메서드.
     /// </summary>

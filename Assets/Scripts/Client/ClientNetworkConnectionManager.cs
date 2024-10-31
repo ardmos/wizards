@@ -7,9 +7,9 @@ using UnityEngine;
 /// <summary>
 /// 클라이언트 측 로직을 담당합니다. 서버 연결, 연결 상태 이벤트 처리 등을 수행합니다.
 /// </summary>
-public class ClientNetworkManager : NetworkBehaviour
+public class ClientNetworkConnectionManager : NetworkBehaviour
 {
-    public static ClientNetworkManager Instance { get; private set; }
+    public static ClientNetworkConnectionManager Instance { get; private set; }
 
     public event EventHandler OnMatchJoined;
     public event EventHandler OnMatchExited;
@@ -36,24 +36,6 @@ public class ClientNetworkManager : NetworkBehaviour
         NetworkManager.Singleton.OnClientConnectedCallback -= Client_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback -= Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.Shutdown();
-    }
-
-    public int GetPlayerScore()
-    {
-        return GetPlayerData().score;
-    }
-
-    public PlayerInGameData GetPlayerData()
-    {
-        foreach (PlayerInGameData playerData in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
-        {
-            if (playerData.clientId == OwnerClientId)
-            {
-                return playerData;
-            }
-        }
-
-        return default;
     }
 
     private void Client_OnClientConnectedCallback(ulong clientId)

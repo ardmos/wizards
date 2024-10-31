@@ -60,7 +60,7 @@ public abstract class PlayerClient : NetworkBehaviour
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         mRigidbody.isKinematic = false;
         // 플레이어 닉네임 표시
-        PlayerInGameData playerData = ClientNetworkManager.Instance.GetPlayerData();
+        PlayerInGameData playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(OwnerClientId);
         userNameUIController?.SetName(playerData.playerName.ToString());
 
         // 오디오리스너 초기화
@@ -276,7 +276,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
         if (playerOutGameData == null) return;
 
-        float score = ClientNetworkManager.Instance.GetPlayerScore();
+        float score = GetPlayerScore();
 
         if (playerOutGameData.hightestKOinOneMatch < score)
         {
@@ -312,7 +312,7 @@ public abstract class PlayerClient : NetworkBehaviour
 
         if (playerOutGameData == null) return;
 
-        float score = ClientNetworkManager.Instance.GetPlayerScore();
+        float score = GetPlayerScore();
 
         if (playerOutGameData.hightestKOinOneMatch < score)
         {
@@ -364,5 +364,14 @@ public abstract class PlayerClient : NetworkBehaviour
         List<ISkillUpgradeOption> skillUpgradeOptions = SkillUpgradeFactory.FromDTOList(skillUpgradeOptionsDTO.ToList());
         GameSceneUIManager.Instance.popupSelectScrollEffectUIController.InitPopup(skillUpgradeOptions);
     }
+    #endregion
+
+    #region Player Data
+    public int GetPlayerScore()
+    {
+        if (CurrentPlayerDataManager.Instance == null) return 0;
+
+        return CurrentPlayerDataManager.Instance.GetPlayerScore(OwnerClientId);
+    } 
     #endregion
 }

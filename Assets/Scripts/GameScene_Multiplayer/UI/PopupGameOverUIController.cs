@@ -51,9 +51,9 @@ public class PopupGameOverUIController : MonoBehaviour
         {
             Destroy(ServerNetworkConnectionManager.Instance.gameObject);
         }
-        if (ClientNetworkManager.Instance != null)
+        if (ClientNetworkConnectionManager.Instance != null)
         {
-            Destroy(ClientNetworkManager.Instance.gameObject);
+            Destroy(ClientNetworkConnectionManager.Instance.gameObject);
         }
     }
 
@@ -69,7 +69,7 @@ public class PopupGameOverUIController : MonoBehaviour
     {
         // 1. 얻은 트로피 개수 보여주기(킬수 + 등수점수(10-등수))
         yield return waitForSeconds;
-        int currentPlayerScore = ClientNetworkManager.Instance.GetPlayerScore();
+        int currentPlayerScore = PlayerClient.Instance.GetPlayerScore();
         txtScoreCount.text = $"+ {currentPlayerScore + (10 - (MultiplayerGameManager.Instance.GetCurrentAlivePlayerCount()))}";
         // 2. 버튼들 등장
         yield return waitForSeconds;

@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Unity.Netcode;
-using UnityEditor.PackageManager;
-using UnityEngine;
-using Random = System.Random;
 
 /// <summary>
 /// 서버 측 로직을 담당합니다. 플레이어 데이터 관리, 연결 및 연결 해제 처리 등을 수행합니다.
@@ -15,7 +9,7 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance == null && IsServer)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -42,16 +36,9 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
 
     private void Server_OnClientConnectedCallback(ulong obj)
     {
-        // 새로운 유저가 접속하면 접속중이던 AI유저들을 레디 상태로 만듭니다
-        SetAIPlayersReady();
-    }
-
-    public void SetAIPlayersReady()
-    {
-        foreach (var player in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
-        {
-            if (player.isAI) GameMatchReadyManagerServer.Instance.SetAIPlayerReady(player.clientId);
-        }
+        if (GameMatchReadyManagerServer.Instance == null) return;
+        // 새로운 유저가 접속하면 접속중이던 모든 AI유저들을 레디 상태로 만듭니다
+        GameMatchReadyManagerServer.Instance.SetEveryAIPlayersReady();
     }
 
     /// <summary>

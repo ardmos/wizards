@@ -111,7 +111,7 @@ public class PopupWinUIController : MonoBehaviour
         UpdateRewardItemQuantity(ItemName.Item_Gold, 100);
 
         // 1. 스코어 기반 보상 제공
-        int playerScore = ClientNetworkManager.Instance.GetPlayerScore();
+        int playerScore = PlayerClient.Instance.GetPlayerScore();
         if (playerScore > 0)
             UpdateRewardItemQuantity(ItemName.Item_Gold, (ushort)playerScore);
     }
@@ -185,9 +185,9 @@ public class PopupWinUIController : MonoBehaviour
         {
             Destroy(ServerNetworkConnectionManager.Instance.gameObject);
         }
-        if (ClientNetworkManager.Instance != null)
+        if (ClientNetworkConnectionManager.Instance != null)
         {
-            Destroy(ClientNetworkManager.Instance.gameObject);
+            Destroy(ClientNetworkConnectionManager.Instance.gameObject);
         }
     }
 }

@@ -154,7 +154,6 @@ public class CurrentPlayerDataManager : NetworkBehaviour
     /// <returns></returns>
     public int GetPlayerScore(ulong clientID)
     {
-        Debug.Log($"GetPlayerScore player{clientID} requested. {GetPlayerDataByClientId(clientID).score}");
         return GetPlayerDataByClientId(clientID).score;
     }
     #endregion
