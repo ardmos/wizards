@@ -181,9 +181,9 @@ public class PopupWinUIController : MonoBehaviour
             NetworkManager.Singleton.Shutdown();
             Destroy(NetworkManager.Singleton.gameObject);
         }
-        if (ServerNetworkManager.Instance != null)
+        if (ServerNetworkConnectionManager.Instance != null)
         {
-            Destroy(ServerNetworkManager.Instance.gameObject);
+            Destroy(ServerNetworkConnectionManager.Instance.gameObject);
         }
         if (ClientNetworkManager.Instance != null)
         {

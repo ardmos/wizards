@@ -130,7 +130,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     /// AI의 클라이언트 ID를 할당해줘야합니다.
     /// </summary>
     /// <param name="AIClientId"></param>
-    public void InitializeAIPlayerOnServer(ulong AIClientId, Vector3 spawnPos)
+    public void InitializeAIPlayerOnServer(ulong AIClientId)
     {
         gameState = PlayerGameState.Playing;
 
@@ -142,14 +142,11 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
             return;
         }
 
-        PlayerInGameData playerInGameData = ServerNetworkManager.Instance.GetPlayerDataFromClientId(AIClientId);
+        PlayerInGameData playerInGameData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(AIClientId);
         SetCharacterData(playerInGameData);
 
         // NavMesh를 사용하기 대문에 속도 설정을 따로 챙겨줍니다
         wizardRukeAIMovementServer.SetMoveSpeed(playerInGameData.moveSpeed);
-
-        // 스폰 위치 초기화   
-        //transform.position = spawnPos;// spawnPointsController.GetSpawnPoint(GameMultiplayer.Instance.GetPlayerDataIndexFromClientId(AIClientId));
 
         // HP 초기화
         // 현재 HP 설정 및 UI에 반영
@@ -298,15 +295,15 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         // 스스로 게임오버 당한 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
         if (clientWhoAttacked == OwnerClientId)
         {
-            foreach (PlayerInGameData playerInGameData in ServerNetworkManager.Instance.GetPlayerDataNetworkList())
+            foreach (PlayerInGameData playerInGameData in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
             {
-                ServerNetworkManager.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
+                CurrentPlayerDataManager.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
             }
         }
         // 일반적인 경우 상대 플레이어 300스코어 획득
         else
         {
-            ServerNetworkManager.Instance.AddPlayerScore(clientWhoAttacked, DEFAULT_SCORE);
+            CurrentPlayerDataManager.Instance.AddPlayerScore(clientWhoAttacked, DEFAULT_SCORE);
         }
     }
 

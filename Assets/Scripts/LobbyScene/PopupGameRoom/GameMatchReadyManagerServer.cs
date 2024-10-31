@@ -37,7 +37,7 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
     {
-        Debug.Log($"레디 보고가 들어왔습니다. 보고자: clientId:{serverRpcParams.Receive.SenderClientId}, playerIndex:{ServerNetworkManager.Instance.GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId)}");
+        Debug.Log($"레디 보고가 들어왔습니다. 보고자: clientId:{serverRpcParams.Receive.SenderClientId}, playerIndex:{CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(serverRpcParams.Receive.SenderClientId)}");
         // Client쪽에도 레디한 ClientId 브로드캐스트 해줌. 각자 화면에서 레디 표시 띄워줘야하기 때문
         GameMatchReadyManagerClient.Instance.SetPlayerReadyClientRpc(serverRpcParams.Receive.SenderClientId);
         // 이 과정은 서버쪽에서만 저장하고 처리하는 거라 윗줄이 필요함.
@@ -81,9 +81,11 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
     /// <param name="컴퓨터용클라이언트아이디"></param>
     public void SetAIPlayerReady(ulong 컴퓨터용클라이언트아이디)
     {
+        // 이미 레디중인 경우를 걸러줍니다.
         if (playerReadyDictionaryOnServer.ContainsKey(컴퓨터용클라이언트아이디) && playerReadyDictionaryOnServer[컴퓨터용클라이언트아이디]) return;
+        if (GameMatchReadyManagerClient.Instance == null) return;
 
-        Debug.Log($"AI 레디 보고가 들어왔습니다. 보고자: AIClientId:{컴퓨터용클라이언트아이디}, AIplayerIndex:{ServerNetworkManager.Instance.GetPlayerDataIndexFromClientId(컴퓨터용클라이언트아이디)}");
+        Debug.Log($"AI 레디 보고가 들어왔습니다. 보고자: AIClientId:{컴퓨터용클라이언트아이디}, AIPlayerIndex:{CurrentPlayerDataManager.Instance.GetPlayerDataListIndexByClientId(컴퓨터용클라이언트아이디)}");
         // 이 과정은 서버쪽에서만 저장하고 처리하는 거라 윗줄이 필요함.
         playerReadyDictionaryOnServer[컴퓨터용클라이언트아이디] = true;
         // Client쪽에도 레디한 ClientId 브로드캐스트 해줌. 각자 화면에서 레디 표시 띄워줘야하기 때문

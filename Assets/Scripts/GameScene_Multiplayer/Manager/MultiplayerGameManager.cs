@@ -84,52 +84,60 @@ public class MultiplayerGameManager : NetworkBehaviour
 
     /// <summary>
     /// Game Scene 로드 완료시 실행됩니다.
-    /// 1. Player Character 스폰
-    /// 2. MaxPlayers에서 모자란 숫자만큼 AI 스폰
+    /// 게임 플레이어들을 소환합니다.
     /// </summary>
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
         Debug.Log("MultiplayerGameManager.SceneManager_OnLoadEventCompleted() Called");
 
-        // Player 스폰
-        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        foreach (PlayerInGameData playerData in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
         {
-            Debug.Log($"Player {clientId} 스폰");
-            // Player Character Server 저장 방식
-            Character playerClass = ServerNetworkManager.Instance.GetPlayerDataFromClientId(clientId).characterClass;
-            GameObject player = Instantiate(GameAssetsManager.Instance.GetCharacterPrefab_MultiPlayerInGame(playerClass));
-            if (player != null)
-                player.transform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
-            else
-                Debug.Log($"SceneManager_OnLoadEventCompleted : player prefab load failed. prefab is null");
-        }
-
-        // AI 스폰
-        ulong lastClientId = ServerNetworkManager.Instance.GetLastClientId();
-        ulong lastAIClientId = ServerNetworkManager.Instance.GetPlayerDataNetworkList()[ServerNetworkManager.Instance.GetPlayerCount()-1].clientId;
-        for (ulong aiClientId = lastClientId + 1; aiClientId <= lastAIClientId; aiClientId++)
-        {
-            Debug.Log($"AI Player {aiClientId} 스폰");
-
-            Vector3 spawnPoint = spawnPointsController.GetSpawnPoint();
-
-            // 추후 직업 추가시 여기서 AI 클래스 읽어와서 프리팹 검색 후 사용해야합니다. 지금은 위저드 하나이기 때문에 이렇게 합니다. GameMultiplayer와의 연동 결속력이 너무 약함. 지금. 
-            GameObject aiPlayer = Instantiate(GameAssetsManager.Instance.GetAIPlayerCharacterPrefab(), spawnPoint, Quaternion.identity);
-            if (aiPlayer == null) return;
-
-            aiPlayer.transform.TryGetComponent<NetworkObject>(out NetworkObject aiPlayerNetworkObject);
-            if (aiPlayerNetworkObject != null)
+            if (!playerData.isAI)
             {
-                aiPlayerNetworkObject.Spawn();
-                aiPlayer.transform.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer wizardRukeAIServer);
-                if (wizardRukeAIServer != null)
-                {
-                    //Debug.Log($"spawnPoints : {spawnPointsController.GetSpawnPoint()}");
-                    wizardRukeAIServer.InitializeAIPlayerOnServer(aiClientId, spawnPoint);
-                }
+                SpawnPlayer(playerData.clientId);
+            }
+            else
+            {
+                SpawnAIPlayer(playerData.clientId);
             }
         }
-        //GetLastClientId()
+    }
+
+    private void SpawnPlayer(ulong clientId)
+    {
+        Debug.Log($"Player {clientId} 스폰");
+        Character playerClass = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(clientId).characterClass;
+        GameObject player = Instantiate(GameAssetsManager.Instance.GetCharacterPrefab_MultiPlayerInGame(playerClass));
+
+        if (player == null) return;
+        player.transform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+
+        if (spawnPointsController == null) return;
+        player.transform.position = spawnPointsController.GetSpawnPoint();
+    }
+
+    private void SpawnAIPlayer(ulong aiClientId)
+    {
+        Debug.Log($"AI Player {aiClientId} 스폰");
+
+        if (spawnPointsController == null) return;
+        Vector3 spawnPoint = spawnPointsController.GetSpawnPoint();
+
+        // 추후 직업 추가시 여기서 AI 클래스 읽어와서 프리팹 검색 후 사용해야합니다. 지금은 위저드 하나이기 때문에 이렇게 합니다. GameMultiplayer와의 연동 결속력이 너무 약함. 지금. 
+        GameObject aiPlayer = Instantiate(GameAssetsManager.Instance.GetAIPlayerCharacterPrefab(), spawnPoint, Quaternion.identity);
+        if (aiPlayer == null) return;
+
+        aiPlayer.transform.TryGetComponent<NetworkObject>(out NetworkObject aiPlayerNetworkObject);
+        if (aiPlayerNetworkObject != null)
+        {
+            aiPlayerNetworkObject.Spawn();
+            aiPlayer.transform.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer wizardRukeAIServer);
+            if (wizardRukeAIServer != null)
+            {
+                wizardRukeAIServer.InitializeAIPlayerOnServer(aiClientId);
+            }
+        }
+
     }
 
     private void State_OnValueChanged(GameState previousValue, GameState newValue)
@@ -196,7 +204,7 @@ public class MultiplayerGameManager : NetworkBehaviour
                 break;
             case GameState.GameFinished:
 
-                foreach (PlayerInGameData playerData in ServerNetworkManager.Instance.GetPlayerDataNetworkList())
+                foreach (PlayerInGameData playerData in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
                 {
                     if (playerData.isAI) continue;
 
@@ -211,7 +219,7 @@ public class MultiplayerGameManager : NetworkBehaviour
 
                         // 생존자 State Win 으로 변경
                         winPlayer.playerGameState = PlayerGameState.Win;
-                        ServerNetworkManager.Instance.SetPlayerDataFromClientId(winPlayer.clientId, winPlayer);
+                        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(winPlayer.clientId, winPlayer);
 
                         // 생존자 화면에 Win 팝업 실행
                         NetworkClient networkClient = NetworkManager.ConnectedClients[winPlayer.clientId];
@@ -242,8 +250,8 @@ public class MultiplayerGameManager : NetworkBehaviour
 
         // 게임 참가자들 스코어를 비교 정렬
         List<PlayerInGameData> playersDataList = new List<PlayerInGameData>();
-        
-        foreach(PlayerInGameData playerInGameData in ServerNetworkManager.Instance.GetPlayerDataNetworkList())
+
+        foreach (PlayerInGameData playerInGameData in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
         {
             playersDataList.Add(playerInGameData);
         }
@@ -255,7 +263,7 @@ public class MultiplayerGameManager : NetworkBehaviour
         foreach (PlayerInGameData playerInGameData in sortedList)
         {
             // 최상위 스코어자와 공동 1등이 아닌 경우 전부 게임오버 처리.
-            if(playerInGameData.score != topScore)
+            if (playerInGameData.score != topScore)
             {
                 UpdatePlayerGameOverOnServer(playerInGameData.clientId);
             }
@@ -283,16 +291,10 @@ public class MultiplayerGameManager : NetworkBehaviour
         if (allClientsReady)
         {
             // 플레이어 카운트 집계 업데이트(이 순간 접속중인 인원.)
-            //startedPlayerCount.Value = NetworkManager.ConnectedClients.Count;
-            startedPlayerCount.Value = ServerNetworkManager.Instance.GetPlayerDataNetworkList().Count;
+            startedPlayerCount.Value = CurrentPlayerDataManager.Instance.GetCurrentPlayerCount();
             UpdateCurrentAlivePlayerCount();
-            //Debug.Log($"allClientsReady state.Value:{state.Value}");
             gameState.Value = GameState.CountdownToStart;
-            //Debug.Log($"allClientsReady state.Value:{state.Value}");
         }
-
-        //Debug.Log($"SetPlayerReadyServerRpc Requested player client ID: {serverRpcParams.Receive.SenderClientId}, playerReadyList.Count: {playerReadyList.Count}");
-        //Debug.Log($"SetPlayerReadyServerRpc game state:{gameState.Value}, allClientsReady: {allClientsReady}");
     }
 
     /// <summary>
@@ -328,14 +330,14 @@ public class MultiplayerGameManager : NetworkBehaviour
     public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver, ulong clientWhoAttacked = 100)
     {
         // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
-        PlayerInGameData playerData = ServerNetworkManager.Instance.GetPlayerDataFromClientId(clientWhoGameOver);
+        PlayerInGameData playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(clientWhoGameOver);
         if (playerData.playerGameState == PlayerGameState.GameOver)
         {
             Debug.Log($"player{clientWhoGameOver}는 이미 게임오버처리된 플레이어입니다.");
             return;
         }
         playerData.playerGameState = PlayerGameState.GameOver;
-        ServerNetworkManager.Instance.SetPlayerDataFromClientId(clientWhoGameOver, playerData);
+        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(clientWhoGameOver, playerData);
 
         // 접속중인 모든 Client들에게 게임오버 소식을 브로드캐스트해줍니다. AI들은 새로운 타겟을 찾아나설것이고, 플레이어들은 UI에 정보를 노출시킬것입니다.
         OnPlayerGameOver?.Invoke(this, new PlayerGameOverEventArgs { clientIDWhoGameOver = clientWhoGameOver, clientIDWhoAttacked = clientWhoAttacked });
@@ -350,9 +352,9 @@ public class MultiplayerGameManager : NetworkBehaviour
     /// 서버에서 사용합니다. 
     /// 마법 오브젝트같은것들을 정리해줍니다
     /// </summary>
-    public void CleanUpObjects()
+    public void CleanUpChildObjects()
     {
-        Debug.Log("MultiplayerGameManager CleanUpObjects called!");
+        Debug.Log("MultiplayerGameManager CleanUpChildObjects called!");
         // 현재 GameObject의 모든 자식 GameObject를 파괴
         transform.Cast<Transform>().ToList().ForEach(child => Destroy(child.gameObject));
     }

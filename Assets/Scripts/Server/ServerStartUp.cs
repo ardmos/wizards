@@ -91,7 +91,7 @@ public class ServerStartUp : MonoBehaviour
     private void StartServer()
     {
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(InternalServerIp, serverPort);
-        ServerNetworkManager.Instance.StartServer();
+        ServerNetworkConnectionManager.Instance.StartServer();
 
         NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }

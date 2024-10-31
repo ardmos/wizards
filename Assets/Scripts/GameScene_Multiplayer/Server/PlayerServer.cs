@@ -45,15 +45,6 @@ public class PlayerServer : NetworkBehaviour
             return;
         }
 
-        PlayerSpawnPointsController spawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
-        if (spawnPointsController == null)
-        {
-            Debug.LogError($"{nameof(InitializePlayerOnServer)}, 스폰위치를 특정하지 못했습니다.");
-            return;
-        }
-
-        // 스폰 위치 초기화       
-        transform.position = spawnPointsController.GetSpawnPoint();
         // HP 초기화
         playerHPManager.InitPlayerHP(character);
         // 플레이어가 보유한 스킬 목록 저장
@@ -130,15 +121,15 @@ public class PlayerServer : NetworkBehaviour
         // 환경 요소등으로 인해 게임오버 당한 경우, 게임 내 모든 플레이어들에게 점수를 줍니다. 
         if (attackerClientId == OwnerClientId)
         {
-            foreach (PlayerInGameData playerInGameData in ServerNetworkManager.Instance.GetPlayerDataNetworkList())
+            foreach (PlayerInGameData playerInGameData in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
             {
-                ServerNetworkManager.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
+                CurrentPlayerDataManager.Instance.AddPlayerScore(playerInGameData.clientId, DEFAULT_SCORE);
             }
         }
         // 일반적인 경우 상대 플레이어 300스코어 획득
         else
         {
-            ServerNetworkManager.Instance.AddPlayerScore(attackerClientId, DEFAULT_SCORE);
+            CurrentPlayerDataManager.Instance.AddPlayerScore(attackerClientId, DEFAULT_SCORE);
         }
     }
 
@@ -212,8 +203,8 @@ public class PlayerServer : NetworkBehaviour
     /// <returns>검증 결과를 bool 형태로 반환합니다</returns>
     private bool ValidateGameOverConditions()
     {
-        if (ServerNetworkManager.Instance == null) return false;
-        PlayerInGameData playerData = ServerNetworkManager.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        if (ServerNetworkConnectionManager.Instance == null) return false;
+        PlayerInGameData playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(OwnerClientId);
         if (playerData.playerGameState != PlayerGameState.Playing) return false;
         if (playerAnimator == null) return false;
         if (playerClient == null) return false;

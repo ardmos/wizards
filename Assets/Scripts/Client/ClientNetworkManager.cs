@@ -45,7 +45,7 @@ public class ClientNetworkManager : NetworkBehaviour
 
     public PlayerInGameData GetPlayerData()
     {
-        foreach (PlayerInGameData playerData in ServerNetworkManager.Instance.currentPlayers)
+        foreach (PlayerInGameData playerData in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
         {
             if (playerData.clientId == OwnerClientId)
             {
@@ -61,7 +61,7 @@ public class ClientNetworkManager : NetworkBehaviour
         // 접속 성공을 알림
         OnMatchJoined?.Invoke(this, EventArgs.Empty);
         // 현 Player 정보를 서버측에 전달 
-        ServerNetworkManager.Instance.UpdatePlayerInGameDataServerRPC(PlayerDataManager.Instance.GetPlayerInGameData());
+        CurrentPlayerDataManager.Instance.AddPlayerServerRPC(PlayerDataManager.Instance.GetPlayerInGameData());
     }
     private void Client_OnClientDisconnectCallback(ulong clientId)
     {

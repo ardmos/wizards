@@ -43,7 +43,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         if (IsServer) return;
         ClientNetworkManager.Instance.OnMatchJoined += OnMatchJoined;
         ClientNetworkManager.Instance.OnMatchExited += OnMatchExited;
-        ServerNetworkManager.Instance.OnCurrentPlayerListOnServerChanged += OnPlayerListOnServerChanged;
+        CurrentPlayerDataManager.Instance.OnCurrentPlayerListOnServerChanged += OnCurrentPlayerListChanged;
         GameMatchReadyManagerClient.Instance.OnPlayerReadyDictionaryClientChanged += OnReadyPlayerListClientChanged;
 
         btnCancel.AddClickListener(CancelMatch);
@@ -59,7 +59,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         if (IsServer) return;
         ClientNetworkManager.Instance.OnMatchJoined -= OnMatchJoined;
         ClientNetworkManager.Instance.OnMatchExited -= OnMatchExited;
-        ServerNetworkManager.Instance.OnCurrentPlayerListOnServerChanged -= OnPlayerListOnServerChanged;
+        CurrentPlayerDataManager.Instance.OnCurrentPlayerListOnServerChanged -= OnCurrentPlayerListChanged;
         GameMatchReadyManagerClient.Instance.OnPlayerReadyDictionaryClientChanged -= OnReadyPlayerListClientChanged;
     }
 
@@ -103,7 +103,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         }
 
         // 3. 접속중인 인원 숫자 표시
-        SetUIs(ServerNetworkManager.Instance.GetPlayerCount());
+        SetUIs(CurrentPlayerDataManager.Instance.GetCurrentPlayerCount());
     }
 
     private void ActivateReadyCountdownUI()
@@ -132,7 +132,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
 
     private void OnReadyPlayerListClientChanged(object sender, System.EventArgs e)
     {
-        SetUIs(ServerNetworkManager.Instance.GetPlayerCount());
+        SetUIs(CurrentPlayerDataManager.Instance.GetCurrentPlayerCount());
     }
 
     /// <summary>
@@ -157,7 +157,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
     /// 현재 참여중인 플레이어 숫자에 변동이 있을 때 호출되는 메소드 입니다.
     /// 호출될 때 마다 RunStateMachine()을 호출해서 현 State에 맞는 UI 업데이트를 진행해줍니1다.
     /// </summary>
-    private void OnPlayerListOnServerChanged(object sender, System.EventArgs e)     // 이름 수정 고려하기 
+    private void OnCurrentPlayerListChanged(object sender, System.EventArgs e)     // 이름 수정 고려하기 
     {
         // Unity Editor에서는 서버 확인이 안되기 때문에 이렇게 처리해줍니다.
         if (!gameObject.activeSelf) return;
@@ -165,7 +165,7 @@ public class PopupGameRoomUIController : NetworkBehaviour
         //Debug.Log($"현재 참여중인 총 플레이어 수 : {playerCount}, matchingState:{matchingState}");
 
         // 게임 인원 다 모이면 매칭상태 변경
-        byte playerCount = ServerNetworkManager.Instance.GetPlayerCount();
+        byte playerCount = CurrentPlayerDataManager.Instance.GetCurrentPlayerCount();
         if (playerCount == ConnectionApprovalHandler.MaxPlayers) //테스트용 주석
         {
             // 레디 대기 상태로 변경
@@ -210,18 +210,20 @@ public class PopupGameRoomUIController : NetworkBehaviour
     /// </summary>
     private void UpdateToggleUIState()
     {
-        //Debug.Log($"UpdateToggleUIState(), 클라이언트측에서 확인되는 currentConnectedPlayer:{GameMultiplayer.Instance.GetPlayerCount()} ");
-        for (int playerIndex = 0; playerIndex < toggleArrayPlayerJoined.Length; playerIndex++)
+        if(ServerNetworkConnectionManager.Instance == null) return;
+        if(CurrentPlayerDataManager.Instance == null) return;   
+        if(GameMatchReadyManagerClient.Instance == null) return;
+
+        for (int toggleArrayPlayerIndex = 0; toggleArrayPlayerIndex < toggleArrayPlayerJoined.Length; toggleArrayPlayerIndex++)
         {
-            if (ServerNetworkManager.Instance.IsPlayerIndexConnected(playerIndex))
+            if (ServerNetworkConnectionManager.Instance.IsPlayerIndexConnected(toggleArrayPlayerIndex))
             {
-                PlayerInGameData playerData = ServerNetworkManager.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
-                //Debug.Log($"Player Index{playerIndex} is ready? {GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId)}");
-                toggleArrayPlayerJoined[playerIndex].isOn = GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId);
+                PlayerInGameData playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByPlayerIndex(toggleArrayPlayerIndex);
+                toggleArrayPlayerJoined[toggleArrayPlayerIndex].isOn = GameMatchReadyManagerClient.Instance.IsPlayerReady(playerData.clientId);
             }
             else
             {
-                toggleArrayPlayerJoined[playerIndex].isOn = false;
+                toggleArrayPlayerJoined[toggleArrayPlayerIndex].isOn = false;
             }
         }
     }

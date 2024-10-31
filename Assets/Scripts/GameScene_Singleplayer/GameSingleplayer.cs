@@ -157,7 +157,7 @@ public class GameSingleplayer : NetworkBehaviour
 #if UNITY_SERVER || UNITY_EDITOR
         if (MultiplayerGameManager.Instance != null)
         {
-            MultiplayerGameManager.Instance.CleanUpObjects();
+            MultiplayerGameManager.Instance.CleanUpChildObjects();
         }
         if (NetworkManager.Singleton != null)
         {
@@ -260,8 +260,8 @@ public class GameSingleplayer : NetworkBehaviour
     /// </summary>
     public void SetPlayerDataFromClientId(ulong clientId, PlayerInGameData newPlayerData)
     {
-        Debug.Log($"SetPlayerDataFromClientId. player.clientId: {clientId}.");
-        Debug.Log($"SetPlayerDataFromClientId. currentPlayers.Count: {playerDataNetworkList.Count}");
+        Debug.Log($"SetPlayerDataByClientId. player.clientId: {clientId}.");
+        Debug.Log($"SetPlayerDataByClientId. currentPlayers.Count: {playerDataNetworkList.Count}");
         playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)] = newPlayerData;
         //Debug.Log($"SetPlayerDataFromClientId. player.clientId:{clientId}. playerGameState:{playerDataNetworkList[GetPlayerDataIndexFromClientId(clientId)].playerGameState}");
     }

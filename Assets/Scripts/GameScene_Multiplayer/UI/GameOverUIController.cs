@@ -35,8 +35,8 @@ public class GameOverUIController : NetworkBehaviour
         {
             string playerWhoAttacked = "";
             if (e.clientIDWhoAttacked == 100) playerWhoAttacked = "\'Disconnect\'";
-            else playerWhoAttacked = ServerNetworkManager.Instance.GetPlayerDataFromClientId(e.clientIDWhoAttacked).playerName.ToString();
-            ShowGameOverPlayerClientRPC(ServerNetworkManager.Instance.GetPlayerDataFromClientId(e.clientIDWhoGameOver).playerName.ToString(), playerWhoAttacked);
+            else playerWhoAttacked = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(e.clientIDWhoAttacked).playerName.ToString();
+            ShowGameOverPlayerClientRPC(CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(e.clientIDWhoGameOver).playerName.ToString(), playerWhoAttacked);
         }
 
 

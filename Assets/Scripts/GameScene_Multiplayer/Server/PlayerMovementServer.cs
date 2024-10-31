@@ -29,7 +29,7 @@ public class PlayerMovementServer : NetworkBehaviour
     public void HandleMovementServerRPC(Vector2 inputVector, bool isAttackButtonClicked, ServerRpcParams serverRpcParams = default)
     {
         // GameOver상태일 경우 이동처리가 안되도록 합니다.
-        if (ServerNetworkManager.Instance.GetPlayerDataFromClientId(OwnerClientId).playerGameState == PlayerGameState.GameOver) return;
+        if (CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(OwnerClientId).playerGameState == PlayerGameState.GameOver) return;
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
         float moveDistance = ((ICharacter)playerClient).moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
