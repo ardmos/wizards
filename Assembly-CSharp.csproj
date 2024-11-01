@@ -228,6 +228,7 @@
     <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupMenuUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\PopupSettingsUIController.cs" />
+    <Compile Include="Assets\Scripts\Server\BackfillManager.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIHPManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene_Singleplayer\SingleplayerGameManager.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\PushAlarmGroupUI.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\Server\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Data\AnimationStateEnums.cs" />
+    <Compile Include="Assets\Scripts\Server\MatchMakingManager.cs" />
     <Compile Include="Assets\Scripts\Spells\StoneSlashLv1.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailHelmet.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />

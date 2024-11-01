@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using UnityEditor.PackageManager;
 
 /// <summary>
 /// 서버 측 로직을 담당합니다. 플레이어 데이터 관리, 연결 및 연결 해제 처리 등을 수행합니다.
@@ -17,6 +18,12 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
         else Destroy(gameObject);
     }
 
+    public void StartConnectionManager()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback += Server_OnClientConnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += Server_OnClientDisconnectCallback;
+    }
+
     public override void OnNetworkDespawn()
     {
         if (IsServer)
@@ -24,14 +31,6 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
             NetworkManager.Singleton.OnClientConnectedCallback -= Server_OnClientConnectedCallback;
             NetworkManager.Singleton.OnClientDisconnectCallback -= Server_OnClientDisconnectCallback;
         }
-    }
-
-    // UGS Dedicated Server
-    public void StartServer()
-    {
-        NetworkManager.Singleton.OnClientConnectedCallback += Server_OnClientConnectedCallback;
-        NetworkManager.Singleton.OnClientDisconnectCallback += Server_OnClientDisconnectCallback;
-        NetworkManager.Singleton.StartServer();
     }
 
     private void Server_OnClientConnectedCallback(ulong obj)
@@ -49,6 +48,7 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
         if (CurrentPlayerDataManager.Instance == null) return;
         if(GameMatchReadyManagerServer.Instance == null) return;
         if(AIPlayerGenerator.Instance == null) return;
+        if(BackfillManager.Instance == null) return;
 
         // 플레이어 데이터 제거
         CurrentPlayerDataManager.Instance.RemovePlayer(clientId);
@@ -63,9 +63,14 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
             AIPlayerGenerator.Instance.ResetAIPlayerGenerator();
         }
 
+        // 플레이어 재모집을 위해 backfill 실행여부 확인 후 backfill 재개
+        BackfillManager.Instance.RestartBackfill();
+
         // 플레이어가 이탈한 현재 씬이 게임씬이라면 추가 처리 진행
         GameSceneConnectionHandler(clientId);
     }
+
+
 
     private bool CheckIsEveryPlayerAnAI()
     {

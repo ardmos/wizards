@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Core;
-using Unity.Services.Matchmaker;
 using Unity.Services.Matchmaker.Models;
 using Unity.Services.Multiplay;
 using UnityEngine;
 
 /// <summary>
 /// Matchmaking 서비스를 위한 서버 설정 스크립트 입니다. 
-/// 기타 주요 서버 기능들은 GameMultiplayer.cs에 구현되어있습니다. 
 /// </summary>
 public class ServerStartUp : MonoBehaviour
 {
@@ -32,14 +30,13 @@ public class ServerStartUp : MonoBehaviour
     private MultiplayEventCallbacks serverCallbacks;
     private IServerEvents serverEvents;
 
-    private BackfillTicket localBackfillTicket;
-    private CreateBackfillTicketOptions createBackfillTicketOptions;
-    private const int ticketCheckMs = 1000;
-    private MatchmakingResults matchmakingPayload;
 
-    private bool backfilling = false;
+    
+  
+    private MatchmakingResults matchmakerPayload;
 
-    // Start is called before the first frame update
+
+
     async void Start()
     {
         if (Instance == null)
@@ -49,7 +46,7 @@ public class ServerStartUp : MonoBehaviour
         }
         else Destroy(gameObject);
         
-        bool server = false;
+        bool server = false;  
         var args = System.Environment.GetCommandLineArgs();
 
         string commandLineArgs = "";
@@ -62,14 +59,17 @@ public class ServerStartUp : MonoBehaviour
 
         for (int i = 0; i < args.Length; i++)
         {
+            // Command Line Args를 통해 서버인지 확인한다
             if (args[i] == "-dedicatedServer")
             {
                 server = true;
             }
+            // port 확인. 서비스 포트 확인
             if (args[i] == "-port" && (i + 1 < args.Length))
             {
                 serverPort = (ushort)int.Parse(args[i + 1]);
             }
+            // ip 확인. Backfill을 구현하기위해 외부에서 접속 가능한 주소를 파악해둔다.
             if (args[i] == "-ip" && (i + 1 < args.Length))
             {
                 externalServerIP = args[i + 1];
@@ -88,21 +88,23 @@ public class ServerStartUp : MonoBehaviour
         Dispose();
     }
 
+    // 서버 시작.
     private void StartServer()
     {
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(InternalServerIp, serverPort);
-        ServerNetworkConnectionManager.Instance.StartServer();
-
-        NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
+        ServerNetworkConnectionManager.Instance.StartConnectionManager();
+        NetworkManager.Singleton.StartServer();
     }
 
     async Task StartServerServices()
     {
+        // Unity 서비스 초기화
         await UnityServices.InitializeAsync();
         try
         {
+            // 멀티플레이 인스턴스 생성
             multiplayService = MultiplayService.Instance;
-            // connect to sqp query handler
+            // Unity MultiplayService의 SQP 쿼리 핸들러 설정
             await multiplayService.StartServerQueryHandlerAsync((ushort)ConnectionApprovalHandler.MaxPlayers, "n/a", "n/a", "0", "n/a");
         }
         catch (Exception ex)
@@ -112,16 +114,15 @@ public class ServerStartUp : MonoBehaviour
 
         try
         {
-            matchmakingPayload = await GetMatchmakerPayload(multiplayServiceTimeout);
-            if (matchmakingPayload != null)
+            // matchmakerPayload(매치메이커가 발급하는 페이로드) 획득 시도. 타임아웃일 경우 null 반환
+            matchmakerPayload = await GetMatchmakerPayload(multiplayServiceTimeout); /////여기까지.
+            // 페이로드를 정상적으로 받아왔는지 확인
+            if (matchmakerPayload != null)
             {
-                Debug.Log($"Got payload: {matchmakingPayload}");        
-
-                // matchmakingPayload가 null이 아니란건, Allocation이 완료됐다는 뜻! 서버를 플레이어 수용 대기 상태로 만듭니다.
-                Debug.Log("ReadyServerForPlayersAsync");
+                // 서버를 플레이어 참가 가능 상태로 만듦
                 await MultiplayService.Instance.ReadyServerForPlayersAsync();
-
-                await StartBackfill(matchmakingPayload);
+                // 백필 프로세스 시작
+                await StartBackfill(matchmakerPayload);
             }
             else
             {
@@ -134,10 +135,16 @@ public class ServerStartUp : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 매치메이커 페이로드를 가져오는 작업을 수행하는 비동기 메서드입니다.
+    /// 매치메이커 페이로드 할당을 기다리되, 무한정 기다리진 않도록 타임아웃을 설정했습니다.
+    /// </summary>
+    /// <param name="timeout">타임아웃</param>
+    /// <returns>타임아웃시 null 반환</returns>
     private async Task<MatchmakingResults> GetMatchmakerPayload(int timeout)
     {
         var matchmakerPayloadTask = SubscribeAndAwaitMatchmakerAllocation();
-        // 아래 둘 중 하나를 만족하면 결과를 반환한다
+
         if(await Task.WhenAny(matchmakerPayloadTask, Task.Delay(timeout))==matchmakerPayloadTask) 
         {
             return matchmakerPayloadTask.Result;
@@ -146,27 +153,45 @@ public class ServerStartUp : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// 멀티플레이 서비스에 구독하고, 게임 서버 인스턴스 할당 및 할당 결과 페이로드를 기다리는 메서드입니다.
+    /// 추후 매치메이킹 Backfill을 통해 유저들이 참여할 수 있도록 MatchmakingResult형태의 페이로드를 반환합니다.
+    /// </summary>
+    /// <returns>매치메이커 페이로드를 반환합니다</returns>
     private async Task<MatchmakingResults> SubscribeAndAwaitMatchmakerAllocation()
     {
-        if(multiplayService == null) { return null; }
+        if(multiplayService == null) return null;
+
         allocationId = null;
         serverCallbacks = new MultiplayEventCallbacks();
-        // allocate 됐을 경우 리스너 등록
-        serverCallbacks.Allocate += OnMultiplayAllocation;
+        // 서버 이벤트 구독
         serverEvents = await multiplayService.SubscribeToServerEventsAsync(serverCallbacks);
-
+        // 멀티플레이 게임 서버 인스턴스가 할당되었을 경우 allocationId를 저장합니다.
+        serverCallbacks.Allocate += OnMultiplayAllocation;
+        // 마찬가지로 allocationId를 저장하는 메서드를 await합니다. 만약을 위한 이중 안전장치입니다.
         allocationId = await AwaitAllocationID();
-        var mmPayload = await GetMatchmakerAllocationPayloadAsync();
-        return mmPayload;
+        // MatchmakingResults형태로 가공된 매치메이킹 서버 인스턴스 할당 결과 페이로드 받아오기
+        var matchmakingResultPayload = await GetMatchmakerAllocationPayloadAsync();
+        return matchmakingResultPayload;
     }
 
+    /// <summary>
+    /// 멀티플레이 게임 서버가 할당되었을 경우 동작하는 이벤트 핸들러입니다.
+    /// allocationId를 저장합니다.
+    /// </summary>
+    /// <param name="allocation"></param>
     private void OnMultiplayAllocation(MultiplayAllocation allocation)
     {
-        Debug.Log($"OnAllocation: {allocation.AllocationId}");
-        if(string.IsNullOrEmpty(allocationId)) { return; }
+        if(string.IsNullOrEmpty(allocationId)) return; 
+
         allocationId = allocation.AllocationId;
     }
 
+    /// <summary>
+    /// allocationId가 설정되기를 기다리다가 설정되면 저장하는 메서드입니다.
+    /// 모종의 이유로 OnMultiplayAllocation가 작동하지 않을 경우를 대비해 동작시키는 메서드입니다.
+    /// </summary>
+    /// <returns></returns>
     private async Task<string> AwaitAllocationID()
     {
         var config = multiplayService.ServerConfig;
@@ -175,6 +200,7 @@ public class ServerStartUp : MonoBehaviour
             $"-AllocationID: {config.AllocationId}\n"+
             $"-QPort: {config.QueryPort}\n"+
             $"-logs: {config.ServerLogDirectory}");
+
         while(string.IsNullOrEmpty(allocationId)) 
         {
             var configId = config.AllocationId;
@@ -190,6 +216,10 @@ public class ServerStartUp : MonoBehaviour
         return allocationId;
     }
 
+    /// <summary>
+    /// 멀티플레이 서버 인스턴스 할당 결과를 가져오는 메서드입니다.
+    /// </summary>
+    /// <returns>MatchmakingResults로 가공된 멀티플레이 서버 할당 페이로드</returns>
     private async Task<MatchmakingResults> GetMatchmakerAllocationPayloadAsync()
     {
         try
@@ -207,78 +237,11 @@ public class ServerStartUp : MonoBehaviour
         return null;
     }
 
-    private async Task StartBackfill(MatchmakingResults payload)
-    {
-        var backfillProperties = new BackfillTicketProperties(payload.MatchProperties);
-        localBackfillTicket = new BackfillTicket { Id = payload.MatchProperties.BackfillTicketId, Properties = backfillProperties };
-        await BeginBackfilling(payload);
-    }
-
-    private async Task BeginBackfilling(MatchmakingResults payload)
-    {
-        if (string.IsNullOrEmpty(localBackfillTicket.Id))
-        {
-            var matchProperties = payload.MatchProperties;
-
-            createBackfillTicketOptions = new CreateBackfillTicketOptions
-            {
-                Connection = externalConnectionString,
-                QueueName = payload.QueueName,
-                Properties = new BackfillTicketProperties(matchProperties)
-            };
-
-            localBackfillTicket.Id = await MatchmakerService.Instance.CreateBackfillTicketAsync(createBackfillTicketOptions);
-        }
-
-        backfilling = true;
-#pragma warning disable 4014
-        BackfillLoop();
-        #pragma warning restore 4014
-    }
-
-    private async Task BackfillLoop()
-    {
-        while (backfilling && NeedsPlayers())
-        {
-            localBackfillTicket = await MatchmakerService.Instance.ApproveBackfillTicketAsync(localBackfillTicket.Id);
-            
-            // 풀방이 되었는지 확인
-            if (!NeedsPlayers())
-            {
-                // 풀방이 되었을 시 추가 진입 차단
-                await MatchmakerService.Instance.DeleteBackfillTicketAsync(localBackfillTicket.Id);
-                localBackfillTicket.Id = null;
-                backfilling = false;              
-                return;
-            }
-
-            await Task.Delay(ticketCheckMs);
-        }
-
-        // 만약을 위해 한 번더 false
-        backfilling = false;
-    }
-
-    private bool NeedsPlayers()
-    {
-        return NetworkManager.Singleton.ConnectedClients.Count < ConnectionApprovalHandler.MaxPlayers;
-    }
-
-    private void ClientDisconnected(ulong clientId)
-    {
-        Debug.Log($"ServerStartUp.cs_ ClientDisconnected: disconnected client:{clientId}");
-        if (!backfilling && NetworkManager.Singleton.ConnectedClients.Count > 0 && NeedsPlayers())
-        {
-#pragma warning disable 4014
-            BeginBackfilling(matchmakingPayload);
-#pragma warning restore 4014
-        }
-    }
+    
 
     // 메모리 누수를 막기 위한 메서드. 실행시점을 고민 후 적용하자
     private void Dispose()
     {
-        NetworkManager.Singleton.OnClientDisconnectCallback -= ClientDisconnected;
         serverCallbacks.Allocate -= OnMultiplayAllocation;
         serverEvents?.UnsubscribeAsync();
     }

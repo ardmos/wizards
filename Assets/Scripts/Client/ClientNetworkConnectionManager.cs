@@ -1,8 +1,6 @@
 using System;
 using Unity.Netcode;
-using UnityEditor.PackageManager;
 using UnityEngine;
-
 
 /// <summary>
 /// 클라이언트 측 로직을 담당합니다. 서버 연결, 연결 상태 이벤트 처리 등을 수행합니다.
