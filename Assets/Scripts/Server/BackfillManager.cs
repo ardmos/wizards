@@ -23,7 +23,7 @@ public class BackfillManager : NetworkBehaviour
         }
     }
 
-    private async Task StartBackfill(MatchmakingResults payload)
+    public async Task StartBackfill(MatchmakingResults payload)
     {
         var backfillProperties = new BackfillTicketProperties(payload.MatchProperties);
         localBackfillTicket = new BackfillTicket { Id = payload.MatchProperties.BackfillTicketId, Properties = backfillProperties };
@@ -35,7 +35,7 @@ public class BackfillManager : NetworkBehaviour
         if (!backfilling && NetworkManager.Singleton.ConnectedClients.Count > 0 && NeedsPlayers())
         {
 #pragma warning disable 4014
-            BeginBackfilling(matchmakingPayload);
+            BeginBackfilling(ServerStartup.Instance.GetMatchmakerPayload());
 #pragma warning restore 4014
         }
     }
@@ -48,7 +48,7 @@ public class BackfillManager : NetworkBehaviour
 
             createBackfillTicketOptions = new CreateBackfillTicketOptions
             {
-                Connection = externalConnectionString,
+                Connection = ServerStartup.Instance.GetExternalConnectionString(),
                 QueueName = payload.QueueName,
                 Properties = new BackfillTicketProperties(matchProperties)
             };

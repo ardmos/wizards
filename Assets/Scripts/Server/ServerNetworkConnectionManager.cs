@@ -121,9 +121,9 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
-        if (ServerStartUp.Instance != null)
+        if (ServerStartup.Instance != null)
         {
-            Destroy(ServerStartUp.Instance.gameObject);
+            Destroy(ServerStartup.Instance.gameObject);
         }
         if(CurrentPlayerDataManager.Instance != null)
         {
