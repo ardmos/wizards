@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{7FC4D1F6-4B77-CEAF-F0D0-EBE64339CD74}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -72,6 +71,7 @@
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\TimerUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IServerInfoProvider.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Scripts\Server\ServerStartUp.cs" />
@@ -247,7 +247,7 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\Server\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Data\AnimationStateEnums.cs" />
-    <Compile Include="Assets\Scripts\Server\MatchmakingManager.cs" />
+    <Compile Include="Assets\Scripts\Server\MatchMakingManager.cs" />
     <Compile Include="Assets\Scripts\Spells\StoneSlashLv1.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailHelmet.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
@@ -291,7 +291,7 @@
     <None Include="Assets\Downloaded Assets\RealToon\For VRoid-VRM users.txt" />
     <None Include="Assets\Shaders\ChickenToonShader_URP.shader" />
     <None Include="Assets\Downloaded Assets\RealToon\RealToon Shader Packages\SRP (LWRP - URP - HDRP)\URP\Please read before you unpack or import.txt" />
-    <None Include="Assets\Downloaded Assets\RealToon\What's New.txt" />
+    <None Include="Assets\Downloaded Assets\RealToon\What&apos;s New.txt" />
     <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseColorDepthWaterTwoSide.shader" />
     <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseDepthWaterTwoSide.shader" />
     <None Include="Assets\Downloaded Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_Core.hlsl" />

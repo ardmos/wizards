@@ -12,6 +12,7 @@ public class BackfillManager : NetworkBehaviour
 
     private BackfillTicket localBackfillTicket;
     private CreateBackfillTicketOptions createBackfillTicketOptions;
+    private IServerInfoProvider serverInfoProvider;
     private const int ticketCheckMs = 1000;
     private bool backfilling = false;
 
@@ -23,6 +24,12 @@ public class BackfillManager : NetworkBehaviour
         }
     }
 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        serverInfoProvider = ServerStartup.Instance;
+    }
+
     public async Task StartBackfill(MatchmakingResults payload)
     {
         var backfillProperties = new BackfillTicketProperties(payload.MatchProperties);
@@ -32,23 +39,25 @@ public class BackfillManager : NetworkBehaviour
 
     public void RestartBackfill()
     {
-        if (!backfilling && NetworkManager.Singleton.ConnectedClients.Count > 0 && NeedsPlayers())
-        {
+        if (serverInfoProvider == null) return;
+        if (backfilling || NetworkManager.Singleton.ConnectedClients.Count <= 0 || !NeedsPlayers()) return;
+
 #pragma warning disable 4014
-            BeginBackfilling(ServerStartup.Instance.GetMatchmakerPayload());
+        BeginBackfilling(serverInfoProvider.GetMatchmakerPayload());
 #pragma warning restore 4014
-        }
     }
 
     private async Task BeginBackfilling(MatchmakingResults payload)
     {
+        if(serverInfoProvider == null) return;
+
         if (string.IsNullOrEmpty(localBackfillTicket.Id))
         {
             var matchProperties = payload.MatchProperties;
 
             createBackfillTicketOptions = new CreateBackfillTicketOptions
             {
-                Connection = ServerStartup.Instance.GetExternalConnectionString(),
+                Connection = serverInfoProvider.GetExternalConnectionString(),
                 QueueName = payload.QueueName,
                 Properties = new BackfillTicketProperties(matchProperties)
             };

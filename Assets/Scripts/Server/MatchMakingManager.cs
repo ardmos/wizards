@@ -15,12 +15,19 @@ public class MatchmakingManager : NetworkBehaviour
     private string allocationId;
     private MultiplayEventCallbacks serverCallbacks;
     private IServerEvents serverEvents;
+    private IServerInfoProvider serverInfoProvider;
     private const int multiplayServiceTimeout = 20000; //20초가량  
 
     private void Awake()
     {
         if (Instance == null && IsServer)
             Instance = this;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        serverInfoProvider = ServerStartup.Instance;
     }
 
     public override void OnDestroy()
@@ -53,12 +60,12 @@ public class MatchmakingManager : NetworkBehaviour
     /// <returns>매치메이커 페이로드를 반환합니다</returns>
     private async Task<MatchmakingResults> SubscribeAndAwaitMatchmakerAllocation()
     {
-        if (ServerStartup.Instance.GetMultiplayService() == null) return null;
+        if (serverInfoProvider == null) return null;
 
         allocationId = null;
         serverCallbacks = new MultiplayEventCallbacks();
         // 서버 이벤트 구독
-        serverEvents = await ServerStartup.Instance.GetMultiplayService().SubscribeToServerEventsAsync(serverCallbacks);
+        serverEvents = await serverInfoProvider.GetMultiplayService().SubscribeToServerEventsAsync(serverCallbacks);
         // 멀티플레이 게임 서버 인스턴스가 할당되었을 경우 allocationId를 저장합니다.
         serverCallbacks.Allocate += OnMultiplayAllocation;
         // 마찬가지로 allocationId를 저장하는 메서드를 await합니다. 만약을 위한 이중 안전장치입니다.
@@ -87,7 +94,7 @@ public class MatchmakingManager : NetworkBehaviour
     /// <returns></returns>
     private async Task<string> AwaitAllocationID()
     {
-        var config = ServerStartup.Instance.GetMultiplayService().ServerConfig;
+        var config = serverInfoProvider.GetMultiplayService().ServerConfig;
         Debug.Log($"Awaiting Allocation. Server Config is:\n" +
             $"-ServerID: {config.ServerId}\n" +
             $"-AllocationID: {config.AllocationId}\n" +
