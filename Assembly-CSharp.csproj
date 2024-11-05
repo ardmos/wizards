@@ -74,11 +74,11 @@
     <Compile Include="Assets\Scripts\Interfaces\IServerInfoProvider.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
-    <Compile Include="Assets\Scripts\Server\ServerStartUp.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\FloorGenerator.cs" />
     <Compile Include="Assets\Scripts\AI Player\WizardRukeAIBattleSystemServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\MiniPopupSkillInfoDetailController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\CharacterCardController.cs" />
+    <Compile Include="Assets\Scripts\Server\MatchmakingManager.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
@@ -229,6 +229,7 @@
     <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupMenuUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\PopupSettingsUIController.cs" />
+    <Compile Include="Assets\Scripts\Server\ServerStartup.cs" />
     <Compile Include="Assets\Scripts\Server\BackfillManager.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIHPManagerClient.cs" />
     <Compile Include="Assets\Scripts\GameScene_Singleplayer\SingleplayerGameManager.cs" />
@@ -247,7 +248,6 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
     <Compile Include="Assets\Scripts\Server\TargetFPS.cs" />
     <Compile Include="Assets\Scripts\Data\AnimationStateEnums.cs" />
-    <Compile Include="Assets\Scripts\Server\MatchMakingManager.cs" />
     <Compile Include="Assets\Scripts\Spells\StoneSlashLv1.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailHelmet.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />

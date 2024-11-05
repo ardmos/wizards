@@ -12,17 +12,17 @@ public interface IServerInfoProvider
     /// 멀티플레이 서비스 인스턴스를 반환합니다.
     /// </summary>
     /// <returns>IMultiplayService 인스턴스</returns>
-    IMultiplayService GetMultiplayService();
+    public IMultiplayService GetMultiplayService();
 
     /// <summary>
     /// 현재 매치메이킹 결과를 반환합니다.
     /// </summary>
     /// <returns>MatchmakingResults 객체</returns>
-    MatchmakingResults GetMatchmakerPayload();
+    public MatchmakingResults GetMatchmakerPayload();
 
     /// <summary>
     /// 서버의 외부 연결 문자열을 반환합니다.
     /// </summary>
     /// <returns>IP:Port 형식의 연결 문자열</returns>
-    string GetExternalConnectionString();
+    public string GetExternalConnectionString();
 }

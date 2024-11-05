@@ -44,7 +44,7 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider
     }
 
     /// <summary>
-    /// 커맨드라인 인수를 확인하여 서버 설정을 확인하고 설정 확인 결과를 반환합니다.
+    /// 커맨드라인 인수를 확인하여 서버 설정을 확인하고 설정 확인 결과를 반환하는 메서드입니다.
     /// </summary>
     /// <returns>설정 확인 성공 여부를 담은 boolean변수</returns>
     private bool CheckServerCommandLineArgs()
@@ -80,7 +80,7 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider
     }
 
     /// <summary>
-    /// 서버를 시작합니다.
+    /// 서버를 시작하는 메서드입니다.
     /// </summary>
     private void StartServer()
     {
@@ -92,7 +92,7 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider
     }
 
     /// <summary>
-    /// 여기부터//////////////////////
+    /// 서버 서비스를 시작하는 메서드입니다.
     /// </summary>
     /// <returns></returns>
     private async Task StartServerServices()
@@ -100,13 +100,13 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider
         if (MatchmakingManager.Instance == null) return;
         if (BackfillManager.Instance == null) return;
 
-        // Unity 서비스 초기화
+        // Unity Service 초기화
         await UnityServices.InitializeAsync();
         try
         {
-            // 멀티플레이 인스턴스 생성
+            // Unity MultiplayService 인스턴스 생성
             multiplayService = MultiplayService.Instance;
-            // Unity MultiplayService의 SQP 쿼리 핸들러 설정
+            // Unity MultiplayService 의 SQP 쿼리 핸들러 설정
             await multiplayService.StartServerQueryHandlerAsync((ushort)ConnectionApprovalHandler.MaxPlayers, "n/a", "n/a", "0", "n/a");
         }
         catch (Exception ex)
@@ -116,9 +116,9 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider
 
         try
         {
-            // matchmakerPayload(매치메이커가 발급하는 페이로드) 획득 시도. 타임아웃일 경우 null 반환
+            // matchmakerPayload 획득
             matchmakerPayload = await MatchmakingManager.Instance.GetMatchmakerPayload(); 
-            // 페이로드를 정상적으로 받아왔는지 확인
+
             if (matchmakerPayload != null)
             {
                 // 서버를 플레이어 참가 가능 상태로 만듦

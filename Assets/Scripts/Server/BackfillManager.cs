@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Netcode;
-using Unity.Services.Matchmaker.Models;
-using Unity.Services.Matchmaker;
-using UnityEngine;
 using System.Threading.Tasks;
+using Unity.Netcode;
+using Unity.Services.Matchmaker;
+using Unity.Services.Matchmaker.Models;
 
+/// <summary>
+/// 게임 세션의 백필 프로세스를 관리하는 클래스입니다.
+/// </summary>
 public class BackfillManager : NetworkBehaviour
 {
     public static BackfillManager Instance { get; private set; }
@@ -26,10 +26,12 @@ public class BackfillManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
         serverInfoProvider = ServerStartup.Instance;
     }
 
+    /// <summary>
+    /// 백필 프로세스를 시작합니다.
+    /// </summary>
     public async Task StartBackfill(MatchmakingResults payload)
     {
         var backfillProperties = new BackfillTicketProperties(payload.MatchProperties);
@@ -37,6 +39,9 @@ public class BackfillManager : NetworkBehaviour
         await BeginBackfilling(payload);
     }
 
+    /// <summary>
+    /// 백필 프로세스를 재시작합니다.
+    /// </summary>
     public void RestartBackfill()
     {
         if (serverInfoProvider == null) return;
@@ -47,6 +52,9 @@ public class BackfillManager : NetworkBehaviour
 #pragma warning restore 4014
     }
 
+    /// <summary>
+    /// 백필 프로세스를 시작하는 내부 메서드입니다.
+    /// </summary>
     private async Task BeginBackfilling(MatchmakingResults payload)
     {
         if(serverInfoProvider == null) return;
@@ -71,6 +79,9 @@ public class BackfillManager : NetworkBehaviour
 #pragma warning restore 4014
     }
 
+    /// <summary>
+    /// 백필 루프를 실행하는 메서드입니다.
+    /// </summary>
     private async Task BackfillLoop()
     {
         while (backfilling && NeedsPlayers())
@@ -94,10 +105,11 @@ public class BackfillManager : NetworkBehaviour
         backfilling = false;
     }
 
+    /// <summary>
+    /// 게임에 추가 플레이어가 필요한지 확인합니다.
+    /// </summary>
     private bool NeedsPlayers()
     {
         return NetworkManager.Singleton.ConnectedClients.Count < ConnectionApprovalHandler.MaxPlayers;
     }
-
-
 }

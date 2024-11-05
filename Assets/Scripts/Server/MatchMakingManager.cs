@@ -1,13 +1,14 @@
 using Newtonsoft.Json;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Services.Matchmaker.Models;
 using Unity.Services.Multiplay;
 using UnityEngine;
 
+/// <summary>
+/// 매치메이킹 프로세스를 관리하는 클래스입니다.
+/// </summary>
 public class MatchmakingManager : NetworkBehaviour
 {
     public static MatchmakingManager Instance { get; private set; }
@@ -16,7 +17,7 @@ public class MatchmakingManager : NetworkBehaviour
     private MultiplayEventCallbacks serverCallbacks;
     private IServerEvents serverEvents;
     private IServerInfoProvider serverInfoProvider;
-    private const int multiplayServiceTimeout = 20000; //20초가량  
+    private const int multiplayServiceTimeout = 20000; // 20초 
 
     private void Awake()
     {
@@ -26,7 +27,8 @@ public class MatchmakingManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
+        if (ServerStartup.Instance == null) return;
+
         serverInfoProvider = ServerStartup.Instance;
     }
 
@@ -95,7 +97,7 @@ public class MatchmakingManager : NetworkBehaviour
     private async Task<string> AwaitAllocationID()
     {
         var config = serverInfoProvider.GetMultiplayService().ServerConfig;
-        Debug.Log($"Awaiting Allocation. Server Config is:\n" +
+        Debug.Log($"서버 할당을 기다리고 있습니다. Server Config is:\n" +
             $"-ServerID: {config.ServerId}\n" +
             $"-AllocationID: {config.AllocationId}\n" +
             $"-QPort: {config.QueryPort}\n" +
@@ -131,9 +133,8 @@ public class MatchmakingManager : NetworkBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogWarning($"Something went wrong trying to get the Matchmaker Payload in GetMatchmakerAllocationPayloadAsync:\n{ex}");
+            Debug.LogWarning($"Matchmaker allocation payload를 얻는데 실패했습니다. {ex}");
         }
-
         return null;
     }
 
