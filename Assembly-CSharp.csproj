@@ -155,6 +155,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ICleanable.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Client\PlayerScrollCounter.cs" />
     <Compile Include="Assets\Scripts\Client\ClientNetworkTransform.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerSpawnPointsController.cs" />
     <Compile Include="Assets\Scripts\TitleScene\TitleSceneUIController.cs" />
     <Compile Include="Assets\Scripts\Custom UI\TouchEffectManager.cs" />
+    <Compile Include="Assets\Scripts\Loading\SceneCleanupManager.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\MuzzlePos.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\GameSceneUIManager.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />

@@ -5,7 +5,7 @@ using UnityEditor.PackageManager;
 /// 서버 측 네트워크 연결 관리를 담당하는 연결 관리자 클래스입니다.
 /// 플레이어 연결, 연결 해제등을 처리합니다.
 /// </summary>
-public class ServerNetworkConnectionManager : NetworkBehaviour
+public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
 {
     public static ServerNetworkConnectionManager Instance { get; private set; }
 
@@ -15,6 +15,7 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneCleanupManager.RegisterCleanableObject(this);
         }
         else
         {
@@ -31,13 +32,15 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
         NetworkManager.Singleton.OnClientDisconnectCallback += Server_OnClientDisconnectCallback;
     }
 
-    /// <summary>
-    /// 연결관리자를 Desawn할 때 이전에 등록했던 콜백(이벤트 핸들러)들을 제거해줍니다.
-    /// </summary>
     public override void OnNetworkDespawn()
     {
         NetworkManager.Singleton.OnClientConnectedCallback -= Server_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback -= Server_OnClientDisconnectCallback;
+    }
+
+    public override void OnDestroy()
+    {
+        SceneCleanupManager.UnregisterCleanableObject(this);
     }
 
     /// <summary>
@@ -113,7 +116,7 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
         // 혹시 남아있는 플레이어가 없는 경우, 서버도 다시 로비씬으로 돌아갑니다.
         if (CurrentPlayerDataManager.Instance.GetCurrentPlayerCount() <= 0)
         {
-            CleanUp();
+            Cleanup();
             LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         }
     }
@@ -128,35 +131,11 @@ public class ServerNetworkConnectionManager : NetworkBehaviour
         return toggleArrayPlayerIndex < CurrentPlayerDataManager.Instance.GetCurrentPlayerCount();
     }
 
-    // 로비씬으로 돌아기 전 초기화
-    private void CleanUp()
+    /// <summary>
+    /// 특정 씬으로 이동시 현 오브젝트가 파괴되는 기능을 옵저버패턴으로 구현했습니다.
+    /// </summary>
+    public void Cleanup()
     {
-        // 서버 또는 에디터에서만 실행
-#if UNITY_SERVER || UNITY_EDITOR
-        if (MultiplayerGameManager.Instance != null)
-        {
-            MultiplayerGameManager.Instance.CleanUpChildObjects();
-            Destroy(MultiplayerGameManager.Instance.gameObject);
-        }
-        if (NetworkManager.Singleton != null)
-        {
-            NetworkManager.Singleton.Shutdown();
-            Destroy(NetworkManager.Singleton.gameObject);
-        }
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        if (ServerStartup.Instance != null)
-        {
-            Destroy(ServerStartup.Instance.gameObject);
-        }
-        if (CurrentPlayerDataManager.Instance != null)
-        {
-            Destroy(CurrentPlayerDataManager.Instance.gameObject);
-        }
-        if (AIPlayerGenerator.Instance != null)
-            Destroy(AIPlayerGenerator.Instance.gameObject);
-#endif
+        Destroy(gameObject);
     }
 }

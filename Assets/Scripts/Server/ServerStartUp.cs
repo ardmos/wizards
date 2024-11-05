@@ -11,7 +11,7 @@ using UnityEngine;
 /// <summary>
 /// UGS Multiplay 서버의 설정 및 초기화를 담당하는 클래스입니다.
 /// </summary>
-public class ServerStartup : NetworkBehaviour, IServerInfoProvider
+public class ServerStartup : NetworkBehaviour, IServerInfoProvider, ICleanable
 {
     public static ServerStartup Instance { get; private set; }
 
@@ -30,6 +30,7 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneCleanupManager.RegisterCleanableObject(this);
         }
         else Destroy(gameObject);
     }
@@ -41,6 +42,11 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider
             StartServer();
             await StartServerServices();
         }
+    }
+
+    public override void OnDestroy()
+    {
+        SceneCleanupManager.UnregisterCleanableObject(this);
     }
 
     /// <summary>
@@ -151,6 +157,13 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider
     public string GetExternalConnectionString()
     {
         return externalConnectionString;
+    }
+    #endregion
+
+    #region ICleanable
+    public void Cleanup()
+    {
+        Destroy(gameObject);
     }
     #endregion
 }

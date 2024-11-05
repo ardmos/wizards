@@ -10,7 +10,6 @@ public class PopupHostHasDisconnectedUIController : MonoBehaviour
     {
         btnPlayAgain.AddClickListener(() =>
         {
-            CleanUp();
             // 로비로 이동.
             LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         });
@@ -45,22 +44,5 @@ public class PopupHostHasDisconnectedUIController : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
-    }
-
-    private void CleanUp()
-    {
-        if (NetworkManager.Singleton != null)
-        {
-            NetworkManager.Singleton.Shutdown();
-            Destroy(NetworkManager.Singleton.gameObject);
-        }
-        if (ServerNetworkConnectionManager.Instance != null)
-        {
-            Destroy(ServerNetworkConnectionManager.Instance.gameObject);
-        }
-        if (ClientNetworkConnectionManager.Instance != null)
-        {
-            Destroy(ClientNetworkConnectionManager.Instance.gameObject);
-        }
     }
 }

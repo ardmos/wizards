@@ -250,7 +250,7 @@ public class SingleplayerGameManager : NetworkBehaviour
     /// </summary>
     public void CleanUpObjects()
     {
-        Debug.Log("MultiplayerGameManager CleanUpChildObjects called!");
+        Debug.Log("MultiplayerGameManager CleanupChildObjects called!");
         // 현재 GameObject의 모든 자식 GameObject를 파괴
         transform.Cast<Transform>().ToList().ForEach(child => Destroy(child.gameObject));
     }

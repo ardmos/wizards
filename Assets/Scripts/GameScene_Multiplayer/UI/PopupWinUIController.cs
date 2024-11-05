@@ -51,8 +51,6 @@ public class PopupWinUIController : MonoBehaviour
         {
             // 보상 수령 로직은 추후 업데이트 예정 (미구현)
 
-            // NetworkManager 정리
-            CleanUp();
             // 로비로 이동. 
             LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         });
@@ -171,23 +169,6 @@ public class PopupWinUIController : MonoBehaviour
             GameObject itemObject = Instantiate(templateObject);
             itemObject.GetComponent<WinPopupItemTemplateUI>().InitTemplate(Item.GetIcon(item.Key), item.Value.ToString(), true);
             itemObject.transform.SetParent(itemGroup, false);           
-        }
-    }
-
-    private void CleanUp()
-    {
-        if (NetworkManager.Singleton != null)
-        {
-            NetworkManager.Singleton.Shutdown();
-            Destroy(NetworkManager.Singleton.gameObject);
-        }
-        if (ServerNetworkConnectionManager.Instance != null)
-        {
-            Destroy(ServerNetworkConnectionManager.Instance.gameObject);
-        }
-        if (ClientNetworkConnectionManager.Instance != null)
-        {
-            Destroy(ClientNetworkConnectionManager.Instance.gameObject);
         }
     }
 }

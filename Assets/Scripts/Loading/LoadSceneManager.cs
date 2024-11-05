@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 /// <summary>
-/// 로딩씬을 활용한 로딩을 관리하는 스크립트 입니다. 그리고 CleanUp 기능을 여기에 담아서, Title이나 Lobby화면으로 이동시 자동 클린업 되도록 하는게 깔끔해보임.
 /// !!!현재 기능
 ///     1. 로딩씬 열기
 ///     2. 타겟씬 백그라운드에서 로딩
@@ -32,6 +32,11 @@ public static class LoadSceneManager
     /// <param name="targetScene">백그라운드에서 로딩시킬 타겟씬</param>
     public static void Load(Scene targetScene)
     {
+        if(targetScene == Scene.LobbyScene)
+        {
+            SceneCleanupManager.CleanupAllObjects();
+        }
+
         // 타겟씬 백그라운드에서 로딩
         onLoaderCallback = () =>
         {

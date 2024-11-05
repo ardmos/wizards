@@ -9,7 +9,7 @@ using Random = System.Random;
 /// AI 플레이어의 생성을 관리하는 스크립트 입니다.
 /// Server측에서 동작합니다.
 /// </summary>
-public class AIPlayerGenerator : NetworkBehaviour
+public class AIPlayerGenerator : NetworkBehaviour, ICleanable
 {
     private const ulong FIRST_AI_PLAYER_CLIENT_ID = 10000;
     private const ulong DEFAULT_AI_GENERATE_DELAY_TIME = 10;
@@ -24,6 +24,7 @@ public class AIPlayerGenerator : NetworkBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneCleanupManager.RegisterCleanableObject(this);
         }
         else Destroy(gameObject);
 
@@ -34,6 +35,11 @@ public class AIPlayerGenerator : NetworkBehaviour
     {
         if (!IsServer) return;
         CheckFirstPlayerConnectionTime();
+    }
+
+    public override void OnDestroy()
+    {
+        SceneCleanupManager.UnregisterCleanableObject(this);
     }
 
     private void CheckFirstPlayerConnectionTime()
@@ -107,5 +113,10 @@ public class AIPlayerGenerator : NetworkBehaviour
     public void ResetAIPlayerGenerator()
     {
         isAIPlayerAdded = false;
+    }
+
+    public void Cleanup()
+    {
+        Destroy(gameObject);
     }
 }

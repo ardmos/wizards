@@ -21,7 +21,7 @@ using Unity.Services.Multiplay;
 /// ownerPlayerObject
 /// </summary>
 
-public class MultiplayerGameManager : NetworkBehaviour
+public class MultiplayerGameManager : NetworkBehaviour, ICleanable
 {
     public static MultiplayerGameManager Instance { get; private set; }
 
@@ -48,9 +48,9 @@ public class MultiplayerGameManager : NetworkBehaviour
     {
         Instance = this;
         playerReadyList = new Dictionary<ulong, bool>();
+        SceneCleanupManager.RegisterCleanableObject(this);
     }
 
-    // Start is called before the first frame update
     async void Start()
     {
 #if UNITY_SERVER //|| UNITY_EDITOR
@@ -80,6 +80,11 @@ public class MultiplayerGameManager : NetworkBehaviour
         }
         gameState.OnValueChanged -= State_OnValueChanged;
         currentAlivePlayerCount.OnValueChanged -= currentAlivePlayerCount_OnValueChanged;
+    }
+
+    public override void OnDestroy()
+    {
+        SceneCleanupManager.UnregisterCleanableObject(this);
     }
 
     /// <summary>
@@ -352,11 +357,17 @@ public class MultiplayerGameManager : NetworkBehaviour
     /// 서버에서 사용합니다. 
     /// 마법 오브젝트같은것들을 정리해줍니다
     /// </summary>
-    public void CleanUpChildObjects()
+    public void CleanupChildObjects()
     {
-        Debug.Log("MultiplayerGameManager CleanUpChildObjects called!");
+        Debug.Log("MultiplayerGameManager CleanupChildObjects called!");
         // 현재 GameObject의 모든 자식 GameObject를 파괴
         transform.Cast<Transform>().ToList().ForEach(child => Destroy(child.gameObject));
+    }
+
+    public void Cleanup()
+    {
+        CleanupChildObjects();
+        Destroy(gameObject);
     }
 
     public void SetGameStateStart()

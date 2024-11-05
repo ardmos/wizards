@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class CurrentPlayerDataManager : NetworkBehaviour
+public class CurrentPlayerDataManager : NetworkBehaviour, ICleanable
 {
     public static CurrentPlayerDataManager Instance { get; private set; }
 
@@ -19,6 +19,7 @@ public class CurrentPlayerDataManager : NetworkBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneCleanupManager.RegisterCleanableObject(this);
         }
         else Destroy(gameObject);
     }
@@ -31,6 +32,11 @@ public class CurrentPlayerDataManager : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         currentPlayers.OnListChanged -= OnCurrentPlayerListChanged;
+    }
+
+    public override void OnDestroy()
+    {
+        SceneCleanupManager.UnregisterCleanableObject(this);
     }
 
     private void InitalizePlayerList()
@@ -157,4 +163,9 @@ public class CurrentPlayerDataManager : NetworkBehaviour
         return GetPlayerDataByClientId(clientID).score;
     }
     #endregion
+
+    public void Cleanup()
+    {
+        Destroy(gameObject);
+    }
 }

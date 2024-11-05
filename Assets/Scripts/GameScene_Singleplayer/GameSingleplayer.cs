@@ -144,20 +144,20 @@ public class GameSingleplayer : NetworkBehaviour
         if (playerDataNetworkList.Count == 0)
         {
             Debug.Log($"Server_OnClientDisconnectCallback, Go to Lobby");
-            CleanUp();
+            // 싱글모드는 추후 수정하기. 이제는 클린업 옵저버패턴으로 쓰고있음CleanUp();
             // 로비씬으로 이동
             LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         }
     }
 
-    // 로비씬으로 돌아기 전 초기화
+/*    // 로비씬으로 돌아기 전 초기화
     private void CleanUp()
     {
         // 클라이언트 빌드용 if 옵션.
 #if UNITY_SERVER || UNITY_EDITOR
         if (MultiplayerGameManager.Instance != null)
         {
-            MultiplayerGameManager.Instance.CleanUpChildObjects();
+            MultiplayerGameManager.Instance.CleanupChildObjects();
         }
         if (NetworkManager.Singleton != null)
         {
@@ -177,7 +177,7 @@ public class GameSingleplayer : NetworkBehaviour
         playerDataNetworkList.Clear();
 #endif
     }
-
+*/
     [ServerRpc(RequireOwnership = false)]
     private void UpdatePlayerInGameDataServerRPC(PlayerInGameData playerData, ServerRpcParams serverRpcParams = default)
     {

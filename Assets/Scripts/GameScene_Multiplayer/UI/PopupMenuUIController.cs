@@ -15,7 +15,6 @@ public class PopupMenuUIController : MonoBehaviour
         btnContinue.AddClickListener(Hide);
         btnHome.AddClickListener(() =>
         {
-            CleanUp();
             // 로비씬으로 이동
             LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         });
@@ -30,22 +29,5 @@ public class PopupMenuUIController : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
-    }
-
-    private void CleanUp()
-    {
-        if (NetworkManager.Singleton != null)
-        {
-            NetworkManager.Singleton.Shutdown();
-            Destroy(NetworkManager.Singleton.gameObject);
-        }
-        if (ServerNetworkConnectionManager.Instance != null)
-        {
-            Destroy(ServerNetworkConnectionManager.Instance.gameObject);
-        }
-        if (ClientNetworkConnectionManager.Instance != null)
-        {
-            Destroy(ClientNetworkConnectionManager.Instance.gameObject);
-        }
     }
 }
