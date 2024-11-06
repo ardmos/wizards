@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\GameScene_Singleplayer\PlayerServerSingleMode.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupGameOverUIController.cs" />
+    <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\PopupMatchingRoomUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Store\StoreTriggerAreaCollider.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailSword.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
@@ -172,7 +173,6 @@
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupWatingForPlayersUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\PopupGameRoomUIController.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\Spells\SlashSkill.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
