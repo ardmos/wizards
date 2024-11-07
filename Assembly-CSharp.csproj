@@ -144,12 +144,12 @@
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailBody.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSupportUIController.cs" />
     <Compile Include="Assets\Scripts\Data\GraphicQualitySettingsData.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\PlayerAnimator.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSUI.cs" />
     <Compile Include="Assets\Scripts\Data\SFXType.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\SkillManagerServerKnight.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupGameStartCountdownUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
-    <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICleanable.cs" />
     <Compile Include="Assets\Scripts\Client\ClientNetworkTransform.cs" />
@@ -198,7 +198,6 @@
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\PlayerServer.cs" />
     <Compile Include="Assets\Scripts\Custom UI\TouchEffectManager.cs" />
     <Compile Include="Assets\Scripts\Loading\SceneCleanupManager.cs" />
-    <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\MuzzlePos.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Client\Knight.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\GameSceneUIManager.cs" />
     <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />
@@ -257,10 +256,12 @@
     <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
     <Compile Include="Assets\Scripts\Test\TestNetworkUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Manager\MultiplayerGameManager.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\MuzzlePos.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Data\RandomSkillOptionProviderSystem.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterArea.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\JoystickDirectionUI.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Client\GameInput.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Client\PlayerScrollCounter.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SoundFXGroupUI.cs" />
     <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
@@ -272,7 +273,6 @@
     <Compile Include="Assets\Scripts\Data\SpellName.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\TouchRotator.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Item\PotionHP.cs" />
-    <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\GameInput.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\PlayerHPManagerServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
