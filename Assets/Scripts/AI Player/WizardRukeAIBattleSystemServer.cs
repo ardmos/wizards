@@ -11,10 +11,10 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
     // 타겟과 거리에 따른 우선순위로 공격스킬 발사
     public void Attack()
     {
-        if (!wizardRukeAIServer.target) return;
+        if (!wizardRukeAIServer.GetTarget()) return;
 
         // 타겟과의 거리 확인
-        targetDistance = Vector3.Distance(transform.position, wizardRukeAIServer.target.transform.position);
+        targetDistance = Vector3.Distance(transform.position, wizardRukeAIServer.GetTarget().transform.position);
 
         //3 이하 블리자드
         if (targetDistance <= 3)
@@ -31,7 +31,7 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
     {
         //Debug.Log("FireBlizzard");
         // 타겟쪽 바라보기
-        transform.LookAt(wizardRukeAIServer.target.transform);
+        transform.LookAt(wizardRukeAIServer.GetTarget().transform);
         // 스킬 준비
         wizardRukeAISpellManager.CastBlizzard();
         // 스킬 발사
@@ -42,7 +42,7 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
     {
         //Debug.Log("FireFireBall");
         // 타겟쪽 바라보기
-        transform.LookAt(wizardRukeAIServer.target.transform);
+        transform.LookAt(wizardRukeAIServer.GetTarget().transform);
         // 스킬 준비
         wizardRukeAISpellManager.CastSpell(0);
         // 스킬 발사
@@ -53,7 +53,7 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
     {
         //Debug.Log("FireWaterBall");
         // 타겟쪽 바라보기
-        transform.LookAt(wizardRukeAIServer.target.transform);
+        transform.LookAt(wizardRukeAIServer.GetTarget().transform);
         // 스킬 준비
         wizardRukeAISpellManager.CastSpell(1);
         // 스킬 발사

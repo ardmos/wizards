@@ -12,10 +12,10 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
     public void InitPlayerHP(ICharacter character)
     {
-        playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(wizardRukeAIServer.AIClientId);
+        playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(wizardRukeAIServer.GetAIClientId());
         playerData.hp = character.hp;
         playerData.maxHp = character.maxHp;
-        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.AIClientId, playerData);
+        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetAIClientId(), playerData);
 
         wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
     }
@@ -33,7 +33,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
         // 변경된 HP값 서버에 저장
         playerData.hp = newHP;
-        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.AIClientId, playerData);
+        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetAIClientId(), playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
         wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
@@ -46,7 +46,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
     {
         // GamePlaying중이 아니면 전부 리턴. 게임이 끝나면 무적처리 되도록.
         if (!MultiplayerGameManager.Instance.IsGamePlaying()) return;
-        if (wizardRukeAIServer.gameState != PlayerGameState.Playing) return;
+        if (wizardRukeAIServer.GetAIGameState() != PlayerGameState.Playing) return;
 
         // 피격 사운드 효과 실행 ClientRPC
 
@@ -78,7 +78,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
         // 변경된 HP값 서버에 저장
         playerData.hp = newPlayerHP;
-        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.AIClientId, playerData);
+        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetAIClientId(), playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
         wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
@@ -94,8 +94,8 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
         TakingDamage(damage, clientIDWhoAttacked);
 
         // 공격자가 인식범위 안에 있으면 타겟으로 설정. 
-        if (Vector3.Distance(transform.position, clientObjectWhoAttacked.transform.position) <= wizardRukeAIServer.maxDistanceDetect)
-            wizardRukeAIServer.target = clientObjectWhoAttacked;
+        if (Vector3.Distance(transform.position, clientObjectWhoAttacked.transform.position) <= wizardRukeAIServer.GetMaxDetectionDistance())
+            wizardRukeAIServer.SetTarget(clientObjectWhoAttacked);
 
         // 방어스킬 발동
         wizardRukeAIBattleSystemServer.Defence();

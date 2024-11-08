@@ -320,7 +320,7 @@ public class BlizzardLv1 : AoESpell
         if (!other) return;
 
         // 충돌한 플레이어 이동속도 저하.
-        if (other.TryGetComponent<WizardRukeAIMovementServer>(out WizardRukeAIMovementServer aiPlayerMovement))
+        if (other.TryGetComponent<WizardRukeAIMovementSystemServer>(out WizardRukeAIMovementSystemServer aiPlayerMovement))
         {
             aiPlayerMovement.ReduceMoveSpeed(slowValue);
             //Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} ReduceMoveSpeed result : {playerMovement.GetMoveSpeed()} ");
@@ -336,7 +336,7 @@ public class BlizzardLv1 : AoESpell
     {
         if (!other) return;
 
-        if (other.TryGetComponent<WizardRukeAIMovementServer>(out WizardRukeAIMovementServer aiPlayerMovement))
+        if (other.TryGetComponent<WizardRukeAIMovementSystemServer>(out WizardRukeAIMovementSystemServer aiPlayerMovement))
         {
             aiPlayerMovement.AddMoveSpeed(slowValue);
             //Debug.Log($"player{other.GetComponent<NetworkObject>().OwnerClientId} AddMoveSpeed result : {playerMovement.GetMoveSpeed()} ");

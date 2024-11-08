@@ -63,7 +63,6 @@
     <Compile Include="Assets\Scripts\Spells\HomingMissile.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\WinPopupItemTemplateUI.cs" />
     <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
-    <Compile Include="Assets\Scripts\AI Player\WizardRukeAIMovementServer.cs" />
     <Compile Include="Assets\Scripts\Server\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\DamageTextUI.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
@@ -117,6 +116,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Spells\IceSpell.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimStateEventData.cs" />
+    <Compile Include="Assets\Scripts\AI Player\WizardRukeAIMovementSystemServer.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoRotate.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupHostHasDisconnectedUIController.cs" />
@@ -128,11 +128,13 @@
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\GameScene_Singleplayer\PlayerServerSingleMode.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupGameOverUIController.cs" />
+    <Compile Include="Assets\Scripts\AI Player\WizardRukeAIItemDropManagerServer.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\PopupMatchingRoomUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Store\StoreTriggerAreaCollider.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailSword.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Store\MagicStoreItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\AI Player\AITargetingSystem.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIAnimationServer.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIClient.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\PopupShopUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
+    <Compile Include="Assets\Scripts\AI Player\PatrolState.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
     <Compile Include="Assets\Scripts\TitleScene\TextAppVersion.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
@@ -166,6 +169,7 @@
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\PopupWatingForPlayersUIController.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\SpellManagerServer.cs" />
+    <Compile Include="Assets\Scripts\AI Player\IdleState.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\Spells\SlashSkill.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
@@ -207,6 +211,8 @@
     <Compile Include="Assets\Scripts\Server\ServerNetworkConnectionManager.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManagerServer.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Client\SkillManagerClientKnight.cs" />
+    <Compile Include="Assets\Scripts\AI Player\AttackState.cs" />
+    <Compile Include="Assets\Scripts\AI Player\AIStateMachine.cs" />
     <Compile Include="Assets\Scripts\Server\CurrentPlayerDataManager.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\ScrollManagerServer.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\ItemAcquiredMessageTemplateUI.cs" />
@@ -222,8 +228,8 @@
     <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupNameChangeUIController.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadSceneManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
-    <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Client\SpellManagerClient.cs" />
+    <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\SpellManagerServerWizard.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
@@ -271,6 +277,7 @@
     <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\Data\SpellName.cs" />
+    <Compile Include="Assets\Scripts\AI Player\ChaseState.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\TouchRotator.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\Item\PotionHP.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\PlayerHPManagerServer.cs" />

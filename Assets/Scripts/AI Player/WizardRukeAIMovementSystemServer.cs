@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WizardRukeAIMovementServer : MonoBehaviour
+public class WizardRukeAIMovementSystemServer : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
 

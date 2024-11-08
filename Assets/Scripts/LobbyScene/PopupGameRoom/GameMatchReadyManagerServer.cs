@@ -92,7 +92,7 @@ public class GameMatchReadyManagerServer : NetworkBehaviour
         if (playerReadyDictionaryOnServer.ContainsKey(컴퓨터용클라이언트아이디) && playerReadyDictionaryOnServer[컴퓨터용클라이언트아이디]) return;
         if (GameMatchReadyManagerClient.Instance == null) return;
 
-        Debug.Log($"AI 레디 보고가 들어왔습니다. 보고자: AIClientId:{컴퓨터용클라이언트아이디}, AIPlayerIndex:{CurrentPlayerDataManager.Instance.GetPlayerDataListIndexByClientId(컴퓨터용클라이언트아이디)}");
+        Debug.Log($"AI 레디 보고가 들어왔습니다. 보고자: aiClientId:{컴퓨터용클라이언트아이디}, AIPlayerIndex:{CurrentPlayerDataManager.Instance.GetPlayerDataListIndexByClientId(컴퓨터용클라이언트아이디)}");
         // 이 과정은 서버쪽에서만 저장하고 처리하는 거라 윗줄이 필요함.
         playerReadyDictionaryOnServer[컴퓨터용클라이언트아이디] = true;
         // Client쪽에도 레디한 ClientId 브로드캐스트 해줌. 각자 화면에서 레디 표시 띄워줘야하기 때문

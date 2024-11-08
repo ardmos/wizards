@@ -53,7 +53,7 @@ public class Water : NetworkBehaviour
             }
             if (player.TryGetComponent<WizardRukeAIHPManagerServer>(out WizardRukeAIHPManagerServer wizardRukeAIHPManagerServer))
             {
-                wizardRukeAIHPManagerServer.TakingDamage(damageValue, player.GetComponent<WizardRukeAIServer>().AIClientId);
+                wizardRukeAIHPManagerServer.TakingDamage(damageValue, player.GetComponent<WizardRukeAIServer>().GetAIClientId());
             }
             if (player.TryGetComponent<ChickenAIHPManagerServer>(out ChickenAIHPManagerServer chickenAIHPManagerServer))
             {

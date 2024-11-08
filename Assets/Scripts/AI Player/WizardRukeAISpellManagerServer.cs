@@ -95,7 +95,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         spellObject.GetComponent<NetworkObject>().Spawn();
         if (spellObject.TryGetComponent<AoESpell>(out var aoESpell))
         {
-            aoESpell.SetOwner(wizardRukeAIServer.AIClientId, gameObject);
+            aoESpell.SetOwner(wizardRukeAIServer.GetAIClientId(), gameObject);
             aoESpell.InitAoESpell(GetSpellInfo(2));
         }
 
@@ -127,7 +127,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         // 호밍 마법이라면 호밍 마법에 소유자 등록 & 속도 설정
         if (spellObject.TryGetComponent<HomingMissile>(out var ex))
         {
-            ex.SetOwner(wizardRukeAIServer.AIClientId, gameObject);
+            ex.SetOwner(wizardRukeAIServer.GetAIClientId(), gameObject);
             ex.SetSpeed(spellInfo.moveSpeed);
         }
         spellObject.transform.SetParent(transform);
@@ -282,7 +282,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         foreach (SpellName spellName in skillNames)
         {
             SpellInfo spellInfo = new SpellInfo(SpellSpecifications.Instance.GetSpellDefaultSpec(spellName));
-            spellInfo.ownerPlayerClientId = wizardRukeAIServer.AIClientId;
+            spellInfo.ownerPlayerClientId = wizardRukeAIServer.GetAIClientId();
             playerSpellInfoList.Add(spellInfo);
         }
 
