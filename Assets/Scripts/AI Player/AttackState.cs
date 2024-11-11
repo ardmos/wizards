@@ -15,7 +15,7 @@ public class AttackState : AIState
 
         ai.MoveTowardsTarget();
         ai.AttackTarget();
-        if (Vector3.Distance(ai.transform.position, ai.GetTarget().transform.position) > ai.GetAttackRange())
+        if (Vector3.Distance(ai.transform.position, ai.GetTarget().transform.position) > ai.GetBattleManager().GetAttackRange())
         {
             ai.GetStateMachine().ChangeState(AIStateType.Chase);
         }

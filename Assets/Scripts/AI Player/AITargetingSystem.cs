@@ -17,14 +17,14 @@ public class AITargetingSystem
     {
         GameObject resault = null;
 
-        // 근처 범위 검색
+        // 근처 범위 탐색
         Collider[] colliders = Physics.OverlapSphere(aiTransform.position, maxDetectionDistance);
         List<PlayerServer> players = new List<PlayerServer>();
         List<WizardRukeAIServer> aiPlayers = new List<WizardRukeAIServer>();
 
         foreach (var collider in colliders)
         {
-            if (collider.CompareTag("Player"))
+            if (collider.CompareTag(Tags.Player))
             {
                 if (collider.TryGetComponent<PlayerServer>(out PlayerServer player))
                 {
@@ -32,7 +32,7 @@ public class AITargetingSystem
                 }
             }
             // 자신을 제외한 AI를 검색
-            else if (collider.gameObject != aiTransform.gameObject && collider.CompareTag("AI"))
+            else if (collider.gameObject != aiTransform.gameObject && collider.CompareTag(Tags.AI))
             {
                 if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
                 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WizardRukeAIMovementSystemServer : MonoBehaviour
+public class WizardRukeAIMovementManagerServer : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
 
@@ -11,7 +11,7 @@ public class WizardRukeAIMovementSystemServer : MonoBehaviour
     [SerializeField] private PlayerSpawnPointsController playerSpawnPointsController;
     [SerializeField] private int randomIndex;
     [SerializeField] private Transform patrolDestination;
-    [SerializeField] private bool isChasing;
+    [SerializeField] private bool startMove;
     [SerializeField] private Transform target; // 상대 오브젝트
     [SerializeField] private float minDesiredDistance = 3f; // 유지하고 싶은 최소 거리
     [SerializeField] private float maxDesiredDistance = 7f; // 유지하고 싶은 최대 거리
@@ -20,13 +20,13 @@ public class WizardRukeAIMovementSystemServer : MonoBehaviour
 
     private void Awake()
     {
-        isChasing = false;
+        startMove = false;
         playerSpawnPointsController = FindObjectOfType<PlayerSpawnPointsController>();
     }
 
     private void Update()
     {
-        if (isChasing && target)
+        if (startMove && target)
         {
             KeepDistance();
         }
@@ -35,7 +35,7 @@ public class WizardRukeAIMovementSystemServer : MonoBehaviour
     public void StopMove()
     {
         agent.isStopped = true;
-        isChasing= false;
+        startMove= false;
     }
 
     public void ReduceMoveSpeed(float value)
@@ -55,13 +55,19 @@ public class WizardRukeAIMovementSystemServer : MonoBehaviour
 
     public void MoveToTarget(Transform target)
     {
-        isChasing = true;
+        startMove = true;
         this.target = target;
+    }
+
+    private void Move(Vector3 destination)
+    {
+        agent.SetDestination(destination);
+        playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Walking);
     }
 
     public void Patrol()
     {
-        isChasing = false;
+        startMove = false;
         if (playerSpawnPointsController == null) return;
 
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
@@ -71,8 +77,7 @@ public class WizardRukeAIMovementSystemServer : MonoBehaviour
                 randomIndex = UnityEngine.Random.Range(0, playerSpawnPointsController.spawnPoints.Length);
                 patrolDestination = playerSpawnPointsController.spawnPoints[randomIndex];
 
-                agent.SetDestination(patrolDestination.position);
-                playerAnimator.UpdatePlayerAnimationOnServer(PlayerMoveAnimState.Walking);
+                Move(patrolDestination.position);
             }
         }
     }
@@ -116,35 +121,11 @@ public class WizardRukeAIMovementSystemServer : MonoBehaviour
 
                 if (distanceToNewDestination >= minMoveDistance)
                 {
-                    agent.SetDestination(newDestination);
+                    Move(newDestination);
                 }
                 // 10번 시도해도 적절한 위치를 찾지 못했을 경우의 처리
                 // 예: 현재 위치에 머무르거나, 다른 행동을 취하게 할 수 있습니다.
             }
         }
-    }
-
-    /*    private void KeepDistance()
-        {
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-                {
-                    // 범위 무빙
-                    // 목표를 기준으로 원주상의 임의의 지점을 선택
-                    float randomAngle = Random.Range(0f, 360f);
-                    float randomDistance = Random.Range(minDesiredDistance, maxDesiredDistance);
-
-                    Vector3 direction = new Vector3(Mathf.Cos(randomAngle), 0, Mathf.Sin(randomAngle));
-                    Vector3 desiredPosition = target.position + direction * randomDistance;
-
-                    // NavMesh 상의 유효한 위치인지 확인. desiredPosition과 근접한 가장 가까운 NavMesh 포인트를 반환해줍니다.
-                    NavMeshHit hit;
-                    if (NavMesh.SamplePosition(desiredPosition, out hit, 1.0f, NavMesh.AllAreas))
-                    {
-                        agent.SetDestination(hit.position);
-                    }             
-                }
-            }
-        }*/
+    }  
 }

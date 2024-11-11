@@ -7,7 +7,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
     PlayerInGameData playerData;
     public WizardRukeAIClient wizardRukeAIClient;
     public WizardRukeAIServer wizardRukeAIServer;
-    public WizardRukeAIBattleSystemServer wizardRukeAIBattleSystemServer;
+    public WizardRukeAIBattleManagerServer wizardRukeAIBattleSystemServer;
     public PlayerAnimator playerAnimator;
 
     public void InitPlayerHP(ICharacter character)

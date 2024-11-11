@@ -22,7 +22,7 @@ public class ChaseState : AIState
             ai.GetStateMachine().ChangeState(AIStateType.Patrol);
         }
 
-        if (targetDistance <= ai.GetAttackRange())
+        if (targetDistance <= ai.GetBattleManager().GetAttackRange())
         {
             ai.GetStateMachine().ChangeState(AIStateType.Attack);
         }

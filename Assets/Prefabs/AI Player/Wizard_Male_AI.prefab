@@ -3412,9 +3412,10 @@ GameObject:
   - component: {fileID: 9149388303275098866}
   - component: {fileID: 2189034740342313466}
   - component: {fileID: 4402547842458141143}
+  - component: {fileID: 7803894822229370676}
+  - component: {fileID: 447519864455812621}
   - component: {fileID: 4602696810147650149}
   - component: {fileID: 8212242918602197619}
-  - component: {fileID: 7803894822229370676}
   - component: {fileID: 3649304333819496010}
   - component: {fileID: 8535330265205084872}
   - component: {fileID: 7455147559764763398}
@@ -3463,14 +3464,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 348040020246766908}
-  rb: {fileID: 3649304333819496010}
-  aiCollider: {fileID: 8535330265205084872}
   wizardRukeAISpellManager: {fileID: 4402547842458141143}
   wizardRukeAIClient: {fileID: 9149388303275098866}
   wizardRukeAIHPManager: {fileID: 2189034740342313466}
-  wizardRukeAIMovementSystem: {fileID: 4602696810147650149}
-  wizardRukeAIBattleSystem: {fileID: 8212242918602197619}
-  wizardRukeAIItemDropManager: {fileID: 7803894822229370676}
+  wizardRukeAIMovementManager: {fileID: 4602696810147650149}
+  wizardRukeAIBattleManager: {fileID: 8212242918602197619}
+  wizardRukeAIGameOverManager: {fileID: 447519864455812621}
 --- !u!114 &9149388303275098866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3530,6 +3529,33 @@ MonoBehaviour:
   playerAnimator: {fileID: 348040020246766908}
   muzzlePos_Normal: {fileID: 6031451656180875832}
   muzzlePos_AoE: {fileID: 9020788441731087661}
+--- !u!114 &7803894822229370676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942309540604300156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a62b37a1b4be848ae99b7a388d6141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &447519864455812621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942309540604300156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fface9b753ec9294a8dd37b41538f4c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 3649304333819496010}
+  aiCollider: {fileID: 8535330265205084872}
+  itemDropManager: {fileID: 7803894822229370676}
 --- !u!114 &4602696810147650149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3546,7 +3572,7 @@ MonoBehaviour:
   playerSpawnPointsController: {fileID: 0}
   randomIndex: 0
   patrolDestination: {fileID: 0}
-  isChasing: 0
+  startMove: 0
   target: {fileID: 0}
   minDesiredDistance: 4
   maxDesiredDistance: 7
@@ -3560,24 +3586,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8942309540604300156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df885d4ad8a03814380b54dd0ef80cc0, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c5b4b590ff3fb41bc28388114bba64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wizardRukeAIServer: {fileID: 2437205598536995200}
   wizardRukeAISpellManager: {fileID: 4402547842458141143}
   targetDistance: 0
---- !u!114 &7803894822229370676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8942309540604300156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a62b37a1b4be848ae99b7a388d6141, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &3649304333819496010
 Rigidbody:
   m_ObjectHideFlags: 0

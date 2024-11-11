@@ -2,16 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WizardRukeAIBattleSystemServer : MonoBehaviour
+public class WizardRukeAIBattleManagerServer : MonoBehaviour
 {
+    private const float ATTACK_COOLDOWN = 2f;
+    private const float ATTACK_RANGE = 8f;
+
     public WizardRukeAIServer wizardRukeAIServer;
     public WizardRukeAISpellManagerServer wizardRukeAISpellManager;
     public float targetDistance;
 
+    private float lastAttackTime = 0f;
+
     // 타겟과 거리에 따른 우선순위로 공격스킬 발사
     public void Attack()
     {
-        if (!wizardRukeAIServer.GetTarget()) return;
+        if (Time.time > lastAttackTime + ATTACK_COOLDOWN)
+        {
+            FireSpellByTargetDistance();
+            lastAttackTime = Time.time;
+        }
+    }
+
+    private void FireSpellByTargetDistance()
+    {
+        if (wizardRukeAIServer.GetTarget() == null) return;
 
         // 타겟과의 거리 확인
         targetDistance = Vector3.Distance(transform.position, wizardRukeAIServer.GetTarget().transform.position);
@@ -77,4 +91,6 @@ public class WizardRukeAIBattleSystemServer : MonoBehaviour
     {
         wizardRukeAISpellManager.StartActivateDefenceSpell();
     }
+
+    public float GetAttackRange() => ATTACK_RANGE;
 }

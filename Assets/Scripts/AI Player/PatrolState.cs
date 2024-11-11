@@ -26,7 +26,7 @@ public class PatrolState : AIState
 
     private void Patrol()
     {
-        ai.GetMovementSystem().Patrol();
+        ai.GetMovementManager().Patrol();
     }
 
     private bool TryDetectAndSetTarget()
@@ -44,7 +44,7 @@ public class PatrolState : AIState
     {
         float targetDistance = Vector3.Distance(ai.transform.position, ai.GetTarget().transform.position);
 
-        if (targetDistance <= ai.GetAttackRange())
+        if (targetDistance <= ai.GetBattleManager().GetAttackRange())
         {
             ai.GetStateMachine().ChangeState(AIStateType.Attack);
         }
