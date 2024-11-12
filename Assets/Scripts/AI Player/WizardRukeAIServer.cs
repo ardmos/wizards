@@ -1,8 +1,10 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
+/// <summary>
+/// AI 마법사 Ruke의 서버 측 동작을 관리하는 클래스입니다.
+/// </summary>
 public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 {
     private const float MAX_DETECTION_DISTANCE = 12f;
@@ -57,17 +59,23 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         MultiplayerGameManager.Instance.OnPlayerGameOver -= GameManager_OnPlayerGameOver;
     }
 
+    /// <summary>
+    /// 게임 상태가 변경될 때 호출되는 이벤트 핸들러입니다.
+    /// </summary>
     private void GameManager_OnGameStateChanged(object sender, EventArgs e)
     {
         if (MultiplayerGameManager.Instance == null) return;
 
         if (MultiplayerGameManager.Instance.IsGamePlaying())
         {
-            // 이제 카운트다운은 끝! 게임 시작! 순찰을 시작합니다!
+            // 새로운 게임 상태가 Playing이면 순찰을 시작합니다
             stateMachine.ChangeState(AIStateType.Patrol);
         }
     }
 
+    /// <summary>
+    /// 플레이어가 게임 오버될 때 호출되는 이벤트 핸들러입니다.
+    /// </summary>
     private void GameManager_OnPlayerGameOver(object sender, PlayerGameOverEventArgs e)
     {
         // 게임오버된 플레이어가 현재 target라면 target을 초기화하고 재검색합니다.
@@ -84,9 +92,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     }
 
     /// <summary>
-    /// AI플레이어를 초기화해줍니다
+    /// AI 플레이어를 초기화합니다.
     /// </summary>
-    /// <param name="AIClientId"></param>
+    /// <param name="AIClientId">AI 플레이어의 클라이언트 ID</param>
     public void InitializeAIPlayerOnServer(ulong AIClientId)
     {
         aiGameState = PlayerGameState.Playing;
@@ -98,6 +106,10 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         InitializeAIComponents(playerData);
     }
 
+    /// <summary>
+    /// AI 컴포넌트들을 초기화합니다.
+    /// </summary>
+    /// <param name="playerInGameData">플레이어 인게임 데이터</param>
     private void InitializeAIComponents(PlayerInGameData playerInGameData)
     {
         if (!ComponentsValidationCheck()) return;
@@ -114,6 +126,10 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         targetingSystem = new AITargetingSystem(MAX_DETECTION_DISTANCE, transform);
     }
 
+    /// <summary>
+    /// AI 컴포넌트들이 올바르게 할당되었는지 확인합니다.
+    /// </summary>
+    /// <returns>모든 컴포넌트가 할당되었으면 true, 그렇지 않으면 false</returns>
     private bool ComponentsValidationCheck()
     {
         bool checkResault = true;
@@ -126,6 +142,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         return checkResault;
     }
 
+    /// <summary>
+    /// 타겟을 향해 이동합니다.
+    /// </summary>
     public void MoveTowardsTarget()
     {
         if (target == null) return;
@@ -134,6 +153,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIMovementManager.MoveToTarget(target.transform);
     }
 
+    /// <summary>
+    /// 타겟을 공격합니다.
+    /// </summary>
     public void AttackTarget()
     {
         if (target == null) return;
@@ -142,7 +164,10 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIBattleManager.Attack();
     }
 
-    // 스크롤 활용. 스킬 강화 VFX 실행
+    #region RPC
+    /// <summary>
+    /// 스크롤 사용 효과를 적용하는 VFX를 시작합니다.
+    /// </summary>
     [ServerRpc(RequireOwnership = false)]
     public void StartApplyScrollVFXServerRPC()
     {
@@ -157,7 +182,12 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
             vfxHeal.transform.SetParent(transform);
         }
     }
+    #endregion
 
+    /// <summary>
+    /// AI 플레이어의 게임 오버 처리를 합니다.
+    /// </summary>
+    /// <param name="clientWhoAttacked">공격한 클라이언트의 ID</param>
     public void GameOver(ulong clientWhoAttacked)
     {
         if (aiGameState != PlayerGameState.Playing) return;
@@ -167,12 +197,20 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIGameOverManager.HandleGameOver(clientWhoAttacked);
     }
 
+    /// <summary>
+    /// AI 플레이어 데이터를 설정합니다.
+    /// </summary>
+    /// <param name="playerData">플레이어 데이터</param>
     public void SetAIPlayerData(PlayerInGameData playerData)
     {
         this.aiClientId = playerData.clientId;
         ICharacter aiCharacterData = CharacterSpecifications.GetCharacter(playerData.characterClass); 
         SetCharacterData(aiCharacterData);
     }
+    /// <summary>
+    /// 새로운 타겟을 설정합니다.
+    /// </summary>
+    /// <param name="newTarget">새로운 타겟 게임 오브젝트</param>
     public void SetTarget(GameObject newTarget) => target = newTarget;
     public GameObject GetTarget() => target;
     private ulong GetTargetClientID()
