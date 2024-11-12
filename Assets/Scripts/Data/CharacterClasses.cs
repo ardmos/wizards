@@ -1,5 +1,6 @@
 public enum Character
 {
     Wizard,
-    Knight
+    Knight,
+    WizardAI
 }

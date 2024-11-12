@@ -26,11 +26,15 @@ public interface ICharacter
     /// <summary>
     /// 캐릭터가 사용할 수 있는 스킬 목록입니다.
     /// </summary>
-    SpellName[] skills { get; set; }
+    SpellName[] spells { get; set; }
 
     /// <summary>
     /// 캐릭터 데이터를 반환하는 메서드입니다.
     /// </summary>
     /// <returns>ICharacter 인터페이스를 구현한 객체</returns>
     ICharacter GetCharacterData();
+
+    void SetCharacterData(ICharacter character);
+
+    ulong GetClientID();
 }

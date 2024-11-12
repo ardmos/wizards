@@ -29,7 +29,7 @@ public class WizardRukeAIGameOverManagerServer : NetworkBehaviour
         aiClient.OffPlayerUIClientRPC();
         aiServer.GetPlayerAnimator().UpdatePlayerAnimationOnServer(PlayerMoveAnimState.GameOver);
         itemDropManager.DropItem(aiServer.transform.position);
-        MultiplayerGameManager.Instance.UpdatePlayerGameOverOnServer(aiServer.GetAIClientId(), clientWhoAttacked);
+        MultiplayerGameManager.Instance.UpdatePlayerGameOverOnServer(aiServer.GetClientID(), clientWhoAttacked);
 
         GiveScore(clientWhoAttacked);
     }

@@ -12,7 +12,7 @@ public class Knight : PlayerClient, ICharacter
     public sbyte hp { get; set; } = 7;
     public sbyte maxHp { get; set; } = 7;
     public float moveSpeed { get; set; } = 4f;
-    public SpellName[] skills { get; set; } = new SpellName[]{
+    public SpellName[] spells { get; set; } = new SpellName[]{
                 SpellName.ElectricSlashAttackVertical_Lv1,
                 SpellName.ElectricSlashAttackWhirlwind_Lv1,
                 SpellName.ElectricSlashAttackChargeSlash_Lv1,
@@ -30,6 +30,16 @@ public class Knight : PlayerClient, ICharacter
     public ICharacter GetCharacterData()
     {
         return this;
+    }
+
+    public void SetCharacterData(ICharacter character)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ulong GetClientID()
+    {
+        throw new NotImplementedException();
     }
 
     protected override void GameInput_OnAttack1Started(object sender, EventArgs e)

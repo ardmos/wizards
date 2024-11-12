@@ -57,11 +57,11 @@ public class PlayerServerSingleMode : NetworkBehaviour
         playerHPManager.InitPlayerHP(character);
 
         // 플레이어가 보유한 스킬 목록 저장
-        skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
+        skillSpellManagerServer.InitPlayerSpellInfoArrayOnServer(character.spells);
 
         Debug.Log("0");
         // 플레이어 InitializePlayer 시작, 스킬 목록을 클라이언트측(SpellController)에 저장 ( 수정해야함
-        playerClient.InitializePlayerClientRPC();
+        /*playerClient.InitializePlayerClientRPC();*/
     }
 
     // 스크롤 활용. 스킬 강화 VFX 실행

@@ -360,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 932501098101691874}
   - component: {fileID: -2686748507231774534}
-  - component: {fileID: 294066641757979093}
+  - component: {fileID: 7221617734622488335}
   - component: {fileID: 854047434301573314}
   - component: {fileID: 532842309490800541}
   - component: {fileID: 6631467521865965885}
@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 4579991518944106865}
   - component: {fileID: -3331297196142442222}
   - component: {fileID: 3749893879625615818}
+  - component: {fileID: 4971835325138842309}
   - component: {fileID: 4842463508567140202}
   - component: {fileID: 7039472144025679976}
   - component: {fileID: 3569301515384591240}
@@ -416,17 +417,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a0b2ec62b4a5747b4059f0f3fd4bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerServer: {fileID: 294066641757979093}
+  playerServer: {fileID: 7221617734622488335}
   teamColorController: {fileID: 5186039184898530501}
   userNameUIController: {fileID: 4649931589576448986}
   hPBarUIController: {fileID: 2648681988919741548}
   damageTextUIController: {fileID: 191790276371271504}
-  VirtualCamera: {fileID: 4487991525872706357}
+  virtualCamera: {fileID: 4487991525872706357}
   mRigidbody: {fileID: 4842463508567140202}
   audioListener: {fileID: 819323531288302397}
-  playerSpellScrollQueueManagerClient: {fileID: 4579991518944106865}
-  meshTrail: {fileID: 0}
+  playerScrollCounter: {fileID: 4579991518944106865}
   gameInput: {fileID: -3331297196142442222}
+  cameraShake: {fileID: 4764148587749578273}
   originalMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 8f5611d6ff98e58408979d37f88255c1, type: 2}
   frozenMaterial: {fileID: 2100000, guid: 89611dcb12c21f04b99fdc75034538fe, type: 2}
@@ -436,9 +437,8 @@ MonoBehaviour:
   - {fileID: 3344687823725704899}
   - {fileID: 8054825543133005109}
   - {fileID: 8653536894580035756}
-  cameraShake: {fileID: 4764148587749578273}
   spellManagerClientWizard: {fileID: 6631467521865965885}
---- !u!114 &294066641757979093
+--- !u!114 &7221617734622488335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -447,15 +447,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 932501098101691884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cebec3ae8547de4cae4a684d6416cb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 53b79040760645848b6e705ec800ba7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: -2686748507231774534}
-  playerHPManager: {fileID: 3749893879625615818}
+  playerHPManagerServer: {fileID: 3749893879625615818}
   playerAnimator: {fileID: 2441054021172676538}
-  skillSpellManagerServer: {fileID: 1543831547272748415}
+  spellManagerServer: {fileID: 1543831547272748415}
   rb: {fileID: 4842463508567140202}
-  _collider: {fileID: 7039472144025679976}
+  mCollider: {fileID: 7039472144025679976}
+  wizardClient: {fileID: -2686748507231774534}
 --- !u!114 &854047434301573314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa032cbefb2bd704d83e4d4422175151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillSpellManagerServer: {fileID: 1543831547272748415}
+  spellManagerServer: {fileID: 1543831547272748415}
   skillInfoListOnClient: []
   restTimeCurrentSpellArrayOnClient: []
 --- !u!114 &1543831547272748415
@@ -511,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464cba5c9a34b4c4fa63b42ce89327b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillSpellManagerClient: {fileID: 6631467521865965885}
+  spellManagerClient: {fileID: 6631467521865965885}
   playerAnimator: {fileID: 2441054021172676538}
   muzzlePos_Normal: {fileID: 932501096560631534}
   muzzlePos_AoE: {fileID: 8291664480673073979}
@@ -552,8 +553,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerClient: {fileID: -2686748507231774534}
-  playerServer: {fileID: 294066641757979093}
+  playerServer: {fileID: 7221617734622488335}
   playerAnimator: {fileID: 2441054021172676538}
+  playerHPManagerClient: {fileID: 4971835325138842309}
+--- !u!114 &4971835325138842309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932501098101691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c049ea4114d315b458ab4d45bc367da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerClient: {fileID: -2686748507231774534}
 --- !u!54 &4842463508567140202
 Rigidbody:
   m_ObjectHideFlags: 0

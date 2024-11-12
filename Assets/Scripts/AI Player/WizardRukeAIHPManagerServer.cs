@@ -12,10 +12,10 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
     public void InitPlayerHP(ICharacter character)
     {
-        playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(wizardRukeAIServer.GetAIClientId());
+        playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(wizardRukeAIServer.GetClientID());
         playerData.hp = character.hp;
         playerData.maxHp = character.maxHp;
-        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetAIClientId(), playerData);
+        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetClientID(), playerData);
 
         wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
     }
@@ -33,7 +33,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
         // 변경된 HP값 서버에 저장
         playerData.hp = newHP;
-        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetAIClientId(), playerData);
+        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetClientID(), playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
         wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
@@ -78,7 +78,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
 
         // 변경된 HP값 서버에 저장
         playerData.hp = newPlayerHP;
-        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetAIClientId(), playerData);
+        CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetClientID(), playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
         wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);

@@ -24,7 +24,7 @@ public abstract class PlayerClient : NetworkBehaviour
     public UserNameUIController userNameUIController;
     public HPBarUIController hPBarUIController;
     public DamageTextUIController damageTextUIController;
-    public CinemachineVirtualCamera VirtualCamera;
+    public CinemachineVirtualCamera virtualCamera;
     public Rigidbody mRigidbody;
     public AudioListener audioListener;
     public PlayerScrollCounter playerScrollCounter;
@@ -50,13 +50,12 @@ public abstract class PlayerClient : NetworkBehaviour
     #endregion
 
     #region Initialization
-    [ClientRpc]
-    public virtual void InitializePlayerClientRPC()
+    public void InitializePlayerClient()
     {
-        Debug.Log($"OwnerClientId {OwnerClientId} Player InitializePlayerClientRPC");
+        Debug.Log($"OwnerClientId {OwnerClientId} Player InitializePlayerClient()");
 
         // 카메라 위치 초기화. 소유자만 따라다니도록 함 
-        VirtualCamera?.gameObject.SetActive(IsOwner);
+        virtualCamera?.gameObject.SetActive(IsOwner);
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         mRigidbody.isKinematic = false;
         // 플레이어 닉네임 표시
@@ -80,8 +79,7 @@ public abstract class PlayerClient : NetworkBehaviour
             }        
             // 추후 동맹시스템 추가시 여기서 동맹컬러 설정 분기 나눠줘야합니다. 
             return;
-        }
-        
+        }    
 
         Instance = this;
 
@@ -264,6 +262,8 @@ public abstract class PlayerClient : NetworkBehaviour
         OnPlayerGameOver.Invoke(this, EventArgs.Empty);
         GameSceneUIManager.Instance.popupGameOverUIController.Show();
         SoundManager.Instance.PlayLosePopupSound();
+        // 현 플레이어의 '이름 & HP' UI off
+        OffPlayerUIClientRPC();
         SaveGameOverResult();
     }
 

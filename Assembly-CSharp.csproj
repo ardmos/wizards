@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Interfaces\IServerInfoProvider.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
+    <Compile Include="Assets\Scripts\Data\CharacterSpecifications.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\FloorGenerator.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\MiniPopupSkillInfoDetailController.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupSelectCharacter\CharacterCardController.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Assets\Scripts\TitleScene\TextAppVersion.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
+    <Compile Include="Assets\Scripts\GameScene_Multiplayer\PlayerCharacter\Server\WizardServer.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\Billboard.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />

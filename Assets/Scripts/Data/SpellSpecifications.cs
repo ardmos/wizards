@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// ========= 수정 필요.  스펙들은 Wizard나 Knight처럼 각각 스크립트에 담겨있는게 나을지도 모릅니다. ==================
 /// 각 스펠들의 상세 스펙을 담고있는 스크립트입니다.
 /// 요청받으면 스펙을 제공합니다.
 /// Game씬의 SpellSpecifications 오브젝트의 컴포넌트 입니다. Game씬과 라이프사이클을 함께합니다.

@@ -5,64 +5,24 @@ using Unity.Netcode;
 /// 클라이언트 측에서 Wizard 캐릭터의 특성과 행동을 관리하는 클래스입니다.
 /// PlayerClient를 상속받고 ICharacter 인터페이스를 구현합니다.
 /// </summary>
-public class WizardClient : PlayerClient, ICharacter
+public class WizardClient : PlayerClient
 {
     #region Fields and Properties
     /// <summary>
     /// Wizard 캐릭터의 스펠 매니저 컴포넌트입니다.
     /// </summary>
     public SpellManagerClientWizard spellManagerClientWizard;
-
-    /// <summary>
-    /// 캐릭터 클래스를 나타냅니다.
-    /// </summary>
-    public Character characterClass { get; set; } = Character.Wizard;
-    /// <summary>
-    /// 현재 체력을 나타냅니다.
-    /// </summary>
-    public sbyte hp { get; set; } = 5;
-    /// <summary>
-    /// 최대 체력을 나타냅니다.
-    /// </summary>
-    public sbyte maxHp { get; set; } = 5;
-    /// <summary>
-    /// 이동 속도를 나타냅니다.
-    /// </summary>
-    public float moveSpeed { get; set; } = 4f;
-    /// <summary>
-    /// Wizard가 사용할 수 있는 스킬 목록입니다.
-    /// </summary>
-    public SpellName[] skills { get; set; } = new SpellName[]{
-                SpellName.FireBallLv1,
-                SpellName.WaterBallLv1,
-                SpellName.BlizzardLv1,
-                SpellName.MagicShieldLv1
-                };
     #endregion
 
     #region Initialization
-    /// <summary>
-    /// 플레이어를 초기화하는 ClientRpc 메서드입니다.
-    /// </summary>
     [ClientRpc]
-    public override void InitializePlayerClientRPC()
+    public void InitializeWizardClientRPC(SpellName[] spellNames)
     {
-        base.InitializePlayerClientRPC();
-        // 보유 skill 정보를 GamePad UI에 반영          
-        GameSceneUIManager.Instance.gamePadUIController.UpdateSpellUI(skills);
-        // 보유 skill 정보를 바탕으로 스킬 매니저를 초기화
-        spellManagerClientWizard.InitPlayerSpellInfoListClient(skills);
-    }
-    #endregion
-
-    #region Character Data
-    /// <summary>
-    /// 캐릭터 데이터를 반환하는 메서드입니다.
-    /// </summary>
-    /// <returns>ICharacter 인터페이스를 구현한 현재 객체</returns>
-    public ICharacter GetCharacterData()
-    {
-        return this;
+        InitializePlayerClient();
+        // 보유 마법 정보를 GamePad UI에 반영          
+        GameSceneUIManager.Instance.gamePadUIController.UpdateSpellUI(spellNames);
+        // 보유 마법 정보를 바탕으로 스킬 매니저를 초기화
+        spellManagerClientWizard.InitPlayerSpellInfoListClient(spellNames);
     }
     #endregion
 

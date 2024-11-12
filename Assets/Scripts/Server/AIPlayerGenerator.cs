@@ -82,15 +82,20 @@ public class AIPlayerGenerator : NetworkBehaviour, ICleanable
 
     private PlayerInGameData GenerateAIPlayerData(ulong aiClientId)
     {
+        ICharacter aiSpecifications = CharacterSpecifications.GetCharacter(Character.WizardAI);
         return new PlayerInGameData()
         {
             clientId = aiClientId,
             playerGameState = PlayerGameState.Playing,
             playerName = GenerateRandomAIPlayerName(),
-            characterClass = Character.Wizard,
-            hp = 5,
-            maxHp = 5,
-            moveSpeed = 4,
+            characterClass = aiSpecifications.characterClass,
+            hp = aiSpecifications.hp,
+            maxHp = aiSpecifications.maxHp,
+            moveSpeed = aiSpecifications.moveSpeed,
+            skillAttack1 = aiSpecifications.spells[0],
+            skillAttack2 = aiSpecifications.spells[1],
+            skillAttack3 = aiSpecifications.spells[2],
+            skillDefence = aiSpecifications.spells[3],
             isAI = true,
         };
     }

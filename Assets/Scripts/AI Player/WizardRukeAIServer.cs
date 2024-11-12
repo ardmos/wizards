@@ -1,10 +1,12 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 {
     private const float MAX_DETECTION_DISTANCE = 12f;
+    private const int MAX_SPELLS = 4;
 
     [SerializeField] private PlayerAnimator playerAnimator;
     [SerializeField] private WizardRukeAISpellManagerServer wizardRukeAISpellManager;
@@ -26,7 +28,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public sbyte hp { get; set; }
     public sbyte maxHp { get; set; }
     public float moveSpeed { get; set; }
-    public SpellName[] skills { get; set; }
+    public SpellName[] spells { get; set; }
 
     private void Update()
     {
@@ -91,9 +93,9 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
 
         if (CurrentPlayerDataManager.Instance == null) return;
 
-        PlayerInGameData playerInGameData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(AIClientId);
-        SetCharacterData(playerInGameData);
-        InitializeAIComponents(playerInGameData);
+        PlayerInGameData playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(AIClientId);
+        SetAIPlayerData(playerData);
+        InitializeAIComponents(playerData);
     }
 
     private void InitializeAIComponents(PlayerInGameData playerInGameData)
@@ -105,7 +107,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         // 플레이어 닉네임UI & 메터리얼 초기화
         wizardRukeAIClient.InitializeAIClientRPC(playerInGameData.playerName.ToString());
         // 플레이어가 보유한 스킬 목록 저장
-        wizardRukeAISpellManager.InitAIPlayerSpellInfoArrayOnServer(this.skills);
+        wizardRukeAISpellManager.InitAIPlayerSpellInfoArrayOnServer(this.spells);
         wizardRukeAIGameOverManager.InitAIGameOverManager(this, wizardRukeAIClient);
         stateMachine = new AIStateMachine(this);
         stateMachine.Initialize(AIStateType.Idle);
@@ -165,21 +167,12 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         wizardRukeAIGameOverManager.HandleGameOver(clientWhoAttacked);
     }
 
-    public void SetCharacterData(PlayerInGameData characterData)
+    public void SetAIPlayerData(PlayerInGameData playerData)
     {
-        this.aiClientId = characterData.clientId;
-        this.characterClass = characterData.characterClass;
-        this.hp = characterData.hp;
-        this.maxHp = characterData.maxHp;
-        this.moveSpeed = characterData.moveSpeed;
-        this.skills = new SpellName[]{
-                SpellName.FireBallLv1,
-                SpellName.WaterBallLv1,
-                SpellName.BlizzardLv1,
-                SpellName.MagicShieldLv1
-                };
+        this.aiClientId = playerData.clientId;
+        ICharacter aiCharacterData = CharacterSpecifications.GetCharacter(playerData.characterClass); 
+        SetCharacterData(aiCharacterData);
     }
-    public ICharacter GetCharacterData() => this;
     public void SetTarget(GameObject newTarget) => target = newTarget;
     public GameObject GetTarget() => target;
     private ulong GetTargetClientID()
@@ -187,20 +180,15 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         if (target == null) return 0;
 
         ulong targetClientID = 0;
-        // AI인 경우
-        if (target.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer wizardRukeAIServer))
+
+        if (target.TryGetComponent<ICharacter>(out var character))
         {
-            targetClientID = wizardRukeAIServer.aiClientId;
-        }
-        // Player인 경우
-        else if (target.TryGetComponent<PlayerServer>(out PlayerServer playerServer))
-        {
-            targetClientID = playerServer.OwnerClientId;
+            targetClientID = character.GetClientID();
         }
 
         return targetClientID;
     }
-    public ulong GetAIClientId() => aiClientId;
+
     public PlayerGameState GetAIGameState() => aiGameState;
     public AIStateMachine GetStateMachine() => stateMachine;
     public AITargetingSystem GetTargetingSystem() => targetingSystem;
@@ -209,4 +197,18 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public PlayerAnimator GetPlayerAnimator() => playerAnimator;
     public float GetMaxDetectionDistance() => MAX_DETECTION_DISTANCE;
     public sbyte GetPlayerHP() => wizardRukeAIHPManager.GetHP();
+
+    #region ICharacter 구현
+    public ICharacter GetCharacterData() => this;
+    public void SetCharacterData(ICharacter character)
+    {
+        characterClass = character.characterClass;
+        hp = character.hp;
+        maxHp = character.maxHp;
+        moveSpeed = character.moveSpeed;
+        spells = new SpellName[MAX_SPELLS];
+        Array.Copy(character.spells, spells, Math.Min(character.spells.Length, MAX_SPELLS));
+    }
+    public ulong GetClientID() => aiClientId;
+    #endregion
 }

@@ -11,25 +11,13 @@ public class PlayerServer : NetworkBehaviour
     private const float ITEM_OFFSET_X = 0.5f;
     #endregion
 
-    #region Fields & Components
-    public PlayerClient playerClient;
-    public PlayerHPManagerServer playerHPManager;
-    public PlayerAnimator playerAnimator;
-    public SpellManagerServer spellManagerServer;
-
-    [Header("물리 관련")]
-    public Rigidbody rb;
-    public Collider mCollider;
-    #endregion
-
-    #region Network Lifecycle
-    public override void OnNetworkSpawn()
-    {
-        if (!IsServer) return;
-
-        ICharacter character = (ICharacter)playerClient;
-        InitializePlayerOnServer(character);
-    }
+    #region Components
+    [SerializeField] private PlayerClient playerClient;
+    [SerializeField] private PlayerHPManagerServer playerHPManagerServer;
+    [SerializeField] private PlayerAnimator playerAnimator;
+    [SerializeField] private SpellManagerServer spellManagerServer;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Collider mCollider;
     #endregion
 
     #region Initialization
@@ -46,11 +34,9 @@ public class PlayerServer : NetworkBehaviour
         }
 
         // HP 초기화
-        playerHPManager.InitPlayerHP(character);
+        playerHPManagerServer.InitPlayerHP(character);
         // 플레이어가 보유한 스킬 목록 저장
-        spellManagerServer.InitPlayerSpellInfoArrayOnServer(character.skills);
-        // 클라이언트측 플레이어도 초기화 실행
-        playerClient.InitializePlayerClientRPC();
+        spellManagerServer.InitPlayerSpellInfoArrayOnServer(character.spells);
     }
     #endregion
 
@@ -76,9 +62,9 @@ public class PlayerServer : NetworkBehaviour
     /// </summary>
     public sbyte GetPlayerHP()
     {
-        if (playerHPManager == null) return 0;
+        if (playerHPManagerServer == null) return 0;
 
-        return playerHPManager.GetHP();
+        return playerHPManagerServer.GetHP();
     }
     #endregion
 
@@ -92,7 +78,7 @@ public class PlayerServer : NetworkBehaviour
         if (!ValidateGameOverConditions()) return;
 
         DisablePhysicsAndCollisions();
-        tag = "GameOver";
+        tag = Tags.GameOver;
 
         // 현 플레이어를 처치한 플레이어들에게 점수를 부여
         GiveScoreToAttackerWhenGameOver(attackerClientId);
@@ -102,8 +88,6 @@ public class PlayerServer : NetworkBehaviour
 
         // 현 플레이어 조작 불가 처리 및 게임오버 팝업 띄우기.
         playerClient.SetPlayerGameOverClientRPC();
-        // 현 플레이어의 '이름 & HP' UI off
-        playerClient.OffPlayerUIClientRPC();
 
         // 현 플레이어의 게임오버 사실을 서버에 기록.
         MultiplayerGameManager.Instance.UpdatePlayerGameOverOnServer(OwnerClientId, attackerClientId);
