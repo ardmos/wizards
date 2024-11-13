@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 1. Knight ½ºÅÈ °ü¸®
 /// </summary>
-public class Knight : PlayerClient, ICharacter
+public class KnightClient : PlayerClient, ICharacter
 {
     public SkillManagerClientKnight skillManagerClientKnight;
     public Character characterClass { get; set; } = Character.Knight;

@@ -27,7 +27,7 @@ public abstract class PlayerClient : NetworkBehaviour
     public CinemachineVirtualCamera virtualCamera;
     public Rigidbody mRigidbody;
     public AudioListener audioListener;
-    public PlayerScrollCounter playerScrollCounter;
+    public PlayerScrollCounterClient playerScrollCounter;
     public GameInput gameInput;
     public CameraShake cameraShake;
     #endregion

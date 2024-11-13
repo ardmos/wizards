@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 
 
-public class PlayerScrollCounter : NetworkBehaviour
+public class PlayerScrollCounterClient : NetworkBehaviour
 {
     // On Client
     public void UpdateScrollCount(int scrollCount)
