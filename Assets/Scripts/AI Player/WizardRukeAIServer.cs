@@ -97,13 +97,12 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     /// <param name="AIClientId">AI 플레이어의 클라이언트 ID</param>
     public void InitializeAIPlayerOnServer(ulong AIClientId)
     {
-        aiGameState = PlayerGameState.Playing;
-
         if (CurrentPlayerDataManager.Instance == null) return;
 
         PlayerInGameData playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(AIClientId);
         SetAIPlayerData(playerData);
         InitializeAIComponents(playerData);
+        aiGameState = PlayerGameState.Playing;
     }
 
     /// <summary>
@@ -187,14 +186,31 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     /// <summary>
     /// AI 플레이어의 게임 오버 처리를 합니다.
     /// </summary>
-    /// <param name="clientWhoAttacked">공격한 클라이언트의 ID</param>
-    public void GameOver(ulong clientWhoAttacked)
+    /// <param name="attackerClientID">공격한 클라이언트의 ID</param>
+    public void GameOver(ulong attackerClientID)
     {
         if (aiGameState != PlayerGameState.Playing) return;
         if (wizardRukeAIGameOverManager == null) return;
 
         aiGameState = PlayerGameState.GameOver;
-        wizardRukeAIGameOverManager.HandleGameOver(clientWhoAttacked);
+        wizardRukeAIGameOverManager.HandleGameOver(attackerClientID);
+    }
+
+    /// <summary>
+    /// 현재 타겟의 클라이언트ID를 반환합니다.
+    /// </summary>
+    /// <returns>타겟의 클라이언트ID</returns>
+    private ulong GetTargetClientID()
+    {
+        if (target == null) return 0;
+
+        ulong targetClientID = 0;
+        if (target.TryGetComponent<ICharacter>(out var character))
+        {
+            targetClientID = character.GetClientID();
+        }
+
+        return targetClientID;
     }
 
     /// <summary>
@@ -213,20 +229,6 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     /// <param name="newTarget">새로운 타겟 게임 오브젝트</param>
     public void SetTarget(GameObject newTarget) => target = newTarget;
     public GameObject GetTarget() => target;
-    private ulong GetTargetClientID()
-    {
-        if (target == null) return 0;
-
-        ulong targetClientID = 0;
-
-        if (target.TryGetComponent<ICharacter>(out var character))
-        {
-            targetClientID = character.GetClientID();
-        }
-
-        return targetClientID;
-    }
-
     public PlayerGameState GetAIGameState() => aiGameState;
     public AIStateMachine GetStateMachine() => stateMachine;
     public AITargetingSystem GetTargetingSystem() => targetingSystem;

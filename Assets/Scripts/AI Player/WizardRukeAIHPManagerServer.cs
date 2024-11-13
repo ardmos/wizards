@@ -42,7 +42,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
     /// <summary>
     /// 서버에서 호출해야하는 메서드. 서버에서 동작합니다.
     /// </summary>
-    public void TakingDamage(sbyte damage, ulong clientWhoAttacked)
+    public void TakingDamage(sbyte damage, ulong attackerClientID)
     {
         // GamePlaying중이 아니면 전부 리턴. 게임이 끝나면 무적처리 되도록.
         if (!MultiplayerGameManager.Instance.IsGamePlaying()) return;
@@ -65,7 +65,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
             playerData.playerGameState = PlayerGameState.GameOver; // 아래에서 HP값을 저장할 때 새로 SetPlayerData를 하기 때문에...! 일단 여기서 한 번더 게임오버 스테이트를 저장해주고 있는데, GameOver()에서 이미 게임오버처리를 해주고 있다. 일단은 동작하지만 수정 필요.
 
             // 게임오버 처리
-            wizardRukeAIServer.GameOver(clientWhoAttacked);
+            wizardRukeAIServer.GameOver(attackerClientID);
         }
         else
         {
@@ -88,20 +88,20 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
     }
 
     // 피격처리.
-    public void TakingDamageWithCameraShake(sbyte damage, ulong clientIDWhoAttacked, GameObject clientObjectWhoAttacked)
+    public void TakingDamageWithCameraShake(sbyte damage, ulong attackerClientID, GameObject attackerClientObject)
     {
         // 피격 처리 총괄.
-        TakingDamage(damage, clientIDWhoAttacked);
+        TakingDamage(damage, attackerClientID);
 
         // 공격자가 인식범위 안에 있으면 타겟으로 설정. 
-        if (Vector3.Distance(transform.position, clientObjectWhoAttacked.transform.position) <= wizardRukeAIServer.GetMaxDetectionDistance())
-            wizardRukeAIServer.SetTarget(clientObjectWhoAttacked);
+        if (Vector3.Distance(transform.position, attackerClientObject.transform.position) <= wizardRukeAIServer.GetMaxDetectionDistance())
+            wizardRukeAIServer.SetTarget(attackerClientObject);
 
         // 방어스킬 발동
         wizardRukeAIBattleSystemServer.Defence();
 
         // 공격자가 Player라면 카메라 쉐이크 
-        if (clientObjectWhoAttacked.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
+        if (attackerClientObject.TryGetComponent<PlayerClient>(out PlayerClient playerClient))
         {
             playerClient.ActivateHitCameraShakeClientRPC();
         }
