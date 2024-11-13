@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// AI 마법사 Ruke의 서버 측 동작을 관리하는 클래스입니다.
 /// </summary>
-public class WizardRukeAIServer : NetworkBehaviour, ICharacter
+public class WizardRukeAIServer : NetworkBehaviour, ICharacter, ITargetable
 {
     private const float MAX_DETECTION_DISTANCE = 12f;
     private const int MAX_SPELLS = 4;
@@ -131,14 +131,14 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     /// <returns>모든 컴포넌트가 할당되었으면 true, 그렇지 않으면 false</returns>
     private bool ComponentsValidationCheck()
     {
-        bool checkResault = true;
-        if (wizardRukeAIMovementManager == null) checkResault = false;
-        if (wizardRukeAIHPManager == null) checkResault = false;
-        if (wizardRukeAIClient == null) checkResault = false;
-        if (wizardRukeAISpellManager == null) checkResault = false;
-        if (wizardRukeAIGameOverManager == null) checkResault = false;
+        bool checkResult = true;
+        if (wizardRukeAIMovementManager == null) checkResult = false;
+        if (wizardRukeAIHPManager == null) checkResult = false;
+        if (wizardRukeAIClient == null) checkResult = false;
+        if (wizardRukeAISpellManager == null) checkResult = false;
+        if (wizardRukeAIGameOverManager == null) checkResult = false;
 
-        return checkResault;
+        return checkResult;
     }
 
     /// <summary>
@@ -236,7 +236,6 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
     public WizardRukeAIBattleManagerServer GetBattleManager() => wizardRukeAIBattleManager;
     public PlayerAnimator GetPlayerAnimator() => playerAnimator;
     public float GetMaxDetectionDistance() => MAX_DETECTION_DISTANCE;
-    public sbyte GetPlayerHP() => wizardRukeAIHPManager.GetHP();
 
     #region ICharacter 구현
     public ICharacter GetCharacterData() => this;
@@ -250,5 +249,10 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter
         Array.Copy(character.spells, spells, Math.Min(character.spells.Length, MAX_SPELLS));
     }
     public ulong GetClientID() => aiClientId;
+    #endregion
+
+    #region ITargetable 구현
+    public float GetHP() => hp;
+    public GameObject GetGameObject() => gameObject;
     #endregion
 }

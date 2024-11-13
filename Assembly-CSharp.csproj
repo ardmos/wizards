@@ -247,6 +247,7 @@
     <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenButton.cs" />
     <Compile Include="Assets\Scripts\GameScene_Multiplayer\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\Server\ConnectionApprovalHandler.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ITargetable.cs" />
     <Compile Include="Assets\Scripts\LobbyScene\PopupShop\ItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\Server\ScrollManagerServer.cs" />

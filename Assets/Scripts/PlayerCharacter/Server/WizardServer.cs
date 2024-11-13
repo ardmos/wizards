@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class WizardServer : PlayerServer, ICharacter
+public class WizardServer : PlayerServer, ICharacter, ITargetable
 {
     private const int MAX_SPELLS = 4;
 
@@ -45,4 +45,8 @@ public class WizardServer : PlayerServer, ICharacter
     public ulong GetClientID() => OwnerClientId;
     #endregion
 
+    #region ITargetable ±¸Çö
+    public float GetHP() => hp;
+    public GameObject GetGameObject() => gameObject;
+    #endregion
 }

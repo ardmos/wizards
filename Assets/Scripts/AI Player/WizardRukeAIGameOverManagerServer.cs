@@ -53,16 +53,16 @@ public class WizardRukeAIGameOverManagerServer : NetworkBehaviour
 
     private bool ValidationCheck()
     {
-        bool checkResault = true;
-        if (rb == null) checkResault = false;
-        if (aiCollider == null) checkResault = false;
-        if (aiServer == null) checkResault = false;
-        if (aiClient == null) checkResault = false;
-        if (aiServer.GetMovementManager() == null) checkResault = false;
-        if (itemDropManager == null) checkResault = false;
-        if (MultiplayerGameManager.Instance == null) checkResault = false;
-        if (CurrentPlayerDataManager.Instance == null) checkResault = false;
+        bool checkResult = true;
+        if (rb == null) checkResult = false;
+        if (aiCollider == null) checkResult = false;
+        if (aiServer == null) checkResult = false;
+        if (aiClient == null) checkResult = false;
+        if (aiServer.GetMovementManager() == null) checkResult = false;
+        if (itemDropManager == null) checkResult = false;
+        if (MultiplayerGameManager.Instance == null) checkResult = false;
+        if (CurrentPlayerDataManager.Instance == null) checkResult = false;
 
-        return checkResault;
+        return checkResult;
     }
 }
