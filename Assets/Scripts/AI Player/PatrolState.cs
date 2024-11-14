@@ -31,7 +31,7 @@ public class PatrolState : AIState
 
     private bool TryDetectAndSetTarget()
     {
-        GameObject detectedTarget = ai.GetTargetingSystem().DetectTarget();
+        GameObject detectedTarget = ai.GetTargetingSystem().DetectTarget<ITargetable>();
         if (detectedTarget != null)
         {
             ai.SetTarget(detectedTarget);

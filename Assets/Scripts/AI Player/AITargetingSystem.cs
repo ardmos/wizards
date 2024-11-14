@@ -3,23 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// AI의 타겟팅 시스템을 관리하는 클래스입니다.
+/// </summary>
 public class AITargetingSystem
 {
+    // 최대 감지 가능한 콜라이더 수
     private const byte MAX_DETECTION_COUNT = 10;
 
+    // 최대 감지 거리
     private float maxDetectionDistance;
+    // AI의 Transform 컴포넌트
     private Transform aiTransform;
+    // AI 플레이어 자신의 ITargetable 인터페이스
+    private ITargetable aiPlayer;
+    // 감지된 콜라이더를 저장할 배열
     private Collider[] detectionResults;
+    // 캐시된 타겟들을 저장할 리스트
     private List<ITargetable> cachedTargets;
 
-    public AITargetingSystem(float maxDetectionDistance, Transform aiTransform)
+    /// <summary>
+    /// AITargetingSystem의 생성자입니다.
+    /// </summary>
+    /// <param name="maxDetectionDistance">최대 감지 거리</param>
+    /// <param name="aiTransform">AI의 Transform 컴포넌트</param>
+    /// <param name="aiPlayer">AI 플레이어 자신의 ITargetable 인터페이스</param>
+    public AITargetingSystem(float maxDetectionDistance, Transform aiTransform, ITargetable aiPlayer)
     {
         this.maxDetectionDistance = maxDetectionDistance;
         this.aiTransform = aiTransform;
+        this.aiPlayer = aiPlayer;
         detectionResults = new Collider[MAX_DETECTION_COUNT];
         cachedTargets = new List<ITargetable>();
     }
 
+    /// <summary>
+    /// 주변에서 타겟을 감지하고 HP가 가장 낮은 타겟을 반환합니다.
+    /// </summary>
+    /// <typeparam name="T">ITargetable을 구현한 타입</typeparam>
+    /// <returns>감지된 타겟 중 HP가 가장 낮은 타겟의 GameObject, 없으면 null</returns>
     public GameObject DetectTarget<T>() where T : ITargetable
     {
         try
@@ -34,84 +56,52 @@ public class AITargetingSystem
         }
     }
 
+    /// <summary>
+    /// 근처의 타겟들을 반환합니다. 
+    /// 자주 호출되는 메서드라 성능 최적화를 위해 LINQ대신 직접 순회 방식으로 메서드를 구현했습니다.
+    /// </summary>
+    /// <typeparam name="T">ITargetable을 구현한 타입</typeparam>
+    /// <returns>근처에서 감지된 타겟들의 컬렉션</returns>
     private IEnumerable<T> GetNearbyTargets<T>() where T : ITargetable
     {
         cachedTargets.Clear();
         // 근처 범위 탐색
         int hitCount = Physics.OverlapSphereNonAlloc(aiTransform.position, maxDetectionDistance, detectionResults);
-
-        if (hitCount > detectionResults.Length)
-        {
-            Debug.LogWarning($"검출된 콜라이더 수({hitCount})가 배열 크기({detectionResults.Length})를 초과했습니다. 일부 결과가 무시됩니다.");
-        }
+        if (hitCount > detectionResults.Length) Debug.LogWarning($"검출된 콜라이더 수({hitCount})가 검색 결과 배열 크기({detectionResults.Length})를 초과했습니다. 일부 검색 결과가 무시됩니다.");
 
         for (int i = 0; i < hitCount; i++)
         {
-            var target = detectionResults[i].GetComponent<T>();
-            // 자신을 제외한 AI를 검색
-            if (target != null && !ReferenceEquals(target, this))
+            if(detectionResults[i].TryGetComponent<T>(out T target))
             {
+                if (ReferenceEquals(target, aiPlayer)) continue;
                 cachedTargets.Add(target);
             }
         }
-
         return (IEnumerable<T>)cachedTargets;
     }
 
+    /// <summary>
+    /// HP가 가장 낮은 타겟을 반환합니다. 
+    /// 자주 호출되는 메서드라 성능 최적화를 위해 LINQ대신 직접 순회 방식으로 메서드를 구현했습니다.
+    /// </summary>
+    /// <typeparam name="T">ITargetable을 구현한 타입</typeparam>
+    /// <param name="targets">타겟들의 컬렉션</param>
+    /// <returns>HP가 가장 낮은 타겟의 GameObject</returns>
     private GameObject GetLowestHPTarget<T>(IEnumerable<T> targets) where T : ITargetable
     {
-        return targets
-            .OrderBy(target => target.GetHP())
-            .FirstOrDefault()
-            ?.GetGameObject();
-    }
+        ITargetable lowestHPTarget = cachedTargets[0];
+        float lowestHP = lowestHPTarget.GetHP();
 
-    public GameObject DetectTarget()
-    {
-        GameObject result = null;
-
-        // 근처 범위 탐색
-        Collider[] colliders = Physics.OverlapSphere(aiTransform.position, maxDetectionDistance);
-        List<PlayerServer> players = new List<PlayerServer>();
-        List<WizardRukeAIServer> aiPlayers = new List<WizardRukeAIServer>();
-
-        foreach (var collider in colliders)
+        for (int i = 1; i < cachedTargets.Count; i++)
         {
-            if (collider.CompareTag(Tags.Player))
+            float hp = cachedTargets[i].GetHP();
+            if (hp < lowestHP)
             {
-                if (collider.TryGetComponent<PlayerServer>(out PlayerServer player))
-                {
-                    players.Add(player);
-                }
-            }
-            // 자신을 제외한 AI를 검색
-            else if (collider.gameObject != aiTransform.gameObject && collider.CompareTag(Tags.AI))
-            {
-                if (collider.TryGetComponent<WizardRukeAIServer>(out WizardRukeAIServer aiPlayer))
-                {
-                    aiPlayers.Add(aiPlayer);
-                }
+                lowestHP = hp;
+                lowestHPTarget = cachedTargets[i];
             }
         }
 
-        // 검색된 타겟이 없는 경우. 
-        if (players.Count == 0 && aiPlayers.Count == 0)
-        {
-            return null;
-        }
-
-        // HP가 가장 낮은 플레이어를 타겟으로 설정
-        if (players.Count > 0)
-        {
-            List<PlayerServer> sortedPlayers = players.OrderBy(player => player.GetPlayerHP()).ToList();
-            result = sortedPlayers[0].gameObject;
-        }
-        if (aiPlayers.Count > 0)
-        {
-            List<WizardRukeAIServer> sortedAIPlayer = aiPlayers.OrderBy(aiPlayer => aiPlayer.GetHP()).ToList();
-            result = sortedAIPlayer[0].gameObject;
-        }
-
-        return result;
+        return lowestHPTarget.GetGameObject();
     }
 }

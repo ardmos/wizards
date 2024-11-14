@@ -122,7 +122,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter, ITargetable
         wizardRukeAIGameOverManager.InitAIGameOverManager(this, wizardRukeAIClient);
         stateMachine = new AIStateMachine(this);
         stateMachine.Initialize(AIStateType.Idle);
-        targetingSystem = new AITargetingSystem(MAX_DETECTION_DISTANCE, transform);
+        targetingSystem = new AITargetingSystem(MAX_DETECTION_DISTANCE, transform, this);
     }
 
     /// <summary>
