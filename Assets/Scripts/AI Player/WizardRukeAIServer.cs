@@ -121,7 +121,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter, ITargetable
         wizardRukeAISpellManager.InitAIPlayerSpellInfoArrayOnServer(this.spells);
         wizardRukeAIGameOverManager.InitAIGameOverManager(this, wizardRukeAIClient);
         stateMachine = new AIStateMachine(this);
-        stateMachine.Initialize(AIStateType.Idle);
+        stateMachine.InitializeStateMachine(AIStateType.Idle);
         targetingSystem = new AITargetingSystem(MAX_DETECTION_DISTANCE, transform, this);
     }
 

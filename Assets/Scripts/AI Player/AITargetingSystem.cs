@@ -51,7 +51,7 @@ public class AITargetingSystem
         }
         catch (Exception e)
         {
-            Debug.LogError($"Error in DetectTarget: {e.Message}");
+            Logger.LogError($"{nameof(DetectTarget)} 에서 에러가 발생했습니다 : {e.Message}");
             return null;
         }
     }
@@ -67,7 +67,7 @@ public class AITargetingSystem
         cachedTargets.Clear();
         // 근처 범위 탐색
         int hitCount = Physics.OverlapSphereNonAlloc(aiTransform.position, maxDetectionDistance, detectionResults);
-        if (hitCount > detectionResults.Length) Debug.LogWarning($"검출된 콜라이더 수({hitCount})가 검색 결과 배열 크기({detectionResults.Length})를 초과했습니다. 일부 검색 결과가 무시됩니다.");
+        if (hitCount > detectionResults.Length) Logger.LogWarning($"검출된 콜라이더 수({hitCount})가 검색 결과 배열 크기({detectionResults.Length})를 초과했습니다. 일부 검색 결과가 무시됩니다.");
 
         for (int i = 0; i < hitCount; i++)
         {
