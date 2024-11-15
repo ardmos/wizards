@@ -140,8 +140,8 @@
     <Compile Include="Assets\Scripts\AI Player\WizardRukeAIItemDropManagerServer.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\UserNameUIController.cs" />
     <Compile Include="Assets\Scripts\Knight_Buzz\ObjectPoolBuzzTrailSword.cs" />
-    <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
     <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupGameRoom\PopupMatchingRoomUIController.cs" />
+    <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
     <Compile Include="Assets\Scripts\AI Player\AITargetingSystem.cs" />
     <Compile Include="Assets\Scripts\Monster\ChickenAIAnimationServer.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Singleplayer\PlayerServerSingleMode.cs" />
@@ -233,8 +233,8 @@
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupHostHasDisconnectedUIController.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSCounter.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\Client\GameInput.cs" />
     <Compile Include="Assets\Scripts\Scenes\TitleScene\PopupSelectAuthMethodUIController.cs" />
+    <Compile Include="Assets\Scripts\PlayerCharacter\Client\GameInput.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\TeamColorController.cs" />
     <Compile Include="Assets\Scripts\Loading\LoadSceneManager.cs" />
@@ -251,9 +251,9 @@
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\GameOverUIController.cs" />
     <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenButton.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Store\StoreTriggerAreaCollider.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSelectCharacter\PopupSelectCharacterUIController.cs" />
     <Compile Include="Assets\Scripts\Server\ConnectionApprovalHandler.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ITargetable.cs" />
-    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSelectCharacter\PopupSelectCharacterUIController.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\Server\ScrollManagerServer.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Client\PlayerMovementClient.cs" />

@@ -6,32 +6,73 @@ public class PatrolState : AIState
 
     public override void Enter()
     {
-        //Debug.Log("Entering Patrol State");
+        Logger.Log("Patrol State에 진입합니다.");
+
+        InitState();
     }
 
     public override void Update()
     {
-        Patrol();
+        Logger.Log("Patrol State 업데이트.");
 
+        Patrol();
+    }
+
+    public override void Exit()
+    {
+        Logger.Log("Patrol State에서 벗어납니다.");
+    }
+
+    private void InitState()
+    {
+        if (!ValidateComponent(ai, "AI 설정이 안되어있습니다.")) return;
+
+        ai.SetTarget(null);
+    }
+
+    private void Patrol()
+    {
+        if (!ValidateAIComponents()) return;
+
+        CycleThroughPatrolPoints();
         if (TryDetectAndSetTarget())
         {
             EvaluateTargetDistance();
         }
     }
 
-    public override void Exit()
+    private bool ValidateAIComponents()
     {
-        //Debug.Log("Exiting Patrol State");
+        return ValidateComponent(ai, "AI 설정이 안되어있습니다.") &&
+           ValidateComponent(ai.GetMovementManager(), "AI MovementManager 획득에 실패했습니다.") &&
+           ValidateComponent(ai.GetTargetingSystem(), "AI TargetingSystem 획득에 실패했습니다.") &&
+           ValidateComponent(ai.GetTarget(), "AI Target 획득에 실패했습니다.") &&
+           ValidateComponent(ai.GetBattleManager(), "AI BattleManager 획득에 실패했습니다.") &&
+           ValidateComponent(ai.GetStateMachine(), "AI StateMachine 획득에 실패했습니다.");
     }
 
-    private void Patrol()
+    private bool ValidateComponent<T>(T component, string errorMessage)
     {
-        ai.GetMovementManager().Patrol();
+        if (component == null)
+        {
+            Logger.LogError(errorMessage);
+            return false;
+        }
+        return true;
     }
+
+    private void CycleThroughPatrolPoints() => ai.GetMovementManager().Patrol();
 
     private bool TryDetectAndSetTarget()
     {
-        GameObject detectedTarget = ai.GetTargetingSystem().DetectTarget<ITargetable>();
+        GameObject detectedTarget = DetectTarget();
+        return SetTargetIfDetected(detectedTarget);
+    }
+
+    private GameObject DetectTarget() => ai.GetTargetingSystem().DetectTarget<ITargetable>();
+
+    private bool SetTargetIfDetected(GameObject detectedTarget)
+    {
         if (detectedTarget != null)
         {
             ai.SetTarget(detectedTarget);
@@ -42,15 +83,20 @@ public class PatrolState : AIState
 
     private void EvaluateTargetDistance()
     {
-        float targetDistance = Vector3.Distance(ai.transform.position, ai.GetTarget().transform.position);
-
-        if (targetDistance <= ai.GetBattleManager().GetAttackRange())
+        float targetDistance = GetTargetDistance();
+        if (IsTargetInAttackRange(targetDistance))
         {
-            ai.GetStateMachine().ChangeState(AIStateType.Attack);
+            HandleTargetInAttackRange();
         }
-        else if (targetDistance <= ai.GetMaxDetectionDistance())
+        else if (IsTargetInDetectionRange(targetDistance))
         {
-            ai.GetStateMachine().ChangeState(AIStateType.Chase);
+            HandleTargetInDetectionRange();
         }
     }
+
+    private float GetTargetDistance() => Vector3.Distance(ai.transform.position, ai.GetTarget().transform.position);
+    private bool IsTargetInAttackRange(float targetDistance) => targetDistance <= ai.GetBattleManager().GetAttackRange();
+    private bool IsTargetInDetectionRange(float targetDistance) => targetDistance <= ai.GetMaxDetectionDistance();
+    private void HandleTargetInAttackRange() => ai.GetStateMachine().ChangeState(AIStateType.Attack);
+    private void HandleTargetInDetectionRange() => ai.GetStateMachine().ChangeState(AIStateType.Chase);
 }
