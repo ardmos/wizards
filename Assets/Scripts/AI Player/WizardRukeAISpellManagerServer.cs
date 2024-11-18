@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using static ComponentValidator;
 
 public class WizardRukeAISpellManagerServer : MonoBehaviour
 {
@@ -25,15 +26,14 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     private void Update()
     {
         // 쿨타임 관리
-        for (ushort i = 0; i < playerOwnedSpellInfoListOnServer.Count; i++)
+        for (ushort spellIndex = 0; spellIndex < playerOwnedSpellInfoListOnServer.Count; spellIndex++)
         {
-            Cooltime(i);
+            Cooltime(spellIndex);
         }
     }
 
     private void Cooltime(ushort spellIndex)
     {
-        //Debug.Log($"spellNumber : {spellIndex}, currentSpellPrefabArray.Length : {currentSpellPrefabArray.Length}");
         if (playerOwnedSpellInfoListOnServer[spellIndex] == null) return;
         // 쿨타임 관리
         if (playerOwnedSpellInfoListOnServer[spellIndex].spellState == SpellState.Cooltime)
@@ -46,8 +46,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
                 // 여기서 한 번 클라이언트의 State를 바꿔주고 서버에 보고 해준다.
                 playerOwnedSpellInfoListOnServer[spellIndex].spellState = SpellState.Ready;
                 UpdatePlayerSpellState(spellIndex, SpellState.Ready);
-            }
-            //Debug.Log($"쿨타임 관리 메소드. spellState:{spellInfoListOnClient[spellIndex].spellState}, restTime:{restTimeCurrentSpellArrayOnClient[spellIndex]}, coolTime:{spellInfoListOnClient[spellIndex].coolTime}");            
+            }          
         }
     }
     #endregion
@@ -61,6 +60,9 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     public void CastBlizzard()
     {
         if (playerOwnedSpellInfoListOnServer[2].spellState != SpellState.Ready) return;
+        if (!ValidateComponent(GameAssetsManager.Instance, "WizardRukeAISpellManagerServer GameAssetsManager.Instance 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(muzzlePos_AoE, "WizardRukeAISpellManagerServer muzzlePos_AoE 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(playerAnimator, "WizardRukeAISpellManagerServer playerAnimator 설정이 안되어있습니다.")) return;
 
         // 범위 표시 오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(SpellName.BlizzardLv1_Ready), muzzlePos_AoE.position, Quaternion.identity);
@@ -87,6 +89,10 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     public void FireBlizzard()
     {
         if (playerOwnedSpellInfoListOnServer[2].spellState != SpellState.Casting) return;
+        if (!ValidateComponent(GameAssetsManager.Instance, "WizardRukeAISpellManagerServer GameAssetsManager.Instance 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(muzzlePos_AoE, "WizardRukeAISpellManagerServer muzzlePos_AoE 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(wizardRukeAIServer, "WizardRukeAISpellManagerServer wizardRukeAIServer 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(playerAnimator, "WizardRukeAISpellManagerServer playerAnimator 설정이 안되어있습니다.")) return;
 
         // 1. 시전중인 범위표시 오브젝트 제거
         Destroy(playerCastingSpell);
@@ -99,7 +105,6 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
             aoESpell.InitAoESpell(GetSpellInfo(2));
         }
 
-        //Destroy(spellObject, 4f);
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(2, SpellState.Cooltime);
         spellObject.transform.SetParent(MultiplayerGameManager.Instance.transform);
@@ -114,8 +119,12 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     /// </summary>
     public void CastSpell(ushort spellIndex)
     {
-        //Debug.Log($"playerOwnedSpellInfoListOnServer.count {playerOwnedSpellInfoListOnServer.Count}");
         if (playerOwnedSpellInfoListOnServer[spellIndex].spellState != SpellState.Ready) return;
+        if (!ValidateComponent(GameAssetsManager.Instance, "WizardRukeAISpellManagerServer GameAssetsManager.Instance 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(muzzlePos_AoE, "WizardRukeAISpellManagerServer muzzlePos_AoE 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(wizardRukeAIServer, "WizardRukeAISpellManagerServer wizardRukeAIServer 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(SoundManager.Instance, "WizardRukeAISpellManagerServer SoundManager.Instance 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(playerAnimator, "WizardRukeAISpellManagerServer playerAnimator 설정이 안되어있습니다.")) return;
 
         // 발사체 오브젝트 생성
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(spellIndex).spellName), muzzlePos_Normal.position, Quaternion.identity);
@@ -135,7 +144,7 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         spellObject.transform.localPosition = muzzlePos_Normal.localPosition;
 
         // 마법 생성 SFX 실행
-        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Aiming, transform);
+        SoundManager.Instance.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Aiming, transform);
 
         // 플레이어가 보고있는 방향과 발사체가 바라보는 방향 일치시키기
         spellObject.transform.forward = transform.forward;
@@ -156,40 +165,45 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     public void FireSpell(ushort spellIndex)
     {
         if (playerOwnedSpellInfoListOnServer[spellIndex].spellState != SpellState.Casting) return;
-
-        if (playerCastingSpell == null)
-        {
-            return;
-        }
+        if (!ValidateComponent(MultiplayerGameManager.Instance, "WizardRukeAISpellManagerServer MultiplayerGameManager.Instance 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(playerCastingSpell, "WizardRukeAISpellManagerServer playerCastingSpell 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(SoundManager.Instance, "WizardRukeAISpellManagerServer SoundManager.Instance 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(playerAnimator, "WizardRukeAISpellManagerServer playerAnimator 설정이 안되어있습니다.")) return;
 
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(spellIndex, SpellState.Cooltime);
 
         playerCastingSpell.transform.SetParent(MultiplayerGameManager.Instance.transform);
-        float moveSpeed = playerCastingSpell.GetComponent<AttackSpell>().GetSpellInfo().moveSpeed;
-
-        // 호밍 마법이라면 호밍 시작 처리
-        if (playerCastingSpell.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
-        // 설치 마법
-        else if (moveSpeed == 0)
+        float moveSpeed = 0;
+        if (playerCastingSpell.TryGetComponent<AttackSpell>(out AttackSpell attackSpell))
         {
+            moveSpeed = attackSpell.GetSpellInfo().moveSpeed;
 
-        }
-        // 마법 발사 (기본 직선 비행 마법)
-        else
-        {
-            playerCastingSpell.GetComponent<AttackSpell>().Shoot(playerCastingSpell.transform.forward * moveSpeed, ForceMode.Impulse);
-        }
+            // 호밍 마법이라면 호밍 시작 처리
+            if (attackSpell.TryGetComponent<HomingMissile>(out var ex)) ex.StartHoming();
+            // 설치 마법
+            else if (moveSpeed == 0)
+            {
+                // 설치 마법은 아무것도 안해도 됩니다.
+            }
+            // 마법 발사 (기본 직선 비행 마법)
+            else
+            {
+                attackSpell.Shoot(playerCastingSpell.transform.forward * moveSpeed, ForceMode.Impulse);
+            }
 
-        // 발사 SFX 실행 
-        SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
-        SoundManager.Instance?.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Shooting, transform);
+            // 발사 SFX 실행 
+            SpellInfo spellInfo = new SpellInfo(GetSpellInfo(spellIndex));
+            SoundManager.Instance.PlayWizardSpellSFX(spellInfo.spellName, SFX_Type.Shooting, transform);
 
-        // 포구 VFX
-        MuzzleVFX(playerCastingSpell.GetComponent<AttackSpell>().GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
+            // 포구 VFX
+            MuzzleVFX(attackSpell.GetMuzzleVFXPrefab(), GetComponentInChildren<MuzzlePos>().transform);
 
-        // 발사 애니메이션 실행
-        playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
+            // 발사 애니메이션 실행
+            playerAnimator.UpdateWizardMaleAnimationOnServer(WizardMaleAnimState.ShootingMagic);
+        }   
+
+
     }
     #endregion
 
@@ -201,17 +215,19 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     public void StartActivateDefenceSpell()
     {
         if (playerOwnedSpellInfoListOnServer[DEFENCE_SPELL_INDEX_DEFAULT].spellState != SpellState.Ready) return;
+        if (!ValidateComponent(GameAssetsManager.Instance, "WizardRukeAISpellManagerServer GameAssetsManager.Instance 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(playerAnimator, "WizardRukeAISpellManagerServer playerAnimator 설정이 안되어있습니다.")) return;
 
         // 마법 시전
         GameObject spellObject = Instantiate(GameAssetsManager.Instance.GetSpellPrefab(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT).spellName), transform.position, Quaternion.identity);
-        spellObject.GetComponent<NetworkObject>().Spawn();
-        spellObject.GetComponent<DefenceSpell>().InitSpellInfoDetail(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT));
+        spellObject.GetComponent<NetworkObject>()?.Spawn();
+        spellObject.GetComponent<DefenceSpell>()?.InitSpellInfoDetail(GetSpellInfo(DEFENCE_SPELL_INDEX_DEFAULT));
         spellObject.transform.SetParent(transform);
         spellObject.transform.localPosition = Vector3.zero;
-        spellObject.GetComponent<DefenceSpell>().Activate();
+        spellObject.GetComponent<DefenceSpell>()?.Activate();
 
         // 마법 생성 사운드 재생
-        spellObject.GetComponent<DefenceSpell>().PlaySFX(SFX_Type.Aiming);
+        spellObject.GetComponent<DefenceSpell>()?.PlaySFX(SFX_Type.Aiming);
 
         // 해당 SpellState 업데이트
         UpdatePlayerSpellState(DEFENCE_SPELL_INDEX_DEFAULT, SpellState.Cooltime);
@@ -243,24 +259,16 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     // 포구 VFX 
     public void MuzzleVFX(GameObject muzzleVFXPrefab, Transform muzzleTransform)
     {
-        if (muzzleVFXPrefab == null)
-        {
-            //Debug.Log($"MuzzleVFX muzzleVFXPrefab is null");
-            return;
-        }
-
-        //Debug.Log($"MuzzleVFX muzzlePos:{muzzleTransform.position}, muzzleLocalPos:{muzzleTransform.localPosition}");
+        if (!ValidateComponent(muzzleVFXPrefab, "WizardRukeAISpellManagerServer muzzleVFXPrefab 설정이 안되어있습니다.")) return;
         GameObject muzzleVFX = Instantiate(muzzleVFXPrefab, muzzleTransform.position, Quaternion.identity);
+        if (!ValidateComponent(muzzleVFX, "WizardRukeAISpellManagerServer muzzleVFX 설정이 안되어있습니다.")) return;
+        var particleSystem = muzzleVFX.GetComponent<ParticleSystem>();
+        if (!ValidateComponent(particleSystem, "WizardRukeAISpellManagerServer particleSystem 설정이 안되어있습니다.")) return;
+
         muzzleVFX.GetComponent<NetworkObject>().Spawn();
-        //muzzleVFX.transform.SetParent(transform);
         muzzleVFX.transform.position = muzzleTransform.position;
         muzzleVFX.transform.forward = muzzleTransform.forward;
-        var particleSystem = muzzleVFX.GetComponent<ParticleSystem>();
-
-        if (particleSystem == null)
-        {
-            particleSystem = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-        }
+        particleSystem = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
 
         Destroy(muzzleVFX, particleSystem.main.duration);
     }
@@ -278,6 +286,8 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
     /// </summary>
     public void InitAIPlayerSpellInfoArrayOnServer(SpellName[] skillNames)
     {
+        if (!ValidateComponent(SpellSpecifications.Instance, "WizardRukeAISpellManagerServer SpellSpecifications.Instance 설정이 안되어있습니다.")) return;
+
         List<SpellInfo> playerSpellInfoList = new List<SpellInfo>();
         foreach (SpellName spellName in skillNames)
         {
@@ -287,7 +297,6 @@ public class WizardRukeAISpellManagerServer : MonoBehaviour
         }
 
         playerOwnedSpellInfoListOnServer = playerSpellInfoList;
-        //Debug.Log($"InitAI Spell List. {playerOwnedSpellInfoListOnServer.Count}");
     }
 
     public List<SpellInfo> GetSpellInfoList()

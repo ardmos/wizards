@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using static ComponentValidator;
 
 public class WizardRukeAIClient : NetworkBehaviour
 {
@@ -25,18 +26,20 @@ public class WizardRukeAIClient : NetworkBehaviour
     [ClientRpc]
     public virtual void InitializeAIClientRPC(string aiName)
     {
-        Debug.Log($"WizardRuke AI Player InitializeAIClientRPC");
+        if (!ValidateComponent(mRigidbody, "WizardRukeAIClient mRigidbody 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(userNameUIController, "WizardRukeAIClient userNameUIController 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(teamColorController, "WizardRukeAIClient teamColorController 설정이 안되어있습니다.")) return;
+
+        Logger.Log($"WizardRuke AI Player InitializeAIClientRPC");
 
         // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         mRigidbody.isKinematic = false;
         // 플레이어 닉네임 설정    
-        userNameUIController?.SetName(aiName); 
-
+        userNameUIController.SetName(aiName); 
         // 기본 메터리얼 초기화
         currentMaterial = originalMaterial;
-
         // UI 팀 컬러 설정. AI는 항상 Enemy 컬러
-        teamColorController?.Setup(isOwner: false);
+        teamColorController.Setup(isOwner: false);
 
         // enemy 플레이어 테두리 컬러 설정
         foreach (Renderer renderer in ownRenderers)
@@ -91,20 +94,27 @@ public class WizardRukeAIClient : NetworkBehaviour
     [ClientRpc]
     public void SetHPClientRPC(sbyte hp, sbyte maxHP)
     {
-        hPBarUIController?.SetHP(hp, maxHP);
+        if (!ValidateComponent(hPBarUIController, "WizardRukeAIClient HPUIController 설정이 안되어있습니다.")) return;
+
+        hPBarUIController.SetHP(hp, maxHP);
     }
 
     [ClientRpc]
     public void ShowDamageTextPopupClientRPC(sbyte damageAmount)
     {
-        damageTextUIController?.CreateTextObject(damageAmount);
+        if (!ValidateComponent(damageTextUIController, "WizardRukeAIClient DamageTextUIController 설정이 안되어있습니다.")) return;
+
+        damageTextUIController.CreateTextObject(damageAmount);
     }
 
     [ClientRpc]
     public void OffPlayerUIClientRPC()
     {
+        if (!ValidateComponent(hPBarUIController, "WizardRukeAIClient HPUIController 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(userNameUIController, "WizardRukeAIClient UserNameUIController 설정이 안되어있습니다.")) return;
+
         hPBarUIController.gameObject.SetActive(false);
-        userNameUIController.gameObject?.SetActive(false);
+        userNameUIController.gameObject.SetActive(false);
     }
 
     public ICharacter GetCharacterData()

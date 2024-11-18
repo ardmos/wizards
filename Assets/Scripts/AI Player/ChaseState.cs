@@ -1,4 +1,5 @@
 using UnityEngine;
+using static ComponentValidator;
 
 public class ChaseState : AIState
 {
@@ -35,16 +36,6 @@ public class ChaseState : AIState
            ValidateComponent(ai.GetTarget(), "AI Target È¹µæ¿¡ ½ÇÆÐÇß½À´Ï´Ù.") &&
            ValidateComponent(ai.GetBattleManager(), "AI BattleManager È¹µæ¿¡ ½ÇÆÐÇß½À´Ï´Ù.") &&
            ValidateComponent(ai.GetStateMachine(), "AI StateMachine È¹µæ¿¡ ½ÇÆÐÇß½À´Ï´Ù.");
-    }
-
-    private bool ValidateComponent<T>(T component, string errorMessage)
-    {
-        if (component == null)
-        {
-            Logger.LogError(errorMessage);
-            return false;
-        }
-        return true;
     }
 
     private void ChaseTarget() => ai.MoveTowardsTarget();

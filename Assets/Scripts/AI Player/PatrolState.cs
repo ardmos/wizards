@@ -1,4 +1,5 @@
 using UnityEngine;
+using static ComponentValidator;
 
 public class PatrolState : AIState
 {
@@ -51,28 +52,11 @@ public class PatrolState : AIState
            ValidateComponent(ai.GetStateMachine(), "AI StateMachine È¹µæ¿¡ ½ÇÆÐÇß½À´Ï´Ù.");
     }
 
-    private bool ValidateComponent<T>(T component, string errorMessage)
-    {
-        if (component == null)
-        {
-            Logger.LogError(errorMessage);
-            return false;
-        }
-        return true;
-    }
-
     private void CycleThroughPatrolPoints() => ai.GetMovementManager().Patrol();
 
     private bool TryDetectAndSetTarget()
     {
         GameObject detectedTarget = DetectTarget();
-        return SetTargetIfDetected(detectedTarget);
-    }
-
-    private GameObject DetectTarget() => ai.GetTargetingSystem().DetectTarget<ITargetable>();
-
-    private bool SetTargetIfDetected(GameObject detectedTarget)
-    {
         if (detectedTarget != null)
         {
             ai.SetTarget(detectedTarget);
@@ -80,6 +64,8 @@ public class PatrolState : AIState
         }
         return false;
     }
+
+    private GameObject DetectTarget() => ai.GetTargetingSystem().DetectTarget<ITargetable>();
 
     private void EvaluateTargetDistance()
     {

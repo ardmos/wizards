@@ -85,7 +85,7 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter, ITargetable
         // 게임오버된 플레이어가 현재 타겟이었으면 타겟 초기화, 다시 검색 시작. 
         if (e.clientIDWhoGameOver == GetTargetClientID())
         {
-            Debug.Log("Target 게임오버! 새로운 타겟을 검색합니다");
+            Logger.Log("Target 게임오버! 새로운 타겟을 검색합니다");
             target = null;
             stateMachine.ChangeState(AIStateType.Patrol);
         }

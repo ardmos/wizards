@@ -257,6 +257,7 @@
     <Compile Include="Assets\Scripts\PlayerCharacter\Client\SkillManagerClientKnight.cs" />
     <Compile Include="Assets\Scripts\Server\ScrollManagerServer.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Client\PlayerMovementClient.cs" />
+    <Compile Include="Assets\Scripts\Generals\ComponentValidator.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\FloorGenerator.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Server\SkillManagerServerKnight.cs" />
     <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupShop\DailyGroupUI.cs" />
