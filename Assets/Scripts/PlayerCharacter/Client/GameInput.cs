@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static ComponentValidator;
 
 /// <summary>
 /// 플레이어의 입력을 관리하는 컴포넌트입니다.
@@ -8,60 +10,58 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
     #region Events
-    public event EventHandler OnAttack1Started;
-    public event EventHandler OnAttack2Started;
-    public event EventHandler OnAttack3Started;
-    public event EventHandler OnAttack1Ended;
-    public event EventHandler OnAttack2Ended;
-    public event EventHandler OnAttack3Ended;
+    /// <summary>
+    /// 공격 시작 이벤트. int 매개변수는 공격 타입을 나타냅니다 (1, 2, 3).
+    /// </summary>
+    public event EventHandler<int> OnAttackStarted;
+    /// <summary>
+    /// 공격 종료 이벤트. int 매개변수는 공격 타입을 나타냅니다 (1, 2, 3).
+    /// </summary>
+    public event EventHandler<int> OnAttackEnded;
+    // 방어 시작 이벤트.
     public event EventHandler OnDefenceStarted;
+    // 방어 종료 이벤트.
     public event EventHandler OnDefenceEnded;
     #endregion
 
-    #region Fields
+    #region Constants & Fields
+    // 에러 메세지 상수들...
+    private const string ERROR_PLAYER_CLIENT_NOT_SET = "GameInput playerClient 설정이 안되어있습니다.";
+    private const string ERROR_PLAYER_INPUT_ACTIONS_NOT_SET = "GameInput playerInputActions 설정이 안되어있습니다.";
+
+    [SerializeField] private PlayerClient playerClient;
     private bool isPlayerControllable;
     private bool isAttackButtonClicked;
     private PlayerInputActions playerInputActions;
     #endregion
 
     #region Unity Lifecycle
+    /// <summary>
+    /// Unity의 Awake 메서드입니다. 컴포넌트 초기화를 수행합니다.
+    /// </summary>
     private void Awake()
     {
+        if (!ValidateComponent(playerClient, ERROR_PLAYER_CLIENT_NOT_SET)) return;
+
+        SetupInputActions();
         isPlayerControllable = true;
-
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Enable();
-        playerInputActions.Player.Attack1.started += Attack1_started;
-        playerInputActions.Player.Attack1.canceled += Attack1_canceled;
-        playerInputActions.Player.Attack2.started += Attack2_started;
-        playerInputActions.Player.Attack2.canceled += Attack2_canceled;
-        playerInputActions.Player.Attack3.started += Attack3_started;
-        playerInputActions.Player.Attack3.canceled += Attack3_canceled;
-        playerInputActions.Player.Defence.started += Defence_started;
-        playerInputActions.Player.Defence.canceled += Defence_canceled;
-
-        GetComponent<PlayerClient>().OnPlayerGameOver += OnPlayerGameOver;
+        playerClient.OnPlayerGameOver += OnPlayerGameOver;
     }
 
+    /// <summary>
+    /// Unity의 OnDestroy 메서드입니다. 컴포넌트 정리 작업을 수행합니다.
+    /// </summary>
     private void OnDestroy()
     {
-        playerInputActions.Player.Attack1.started -= Attack1_started;
-        playerInputActions.Player.Attack1.canceled -= Attack1_canceled;
-        playerInputActions.Player.Attack2.started -= Attack2_started;
-        playerInputActions.Player.Attack2.canceled -= Attack2_canceled;
-        playerInputActions.Player.Attack3.started -= Attack3_started;
-        playerInputActions.Player.Attack3.canceled -= Attack3_canceled;
+        if (!ValidateComponent(playerInputActions, ERROR_PLAYER_INPUT_ACTIONS_NOT_SET)) return;
+        if (!ValidateComponent(playerClient, ERROR_PLAYER_CLIENT_NOT_SET)) return;
 
-        playerInputActions.Player.Defence.started -= Defence_started;
-        playerInputActions.Player.Defence.canceled -= Defence_canceled;
-
-        GetComponent<PlayerClient>().OnPlayerGameOver -= OnPlayerGameOver;
-
-        playerInputActions.Dispose();
+        CleanupInputActions();
+        playerClient.OnPlayerGameOver -= OnPlayerGameOver;
     }
     #endregion
 
-    #region Input Handling
+    #region Public Methods
     /// <summary>
     /// 플레이어의 이동 입력을 정규화된 벡터로 반환합니다.
     /// </summary>
@@ -69,11 +69,10 @@ public class GameInput : MonoBehaviour
     public Vector2 GetMovementVectorNormalized()
     {
         if (!isPlayerControllable) return Vector2.zero;
+        if (!ValidateComponent(playerInputActions, ERROR_PLAYER_INPUT_ACTIONS_NOT_SET)) return Vector2.zero;
 
         Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
-
         inputVector = inputVector.normalized;
-
         return inputVector;
     }
 
@@ -85,38 +84,70 @@ public class GameInput : MonoBehaviour
     {
         return isAttackButtonClicked;
     }
+    #endregion
+
+    #region Input Handling
+    /// <summary>
+    /// 입력 액션을 설정하고 이벤트 핸들러를 등록합니다.
+    /// 이 메서드는 컴포넌트 초기화 시 호출되어야 합니다.
+    /// </summary>
+    private void SetupInputActions()
+    {
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Attack1.started += _ => HandleAttackStarted(1);
+        playerInputActions.Player.Attack1.canceled += _ => HandleAttackEnded(1);
+        playerInputActions.Player.Attack2.started += _ => HandleAttackStarted(2);
+        playerInputActions.Player.Attack2.canceled += _ => HandleAttackEnded(2);
+        playerInputActions.Player.Attack3.started += _ => HandleAttackStarted(3);
+        playerInputActions.Player.Attack3.canceled += _ => HandleAttackEnded(3);
+        playerInputActions.Player.Defence.started += Defence_started;
+        playerInputActions.Player.Defence.canceled += Defence_canceled;
+    }
 
     /// <summary>
-    /// Attack1 버튼이 눌렸을 때 호출되는 메서드입니다.
+    /// 등록된 입력 액션 이벤트 핸들러를 제거합니다.
+    /// 이 메서드는 컴포넌트 정리 시 호출되어야 하며, 메모리 누수를 방지합니다.
     /// </summary>
-    private void Attack1_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void CleanupInputActions()
     {
-        if (!isPlayerControllable) return;
-        isAttackButtonClicked = true;
-        OnAttack1Started?.Invoke(this, EventArgs.Empty);
+        playerInputActions.Player.Attack1.started -= _ => HandleAttackStarted(1);
+        playerInputActions.Player.Attack1.canceled -= _ => HandleAttackEnded(1);
+        playerInputActions.Player.Attack2.started -= _ => HandleAttackStarted(2);
+        playerInputActions.Player.Attack2.canceled -= _ => HandleAttackEnded(2);
+        playerInputActions.Player.Attack3.started -= _ => HandleAttackStarted(3);
+        playerInputActions.Player.Attack3.canceled -= _ => HandleAttackEnded(3);
+        playerInputActions.Player.Defence.started -= Defence_started;
+        playerInputActions.Player.Defence.canceled -= Defence_canceled;
+        playerInputActions.Dispose();
     }
+
     /// <summary>
-    /// Attack2 버튼이 눌렸을 때 호출되는 메서드입니다.
+    /// 공격 버튼이 눌렸을 때 호출되는 메서드입니다.
     /// </summary>
-    private void Attack2_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    /// <param name="attackType">공격 타입 (1, 2, 3)</param>
+    private void HandleAttackStarted(int attackType)
     {
         if (!isPlayerControllable) return;
         isAttackButtonClicked = true;
-        OnAttack2Started?.Invoke(this, EventArgs.Empty);
+        OnAttackStarted?.Invoke(this, attackType);
     }
+
     /// <summary>
-    /// Attack3 버튼이 눌렸을 때 호출되는 메서드입니다.
+    /// 공격 버튼이 떼졌을 때 호출되는 메서드입니다.
     /// </summary>
-    private void Attack3_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    /// <param name="attackType">공격 타입 (1, 2, 3)</param>
+    private void HandleAttackEnded(int attackType)
     {
-        if (!isPlayerControllable) return;
-        isAttackButtonClicked = true;
-        OnAttack3Started?.Invoke(this, EventArgs.Empty);
+        if (!isPlayerControllable || !isAttackButtonClicked) return;
+        isAttackButtonClicked = false;
+        OnAttackEnded?.Invoke(this, attackType);
     }
+
     /// <summary>
     /// Defence 버튼이 눌렸을 때 호출되는 메서드입니다.
     /// </summary>
-    private void Defence_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Defence_started(InputAction.CallbackContext context)
     {
         if (!isPlayerControllable) return;
         isAttackButtonClicked = true;
@@ -124,48 +155,17 @@ public class GameInput : MonoBehaviour
     }
 
     /// <summary>
-    /// Attack1 버튼이 떼졌을 때 호출되는 메서드입니다.
-    /// </summary>
-    private void Attack1_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (!isPlayerControllable) return;
-        if (!isAttackButtonClicked) return;
-        isAttackButtonClicked = false;
-        OnAttack1Ended?.Invoke(this, EventArgs.Empty);
-    }
-    /// <summary>
-    /// Attack2 버튼이 떼졌을 때 호출되는 메서드입니다.
-    /// </summary>
-    private void Attack2_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (!isPlayerControllable) return;
-        if (!isAttackButtonClicked) return;
-        isAttackButtonClicked = false;
-        OnAttack2Ended?.Invoke(this, EventArgs.Empty);
-    }
-    /// <summary>
-    /// Attack3 버튼이 떼졌을 때 호출되는 메서드입니다.
-    /// </summary>
-    private void Attack3_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (!isPlayerControllable) return;
-        if (!isAttackButtonClicked) return;
-        isAttackButtonClicked = false;
-        OnAttack3Ended?.Invoke(this, EventArgs.Empty);
-    }
-    /// <summary>
     /// Defence 버튼이 떼졌을 때 호출되는 메서드입니다.
     /// </summary>
-    private void Defence_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Defence_canceled(InputAction.CallbackContext context)
     {
-        if (!isPlayerControllable) return;
-        if (!isAttackButtonClicked) return;
+        if (!isPlayerControllable || !isAttackButtonClicked) return;
         isAttackButtonClicked = false;
         OnDefenceEnded?.Invoke(this, EventArgs.Empty);
     }
     #endregion
 
-    #region Player Controllable Handling
+    #region Event Handlers
     /// <summary>
     /// 플레이어 게임 오버 시 호출되는 메서드입니다.
     /// </summary>
