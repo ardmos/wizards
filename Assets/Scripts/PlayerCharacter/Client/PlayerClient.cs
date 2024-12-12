@@ -272,7 +272,7 @@ public abstract class PlayerClient : NetworkBehaviour
     /// </summary>
     private void SaveGameOverResult()
     {
-        PlayerOutGameData playerOutGameData = PlayerDataManager.Instance.GetPlayerOutGameData();
+        PlayerOutGameData playerOutGameData = LocalPlayerDataManagerClient.Instance.GetPlayerOutGameData();
 
         if (playerOutGameData == null) return;
 
@@ -285,7 +285,7 @@ public abstract class PlayerClient : NetworkBehaviour
         playerOutGameData.knockOuts += (uint)score;
         playerOutGameData.totalScore = playerOutGameData.knockOuts * 2;
 
-        PlayerDataManager.Instance.UpdatePlayerData(playerOutGameData);
+        LocalPlayerDataManagerClient.Instance.UpdatePlayerData(playerOutGameData);
     }
     #endregion
 
@@ -308,7 +308,7 @@ public abstract class PlayerClient : NetworkBehaviour
     /// </summary>
     private void SaveWinResult()
     {
-        PlayerOutGameData playerOutGameData = PlayerDataManager.Instance.GetPlayerOutGameData();
+        PlayerOutGameData playerOutGameData = LocalPlayerDataManagerClient.Instance.GetPlayerOutGameData();
 
         if (playerOutGameData == null) return;
 
@@ -323,7 +323,7 @@ public abstract class PlayerClient : NetworkBehaviour
         playerOutGameData.knockOuts += (uint)score;
         playerOutGameData.totalScore = playerOutGameData.knockOuts * 2;
 
-        PlayerDataManager.Instance.UpdatePlayerData(playerOutGameData);
+        LocalPlayerDataManagerClient.Instance.UpdatePlayerData(playerOutGameData);
     }
     #endregion
 

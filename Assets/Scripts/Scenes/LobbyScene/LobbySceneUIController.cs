@@ -78,7 +78,7 @@ public class LobbySceneUIController : MonoBehaviour
     public void UpdateUserInfoUI()
     {
         // 1. Update User Name From PlayerProfileDataManager
-        txtUserName.text = PlayerDataManager.Instance.GetPlayerName();
+        txtUserName.text = LocalPlayerDataManagerClient.Instance.GetPlayerName();
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ public class LobbySceneUIController : MonoBehaviour
     /// </summary>
     public void ChangePlayerCharacter(Character character)
     {
-        PlayerDataManager.Instance.SetCurrentPlayerClass(character);
+        LocalPlayerDataManagerClient.Instance.SetCurrentPlayerClass(character);
 
         UpdatePlayerCharacter();
     }
@@ -95,15 +95,15 @@ public class LobbySceneUIController : MonoBehaviour
     {
         if (character != null) { Destroy(character); }
 
-        switch (PlayerDataManager.Instance.GetCurrentPlayerClass())
+        switch (LocalPlayerDataManagerClient.Instance.GetCurrentPlayerClass())
         {
             case Character.Wizard:
                 btnChangeCharacter.GetComponentsInChildren<Image>()[1].sprite = iconWizard;
-                character = Instantiate(GameAssetsManager.Instance.GetCharacterPrefab_NotInGame(PlayerDataManager.Instance.GetCurrentPlayerClass()));
+                character = Instantiate(GameAssetsManager.Instance.GetCharacterPrefab_NotInGame(LocalPlayerDataManagerClient.Instance.GetCurrentPlayerClass()));
                 break;
             case Character.Knight:
                 btnChangeCharacter.GetComponentsInChildren<Image>()[1].sprite = iconKnight;
-                character = Instantiate(GameAssetsManager.Instance.GetCharacterPrefab_NotInGame(PlayerDataManager.Instance.GetCurrentPlayerClass()));
+                character = Instantiate(GameAssetsManager.Instance.GetCharacterPrefab_NotInGame(LocalPlayerDataManagerClient.Instance.GetCurrentPlayerClass()));
                 break;
             default:
                 Debug.LogError("UpdateCurrentClass() Class Error");

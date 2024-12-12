@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Logger
+public static class Logger
 {
     [System.Diagnostics.Conditional("DEBUG")]
     public static void Log(string message)

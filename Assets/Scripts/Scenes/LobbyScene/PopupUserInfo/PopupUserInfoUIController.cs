@@ -37,7 +37,7 @@ public class PopupUserInfoUIController : MonoBehaviour
     public void UpdateUserName(string userName)
     {
         // 1. Update Player Data
-        PlayerDataManager.Instance.UpdatePlayerName(userName);
+        LocalPlayerDataManagerClient.Instance.UpdatePlayerName(userName);
         // 2. Update this Popup UI's user name textBox
         txtUserName.UpdateTextValue(userName);
         // 3. Update this In Lobby Scene
@@ -52,9 +52,9 @@ public class PopupUserInfoUIController : MonoBehaviour
     /// </summary>
     private void InitPopup()
     {
-        txtUserName.UpdateTextValue(PlayerDataManager.Instance.GetPlayerName());
+        txtUserName.UpdateTextValue(LocalPlayerDataManagerClient.Instance.GetPlayerName());
 
-        PlayerOutGameData playerOutGameData = PlayerDataManager.Instance.GetPlayerOutGameData();
+        PlayerOutGameData playerOutGameData = LocalPlayerDataManagerClient.Instance.GetPlayerOutGameData();
         if (playerOutGameData == null) return;
 
         txtHighestKOinOneMatch.text = playerOutGameData.hightestKOinOneMatch.ToString();

@@ -46,7 +46,7 @@ public static class SaveSystem
 
         FileStream fileStream = new FileStream(path, FileMode.Create);
 
-        SaveData saveData = new SaveData(PlayerDataManager.Instance.GetPlayerData(), soundVolumeData, new GraphicQualitySettingsData(GraphicQualityManager.Instance.GetQualityLevel()));
+        SaveData saveData = new SaveData(LocalPlayerDataManagerClient.Instance.GetPlayerData(), soundVolumeData, new GraphicQualitySettingsData(GraphicQualityManager.Instance.GetQualityLevel()));
         binaryFormatter.Serialize(fileStream, saveData);
         fileStream.Close();
     }
@@ -76,7 +76,7 @@ public static class SaveSystem
 
         FileStream fileStream = new FileStream(path, FileMode.Create);
 
-        SaveData saveData = new SaveData(PlayerDataManager.Instance.GetPlayerData(), SoundManager.Instance.GetSoundVolumeData(), graphicQualitySettingsData);
+        SaveData saveData = new SaveData(LocalPlayerDataManagerClient.Instance.GetPlayerData(), SoundManager.Instance.GetSoundVolumeData(), graphicQualitySettingsData);
         binaryFormatter.Serialize(fileStream, saveData);
         fileStream.Close();
     }

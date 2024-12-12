@@ -17,7 +17,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
         playerData.maxHp = character.maxHp;
         CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetClientID(), playerData);
 
-        wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        wizardRukeAIClient.UpdateHPBarUIClientRPC(playerData.hp, playerData.maxHp);
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
         CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetClientID(), playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
-        wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        wizardRukeAIClient.UpdateHPBarUIClientRPC(playerData.hp, playerData.maxHp);
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ public class WizardRukeAIHPManagerServer : NetworkBehaviour
         CurrentPlayerDataManager.Instance.SetPlayerDataByClientId(wizardRukeAIServer.GetClientID(), playerData);
 
         // 각 Client 플레이어의 HP바 UI 업데이트 ClientRPC       
-        wizardRukeAIClient.SetHPClientRPC(playerData.hp, playerData.maxHp);
+        wizardRukeAIClient.UpdateHPBarUIClientRPC(playerData.hp, playerData.maxHp);
 
         // 각 Client의 쉐이더 피격 이펙트 실행 ClientRPC
         wizardRukeAIClient.ActivateHitByAttackEffectClientRPC();
