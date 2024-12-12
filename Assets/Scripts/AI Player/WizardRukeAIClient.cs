@@ -3,122 +3,134 @@ using Unity.Netcode;
 using UnityEngine;
 using static ComponentValidator;
 
+/// <summary>
+/// AI 마법사 Ruke의 클라이언트 측 동작(UI, VFX)을 관리하는 클래스입니다. 
+/// </summary>
+
 public class WizardRukeAIClient : NetworkBehaviour
 {
-    [Header("UI 컨트롤러들")]    
-    public TeamColorController teamColorController;
-    public UserNameUIController userNameUIController;
-    public HPBarUIController hPBarUIController;
-    public DamageTextUIController damageTextUIController;
-    public Rigidbody mRigidbody;
+    #region Constants & Fields
+    // 에러 메시지 상수들
+    private const string ERROR_RIGIDBODY_NOT_SET = "WizardRukeAIClient mRigidbody 설정이 안되어있습니다.";
+    private const string ERROR_USERNAME_UI_CONTROLLER_NOT_SET = "WizardRukeAIClient userNameUIController 설정이 안되어있습니다.";
+    private const string ERROR_TEAMCOLOR_CONTROLLER_NOT_SET = "WizardRukeAIClient teamColorController 설정이 안되어있습니다.";
+    private const string ERROR_HP_UI_CONTROLLER_NOT_SET = "WizardRukeAIClient HPUIController 설정이 안되어있습니다.";
+    private const string ERROR_DAMAGE_TEXT_UI_CONTROLLER_NOT_SET = "WizardRukeAIClient DamageTextUIController 설정이 안되어있습니다.";
+
+    [SerializeField] private TeamColorController teamColorController;
+    [SerializeField] private UserNameUIController userNameUIController;
+    [SerializeField] private HPBarUIController hPBarUIController;
+    [SerializeField] private DamageTextUIController damageTextUIController;
+    [SerializeField] private Rigidbody mRigidbody;
 
     [Header("VFX용 메터리얼들")]
-    [SerializeField] private Material currentMaterial;
-    public Material originalMaterial;
-    public Material highlightMaterial;
-    public Material frozenMaterial;
-    public Material enemyMaterial;
-    public Renderer[] ownRenderers;
+    [SerializeField] private Material originalMaterial;
+    [SerializeField] private Material highlightMaterial;
+    [SerializeField] private Material frozenMaterial;
+    [SerializeField] private Renderer[] ownRenderers;
+    #endregion
 
+    #region Initialization
     /// <summary>
-    /// AI 캐릭터 이름 & 메터리얼 초기화
+    /// AI 캐릭터를 초기화합니다.
+    /// 이름과 팀컬러를 설정해줍니다.
     /// </summary>
+    /// <param name="aiName">AI캐릭터 이름</param>
     [ClientRpc]
     public virtual void InitializeAIClientRPC(string aiName)
     {
-        if (!ValidateComponent(mRigidbody, "WizardRukeAIClient mRigidbody 설정이 안되어있습니다.")) return;
-        if (!ValidateComponent(userNameUIController, "WizardRukeAIClient userNameUIController 설정이 안되어있습니다.")) return;
-        if (!ValidateComponent(teamColorController, "WizardRukeAIClient teamColorController 설정이 안되어있습니다.")) return;
+        // 필요한 컴포넌트들의 유효성 검사
+        if (!ValidateComponent(mRigidbody, ERROR_RIGIDBODY_NOT_SET)) return;
+        if (!ValidateComponent(userNameUIController, ERROR_HP_UI_CONTROLLER_NOT_SET)) return;
+        if (!ValidateComponent(teamColorController, ERROR_TEAMCOLOR_CONTROLLER_NOT_SET)) return;
 
-        Logger.Log($"WizardRuke AI Player InitializeAIClientRPC");
-
-        // 자꾸 isKinematic이 켜져서 추가한 코드. Rigidbody network에서 계속 켜는 것 같다.
         mRigidbody.isKinematic = false;
-        // 플레이어 닉네임 설정    
-        userNameUIController.SetName(aiName); 
-        // 기본 메터리얼 초기화
-        currentMaterial = originalMaterial;
-        // UI 팀 컬러 설정. AI는 항상 Enemy 컬러
+        userNameUIController.SetName(aiName);
         teamColorController.Setup(isOwner: false);
-
-        // enemy 플레이어 테두리 컬러 설정
-        foreach (Renderer renderer in ownRenderers)
-        {
-            renderer.material = enemyMaterial;
-        }
     }
+    #endregion
 
-    // 캐릭터 프로즌 이펙트 실행
+    #region UI Control
+    /// <summary>
+    /// HP바 UI를 업데이트합니다.
+    /// </summary>
+    /// <param name="currentHP">현재 HP값</param>
+    /// <param name="maxHP">최대 HP값</param>
     [ClientRpc]
-    public void ActivateFrozenEffectClientRPC()
+    public void UpdateHPBarUIClientRPC(sbyte currentHP, sbyte maxHP)
     {
-        currentMaterial = frozenMaterial;
-        foreach (Renderer renderer in ownRenderers)
-        {
-            renderer.material = frozenMaterial;
-        }
-    }
-    // 캐릭터 프로즌 이펙트 종료
-    [ClientRpc]
-    public void DeactivateFrozenEffectClientRPC()
-    {
-        currentMaterial = originalMaterial;
-        foreach (Renderer renderer in ownRenderers)
-        {
-            renderer.material = originalMaterial;
-        }
+        if (!ValidateComponent(hPBarUIController, ERROR_HP_UI_CONTROLLER_NOT_SET)) return;
+
+        hPBarUIController.SetHP(currentHP, maxHP);
     }
 
-    // 피격 캐릭터 반짝 이펙트 실행
-    [ClientRpc]
-    public void ActivateHitByAttackEffectClientRPC()
-    {
-        foreach (Renderer renderer in ownRenderers)
-        {
-            renderer.material = highlightMaterial;
-        }
-
-        StartCoroutine(ResetFlashEffect());
-    }
-    // 피격 캐릭터 반짝 효과를 일정 시간 후에 비활성화하는 코루틴 메서드
-    private IEnumerator ResetFlashEffect()
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        foreach (Renderer renderer in ownRenderers)
-        {
-            renderer.material = currentMaterial;
-        }
-    }
-
-    [ClientRpc]
-    public void SetHPClientRPC(sbyte hp, sbyte maxHP)
-    {
-        if (!ValidateComponent(hPBarUIController, "WizardRukeAIClient HPUIController 설정이 안되어있습니다.")) return;
-
-        hPBarUIController.SetHP(hp, maxHP);
-    }
-
+    /// <summary>
+    /// 대미지 텍스트 팝업을 표시합니다.
+    /// </summary>
+    /// <param name="damageAmount">대미지 수치</param>
     [ClientRpc]
     public void ShowDamageTextPopupClientRPC(sbyte damageAmount)
     {
-        if (!ValidateComponent(damageTextUIController, "WizardRukeAIClient DamageTextUIController 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(damageTextUIController, ERROR_DAMAGE_TEXT_UI_CONTROLLER_NOT_SET)) return;
 
         damageTextUIController.CreateTextObject(damageAmount);
     }
 
+    /// <summary>
+    /// 플레이어 UI를 비활성화합니다.
+    /// </summary>
     [ClientRpc]
     public void OffPlayerUIClientRPC()
     {
-        if (!ValidateComponent(hPBarUIController, "WizardRukeAIClient HPUIController 설정이 안되어있습니다.")) return;
-        if (!ValidateComponent(userNameUIController, "WizardRukeAIClient UserNameUIController 설정이 안되어있습니다.")) return;
+        if (!ValidateComponent(hPBarUIController, ERROR_HP_UI_CONTROLLER_NOT_SET)) return;
+        if (!ValidateComponent(userNameUIController, ERROR_USERNAME_UI_CONTROLLER_NOT_SET)) return;
 
         hPBarUIController.gameObject.SetActive(false);
         userNameUIController.gameObject.SetActive(false);
     }
+    #endregion
 
-    public ICharacter GetCharacterData()
+    #region VFX Control
+    /// <summary>
+    /// 프로즌 이펙트를 활성화합니다.
+    /// </summary>
+    [ClientRpc]
+    public void ActivateFrozenEffectClientRPC() => SetMaterialForAllRenderers(frozenMaterial);
+
+    /// <summary>
+    /// 프로즌 이펙트를 비활성화합니다.
+    /// </summary>
+    [ClientRpc]
+    public void DeactivateFrozenEffectClientRPC() => SetMaterialForAllRenderers(originalMaterial);
+
+    /// <summary>
+    /// 피격 이펙트를 활성화합니다.
+    /// </summary>
+    [ClientRpc]
+    public void ActivateHitByAttackEffectClientRPC() => StartCoroutine(ActivateHitEffectAndRestore());
+
+    /// <summary>
+    /// 피격 캐릭터 반짝 효과를 활성화하고, 일정 시간 후에 자동으로 효과를 비활성화하는 코루틴 메서드입니다.
+    /// </summary>
+    private IEnumerator ActivateHitEffectAndRestore()
     {
-        throw new System.NotImplementedException();
+        Material previousMaterial = ownRenderers[0].material;
+        SetMaterialForAllRenderers(highlightMaterial);
+        yield return new WaitForSeconds(0.1f);
+        SetMaterialForAllRenderers(previousMaterial);
     }
+
+    /// <summary>
+    /// 모든 렌더러에 동일한 메터리얼을 적용시켜줍니다.
+    /// 각종 이펙트 연출에 사용됩니다.
+    /// </summary>
+    /// <param name="material">새로 적용할 메터리얼</param>
+    private void SetMaterialForAllRenderers(Material material)
+    {
+        foreach (Renderer renderer in ownRenderers)
+        {
+            renderer.material = material;
+        }
+    }
+    #endregion
 }

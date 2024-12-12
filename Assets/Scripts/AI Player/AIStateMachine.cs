@@ -6,10 +6,13 @@ using System.Collections.Generic;
 /// </summary>
 public class AIStateMachine
 {
-    private Dictionary<AIStateType, AIState> states = new Dictionary<AIStateType, AIState>(); 
+    #region Fields
+    private Dictionary<AIStateType, AIState> states = new Dictionary<AIStateType, AIState>();
     private AIState currentState;
     private WizardRukeAIServer ai;
+    #endregion
 
+    #region Initialization
     /// <summary>
     /// AIStateMachine의 생성자입니다.
     /// </summary>
@@ -40,7 +43,9 @@ public class AIStateMachine
     {
         ChangeState(initialState);
     }
+    #endregion
 
+    #region State Management
     /// <summary>
     /// 현재 상태를 새로운 상태로 변경합니다.
     /// </summary>
@@ -64,4 +69,5 @@ public class AIStateMachine
     {
         currentState?.Update();
     }
+    #endregion
 }

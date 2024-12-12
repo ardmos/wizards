@@ -327,7 +327,7 @@ public class SingleplayerGameManager : NetworkBehaviour
             Debug.Log($"Player {clientId} 스폰");
 
             Character playerClass = GameSingleplayer.Instance.GetPlayerDataFromClientId(clientId).characterClass;
-            PlayerInGameData playerInGameData = PlayerDataManager.Instance.GetPlayerInGameData();
+            PlayerInGameData playerInGameData = LocalPlayerDataManagerClient.Instance.GetPlayerInGameData();
             // 플레이어 추가
             GameSingleplayer.Instance.AddPlayer(new PlayerInGameData
             {

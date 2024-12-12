@@ -131,7 +131,7 @@ public class PopupSelectCharacterUIController : MonoBehaviour
             GameObject characterCardObject = Instantiate(prefabCharacterCard, containerCharacterCards);
             characterCardObject.GetComponent<CharacterCardController>().InitCharacterCard(cardInfo);
 
-            if(cardInfo.character == PlayerDataManager.Instance.GetCurrentPlayerClass())
+            if(cardInfo.character == LocalPlayerDataManagerClient.Instance.GetCurrentPlayerClass())
             {
                 selectedCard = characterCardObject.GetComponent<CharacterCardController>();
                 /*                selectedCard.SetFocus(true);

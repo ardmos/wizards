@@ -451,7 +451,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 170314462f7b9c9448ee575af055ed5e, type: 2}
+  - {fileID: 2100000, guid: 30b0263267936824f9198dad8a1d7980, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1068,7 +1068,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 170314462f7b9c9448ee575af055ed5e, type: 2}
+  - {fileID: 2100000, guid: 30b0263267936824f9198dad8a1d7980, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1310,7 +1310,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 170314462f7b9c9448ee575af055ed5e, type: 2}
+  - {fileID: 2100000, guid: 30b0263267936824f9198dad8a1d7980, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2317,7 +2317,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 170314462f7b9c9448ee575af055ed5e, type: 2}
+  - {fileID: 2100000, guid: 30b0263267936824f9198dad8a1d7980, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3487,11 +3487,9 @@ MonoBehaviour:
   hPBarUIController: {fileID: 4304191059183160955}
   damageTextUIController: {fileID: 1854042178333039586}
   mRigidbody: {fileID: 3649304333819496010}
-  currentMaterial: {fileID: 0}
-  originalMaterial: {fileID: 2100000, guid: f323cced30244554986ee5e9f5dd8b67, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 30b0263267936824f9198dad8a1d7980, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 8f5611d6ff98e58408979d37f88255c1, type: 2}
   frozenMaterial: {fileID: 2100000, guid: 89611dcb12c21f04b99fdc75034538fe, type: 2}
-  enemyMaterial: {fileID: 2100000, guid: 30b0263267936824f9198dad8a1d7980, type: 2}
   ownRenderers:
   - {fileID: 1275960713283973802}
   - {fileID: 177750188313599285}

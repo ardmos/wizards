@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class AITargetingSystem
 {
+    #region Constants & Fields
     // 최대 감지 가능한 콜라이더 수
     private const byte MAX_DETECTION_COUNT = 10;
 
@@ -21,7 +22,9 @@ public class AITargetingSystem
     private Collider[] detectionResults;
     // 캐시된 타겟들을 저장할 리스트
     private List<ITargetable> cachedTargets;
+    #endregion
 
+    #region Public Methods
     /// <summary>
     /// AITargetingSystem의 생성자입니다.
     /// </summary>
@@ -55,9 +58,11 @@ public class AITargetingSystem
             return null;
         }
     }
+    #endregion
 
+    #region Private Methods
     /// <summary>
-    /// 근처의 타겟들을 반환합니다. 
+    /// 근처의 타겟들을 반환합니다.
     /// 자주 호출되는 메서드라 성능 최적화를 위해 LINQ대신 직접 순회 방식으로 메서드를 구현했습니다.
     /// </summary>
     /// <typeparam name="T">ITargetable을 구현한 타입</typeparam>
@@ -67,11 +72,12 @@ public class AITargetingSystem
         cachedTargets.Clear();
 
         int hitCount = Physics.OverlapSphereNonAlloc(aiTransform.position, maxDetectionDistance, detectionResults);
-        if (hitCount > detectionResults.Length) Logger.LogWarning($"검출된 콜라이더 수({hitCount})가 검색 결과 배열 크기({detectionResults.Length})를 초과했습니다. 일부 검색 결과가 무시됩니다.");
+        if (hitCount > detectionResults.Length)
+            Logger.LogWarning($"검출된 콜라이더 수({hitCount})가 검색 결과 배열 크기({detectionResults.Length})를 초과했습니다. 일부 검색 결과가 무시됩니다.");
 
         for (int i = 0; i < hitCount; i++)
         {
-            if(detectionResults[i].TryGetComponent<T>(out T target))
+            if (detectionResults[i].TryGetComponent<T>(out T target))
             {
                 if (ReferenceEquals(target, aiPlayer)) continue;
                 cachedTargets.Add(target);
@@ -81,7 +87,7 @@ public class AITargetingSystem
     }
 
     /// <summary>
-    /// HP가 가장 낮은 타겟을 반환합니다. 
+    /// HP가 가장 낮은 타겟을 반환합니다.
     /// 자주 호출되는 메서드라 성능 최적화를 위해 LINQ대신 직접 순회 방식으로 메서드를 구현했습니다.
     /// </summary>
     /// <typeparam name="T">ITargetable을 구현한 타입</typeparam>
@@ -104,4 +110,5 @@ public class AITargetingSystem
 
         return lowestHPTarget.GetGameObject();
     }
+    #endregion
 }

@@ -10,9 +10,9 @@ using UnityEngine;
 /// 
 /// Player 스크립트의 PlayerData로 합칠 필요가 있음. 
 /// </summary>
-public class PlayerDataManager : MonoBehaviour
+public class LocalPlayerDataManagerClient : MonoBehaviour
 {
-    public static PlayerDataManager Instance { get; private set; }
+    public static LocalPlayerDataManagerClient Instance { get; private set; }
 
     [SerializeField] private PlayerData playerData;
 
