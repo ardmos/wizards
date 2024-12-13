@@ -6,7 +6,6 @@ using static ComponentValidator;
 /// <summary>
 /// AI 마법사 Ruke의 클라이언트 측 동작(UI, VFX)을 관리하는 클래스입니다. 
 /// </summary>
-
 public class WizardRukeAIClient : NetworkBehaviour
 {
     #region Constants & Fields
