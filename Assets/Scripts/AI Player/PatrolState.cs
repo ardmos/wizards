@@ -6,13 +6,15 @@ using static ComponentValidator;
 /// </summary>
 public class PatrolState : AIState
 {
+    #region Constructor
     /// <summary>
     /// PatrolState의 생성자입니다.
     /// </summary>
     /// <param name="ai">AI 서버 인스턴스</param>
     public PatrolState(WizardRukeAIServer ai) : base(ai) { }
+    #endregion
 
-    #region AIState 로부터 상속받은 메서드
+    #region AIState Override Methods
     /// <summary>
     /// 순찰 상태에 진입할 때 호출되는 메서드입니다.
     /// </summary>
@@ -42,7 +44,7 @@ public class PatrolState : AIState
     }
     #endregion
 
-    #region Patrol State 메서드
+    #region Core Patrol Logic
     /// <summary>
     /// 순찰 상태를 초기화하는 메서드입니다.
     /// </summary>
@@ -71,7 +73,9 @@ public class PatrolState : AIState
     /// 순찰 지점들을 순환하는 메서드입니다.
     /// </summary>
     private void CycleThroughPatrolPoints() => ai.GetMovementManager().Patrol();
+    #endregion
 
+    #region Target Detection
     /// <summary>
     /// 타겟을 감지하고 설정하는 메서드입니다.
     /// </summary>
@@ -92,7 +96,9 @@ public class PatrolState : AIState
     /// </summary>
     /// <returns>감지된 타겟의 GameObject, 없으면 null</returns>
     private GameObject DetectTarget() => ai.GetTargetingSystem().DetectTarget<ITargetable>();
+    #endregion
 
+    #region Target Distance Evaluation
     /// <summary>
     /// 타겟과의 거리를 평가하고 적절한 행동을 결정하는 메서드입니다.
     /// </summary>
@@ -107,7 +113,9 @@ public class PatrolState : AIState
         else if (IsTargetInDetectionRange(targetDistance))
             SwitchToChase();
     }
+    #endregion
 
+    #region Target Distance Calculation
     /// <summary>
     /// 타겟과의 거리를 계산하는 메서드입니다.
     /// </summary>
@@ -127,7 +135,9 @@ public class PatrolState : AIState
     /// <param name="targetDistance">타겟과의 거리</param>
     /// <returns>타겟이 감지 범위 내에 있으면 true, 아니면 false</returns>
     private bool IsTargetInDetectionRange(float targetDistance) => targetDistance <= ai.GetMaxDetectionDistance();
+    #endregion
 
+    #region State Transition
     /// <summary>
     /// 공격 상태로 전환하는 메서드입니다.
     /// </summary>
@@ -137,7 +147,9 @@ public class PatrolState : AIState
     /// 추격상태로 전환하는 메서드입니다.
     /// </summary>
     private void SwitchToChase() => ai.GetStateMachine().ChangeState(AIStateType.Chase);
+    #endregion
 
+    #region Validation Check
     /// <summary>
     /// AI 구성 요소의 유효성을 검사하는 메서드입니다.
     /// </summary>

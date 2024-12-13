@@ -12,7 +12,7 @@ public class AIStateMachine
     private WizardRukeAIServer ai;
     #endregion
 
-    #region Initialization
+    #region Constructor
     /// <summary>
     /// AIStateMachine의 생성자입니다.
     /// </summary>
@@ -21,6 +21,17 @@ public class AIStateMachine
     {
         this.ai = ai;
         InitializeStates();
+    }
+    #endregion
+
+    #region Initialization
+    /// <summary>
+    /// 초기 상태를 설정하고 진입합니다.
+    /// </summary>
+    /// <param name="initialState">초기 AI 상태</param>
+    public void InitializeStateMachine(AIStateType initialState)
+    {
+        ChangeState(initialState);
     }
 
     /// <summary>
@@ -33,15 +44,6 @@ public class AIStateMachine
         states[AIStateType.Patrol] = new PatrolState(ai);
         states[AIStateType.Chase] = new ChaseState(ai);
         states[AIStateType.Attack] = new AttackState(ai);
-    }
-
-    /// <summary>
-    /// 초기 상태를 설정하고 진입합니다.
-    /// </summary>
-    /// <param name="initialState">초기 AI 상태</param>
-    public void InitializeStateMachine(AIStateType initialState)
-    {
-        ChangeState(initialState);
     }
     #endregion
 

@@ -6,13 +6,15 @@ using static ComponentValidator;
 /// </summary>
 public class ChaseState : AIState
 {
+    #region Constructor
     /// <summary>
     /// ChaseState의 생성자입니다.
     /// </summary>
     /// <param name="ai">AI 서버 인스턴스</param>
     public ChaseState(WizardRukeAIServer ai) : base(ai) { }
+    #endregion
 
-    #region AIState 로부터 상속받은 메서드
+    #region AIState Override Methods
     /// <summary>
     /// 추격 상태에 진입할 때 호출되는 메서드입니다.
     /// </summary>
@@ -41,7 +43,7 @@ public class ChaseState : AIState
     }
     #endregion
 
-    #region Attack State 메서드
+    #region Core Chase Logic
     /// <summary>
     /// 추격 로직을 처리하는 메서드입니다.
     /// </summary>
@@ -57,7 +59,9 @@ public class ChaseState : AIState
     /// 목표를 향해 이동하는 메서드입니다.
     /// </summary>
     private void ChaseTarget() => ai.MoveTowardsTarget();
+    #endregion
 
+    #region Target Distance Evaluation
     /// <summary>
     /// 목표와의 거리를 확인하고 적절한 행동을 결정하는 메서드입니다.
     /// </summary>
@@ -72,7 +76,9 @@ public class ChaseState : AIState
         else if (IsTargetInAttackRange(targetDistance))
             SwitchToAttack();
     }
+    #endregion
 
+    #region Target Distance Calculation
     /// <summary>
     /// 목표와의 거리를 계산하는 메서드입니다.
     /// </summary>
@@ -92,7 +98,9 @@ public class ChaseState : AIState
     /// <param name="targetDistance">목표와의 거리</param>
     /// <returns>목표가 공격 범위 내에 있으면 true, 아니면 false</returns>
     private bool IsTargetInAttackRange(float targetDistance) => targetDistance <= ai.GetBattleManager().GetAttackRange();
+    #endregion
 
+    #region State Transition
     /// <summary>
     /// 순찰 상태로 전환하는 메서드입니다.
     /// </summary>
@@ -103,6 +111,10 @@ public class ChaseState : AIState
     /// </summary>
     private void SwitchToAttack() => ai.GetStateMachine().ChangeState(AIStateType.Attack);
 
+
+    #endregion
+
+    #region Validation Check
     /// <summary>
     /// AI 구성 요소의 유효성을 검사하는 메서드입니다.
     /// </summary>

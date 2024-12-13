@@ -51,10 +51,6 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter, ITargetable
     #endregion
 
     #region Unity Lifecycle
-    /// <summary>
-    /// AI stateMachine을 매 프레임 업데이트 시킵니다.
-    /// </summary>
-
     private void Update()
     {
         if (!IsServer) return;

@@ -4,13 +4,15 @@
 /// </summary>
 public class IdleState : AIState
 {
+    #region Constructor
     /// <summary>
     /// IdleState의 생성자입니다.
     /// </summary>
     /// <param name="ai">AI 서버 인스턴스</param>
     public IdleState(WizardRukeAIServer ai) : base(ai) { }
+    #endregion
 
-    #region AIState 로부터 상속받은 메서드
+    #region AIState Override Methods
     /// <summary>
     /// 대기 상태에 진입할 때 호출되는 메서드입니다.
     /// </summary>

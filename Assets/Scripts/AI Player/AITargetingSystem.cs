@@ -24,7 +24,7 @@ public class AITargetingSystem
     private List<ITargetable> cachedTargets;
     #endregion
 
-    #region Public Methods
+    #region Constructor
     /// <summary>
     /// AITargetingSystem의 생성자입니다.
     /// </summary>
@@ -39,7 +39,9 @@ public class AITargetingSystem
         detectionResults = new Collider[MAX_DETECTION_COUNT];
         cachedTargets = new List<ITargetable>();
     }
+    #endregion
 
+    #region Target Detection
     /// <summary>
     /// 주변에서 타겟을 감지하고 HP가 가장 낮은 타겟을 반환합니다.
     /// </summary>
@@ -58,9 +60,7 @@ public class AITargetingSystem
             return null;
         }
     }
-    #endregion
 
-    #region Private Methods
     /// <summary>
     /// 근처의 타겟들을 반환합니다.
     /// 자주 호출되는 메서드라 성능 최적화를 위해 LINQ대신 직접 순회 방식으로 메서드를 구현했습니다.
