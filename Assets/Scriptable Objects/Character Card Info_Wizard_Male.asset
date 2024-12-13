@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55363513a118e6a4a8ecd6100ee8a5a4, type: 3}
+  m_Name: Character Card Info_Wizard_Male
+  m_EditorClassIdentifier: 
+  character: 0
+  iconRole: {fileID: 21300000, guid: 71b10421d217d4d2d85b7d37dc19a2f2, type: 3}
+  iconCharacter: {fileID: 21300000, guid: 5008d607c5602486db52f3722327d87f, type: 3}
+  spriteBG: {fileID: 21300000, guid: cab1bed53d60e4416ad1f76c9b70e7a6, type: 3}
+  characterName: Ruke
+  characterDescription: Elemental Wizard
+  characterLevel: 1
+  characterSkillSet: 0000000001000000040000000a000000
+  skillInfoDetails:
+  - skillIcon: {fileID: 21300000, guid: 5e82c79e89157b0498086add9ecd5e65, type: 3}
+    skillName: FireBall
+    skillDescription: 'Basic fireball skills. Inflicts 1 [Fire] damage on hit. '
+  - skillIcon: {fileID: 21300000, guid: aff69b164a3d00542b5daf5653188ec6, type: 3}
+    skillName: WaterBall
+    skillDescription: Guided skill. Upon launch, automatically tracks and deals 1
+      [water] damage to enemies.
+  - skillIcon: {fileID: 21300000, guid: 4d49b79a114ab0e4598fcaf28322f86a, type: 3}
+    skillName: Blizzard
+    skillDescription: Area-of-effect skill. Summons an area that inflicts 1 [ice]
+      damage every 2 seconds and slows enemies upon casting.
+  - skillIcon: {fileID: 21300000, guid: 5cc43e752d94000488280ec6c21fcd31, type: 3}
+    skillName: MagicShield
+    skillDescription: Defensive skill. Grants immunity to all damage for 2.2 seconds
+      upon casting.

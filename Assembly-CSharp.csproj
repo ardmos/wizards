@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\</OutputPath>
-    <DefineConstants>UNITY_2022_3_10;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_RUNTIME_PERMISSIONS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_ANDROID;TEXTCORE_1_0_OR_NEWER;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;ENABLE_ETC_COMPRESSION;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_2022_3_10;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;DEDICATED_SERVER_NO;UNITY_ANDROID_NO;UNITY_NETCODE_NATIVE_COLLECTION_SUPPORT;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -49,7 +49,7 @@
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.18</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>Android:13</UnityBuildTarget>
+    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2022.3.10f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -58,176 +58,300 @@
     <Analyzer Include="D:\UnityEditor\2022.3.10f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollFlySpeedUp.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\LobbySceneUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupSelectScrollEffectUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\IceSpell.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\ItemAcquiredMessageTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSettings\SwitchUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSettings\GraphicGroupUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\SmoothObjectNormalHelper.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\GameOverMessageTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Client\UnityAuthenticationManager.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupShop\ItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSettings\MusicGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\MuzzlePos.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\Scripts\Data\SaveSystem.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Player.cs" />
     <Compile Include="Assets\Downloaded Assets\UI\Layer Lab\GUI Pro-SimpleCasual\Scripts\PanelSimpleCasual.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAIHPManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IServerInfoProvider.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\SkillManagerServerKnight.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAIGameOverManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\GamePadUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Store\SelectSpellSlotUI.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Store\StoreTriggerAreaCollider.cs" />
-    <Compile Include="Assets\Scripts\UGS Network\ServerStartUp.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PopupSelectScrollEffectUIController.cs" />
-    <Compile Include="Assets\Scripts\UGS Network\ConnectionApprovalHandler.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupClanUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\HPBarUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\MusicGroupUI.cs" />
-    <Compile Include="Assets\Scripts\Loading\LoaderCallback.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollGuide.cs" />
+    <Compile Include="Assets\Scripts\Data\CharacterSpecifications.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\LocalPlayerDataManagerClient.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupMatchingRoom\GameMatchReadyManagerClient.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSettings\PopupSettingsUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupEquipmentUIController.cs" />
+    <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\CustomShadowResolution.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\ServerNetworkConnectionManager.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Client\ClientNetworkConnectionManager.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\ChaseState.cs" />
+    <Compile Include="Assets\Scripts\Data\AIPlayerName.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\DefenceSpell.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\LobbySceneUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\SkillManagerClientKnight.cs" />
+    <Compile Include="Assets\Scripts\Generals\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\FireBallLv3.cs" />
+    <Compile Include="Assets\Scripts\Data\GameAssetsManager.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupMagicStoreUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupGameOverUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAIBattleManagerServer.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\TimerUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\PlayerAnimator.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupGameStartCountdownUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\Monster\ChickenAIServer.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\PlayerServer.cs" />
+    <Compile Include="Assets\Scripts\Generals\Custom UI\TouchEffectManager.cs" />
+    <Compile Include="Assets\Scripts\Generals\CameraShake.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Store\SelectSpellSlotUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterPropertyBlockSetter.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\AttackSpell.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Scripts\Data\SaveData.cs" />
-    <Compile Include="Assets\Scripts\TitleScene\GraphicQualityManager.cs" />
-    <Compile Include="Assets\Scripts\Custom UI\CustomClickSoundButton.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Client\PlayerMovementClient.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\GameSceneUIController.cs" />
-    <Compile Include="Assets\Scripts\UGS Network\UnityAuthenticationManager.cs" />
-    <Compile Include="Assets\Scripts\Spells\DefenceSpell.cs" />
-    <Compile Include="Assets\Scripts\TitleScene\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupInboxUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\KnightClient.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\SpellManagerClient.cs" />
+    <Compile Include="Assets\Scripts\Data\Tags.cs" />
+    <Compile Include="Assets\Scripts\Scenes\TitleScene\TextAppVersion.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupUserInfo\PopupUserInfoUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\AIStateType.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\PlayerHPManagerClient.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\DamageTextUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\TitleScene\GraphicQualityManager.cs" />
     <Compile Include="Assets\Scripts\Data\SpellType.cs" />
-    <Compile Include="Assets\Scripts\Spells\FireBallLv2.cs" />
-    <Compile Include="Assets\Scripts\Spells\IceSpell.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\GameOverMessageTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\KnightServer.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimStateEventData.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\ItemAcquiredMessageTemplateUI.cs" />
+    <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoRotate.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IStoreCustomer.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\PlayerAnimator.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAIItemDropManagerServer.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\WinPopupItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Generals\Loading\SceneCleanupManager.cs" />
     <Compile Include="Assets\Scripts\Data\SpellSpecifications.cs" />
-    <Compile Include="Assets\Scripts\GameScene\SFX\AudioSourceObject.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Singleplayer\GameSingleplayer.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupWinUIController.cs" />
+    <Compile Include="Assets\Scripts\Generals\Custom UI\CustomOnScreenButton.cs" />
     <Compile Include="Assets\Scripts\Data\ItemName.cs" />
     <Compile Include="Assets\Scripts\Data\SpellState.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\ItemAcquireUIController.cs" />
-    <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenStickWithDynamicTouch.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PopupMagicStoreUI.cs" />
+    <Compile Include="Assets\Scripts\Generals\Loading\LoaderCallback.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\Billboard.cs" />
+    <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupModUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Manager\MultiplayerGameManager.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\UserNameUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\PatrolState.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\MatchmakingManager.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Singleplayer\PlayerServerSingleMode.cs" />
     <Compile Include="Assets\Scripts\Data\GameState.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\Coin.cs" />
-    <Compile Include="Assets\Scripts\GameScene\VFX\VfxSpellUpgrade.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\SFX\AudioSourceObject.cs" />
+    <Compile Include="Assets\Scripts\Scenes\TitleScene\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Data\SkillInfoDetail.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAISpellManagerServer.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\SlashSkill.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\WizardClient.cs" />
     <Compile Include="Assets\GPGSIds.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\PotionHP.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupSupportUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\StoneSlashLv1.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Client\ClientNetworkTransform.cs" />
+    <Compile Include="Assets\Scripts\Data\UISFX_Type.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\GamePadUIController.cs" />
     <Compile Include="Assets\Scripts\Data\GraphicQualitySettingsData.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\TimerUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\MuzzlePos.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSUI.cs" />
+    <Compile Include="Assets\Scripts\Data\SFXType.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSettings\PushAlarmGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\PlayerHPManagerServer.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PlayerCountUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\GameMultiplayer.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSelectCharacter\SkillGroupItemController.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ICleanable.cs" />
+    <Compile Include="Assets\Scripts\Generals\Loading\LoadingProgressBarUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\VFX\VfxSpellUpgrade.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupInboxUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\FireBallLv2.cs" />
+    <Compile Include="Assets\Scripts\Generals\Loading\LoadSceneManager.cs" />
+    <Compile Include="Assets\Scripts\Generals\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerSpawnPointsController.cs" />
-    <Compile Include="Assets\Scripts\Spells\IceBallLv1.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupShop\PopupShopUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollFireRateUp.cs" />
+    <Compile Include="Assets\Scripts\VFX\Knight_Buzz\ObjectPoolBuzzTrailHelmet.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupNewsUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\SelectScrollEffectPopupItemTemplateUI.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerOutGameData.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\SpellManagerClientWizard.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\ButtonReadSpellScrollUIController.cs" />
+    <Compile Include="Assets\Scripts\VFX\Knight_Buzz\KnightBuzzMeshTrail.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\WinPopupItemTemplateUI.cs" />
-    <Compile Include="Assets\Scripts\Data\PlayerAttackAnimState.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Item\Scroll.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\CurrentPlayerDataManager.cs" />
+    <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\GameInput.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\Scroll.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\PopupGameRoomUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\DamageTextUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\JoystickDirectionUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\GameSceneUIManager.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerGameState.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerSpellData.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\AoESpell.cs" />
+    <Compile Include="Assets\Scripts\VFX\Knight_Buzz\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Data\SpellInfo.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\SpellController.cs" />
-    <Compile Include="Assets\Scripts\Spells\WaterSpell.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupEquipmentUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Server\PlayerMovementServer.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupUserInfoUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PopupGameOverUIController.cs" />
+    <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Manual.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\ItemAcquireUIController.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\ConnectionApprovalHandler.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\WaterSpell.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
-    <Compile Include="Assets\Scripts\UGS Network\OwnerNetworkAnimator.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupNewsUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SwitchUI.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupLookingForGameUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PlayerDataManager.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\GameOverUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupMatchingRoom\GameMatchReadyManagerServer.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\AnimationStarter.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\WizardServer.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\CameraDepthSlider.cs" />
+    <Compile Include="Assets\Scripts\Scenes\TitleScene\TitleSceneUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\GameInput.cs" />
+    <Compile Include="Assets\Scripts\Generals\Logger.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAIMovementManagerServer.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\AttackState.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSettings\SoundFXGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Water.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\PlayerScrollCounterClient.cs" />
+    <Compile Include="Assets\Scriptable Objects\GameAssetsScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerMoveAnimState.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\Billboard.cs" />
-    <Compile Include="Assets\Scripts\TitleScene\TitleSceneUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PopupWinUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Manager\PlayerHPManager.cs" />
-    <Compile Include="Assets\Scripts\Spells\WaterBallLv1.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\JoystickDirectionUI.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\ScrollManagerServer.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\SpellManagerServer.cs" />
+    <Compile Include="Assets\Scripts\Characters\Monster\ChickenAIClient.cs" />
     <Compile Include="Assets\InputSystem\PlayerInputActions.cs" />
-    <Compile Include="Assets\Scripts\Spells\FireBallLv1.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\UserNameUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PopupGameStartCountdownUIController.cs" />
-    <Compile Include="Assets\Scripts\UGS Network\MatchmakerClient.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupShop\DailyGroupUI.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollLevelUp.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Wizard.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Item\ScrollAttach.cs" />
-    <Compile Include="Assets\Scripts\Loading\LoadingImageUI.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\IceBallLv1.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\FireSpell.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\HPBarUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\VFX\VfxHeal.cs" />
+    <Compile Include="Assets\Scriptable Objects\CharacterCardInfo.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\BackfillManager.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupShop\PopupShopUIController.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IOwnerSeter.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupLookingForGameUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Item\Coin.cs" />
+    <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupMenuUIController.cs" />
+    <Compile Include="Assets\Scripts\Generals\Custom UI\CustomClickSoundButton.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupHostHasDisconnectedUIController.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSCounter.cs" />
+    <Compile Include="Assets\Scripts\Scenes\TitleScene\PopupSelectAuthMethodUIController.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\FireBallLv1.cs" />
     <Compile Include="Assets\Scripts\Data\Spell.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\PopupNameChangeUIController.cs" />
-    <Compile Include="Assets\Scripts\Loading\LoadSceneManager.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupGameRoom\GameMatchReadyManager.cs" />
-    <Compile Include="Assets\Scripts\Spells\MagicShieldLv1.cs" />
-    <Compile Include="Assets\Scripts\Loading\LoadingProgressBarUI.cs" />
-    <Compile Include="Assets\Scripts\Spells\AttackSpell.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Manager\GameManager.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\DamageTextUI.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\PopupSettingsUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\PushAlarmGroupUI.cs" />
-    <Compile Include="Assets\Scripts\UGS Network\ClientNetworkTransform.cs" />
-    <Compile Include="Assets\Scripts\Custom UI\CustomOnScreenButton.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PopupWatingForPlayersUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupShop\ItemTemplateUI.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PopupHostHasDisconnectedUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\GraphicGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\MagicShieldLv1.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\TeamColorController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupClanUIController.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ICharacter.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\AIPlayerGenerator.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\AIState.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Client\MatchmakerClient.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupWatingForPlayersUIController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\GameOverUIController.cs" />
+    <Compile Include="Assets\Scripts\VFX\Knight_Buzz\ObjectPoolBuzzTrailSword.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Store\StoreTriggerAreaCollider.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSelectCharacter\PopupSelectCharacterUIController.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ITargetable.cs" />
+    <Compile Include="Assets\Scripts\Generals\ComponentValidator.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\FloorGenerator.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\WaterBallLv1.cs" />
+    <Compile Include="Assets\Scripts\VFX\Knight_Buzz\ObjectPoolBuzzTrailBody.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupShop\DailyGroupUI.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerGameOverEventArgs.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerInGameData.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupUserInfo\TextFieldUI.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\ButtonReadSpellScrollUIController.cs" />
-    <Compile Include="Assets\Scripts\Spells\StoneSlashLv1.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\ServerStartup.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\HomingMissile.cs" />
+    <Compile Include="Assets\Scripts\Data\AnimationStateEnums.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\IdleState.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Store\MagicStoreItemTemplateUI.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Item\PotionHP.cs" />
     <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Manager\SpellManager.cs" />
-    <Compile Include="Assets\Scripts\Spells\FireSpell.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAIClient.cs" />
     <Compile Include="Assets\Scripts\Test\TestNetworkUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PlayerCountUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\FloorGenerator.cs" />
-    <Compile Include="Assets\Scripts\GameScene\UI\PopupMenuUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupSettings\SoundFXGroupUI.cs" />
-    <Compile Include="Assets\Scripts\GameScene\Store\MagicStoreItemTemplateUI.cs" />
-    <Compile Include="Assets\Scripts\TitleScene\PopupSelectAuthMethodUIController.cs" />
-    <Compile Include="Assets\Scripts\Data\GameAssets.cs" />
-    <Compile Include="Assets\Scripts\UGS Network\TargetFPS.cs" />
-    <Compile Include="Assets\Scripts\Spells\FireBallLv3.cs" />
-    <Compile Include="Assets\Scripts\GameScene\VFX\VfxHeal.cs" />
+    <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\TargetFPS.cs" />
+    <Compile Include="Assets\Scripts\Data\RandomSkillOptionProviderSystem.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\PlayerSpawnPointsController.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupConnectionNotificationUIController.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\Water\WaterArea.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\AIStateMachine.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSelectCharacter\CharacterCardController.cs" />
+    <Compile Include="Assets\Scripts\Characters\Monster\ChickenAIHPManagerClient.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\PlayerMovementServer.cs" />
+    <Compile Include="Assets\Scripts\Data\MatchmakingPlayerData.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAIServer.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Singleplayer\SingleplayerGameManager.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupMatchingRoom\PopupMatchingRoomUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\Monster\ChickenAIHPManagerServer.cs" />
+    <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Default.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\PlayerClient.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSupportUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\SpellManagerServerWizard.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
+    <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\PlayerMovementClient.cs" />
     <Compile Include="Assets\Scripts\Data\SpellName.cs" />
-    <Compile Include="Assets\Scripts\Data\PlayerAttackAnimStateEventData.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupModUIController.cs" />
-    <Compile Include="Assets\Scripts\LobbyScene\PopupConnectionNotificationUIController.cs" />
-    <Compile Include="Assets\Scripts\GameScene\PlayerCharacter\Knight.cs" />
+    <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\TouchRotator.cs" />
+    <Compile Include="Assets\Scripts\VFX\Knight_Buzz\ObjectPoolBuzzTrailShield.cs" />
+    <Compile Include="Assets\Scripts\Characters\AI Player\AITargetingSystem.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\TileGenerator.cs" />
+    <Compile Include="Assets\Scripts\Characters\Monster\ChickenAIAnimationServer.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupUserInfo\PopupNameChangeUIController.cs" />
+    <Compile Include="Assets\Scripts\Characters\Monster\ChickenAIMovementServer.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSelectCharacter\MiniPopupSkillInfoDetailController.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\BlizzardLv1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFX3 Multiply Color.shader" />
     <None Include="Assets\GooglePlayGames\com.google.play.games\Proguard\games.txt" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseColorHeightWaterTwoSide.shader" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_SETTINGS.cginc" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\DiffuseWaterOpaque.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\CartoonFX Free.txt" />
+    <None Include="Assets\Downloaded Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Extended.shader" />
+    <None Include="Assets\Downloaded Assets\RealToon\For VRoid-VRM users.txt" />
+    <None Include="Assets\Shaders\ChickenToonShader_URP.shader" />
+    <None Include="Assets\Downloaded Assets\RealToon\RealToon Shader Packages\SRP (LWRP - URP - HDRP)\URP\Please read before you unpack or import.txt" />
+    <None Include="Assets\Downloaded Assets\RealToon\What&apos;s New.txt" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseColorDepthWaterTwoSide.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseDepthWaterTwoSide.shader" />
+    <None Include="Assets\Downloaded Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_Core.hlsl" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Downloaded Assets\RealToon\RealToon Shaders\Version 5\URP\Default\D_Default_URP.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseHeightWater.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Shaders\DiffuseWaterOpaque(mine).shader" />
+    <None Include="Assets\Audios\FREE CASUAL MUSIC PACK\WELCOME_CGMUSIC.txt" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseHeightWaterTwoSide.shader" />
+    <None Include="Assets\Audios\Casual Puzzle World Sounds - Free Package\assetexplain.txt" />
+    <None Include="Assets\Downloaded Assets\BOXOPHOBIC\Skybox Cubemap Extended\Core\Shaders\Skybox Cubemap Blend.shader" />
     <None Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Shaders\Legacy\AdditiveMobile_Scroll01.shader" />
     <None Include="Assets\Downloaded Assets\Lana Studio\Hyper Casual FX\Demo\Readme.txt" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\Depth\DiffuseDepthWater.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\Readme Cartoon FX Remaster FREE.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Prefabs\Texts\_Make your own text effect.txt" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_PASSES.cginc" />
+    <None Include="Assets\Downloaded Assets\RealToon\RealToon Shaders\RealToon Core\URP\RT_URP_PROP.hlsl" />
+    <None Include="Assets\Downloaded Assets\RealToon\ReadMe - Important - Guide.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseColorHeightWater.shader" />
+    <None Include="Assets\Downloaded Assets\MobileDepthWater\Shaders\WaterOpaque\Depth\DiffuseColorDepthWater.shader" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\RPGTinyHeroWavePBR\HowToTestHDRP_URP.txt" />
+    <None Include="Assets\Downloaded Assets\RealToon\Change - Fix Log.txt" />
+    <None Include="Assets\Downloaded Assets\RPGTinyHeroWavePBR\HowToTestHDRP_URP.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\Shaders\MyLavaShader(개선 필요).shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_URP.cginc" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Downloaded Assets\Hovl Studio\Magic effects pack\Demo scene\Readme.txt" />
@@ -260,6 +384,12 @@
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
       <HintPath>D:\UnityEditor\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>D:\UnityEditor\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>D:\UnityEditor\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ContentLoadModule">
       <HintPath>D:\UnityEditor\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.ContentLoadModule.dll</HintPath>
@@ -419,6 +549,9 @@
     </Reference>
     <Reference Include="UnityEngine.VideoModule">
       <HintPath>D:\UnityEditor\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VirtualTexturingModule">
+      <HintPath>D:\UnityEditor\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.WindModule">
       <HintPath>D:\UnityEditor\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>
@@ -942,6 +1075,12 @@
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.MemoryProfiler">
+      <HintPath>Library\ScriptAssemblies\Unity.MemoryProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.MemoryProfiler.Editor.MemoryProfilerModule">
+      <HintPath>Library\ScriptAssemblies\Unity.MemoryProfiler.Editor.MemoryProfilerModule.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
@@ -978,6 +1117,9 @@
     <Reference Include="Unity.InputSystem.ForUI">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.MemoryProfiler.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.MemoryProfiler.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
@@ -992,6 +1134,9 @@
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="NavMeshPlusEditor">
+      <HintPath>Library\ScriptAssemblies\NavMeshPlusEditor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.IK.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
@@ -1062,11 +1207,14 @@
     <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Multiplayer.Tools.Common">
-      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.Common.dll</HintPath>
+    <Reference Include="NavMeshPlus">
+      <HintPath>Library\ScriptAssemblies\NavMeshPlus.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Profiling.Core">
       <HintPath>Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.Common">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
@@ -1181,9 +1329,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Boxophobic.SkyboxCubemapExtended.Editor.csproj">
+      <Project>{3F43D61B-1492-BBA9-7C8D-E37BAD1DA0DD}</Project>
+      <Name>Boxophobic.SkyboxCubemapExtended.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXRRuntime.csproj">
+      <Project>{AD2C6BDC-23DE-231A-6117-5CCEC16F8AE6}</Project>
+      <Name>CFXRRuntime</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXREditor.csproj">
+      <Project>{156B902B-846C-0EDB-0B00-010B4A9DAAB3}</Project>
+      <Name>CFXREditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Boxophobic.Utils.Editor.csproj">
+      <Project>{42CA4FC4-9BD1-47BD-D6B0-A4FB831930D5}</Project>
+      <Name>Boxophobic.Utils.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="IngameDebugConsole.Editor.csproj">
       <Project>{0822653F-8344-E92C-D91D-F180CC00FB96}</Project>
       <Name>IngameDebugConsole.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Boxophobic.Utils.Scripts.csproj">
+      <Project>{54A184D2-2958-83C7-9B8B-777EAC1F5882}</Project>
+      <Name>Boxophobic.Utils.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="KinoBloom.Runtime.csproj">
+      <Project>{C61914C6-33EB-95F8-6511-87A3B9F4E906}</Project>
+      <Name>KinoBloom.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Google.Play.Games.csproj">
       <Project>{C2C88881-030D-60CE-C6A0-8054BC730F91}</Project>
@@ -1200,6 +1372,18 @@
     <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
       <Project>{9BBFB8B1-55DE-CC05-A70E-5F051FB16868}</Project>
       <Name>IngameDebugConsole.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="ToonyColorsPro.Demo.Editor.csproj">
+      <Project>{A4FECF81-75D0-B0FA-C419-226B55F64619}</Project>
+      <Name>ToonyColorsPro.Demo.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXRDemo.csproj">
+      <Project>{3CCE642E-8F0B-5B22-B09A-E333AECE1EB8}</Project>
+      <Name>CFXRDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXR.WelcomeScreen.csproj">
+      <Project>{C0D0DBE2-3EFE-2130-1AA1-86714ED86ACB}</Project>
+      <Name>CFXR.WelcomeScreen</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

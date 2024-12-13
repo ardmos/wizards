@@ -1,19 +1,15 @@
 public enum SpellName
 {
-    FireSpellStart,
     FireBallLv1,
-    FireSpellEnd,
-    WaterSpellStart,
     WaterBallLv1,
-    WaterSpellEnd,
-    IceSpellStart,
     IceBallLv1,
-    IceSpellEnd,
-    SlashSpellStart,
-    StoneSlashLv1,
-    SlashSpellEnd,
-    DefenceSpellStart,
+    BlizzardLv1_Ready,
+    BlizzardLv1,
+    StoneSlashAttack1_Lv1,
+    ElectricSlashAttackVertical_Lv1,
+    ElectricSlashAttackWhirlwind_Lv1,
+    ElectricSlashAttackCharge_Lv1,
+    ElectricSlashAttackChargeSlash_Lv1,
     MagicShieldLv1,
-    DefenceSpellEnd,
-    Max
+    Dash_Lv1,
 }

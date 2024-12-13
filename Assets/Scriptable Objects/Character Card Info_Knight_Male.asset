@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55363513a118e6a4a8ecd6100ee8a5a4, type: 3}
+  m_Name: Character Card Info_Knight_Male
+  m_EditorClassIdentifier: 
+  character: 1
+  iconRole: {fileID: 21300000, guid: 86b2b4a7362e24d25be61c335165663d, type: 3}
+  iconCharacter: {fileID: 21300000, guid: e83632a751f3f44539cbd3788947ccb4, type: 3}
+  spriteBG: {fileID: 21300000, guid: ab7ccdba25d3941b9a0232b1d909ec58, type: 3}
+  characterName: Buzz
+  characterDescription: Electric Knight
+  characterLevel: 1
+  characterSkillSet: 0600000007000000090000000b000000
+  skillInfoDetails:
+  - skillIcon: {fileID: 21300000, guid: bb24fc541434a604d8ede094a2ede553, type: 3}
+    skillName: Electric Slash
+    skillDescription: Melee attack skill. Swiftly swing an electrically charged sword
+      to deal 1 [electric] damage to enemies in front.
+  - skillIcon: {fileID: 21300000, guid: bee34cabe96173044bea44049f12ab02, type: 3}
+    skillName: Electric Whirlwind
+    skillDescription: Melee attack skill. Become a whirlwind of lightning itself,
+      dealing 1 [electric] damage to all nearby enemies.
+  - skillIcon: {fileID: 21300000, guid: 4925da1a288bf974fb7ced1ba8d0e9ac, type: 3}
+    skillName: Electric Charge Slash
+    skillDescription: Ranged attack skill. Release a lightning-charged sword strike
+      to hit distant enemies. Inflicts 1 [electric] damage.
+  - skillIcon: {fileID: 21300000, guid: fc8b9e04a6ec10e4a9a6b08ee9f0dd40, type: 3}
+    skillName: Dash
+    skillDescription: Evasive skill. Quickly move forward.

@@ -3,31 +3,31 @@ using UnityEngine;
 public class Spell
 {
     /// <summary>
-    /// 스펠의 레벨에 맞는 이름을 설정해주는 메소드 입니다.
+    /// 스펠의 레벨에 맞는 이름을 설정해주는 메소드 입니다.   메서드명 바꿀 필요 있어보임. 충돌결과처리하는건데 직관성이 떨어짐
+    /// 각 속성별로 Start라는 enum의 요소들을 없앴기 때문에 -1 해주고있음
     /// </summary>
     /// <param name="level"></param>
     /// <param name="spellType"></param>
     public static SpellName GetSpellName(byte level, SpellType spellType)
     {
-        SpellName spellName = SpellName.FireSpellStart;
+        SpellName spellName = SpellName.FireBallLv1;
 
         switch (spellType)
         {
             case SpellType.Normal:
                 // 기사 마법은 추후 수정 예정. 일단 테스트용.
-                spellName = SpellName.SlashSpellStart + level;
+                spellName = SpellName.FireBallLv1 + level - 1;
                 break;
             case SpellType.Fire:
-                spellName = SpellName.FireSpellStart + level;
+                spellName = SpellName.FireBallLv1 + level - 1;
                 break;
 
             case SpellType.Water:
-                spellName = (SpellName)((int)SpellName.WaterSpellStart + (int)level);
-                Debug.Log($"!!! result spell name:{spellName} !!! level:{level}");
+                spellName = SpellName.WaterBallLv1 + level - 1;
                 break;
 
             case SpellType.Ice:
-                spellName = SpellName.IceSpellStart + level;
+                spellName = SpellName.IceBallLv1 + level - 1;
                 break;
 
             default: break;
