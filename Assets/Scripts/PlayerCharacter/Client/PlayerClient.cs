@@ -91,12 +91,8 @@ public abstract class PlayerClient : NetworkBehaviour
     #region Event Subscription
     private void SubscribeToInputEvents()
     {
-        gameInput.OnAttack1Started += GameInput_OnAttack1Started;
-        gameInput.OnAttack2Started += GameInput_OnAttack2Started;
-        gameInput.OnAttack3Started += GameInput_OnAttack3Started;
-        gameInput.OnAttack1Ended += GameInput_OnAttack1Ended;
-        gameInput.OnAttack2Ended += GameInput_OnAttack2Ended;
-        gameInput.OnAttack3Ended += GameInput_OnAttack3Ended;
+        gameInput.OnAttackStarted += GameInput_OnAttackStarted;
+        gameInput.OnAttackEnded += GameInput_OnAttackEnded;
         gameInput.OnDefenceStarted += GameInput_OnDefenceStarted;
         gameInput.OnDefenceEnded += GameInput_OnDefenceEnded;
     }
@@ -109,25 +105,59 @@ public abstract class PlayerClient : NetworkBehaviour
 
     private void UnsubscribeFromInputEvents()
     {
-        gameInput.OnAttack1Started -= GameInput_OnAttack1Started;
-        gameInput.OnAttack2Started -= GameInput_OnAttack2Started;
-        gameInput.OnAttack3Started -= GameInput_OnAttack3Started;
-        gameInput.OnAttack1Ended -= GameInput_OnAttack1Ended;
-        gameInput.OnAttack2Ended -= GameInput_OnAttack2Ended;
-        gameInput.OnAttack3Ended -= GameInput_OnAttack3Ended;
+        gameInput.OnAttackStarted -= GameInput_OnAttackStarted;
+        gameInput.OnAttackEnded -= GameInput_OnAttackEnded;
         gameInput.OnDefenceStarted -= GameInput_OnDefenceStarted;
         gameInput.OnDefenceEnded -= GameInput_OnDefenceEnded;
     }
     #endregion
 
     #region Input Handlers
-    protected abstract void GameInput_OnAttack1Started(object sender, EventArgs e);
-    protected abstract void GameInput_OnAttack2Started(object sender, EventArgs e);
-    protected abstract void GameInput_OnAttack3Started(object sender, EventArgs e);
+    private void GameInput_OnAttackStarted(object sender, int attackType)
+    {
+        switch (attackType)
+        {
+            case 1:
+                OnAttack_1_Started();
+                break;
+            case 2:
+                OnAttack_2_Started();
+                break;
+            case 3:
+                OnAttack_3_Started();
+                break;
+            default:
+                Logger.LogError($"잘못된 attackType 입력입니다: {attackType}");
+                break;
+        }
+    }
+
+    private void GameInput_OnAttackEnded(object sender, int attackType)
+    {
+        switch (attackType)
+        {
+            case 1:
+                OnAttack_1_Ended();
+                break;
+            case 2:
+                OnAttack_2_Ended();
+                break;
+            case 3:
+                OnAttack_3_Ended();
+                break;
+            default:
+                Logger.LogError($"잘못된 attackType 입력입니다: {attackType}");
+                break;
+        }
+    }
+
+    protected abstract void OnAttack_1_Started();
+    protected abstract void OnAttack_2_Started();
+    protected abstract void OnAttack_3_Started();
     protected abstract void GameInput_OnDefenceStarted(object sender, EventArgs e);
-    protected abstract void GameInput_OnAttack1Ended(object sender, EventArgs e);
-    protected abstract void GameInput_OnAttack2Ended(object sender, EventArgs e);
-    protected abstract void GameInput_OnAttack3Ended(object sender, EventArgs e);
+    protected abstract void OnAttack_1_Ended();
+    protected abstract void OnAttack_2_Ended();
+    protected abstract void OnAttack_3_Ended();
     protected abstract void GameInput_OnDefenceEnded(object sender, EventArgs e);
     #endregion
 

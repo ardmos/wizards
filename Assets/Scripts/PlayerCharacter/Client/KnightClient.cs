@@ -42,34 +42,34 @@ public class KnightClient : PlayerClient, ICharacter
         throw new NotImplementedException();
     }
 
-    protected override void GameInput_OnAttack1Started(object sender, EventArgs e)
+    protected override void OnAttack_1_Started()
     {
         //Debug.Log("GameInput_OnAttack1Started");
         skillManagerClientKnight.AimingSkill(0);
     }
 
-    protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
+    protected override void OnAttack_1_Ended()
     {
         //Debug.Log("GameInput_OnAttack1Ended");
         skillManagerClientKnight.ActivateAttackSkillOnClient(0);
     }
 
-    protected override void GameInput_OnAttack2Started(object sender, EventArgs e)
+    protected override void OnAttack_2_Started()
     {
         skillManagerClientKnight.AimingSkill(1);
     }
 
-    protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
+    protected override void OnAttack_2_Ended()
     {
         skillManagerClientKnight.ActivateAttackSkillOnClient(1);
     }
 
-    protected override void GameInput_OnAttack3Started(object sender, EventArgs e)
+    protected override void OnAttack_3_Started()
     {
         skillManagerClientKnight.AimingSkill(2);
     }
 
-    protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
+    protected override void OnAttack_3_Ended()
     {
         skillManagerClientKnight.ActivateAttackSkillOnClient(2);
     }

@@ -30,14 +30,14 @@ public class WizardClient : PlayerClient
     /// <summary>
     /// Attack1 버튼이 눌렸을 때 호출되는 메서드입니다. 스킬을 캐스팅하기 시작합니다.
     /// </summary>
-    protected override void GameInput_OnAttack1Started(object sender, EventArgs e)
+    protected override void OnAttack_1_Started()
     {
         spellManagerClientWizard.CastingNormalSpell(0);
     }
     /// <summary>
     /// Attack1 버튼이 떼졌을 때 호출되는 메서드입니다. 스킬을 시전합니다.
     /// </summary>
-    protected override void GameInput_OnAttack1Ended(object sender, EventArgs e)
+    protected override void OnAttack_1_Ended()
     {
         spellManagerClientWizard.ReleaseNormalSpell(0);
     }
@@ -45,14 +45,14 @@ public class WizardClient : PlayerClient
     /// <summary>
     /// Attack2 버튼이 눌렸을 때 호출되는 메서드입니다. 스킬을 캐스팅하기 시작합니다.
     /// </summary>
-    protected override void GameInput_OnAttack2Started(object sender, EventArgs e)
+    protected override void OnAttack_2_Started()
     {
         spellManagerClientWizard.CastingNormalSpell(1);
     }
     /// <summary>
     /// Attack2 버튼이 떼졌을 때 호출되는 메서드입니다. 스킬을 시전합니다.
     /// </summary>
-    protected override void GameInput_OnAttack2Ended(object sender, EventArgs e)
+    protected override void OnAttack_2_Ended()
     {
         spellManagerClientWizard.ReleaseNormalSpell(1);
     }
@@ -60,14 +60,14 @@ public class WizardClient : PlayerClient
     /// <summary>
     /// Attack3 버튼이 눌렸을 때 호출되는 메서드입니다. 스킬을 캐스팅하기 시작합니다.
     /// </summary>
-    protected override void GameInput_OnAttack3Started(object sender, EventArgs e)
+    protected override void OnAttack_3_Started()
     {
         spellManagerClientWizard.CastingBlizzard();
     }
     /// <summary>
     /// Attack3 버튼이 떼졌을 때 호출되는 메서드입니다. 스킬을 시전합니다.
     /// </summary>
-    protected override void GameInput_OnAttack3Ended(object sender, EventArgs e)
+    protected override void OnAttack_3_Ended()
     {
         spellManagerClientWizard.ReleaseBlizzard();
     }
