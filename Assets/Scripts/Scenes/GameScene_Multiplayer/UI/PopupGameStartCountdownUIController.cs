@@ -10,50 +10,50 @@ public class PopupGameStartCountdownUIController : NetworkBehaviour
     private double tmpCountdownValue = 0;
     private bool[] isAnnounced = new bool[4] { false, false, false, false };
 
-    private void Awake()
-    {
-        // Singleplay모드 Multiplay모드 구분 처리
-        if (IsHost)
-        {
-            SingleplayerGameManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-        else
-        {
-            MultiplayerGameManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-    }
-
     private void Start()
     {
         //Debug.Log($"IsHost:{IsHost}");      
-        if (!IsHost)
-            Hide();
+        // Singleplay모드 Multiplay모드 구분 처리
+        /*        if (IsHost)
+                {
+                    SingleplayerGameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+                }
+                else
+                {
+                    MultiplayerGameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+                }*/
+
+        MultiplayerGameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+
+        Hide();
     }
 
     public override void OnDestroy()
     {
         // Singleplay모드 Multiplay모드 구분 처리
-        if (IsHost)
-        {
-            SingleplayerGameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-        else
-        {
-            MultiplayerGameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }       
+        /*        if (IsHost)
+                {
+                    SingleplayerGameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+                }
+                else
+                {
+                    MultiplayerGameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+                }    */
+        MultiplayerGameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void FixedUpdate()
     {
-        double countdownTime = 0; 
-        if (IsHost)
-        {
-            countdownTime = Math.Ceiling(SingleplayerGameManager.Instance.GetCountdownToStartTimer());
-        }
-        else
-        {
-            countdownTime = Math.Ceiling(MultiplayerGameManager.Instance.GetCountdownToStartTimer());
-        }
+        double countdownTime = 0;
+        /*        if (IsHost)
+                {
+                    countdownTime = Math.Ceiling(SingleplayerGameManager.Instance.GetCountdownToStartTimer());
+                }
+                else
+                {
+                    countdownTime = Math.Ceiling(MultiplayerGameManager.Instance.GetCountdownToStartTimer());
+                }*/
+        countdownTime = Math.Ceiling(MultiplayerGameManager.Instance.GetCountdownToStartTimer());
 
         if (tmpCountdownValue == countdownTime) return;
         switch (countdownTime)
@@ -76,31 +76,39 @@ public class PopupGameStartCountdownUIController : NetworkBehaviour
     }
 
     private void OnGameStateChanged(object sender, EventArgs e)
-    {     
-        // Singleplay모드 Multiplay모드 구분 처리
-        if (IsHost)
+    {
+        /*        // Singleplay모드 Multiplay모드 구분 처리
+                if (IsHost)
+                {
+                    //Debug.Log($"PopupGameStartCountdownUIController, IsCountdownToStartActive:{SingleplayerGameManager.Instance.IsCountdownToStartActive()}");
+                    if (SingleplayerGameManager.Instance.IsCountdownToStartActive())
+                    {
+                        Show();
+                    }
+                    else
+                    {
+                        Hide();
+                    }
+                    //Debug.Log($"팝업 열려있나:{gameObject.activeSelf}");
+                }
+                else
+                {
+                    if (MultiplayerGameManager.Instance.IsCountdownToStartActive())
+                    {
+                        Show();
+                    }
+                    else
+                    {
+                        Hide();
+                    }
+                }*/
+        if (MultiplayerGameManager.Instance.IsCountdownToStartActive())
         {
-            //Debug.Log($"PopupGameStartCountdownUIController, IsCountdownToStartActive:{SingleplayerGameManager.Instance.IsCountdownToStartActive()}");
-            if (SingleplayerGameManager.Instance.IsCountdownToStartActive())
-            {
-                Show();
-            }
-            else
-            {
-                Hide();
-            }
-            //Debug.Log($"팝업 열려있나:{gameObject.activeSelf}");
+            Show();
         }
         else
         {
-            if (MultiplayerGameManager.Instance.IsCountdownToStartActive())
-            {
-                Show();
-            }
-            else
-            {
-                Hide();
-            }
+            Hide();
         }
     }
 

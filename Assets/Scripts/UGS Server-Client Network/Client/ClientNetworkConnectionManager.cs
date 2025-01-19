@@ -30,7 +30,7 @@ public class ClientNetworkConnectionManager : NetworkBehaviour
     private void Awake()
     {
         // ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫ √ ±‚»≠
-        if (Instance == null && IsClient) Instance = this;
+        if (Instance == null) Instance = this;
     }
     #endregion
 

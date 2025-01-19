@@ -1,4 +1,3 @@
-#if UNITY_SERVER || UNITY_EDITOR
 using System;
 using System.Threading.Tasks;
 using Unity.Netcode;
@@ -120,7 +119,7 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider, ICleanable
     /// 서버를 시작하는 메서드입니다.
     /// </summary>
     /// <returns>서버 시작의 성공 여부</returns>
-    private bool StartServer()
+    public bool StartServer()
     {
         if (!ValidateComponent(ServerNetworkConnectionManager.Instance, ERROR_SERVER_NETWORK_CONNECTION_MANAGER_NOT_SET)) return false;
         if (!ValidateComponent(NetworkManager.Singleton, ERROR_NETWORK_MANAGER_NOT_SET)) return false;
@@ -236,4 +235,3 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider, ICleanable
     public void Cleanup() => Destroy(gameObject);
     #endregion
 }
-#endif

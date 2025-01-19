@@ -29,7 +29,7 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
     /// </summary>
     private void Awake()
     {
-        if (Instance == null && IsServer)
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);

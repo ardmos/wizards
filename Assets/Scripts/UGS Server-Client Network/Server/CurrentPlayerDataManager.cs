@@ -18,7 +18,7 @@ public class CurrentPlayerDataManager : NetworkBehaviour, ICleanable
 
     #region Fields
     // 서버에 접속중인 플레이어들의 데이터가 담긴 네트워크 리스트
-    private NetworkList<PlayerInGameData> currentPlayers;
+    private NetworkList<PlayerInGameData> currentPlayers = new NetworkList<PlayerInGameData>();
     #endregion
 
     #region Unity Lifecycle
@@ -41,7 +41,6 @@ public class CurrentPlayerDataManager : NetworkBehaviour, ICleanable
     /// </summary>
     public override void OnNetworkSpawn()
     {
-        currentPlayers = new NetworkList<PlayerInGameData>();
         currentPlayers.OnListChanged += OnCurrentPlayerListChanged; // 리스트 변경 이벤트 등록
     }
 
@@ -195,7 +194,7 @@ public class CurrentPlayerDataManager : NetworkBehaviour, ICleanable
     private bool IsClientIdExists(ulong clientId)
     {
         bool clientIdExists = GetPlayerDataListIndexByClientId(clientId) != -1;
-        if (!clientIdExists) Logger.LogError($"해당 클라이언트ID를 가진 플레이어가 없습니다: {clientId}");
+        if (!clientIdExists) Logger.Log($"해당 클라이언트ID를 가진 플레이어가 없습니다: {clientId}");
 
         return clientIdExists;
     }

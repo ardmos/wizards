@@ -18,7 +18,6 @@ public class SpellManagerClient : NetworkBehaviour
 
     private void Awake()
     {
-        Debug.Log("?");
         skillInfoListOnClient = new List<SpellInfo>();
         restTimeCurrentSpellArrayOnClient = new float[totalSpellCount];
     }

@@ -43,7 +43,7 @@ public class PopupMatchingRoomUIController : NetworkBehaviour
 
 
     #region Unity Lifecycle
-    public override void OnNetworkSpawn()
+    public void Start()
     {
         InitializeEventListeners();
         InitializeButtonListeners();
@@ -255,6 +255,7 @@ public class PopupMatchingRoomUIController : NetworkBehaviour
     /// </summary>
     private void Hide()
     {
+        Debug.Log($"Hide");
         gameObject.SetActive(false);
     }
     #endregion

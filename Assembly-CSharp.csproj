@@ -98,8 +98,8 @@
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupMagicStoreUI.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupGameOverUIController.cs" />
     <Compile Include="Assets\Scripts\Characters\AI Player\WizardRukeAIBattleManagerServer.cs" />
-    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\TimerUIController.cs" />
     <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\PlayerAnimator.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\TimerUIController.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupGameStartCountdownUIController.cs" />
     <Compile Include="Assets\Scripts\Characters\Monster\ChickenAIServer.cs" />
     <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\PlayerServer.cs" />
@@ -166,9 +166,9 @@
     <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSelectCharacter\SkillGroupItemController.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICleanable.cs" />
     <Compile Include="Assets\Scripts\Generals\Loading\LoadingProgressBarUI.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\VFX\VfxSpellUpgrade.cs" />
     <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupInboxUIController.cs" />
-    <Compile Include="Assets\Scripts\Data\Spells\FireBallLv2.cs" />
     <Compile Include="Assets\Scripts\Generals\Loading\LoadSceneManager.cs" />
     <Compile Include="Assets\Scripts\Generals\Loading\LoadingImageUI.cs" />
     <Compile Include="Assets\Scripts\Data\CharacterClasses.cs" />
@@ -197,8 +197,8 @@
     <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Manual.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\ItemAcquireUIController.cs" />
     <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\ConnectionApprovalHandler.cs" />
-    <Compile Include="Assets\Scripts\Data\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Scripts\UGS Server-Client Network\Server\OwnerNetworkAnimator.cs" />
+    <Compile Include="Assets\Scripts\Data\Spells\WaterSpell.cs" />
     <Compile Include="Assets\Downloaded Assets\GabrielAguiarProductions\Unique_ToonProjectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupMatchingRoom\GameMatchReadyManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\AnimationStarter.cs" />
@@ -229,8 +229,8 @@
     <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupLookingForGameUIController.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\Item\Coin.cs" />
     <Compile Include="Assets\Downloaded Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
-    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupMenuUIController.cs" />
     <Compile Include="Assets\Scripts\Generals\Custom UI\CustomClickSoundButton.cs" />
+    <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupMenuUIController.cs" />
     <Compile Include="Assets\Scripts\Scenes\GameScene_Multiplayer\UI\PopupHostHasDisconnectedUIController.cs" />
     <Compile Include="Assets\Downloaded Assets\MobileDepthWater\Scripts\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\Scenes\TitleScene\PopupSelectAuthMethodUIController.cs" />
@@ -281,8 +281,8 @@
     <Compile Include="Assets\Scripts\Characters\Monster\ChickenAIHPManagerServer.cs" />
     <Compile Include="Assets\Downloaded Assets\RealToon\RealToon Tools\FrameByFrameRendering\FrameByFrameRendering_Default.cs" />
     <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\PlayerClient.cs" />
-    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSupportUIController.cs" />
     <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Server\SpellManagerServerWizard.cs" />
+    <Compile Include="Assets\Scripts\Scenes\LobbyScene\PopupSupportUIController.cs" />
     <Compile Include="Assets\Scripts\Data\SoundVolumeData.cs" />
     <Compile Include="Assets\Scripts\Characters\PlayerCharacter\Client\PlayerMovementClient.cs" />
     <Compile Include="Assets\Scripts\Data\SpellName.cs" />

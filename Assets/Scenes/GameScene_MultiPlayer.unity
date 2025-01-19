@@ -3476,7 +3476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8273c89c9f4f5d748a56f288a5de6886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerClientId: 0
   animator: {fileID: 450496656}
   sliderBattlePath: {fileID: 1516449340}
   detailArea: {fileID: 1916439499}
@@ -5253,7 +5252,7 @@ PrefabInstance:
     - target: {fileID: 5857748585476421, guid: 477ed2332ecaad848a721564a25064f5, type: 3}
       propertyPath: canvas
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1549680366}
     - target: {fileID: 5857748585476421, guid: 477ed2332ecaad848a721564a25064f5, type: 3}
       propertyPath: poolSize
       value: 7
@@ -19046,15 +19045,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b4cffe1c4a68940a9b770bc179ebb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnMenu: {fileID: 0}
-  popupMenuUI: {fileID: 0}
-  notifyUIController: {fileID: 0}
-  popupGameOverUIController: {fileID: 0}
-  popupWinUIController: {fileID: 0}
-  popupSelectScrollEffectUIController: {fileID: 0}
-  buttonReadSpellScrollUIController: {fileID: 0}
-  itemAcquireUIController: {fileID: 0}
-  gamePadUIController: {fileID: 0}
+  btnMenu: {fileID: 1010044092}
+  popupMenuUI: {fileID: 1277858105}
+  notifyUIController: {fileID: 1051629102}
+  popupGameOverUIController: {fileID: 1300794628}
+  popupWinUIController: {fileID: 450496657}
+  popupSelectScrollEffectUIController: {fileID: 1560778918}
+  buttonReadSpellScrollUIController: {fileID: 900736783}
+  itemAcquireUIController: {fileID: 2008435291}
+  gamePadUIController: {fileID: 37455284}
 --- !u!4 &2140973039
 Transform:
   m_ObjectHideFlags: 0
@@ -64299,7 +64298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 824109996654824266}
   m_Layer: 0
-  m_Name: Wizard Forest
+  m_Name: == Wizard Forest ==
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
