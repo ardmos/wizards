@@ -30,7 +30,7 @@ public class PatrolState : AIState
     /// </summary>
     public override void Update()
     {
-        Logger.Log("Patrol State 업데이트.");
+        //Logger.Log("Patrol State 업데이트.");
 
         Patrol();
     }

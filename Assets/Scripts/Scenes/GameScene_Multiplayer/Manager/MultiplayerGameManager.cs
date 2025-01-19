@@ -41,7 +41,7 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
     [SerializeField] private ushort gameOverPlayerCount = 0;
     [SerializeField] private float gamePlayingTimerMax;
     [SerializeField] private Dictionary<ulong, bool> playerReadyList;
-    [SerializeField] private bool isLocalPlayerReady;
+    [SerializeField] private bool isCurrentPlayerConnected;
     [SerializeField] private bool isBGMStarted;
 
     void Awake()
@@ -277,11 +277,12 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
 
     // 레디상태 서버에 보고
     [ServerRpc(RequireOwnership = false)]
-    private void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
+    private void SetPlayerReadyToStartGameServerRpc(ServerRpcParams serverRpcParams = default)
     {
         playerReadyList[serverRpcParams.Receive.SenderClientId] = true;
 
         bool allClientsReady = true;
+        Debug.Log($"NetworkManager.Singleton.ConnectedClientsIds.Count: {NetworkManager.Singleton.ConnectedClientsIds.Count}");
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             if (!playerReadyList.ContainsKey(clientId) || !playerReadyList[clientId])
@@ -292,7 +293,7 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
             }
         }
 
-        // 모든 플레이어가 레디 했을 경우. 카운트다운 시작
+        // 모든 플레이어가 준비됐을 경우. 카운트다운 시작
         if (allClientsReady)
         {
             // 플레이어 카운트 집계 업데이트(이 순간 접속중인 인원.)
@@ -312,15 +313,14 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
         //Debug.Log($"UpdateCurrentAlivePlayerCount playerCount:{currentAlivePlayerCount.Value}");
     }
 
-    // 클라이언트에서 호출하는 메소드
-    // 게임 시작시 보이는 Ready UI 버튼을 클릭했을 때 동작하는 메서드 입니다.
-    public void LocalPlayerReadyOnClient()
+    // 클라이언트에서 호출하는 메소드입니다.
+    public void PlayerConnectedReportOnClient()
     {
+        Debug.Log($"PlayerConnected game state:{gameState.Value}");
         if (gameState.Value == GameState.WatingToStart)
         {
-            //Debug.Log($"LocalPlayerReady game state:{gameState.Value}");
-            isLocalPlayerReady = true;
-            SetPlayerReadyServerRpc();
+            isCurrentPlayerConnected = true;
+            SetPlayerReadyToStartGameServerRpc();
         }
     }
 
@@ -377,7 +377,7 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
 
     public bool IsLocalPlayerReady()
     {
-        return isLocalPlayerReady;
+        return isCurrentPlayerConnected;
     }
 
     public bool IsWatingToStart()

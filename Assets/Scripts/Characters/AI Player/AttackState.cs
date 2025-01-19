@@ -28,7 +28,7 @@ public class AttackState : AIState
     /// </summary>
     public override void Update()
     {
-        Logger.Log("Attack State 업데이트.");
+        //Logger.Log("Attack State 업데이트.");
 
         // 공격 로직을 실행합니다.
         Attack();

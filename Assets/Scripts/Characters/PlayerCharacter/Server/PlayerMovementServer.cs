@@ -10,13 +10,13 @@ public class PlayerMovementServer : NetworkBehaviour
 {
     #region Constants & Fields
     // 에러 메세지 상수들...
-    private const string ERROR_PLAYER_CLIENT_NOT_SET = "PlayerMovementServer playerClient 설정이 안되어있습니다.";
+    private const string ERROR_PLAYER_SERVER_NOT_SET = "PlayerMovementServer playerServer 설정이 안되어있습니다.";
     private const string ERROR_PLAYER_ANIMATOR_NOT_SET = "PlayerMovementServer playerAnimator 설정이 안되어있습니다.";
     private const string ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET = "PlayerMovementServer CurrentPlayerDataManager.Instance 설정이 안되어있습니다.";
     // 플레이어의 회전 속도를 정의하는 상수입니다.
     private const float ROTATE_SPEED = 30f;
 
-    [SerializeField] private PlayerClient playerClient;
+    [SerializeField] private PlayerServer playerServer;
     [SerializeField] private PlayerAnimator playerAnimator;
     #endregion
 
@@ -41,13 +41,13 @@ public class PlayerMovementServer : NetworkBehaviour
     /// <returns>실제 이동 방향 벡터</returns>
     private Vector3 Move(Vector2 inputVector)
     {
-        if (!ValidateComponent(playerClient, ERROR_PLAYER_CLIENT_NOT_SET)) return Vector3.zero;
+        if (!ValidateComponent(playerServer, ERROR_PLAYER_SERVER_NOT_SET)) return Vector3.zero;
         if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return Vector3.zero;
         // GameOver상태일 경우 이동처리가 안되도록 합니다.
         if (CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(OwnerClientId).playerGameState == PlayerGameState.GameOver) return Vector3.zero;
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-        float moveDistance = ((ICharacter)playerClient).moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
+        float moveDistance = ((ICharacter)playerServer).moveSpeed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
         transform.position += moveDir * moveDistance;
 
         return moveDir;
@@ -104,9 +104,9 @@ public class PlayerMovementServer : NetworkBehaviour
     /// <param name="reduceValue">감소시킬 속도 값</param>
     public void ReduceMoveSpeed(float reduceValue)
     {
-        if (!ValidateComponent(playerClient, ERROR_PLAYER_CLIENT_NOT_SET)) return;
+        if (!ValidateComponent(playerServer, ERROR_PLAYER_SERVER_NOT_SET)) return;
 
-        ((ICharacter)playerClient).moveSpeed -= reduceValue;
+        ((ICharacter)playerServer).moveSpeed -= reduceValue;
     }
 
     /// <summary>
@@ -115,9 +115,9 @@ public class PlayerMovementServer : NetworkBehaviour
     /// <param name="addValue">증가시킬 속도 값</param>
     public void AddMoveSpeed(float addValue)
     {
-        if (!ValidateComponent(playerClient, ERROR_PLAYER_CLIENT_NOT_SET)) return;
+        if (!ValidateComponent(playerServer, ERROR_PLAYER_SERVER_NOT_SET)) return;
 
-        ((ICharacter)playerClient).moveSpeed += addValue;
+        ((ICharacter)playerServer).moveSpeed += addValue;
     }
     #endregion
 }

@@ -28,7 +28,7 @@ public class ChaseState : AIState
     /// </summary>
     public override void Update()
     {
-        Logger.Log("Chase State 업데이트.");
+        //Logger.Log("Chase State 업데이트.");
 
         // 추격 로직을 실행합니다.
         Chase();

@@ -32,7 +32,7 @@ public static class LoadSceneManager
     /// <param name="targetScene">백그라운드에서 로딩시킬 타겟씬</param>
     public static void Load(Scene targetScene)
     {
-        Debug.Log($"GetActiveScene: {SceneManager.GetActiveScene().name}");
+        //Debug.Log($"GetActiveScene: {SceneManager.GetActiveScene().name}");
         if(targetScene == Scene.LobbyScene && SceneManager.GetActiveScene().name != Scene.TitleScene.ToString())
         {
             SceneCleanupManager.CleanupAllObjects();

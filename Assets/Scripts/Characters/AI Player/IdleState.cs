@@ -27,7 +27,7 @@ public class IdleState : AIState
     /// </summary>
     public override void Update()
     {
-        Logger.Log("Idle State 업데이트.");
+        //Logger.Log("Idle State 업데이트.");
         // 아이들 상태에서는 특별한 동작을 하지 않습니다.
     }
 
