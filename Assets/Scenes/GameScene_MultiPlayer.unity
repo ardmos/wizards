@@ -1813,7 +1813,7 @@ GameObject:
   - component: {fileID: 220978426}
   - component: {fileID: 220978425}
   m_Layer: 5
-  m_Name: ==Popup_Game Ready UI Controller==
+  m_Name: ==Popup_Wating For Players UI Controller==
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19114,7 +19114,7 @@ MonoBehaviour:
     m_InternalValue: 0
   gameOverPlayerCount: 0
   gamePlayingTimerMax: 600
-  isLocalPlayerReady: 0
+  isCurrentPlayerConnected: 0
   isBGMStarted: 0
 --- !u!4 &2141758591
 Transform:

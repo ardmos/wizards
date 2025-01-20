@@ -198,7 +198,7 @@ public class PopupMatchingRoomUIController : NetworkBehaviour
         {
             if (!ServerNetworkConnectionManager.Instance.IsPlayerIndexConnected(index))
             {
-                Logger.Log($"해당 인덱스의 플레이어는 접속중이 아닙니다. 토글을 비활성화 합니다. index: {index}");
+                //Logger.Log($"해당 인덱스의 플레이어는 접속중이 아닙니다. 토글을 비활성화 합니다. index: {index}");
                 togglePlayerIconUIArray[index].isOn = false;
                 continue;
             }

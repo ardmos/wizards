@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Unity.Netcode;
 
 /// <summary>
@@ -70,6 +71,7 @@ public class CurrentPlayerDataManager : NetworkBehaviour, ICleanable
     [ServerRpc(RequireOwnership = false)]
     public void AddPlayerServerRPC(PlayerInGameData playerData, ServerRpcParams serverRpcParams = default)
     {
+        Logger.Log($"AddPlayerServerRPC IsClient:{IsClient}, IsServer:{IsServer}, IsHost:{IsHost}");
         if (IsClientIdExists(serverRpcParams.Receive.SenderClientId))
         {
             Logger.LogError($"이미 존재하는 플레이어입니다. 추가할 수 업습니다. 클라이언트ID: {serverRpcParams.Receive.SenderClientId}");

@@ -93,7 +93,7 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
     /// </summary>
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        Debug.Log("MultiplayerGameManager.SceneManager_OnLoadEventCompleted() Called");
+        //Debug.Log("MultiplayerGameManager.SceneManager_OnLoadEventCompleted() Called");
 
         foreach (PlayerInGameData playerData in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
         {
@@ -275,14 +275,17 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
         }
     }
 
-    // 레디상태 서버에 보고
-    [ServerRpc(RequireOwnership = false)]
-    private void SetPlayerReadyToStartGameServerRpc(ServerRpcParams serverRpcParams = default)
+    /// <summary>
+    /// 파라미터로 전달된 플레이어의 레디 설정 및 전체 플레이어들의 레디상태를 확인하여 게임 시작 여부를 판단하는 메서드입니다.
+    /// </summary>
+    /// <param name="serverRpcParams"></param>
+    private void SetPlayerReadyAndStartGame(ulong connectedClientId)
     {
-        playerReadyList[serverRpcParams.Receive.SenderClientId] = true;
-
-        bool allClientsReady = true;
         Debug.Log($"NetworkManager.Singleton.ConnectedClientsIds.Count: {NetworkManager.Singleton.ConnectedClientsIds.Count}");
+
+        playerReadyList[connectedClientId] = true;
+
+        bool allClientsReady = true;     
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             if (!playerReadyList.ContainsKey(clientId) || !playerReadyList[clientId])
@@ -299,7 +302,7 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
             // 플레이어 카운트 집계 업데이트(이 순간 접속중인 인원.)
             startedPlayerCount.Value = CurrentPlayerDataManager.Instance.GetCurrentPlayerCount();
             UpdateCurrentAlivePlayerCount();
-            gameState.Value = GameState.CountdownToStart;
+            SetGameStateStart();
         }
     }
 
@@ -314,13 +317,13 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
     }
 
     // 클라이언트에서 호출하는 메소드입니다.
-    public void PlayerConnectedReportOnClient()
+    [ServerRpc(RequireOwnership = false)]
+    public void PlayerConnectedReportServerRPC(ServerRpcParams serverRpcParams = default)
     {
-        Debug.Log($"PlayerConnected game state:{gameState.Value}");
         if (gameState.Value == GameState.WatingToStart)
-        {
+        {            
             isCurrentPlayerConnected = true;
-            SetPlayerReadyToStartGameServerRpc();
+            SetPlayerReadyAndStartGame(serverRpcParams.Receive.SenderClientId);
         }
     }
 

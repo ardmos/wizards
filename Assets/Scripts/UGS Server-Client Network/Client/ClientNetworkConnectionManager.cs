@@ -78,6 +78,8 @@ public class ClientNetworkConnectionManager : NetworkBehaviour
         }
 
         OnMatchJoined?.Invoke(this, EventArgs.Empty);
+
+        Logger.Log($"Client_OnClientConnectedCallback IsClient:{IsClient}, IsServer:{IsServer}, IsHost:{IsHost}");
         // 서버에 플레이어 정보 추가
         CurrentPlayerDataManager.Instance.AddPlayerServerRPC(LocalPlayerDataManagerClient.Instance.GetPlayerInGameData());
     }

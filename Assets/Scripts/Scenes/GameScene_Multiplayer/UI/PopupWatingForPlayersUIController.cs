@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -27,8 +28,8 @@ public class PopupWatingForPlayersUIController : NetworkBehaviour
 
         if (IsServer) Hide();
         else
-            // 자동 레디 보고
-            PlayerConnected();
+            // 자동 레디 보고. 서버의 MultiplayerGameManager가 생성될 시간을 기다리기 위해 1초 대기 후 보고합니다. 
+            StartCoroutine(PlayerConnectedReportAfter1Second());
     }
 
     public override void OnNetworkDespawn()
@@ -80,7 +81,7 @@ public class PopupWatingForPlayersUIController : NetworkBehaviour
         }
     }
 
-    private void PlayerConnected()
+    private IEnumerator PlayerConnectedReportAfter1Second()
     {
         /*        // Singleplay모드 Multiplay모드 구분 처리
                 if (IsHost)
@@ -91,8 +92,9 @@ public class PopupWatingForPlayersUIController : NetworkBehaviour
                 {
                     MultiplayerGameManager.Instance.LocalPlayerReadyOnClient();
                 }  */
-        Debug.Log($"PlayerConnected()");
-        MultiplayerGameManager.Instance.PlayerConnectedReportOnClient();
+        yield return new WaitForSeconds(1);
+
+        MultiplayerGameManager.Instance.PlayerConnectedReportServerRPC();
     }
 
     private void Show()
