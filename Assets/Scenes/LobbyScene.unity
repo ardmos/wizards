@@ -5872,7 +5872,13 @@ MonoBehaviour:
   btnReady: {fileID: 620810480516727064}
   imgReadyCountdown: {fileID: 1320798951}
   txtPlayerCount: {fileID: 710942936}
-  togglePlayerIconUIArray: []
+  togglePlayerIconUIArray:
+  - {fileID: 1847071323362495700}
+  - {fileID: 1023233274}
+  - {fileID: 1149409082}
+  - {fileID: 1773055680}
+  - {fileID: 519381220}
+  - {fileID: 1543746089}
   isReadyCountdownUIAnimStarted: 0
 --- !u!114 &1001950446
 MonoBehaviour:

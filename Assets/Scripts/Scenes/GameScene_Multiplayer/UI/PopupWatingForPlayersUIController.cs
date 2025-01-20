@@ -24,8 +24,11 @@ public class PopupWatingForPlayersUIController : NetworkBehaviour
         MultiplayerGameManager.Instance.OnGameStateChanged += OnGameStateChanged;
 
         txtMessage.text = "Wating for players...";
-        // 자동 레디 보고
-        PlayerConnected();
+
+        if (IsServer) Hide();
+        else
+            // 자동 레디 보고
+            PlayerConnected();
     }
 
     public override void OnNetworkDespawn()

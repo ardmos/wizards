@@ -255,7 +255,6 @@ public class PopupMatchingRoomUIController : NetworkBehaviour
     /// </summary>
     private void Hide()
     {
-        Debug.Log($"Hide");
         gameObject.SetActive(false);
     }
     #endregion

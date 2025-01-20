@@ -407,7 +407,7 @@ Material:
     - _OutlineEnabled: 0
     - _OutlineExtrudeMethod: 0
     - _OutlineMode: 0
-    - _OutlineWidth: 2
+    - _OutlineWidth: 0
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 100
     - _OverallShadowColorPower: 1
