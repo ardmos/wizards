@@ -40,7 +40,7 @@ public class ServerStartup : NetworkBehaviour, IServerInfoProvider, ICleanable
     /// </summary>
     private void Awake()
     {
-        if (Instance == null && IsServer)
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);

@@ -19,7 +19,12 @@ public class GraphicGroupUI : MonoBehaviour
 
     public void Setup()
     {
-        int qualityLevel = GraphicQualityManager.Instance.GetQualityLevel();
+        int qualityLevel = 0;
+        if (GraphicQualityManager.Instance != null)
+        {
+            qualityLevel = GraphicQualityManager.Instance.GetQualityLevel();
+        }
+
         switch (qualityLevel)
         {
             case 0: 

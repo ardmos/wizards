@@ -38,7 +38,7 @@ public class BackfillManager : NetworkBehaviour
     /// </summary>
     private void Awake()
     {
-        if (Instance == null && IsServer)
+        if (Instance == null)
         {
             Instance = this;
         }

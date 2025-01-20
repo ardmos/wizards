@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 using static ComponentValidator;
 
 /// <summary>
@@ -94,8 +96,13 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
     /// 연결 해제된 플레이어를 게임 오버 처리하고, 남은 플레이어가 없는 경우 로비로 돌아갑니다.
     /// </summary>
     /// <param name="clientId">연결 해제된 클라이언트의 ID</param>
-    private void HandlePlayerDisconnectInGameScene(ulong clientId)
+    public void HandlePlayerDisconnectInGameScene(ulong clientId)
     {
+        if (SceneManager.GetActiveScene().ToString() != LoadSceneManager.Scene.GameScene_MultiPlayer.ToString()) {
+            Logger.Log($"게임씬이 아닙니다");
+            return; 
+        }
+
         if (!ValidateComponent(MultiplayerGameManager.Instance, ERROR_MULTIPLAYER_GAME_MANAGER_NOT_SET)) return;
         if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return;
         if (!ValidateClientID(clientId)) return;
@@ -109,9 +116,10 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
     /// </summary>
     private void ReturnToLobbyWhenNoPlayersRemain()
     {
-        if (CurrentPlayerDataManager.Instance.GetCurrentPlayerCount() <= 0)
+        //if (CurrentPlayerDataManager.Instance.GetCurrentPlayerCount() <= 0)
+        if(NetworkManager.Singleton.ConnectedClients.Count <= 0)
         {
-            Cleanup();
+            Logger.Log("모든 인간 플레이어가 이탈했습니다. 게임을 종료합니다.");
             LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
         }
     }
@@ -210,6 +218,7 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
     /// <param name="clientId">연결 해제된 클라이언트의 ID</param>
     private void Server_OnClientDisconnectCallback(ulong clientId)
     {
+        Logger.Log($"플레이어 {clientId} 아웃!");
         if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return;
         if (!ValidateComponent(GameMatchReadyManagerServer.Instance, ERROR_GAME_MATCH_READY_MANAGER_NOT_SET)) return;
         if (!ValidateComponent(AIPlayerGenerator.Instance, ERROR_AI_PLAYER_GENERATOR_NOT_SET)) return;
@@ -219,9 +228,6 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
         ResetAllPlayersReadyState();
         HandleAllAIScenario();
         RestartBackfill();
-        HandlePlayerDisconnectInGameScene(clientId);
-
-
     }
     #endregion
 

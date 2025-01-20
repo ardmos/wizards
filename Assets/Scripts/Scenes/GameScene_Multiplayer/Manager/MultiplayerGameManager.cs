@@ -189,7 +189,6 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
             case GameState.GamePlaying:
                 gamePlayingTimer.Value -= Time.deltaTime;
 
-                // 최후 생존이 타임아웃보다 우선됨.
                 // 최후 생존
                 if (currentAlivePlayerCount.Value == 1)
                 {
