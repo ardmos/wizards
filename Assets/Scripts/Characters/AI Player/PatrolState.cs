@@ -159,7 +159,6 @@ public class PatrolState : AIState
         return ValidateComponent(ai, "AI 설정이 안되어있습니다.") &&
           ValidateComponent(ai.GetMovementManager(), "AI MovementManager 획득에 실패했습니다.") &&
           ValidateComponent(ai.GetTargetingSystem(), "AI TargetingSystem 획득에 실패했습니다.") &&
-          ValidateComponent(ai.GetTarget(), "AI Target 획득에 실패했습니다.") &&
           ValidateComponent(ai.GetBattleManager(), "AI BattleManager 획득에 실패했습니다.") &&
           ValidateComponent(ai.GetStateMachine(), "AI StateMachine 획득에 실패했습니다.");
     }

@@ -52,6 +52,12 @@ public class AITargetingSystem
         try
         {
             var targets = GetNearbyTargets<T>();
+ /*           Logger.Log($"targets.Count(): {targets.Count()}");
+            foreach (var target in targets)
+            {
+                Logger.Log($"target: {target}");
+            }*/
+           
             return targets.Count() > 0 ? GetLowestHPTarget(targets) : null;
         }
         catch (Exception e)
@@ -71,7 +77,11 @@ public class AITargetingSystem
     {
         cachedTargets.Clear();
 
-        int hitCount = Physics.OverlapSphereNonAlloc(aiTransform.position, maxDetectionDistance, detectionResults);
+        int aiLayer = 1 << LayerMask.NameToLayer("AI");
+        int playerLayer = 1 << LayerMask.NameToLayer("Player");
+        int layerMask = aiLayer | playerLayer; // AI와 Player 레이어 모두 검출
+        int hitCount = Physics.OverlapSphereNonAlloc(aiTransform.position, maxDetectionDistance, detectionResults, layerMask);
+
         if (hitCount > detectionResults.Length)
             Logger.LogWarning($"검출된 콜라이더 수({hitCount})가 검색 결과 배열 크기({detectionResults.Length})를 초과했습니다. 일부 검색 결과가 무시됩니다.");
 

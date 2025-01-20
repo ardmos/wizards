@@ -357,4 +357,27 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter, ITargetable
     public float GetHP() => hp;
     public GameObject GetGameObject() => gameObject;
     #endregion
+
+    /// <summary>
+    /// //////////////////////////디버깅용! 리소스 소모 많이할 수 있으니 릴리스시 제거. 호출은 유니티에서 자동으로 합니다.
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        // 에디터에서만 표시되도록 설정
+        //if (!Application.isPlaying) return;
+
+        // 충돌 범위를 나타내는 와이어프레임 구를 그립니다
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 12f);
+
+        // 검출된 대상을 표시 (선택사항)
+/*        Gizmos.color = Color.red;
+        foreach (var target in cachedTargets)
+        {
+            if (target != null)
+            {
+                Gizmos.DrawLine(aiTransform.position, ((Component)target).transform.position);
+            }
+        }*/
+    }
 }

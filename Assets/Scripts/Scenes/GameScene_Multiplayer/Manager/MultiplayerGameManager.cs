@@ -233,6 +233,7 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
                     // GameOver 플레이어 게임오버 공지
                     else if (playerData.playerGameState == PlayerGameState.GameOver)
                     {
+                        if(!NetworkManager.ConnectedClients.ContainsKey(playerData.clientId)) continue;
                         NetworkClient networkClient = NetworkManager.ConnectedClients[playerData.clientId];
                         networkClient?.PlayerObject.GetComponent<PlayerClient>().SetPlayerGameOverClientRPC();
                     }
