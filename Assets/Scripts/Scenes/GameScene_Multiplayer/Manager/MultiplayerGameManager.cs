@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
 using System.Linq;
+using UnityEditor.PackageManager;
+using static ComponentValidator;
 #if UNITY_SERVER || UNITY_EDITOR
 using Unity.Services.Multiplay;
 #endif
@@ -24,6 +26,8 @@ using Unity.Services.Multiplay;
 public class MultiplayerGameManager : NetworkBehaviour, ICleanable
 {
     public static MultiplayerGameManager Instance { get; private set; }
+
+    private const string ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET = "ServerNetworkConnectionManager CurrentPlayerDataManager.Instance 객체가 설정되지 않았습니다.";
 
     public event EventHandler OnGameStateChanged;
     public event EventHandler OnAlivePlayerCountChanged;
@@ -313,7 +317,7 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
     {
         // 게임중인 플레이어 숫자(게임오버 안당하고)
         currentAlivePlayerCount.Value = startedPlayerCount.Value - gameOverPlayerCount;
-        //Debug.Log($"UpdateCurrentAlivePlayerCount playerCount:{currentAlivePlayerCount.Value}");
+        Logger.Log($"현재 게임중인 플레이어 수:{currentAlivePlayerCount.Value}");
     }
 
     // 클라이언트에서 호출하는 메소드입니다.
@@ -337,6 +341,9 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
     /// <param name="serverRpcParams"></param>
     public void UpdatePlayerGameOverOnServer(ulong clientWhoGameOver, ulong clientWhoAttacked = 100)
     {
+        if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return;
+        if (!ValidateClientID(clientWhoGameOver)) return;
+
         // 서버에 저장된 PlayerDataList상의 플레이어 상태 업데이트
         PlayerInGameData playerData = CurrentPlayerDataManager.Instance.GetPlayerDataByClientId(clientWhoGameOver);
         if (playerData.playerGameState == PlayerGameState.GameOver)
@@ -418,4 +425,22 @@ public class MultiplayerGameManager : NetworkBehaviour, ICleanable
 
         return gamePlayingTimerMax - gamePlayingTimer.Value;
     }
+
+    #region Validation Check
+    /// <summary>
+    /// 주어진 클라이언트 ID가 유효한지 확인합니다.
+    /// </summary>
+    /// <param name="clientId">확인할 클라이언트 ID</param>
+    /// <returns>클라이언트 ID가 유효하면 true, 그렇지 않으면 false</returns>
+    private bool ValidateClientID(ulong clientId)
+    {
+        if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return false;
+
+        bool isValidClientId = CurrentPlayerDataManager.Instance.GetPlayerDataListIndexByClientId(clientId) != -1;
+
+        if (!isValidClientId) Logger.LogError($"유효하지 않은 클라이언트ID: {clientId}");
+
+        return isValidClientId;
+    }
+    #endregion
 }

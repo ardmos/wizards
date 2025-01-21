@@ -98,57 +98,73 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
     /// <param name="clientId">연결 해제된 클라이언트의 ID</param>
     public void HandlePlayerDisconnectInGameScene(ulong clientId)
     {
-        if (SceneManager.GetActiveScene().ToString() != LoadSceneManager.Scene.GameScene_MultiPlayer.ToString()) {
+        if (SceneManager.GetActiveScene().name != LoadSceneManager.Scene.GameScene_MultiPlayer.ToString()) {
             Logger.Log($"게임씬이 아닙니다");
             return; 
         }
 
-        if (!ValidateComponent(MultiplayerGameManager.Instance, ERROR_MULTIPLAYER_GAME_MANAGER_NOT_SET)) return;
-        if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return;
-        if (!ValidateClientID(clientId)) return;
-
         SetDisconnectedPlayerGameOver(clientId);
-        ReturnToLobbyWhenNoPlayersRemain();
-    }
-
-    /// <summary>
-    /// 남아있는 플레이어가 없을 경우 로비로 돌아갑니다.
-    /// </summary>
-    private void ReturnToLobbyWhenNoPlayersRemain()
-    {
-        //if (CurrentPlayerDataManager.Instance.GetCurrentPlayerCount() <= 0)
-        if(NetworkManager.Singleton.ConnectedClients.Count <= 0)
-        {
-            Logger.Log("모든 인간 플레이어가 이탈했습니다. 게임을 종료합니다.");
-            LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
-        }
+        RemoveClientData(clientId); // 클라이언트 데이터 삭제
+        HandleAllAIScenarioInGameScene();
     }
 
     /// <summary>
     /// 클라이언트 데이터를 제거합니다.
     /// </summary>
     /// <param name="clientId">제거할 클라이언트의 ID</param>
-    private void RemoveClientData(ulong clientId) => CurrentPlayerDataManager.Instance.RemovePlayer(clientId);
+    private void RemoveClientData(ulong clientId)
+    {
+        if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return;
+        CurrentPlayerDataManager.Instance.RemovePlayer(clientId);
+    }
 
     /// <summary>
     /// 모든 플레이어의 준비 상태를 초기화합니다.
     /// </summary>
-    private void ResetAllPlayersReadyState() => GameMatchReadyManagerServer.Instance.SetEveryPlayerUnReady();
+    private void ResetAllPlayersReadyState()
+    {
+        if (!ValidateComponent(GameMatchReadyManagerServer.Instance, ERROR_GAME_MATCH_READY_MANAGER_NOT_SET)) return;
+        GameMatchReadyManagerServer.Instance.SetEveryPlayerUnReady();
+    }
 
     /// <summary>
     /// 연결이 끊긴 플레이어를 게임 오버 상태로 설정합니다.
     /// </summary>
     /// <param name="clientId">게임 오버 처리할 클라이언트의 ID</param>
-    private void SetDisconnectedPlayerGameOver(ulong clientId) => MultiplayerGameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
+    private void SetDisconnectedPlayerGameOver(ulong clientId)
+    {
+        if (!ValidateComponent(MultiplayerGameManager.Instance, ERROR_MULTIPLAYER_GAME_MANAGER_NOT_SET)) return;
+
+        MultiplayerGameManager.Instance.UpdatePlayerGameOverOnServer(clientId);
+    }
     #endregion
 
     #region AI Player Management
     /// <summary>
-    /// 모든 플레이어가 AI일 경우의 시나리오를 처리합니다.
-    /// AI만 남았을 경우 모든 플레이어를 제거하고 AI 생성기를 초기화합니다.
+    /// 게임씬에서 모든 플레이어가 AI일 경우의 시나리오를 처리합니다.
+    /// AI만 남았을 경우 모든 플레이어 데이터를 초기화하고 로비로 돌아갑니다.
     /// </summary>
-    private void HandleAllAIScenario()
+    private void HandleAllAIScenarioInGameScene()
     {
+        if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return;
+
+        if (CheckIsEveryPlayerAnAI())
+        {
+            Logger.Log("모든 인간 플레이어가 이탈했습니다. 게임을 종료합니다.");
+            CurrentPlayerDataManager.Instance.RemoveAllPlayers();
+            LoadSceneManager.Load(LoadSceneManager.Scene.LobbyScene);
+        }
+    }
+
+    /// <summary>
+    /// 로비씬에서 모든 플레이어가 AI일 경우의 시나리오를 처리합니다.
+    /// AI만 남았을 경우 모든 플레이어 데이터를 초기화하고 AI 생성기를 초기화합니다.
+    /// </summary>
+    private void HandleAllAIScenarioInLobbyScene()
+    {
+        if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return;
+        if (!ValidateComponent(AIPlayerGenerator.Instance, ERROR_AI_PLAYER_GENERATOR_NOT_SET)) return;
+
         if (CheckIsEveryPlayerAnAI())
         {
             CurrentPlayerDataManager.Instance.RemoveAllPlayers();
@@ -164,15 +180,15 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
     {
         if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return false;
 
-        var players = CurrentPlayerDataManager.Instance.GetCurrentPlayers();
-        foreach (var player in players)
+        bool isAllAI = true;
+        foreach (var player in CurrentPlayerDataManager.Instance.GetCurrentPlayers())
         {
             if (!player.isAI)
             {
-                return false;
+                isAllAI = false;
             }
         }
-        return true;
+        return isAllAI;
     }
     #endregion
 
@@ -180,22 +196,10 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
     /// <summary>
     /// 백필 프로세스를 재개합니다.
     /// </summary>
-    private void RestartBackfill() => _ = BackfillManager.Instance.RestartBackfill();
-    #endregion
-
-    #region Validation Check
-    /// <summary>
-    /// 주어진 클라이언트 ID가 유효한지 확인합니다.
-    /// </summary>
-    /// <param name="clientId">확인할 클라이언트 ID</param>
-    /// <returns>클라이언트 ID가 유효하면 true, 그렇지 않으면 false</returns>
-    private bool ValidateClientID(ulong clientId)
+    private void RestartBackfill()
     {
-        bool isValidClientId = CurrentPlayerDataManager.Instance.GetPlayerDataListIndexByClientId(clientId) != -1;
-
-        if (!isValidClientId) Logger.LogError($"유효하지 않은 클라이언트ID: {clientId}");
-
-        return isValidClientId;
+        if (!ValidateComponent(BackfillManager.Instance, ERROR_BACKFILL_MANAGER_NOT_SET)) return;
+        _ = BackfillManager.Instance.RestartBackfill();
     }
     #endregion
 
@@ -218,16 +222,15 @@ public class ServerNetworkConnectionManager : NetworkBehaviour, ICleanable
     /// <param name="clientId">연결 해제된 클라이언트의 ID</param>
     private void Server_OnClientDisconnectCallback(ulong clientId)
     {
-        Logger.Log($"플레이어 {clientId} 아웃!");
-        if (!ValidateComponent(CurrentPlayerDataManager.Instance, ERROR_CURRENT_PLAYER_DATA_MANAGER_NOT_SET)) return;
-        if (!ValidateComponent(GameMatchReadyManagerServer.Instance, ERROR_GAME_MATCH_READY_MANAGER_NOT_SET)) return;
-        if (!ValidateComponent(AIPlayerGenerator.Instance, ERROR_AI_PLAYER_GENERATOR_NOT_SET)) return;
-        if (!ValidateComponent(BackfillManager.Instance, ERROR_BACKFILL_MANAGER_NOT_SET)) return;
-
-        RemoveClientData(clientId);
-        ResetAllPlayersReadyState();
-        HandleAllAIScenario();
-        RestartBackfill();
+        if (SceneManager.GetActiveScene().name == LoadSceneManager.Scene.GameScene_MultiPlayer.ToString())
+            HandlePlayerDisconnectInGameScene(clientId);
+        else
+        {
+            RemoveClientData(clientId); // 클라이언트 데이터 삭제
+            ResetAllPlayersReadyState();
+            HandleAllAIScenarioInLobbyScene();
+            RestartBackfill();
+        }
     }
     #endregion
 

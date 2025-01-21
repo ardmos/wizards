@@ -185,17 +185,21 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter, ITargetable
 
     /// <summary>
     /// 현재 타겟의 클라이언트ID를 반환합니다.
+    /// 클랑이언트 아이디를 찾지 못하면 false를 반환합니다
     /// </summary>
     /// <returns>타겟의 클라이언트ID</returns>
-    private ulong GetTargetClientID()
+    private (bool success, ulong clientId) GetTargetClientID()
     {
+        bool isClientIDFound = false;
         ulong targetClientID = 0;
-        if (target.TryGetComponent<ICharacter>(out var character))
+
+        if (target != null && target.TryGetComponent<ICharacter>(out var character))
         {
             targetClientID = character.GetClientID();
-        }
+            isClientIDFound = true;
+        }            
 
-        return targetClientID;
+        return (isClientIDFound, targetClientID);
     }
     #endregion
 
@@ -320,17 +324,14 @@ public class WizardRukeAIServer : NetworkBehaviour, ICharacter, ITargetable
     }
 
     /// <summary>
-    /// 플레이어가 게임 오버될 때 호출되는 이벤트 핸들러입니다.
+    /// 게임 오버된 플레이어가 있을 때 호출되는 이벤트 핸들러입니다.
+    /// 게임오버된 플레이어가 현재 target이었다면 target을 초기화하고 재검색합니다.
     /// </summary>
     private void GameManager_OnPlayerGameOver(object sender, PlayerGameOverEventArgs e)
-    {
-        // 게임오버된 플레이어가 현재 target라면 target을 초기화하고 재검색합니다.
-        // 현재 target이 설정되어있지 않은 상태라면 작업을 해줄 필요 없습니다.
-        if (!ValidateComponent(target, ERROR_TARGET_NOT_SET)) return;
+    {     
         if (!ValidateComponent(stateMachine, ERROR_STATE_MACHINE_NOT_SET)) return;
 
-        // 게임오버된 플레이어가 현재 타겟이었으면 타겟 초기화, 다시 검색 시작.
-        if (e.clientIDWhoGameOver == GetTargetClientID())
+        if (GetTargetClientID().success && e.clientIDWhoGameOver == GetTargetClientID().clientId)
         {
             Logger.Log("Target 게임오버! 새로운 타겟을 검색합니다");
             target = null;

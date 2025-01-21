@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 /// <summary>
 /// 
 /// </summary>
-public class SoundManager : NetworkBehaviour
+public class SoundManager : NetworkBehaviour, ICleanable
 {
     public static SoundManager Instance { get; private set; }
 
@@ -24,8 +24,13 @@ public class SoundManager : NetworkBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneCleanupManager.RegisterCleanableObject(this);
+        }
+        else Destroy(gameObject);
     }
 
     private void Start()
@@ -270,4 +275,15 @@ public class SoundManager : NetworkBehaviour
             Debug.Log($"로드할 사운드 볼륨 정보가 없습니다.");
         }
     }
+
+    #region ICleanable 구현
+    /// <summary>
+    /// ICleanable 인터페이스 구현. 객체를 정리합니다.
+    /// 이 메서드는 씬 전환 시 호출되어 현재 객체를 파괴합니다.
+    /// </summary>
+    public void Cleanup()
+    {
+        Destroy(gameObject);
+    }
+    #endregion
 }
