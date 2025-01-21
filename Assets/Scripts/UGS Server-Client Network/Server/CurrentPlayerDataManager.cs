@@ -46,12 +46,12 @@ public class CurrentPlayerDataManager : NetworkBehaviour, ICleanable
     }
 
     /// <summary>
-    /// 네트워크 객체가 디스폰될 때 호출됩니다. 이벤트 리스너를 제거합니다.
+    /// 네트워크 객체가 디스폰될 때 호출됩니다. 이벤트 리스너를 제거하고 네트워크 리스트를 해제합니다.
     /// </summary>
     public override void OnNetworkDespawn()
     {
         currentPlayers.OnListChanged -= OnCurrentPlayerListChanged; // 리스트 변경 이벤트 해제
-        currentPlayers = null;
+        currentPlayers.Dispose();
     }
 
     /// <summary>
@@ -71,16 +71,17 @@ public class CurrentPlayerDataManager : NetworkBehaviour, ICleanable
     [ServerRpc(RequireOwnership = false)]
     public void AddPlayerServerRPC(PlayerInGameData playerData, ServerRpcParams serverRpcParams = default)
     {
-        Logger.Log($"AddPlayerServerRPC IsClient:{IsClient}, IsServer:{IsServer}, IsHost:{IsHost}");
-        if (IsClientIdExists(serverRpcParams.Receive.SenderClientId))
+        ulong clientId = serverRpcParams.Receive.SenderClientId;
+        if (IsClientIdExists(clientId))
         {
-            Logger.LogError($"이미 존재하는 플레이어입니다. 추가할 수 업습니다. 클라이언트ID: {serverRpcParams.Receive.SenderClientId}");
+            Logger.LogError($"이미 존재하는 플레이어입니다. 추가할 수 업습니다. 클라이언트ID: {clientId}");
             return;
         }
 
+        Logger.Log($"플레이어를 추가합니다 ClientId:{clientId}");
         PlayerInGameData newPlayer = new PlayerInGameData
         {
-            clientId = serverRpcParams.Receive.SenderClientId,
+            clientId = clientId,
             connectionTime = DateTime.Now,
             characterClass = playerData.characterClass,
             playerGameState = PlayerGameState.Playing,
