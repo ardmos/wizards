@@ -38,7 +38,7 @@ public class GraphicQualityManager : MonoBehaviour
     }
 
     private void LoadGraphicQualitySettingsData() {
-        GraphicQualitySettingsData graphicQualitySettingsData = SaveSystem.LoadGrahpicQualitySettingsData();
+        GraphicQualitySettingsData graphicQualitySettingsData = SaveSystem.LoadData<GraphicQualitySettingsData>();
         if (graphicQualitySettingsData != null)
         {
             Debug.Log($"그래픽 퀄리티 설정 정보 로드 성공!");

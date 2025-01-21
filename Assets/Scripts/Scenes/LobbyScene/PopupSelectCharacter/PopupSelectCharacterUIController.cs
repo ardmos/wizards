@@ -57,7 +57,7 @@ public class PopupSelectCharacterUIController : MonoBehaviour
     {
         Debug.Log($"characterCard:{characterCard.characterCardInfo}, characterCardInfos[1]:{characterCardInfos[1]}, characterCardInfos[0]:{characterCardInfos[0]}");
         // Knight 선택될 경우, Select버튼 잠금. 아직 미구현이기 때문에. 
-        if(characterCard.characterCardInfo == characterCardInfos[1])
+        if(characterCard.characterCardInfo.character == Character.Knight)
         {
             selectBtnLockObject.SetActive(true);
         }

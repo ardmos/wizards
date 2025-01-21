@@ -259,7 +259,7 @@ public class SoundManager : NetworkBehaviour, ICleanable
 
     private void LoadVolumeData()
     {
-        SoundVolumeData soundVolumeData = SaveSystem.LoadSoundVolumeData();
+        SoundVolumeData soundVolumeData = SaveSystem.LoadData<SoundVolumeData>();
         if (soundVolumeData != null)
         {
             Debug.Log($"사운드 볼륨 정보 로드 성공!");

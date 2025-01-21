@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -12,91 +13,107 @@ public static class SaveSystem
 
     public static void SavePlayerData(PlayerData playerData)
     {
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
- 
-        FileStream fileStream = new FileStream(path, FileMode.Create);
-
-        SaveData saveData = new SaveData(playerData, SoundManager.Instance.GetSoundVolumeData(), new GraphicQualitySettingsData(GraphicQualityManager.Instance.GetQualityLevel()));
-        binaryFormatter.Serialize(fileStream, saveData);
-        fileStream.Close();
-    }
-
-    public static PlayerData LoadPlayerData()
-    {      
-        if (File.Exists(path))
+        using (FileStream fileStream = new FileStream(path, FileMode.Create))
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = new FileStream (path, FileMode.Open);
-
-            SaveData saveData = binaryFormatter.Deserialize(fileStream) as SaveData;
-            PlayerData data = saveData.playerData;
-            fileStream.Close();
-            return data;
-        }
-        else
-        {
-            Debug.LogError($"Save file not found in {path}");
-            return null;
+            try
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                SaveData saveData = new SaveData(playerData, SoundManager.Instance.GetSoundVolumeData(), new GraphicQualitySettingsData(GraphicQualityManager.Instance.GetQualityLevel()));
+                binaryFormatter.Serialize(fileStream, saveData);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"플레이어 데이터를 세이브하는데 문제가 발생했습니다: {e.Message}");
+            }
         }
     }
 
     public static void SaveSoundVolumeData(SoundVolumeData soundVolumeData)
     {
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-        FileStream fileStream = new FileStream(path, FileMode.Create);
-
-        SaveData saveData = new SaveData(LocalPlayerDataManagerClient.Instance.GetPlayerData(), soundVolumeData, new GraphicQualitySettingsData(GraphicQualityManager.Instance.GetQualityLevel()));
-        binaryFormatter.Serialize(fileStream, saveData);
-        fileStream.Close();
-    }
-
-    public static SoundVolumeData LoadSoundVolumeData()
-    {
-        if (File.Exists(path))
+        using (FileStream fileStream = new FileStream(path, FileMode.Create))
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = new FileStream(path, FileMode.Open);
-
-            SaveData saveData = binaryFormatter.Deserialize(fileStream) as SaveData;
-            SoundVolumeData data = saveData.soundVolumeData;
-            fileStream.Close();
-            return data;
-        }
-        else
-        {
-            Debug.LogError($"Save file not found in {path}");
-            return null;
+            try
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                SaveData saveData = new SaveData(LocalPlayerDataManagerClient.Instance.GetPlayerData(), soundVolumeData, new GraphicQualitySettingsData(GraphicQualityManager.Instance.GetQualityLevel()));
+                binaryFormatter.Serialize(fileStream, saveData);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"사운드 설정 데이터를 세이브하는데 문제가 발생했습니다: {e.Message}");
+            }
         }
     }
 
     public static void SaveGrahpicQualitySettingsData(GraphicQualitySettingsData graphicQualitySettingsData)
     {
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-        FileStream fileStream = new FileStream(path, FileMode.Create);
-
-        SaveData saveData = new SaveData(LocalPlayerDataManagerClient.Instance.GetPlayerData(), SoundManager.Instance.GetSoundVolumeData(), graphicQualitySettingsData);
-        binaryFormatter.Serialize(fileStream, saveData);
-        fileStream.Close();
+        using (FileStream fileStream = new FileStream(path, FileMode.Create))
+        {
+            try
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                SaveData saveData = new SaveData(LocalPlayerDataManagerClient.Instance.GetPlayerData(), SoundManager.Instance.GetSoundVolumeData(), graphicQualitySettingsData);
+                binaryFormatter.Serialize(fileStream, saveData);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"그래픽 설정 데이터를 세이브하는데 문제가 발생했습니다: {e.Message}");
+            }
+        }
     }
 
-    public static GraphicQualitySettingsData LoadGrahpicQualitySettingsData()
+    public static T LoadData <T>() where T : class
     {
-        if (File.Exists(path))
+        if (!File.Exists(path))
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = new FileStream(path, FileMode.Open);
-
-            SaveData saveData = binaryFormatter.Deserialize(fileStream) as SaveData;
-            GraphicQualitySettingsData data = saveData.graphicQualitySettingsData;
-            fileStream.Close();
-            return data;
-        }
-        else
-        {
-            Debug.LogError($"Save file not found in {path}");
+            Logger.LogError($"세이브파일을 발견하지 못했습니다: {path}");
             return null;
         }
+
+        using (FileStream fileStream = new FileStream(path, FileMode.Open))
+        {
+            if (fileStream.Length <= 0)
+            {
+                Logger.LogError("세이브 파일이 손상됐습니다. 파일을 삭제합니다");
+                fileStream.Close();
+                File.Delete(path);
+                if (!File.Exists(path))
+                    Logger.LogError("삭제 성공");
+                else
+                    Logger.LogError("삭제 실패");
+                return null;
+            }
+
+            // 세이브파일 로드
+            try
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                SaveData saveData = binaryFormatter.Deserialize(fileStream) as SaveData;
+
+                if(typeof(T) == typeof(SoundVolumeData))
+                {
+                    return saveData.soundVolumeData as T;
+                }
+                else if(typeof(T) == typeof(GraphicQualitySettingsData))
+                {
+                    return saveData.graphicQualitySettingsData as T;
+                }
+                else if (typeof(T) == typeof(PlayerData))
+                {
+                    return saveData.playerData as T;
+                }
+                else
+                {
+                    Logger.LogError($"지원하지 않는 데이터 타입입니다.");
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"세이브파일을 읽어오는데 문제가 발생했습니다: {e.Message}");
+                return null;
+            }            
+        }
+
     }
 }

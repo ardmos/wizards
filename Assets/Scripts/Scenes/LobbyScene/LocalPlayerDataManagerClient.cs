@@ -84,7 +84,7 @@ public class LocalPlayerDataManagerClient : MonoBehaviour
     /// <returns></returns>
     private bool LoadPlayerData()
     {
-        PlayerData playerData = SaveSystem.LoadPlayerData();
+        PlayerData playerData = SaveSystem.LoadData<PlayerData>();
         if (playerData != null)
         {
             Debug.Log($"플레이어 정보 로드 성공!");
