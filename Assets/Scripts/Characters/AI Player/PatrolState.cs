@@ -20,7 +20,7 @@ public class PatrolState : AIState
     /// </summary>
     public override void Enter()
     {
-        Logger.Log("Patrol State에 진입합니다.");
+        //Logger.Log("Patrol State에 진입합니다.");
 
         InitState();
     }
@@ -40,7 +40,7 @@ public class PatrolState : AIState
     /// </summary>
     public override void Exit()
     {
-        Logger.Log("Patrol State에서 벗어납니다.");
+        //Logger.Log("Patrol State에서 벗어납니다.");
     }
     #endregion
 

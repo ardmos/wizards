@@ -56,7 +56,7 @@ public class AIStateMachine
     {
         if (currentState != null)
         {
-            Logger.Log("이미 AIStateMachine에 설정된 State가 있습니다. 해당 State를 종료시킨 후 새로운 State를 설정합니다.");
+            //Logger.Log("이미 AIStateMachine에 설정된 State가 있습니다. 해당 State를 종료시킨 후 새로운 State를 설정합니다.");
             currentState.Exit();
         }
 

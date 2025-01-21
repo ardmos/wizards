@@ -20,7 +20,7 @@ public class ChaseState : AIState
     /// </summary>
     public override void Enter()
     {
-        Logger.Log("Chase State에 진입합니다.");
+        //Logger.Log("Chase State에 진입합니다.");
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public class ChaseState : AIState
     /// </summary>
     public override void Exit()
     {
-        Logger.Log("Chase State에서 벗어납니다.");
+        //Logger.Log("Chase State에서 벗어납니다.");
     }
     #endregion
 
